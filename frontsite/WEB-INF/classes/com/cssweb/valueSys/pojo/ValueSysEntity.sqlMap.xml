@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.valueSys.pojo.ValueSysEntity">
+<typeAlias alias="ValueSysEntity" type="com.cssweb.valueSys.pojo.ValueSysEntity"/>	
+	<resultMap id="listValueSys" class="ValueSysEntity">
+	    <result property="fdate" column="fdate" jdbcType="java.lang.Date"/>
+	    <result property="fdate2" column="fdate2" jdbcType="java.lang.String"/>
+	    <result property="fkmbm" column="FKMBM" jdbcType="java.lang.String"/>
+	    <result property="fkmmc" column="fkmmc" jdbcType="java.lang.String"/>
+	    <result property="fhqjg" column="fhqjg" jdbcType="java.lang.Double"/>
+	    <result property="fhqbz" column="fhqbz" jdbcType="java.lang.String"/>
+	    <result property="fzqsl" column="fzqsl" jdbcType="java.lang.Double"/>
+	    <result property="fzqcb" column="fzqcb" jdbcType="java.lang.Double"/>
+	    <result property="fzqsz" column="fzqsz" jdbcType="java.lang.Double"/>
+	    <result property="fgz_zz" column="fgz_zz" jdbcType="java.lang.Double"/>
+	    <result property="fcb_jz_bl" column="fcb_jz_bl" jdbcType="java.lang.String"/>
+	    <result property="fsz_jz_bl" column="fsz_jz_bl" jdbcType="java.lang.String"/>
+	    <result property="ftpxx" column="ftpxx" jdbcType="java.lang.String"/>
+	    <result property="fqyxx" column="fqyxx" jdbcType="java.lang.String"/>	    
+	</resultMap>
+	<!-- 读取估值系统数据 -->
+	<select id="listValueSys" parameterClass="java.util.Map" resultMap="listValueSys">
+		$sql$
+	</select>
+	<select id="listValueSysCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(*)	FROM A172JJHZGZB 
+	</select>	
+</sqlMap>

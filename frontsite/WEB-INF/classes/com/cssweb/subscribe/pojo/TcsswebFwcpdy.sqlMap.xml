@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebFwcpdy">
+<typeAlias alias="TcsswebFwcpdy" type="com.cssweb.subscribe.pojo.TcsswebFwcpdy"/>
+	<resultMap id="TcsswebFwcpdy" class="TcsswebFwcpdy">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="departmentCode" column="DEPARTMENT_CODE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="introduce" column="INTRODUCE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="note" column="NOTE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="sfclId" column="SFCL_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="creatDate" column="CREAT_DATE" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="fwqd" column="FWQD" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="artId" column="ART_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	</resultMap>
+	<resultMap id="TcsswebFwcpdyMap" class="TcsswebFwcpdy">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="introduce" column="INTRODUCE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="packageId" column="PACKAGE_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="packageName" column="PACKAGE_NAME" jdbcType="java.lang.String" nullValue=""/>
+	</resultMap>
+	
+	<select id="getAllTcsswebFwcpdyList" resultMap = "TcsswebFwcpdyMap">
+	SELECT t.ID, t.PRODUCT_NAME,t.INTRODUCE , y.ID as PACKAGE_ID, y.PACKAGE_NAME FROM T_CSSWEB_FWCPDY t,T_CSSWEB_TCPTCDYB c ,T_CSSWEB_FWTCDY y
+		WHERE t.id= c.product_id AND y.id= c.package_id
+	</select>
+	<select id="getAllTcsswebFwcpdyByIds" parameterClass="String" resultMap ="TcsswebFwcpdy">
+		SELECT * FROM T_CSSWEB_FWCPDY WHERE ID IN ($value$)
+	</select>
+	<select id="getAllTcsswebFwcpdyById" parameterClass="java.lang.Long" resultMap ="TcsswebFwcpdy">
+		SELECT * FROM T_CSSWEB_FWCPDY WHERE ID = #value#
+	</select>
+	<select id="getTcsswebFwcpcxDyprodList" parameterClass="java.util.Map" resultMap = "TcsswebFwcpdy">
+		SELECT ID, DEPARTMENT_CODE, INTRODUCE, PRODUCT_NAME, NOTE, SFCL_ID, CREAT_DATE, FWQD, ART_ID FROM T_CSSWEB_FWCPDY p where 
+		EXISTS (
+			SELECT 1 FROM T_CSSWEB_FWCPCX t where p.id=t.product_id 
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.account=#account#
+				 </isNotNull>
+			</dynamic>
+		    and (t.pszt='0' or t.pszt='6')
+			and sysdate &gt;=to_date(t.Eff_date,'yyyymmdd')
+		    and sysdate &lt;=to_date(decode(t.psjsrq,0,30000000+101,30000000,30000000+101,t.psjsrq),'yyyymmdd')
+			)
+	</select>
+	
+	<select id="getTcsswebFwcpcxDyNotprodList" parameterClass="java.util.Map" resultMap = "TcsswebFwcpdy">
+		SELECT ID, DEPARTMENT_CODE, INTRODUCE, PRODUCT_NAME, NOTE, SFCL_ID, CREAT_DATE, FWQD, ART_ID FROM T_CSSWEB_FWCPDY p where 
+		NOT EXISTS(SELECT 1 from T_CSSWEB_FWCPDY_SFCL l where p.SFCL_ID=l.sfcl_id 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.product_level&lt;=#productLevel#
+				 </isNotNull>
+				 <isNotNull property="commission" prepend="and">
+				   l.commission&lt;=#commission#
+				 </isNotNull>
+			</dynamic>)
+		AND NOT EXISTS (
+			SELECT 1 FROM T_CSSWEB_FWCPCX t where p.id=t.product_id 
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.account=#account#
+				 </isNotNull>
+			</dynamic>
+		    and (t.pszt='0' or t.pszt='6')
+			and sysdate &gt;=to_date(t.Eff_date,'yyyymmdd')
+		    and sysdate &lt;=to_date(decode(t.psjsrq,0,30000000+101,30000000,30000000+101,t.psjsrq),'yyyymmdd')
+			)
+		AND NOT EXISTS (
+			SELECT 1 FROM TFWCP_MFCL l ,TFWCP_YJLQJ j , 
+				(
+				SELECT JHYJL*1000 as JHYJL FROM  TFX_KHH_QTQK t WHERE 1=1
+				<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.KHH=#account#
+				 </isNotNull>
+			</dynamic>
+				) b where l.id=p.id and j.YJLSX &lt;= b.JHYJL 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.KHJB=#productLevel#
+				 </isNotNull>
+			</dynamic>
+			and l.YJL=j.id
+			)	
+	</select>
+	
+	<resultMap id="TcsswebFwcpdySfclMap" class="TcsswebFwcpdy">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="packageId" column="PACKAGE_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="packageName" column="PACKAGE_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productLevel" column="PRODUCT_LEVEL" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="commission" column="commission" jdbcType="java.lang.Double"/>
+	</resultMap>
+	
+	<select id="getTcsswebFwcpdySfclMapList" resultMap = "TcsswebFwcpdySfclMap">
+	 select cp.ID, cp.PRODUCT_NAME,cp.PACKAGE_ID,cp.package_name,s.PRODUCT_LEVEL, s.commission from ( select t.id,t.product_name,t.sfcl_id,tc.id as PACKAGE_ID,tc.package_name
+		  from t_cssweb_fwcpdy t , t_cssweb_tcptcdyb g,t_cssweb_fwtcdy tc 
+		 where  tc.id=g.package_id and g.product_id=t.id ) cp, t_cssweb_fwcpdy_sfcl s
+		 where cp.sfcl_id=s.sfcl_id order by cp.PACKAGE_ID
+	</select>
+	<select id="getAllTcsswebFwcpdyByRddy" resultMap="TcsswebFwcpdy">
+		SELECT row_.*, ROWNUM  FROM (
+				 select t.* from (
+			      SELECT c.id,count(product_id) as cppj_id FROM T_CSSWEB_FWCPDY c 
+					  left join T_CSSWEB_PRO_FWCPTD j	on c.id=j.product_id 
+			      group by c.id )
+			      p left join T_CSSWEB_FWCPDY t on t.id=p.id 
+			     order by p.cppj_id desc
+			)
+			row_ WHERE ROWNUM &lt;= 5
+	</select>
+	
+	<select id="getAllTcsswebFwcpdyByCphp" resultMap="TcsswebFwcpdy">
+			SELECT row_.*, ROWNUM  FROM (
+				select t.* from (
+				     select c.id,count(cppj_id) as cppj_id  from T_CSSWEB_FWCPDY c 
+				     left join T_CSSWEB_USER_CPPJ j 
+				     on c.id=j.product_id and j.cppj_id =2
+				     group by c.id
+				     ) p left join T_CSSWEB_FWCPDY t on t.id=p.id 
+				     order by p.cppj_id desc	
+			)
+			row_ WHERE ROWNUM &lt;= 5
+	</select>
+</sqlMap>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.client.pojo.CrmWebuser">
+	<typeAlias alias="CrmWebuser" type="com.cssweb.client.pojo.CrmWebuser" />
+	
+	<resultMap id="CrmWebuser" class="CrmWebuser">
+	    <result property="clientId" column="client_id" jdbcType="java.lang.String"/>
+	    <result property="exchangeType" column="exchange_type" jdbcType="java.lang.String"/>
+	    <result property="stockAccount" column="stock_account" jdbcType="java.lang.String"/>
+	</resultMap>
+
+	<select id="getCrmWebuserByClientId" resultMap="CrmWebuser" parameterClass="java.lang.String">
+		select KHBH as client_id,exchange_type,STOCK_ACCT as stock_account from T_CLIENT_STOCKACCT t where KHBH = #clientId#
+	</select>
+
+	<resultMap id="CrmWebuserBno" class="CrmWebuser">
+	    <result property="clientId" column="client_id" jdbcType="java.lang.String"/>
+	    <result property="branchNo" column="branch_no" jdbcType="java.lang.String"/>
+	</resultMap>
+	<select id="getBranchNoByClientId" resultMap="CrmWebuserBno" parameterClass="java.lang.String">
+		select KHBH as client_id,YYB as branch_no from T_CLIENT_BASIC t where KHBH = #clientId#
+	</select>
+	
+	<resultMap id="CrmWebuserLevel" class="CrmWebuser">
+	    <result property="clientId" column="client_id" jdbcType="java.lang.String"/>
+	    <result property="khjb" column="KHJB" jdbcType="java.lang.String"/>
+	</resultMap>
+	<select id="getLevelByClientId" resultMap="CrmWebuserLevel" parameterClass="java.lang.String">
+		select KHBH as client_id,KHJB from T_CLIENT_LEVEL t where KHBH = #clientId#
+	</select>
+	
+	<resultMap id="CrmWebusersj" class="CrmWebuser">
+	    <result property="clientId" column="client_id" jdbcType="java.lang.String"/>
+	    <result property="sj" column="SJ" jdbcType="java.lang.String"/>
+	</resultMap>
+	<select id="getCrmWebusersjByClientId" resultMap="CrmWebusersj" parameterClass="java.lang.String">
+		select KHBH as client_id,SJ from T_CLIENT_BASIC t where KHBH = #clientId#
+	</select>
+	
+	<select id="getKhbhByZjzh" resultClass="java.lang.String" parameterClass="java.lang.String">
+		select KHBH from T_CLIENT_BASIC t where ZJZH = #zjzh# and rownum=1
+	</select>
+	
+	<resultMap id="CrmWebuserZjzh" class="CrmWebuser">
+	    <result property="clientId" column="client_id" jdbcType="java.lang.String"/>
+	    <result property="branchNo" column="branch_no" jdbcType="java.lang.String"/>
+	    <result property="stockAccount" column="stock_account" jdbcType="java.lang.String"/>
+	</resultMap>
+	<select id="getZjzhByKhbh" resultMap="CrmWebuserZjzh" parameterClass="java.lang.String">
+		select KHBH as client_id,YYB as branch_no,ZJZH as stock_account from T_CLIENT_BASIC t where KHBH = #clientId#
+	</select>
+</sqlMap>

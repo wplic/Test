@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.branch.pojo.BranchBasicInfo">
+
+	<typeAlias alias="BranchBasicInfo" type="com.cssweb.common.branch.pojo.BranchBasicInfo"/>
+
+	<!--result map-->
+	<resultMap id="branchBasicInfobMap" class="BranchBasicInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="branchCode" column="BRANCH_CODE" jdbcType="String"/>
+ 		<result property="branchName" column="BRANCH_NAME" jdbcType="String"/>
+ 		<result property="parentId" column="PARENT_ID" jdbcType="Long"/>
+ 		<result property="areaId" column="AREA_ID" jdbcType="Long"/>
+ 		<result property="orderNum" column="ORDER_NUM" jdbcType="Integer"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+  	
+  	<resultMap id="BasicCodeMap" class =  "BranchBasicInfo">
+  		<result property = "branchCode" column = "BRANCH_CODE" jdbcType="String" />
+  	</resultMap>
+  	
+  	<select id = "getBasicCodeByUserId" resultMap="BasicCodeMap" parameterClass="Long" >
+  		select f.branch_code from user_basic_info t ,Branch_Basic_Info f where t.id = f.ext1 and t.id=#id#
+  	</select>
+  	
+	<insert id="insert" parameterClass="BranchBasicInfo">
+		  insert into BRANCH_BASIC_INFO (ID,BRANCH_CODE,BRANCH_NAME,PARENT_ID,AREA_ID,ORDER_NUM,EXT1,EXT2,EXT3,EXT4)
+		  				values (#id#,#branchCode#,#branchName#,#parentId#,#areaId#,#orderNum#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	
+	<update id="update" parameterClass="BranchBasicInfo">
+		  update BRANCH_BASIC_INFO 
+		  	set BRANCH_CODE=#branchCode#,BRANCH_NAME=#branchName#,PARENT_ID=#parentId#,AREA_ID=#areaId#,
+		  			ORDER_NUM=#orderNum#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where ID=#id#
+	</update>
+	
+	<delete id="deleteById" parameterClass="Long">
+	  	delete BRANCH_BASIC_INFO where ID=#value#
+	</delete>
+	
+	<select id = "getBranchLikeName" parameterClass="String" resultMap="branchBasicInfobMap" >
+			$sql$
+	</select>
+	
+	
+	
+	<select id="getById" parameterClass="Long" resultMap = "branchBasicInfobMap">
+	  	select * from BRANCH_BASIC_INFO where ID = #value#
+	</select>
+	
+	<select id="getByParentId" parameterClass="Long" resultMap = "branchBasicInfobMap">
+    select * from BRANCH_BASIC_INFO where PARENT_ID = #value# order by ORDER_NUM  
+  
+  </select>
+  
+  <select id = "getBranchBasicInfo" resultMap = "branchBasicInfobMap">
+  			select * from BRANCH_BASIC_INFO where parent_id in (select id from BRANCH_BASIC_INFO where parent_id=0 and id != 9) order by parent_id ,ORDER_NUM
+  </select>
+  
+  <select id = "getBranchBasicBmInfo" resultMap = "branchBasicInfobMap">
+  			select * from BRANCH_BASIC_INFO where parent_id in (select id from BRANCH_BASIC_INFO where parent_id=0 and id = 9) order by parent_id ,ORDER_NUM
+  </select>
+    
+    <select id = "getBranchBasicInfoByNoId" resultMap = "branchBasicInfobMap" parameterClass="String" >
+  			select * from BRANCH_BASIC_INFO where parent_id in (select id from BRANCH_BASIC_INFO where parent_id=0 and id != 9  ) and BRANCH_CODE != #branchCode# order by parent_id,ORDER_NUM
+    </select>
+  
+  	<select id = "getBranchBasicInfoMapByNoId" resultMap = "branchBasicInfobMap" parameterClass="java.util.Map">
+  		    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  	</select>
+  	<select id = "getBranchBasicCountByNoId" resultMap= "branchBasicInfobMap" parameterClass="Long" >
+  				select * from BRANCH_BASIC_INFO where parent_id in (select id from BRANCH_BASIC_INFO where parent_id=0 and ID != #id#) order by parent_id ,ORDER_NUM
+  	</select>
+  	
+  	
+  	<select id="getBranchBasicMapAll" resultMap = "branchBasicInfobMap" parameterClass = "java.util.Map">
+  			  SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  			
+  	</select>
+  <select id = "getBranchBasicInfoCount"  resultMap= "branchBasicInfobMap" parameterClass="String" >
+  			$sql$
+  </select>
+  	
+  
+    <select id="getByParentIdAndPagingMap" parameterClass="java.util.Map" resultMap = "branchBasicInfobMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  	<select id="getByBranchCode" parameterClass="String" resultMap = "branchBasicInfobMap">
+	  	select * from BRANCH_BASIC_INFO where BRANCH_CODE = #value#
+	</select>
+	
+  <update id="changeOrderNumByParentIdAndThisOrderNum" parameterClass="java.util.Map">
+     update BRANCH_BASIC_INFO set ORDER_NUM=ORDER_NUM+1 where PARENT_ID=#parentId# and ORDER_NUM &gt;=#orderNum#
+  </update>
+  <update id="changeOrderNumByParentIdAndOldBiggerNew" parameterClass="java.util.Map">
+     update BRANCH_BASIC_INFO set ORDER_NUM=ORDER_NUM+1 where PARENT_ID=#parentId# and ORDER_NUM &gt;=#newOrderNum# and ORDER_NUM &lt;#oldOrderNum#
+  </update>
+  <update id="changeOrderNumByParentIdAndNewBiggerOld" parameterClass="java.util.Map">
+     update BRANCH_BASIC_INFO set ORDER_NUM=ORDER_NUM-1 where PARENT_ID=#parentId# and ORDER_NUM &gt;#oldOrderNum# and ORDER_NUM &lt;=#newOrderNum#
+  </update>
+  
+  <delete id="deleteByIdsAndChilds" parameterClass="java.lang.String">
+    delete BRANCH_BASIC_INFO where ID in ($value$) or PARENT_ID in ($value$)
+  </delete>
+  
+  <select id="getNameByMainId" parameterClass="java.lang.String" resultClass = "java.lang.String">
+    select BRANCH_NAME from BRANCH_BASIC_INFO where ID = #value#
+  </select>
+  
+
+
+</sqlMap>

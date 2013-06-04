@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.Rightsreg">
+
+	<typeAlias alias="rightsreg" type="com.cssweb.collect.pojo.Rightsreg"/>
+
+	<!--result map-->
+	<resultMap id="rightsregMap" class="rightsreg" >
+		<result property="fundCode" column="FUNDCODE"  jdbcType="String" />
+        <result property="totalfundvol" column="TOTALFUNDVOL"  jdbcType="Double"  />
+        <result property="defdividEndMethod" column="DEFDIVIDENDMETHOD" jdbcType="String"/>
+        <result property="registrationDate" column="REGISTRATIONDATE" jdbcType="String" />
+        <result property="transactioncfmDate" column="TRANSACTIONCFMDATE" jdbcType="String" />
+        <result property="nav" column="NAV"  jdbcType="Double" />
+        <result property="volofreinvest" column="VOLOFREINVEST" jdbcType="Double" />
+ 		<result property="dividendRatio" column="DIVIDENDRATIO" jdbcType="Double"/>
+ 		<result property="dividendperunit" column="DIVIDENDPERUNIT" jdbcType="Double"/>
+ 		<result property="distributorname" column="DISTRIBUTORNAME" jdbcType="String"/>
+ 		
+ 	</resultMap>
+  	
+  <select id="getRightsreByPages" parameterClass="java.util.HashMap" resultMap = "rightsregMap" >
+   		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+</sqlMap>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap
+	namespace="com.cssweb.F10.gazx.bond.pojo.ConvertibleDebtToStockPriceChange">
+
+	<typeAlias alias="convertibleDebtToStockPriceChange"
+		type="com.cssweb.F10.gazx.bond.pojo.ConvertibleDebtToStockPriceChange" />
+
+	<!--result map-->
+	<resultMap id="convertibleDebtToStockPriceChangeMap"
+		class="convertibleDebtToStockPriceChange">
+
+		<!-- 调整实施日 -->
+		<result property="coveriteChangeMakeDate" column="TZSSR"
+			jdbcType="java.util.Date" />
+
+		<!-- 调整原因 -->
+		<result property="coveriteChangeReasons" column="TZYY"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券 -->
+		<result property="coveriteDebt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 转股价格 -->
+		<result property="coveriteDebtPrice" column="ZGJG"
+			jdbcType="java.lang.Float" />
+
+		<!-- 可转债转股价格调整ID -->
+		<result property="covertibleDebtToStockId"
+			column="T_KZZZGJGTZ_ID" jdbcType="java.lang.Long" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券代码 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+	</resultMap>
+
+	<!-- 根据股票代码，查找该可转债股的价格调整情况 -->
+	<select id="getConvertibleDebtToStockPriceChangeByBondCode"
+		resultMap="convertibleDebtToStockPriceChangeMap"
+		parameterClass="String">
+		SELECT a.T_KZZZGJGTZ_ID, a.T_ZQZB_ID, a.ZGJG, a.TZSSR, a.TZYY,
+		b.zqjc, b.zqdm FROM KZZZGJGTZ a,zqzb b where a.T_ZQZB_ID =
+		b.t_Zqzb_Id and b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ =
+		1 and rownum = 1
+	</select>
+
+</sqlMap>

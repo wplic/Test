@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.base.pojo.CompanyInfo">
+
+	<typeAlias alias="CompanyInfo" type="com.cssweb.F10.gazx.base.pojo.CompanyInfo" />
+
+	<!--result map-->
+	<resultMap id="CompanyInfoMap" class="CompanyInfo">
+		<result property="companyId" column="T_GSZB_ID" jdbcType="long" />
+		<result property="businessAddress" column="BGDZ" jdbcType="String" />
+		<result property="businessScope" column="JYFW" jdbcType="String" />
+		<result property="city" column="CS" jdbcType="String" />
+		<result property="companyEnglishShortName" column="GSYWJC" jdbcType="String" />
+		<result property="companyEnglisName" column="GSYWMC" jdbcType="String" />
+		<result property="companyName" column="GSMC" jdbcType="String" />
+		<result property="companyPYName" column="GSMCPY" jdbcType="String" />
+		<result property="companyShortName" column="GSJC" jdbcType="String" />
+		<result property="country" column="GJYDQ" jdbcType="String" />
+		<result property="email" column="DZYJ" jdbcType="String" />
+		<result property="faxNumber" column="CZ" jdbcType="String" />
+		<result property="foundationDate" column="CLRQ" jdbcType="java.util.Date" />
+		<result property="industryCategory" column="HYLB" jdbcType="String" />		
+		<result property="isPublicCompany" column="SFSSGS" jdbcType="String" />
+		<result property="legalPerson" column="FRDB" jdbcType="String" />
+		<result property="mainBusiness" column="ZYYW" jdbcType="String" />
+		<result property="phoneCode" column="DH" jdbcType="String" />
+		<result property="postcode" column="YB" jdbcType="String" />
+		<result property="province" column="SF" jdbcType="String" />
+		<result property="registeredAddress" column="ZCDZ" jdbcType="String" />
+		<result property="registeredCaptial" column="ZCZB" jdbcType="long" />
+		<result property="website" column="GSWZ" jdbcType="String" />
+		<result property="history" column="LSJS" jdbcType="String" />
+		<result property="GSDJH" column="GSDJH" jdbcType="String" />
+	</resultMap>
+	
+	<!-- 根据英文简称，返回公司信息 -->
+	<select id="getCompanyInfoByCompanyEnglishShortName" resultMap="CompanyInfoMap" parameterClass="String">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,CZ
+		from GSZB where GSYWJC=#englishShortName# and SCBZ=0 and GKBZ=1
+	</select>
+	
+	<!-- 根据公司ID，返回公司基本信息 -->
+	<select id="getCompanyInfoById" resultMap="CompanyInfoMap" parameterClass="long">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,LSJS,GSDJH,CZ
+		from GSZB where T_GSZB_ID=#companyId# and SCBZ=0 and GKBZ=1
+	</select>
+	
+	<!-- 根据法人代表，返回公司基本情况，需要注意一个法人，可能有多个公司，所以返回List集合 -->
+	<select id="getCompanyInfoByLegalPerson" resultMap="CompanyInfoMap" parameterClass="String">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,CZ
+		from GSZB where FRDB=#legalPerson# and SCBZ=0 and GKBZ=1
+	</select>
+	
+	<!-- 根据公司PY，返回公司信息 -->
+	<select id="getCompanyInfoByCompanyPYName" resultMap="CompanyInfoMap" parameterClass="String">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,CZ
+		from GSZB where GSMCPY=#companyPY# and SCBZ=0 and GKBZ=1
+	</select>
+	
+	<!-- 根据公司简称，返回公司信息 -->
+	<select id="getCompanyInfoByCompanyShortName" resultMap="CompanyInfoMap" parameterClass="String">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,CZ
+		from GSZB where GSJC=#shortName# and SCBZ=0 and GKBZ=1
+	</select>
+	
+	<!-- 根据股票ID，返回公司基本信息 -->
+	<select id="getCompanyInfoByStockId" resultMap="CompanyInfoMap" parameterClass="long">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,CZ
+		from GSZB where T_GSZB_ID=(select T_GSZB_ID from GPZB where T_GPZB_ID=#stockId#) and SCBZ=0 and GKBZ=1
+	</select>
+	<select id="getCompanyInfoByStockId2" resultMap="CompanyInfoMap" parameterClass="long">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,GSDJH,LSJS,CZ
+		from GSZB where T_GSZB_ID=(select T_GSZB_ID from GPZB where T_GPZB_ID=#stockId#) and SCBZ=0 and GKBZ=1
+	</select>
+	<!-- 根据股票代码，返回公司基本信息 -->
+	<select id="getCompanyInfoByStockCode" resultMap="CompanyInfoMap" parameterClass="long">
+		select T_GSZB_ID, BGDZ,JYFW,CS,GSYWJC,GSYWMC,GSMC,GSMCPY,GSJC,GJYDQ,YB,DZYJ,CLRQ,HYLB,SFSSGS,FRDB,
+		ZYYW,DH,YB,SF,ZCDZ,ZCZB,GSWZ,GSDJH,LSJS,CZ
+		from GSZB where T_GSZB_ID=#companyId# and SCBZ=0 and GKBZ=1
+	</select>
+	
+	<!-- 返回信息提供商 
+	<select id="getCompanyInfoById" resultMap="CompanyInfoMap" parameterClass="long">
+		select * from GSZB where T_GSZB_ID=#companyId#
+	</select>-->
+	
+	<!-- 返回信息版本号 
+	<select id="getCompanyInfoById" resultMap="CompanyInfoMap" parameterClass="long">
+		select * from GSZB where T_GSZB_ID=#companyId#
+	</select>-->
+	
+</sqlMap>

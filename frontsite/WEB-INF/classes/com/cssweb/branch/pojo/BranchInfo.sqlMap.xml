@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branch.pojo.BranchInfo">
+
+	<typeAlias alias="BranchInfo" type="com.cssweb.branch.pojo.BranchInfo"/>
+
+	<cacheModel id="BranchInfoCache" type="OSCACHE">
+	    <flushInterval hours="24"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchInfo.insert"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchInfo.update"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchInfo.delete"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchInfo.deleteByDeptId"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	<!--result map-->
+	<resultMap id="BranchInfoMap" class="BranchInfo">
+		<result property="id"              column="id" jdbcType="long" />
+        <result property="userId"          column="user_id" jdbcType="long" />
+        <result property="deptId"          column="dept_id" jdbcType="long" />
+        <result property="branchName"      column="branch_name" jdbcType="String" />
+        <result property="branchBriefname" column="branch_briefname" jdbcType="String" />
+        <result property="branchAddress"   column="branch_address" jdbcType="String" />
+        <result property="branchPost"      column="branch_post" jdbcType="String" />
+        <result property="branchContacter" column="branch_contacter" jdbcType="String" />
+        <result property="branchZphone"    column="branch_zphone" jdbcType="String" />
+        <result property="branchWphone"    column="branch_wphone" jdbcType="String" />
+        <result property="branchEmail"     column="branch_email" jdbcType="String" />
+        <result property="branchUrl"       column="branch_url" jdbcType="String" />
+        <result property="branchIntroduction" column="branch_introduction" jdbcType="String" />
+        <result property="branchCatchword" column="branch_catchword" jdbcType="String" />
+        <result property="modTime"         column="mod_time" jdbcType="java.util.Date" />
+ 		<result property="ext1"            column="ext1" jdbcType="String" />
+ 		<result property="ext2"            column="ext2" jdbcType="String" />
+ 		<result property="ext3"            column="ext3" jdbcType="String" />
+ 		<result property="ext4"            column="ext4" jdbcType="String" />
+ 		<result property="topLogo"         column="toplogo" jdbcType="BLOB"/>
+ 		<result property="topBanner"       column="topbanner" jdbcType="BLOB"/>
+ 		<result property="centerBanner"    column="centerbanner" jdbcType="BLOB"/>
+ 		<result property="branchSeatnum"    column="branch_seatnum" jdbcType="String" />
+  	</resultMap>
+  	
+  <insert id="insert" parameterClass="BranchInfo">
+    insert into Branch_Info 
+          (id,             user_id,     dept_id,            branch_name,     branch_briefname,
+           branch_address, branch_post,branch_contacter,    branch_zphone,   branch_wphone,
+           branch_email,   branch_url,  branch_introduction,branch_catchword,mod_time,
+           ext1,           ext2,        ext3,               ext4,
+           toplogo,        topbanner,   centerbanner,       branch_seatnum)
+    values(#id#,           #userId#,    #deptId#,           #branchName#,    #branchBriefname#,
+           #branchAddress#,#branchPost#,#branchContacter#,  #branchZphone#,  #branchWphone#,
+           #branchEmail#,  #branchUrl#, #branchIntroduction#,#branchCatchword#, #modTime#,
+           #ext1#,         #ext2#,      #ext3#,             #ext4#,
+           #topLogo#,      #topBanner#, #centerBanner#,     #branchSeatnum#  )
+  </insert>
+
+
+  <update id="update" parameterClass="BranchInfo">
+    update Branch_Info 
+    set 
+    		user_id = #userId#, 
+    		dept_id=#deptId#,
+    		branch_name=#branchName#,
+    		branch_briefname=#branchBriefname#,
+    		branch_address=#branchAddress#,
+    		branch_post=#branchPost#,
+    		branch_contacter=#branchContacter#,
+    		branch_zphone=#branchZphone#,
+    		branch_wphone=#branchWphone#,
+    		branch_email=#branchEmail#,
+    		branch_url=#branchUrl#,
+    		branch_introduction=#branchIntroduction#,
+    		branch_catchword=#branchCatchword#,
+    		mod_time=#modTime#,
+    		ext1=#ext1#,
+    		ext2=#ext2#,
+    		ext3=#ext3#,
+    		ext4=#ext4#,
+    		toplogo=#topLogo#,      
+    		topbanner=#topBanner#, 
+    		centerbanner=#centerBanner#,
+    		branch_seatnum=#branchSeatnum#
+     where id = #id#
+  </update>
+
+  <delete id="delete" parameterClass="BranchInfo">
+    delete Branch_Info where id = #id#
+  </delete>
+   
+  <delete id="deleteAll" parameterClass="java.lang.Long">
+    delete Branch_Info  
+  </delete>
+  
+  <delete id="deleteByDeptId" parameterClass="java.lang.Long">
+    delete Branch_Info where dept_id = #value#
+  </delete>
+  
+
+  <select id="select" resultMap = "BranchInfoMap" cacheModel="BranchInfoCache">
+    select
+        *
+    from
+        Branch_Info
+  </select>
+
+  <select id="getBranchInfoById" parameterClass="java.lang.Long" resultMap = "BranchInfoMap" cacheModel="BranchInfoCache">
+    select
+        *
+    from
+        Branch_Info
+    where
+    	id = #value#
+  </select>
+  
+  <select id = "getBranchInfoByDeptId" resultMap = "BranchInfoMap" parameterClass="java.lang.Long" cacheModel="BranchInfoCache">
+    	select
+        	*
+    	from
+    	    Branch_Info
+    	where
+        	dept_id = #value#
+  </select>
+  
+  <select id="getBranchInfoByProperties" parameterClass="java.util.Map" resultMap = "BranchInfoMap" cacheModel="BranchInfoCache">
+    select
+        *
+    from
+        Branch_Info
+    <dynamic prepend="WHERE">
+    	<isNotEmpty prepend="AND" property="id">
+    		id = #id#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="deptId">
+    		dept_id = #deptId#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="userId">
+    		user_id = #userId#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="branchName">
+    		branch_name = #branchName#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="branchBriefname">
+    		branch_briefname = #branchBriefname#
+    	</isNotEmpty>
+    </dynamic>
+  </select>
+</sqlMap>

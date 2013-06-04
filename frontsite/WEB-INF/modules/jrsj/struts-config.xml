@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<action-mappings>	
+		<action path="/vip" parameter="method" scope="request">
+			 	<forward name="jrsjSuccess" path="/bussinesshall/movetradehall/seneschalInfoVip.jsp"></forward> 
+			 	<forward name="ggpjSuccess" path="/bussinesshall/movetradehall/seneschalInfoGgpjVip.jsp"></forward> 
+			 	<forward name="bgylycbSuccess" path="/bussinesshall/movetradehall/seneschalInfoBgylycbVip.jsp"></forward>
+		</action>
+		<action path="/zxtzpj" parameter="method" scope="request">
+			 	<forward name="zxtzpjSuccess" path="/bussinesshall/movetradehall/seneschalInfoZxtzpj.jsp"></forward> 
+		</action>
+		<action path="/jggpc" parameter="method" scope="request">
+			 	<forward name="jggpcSuccess" path="/bussinesshall/movetradehall/seneschalInfoJggpc.jsp"></forward> 
+		</action>
+		<action path="/pjtggg" parameter="method" scope="request">
+			 	<forward name="pjtgggSuccess" path="/bussinesshall/movetradehall/seneschalInfoPjtggg.jsp"></forward> 
+		</action>
+	</action-mappings>
+</struts-config>

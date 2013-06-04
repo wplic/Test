@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="fundform" type="org.apache.struts.validator.LazyValidatorForm" />
+	</form-beans>
+	<action-mappings>
+		
+		<!-- add by liujk -->
+		<action path="/fund" scope="request" parameter="method" validate="false" name="fundform">
+			<!-- add by lvfeng -->
+			<forward name="fundIssuedAndListedInfo" path="/f10/fund/fundF10Issue.jsp"/>
+			<forward name="fundPurAndRedInfo" path="/f10/fund/fundF10Purchase.jsp"/>
+			<forward name="fundDividendList" path="/f10/fund/fundF10Dividend.jsp"/>
+			<forward name="fundNetValueList" path="/f10/fund/fundF10Net.jsp"/>
+			<forward name="investIndustryList" path="/f10/fund/fundF10Indust.jsp"/>
+			<forward name="positionAdjustmentList" path="/f10/fund/fundF10Adjustment.jsp"/>
+			<forward name="keyStockPortfolioList" path="/f10/fund/fundF10Portfolio.jsp"/>
+			<!-- end -->
+			<forward name="fundInfo" path="/f10/fund/fundF10.jsp"/>
+			<forward name="fundHolder" path="/f10/fund/fundHoldersF10.jsp" redirect="false"/>
+			<forward name="netValueChange" path="/f10/fund/IframeNet.jsp"></forward>
+			<forward name="assetAllocation" path="/f10/fund/IframeConfiguration.jsp"></forward>
+			<forward name="financialIndex" path="/f10/fund/IframeFinancialIndex.jsp"></forward>
+			<forward name="fundBalanceSheet" path="/f10/fund/IframefundBalanceSheet.jsp"></forward>
+ 			<forward name="fundProfitDistributionSheet" path="/f10/fund/IframefundDistributionSheet.jsp"></forward>
+ 		</action> 
+ 		<!-- end -->
+ 		<!-- 基金净值参数 -->
+		 <action path="/fundNetValue" parameter="method" validate="false">
+			<forward name="fundNetList" path="/hall/FundValueList.jsp"></forward>
+			<forward name="fundNetListForIndex" path="/hall/FundValueListForIndex.jsp"></forward>
+			<forward name="fnv" path="/hall/results.jsp"></forward>
+			<forward name="fnvList" path="/hall/resultsList.jsp"></forward> 
+	 	</action>
+	</action-mappings>
+</struts-config>

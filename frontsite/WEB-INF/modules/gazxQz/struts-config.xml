@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<action-mappings>	
+		<action path="/qzhqAction"  scope="request" parameter="method" validate="false">
+		  <forward name="qzhq" path="/infoCenter/warrantHq.jsp"/>					
+		</action>
+		<!--软件-->
+		<action path="/qzdqtxAction"  scope="request" parameter="method" validate="false">
+			<forward name="qzdq" path="/infoCenter/warrantDq.jsp"></forward>															
+		</action>
+	</action-mappings>
+</struts-config>

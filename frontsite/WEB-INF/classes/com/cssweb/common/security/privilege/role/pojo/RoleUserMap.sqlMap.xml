@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.security.privilege.role.pojo.RoleUserMap">
+
+	<typeAlias alias="RoleUserMap" type="com.cssweb.common.security.privilege.role.pojo.RoleUserMap"/>
+
+	<!--result map-->
+	<resultMap id="roleUserMapMap" class="RoleUserMap">
+ 		<result property="roleId" column="ROLE_ID" jdbcType="Long"/>
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="RoleUserMap">
+		  insert into ROLE_USER_MAP (ROLE_ID,USER_ID) values (#roleId#,#userId#)
+	</insert>
+	
+	<delete id="delete" parameterClass="RoleUserMap">
+	  	delete ROLE_USER_MAP where ROLE_ID=#roleId# and USER_ID=#userId#
+	</delete>
+	
+	<select id="getByRoleId" parameterClass="Long" resultMap = "roleUserMapMap">
+	    select * from ROLE_USER_MAP where ROLE_ID = #value#
+	 </select>
+	 
+	 <delete id="deleteByRoleId" parameterClass="Long">
+	  	delete ROLE_USER_MAP where ROLE_ID=#value#
+	</delete>
+	
+	<select id="getAllRoleUserByRoleCode" parameterClass="java.lang.String" resultMap="roleUserMapMap">
+       select * from ROLE_USER_MAP
+       where ROLE_ID=(SELECT ID FROM ROLE_INFO WHERE ROLE_CODE = #value#)
+	</select>
+
+	<select id="getByUserId" parameterClass="Long" resultMap = "roleUserMapMap">
+	    select * from ROLE_USER_MAP where USER_ID = #value#
+	 </select>
+</sqlMap>

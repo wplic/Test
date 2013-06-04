@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.soft.pojo.SoftUrlInfo">
+
+	<typeAlias alias="SoftUrlInfo" type="com.cssweb.soft.pojo.SoftUrlInfo" />
+
+	<!--result map-->
+	<resultMap id="SoftUrlInfoMap" class="SoftUrlInfo">
+		<result column="ID" property="id" jdbcType="java.lang.Long"/>       
+		<result column="URL_NAME" property="url_name" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="URL" property="url" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="SOFT_ID" property="soft_id" jdbcType="java.lang.Long"/> 
+		<result column="IS_VALID" property="is_valid" jdbcType="java.lang.Long" /> 
+		<result column="ORDER_NUM" property="order_num" jdbcType="java.lang.Long"/> 
+		<result column="EXT1" property="ext1" jdbcType="java.lang.String"/> 
+		<result column="EXT2" property="ext2" jdbcType="java.lang.String"/> 
+		<result column="EXT3" property="ext3" jdbcType="java.lang.String"/> 
+		<result column="EXT4" property="ext4" jdbcType="java.lang.String"/> 
+	</resultMap>
+	
+ <select id="selectrecord" parameterClass="java.lang.String" resultMap = "SoftUrlInfoMap">   
+      $sql$   
+ </select>
+ 
+ 
+ 
+ <insert id="insert" parameterClass="SoftUrlInfo">    	
+    insert into SOFT_URL_INFO(ID,URL_NAME,URL,SOFT_ID,IS_VALID,ORDER_NUM,EXT1,EXT2,EXT3,EXT4)
+        values(#id#,#url_name#,#url#,#soft_id#,#is_valid#,#order_num#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+ 
+  <update id="update" parameterClass="SoftUrlInfo">    
+     update SOFT_URL_INFO
+         set URL_NAME=#url_name#,URL=#url#,SOFT_ID=#soft_id#,IS_VALID=#is_valid#,ORDER_NUM=#order_num#,
+         EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#  where ID=#id#    
+  </update>
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete SOFT_URL_INFO where id in ($value$)
+  </delete>
+  
+  <select id="selectAll" resultMap = "SoftUrlInfoMap">
+    select * from SOFT_URL_INFO
+  </select>
+  
+   <select id="selectAll_1" parameterClass="java.util.Map" resultMap = "SoftUrlInfoMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+    <select id="getSoftById" parameterClass="java.lang.Long" resultMap = "SoftUrlInfoMap">
+    select * from SOFT_URL_INFO where id = #value#
+  </select>
+ 
+   <select id="getBySoftId_ALL" parameterClass="java.util.Map" resultMap = "SoftUrlInfoMap">
+    select * from SOFT_URL_INFO where SOFT_ID=#softId# and IS_VALID=1  order by ORDER_NUM desc
+  </select>
+  
+  	
+
+
+</sqlMap>

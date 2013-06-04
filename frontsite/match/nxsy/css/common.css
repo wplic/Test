@@ -1,0 +1,170 @@
+body {
+	background: url(../images/top_bg.jpg) center top no-repeat;
+	background-color:#f1f1f1;
+	display: block;
+	color:#333;
+	font-size: 14px !important;
+	margin:0px;
+	padding:0px;
+}
+html {
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-shadow-color: #D2E5F4;
+	scrollbar-highlight-color: #D2E5F4;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #D2E5F4;
+	overflow-x:hidden;
+}
+table, td, th, ul, li, ol, dl, dt, dd, div, html, p, blockquote, h1, h2, h3, h4, h5, form, html, pre, fieldset {
+	margin:0;
+	padding:0;
+}
+ul li {
+	list-style-type:none;
+	line-height:200%;
+list-style-type:
+}
+img {
+	border:none;
+	cursor:pointer;
+}
+p {
+	line-height:24px;
+}
+.clear {
+	clear:both;
+}
+a {
+	color:#965304;
+	text-decoration: underline;
+}
+a:hover {
+	color:#cc0b06;
+}
+.color1 {
+	color:#014897;
+}
+.color2 {
+	color:#000;
+}
+.color3{ color:#c40000;}
+.center{ text-align:center;}
+
+
+.foot_bg {
+	background: url(../images/foot_bg.gif) center bottom no-repeat;
+}
+.main{ width:975px; margin:0 auto;}
+.head{ padding-top:304px;  width:969px; padding-left:3px; height:50px; overflow:hidden;}
+.body{
+	background: url(../images/body_bg.gif) center center repeat-y;
+	width:942px;
+	padding:0 16px 30px;
+}
+.foot{ color:#fff; font-size:12px; height:22px; padding-top:55px; text-align:center;}
+/*产品简介*/
+.cpjj,.cptk,.cpfl,.zhgz{ width: 942px; padding-top:12px; overflow:hidden;}
+.tit1,.tit5,.tit6{
+	background: url(../images/lm_01.gif) center center no-repeat;
+	width:942px;
+	height:37px;
+}
+.con1{
+	background: url(../images/lm_c.gif) center center repeat-y;
+	padding:15px 30px 5px;
+}
+.bot1{
+	background: url(../images/lm_b.gif) center center no-repeat;
+	width:942px;
+	height:21px;}
+.ico_01{ overflow:hidden; padding:20px 0 0 135px;}
+.ico_1{
+	background: url(../images/ico_01.gif) center top no-repeat;
+	width:175px;
+	height:35px;
+	display: inline-block;
+	margin-right:30px;
+}
+.ico_2{
+	background: url(../images/ico_01.gif) center -35px no-repeat;
+	width:175px;
+	height:35px;
+	display:inline-block;
+}
+.ico_3{
+	background: url(../images/ico_03.gif) center center no-repeat;
+	width:175px;
+	height:35px;
+	margin-left:30px;
+	display:inline-block;
+}
+/*产品主要条款*/
+.cptk{ }
+.cptk_l{width:326px; float:left; margin-right:8px;}
+.cptk_l ul{
+	border:1px solid #e7e7e7;
+	padding:15px;
+	color:#663366;
+}
+.cptk_l ul li{
+	border-bottom:1px dashed #999999;
+	padding:5px 0;
+	line-height:21px;
+	
+}
+.num1,.num2,.num3,.num4,.num5,.num6,.num7,.num8,.num9{height:23px; width:23px; background-repeat:no-repeat; display: inline-block; margin-right:5px; float:left;}
+.num1{background: url(../images/num.gif) 0 0; }
+.num2{background: url(../images/num.gif) 0 -23px;}
+.num3{background: url(../images/num.gif) 0 -46px;}
+.num4{background: url(../images/num.gif) 0 -69px;}
+.num5{background: url(../images/num.gif) 0 -92px;}
+.num6{background: url(../images/num.gif) 0 -115px;}
+.num7{background: url(../images/num.gif) 0 -138px;}
+.num8{background: url(../images/num.gif) 0 -161px;}
+.num9{background: url(../images/num.gif) 0 -184px;}
+.cptk_r{ width:608px; float:left;}
+.cptk_r1{}
+.cptk_r2{}
+.tit2{
+	background: url(../images/ico_02.gif) left center no-repeat;
+	font-size:16px;
+	 font-weight:bold;
+	 color:#b6010d;
+	 padding-left:55px;
+	 height:36px;
+	 line-height:36px;
+	 border:1px solid #e7e7e7;
+}
+
+.tit3,.tit4{
+	background: url(../images/lm_bg.png) 0 0 no-repeat;
+	height:36px;
+	line-height:32px;
+	text-align:center;
+	width:608px;
+	font-size:16px;
+	color:#fff;
+	font-weight: bold;
+	text-shadow:-1px 2px 1px #66060c;
+
+}
+.con2,.con3{
+	border: 1px solid #dedede;
+	border-top:none;
+	margin-left:3px;
+	width:600px;
+	overflow:hidden;
+
+}
+.con2_l,.con2_r{ width:300px; height:290px; float:left;}
+.tit4{ margin-top:12px;}
+
+/*产品费率*/
+.cpfl{}
+.tit5{background: url(../images/lm_02.gif) center center no-repeat;}
+/*份额转换规则*/
+.zhgz{}
+.tit6{background: url(../images/lm_03.gif) center center no-repeat;}
+/*  indexpage  end  */

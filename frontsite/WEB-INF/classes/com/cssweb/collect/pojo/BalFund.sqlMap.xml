@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.BalFund">
+
+	<typeAlias alias="balFund" type="com.cssweb.collect.pojo.BalFund"/>
+
+	<!--result map-->
+	<resultMap id="balFundMap" class="balFund">
+		<result property="depositacct" column="DEPOSITACCT"  jdbcType="String" />
+        <result property="fundcode" column="FUNDCODE"  jdbcType="String"  />
+        <result property="accountabbr" column="ACCOUNTABBR" jdbcType="String"/>
+        <result property="nav" column="NAV"  jdbcType="Double" />
+        <result property="sumbuyvol" column="SUMBUYVOL" jdbcType="Double" />
+ 		<result property="avgcost" column="AVGCOST" jdbcType="Double"/>
+ 		<result property="divtype" column="divtype" jdbcType="String"/>
+ 		<result property="distributorcode" column="distributorcode" jdbcType="String"/>
+ 		<result property="distributorname" column="distributorname" jdbcType="String"/>
+ 	</resultMap>
+  	
+ 
+  <select id="getBalFundByZjzh" parameterClass="java.lang.String" resultMap = "balFundMap" >
+	 select b.accountabbr as ACCOUNTABBR,a.taaccountid as DEPOSITACCT ,a.fundcode as FUNDCODE,
+		a.fundvolbalance*nvl(d.net_prc,1) nav,a.AVAILABLEVOL as sumbuyvol,a.AVGCOST,a.defdividendmethod as divtype,a.distributorcode,c.distributorname
+		 from TA_FUND_HISTORY a ,ta_fundaccount b,ta_distributor c,
+		(select fundcode,net_prc,accum_prc from ta_fund_prc where dt =(select max(dt) from ta_fund_prc )) d
+		where a.taaccountid =#depositacct# and a.uploaddate=(select max(dt) from ta_fund_prc )
+		 and a.taaccountid=b.taaccountid(+) and a.distributorcode=c.distributorcode(+) 
+		and a.fundcode=d.fundcode(+)		
+ </select>
+
+  <select id="getBalFundByPages" parameterClass="java.util.HashMap" resultMap = "balFundMap" >
+   		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+    <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+</sqlMap>

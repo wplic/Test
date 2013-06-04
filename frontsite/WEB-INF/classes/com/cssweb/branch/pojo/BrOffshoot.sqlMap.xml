@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branch.pojo.BrOffshoot">
+
+	<typeAlias alias="BrOffshoot" type="com.cssweb.branch.pojo.BrOffshoot"/>
+	<typeAlias alias="UserBasicInfo" type="com.cssweb.common.security.user.pojo.UserBasicInfo"/>
+
+	<cacheModel id="BranchInfoCache" type="OSCACHE">
+	    <flushInterval hours="24"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BrOffshoot.insert"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BrOffshoot.update"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	<!--result map-->
+	<resultMap id="BrOffshootMap" class="BrOffshoot">
+		<result property="id"              	column="id"/>
+        <result property="branchCode"      	column="branch_code"  />
+        <result property="branchName"      	column="branch_name"/>
+        <result property="parentId" 		column="parent_id"/>
+        <result property="areaid"   		column="area_id"/>
+        <result property="zphone"      		column="zphone"/>
+        <result property="fax" 				column="fax"/>
+        <result property="introduceId"    	column="introduce_id"/>
+        <result property="feature"    		column="feature"/>
+        <result property="address"     		column="address"/>
+        <result property="contector"       	column="contector"/>
+        <result property="email" 			column="email" />
+        <result property="mobile" 			column="mobile"/>
+        <result property="post"         	column="post"/>
+ 		<result property="wphone"           column="sphone"/>
+ 		<result property="picid"            column="pic_id"/>
+ 		<result property="url"            	column="url"/>
+ 		<result property="orderNum"         column="order_num"/>
+ 		<result property="state"      		column="state"/>
+ 		<result property="province"       	column="province"/>
+ 		<result property="city"    			column="city"/>
+  	</resultMap>
+	<resultMap id="BrOffshootMapShort" class="BrOffshoot">
+		<result property="id"              column="id"/>
+		<result property="branchName"      column="branch_name"/>
+  	</resultMap>
+	<resultMap id="BrOffshootWithoutBlobMap" class="BrOffshoot">
+		<result property="id"              	column="id"/>
+        <result property="branchCode"      	column="branch_code"/>
+        <result property="branchName"      	column="branch_name"/>
+        <result property="parentId" 		column="parent_id"/>
+        <result property="areaid"   		column="area_id"/>
+        <result property="post"      		column="post"/>
+        <result property="contector" 		column="contector"/>
+        <result property="zphone"    		column="zphone"/>
+        <result property="wphone"    		column="wphone"/>
+        <result property="email"     		column="email"/>
+        <result property="url"       		column="url"/>
+ 		<result property="state"            column="state"/>
+ 		<result property="province"      	column="province"/>
+ 		<result property="city"    			column="city"/>
+ 		<result property="orderNum"    		column="order_num"/>
+  	</resultMap>
+
+  	<resultMap id="UserBasicInfoResult" class="UserBasicInfo">
+		<result column="ID" property="id" jdbcType="LONG"/>
+		<result column="USER_NAME" property="userName" jdbcType="String"/>
+		<result column="REAL_NAME" property="realName" jdbcType="String"/>
+		<result column="PASSWORD" property="password" jdbcType="String"/>
+		<result column="EMAIL" property="email" jdbcType="String"/>
+		<result column="USER_TYPE" property="userType" jdbcType="int"/>
+		<result column="CREATE_DATE" property="createDate" jdbcType="java.util.Date"/>
+		<result column="IS_DELETED" property="isDeleted" jdbcType="int"/>
+	</resultMap>
+  	
+  <insert id="insert" parameterClass="BrOffshoot">
+    insert into T_SYSTEM_BRANCH 
+          (id,          branch_code,    branch_name,     parent_id,     area_id,
+           zphone, 		fax,			introduce_id,    feature,   	address,
+           contector,   email,  		mobile,			 post,			sphone,
+           pic_id,      url,        	order_num,       state,         province,    
+           city)
+    values(#id#,        #branchCode#,   #branchName#,    #parentid#,    #areaid#,
+           #zphone#,	#fax#,			#introduceId#, 	 #feature#,  	#address#,
+           #contector#, #email#, 		#mobile#,		 #post#, 		#sphone#,
+           #picid#,   	#url#,      	#orderNum#,      #state#,       #province#,   
+           #city#)
+  </insert>
+
+
+  <update id="update" parameterClass="BrOffshoot">
+    update T_SYSTEM_BRANCH 
+    set 
+    		branch_code=#branchCode#,
+    		branch_name=#branchName#,
+    		parent_id=#parentid#,
+    		area_id=#areaid#,
+    		zphone=#zphone#,
+    		fax=#fax#,
+    		introduce_id=#introduceId#,
+    		feature=#feature#,
+    		address=#address#,
+    		contector=#contector#,
+    		email=#email#,
+    		mobile=#mobile#,
+    		post=#post#,
+    		sphone=#sphone#,
+    		pic_id=#picid#,
+    		url=#url#,
+    		order_num=#orderNum#,
+    		state=#state#,      
+    		province=#province#, 
+    		city=#city#
+    		
+     where id = #id#
+  </update>
+
+  <delete id="delete" parameterClass="BrOffshoot">
+    delete T_SYSTEM_BRANCH where id = #id#
+  </delete>
+   
+  <delete id="deleteAll" parameterClass="java.lang.Long">
+    delete T_SYSTEM_BRANCH  
+  </delete>
+  
+  <delete id="deleteById" parameterClass="java.lang.Long">
+    delete T_SYSTEM_BRANCH where id = #value#
+  </delete>
+  
+
+  <select id="select" resultMap = "BrOffshootMap" cacheModel="BranchInfoCache">
+    select
+        *
+    from
+        T_SYSTEM_BRANCH
+    order by order_num asc
+  </select>
+
+  <select id="getBrOffshootById" parameterClass="java.lang.Long" resultMap = "BrOffshootMap" cacheModel="BranchInfoCache">
+    select
+        *
+    from
+        T_SYSTEM_BRANCH
+    where
+    	id = #value#
+    order by order_num asc
+  </select>
+  
+  <!-- select id="getBrOffshootByBranchNo" resultMap = "BrOffshootMap" parameterClass="java.lang.String">
+    select
+        *
+    from
+        T_SYSTEM_BRANCH
+    where
+    	branch_no = #value#
+    order by to_number(ext3)
+  </select>
+  <select id="getBrOffshootByBranchNo2" resultMap = "BrOffshootMap" parameterClass="java.lang.String">
+    select
+        ID,province_Id,branch_name
+    from
+        T_SYSTEM_BRANCH
+    where
+    	branch_no = #value#
+    order by ext3
+  </select-->
+  <select id="getBrOffshootByBranchNoWithoutBlob" resultMap = "BrOffshootWithoutBlobMap" parameterClass="java.lang.String">
+    select
+        id,branch_code,branch_name,parent_id
+        ,area_id,post,contector
+        ,zphone,wphone,email
+        ,url,state,province,city,order_num
+    from
+        T_SYSTEM_BRANCH
+    where
+    	branch_no = #value#
+    order by order_num asc
+  </select>
+  
+  <select id = "getBrOffshootByProvinceId" resultMap = "BrOffshootMap" parameterClass="java.lang.String" >
+    	select
+        	*
+    	from
+    	    T_SYSTEM_BRANCH
+    	where
+        	province_Id = #value#
+         order by order_num asc
+  </select>
+  
+   <!-- select id = "getBrOffshootByProvinceIdAndExt4" resultMap = "BrOffshootMap" parameterClass="java.lang.String" >
+    	select
+        	*
+    	from
+    	    T_SYSTEM_BRANCH
+    	where
+    	    ext4=1 and
+        	province_Id = #value#
+         order by order_num asc
+  </select>
+  
+  <select id = "getBrOffshootYybAndFWBByProvinceId" resultMap = "BrOffshootMap" parameterClass="java.lang.String" >		
+  		select
+            *
+        from
+            T_SYSTEM_BRANCH
+    	where
+    	    (ext4=1 or ext4=2 or ext4=3)
+        	 and province_Id = #value#
+         order by to_number(ext3)
+   </select>
+   
+   <select id = "getBrOffshootYybAndFWBByProvinceId1" resultMap = "BrOffshootMap" parameterClass="java.lang.String" >		
+  		select
+            *
+        from
+            T_SYSTEM_BRANCH
+    	where
+    	    (ext4=1 or ext4=7)
+        	 and province_Id = #value#
+         order by to_number(ext3)
+   </select>
+  
+   <select id = "getBrOffshootByProvinceIdSpecial" resultMap = "BrOffshootMap" parameterClass="java.lang.String" >
+    	select
+        	*
+    	from
+    	    T_SYSTEM_BRANCH
+    	where
+    	   substr(province_Id,0,2) = #value#
+         order by to_number(ext3)
+  </select>
+  
+  <select id="getBranchNoListByProvinceId" parameterClass="String" resultClass="String" >
+       select distinct branch_no from T_SYSTEM_BRANCH where province_id = #value#
+  </select--> 
+  
+  <select id="getBrOffshootByProperties" parameterClass="java.util.Map" resultMap = "BrOffshootMap" cacheModel="BranchInfoCache">
+    select
+        *
+    from
+        T_SYSTEM_BRANCH
+    <dynamic prepend="WHERE">
+    	<isNotEmpty prepend="AND" property="id">
+    		id = #id#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="branchCode">
+    		branch_code = #branchCode#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="branchName">
+    		branch_name = #branchName#
+    	</isNotEmpty>
+    </dynamic>
+     order by order_num asc
+  </select>
+  
+  <select id="getBrOffshootByPropertiesExt1" parameterClass="java.util.Map" resultMap = "BrOffshootMap" cacheModel="BranchInfoCache">
+    select
+        *
+    from
+        T_SYSTEM_BRANCH
+    <dynamic prepend="WHERE">
+    	<isNotEmpty prepend="AND" property="id">
+    		id = #id#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="branchCode">
+    		branch_code = #branchCode#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="branchName">
+    		branch_name = #branchName#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="province">
+    		province = #province#
+    	</isNotEmpty>
+    </dynamic>
+     order by order_num asc
+  </select>
+  
+  	<!-- 有效用户分页查询 -->
+	<select id="pageQuery" parameterClass="map" resultMap="UserBasicInfoResult">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+    			$baseSql$
+    		)row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+    order by to_number(ext3)
+	</select>
+	<select id="pageCount" parameterClass="String" resultClass="Integer">
+		select count(*) from ($baseSql$)
+	</select>
+	
+	
+	
+	<!-- 有效用户分页查询 -->
+	<select id="pageQuery2" parameterClass="map" resultMap="BrOffshootMapShort">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+    			$baseSql$
+    		)row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+    order by to_number(ext3)
+	</select>
+	<select id="pageCount2" parameterClass="String" resultClass="Integer">
+		select count(*) from ($baseSql$)
+	</select>
+	
+	<select id="getProvinceIdById" parameterClass="Long" resultClass="String">
+		select province from T_SYSTEM_BRANCH where id =#value#
+	</select>
+	
+	<select id="getBranchNameByBranchNo" parameterClass="Long" resultClass="String">
+		select branch_name from T_SYSTEM_BRANCH where id =#value#
+	</select>
+	
+	
+	 <select id="getBrOffshootByProvinceIdOrBranchNo" parameterClass="map" resultMap="BrOffshootMapShort">
+      SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	 <select id="count" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+	</select>
+	
+	<!-- select id="getBrOffshootByProvinceIdNew" resultMap="BrOffshootMapShort" parameterClass="map">
+		select t.id, t.branch_name, t.state from  T_SYSTEM_BRANCH t,province_offshoot p where t.id= p.offshoot_id and p.province_id= #provinceId#
+		<dynamic>
+    			<isNotEmpty prepend="AND" property="ext4">
+    					state = #state#
+    			</isNotEmpty>
+    	</dynamic>	
+		
+	</select-->
+	
+	<select id="getBranchListByProvinceId" parameterClass="String" resultMap="BrOffshootMapShort" >
+       select * from T_SYSTEM_BRANCH where province = #value#
+  </select> 
+  
+  <select id="getBranchListByProvinceCode" parameterClass="Map" resultMap="BrOffshootMapShort" >
+       select * from T_SYSTEM_BRANCH where 1=1
+       <dynamic>
+		<isNotEmpty prepend="AND" property="provinceCode">
+    		province = #provinceCode#
+		</isNotEmpty>
+		<isNotEmpty prepend="AND" property="ext4">
+    		state in ($ext4$)
+		</isNotEmpty>
+       </dynamic>	
+  </select> 
+</sqlMap>

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.complaints.pojo.Complaints">
+
+	<typeAlias alias="complaints"
+		type="com.cssweb.complaints.pojo.Complaints" />
+
+	<!--result map-->
+	<resultMap id="complaintsMap" class="complaints">
+
+		<!-- ID -->
+		<result column="ID" property="id" jdbcType="java.lang.Long" />
+
+		<!-- 类别 1:专家 2:分析师 -->
+		<result column="TYPE" property="type"
+			jdbcType="java.lang.String" />
+
+		<!-- 真实姓名 -->
+		<result column="NAME" property="name"
+			jdbcType="java.lang.String" />
+
+		<!-- 介绍 -->
+		<result column="INTRO" property="remark"
+			jdbcType="java.lang.String" />
+
+		<!-- 相片 -->
+		<result column="PHOTO" property="photoId"
+			jdbcType="java.lang.Long" />
+
+		<!-- 是否在线 0:离线 1:在线 -->
+		<result column="IS_ONLINE" property="isOnline"
+			jdbcType="java.lang.String" />
+
+		<!-- 排序号 -->
+		<result column="ORDER_NUM" property="orderNum"
+			jdbcType="java.lang.Long" />
+		<!-- 是否值班-->	
+		<result column="IS_WORK" property="isWork"
+			jdbcType="java.lang.String" />
+			
+	</resultMap>
+
+	<!-- 查找所有专家分析师信息 -->
+	<select id="selectAll" resultMap="complaintsMap">
+		SELECT ID, TYPE, NAME, INTRO, PHOTO, IS_ONLINE, ORDER_NUM,IS_WORK FROM
+		T_FINANCE_EXPERTINFO
+	</select>
+
+	<!-- 添加专家分析师信息 -->
+	<insert id="insert" parameterClass="complaints">
+		insert into T_FINANCE_EXPERTINFO(ID, TYPE, NAME, INTRO, PHOTO,
+		IS_ONLINE, ORDER_NUM) values(#id#, #type#, #name#, #remark#,
+		#photoId#, #isOnline#, #orderNum#)
+	</insert>
+	
+	<!-- 修改专家分析师信息 -->
+		<update id="updateByIsOnline" parameterClass="complaints">
+			update T_FINANCE_EXPERTINFO set IS_ONLINE = #isOnline# where ID=#id#
+		</update>
+		
+	<!-- 修改专家分析师信息 -->
+	<update id="update" parameterClass="complaints">
+		update T_FINANCE_EXPERTINFO set TYPE = #type#, NAME=#name#,
+		INTRO=#remark#, PHOTO=#photoId# where ID=#id#
+	</update>
+
+	<!-- 删除专家分析师信息 -->
+	<delete id="delete" parameterClass="java.lang.Long">
+		delete T_FINANCE_EXPERTINFO where ID = #id#
+	</delete>
+
+	<!-- 查找所有专家分析师信息带分页 -->
+	<select id="selectQueryAllByPage" resultMap="complaintsMap"
+		parameterClass="java.util.Map">
+		SELECT ID, TYPE, NAME, INTRO, PHOTO, IS_ONLINE, ORDER_NUM,IS_WORK FROM (
+		SELECT row_.*, ROWNUM rownum_ FROM ( SELECT ID, TYPE, NAME,
+		INTRO, PHOTO, IS_ONLINE, ORDER_NUM,IS_WORK FROM T_FINANCE_EXPERTINFO WHERE 1=1
+		<dynamic>
+			<isNotEmpty prepend="and" property="sql">
+				1=1 $sql$
+			</isNotEmpty>
+		</dynamic>
+		)
+		row_ WHERE ROWNUM &lt;= #endNum# ) WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 根据专家分析师ID获取相关信息 -->
+	<select id="getComplaintsById" parameterClass="java.lang.Long"
+		resultMap="complaintsMap">
+		select ID, TYPE, NAME, INTRO, PHOTO, IS_ONLINE, ORDER_NUM,IS_WORK from
+		T_FINANCE_EXPERTINFO where ID = #id#
+	</select>
+
+	<!-- 根据专家分析师名字获取相关信息 -->
+	<select id="getComplaintsByName" parameterClass="String"
+		resultMap="complaintsMap">
+		select ID, TYPE, NAME, INTRO, PHOTO, IS_ONLINE, ORDER_NUM,IS_WORK from
+		T_FINANCE_EXPERTINFO where NAME = #name#
+	</select>
+
+
+	<!-- 查找所有专家,分析师信息 -->
+	<select id="getComplaintsAllByType" resultMap="complaintsMap" parameterClass="java.util.Map">
+		SELECT ID, TYPE, NAME,INTRO, PHOTO, IS_ONLINE, ORDER_NUM,IS_WORK FROM T_FINANCE_EXPERTINFO WHERE 1=1
+			<dynamic>
+		     <isNotEmpty prepend="and" property="type">
+				TYPE = #type# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isOnline">
+				IS_ONLINE = #isOnline# 
+			</isNotEmpty>
+		</dynamic>
+		order by ORDER_NUM
+	</select>
+	
+	<!--result map-->
+	<resultMap id="complaintsUserMap" class="complaints">
+		<!-- ID -->
+		<result column="ID" property="id" jdbcType="java.lang.Long" />
+		<!-- 内部用户表的 username -->
+		<result column="user_name" property="userName" jdbcType="java.lang.String" />
+		<!-- 内部用户表的 真实姓名 -->
+		<result column="real_name" property="realName" jdbcType="java.lang.String" />
+	</resultMap>
+	<select id="getJosnValue" parameterClass="java.util.Map" resultMap="complaintsUserMap">
+		select id,user_name,real_name from T_SYSTEM_USER where id in (select user_id from role_user_map a ,role_info b where a.role_id =b.id and b.role_code=#roleCode#)
+	</select>
+	<!-- 修改值班状态 -->
+	<update id="updateiswork" parameterClass="complaints" >
+		update T_FINANCE_EXPERTINFO set IS_WORK = #isWork# where id = #id#
+	</update>
+	<!-- 修改值班状态 -->
+	<update id="updatealliswork" parameterClass="complaints">
+		update T_FINANCE_EXPERTINFO set IS_WORK =#isWork#
+	</update>
+	<!-- 查询当日值班人的信息 -->
+	<select id="getIsworkInfo" resultMap="complaintsMap" parameterClass="java.lang.String">
+		SELECT ID, TYPE, NAME,INTRO, PHOTO, IS_ONLINE, ORDER_NUM,IS_WORK FROM T_FINANCE_EXPERTINFO WHERE IS_WORK = #VALUE#
+	</select>
+</sqlMap>

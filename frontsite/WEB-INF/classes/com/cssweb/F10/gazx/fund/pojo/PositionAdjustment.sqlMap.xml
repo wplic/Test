@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.PositionAdjustment">
+
+	<typeAlias alias="positionAdjustment" type="com.cssweb.F10.gazx.fund.pojo.PositionAdjustment" />
+
+	<!--result map-->
+	<resultMap id="positionAdjustmentMap" class="positionAdjustment">
+		<result property="addMarketValue" column="LJMRJE" jdbcType="java.lang.Double" />
+		<result property="changeStyle" column="XZHTC" jdbcType="java.lang.String" />
+		<result property="endDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="id" column="T_JJXZTCGPTJ_ID" jdbcType="java.lang.Long" />
+		<result property="secCode" column="JJDM" jdbcType="java.lang.String" />
+		<result property="secName" column="JJJC" jdbcType="java.lang.String" />
+	</resultMap>
+	
+	<resultMap id="positionAdjustmentByCodeMap" class="positionAdjustment">
+		<result property="endDate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>	
+	
+	<resultMap id="positionAdjustmentALLMap" class="positionAdjustment">
+		<result property="addMarketValue" column="LJMRJE" jdbcType="java.lang.Double" />
+		<result property="changeStyle" column="XZHTC" jdbcType="java.lang.String" />
+		<result property="endDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="recMarketValue" column="LJMCJE" jdbcType="java.lang.Double" />
+		<result property="secCode" column="JJDM" jdbcType="java.lang.String" />
+		<result property="secName" column="JJJC" jdbcType="java.lang.String" />
+	</resultMap>	
+	
+	<!-- 根据代码查询时间列表 -->
+	<select id="getDateListByCode" resultMap="positionAdjustmentByCodeMap" parameterClass="String">
+    	select distinct jz.FSRQ
+		from JJXZTCGPTJ  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #secCode# and jz.SCBZ=0 and jz.GKBZ=1
+		order by jz.FSRQ desc
+	</select>	
+	
+	<!-- 根据代码，开始时间，结束时间查询财务指标列表 -->
+	<select id="getPositionAdjustListByCodeAndDate" resultMap="positionAdjustmentMap" parameterClass="Map">
+    	select jz.LJMRJE,jz.XZHTC,jz.FSRQ,jz.T_JJXZTCGPTJ_ID,j.JJDM,j.JJJC
+		
+		from JJXZTCGPTJ  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID  and to_char(jz.FSRQ,'yyyy-mm-dd') &lt;= #endDate# 
+    		 and j.JJDM= #secCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>
+	
+	<!-- 根据代码、时间查询持仓调整的记录数 -->	
+	<select id="getPositionAdjustmentListOfCount" resultClass="Integer" parameterClass="Map">
+    	select count(*)
+		from JJXZTCGPTJ  jz, JJZB  j,GPZB gb
+			where jz.T_JJZB_ID=j.T_JJZB_ID and jz.gpdm_id=gb.t_gpzb_id
+		  			and jz.SCBZ=0 and jz.GKBZ=1
+  		<dynamic>
+  			<isNotNull prepend="and" property="fundCode">
+								j.JJDM= #fundCode#
+							</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+				to_char(jz.FSRQ,'yyyy-mm-dd') = #endDate# 
+			</isNotNull>
+		</dynamic>	
+	</select>	
+	
+	<!-- 根据代码、时间查询持仓调整列表  分页 -->
+	<select id="pageQuery" resultMap="positionAdjustmentALLMap" parameterClass="Map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+		    	select gb.gpjc as jjjc,gb.gpdm as jjdm,jz.LJMRJE,jz.XZHTC,jz.FSRQ,jz.LJMCJE
+				
+				from JJXZTCGPTJ  jz, JJZB  j,GPZB gb
+				
+				where jz.T_JJZB_ID=j.T_JJZB_ID and jz.gpdm_id=gb.t_gpzb_id
+		  			and jz.SCBZ=0 and jz.GKBZ=1
+    		 			<dynamic>
+							<isNotNull prepend="and" property="fundCode">
+								j.JJDM= #fundCode#
+							</isNotNull>
+							<isNotNull prepend="and" property="endDate">
+								to_char(jz.FSRQ,'yyyy-mm-dd') = #endDate# 
+							</isNotNull>
+						</dynamic>
+		    		 order by jz.FSRQ desc
+			) row_ WHERE ROWNUM &lt;= #endNum#
+		) r WHERE rownum_ &gt;#beginNum#
+	</select>	
+			
+	<select id="getLeastDateByCode" resultClass="java.util.Date" parameterClass="String">
+		select max(jj.FSRQ)  as FSRQ
+		from JJXZTCGPTJ  jj, JJZB  j
+		where jj.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jj.SCBZ=0 and jj.GKBZ=1
+	</select>
+</sqlMap>

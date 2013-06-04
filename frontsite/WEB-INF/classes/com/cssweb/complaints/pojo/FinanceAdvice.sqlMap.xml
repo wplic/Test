@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.complaints.pojo.FinanceAdvice">
+
+	<typeAlias alias="financeAdvice"
+		type="com.cssweb.complaints.pojo.FinanceAdvice" />
+
+	<!--result map-->
+	<resultMap id="financeAdviceMap" class="financeAdvice">
+
+		<!-- ID -->
+		<result column="ID" property="financeAdviceId"
+			jdbcType="java.lang.Long" />
+
+		<!-- 姓名 -->
+		<result column="NAME" property="financeAdviceName"
+			jdbcType="java.lang.String" />
+
+		<!-- 电话 -->
+		<result column="TEL" property="financeAdviceTel"
+			jdbcType="java.lang.String" />
+
+		<!-- 邮箱 -->
+		<result column="EMAIL" property="financeAdviceEmail"
+			jdbcType="java.lang.String" />
+
+		<!-- 地址 -->
+		<result column="ADDRESS" property="financeAdviceAddress"
+			jdbcType="java.lang.String" />
+
+		<!-- 营业部ID -->
+		<result column="BRANCH_ID" property="branchId"
+			jdbcType="java.lang.Long" />
+
+		<!-- 营业部名称 -->
+		<result column="BRANCH_NAME" property="branchName"
+			jdbcType="java.lang.String" />
+
+
+		<!-- 投诉内容 -->
+		<result column="CONTENT" property="financeAdviceContent"
+			jdbcType="java.lang.String" />
+
+		<!-- 回复内容 -->
+		<result column="ANSWER_CON"
+			property="financeAdviceAnswerContent" jdbcType="java.lang.String" />
+
+		<!-- 投诉时间(精确到分钟) -->
+		<result column="CREATE_TIME" property="financeAdviceCreateDate"
+			jdbcType="java.util.Date" />
+
+		<!-- 回复时间 -->
+		<result column="ANSWER_TIME" property="financeAdviceAnswerTime"
+			jdbcType="java.util.Date" />
+
+		<!-- 是否已回复 0:未回复 1:已回复 -->
+		<result column="IS_ANSWER" property="financeAdviceIsAnswer"
+			jdbcType="java.lang.String" />
+
+	</resultMap>
+
+	<!-- 查找已经回复的客户投诉建议 -->
+	<select id="selectReplyedAll" resultMap="financeAdviceMap">
+		SELECT f.id , f.name, f.tel, f.email, f.address, f.branch_id,
+		f.content, f.create_time, f.answer_con, f.answer_time,
+		f.is_answer, b.branch_name FROM t_finance_advice f,
+		t_system_branch b where f.branch_id = b.id and f.is_answer = '1'
+		order by f.create_time desc
+	</select>
+
+	<!-- 查找已经回复的客户投诉建议带分页 -->
+	<select id="selectReplyedAllCutPage" resultMap="financeAdviceMap"
+		parameterClass="java.util.Map">
+		SELECT id , name, tel, email, address, branch_id, content,
+		create_time, answer_con, answer_time, is_answer, branch_name
+		FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( SELECT f.id ,
+		f.name, f.tel, f.email, f.address, f.branch_id, f.content,
+		f.create_time, f.answer_con, f.answer_time, f.is_answer,
+		b.branch_name FROM t_finance_advice f, t_system_branch b where
+		f.branch_id = b.id and f.is_answer = '1' order by f.create_time
+		desc ) row_ WHERE ROWNUM &lt;= #endNum# ) WHERE rownum_ &gt;
+		#beginNum#
+	</select>
+
+	<!-- 查找所有的客户投诉建议 -->
+	<select id="selectAll" resultMap="financeAdviceMap">
+		SELECT f.id , f.name, f.tel, f.email, f.address, f.branch_id,
+		f.content, f.create_time, f.answer_con, f.answer_time,
+		f.is_answer, b.branch_name FROM t_finance_advice f,
+		t_system_branch b where f.branch_id = b.id order by
+		f.create_time desc
+	</select>
+
+	<!-- 查找所有的客户投诉建议带分页 -->
+	<select id="selectAllCutPage" resultMap="financeAdviceMap"
+		parameterClass="java.util.Map">
+		SELECT id , name, tel, email, address, branch_id, content,
+		create_time, answer_con, answer_time, is_answer, branch_name
+		FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( SELECT f.id ,
+		f.name, f.tel, f.email, f.address, f.branch_id, f.content,
+		f.create_time, f.answer_con, f.answer_time, f.is_answer,
+		b.branch_name FROM t_finance_advice f, t_system_branch b where
+		f.branch_id = b.id order by f.create_time desc) row_ WHERE
+		ROWNUM &lt;= #endNum# ) WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 查找未回复的客户投诉建议 -->
+	<select id="selectUnReplyedAll" resultMap="financeAdviceMap">
+		SELECT f.id , f.name, f.tel, f.email, f.address, f.branch_id,
+		f.content, f.create_time, f.answer_con, f.answer_time,
+		f.is_answer, b.branch_name FROM t_finance_advice f,
+		t_system_branch b where f.branch_id = b.id and f.is_answer = '0'
+		order by f.create_time desc
+	</select>
+
+	<!-- 查找未回复的客户投诉建议带分页 -->
+	<select id="selectUnReplyedAllCutPage" resultMap="financeAdviceMap"
+		parameterClass="java.util.Map">
+		SELECT id , name, tel, email, address, branch_id, content,
+		create_time, answer_con, answer_time, is_answer, branch_name
+		FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( SELECT f.id ,
+		f.name, f.tel, f.email, f.address, f.branch_id, f.content,
+		f.create_time, f.answer_con, f.answer_time, f.is_answer,
+		b.branch_name FROM t_finance_advice f, t_system_branch b where
+		f.branch_id = b.id and f.is_answer = '0' order by f.create_time
+		desc) row_ WHERE ROWNUM &lt;= #endNum# ) WHERE rownum_ &gt;
+		#beginNum#
+	</select>
+
+	<!-- 根据ID获取建议的回复信息 -->
+	<select id="selectById" resultMap="financeAdviceMap"
+		parameterClass="java.lang.Long">
+		SELECT f.id , f.name, f.tel, f.email, f.address, f.branch_id,
+		f.content, f.create_time, f.answer_con, f.answer_time,
+		f.is_answer, b.branch_name FROM t_finance_advice f,
+		t_system_branch b where f.branch_id = b.id and f.id =
+		#financeAdviceId# order by f.create_time desc
+	</select>
+
+	<!-- 针对建议的回复信息 -->
+	<update id="replyAdvice" parameterClass="java.util.Map">
+		update t_finance_advice set answer_con =
+		#financeAdviceAnswerContent#, is_answer =
+		#financeAdviceIsAnswer# where id = #financeAdviceId#
+	</update>
+
+</sqlMap>

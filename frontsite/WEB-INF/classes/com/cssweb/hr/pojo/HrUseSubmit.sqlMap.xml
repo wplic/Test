@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUserSubmit">
+				 
+	<typeAlias alias="HrUserSubmit" type="com.cssweb.hr.pojo.HrUserSubmit"/>
+								
+	<!--result map-->
+	<resultMap id="resultMap" class="HrUserSubmit">
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="ifcheck" column="IFCHECK" jdbcType="String"/>
+ 		<result property="ifreadDocument" column="IFREADDOCUMENT" jdbcType="String" />
+ 		<result property="name" column="NAME" jdbcType="String" />
+ 		<result property="promisesTime" column="PROMISESTIME" jdbcType="String" />
+ 		<result property="notCheckReason" column="NOTCHECKREASON" jdbcType="String" />
+ 		<result property="notReadReason" column="NOTREADREASON" jdbcType="String" />
+ 		<result property="updatetime" column="UPDATETIME" jdbcType="java.util.Date" />
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="HrUserSubmit">
+		<![CDATA[
+		 insert into T_HR_USER_SUBMIT(USER_ID,IFCHECK,IFREADDOCUMENT,
+		 		NAME,PROMISESTIME,NOTCHECKREASON,NOTREADREASON,UPDATETIME)
+		 	 values(#userId#,#ifcheck#,#ifreadDocument#,#name#,#promisesTime#,#notCheckReason#,#notReadReason#,sysdate
+		 		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterClass="HrUserSubmit">
+		update T_HR_USER_SUBMIT
+		 set 
+		 	    IFCHECK=#ifcheck#,IFREADDOCUMENT=#ifreadDocument#,
+		 		NAME=#name#,PROMISESTIME=#promisesTime#,NOTCHECKREASON=#notCheckReason#,NOTREADREASON=#notReadReason#,UPDATETIME=sysdate
+		where USER_ID = #userId#
+	</update>
+	
+	<update id="updateDate" parameterClass="Long">
+		update T_HR_USER_SUBMIT
+		 set UPDATETIME=sysdate
+		where USER_ID = #userId#
+	</update>
+	
+	<delete id="delete" parameterClass="Long">
+		delete from T_HR_USER_SUBMIT where USER_ID = #userId#
+	</delete>
+	
+	<select id="getBeanById" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_SUBMIT 
+		    where 
+		    user_id=#userId#
+   </select>
+   
+   
+</sqlMap>

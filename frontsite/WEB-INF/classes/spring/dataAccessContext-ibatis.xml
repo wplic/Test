@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<bean id="propertyConfigurer"
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config/jdbcWind.properties</value>
+				<value>classpath:config/jdbcGzxt.properties</value>
+				<value>classpath:config/jdbcNxsy.properties</value>
+				<value>classpath:config/jdbcYyxt.properties</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="dataSourceWind" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbcWind.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbcWind.url}"/>
+		<property name="user" value="${jdbcWind.username}"/>
+		<property name="password" value="${jdbcWind.password}"/>
+		
+		<property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="20"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="1"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="1"/>
+		<property name="idleConnectionTestPeriod" value="100000"/>
+	</bean>
+	
+	<!-- 粤财每日查询 -->
+	<bean id="dataSourceYyxt" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbcYyxt.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbcYyxt.url}"/>
+		<property name="user" value="${jdbcYyxt.username}"/>
+		<property name="password" value="${jdbcYyxt.password}"/>
+		
+		<property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="30"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="1"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="1"/>
+		<property name="idleConnectionTestPeriod" value="100000"/>
+	</bean>
+
+	<!-- GZXT 估值系统 2012-08-16 jdbcGzxt.properties-->
+	<bean id="dataSourceGzxt" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbcGzxt.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbcGzxt.url}"/>
+		<property name="user" value="${jdbcGzxt.username}"/>
+		<property name="password" value="${jdbcGzxt.password}"/>
+		
+		<property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="20"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="5"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="10"/>
+		<property name="idleConnectionTestPeriod" value="1000"/>
+	</bean>
+	
+	<!-- GZXT 牛熊宝 2012-08-16 jdbcNxsy.properties-->
+	<bean id="dataSourceNxsy" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbcnxsy.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbcnxsy.url}"/>
+		<property name="user" value="${jdbcnxsy.username}"/>
+		<property name="password" value="${jdbcnxsy.password}"/>
+		
+		<property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="50"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="1"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="1"/>
+		<property name="idleConnectionTestPeriod" value="100000"/>
+	</bean>
+	<!-- 数据源定义,使用Apache DBCP 连接池 -->
+	<!--
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="user" value="${jdbc.username}"/>
+		<property name="password" value="${jdbc.password}"/>
+        
+        <property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="20"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="1"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="2"/>
+		<property name="idleConnectionTestPeriod" value="1"/>
+	</bean>
+	<bean id="dataSourceGazx" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.gazxdriverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.gazxurl}"/>
+		<property name="user" value="${jdbc.gazxusername}"/>
+		<property name="password" value="${jdbc.gazxpassword}"/>
+		
+		<property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="20"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="5"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="10"/>
+		<property name="idleConnectionTestPeriod" value="1000"/>
+		</bean>
+	
+	<bean id="dataSourceZcgl" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbc.zcgldriverClassName}"/>
+		<property name="jdbcUrl" value="${jdbc.zcglurl}"/>
+		<property name="user" value="${jdbc.zcglusername}"/>
+		<property name="password" value="${jdbc.zcglpassword}"/>
+		
+		<property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="20"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="5"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="10"/>
+		<property name="idleConnectionTestPeriod" value="1000"/>
+	</bean>	
+	<bean id="dataSourceCrm" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbcCrmImp.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbcCrmImp.url}"/>
+		<property name="user" value="${jdbcCrmImp.username}"/>
+		<property name="password" value="${jdbcCrmImp.password}"/>
+		
+		<property name="minPoolSize" value="10"/>
+		<property name="maxPoolSize" value="20"/>
+		<property name="maxIdleTime" value="20"/>
+		<property name="acquireIncrement" value="5"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="10"/>
+		<property name="idleConnectionTestPeriod" value="1000"/>
+	</bean>
+	<bean id="dataSourceSqlServer" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<property name="driverClass" value="${jdbcSqlServer.driverClassName}"/>
+		<property name="jdbcUrl" value="${jdbcSqlServer.url}"/>
+		<property name="user" value="${jdbcSqlServer.username}"/>
+		<property name="password" value="${jdbcSqlServer.password}"/>
+		
+		<property name="minPoolSize" value="1"/>
+		<property name="maxPoolSize" value="3"/>
+		<property name="maxIdleTime" value="2"/>
+		<property name="acquireIncrement" value="1"/>
+		<property name="maxStatements" value="0"/>
+		<property name="initialPoolSize" value="1"/>
+		<property name="idleConnectionTestPeriod" value="100000"/>
+	</bean>
+	-->
+	
+	<bean id="dataSource"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>webdb</value>
+		</property>
+	</bean>
+	<!-- 
+	<bean id="dataSourceWind"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>winddb</value>
+		</property>
+	</bean>
+	 -->
+	<bean id="dataSourceGazx"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>gaweb</value>
+		</property>
+	</bean>
+	
+	<bean id="dataSourceZcgl"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>zcgldb</value>
+		</property>
+	</bean>
+	
+	<bean id="dataSourceSqlServer"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>sqlServerdb</value>
+		</property>
+	</bean>
+	
+	<bean id="dataSourceCrm"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>crmgazx</value>
+		</property>
+	</bean>
+	<!-- 2012-6-26 -->
+		<bean id="dataSourceCrmpm"
+		class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>rzrqdb</value>
+		</property>
+	</bean>
+	<!-- iBATIS sqlMapClient config -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfig.xml</value>
+		</property>
+		
+		<property name="dataSource" ref="dataSource"/>
+		
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+	
+	<bean id="sqlMapYyxt"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfigYyxt.xml</value>
+		</property>
+
+		<property name="dataSource" ref="dataSourceYyxt" />
+
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+	
+	<bean id="sqlMapClientGazx"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfigGazx.xml</value>
+		</property>
+
+		<property name="dataSource" ref="dataSourceGazx" />
+
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+
+	<bean id="sqlMapClientNxsy"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfigNxsy.xml</value>			
+		</property>
+
+		<property name="dataSource" ref="dataSourceNxsy" />
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+	
+	
+	<bean id="sqlMapClientZcgl"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfigZcgl.xml</value>
+		</property>
+
+		<property name="dataSource" ref="dataSourceZcgl" />
+
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+	
+	<bean id="sqlMapClientSqlServer" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlServerConfig.xml</value>
+		</property>
+		
+		<property name="dataSource" ref="dataSourceSqlServer" />
+	</bean>
+	<bean id="sqlMapClientCrm"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfigCrmImp.xml</value>
+		</property>
+
+		<property name="dataSource" ref="dataSourceCrm" />
+
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+	
+	
+		<!-- 2012-6-26 -->
+	<bean id="sqlMapClientCrmpm"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfigCrm.xml</value>
+		</property>
+
+		<property name="dataSource" ref="dataSourceCrmpm" />
+
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+
+	<!-- 估值系统 GZXT  2012-08-16 -->
+	<bean id="sqlMapGzxt"
+		class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation">
+			<value>classpath:/config/sqlConfigGzxt.xml</value>
+		</property>
+
+		<property name="dataSource" ref="dataSourceGzxt" />
+
+		<property name="lobHandler">
+			<ref local="oracleLobHandler" />
+		</property>
+	</bean>
+
+	
+<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler" lazy-init="true"> 
+	<property name="nativeJdbcExtractor"> 
+		<ref local="nativeJdbcExtractor" /> 
+	</property> 
+</bean>
+
+<bean id="nativeJdbcExtractor" class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor" lazy-init="true" /> 
+
+	<!--Spring TransactionManager-->
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+</beans>

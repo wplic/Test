@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.security.user.pojo.UserAccountInfo">
+
+	<typeAlias alias="UserAccountInfo" type="com.cssweb.common.security.user.pojo.UserAccountInfo"/>
+
+	<!--result map-->
+	<resultMap id="userAccountInfoMap" class="UserAccountInfo">
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="customerId" column="CUSTOMER_ID" jdbcType="String"/>
+ 		<result property="account" column="ACCOUNT" jdbcType="String"/>
+ 		<result property="accountType" column="ACCOUNT_TYPE" jdbcType="String"/>
+ 		<result property="accountPassword" column="ACCOUNT_PASSWORD" jdbcType="String"/>
+ 		<result property="branchId" column="BRANCH_ID" jdbcType="Long"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="UserAccountInfo">
+		  insert into USER_ACCOUNT_INFO (USER_ID,CUSTOMER_ID,ACCOUNT,ACCOUNT_TYPE,ACCOUNT_PASSWORD,BRANCH_ID,EXT1,EXT2)
+		  				values (#userId#,#customerId#,#account#,#accountType#,#accountPassword#,#branchId#,#ext1#,#ext2#)
+	</insert>
+	
+	<update id="update" parameterClass="UserAccountInfo">
+		  update USER_ACCOUNT_INFO 
+		  	set CUSTOMER_ID=#customerId#,ACCOUNT=#account#,ACCOUNT_TYPE=#accountType#,
+		  		ACCOUNT_PASSWORD=#accountPassword#,BRANCH_ID=#branchId#,EXT1=#ext1#,EXT2=#ext2#
+		  where USER_ID=#userId#
+	</update>
+	
+	<delete id="deleteByUserId" parameterClass="Long">
+	  	delete USER_ACCOUNT_INFO where USER_ID=#value#
+	</delete>
+	
+	<select id="getByUserId" parameterClass="Long" resultMap = "userAccountInfoMap">
+	  	select * from USER_ACCOUNT_INFO where USER_ID = #value#
+	</select>
+
+</sqlMap>

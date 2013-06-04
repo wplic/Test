@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.workreport.pojo.WorkReport">
+	<typeAlias alias="WorkReport" type="com.cssweb.workreport.pojo.WorkReport"/>
+	 
+	<resultMap id="workReportMap" class="WorkReport">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="TITLE" property="title" jdbcType="String"/>
+		<result column="USER_ID" property="userId" jdbcType="long"/>
+		<result column="DEPT_ID" property="deptId" jdbcType="long"/>
+		<result column="SEND_TO" property="sendTo" jdbcType="String"/>
+		<result column="CATEGORY" property="category" jdbcType="String"/>
+		<result column="ADD_DATE" property="addDate" jdbcType="java.util.Date"/>
+		<result column="CONTENT_DAY1" property="contentDay1" jdbcType="String"/>
+		<result column="CONTENT_DAY2" property="contentDay2" jdbcType="String"/>
+		<result column="CONTENT_DAY3" property="contentDay3" jdbcType="String"/>
+		<result column="CONTENT_DAY4" property="contentDay4" jdbcType="String"/>
+		<result column="CONTENT_DAY5" property="contentDay5" jdbcType="String"/>
+		<result column="EXTRA_FILE_IDS" property="extraFileIds" jdbcType="String"/>
+		<result column="EXT1" property="ext1" jdbcType="long"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+	</resultMap>
+	<select id="getWorkReportMapById" parameterClass="Long"  resultMap="workReportMap">
+		select ID,TITLE,USER_ID,DEPT_ID,SEND_TO,CATEGORY,ADD_DATE,CONTENT_DAY1,CONTENT_DAY2,
+				CONTENT_DAY3,CONTENT_DAY4,CONTENT_DAY5,EXTRA_FILE_IDS,EXT1,EXT2,EXT3
+		from WORK_REPORT where ID=#value#
+	</select>
+	<select id="getReportByUserId" parameterClass="Long"  resultMap="workReportMap">
+		select ID,TITLE,USER_ID,DEPT_ID,SEND_TO,CATEGORY,ADD_DATE,CONTENT_DAY1,CONTENT_DAY2,
+				CONTENT_DAY3,CONTENT_DAY4,CONTENT_DAY5,EXTRA_FILE_IDS,EXT1,EXT2,EXT3
+		from WORK_REPORT where USER_ID=#value#
+	</select>
+	<select id="getByExt1" parameterClass="Long"  resultMap="workReportMap">
+		select ID,TITLE,USER_ID,DEPT_ID,SEND_TO,CATEGORY,ADD_DATE,CONTENT_DAY1,CONTENT_DAY2,
+				CONTENT_DAY3,CONTENT_DAY4,CONTENT_DAY5,EXTRA_FILE_IDS,EXT1,EXT2,EXT3
+		from WORK_REPORT where EXT1=#value#
+	</select>
+	<insert id="insert" parameterClass="WorkReport">
+		insert into WORK_REPORT(ID,TITLE,USER_ID,DEPT_ID,SEND_TO,CATEGORY,ADD_DATE,CONTENT_DAY1,CONTENT_DAY2,
+									CONTENT_DAY3,CONTENT_DAY4,CONTENT_DAY5,EXTRA_FILE_IDS,EXT1,EXT2,EXT3) 
+					values(#id#,#title#,#userId#,#deptId#,#sendTo#,#category#,#addDate#,#contentDay1#,#contentDay2#,
+									#contentDay3#,#contentDay4#,#contentDay5#,#extraFileIds#,#ext1#,#ext2#,#ext3#)
+	</insert>
+	<update id="update" parameterClass="WorkReport">
+		update WORK_REPORT set TITLE = #title#, USER_ID =#userId#, DEPT_ID = #deptId#, SEND_TO = #sendTo#,
+		CATEGORY = #category#, ADD_DATE = #addDate#,CONTENT_DAY1=#contentDay1#,CONTENT_DAY2=#contentDay2#,
+		CONTENT_DAY3=#contentDay3#,CONTENT_DAY4=#contentDay4#,CONTENT_DAY5=#contentDay5#,EXTRA_FILE_IDS=#extraFileIds#,
+		EXT1 = #ext1#, EXT2 = #ext2#, EXT3 = #ext3# where ID = #id#
+	</update>
+	<delete id="deleteById" parameterClass="Long">
+		delete from WORK_REPORT where ID = #value#
+	</delete>
+</sqlMap>

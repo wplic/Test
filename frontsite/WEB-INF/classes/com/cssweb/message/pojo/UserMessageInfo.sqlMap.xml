@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.message.pojo.UserMessageInfo">
+
+	<typeAlias alias="userMessage" type="com.cssweb.message.pojo.UserMessageInfo"/>
+	
+	<!--result map-->
+	<resultMap id="userMessageMap" class="userMessage">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userId" column="USERID" jdbcType="Long" />
+ 		<result property="title" column="MESSAGE_TITLE" jdbcType="String"/>
+ 		<result property="content" column="MESSAGE_CONTENT" jdbcType="Long" />
+ 		<result property="isView" column="IS_VIEW" jdbcType="String" />
+ 		<result property="sendTime" column="MESSAGE_SEND_TIME" jdbcType="java.util.Date" />
+ 		<result property="sendauthor" column="MESSAGE_SEND_AUTHOR" jdbcType="Long" />
+ 		<result property="messagetype" column="MESSAGE_TYPE" jdbcType="String" />
+ 		<result property="ext1" column="EXT1" jdbcType="String" />
+		<result property="ext2" column="EXT2" jdbcType="String" />
+		<result property="ext3" column="EXT2" jdbcType="String" />
+		<result property="ext4" column="EXT2" jdbcType="String" />
+  	</resultMap>
+  	
+	<insert id="insertUserMessage" parameterClass="userMessage" >
+		  insert into USER_MESSAGE_INFO (ID,USERID,MESSAGE_TITLE,MESSAGE_CONTENT,IS_VIEW,MESSAGE_SEND_TIME,MESSAGE_SEND_AUTHOR,MESSAGE_TYPE,EXT1,EXT2,EXT3,EXT4)
+		  				values (#id#,#userId#,#title#,#content#,#isView#,#sendTime#,#sendauthor#,#messagetype#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	
+	<update id="updateUserMessage" parameterClass="userMessage">
+		  update USER_MESSAGE_INFO 
+		  	set USERID=#userId#,MESSAGE_TITLE=#title#,MESSAGE_CONTENT=#content#,IS_VIEW=#isView#,MESSAGE_SEND_TIME=#sendTime#,MESSAGE_SEND_AUTHOR=#sendauthor#,MESSAGE_TYPE=#messagetype#,
+		  			EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where ID=#id#
+	</update>
+	
+	<delete id="deleteById" parameterClass="Long">
+	  	delete USER_MESSAGE_INFO where ID=#id#
+	</delete>
+	
+	<select id="getById" parameterClass="Long" resultMap = "userMessageMap">
+	  	select * from USER_MESSAGE_INFO where ID = #id#
+	</select>
+	
+	<select id = "getLikeSql" resultMap="userMessageMap">
+			$sql$
+	</select>
+  
+    <select id="getuserMessagePagingMap" parameterClass="java.util.Map" resultMap = "userMessageMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+   
+  <select id ="getuserMessageAll" resultMap="userMessageMap">
+  		select * from USER_MESSAGE_INFO 
+  </select>
+  
+  <select id = "getuserMessageByUserId" resultMap="userMessageMap" parameterClass="Long">
+        select * from USER_MESSAGE_INFO where USERID=#userId#
+  </select>
+  
+  
+    <select id = "getAnalystByAll" resultMap="userMessageMap" >
+        select * from USER_MESSAGE_INFO 
+  </select>
+  
+   <select id = "getNewMessageNum" resultClass="java.lang.Long" >
+        select count(*) from USER_MESSAGE_INFO where userId=#userId# and is_view='0'
+  </select>
+
+
+
+<update id="updateMessageState" parameterClass="java.lang.Long">
+		update USER_MESSAGE_INFO set IS_VIEW='1' where MESSAGE_CONTENT=#value#
+</update>
+
+	 <select id="selectrecord" parameterClass="java.lang.String" resultMap = "userMessageMap">   
+      $sql$   
+  </select>
+  
+  
+ <select id="getMessageInfo" parameterClass="java.lang.Long" resultMap = "userMessageMap">   
+     select * from  USER_MESSAGE_INFO where MESSAGE_CONTENT=#value#
+  </select>
+  
+  
+  
+  	<!--result map-->
+	<resultMap id="AllMessageMap" class="userMessage">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userId" column="USERID" jdbcType="Long" />
+ 		<result property="title" column="MESSAGE_TITLE" jdbcType="String"/>
+ 		<result property="content" column="MESSAGE_CONTENT" jdbcType="Long" />
+ 		<result property="isView" column="IS_VIEW" jdbcType="String" />
+ 		<result property="sendTime" column="MESSAGE_SEND_TIME" jdbcType="java.util.Date" />
+ 		<result property="sendauthor" column="MESSAGE_SEND_AUTHOR" jdbcType="Long" />
+ 		<result property="messagetype" column="MESSAGE_TYPE" jdbcType="String" />
+ 		<result property="ext1" column="EXT1" jdbcType="String" />
+		<result property="ext2" column="EXT2" jdbcType="String" />
+		<result property="ext3" column="EXT2" jdbcType="String" />
+		<result property="ext4" column="EXT2" jdbcType="String" />
+		<result property="name" column="name" jdbcType="String" />
+  	</resultMap>
+  
+   <select id="getAllMessagePagingMap" parameterClass="java.util.Map" resultMap = "AllMessageMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+    <select id="getAllMessagePagingMapCount" parameterClass="java.lang.String" resultClass="java.lang.Long">
+     $sql$
+  </select>
+</sqlMap>

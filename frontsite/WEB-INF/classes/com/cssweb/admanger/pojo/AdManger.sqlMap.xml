@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.admanger.pojo.AdManger">
+
+	<typeAlias alias="AdManger" type="com.cssweb.admanger.pojo.AdManger" />
+
+	<!--result map-->
+	<resultMap id="AdMangerMap" class="AdManger">
+		<result column="ID" property="id" jdbcType="java.lang.Long"/>       
+		<result column="ADNAME" property="adName" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="ADCODE" property="adCode" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="MEDIAADTYPE" property="mediaAdType" jdbcType="java.lang.String" nullValue=""/> 
+		<result column="URL" property="url" jdbcType="java.lang.String" nullValue=""/> 
+		<result column="SHOWTYPE" property="showType" jdbcType="java.lang.String" nullValue=""/> 
+	    <result column="PICID" property="picId" jdbcType="java.lang.Long" /> 
+		<result column="FBSJ" property="fbsj" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/> 
+		<result column="KSSJ" property="kssj" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00" /> 
+		<result column="JSSJ" property="jssj" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00" /> 		
+		<result column="EXT1" property="ext1" jdbcType="java.lang.String"/> 
+		<result column="EXT2" property="ext2" jdbcType="java.lang.String"/> 
+		<result column="EXT3" property="ext3" jdbcType="java.lang.String"/> 
+		<result column="EXT4" property="ext4" jdbcType="java.lang.String"/> 
+	</resultMap>
+	
+ <select id="selectrecord" parameterClass="java.lang.String" resultMap = "AdMangerMap">   
+      $sql$   
+ </select>
+ 
+ <insert id="insert" parameterClass="AdManger">    	
+    insert into AD_MANGER(ID,ADNAME,ADCODE,MEDIAADTYPE,URL,SHOWTYPE,PICID,FBSJ,KSSJ,JSSJ,EXT1,EXT2,EXT3,EXT4)
+        values(#id#,#adName#,#adCode#,#mediaAdType#,#url#,#showType#,#picId#,#fbsj#,#kssj#,#jssj#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+ 
+  <update id="update" parameterClass="AdManger">    
+     update AD_MANGER
+         set ADNAME=#adName#,ADCODE=#adCode#,MEDIAADTYPE=#mediaAdType#,URL=#url#,SHOWTYPE=#showType#,PICID=#picId#,
+             FBSJ=#fbsj#,KSSJ=#kssj#,JSSJ=#jssj#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#  where ID=#id#    
+  </update>
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete AD_MANGER where id in ($value$)
+  </delete>
+  
+  
+  <delete id="deleteByID" parameterClass="java.lang.Long">
+    delete AD_MANGER where ID=#id#  
+  </delete>
+  
+  <select id="selectAll" resultMap = "AdMangerMap">
+    select * from AD_MANGER
+  </select>
+  
+   <select id="selectAll_1" parameterClass="java.util.Map" resultMap = "AdMangerMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+   <select id="getAdById" parameterClass="java.lang.Long" resultMap = "AdMangerMap">
+    select * from AD_MANGER where id = #value#
+  </select>
+  
+   <select id="getAdByName" parameterClass="String" resultMap = "AdMangerMap">
+    select * from AD_MANGER where ADCODE = #value#
+  </select>
+  
+  
+</sqlMap>

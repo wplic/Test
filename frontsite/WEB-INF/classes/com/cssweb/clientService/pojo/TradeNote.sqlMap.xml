@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.clientService.pojo.TradeNote">
+
+	<typeAlias alias="TradeNote" type="com.cssweb.clientService.pojo.TradeNote" />
+
+	<resultMap id="TradeNoteMap" class="TradeNote">
+		<result property="happenDate" column="INIT_DATE" jdbcType="Long"/>
+		<result property="moneyType" column="MONEY_TYPE" jdbcType="String"/>
+		<result property="incomeMoney" column="INCOMEMONEY" jdbcType="Double" nullValue="0"/>
+		<result property="payoutMoney" column="PAYOUTMONEY" jdbcType="Double" nullValue="0"/>
+		<result property="balance" column="POST_BALANCE" jdbcType="Double" nullValue="0"/>
+		<result property="remark" column="REMARK" jdbcType="String"/>
+	</resultMap>
+	
+	<select id="getListByMap" parameterClass="java.util.Map" resultMap="TradeNoteMap">
+    	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+			select a.init_date,a.money_type,
+			       decode(a.occur_balance - abs(a.occur_balance), 0, a.occur_balance, 0) incomeMoney,
+			       decode(a.occur_balance + abs(a.occur_balance), 0, a.occur_balance, 0) payoutMoney,
+			       a.post_balance,decode(a.business_flag,'2303','Cancel the freezing of funds',a.remark) remark
+			from hs_his_hisfundjour a 
+			where a.client_id='$fundaccount$' 
+			<isNotNull prepend="and" property="begindate">
+				a.init_date&gt;=#begindate#
+			</isNotNull>
+			<isNotNull prepend="and" property="enddate">
+				a.init_date&lt;=#enddate#
+			</isNotNull>
+			<isNotNull property="business_date" prepend="and">
+				to_date(to_char(sysdate,'YYYYMM')||'01','YYYYMMDD')-1&gt;=to_date(init_date ,'yyyyMMdd')
+			</isNotNull>
+			order by init_date desc ,serial_no desc
+		) row_ where ROWNUM &lt;= #end# ) where rownum_ &gt;#begin#
+	</select>
+		
+	<select id="getListCountByMap" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(*) from (
+			select a.init_date,a.fund_account,a.money_type,
+			       decode(a.occur_balance - abs(a.occur_balance), 0, a.occur_balance, 0) incomeMoney,
+			       decode(a.occur_balance + abs(a.occur_balance), 0, a.occur_balance, 0) payoutMoney,
+			       a.post_balance,a.remark
+			from hs_his_hisfundjour a 
+			where a.client_id='$fundaccount$' 
+			<isNotNull prepend="and" property="begindate">
+				a.init_date&gt;=#begindate#
+			</isNotNull>
+			<isNotNull prepend="and" property="enddate">
+				a.init_date&lt;=#enddate#
+			</isNotNull>
+			<isNotNull property="business_date" prepend="and">
+				to_date(to_char(sysdate,'YYYYMM')||'01','YYYYMMDD')-1&gt;=to_date(init_date ,'yyyyMMdd')
+			</isNotNull>
+		)
+	</select>
+</sqlMap>

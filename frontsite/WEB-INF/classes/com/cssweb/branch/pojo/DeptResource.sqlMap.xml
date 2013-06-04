@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branch.pojo.DeptResource">
+	<typeAlias alias="DeptResource" type="com.cssweb.branch.pojo.DeptResource"/>
+	<cacheModel id="DeptResourceCache" type="OSCACHE">
+	    <flushInterval hours="1"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	
+	<resultMap id="DeptResourceMap" class="DeptResource">
+		<result property="brOffshootId" column="BR_OFFSHOOT_ID"/>
+        <result property="resourceId" column="RESOURCE_ID"/>
+        <result property="permissionId" column="PERMISSION_ID"/>
+  	</resultMap>
+  	<resultMap id="ResourceInfoResultMap" class="ResourceInfo">
+		<result column="ID" property="id" jdbcType="long" />
+		<result column="PARENT_RESOURCE_ID" property="parentResourceId" jdbcType="Long" />
+		<result column="NAME" property="name" jdbcType="String" />
+		<result column="DESCRIPTION" property="description" jdbcType="String" />
+		<result column="VALID_FLAG" property="validFlag" jdbcType="String" />
+		<result column="URL" property="url" jdbcType="String" />
+		<result column="DEFAULT_ICON" property="defaultIcon" jdbcType="String" />
+		<result column="HOT_ICON" property="hotIcon" jdbcType="String" />
+		<result column="DISPLAY_STYLE" property="displayStyle" jdbcType="String" />
+		<result column="TABLE_NAME" property="tableName" jdbcType="String" />
+		<result column="CONDITION" property="condition" jdbcType="String" />
+		<result column="LIST_NUM" property="listNum" jdbcType="Integer" />
+		<result column="CATEGORY" property="category" jdbcType="String" />
+		<result column="ORDER_NUM" property="orderNum" jdbcType="Integer" />
+		<result column="INFO" property="info" jdbcType="String" />
+		<result column="MOD_DATE" property="modDate" jdbcType="java.util.Date" />
+		<result column="ROLE_ID" property="roleId" jdbcType="Long" />
+		<result column="SYSTEM_ID" property="systemId" jdbcType="Long" />
+		<result column="EXT3" property="ext3" jdbcType="String" />
+		<result column="EXT4" property="ext4" jdbcType="String" />
+		<result column="EXT2" property="ext2" jdbcType="String" />
+		<result column="EXT1" property="ext1" jdbcType="String" />
+	</resultMap>
+  	
+  	<select id="getDeptResourceByCondition" resultMap = "DeptResourceMap" parameterClass="DeptResource" cacheModel="DeptResourceCache">
+	select 
+    	BR_OFFSHOOT_ID,RESOURCE_ID,PERMISSION_ID
+    from
+        DEPT_RESOURCE 
+    where 
+    	1=1
+    	<dynamic>
+		  <isNotEmpty property="brOffshootId" prepend="and">
+			BR_OFFSHOOT_ID = #brOffshootId#
+		  </isNotEmpty>
+		  <isNotEmpty property="resourceId" prepend="and">
+			RESOURCE_ID = #resourceId#
+		  </isNotEmpty>
+		  <isNotEmpty property="permissionId" prepend="and">
+			PERMISSION_ID = #permissionId#
+		  </isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<delete id="deleteByCondition" parameterClass="DeptResource">
+    delete DEPT_RESOURCE where 1=1
+    	<dynamic>
+		  <isNotEmpty property="brOffshootId" prepend="and">
+			BR_OFFSHOOT_ID = #brOffshootId#
+		  </isNotEmpty>
+		  <isNotEmpty property="resourceId" prepend="and">
+			RESOURCE_ID = #resourceId#
+		  </isNotEmpty>
+		</dynamic>
+  	</delete>
+  	
+  	<insert id="insert" parameterClass="DeptResource">
+		INSERT INTO
+			DEPT_RESOURCE(BR_OFFSHOOT_ID,RESOURCE_ID,PERMISSION_ID)
+		VALUES
+			($brOffshootId$,$resourceId$,#permissionId#)
+  	</insert>
+  	
+  	<resultMap id="ResourceMap" class="DeptResource">
+		<result property="brOffshootId" column="BR_OFFSHOOT_ID"/>
+        <result property="resourceId" column="RESOURCE_ID"/>
+        <result property="permissionId" column="PERMISSION_ID"/>
+        <result property="description" column="description"/>
+  	</resultMap>
+  	
+  	<select id="getResourceByBroffshootId" resultMap = "DeptResourceMap" parameterClass="Map" cacheModel="DeptResourceCache">
+  	select 
+  		a.*,b.description 
+  	from 
+  		dept_resource a, resource_info b 
+  	where 
+  		a.RESOURCE_ID=b.ID and a.BR_OFFSHOOT_ID=$brOffshootId$ and b.valid_flag=1
+  	<dynamic>
+	  <isNotEmpty property="category" prepend="and">
+	    b.category=#category#
+	  </isNotEmpty>
+	</dynamic>
+  	</select>
+  	
+  	<select id="getResInCatByBroffshootId" parameterClass="java.util.Map" resultMap="ResourceInfoResultMap">
+		SELECT aa.* FROM resource_info aa,     
+		(select * from br_offshoot a, dept_resource b where a.ID(+)=b.BR_OFFSHOOT_ID and b.BR_OFFSHOOT_ID=#brOffshootId#) bb
+		where aa.id(+)=bb.resource_id and aa.category=#category# and aa.valid_flag=1 order by aa.order_num
+	</select>
+</sqlMap>

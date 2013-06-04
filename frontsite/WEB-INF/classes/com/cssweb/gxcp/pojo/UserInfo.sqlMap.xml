@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gxcp.pojo.UserInfo">
+
+	<typeAlias alias="GxcpUserInfo" type="com.cssweb.gxcp.pojo.UserInfo" />
+
+	<resultMap id="GxcpUserInfoMap" class="GxcpUserInfo">
+		<result property="userid" column="USER_ID" jdbcType="Long"/>
+		<result property="regdate" column="REG_DATE" jdbcType="Date"/>
+		<result property="isvalid" column="ISVALID" jdbcType="String"/>
+		<result property="begintime" column="BEGIN_TIME" jdbcType="Date"/>
+		<result property="submittime" column="SUBMIT_TIME" jdbcType="Date" nullValue="1900/01/01 00:00:00"/>
+		<result property="submittype" column="SUBMIT_TYPE" jdbcType="String" nullValue="0"/>
+		<result property="answertime" column="ANSWER_TIME" jdbcType="Long" nullValue="0"/>
+		<result property="name" column="NAME" jdbcType="String"/>
+		<result property="idcard" column="IDCARD" jdbcType="String"/>
+		<result property="sex" column="SEX" jdbcType="String"/>
+		<result property="marriage" column="MARRIAGE" jdbcType="String"/>
+		<result property="age" column="AGE" jdbcType="String"/>
+		<result property="education" column="EDUCATION" jdbcType="String"/>
+		<result property="workexp" column="WORK_EXP" jdbcType="String"/>
+		<result property="station" column="STATION" jdbcType="String"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="GxcpUserInfo">
+		INSERT into T_MAN_TEST_MANINFO (USER_ID,REG_DATE,ISVALID,NAME,IDCARD,SEX,MARRIAGE,AGE,EDUCATION,WORK_EXP,STATION) 
+								VALUES (#userid#,sysdate,#isvalid#,#name#,#idcard#,#sex#,#marriage#,#age#,#education#,#workexp#,#station#)
+	</insert>
+	
+	<update id="updateInfo" parameterClass="GxcpUserInfo">
+		update T_MAN_TEST_MANINFO set REG_DATE=sysdate,NAME=#name#,IDCARD=#idcard#,SEX=#sex#,MARRIAGE=#marriage#,AGE=#age#,
+									EDUCATION=#education#,WORK_EXP=#workexp#,STATION=#station#
+		where USER_ID=#userid#
+	</update>
+	
+	<update id="updateBeginTime" parameterClass="GxcpUserInfo">
+		update T_MAN_TEST_MANINFO set BEGIN_TIME=sysdate,SUBMIT_TYPE='0',ANSWER_TIME=0 where USER_ID=#userid#
+	</update>
+	
+	<update id="updateSubmitTime" parameterClass="GxcpUserInfo">
+		update T_MAN_TEST_MANINFO set SUBMIT_TIME=sysdate,SUBMIT_TYPE=#submittype#,ANSWER_TIME=#answertime#
+		where USER_ID=#userid#
+	</update>
+	
+	<update id="updateValid" parameterClass="java.util.Map">
+		update T_MAN_TEST_MANINFO set ISVALID=#isvalid# where USER_ID=#userid#
+	</update>
+
+	<delete id="delete" parameterClass="String">
+		delete from T_MAN_TEST_MANINFO where USER_ID in ($userid$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_MAN_TEST_MANINFO where USER_ID = #userid#
+	</delete>
+		
+	<select id="getAll" resultMap="GxcpUserInfoMap">
+		select * from T_MAN_TEST_MANINFO order by REG_DATE desc
+	</select>
+
+	<select id="getCountBySql" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="GxcpUserInfoMap">
+		select * from T_MAN_TEST_MANINFO where USER_ID= #userid#
+	</select>	
+
+	<select id="getSubmitedById" parameterClass="String" resultClass="String">
+		select USER_ID from T_MAN_TEST_MANINFO where USER_ID in ($userid$) and SUBMIT_TYPE!=0
+	</select>	
+
+	<select id="getByIdcard" parameterClass="String" resultMap="GxcpUserInfoMap">
+		select * from T_MAN_TEST_MANINFO where IDCARD= #idcard#
+	</select>	
+	
+	  <select id="getByMap" parameterClass="java.util.Map" resultMap = "GxcpUserInfoMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+</sqlMap>

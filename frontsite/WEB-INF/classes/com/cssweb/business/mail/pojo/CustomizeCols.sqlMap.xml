@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.business.mail.pojo.CustomizeCols">
+	<typeAlias alias="CustomizeCols" type="com.cssweb.business.mail.pojo.CustomizeCols" />
+
+	<resultMap id="CustomizeColsMap" class="CustomizeCols">
+		<result property="id" column="ID" javaType="java.lang.Long"/>
+		<result property="colName" column="COL_NAME" javaType="java.lang.String"/>
+		<result property="colType" column="COL_TYPE" javaType="java.lang.Long"/>
+		<result property="isSyncCRM" column="IS_SYNCCRM" javaType="java.lang.Long"/>
+		<result property="catIds" column="CAT_IDS" javaType="java.lang.String"/>
+		<result property="catNames" column="CAT_NAMES" javaType="java.lang.String"/>		
+	</resultMap>
+
+<!-- 新增 -->
+	<insert id="insert" parameterClass="CustomizeCols">
+		INSERT INTO CUSTOMIZE_COLS(ID,COL_NAME,COL_TYPE,IS_SYNCCRM,CAT_IDS,CAT_NAMES) VALUES (#id#,#colName#,#colType#,#isSyncCRM#,#catIds#,#catNames#) 
+	</insert>
+
+<!-- 获取可定制栏目信息 -->	
+	<select id="getCustomizeColsList" parameterClass="map" resultMap="CustomizeColsMap">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( select * from CUSTOMIZE_COLS )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+			<dynamic prepend="and">
+				<isNotEmpty property="colName">
+					COL_NAME like '%$colName$%'
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="and">
+				<isNotEmpty property="colType">
+					COL_TYPE=#colType#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="and">
+				<isNotEmpty property="isSyncCRM">
+					IS_SYNCCRM=#isSyncCRM#
+				</isNotEmpty>
+			</dynamic>
+	</select>
+<!-- 获取可定制栏目数量 -->		
+	<select id="getCustomizeColsCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM CUSTOMIZE_COLS where 1=1 
+			<dynamic prepend="and">
+				<isNotEmpty property="colName">
+					COL_NAME like '%$colName$%'
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="and">
+				<isNotEmpty property="colType">
+					COL_TYPE=#colType#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="and">
+				<isNotEmpty property="isSyncCRM">
+					IS_SYNCCRM=#isSyncCRM#
+				</isNotEmpty>
+			</dynamic>
+	</select>
+<!-- 修改 -->		
+	<update id="update" parameterClass="CustomizeCols">
+		UPDATE CUSTOMIZE_COLS SET COL_NAME=#colName#,IS_SYNCCRM=#isSyncCRM#,CAT_IDS=#catIds#,CAT_NAMES=#catNames# WHERE ID=#id#
+	</update>
+
+<!-- 删除 -->	
+	<delete id="delete" parameterClass="java.lang.Long">
+		DELETE FROM CUSTOMIZE_COLS WHERE ID=#id#
+	</delete>
+<!-- 获取单条记录 -->	
+	<select id="getCustomizeColsInfo" parameterClass="java.lang.Long" resultMap="CustomizeColsMap">
+		SELECT * FROM CUSTOMIZE_COLS WHERE ID=#id#	
+	</select>
+</sqlMap>

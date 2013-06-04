@@ -1,0 +1,717 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.ThrUserJl">
+				 
+	<typeAlias alias="thrUserJl" type="com.cssweb.hr.pojo.ThrUserJl"/>
+								
+	<!--result map-->
+	<resultMap id="thrUserJlMap" class="thrUserJl">
+ 		<result property="userid" column="USER_ID" jdbcType="String"/>
+ 		<result property="username" column="USERNAME" jdbcType="String" />
+ 		<result property="sex" column="SEX" jdbcType="String" />
+ 		<result property="birthday" column="BIRTHDAY" jdbcType="java.util.Date" />
+ 		<result property="marry" column="MARRYSTATE" jdbcType="String" />
+ 		<result property="highdegree" column="HIGHDEGREE" jdbcType="String" />
+ 		<result property="school" column="SCHOOL" jdbcType="String" />
+ 		<result property="picid" column="PICID" jdbcType="Long" />
+ 		<result property="specialtype" column="specialtype" jdbcType="String" />
+ 		<result property="worktime" column="worktime" jdbcType="String" />
+ 		<result property="graduateyear" column="graduateyear" jdbcType="String" />
+ 		<result property="graduatemonth" column="graduatemonth" jdbcType="String" />
+ 		<result property="nowaddr" column="nowaddr" jdbcType="String" />
+ 		<result property="nowcompany" column="nowcompany" jdbcType="String" />
+ 		<result property="isAudit" column="is_audit" jdbcType="String" />
+ 		<result property="updatetime" column="updatetime" jdbcType="java.util.Date" />
+ 		<result property="highxl" column="HIGHXL" jdbcType="String" />
+ 		<result property="rstime" column="rstime" jdbcType="java.util.Date"/>
+ 	</resultMap>
+ 	
+ 	<resultMap id="thrExcelUserJlMap" class="thrUserJl">
+ 		<result property="userid" column="USER_ID" jdbcType="String"/>
+ 		<result property="username" column="USERNAME" jdbcType="String" />
+ 		<result property="inviteType" column="INVITE_TYPE" jdbcType="String" />
+ 		<result property="sex" column="SEX" jdbcType="String" />
+ 		<result property="birthday" column="BIRTHDAY" jdbcType="java.util.Date" />
+ 		<result property="minzu" column="MINZU" jdbcType="String" />
+ 		<result property="zzmm" column="ZZMM" jdbcType="String" />
+ 		<result property="bornaddr" column="BORNADDR" jdbcType="String" />
+ 		<result property="stature" column="STATURE" jdbcType="String" />
+ 		<result property="weight" column="WEIGHT" jdbcType="String" />
+ 		<result property="idcard" column="IDCARD" jdbcType="String" />
+ 		<result property="marry" column="MARRYSTATE" jdbcType="String" />
+ 		<result property="highdegree" column="HIGHDEGREE" jdbcType="String" />
+ 		<result property="highxl" column="HIGHXL" jdbcType="String" />
+ 		<result property="school" column="SCHOOL" jdbcType="String" />
+ 		<result property="picid" column="PICID" jdbcType="Long" />
+ 		<result property="specialtype" column="specialtype" jdbcType="String" />
+ 		<result property="worktime" column="worktime" jdbcType="String" />
+ 		<result property="graduateyear" column="graduateyear" jdbcType="String" />
+ 		<result property="graduatemonth" column="graduatemonth" jdbcType="String" />
+ 		<result property="paywant" column="PAYWANT" jdbcType="String" />
+ 		<result property="practisetime" column="PRACTISETIME" jdbcType="String" />
+ 		<result property="jointime" column="JOINTIME" jdbcType="String" />
+ 		<result property="hukouaddr" column="HUKOUADDR" jdbcType="String" />
+ 		<result property="docuaddr" column="DOCUADDR" jdbcType="String" />
+ 		<result property="nowaddr" column="nowaddr" jdbcType="String" />
+ 		<result property="hopeworkaddr" column="HOPEWORKADDR" jdbcType="String" />
+ 		<result property="mobil" column="MOBIL" jdbcType="String" />
+ 		<result property="urgentphone" column="URGENTPHONE" jdbcType="String" />
+ 		<result property="curentaddr" column="CURENTADDR" jdbcType="String" />
+ 		<result property="post" column="POST" jdbcType="String" />
+ 		<result property="engletter" column="ENGLETTER" jdbcType="String" />
+ 		<result property="englettercount" column="ENGLETTERCOUNT" jdbcType="String" />
+ 		<result property="otherengletter" column="OTHERENGLETTER" jdbcType="String" />
+ 		<result property="computerletter" column="COMPUTERLETTER" jdbcType="String" />
+ 		<result property="gjsfks" column="GJSFKS" jdbcType="String" />
+ 		<result property="zckjs" column="ZCKJS" jdbcType="String" />
+ 		<result property="zqcyzgks" column="ZQCYZGKS" jdbcType="String" />
+ 		<result property="haveposition" column="HAVEPOSITION" jdbcType="String" />
+ 		<result property="otherposition" column="OTHERPOSITION" jdbcType="String" />
+ 		<result property="strongskill" column="STRONGSKILL" jdbcType="String" />
+ 		<result property="course" column="COURSE" jdbcType="String" />
+ 		<result property="nowcompany" column="nowcompany" jdbcType="String" />
+ 		<result property="isAudit" column="is_audit" jdbcType="String" />
+ 		<result property="updatetime" column="updatetime" jdbcType="java.util.Date" />
+ 		<result property="tzzxzg" column="TZZXZG" jdbcType="String" />
+ 		<result property="tzzxzgno" column="TZZXZGNO" jdbcType="String" />
+ 		<result property="ifworkaddr" column="IFWORKADDR" jdbcType="String" />
+ 		
+ 		<result property="undergraduateSchool" column="UNDERGRADUATESCHOOL" jdbcType="String" />
+ 		<result property="undergraduateTime" column="UNDERGRADUATETIME" jdbcType="java.util.Dates" />
+ 		<result property="isInsuranceAgents" column="ISINSURANCEAGENTS" jdbcType="String" />
+ 		<result property="undergraduateSjType" column="UNDERGRADUATESJTYPE" jdbcType="String" />
+ 	</resultMap>
+  
+   <select id="getThrUserJl" parameterClass="java.util.Map" resultMap = "thrUserJlMap">
+   		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select distinct c.user_id,c.username,c.sex,c.birthday,
+				       c.marrystate,c.highdegree,c.school,c.picid,c.specialtype,c.worktime,c.graduateyear,c.graduatemonth,c.nowaddr,c.nowcompany,t.is_audit,s.updatetime,
+				       c.highxl,t.rstime
+				from 
+		             t_hr_user_baseinfo c LEFT JOIN t_hr_apply_recorder b ON c.user_id = b.user_id
+		        LEFT JOIN t_hr_user_eduexp d ON c.user_id = d.user_id
+		        LEFT JOIN t_hr_postinfo a ON b.job_id = a.id
+		        LEFT JOIN t_hr_user_audit t ON c.user_id = t.user_id
+		        LEFT JOIN t_system_branch h ON a.brahcn_id=h.id
+		        LEFT JOIN t_hr_user_submit s ON c.user_id = s.user_id
+				where 1=1 and s.updatetime is not null and c.username is not null
+					<isNotNull prepend="and" property="postname">
+						a.id=#postname# 
+					</isNotNull>
+						<isNotNull prepend="and" property="posttype">
+						a.type='$posttype$' 
+					</isNotNull>
+					<isNotNull property="postnames">
+						<iterate prepend="AND" property="postnames" open="(" close=")" conjunction="OR">  
+						  	 a.POST_NAME like '$postnames[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="applytimebegin">
+				     s.updatetime&gt;=to_date(#applytimebegin#,'yyyy-MM-dd')
+					</isNotNull>
+					<isNotNull prepend="and" property="applytimeend">
+				      s.updatetime&lt;=to_date(#applytimeend#,'yyyy-MM-dd')+1
+					</isNotNull>
+					<isNotNull property="username">
+						<iterate prepend="AND" property="username" open="(" close=")" conjunction="OR">  
+						  	 c.username like '%$username[]$%'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbh">
+				      c.USER_ID =#jlbh# 
+					</isNotNull>
+					<isNotNull property="jlbhs">
+						<iterate prepend="AND" property="jlbhs" open="(" close=")" conjunction="OR">  
+						  	 c.USER_ID = '$jlbhs[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbhbegin">
+				      c.USER_ID &gt;=#jlbhbegin# 
+					</isNotNull>
+					<isNotNull prepend="and" property="bornaddrs">
+				      c.BORNADDR like '%$bornaddrs$%'
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbhend">
+				      c.USER_ID &lt;=#jlbhend#
+					</isNotNull>
+					<isNotNull prepend="and" property="postcategory">
+				      c.INVITE_TYPE=#postcategory# 
+					</isNotNull>
+					<isNotNull prepend="and" property="sex">
+				      c.sex=#sex# 
+					</isNotNull>
+					<isNotNull prepend="and" property="ageBegin">
+				      months_between(sysdate,c.birthday)/12 &gt;=#ageBegin# 
+					</isNotNull>
+					<isNotNull prepend="and" property="ageEnd">
+				      months_between(sysdate,c.birthday)/12 &lt;=#ageEnd# 
+					</isNotNull>
+					<isNotNull prepend="and" property="zzmm">
+				      c.zzmm='$zzmm$'
+					</isNotNull>
+					<isNotNull prepend="and" property="marrystate">
+				      c.marrystate='$marrystate$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="worktime">
+				      c.worktime='$worktime$'
+					</isNotNull>
+					<isNotNull prepend="and" property="nowaddr">
+				      c.nowaddr like '%$nowaddr$%' 
+					</isNotNull>
+					<isNotNull prepend="and" property="hopeworkaddr">
+				      c.hopeworkaddr like '%$hopeworkaddr$%'
+					</isNotNull>
+					
+					<isNotNull property="addr">
+						<iterate prepend="AND" property="addr" open="(" close=")" conjunction="OR">  
+						  	 c.nowaddr like '%$addr[]$%'
+						  	 OR c.hopeworkaddr like '%$addr[]$%'
+						  	 OR c.BORNADDR like '%$addr[]$%'
+						</iterate>
+					</isNotNull>
+					
+					
+					<isNotNull prepend="and" property="highdegree">
+				      c.highdegree like '%$highdegree$%' 
+					</isNotNull>
+					<isNotNull prepend="and" property="graduatetimeyear">
+				      c.graduateyear=#graduatetimeyear#
+					</isNotNull>
+					<isNotNull prepend="and" property="graduatetimemonth">
+				      c.graduatemonth=#graduatetimemonth#
+					</isNotNull>
+					
+					<isNotNull property="school">
+						<iterate prepend="AND" property="school" open="(" close=")" conjunction="OR">  
+						  	 c.school like '%$school[]$%' 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="userids">
+						<iterate prepend="AND" property="userids" open="(" close=")" conjunction="OR">  
+						  	 c.user_id = '$userids[]$' 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="specialtype">
+						<iterate prepend="AND" property="specialtype" open="(" close=")" conjunction="OR">  
+						  	  c.specialtype like '%$specialtype[]$%'
+						</iterate>
+					</isNotNull>
+					
+					<isNotNull prepend="and" property="gjsfks">
+				      c.gjsfks='$gjsfks$' 
+					</isNotNull>
+					
+					<isNotNull prepend="and" property="tzzxzg">
+				      c.tzzxzg='$tzzxzg$' 
+					</isNotNull>
+					<!-- 潘可荣 -->
+					<isNotNull prepend="and" property="undergraduateSchool">
+				      c.undergraduateSchool='$undergraduateSchool$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="isInsuranceAgents">
+				      c.isInsuranceAgents='$isInsuranceAgents$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="undergraduateTime">
+				      c.undergraduateTime='$undergraduateTime$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="undergraduateSjType">
+				      c.undergraduateSjType='$undergraduateSjType$' 
+					</isNotNull>
+					
+					
+					<isNotNull prepend="and" property="minzu">
+				      c.MINZU='$minzu$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="highxl">
+				      c.HIGHXL='$highxl$' 
+					</isNotNull>
+					
+					
+					<!-- /潘可荣 -->
+					<isNotNull prepend="and" property="english">
+				      instr(c.engletter,#english#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="englishfs">
+				      (c.englettercount &gt;= #englishfs# OR c.englettercount is null)
+					</isNotNull>
+					
+					<isNotNull property="zckjss">
+						<iterate prepend="AND" property="zckjss" open="(" close=")" conjunction="AND"> 
+						     instr(c.zckjs,$zckjss[]$)&gt;0 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="zqcyzgkss">
+						<iterate prepend="AND" property="zqcyzgkss" open="(" close=")" conjunction="AND"> 
+						     instr(c.zqcyzgks,$zqcyzgkss[]$)&gt;0 
+						</iterate>
+					</isNotNull>
+				
+					<isNotNull prepend="and" property="zckjs">
+				      instr(c.zckjs,#zckjs#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="zckjsCount">
+				      (select (length(c.zckjs) - length(replace(c.zckjs,',')))/length(',') times from dual)&gt;=#zckjsCount#
+					</isNotNull>
+					<isNotNull prepend="and" property="zqcyzgks">
+					 instr(c.zqcyzgks,#zqcyzgks#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="zqcyzgksCount">
+					 (select (length(c.zqcyzgks) - length(replace(c.zqcyzgks,',')))/length(',') times from dual)&gt;=#zqcyzgksCount#
+					</isNotNull>
+					<isNotNull prepend="and" property="studystyle">
+				      d.studystyle like '%$studystyle$%'
+					</isNotNull>
+					<isNotNull property="spename">
+						<iterate prepend="AND" property="spename" open="(" close=")" conjunction="OR">  
+						  	   d.spename like '%$spename[]$%'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="isAudit">
+				      t.is_audit = $isAudit$
+				    </isNotNull>
+				    <isNotNull prepend="and" property="isAudits">
+				      t.is_audit is null
+				    </isNotNull>
+					<isNotNull property="branchCode">
+						<iterate prepend="AND" property="branchCode" open="(" close=")" conjunction="OR"> 
+						     h.branch_code ='$branchCode[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="ifTj">
+				      b.IF_TJ=#ifTj# 
+					</isNotNull>
+					<isNotNull prepend="and" property="isrs">
+				      t.ISRS=#isrs# 
+					</isNotNull>
+					<isNotNull prepend="and" property="rstime">
+				      t.RSTIME=to_date(#rstime#,'yyyy-MM-dd')
+					</isNotNull>
+					<isNotNull property="sql">
+				     $sql$
+					</isNotNull>
+			) row_ WHERE ROWNUM &lt;= #end# ) r WHERE
+		rownum_ &gt;#begin#
+  </select>
+  
+  
+  
+  
+     <select id="expertThrUserJl" parameterClass="java.util.Map" resultMap = "thrExcelUserJlMap">
+   		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select distinct c.user_id,c.username,c.invite_type,c.sex,c.birthday,c.minzu,c.zzmm,c.bornaddr,c.stature,c.weight,c.idcard,
+				       c.marrystate,c.highdegree,c.highxl,c.school,c.picid,c.specialtype,c.worktime,c.graduateyear,c.graduatemonth,c.paywant,c.practisetime,c.jointime,
+				       c.hukouaddr,c.docuaddr, c.nowaddr,c.hopeworkaddr,c.mobil,c.urgentphone,c.curentaddr,c.post,c.engletter,c.englettercount,c.otherengletter,c.computerletter,c.gjsfks,c.zckjs,
+				       c.tzzxzg,c.tzzxzgno,c.zqcyzgks,c.haveposition,c.otherposition,c.strongskill,c.course,c.nowcompany,c.ifworkaddr,t.is_audit,s.updatetime,
+				       c.undergraduateSchool,c.isInsuranceAgents,c.undergraduateTime,c.undergraduateSjType
+				from 
+		             t_hr_user_baseinfo c LEFT JOIN t_hr_apply_recorder b ON c.user_id = b.user_id
+		        LEFT JOIN t_hr_user_eduexp d ON c.user_id = d.user_id
+		        LEFT JOIN t_hr_postinfo a ON b.job_id = a.id
+		        LEFT JOIN t_hr_user_audit t ON c.user_id = t.user_id
+		        LEFT JOIN t_system_branch h ON a.brahcn_id=h.id
+		        LEFT JOIN t_hr_user_submit s ON c.user_id = s.user_id
+				where 1=1 and s.updatetime is not null and c.username is not null
+					<isNotNull prepend="and" property="postname">
+						a.id=#postname# 
+					</isNotNull>
+						<isNotNull prepend="and" property="posttype">
+						a.type='$posttype$' 
+					</isNotNull>
+					<isNotNull property="postnames">
+						<iterate prepend="AND" property="postnames" open="(" close=")" conjunction="OR">  
+						  	 a.POST_NAME like '$postnames[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="applytimebegin">
+				     s.updatetime&gt;=to_date(#applytimebegin#,'yyyy-MM-dd')
+					</isNotNull>
+					<isNotNull prepend="and" property="applytimeend">
+				      s.updatetime&lt;=to_date(#applytimeend#,'yyyy-MM-dd')+1
+					</isNotNull>
+					<isNotNull property="username">
+						<iterate prepend="AND" property="username" open="(" close=")" conjunction="OR">  
+						  	 c.username like '%$username[]$%'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbh">
+				      c.USER_ID =#jlbh# 
+					</isNotNull>
+					<isNotNull property="jlbhs">
+						<iterate prepend="AND" property="jlbhs" open="(" close=")" conjunction="OR">  
+						  	 c.USER_ID = '$jlbhs[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbhbegin">
+				      c.USER_ID &gt;=#jlbhbegin# 
+					</isNotNull>
+					<isNotNull prepend="and" property="bornaddrs">
+				      c.BORNADDR like '%$bornaddrs$%'
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbhend">
+				      c.USER_ID &lt;=#jlbhend#
+					</isNotNull>
+					<isNotNull prepend="and" property="postcategory">
+				      c.INVITE_TYPE=#postcategory# 
+					</isNotNull>
+					<isNotNull prepend="and" property="sex">
+				      c.sex=#sex# 
+					</isNotNull>
+					<isNotNull prepend="and" property="ageBegin">
+				      months_between(sysdate,c.birthday)/12 &gt;=#ageBegin# 
+					</isNotNull>
+					<isNotNull prepend="and" property="ageEnd">
+				      months_between(sysdate,c.birthday)/12 &lt;=#ageEnd# 
+					</isNotNull>
+					<isNotNull prepend="and" property="zzmm">
+				      c.zzmm='$zzmm$'
+					</isNotNull>
+					
+					<!-- 潘可荣 -->
+					<isNotNull prepend="and" property="undergraduateSchool">
+				      c.undergraduateSchool='$undergraduateSchool$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="isInsuranceAgents">
+				      c.isInsuranceAgents='$isInsuranceAgents$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="undergraduateTime">
+				      c.undergraduateTime='$undergraduateTime$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="undergraduateSjType">
+				      c.undergraduateSjType='$undergraduateSjType$' 
+					</isNotNull>
+					
+					<!-- /潘可荣 -->
+					
+					<isNotNull prepend="and" property="marrystate">
+				      c.marrystate='$marrystate$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="worktime">
+				      c.worktime='$worktime$'
+					</isNotNull>
+					<isNotNull prepend="and" property="nowaddr">
+				      c.nowaddr like '%$nowaddr$%' 
+					</isNotNull>
+					<isNotNull prepend="and" property="hopeworkaddr">
+				      c.hopeworkaddr like '%$hopeworkaddr$%'
+					</isNotNull>
+					
+					<isNotNull property="addr">
+						<iterate prepend="AND" property="addr" open="(" close=")" conjunction="OR">  
+						  	 c.nowaddr like '%$addr[]$%'
+						  	 OR c.hopeworkaddr like '%$addr[]$%'
+						  	 OR c.BORNADDR like '%$addr[]$%'
+						</iterate>
+					</isNotNull>
+					
+					
+					<isNotNull prepend="and" property="highdegree">
+				      c.highdegree like '%$highdegree$%' 
+					</isNotNull>
+					<isNotNull prepend="and" property="graduatetimeyear">
+				      c.graduateyear=#graduatetimeyear#
+					</isNotNull>
+					<isNotNull prepend="and" property="graduatetimemonth">
+				      c.graduatemonth=#graduatetimemonth#
+					</isNotNull>
+					
+					<isNotNull property="school">
+						<iterate prepend="AND" property="school" open="(" close=")" conjunction="OR">  
+						  	 c.school like '%$school[]$%' 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="userids">
+						<iterate prepend="AND" property="userids" open="(" close=")" conjunction="OR">  
+						  	 c.user_id = '$userids[]$' 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="specialtype">
+						<iterate prepend="AND" property="specialtype" open="(" close=")" conjunction="OR">  
+						  	  c.specialtype like '%$specialtype[]$%'
+						</iterate>
+					</isNotNull>
+					
+					<isNotNull prepend="and" property="gjsfks">
+				      c.gjsfks='$gjsfks$' 
+					</isNotNull>
+					
+					<isNotNull prepend="and" property="tzzxzg">
+				      c.tzzxzg='$tzzxzg$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="english">
+				      instr(c.engletter,#english#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="englishfs">
+				      (c.englettercount &gt;= #englishfs# OR c.englettercount is null)
+					</isNotNull>
+					
+					<isNotNull property="zckjss">
+						<iterate prepend="AND" property="zckjss" open="(" close=")" conjunction="AND"> 
+						     instr(c.zckjs,$zckjss[]$)&gt;0 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="zqcyzgkss">
+						<iterate prepend="AND" property="zqcyzgkss" open="(" close=")" conjunction="AND"> 
+						     instr(c.zqcyzgks,$zqcyzgkss[]$)&gt;0 
+						</iterate>
+					</isNotNull>
+				
+					<isNotNull prepend="and" property="zckjs">
+				      instr(c.zckjs,#zckjs#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="zckjsCount">
+				      (select (length(c.zckjs) - length(replace(c.zckjs,',')))/length(',') times from dual)&gt;=#zckjsCount#
+					</isNotNull>
+					<isNotNull prepend="and" property="zqcyzgks">
+					 instr(c.zqcyzgks,#zqcyzgks#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="zqcyzgksCount">
+					 (select (length(c.zqcyzgks) - length(replace(c.zqcyzgks,',')))/length(',') times from dual)&gt;=#zqcyzgksCount#
+					</isNotNull>
+					<isNotNull prepend="and" property="studystyle">
+				      d.studystyle like '%$studystyle$%'
+					</isNotNull>
+					<isNotNull property="spename">
+						<iterate prepend="AND" property="spename" open="(" close=")" conjunction="OR">  
+						  	   d.spename like '%$spename[]$%'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="isAudit">
+				      t.is_audit = $isAudit$
+				    </isNotNull>
+				    <isNotNull prepend="and" property="isAudits">
+				      t.is_audit is null
+				    </isNotNull>
+					<isNotNull property="branchCode">
+						<iterate prepend="AND" property="branchCode" open="(" close=")" conjunction="OR"> 
+						     h.branch_code ='$branchCode[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="ifTj">
+				      b.IF_TJ=#ifTj# 
+					</isNotNull>
+					<isNotNull prepend="and" property="isrs">
+				      t.ISRS=#isrs# 
+					</isNotNull>
+					<isNotNull prepend="and" property="rstime">
+				      t.RSTIME=to_date(#rstime#,'yyyy-MM-dd')
+					</isNotNull>
+					<isNotNull property="sql">
+				     $sql$
+					</isNotNull>
+			) row_ WHERE ROWNUM &lt;= #end# ) r WHERE
+		rownum_ &gt;#begin#
+  </select>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+   <select id="getThrUserJlCount" parameterClass="java.util.Map" resultClass = "Integer">
+		select count(distinct c.user_id)
+		from 
+		             t_hr_user_baseinfo c LEFT JOIN t_hr_apply_recorder b ON c.user_id = b.user_id
+		        LEFT JOIN t_hr_user_eduexp d ON c.user_id = d.user_id
+		        LEFT JOIN t_hr_postinfo a ON b.job_id = a.id
+		        LEFT JOIN t_hr_user_audit t ON c.user_id = t.user_id
+		        LEFT JOIN t_system_branch h ON a.brahcn_id=h.id
+		        LEFT JOIN t_hr_user_submit s ON c.user_id = s.user_id
+				where 1=1 and s.updatetime is not null and c.username is not null
+						<isNotNull prepend="and" property="postname">
+						a.id=#postname# 
+					</isNotNull>
+						<isNotNull prepend="and" property="posttype">
+						a.type='$posttype$' 
+					</isNotNull>
+					<isNotNull property="postnames">
+						<iterate prepend="AND" property="postnames" open="(" close=")" conjunction="OR">  
+						  	 a.POST_NAME like '$postnames[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="applytimebegin">
+				     s.updatetime&gt;=to_date(#applytimebegin#,'yyyy-MM-dd')
+					</isNotNull>
+					<isNotNull prepend="and" property="applytimeend">
+				      s.updatetime&lt;=to_date(#applytimeend#,'yyyy-MM-dd')+1
+					</isNotNull>
+					<isNotNull property="username">
+						<iterate prepend="AND" property="username" open="(" close=")" conjunction="OR">  
+						  	 c.username like '%$username[]$%'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbhbegin">
+				      c.USER_ID &gt;=#jlbhbegin# 
+					</isNotNull>
+					<isNotNull prepend="and" property="bornaddrs">
+				      c.BORNADDR like '%$bornaddrs$%'
+					</isNotNull>
+					<isNotNull prepend="and" property="jlbhend">
+				      c.USER_ID &lt;=#jlbhend#
+					</isNotNull>
+					<isNotNull prepend="and" property="postcategory">
+				      c.INVITE_TYPE=#postcategory# 
+					</isNotNull>
+					<isNotNull prepend="and" property="sex">
+				      c.sex=#sex# 
+					</isNotNull>
+					<isNotNull prepend="and" property="ageBegin">
+				      months_between(sysdate,c.birthday)/12 &gt;=#ageBegin# 
+					</isNotNull>
+					<isNotNull prepend="and" property="ageEnd">
+				      months_between(sysdate,c.birthday)/12 &lt;=#ageEnd# 
+					</isNotNull>
+					<isNotNull prepend="and" property="zzmm">
+				      c.zzmm='$zzmm$'
+					</isNotNull>
+					
+					
+					
+					<isNotNull prepend="and" property="marrystate">
+				      c.marrystate='$marrystate$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="worktime">
+				      c.worktime='$worktime$'
+					</isNotNull>
+					<isNotNull prepend="and" property="nowaddr">
+				      c.nowaddr like '%$nowaddr$%' 
+					</isNotNull>
+					<isNotNull prepend="and" property="hopeworkaddr">
+				      c.hopeworkaddr like '%$hopeworkaddr$%'
+					</isNotNull>
+					
+					<isNotNull property="addr">
+						<iterate prepend="AND" property="addr" open="(" close=")" conjunction="OR">  
+						  	 c.nowaddr like '%$addr[]$%'
+						  	 OR c.hopeworkaddr like '%$addr[]$%'
+						  	 OR c.BORNADDR like '%$addr[]$%'
+						</iterate>
+					</isNotNull>
+					
+					
+					<isNotNull prepend="and" property="highdegree">
+				      c.highdegree like '%$highdegree$%' 
+					</isNotNull>
+					<isNotNull prepend="and" property="graduatetimeyear">
+				      c.graduateyear=#graduatetimeyear#
+					</isNotNull>
+					<isNotNull prepend="and" property="graduatetimemonth">
+				      c.graduatemonth=#graduatetimemonth#
+					</isNotNull>
+					
+					<isNotNull property="school">
+						<iterate prepend="AND" property="school" open="(" close=")" conjunction="OR">  
+						  	 c.school like '%$school[]$%' 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="userids">
+						<iterate prepend="AND" property="userids" open="(" close=")" conjunction="OR">  
+						  	 c.user_id = '$userids[]$' 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="specialtype">
+						<iterate prepend="AND" property="specialtype" open="(" close=")" conjunction="OR">  
+						  	  c.specialtype like '%$specialtype[]$%'
+						</iterate>
+					</isNotNull>
+					
+					<isNotNull prepend="and" property="gjsfks">
+				      c.gjsfks='$gjsfks$' 
+					</isNotNull>
+					
+					<isNotNull prepend="and" property="tzzxzg">
+				      c.tzzxzg='$tzzxzg$' 
+					</isNotNull>
+					
+					
+					<!-- 潘可荣 -->
+					<isNotNull prepend="and" property="undergraduateSchool">
+				      c.undergraduateSchool='$undergraduateSchool$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="isInsuranceAgents">
+				      c.isInsuranceAgents='$isInsuranceAgents$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="undergraduateTime">
+				      c.undergraduateTime='$undergraduateTime$' 
+					</isNotNull>
+					<isNotNull prepend="and" property="undergraduateSjType">
+				      c.undergraduateSjType='$undergraduateSjType$' 
+					</isNotNull>
+					
+					<!-- /潘可荣 -->
+					
+					
+					<isNotNull prepend="and" property="english">
+				      instr(c.engletter,#english#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="englishfs">
+				      (c.englettercount &gt;= #englishfs# OR c.englettercount is null)
+					</isNotNull>
+					
+					<isNotNull property="zckjss">
+						<iterate prepend="AND" property="zckjss" open="(" close=")" conjunction="AND"> 
+						     instr(c.zckjs,$zckjss[]$)&gt;0 
+						</iterate>
+					</isNotNull>
+					<isNotNull property="zqcyzgkss">
+						<iterate prepend="AND" property="zqcyzgkss" open="(" close=")" conjunction="AND"> 
+						     instr(c.zqcyzgks,$zqcyzgkss[]$)&gt;0 
+						</iterate>
+					</isNotNull>
+				
+					<isNotNull prepend="and" property="zckjs">
+				      instr(c.zckjs,#zckjs#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="zckjsCount">
+				      (select (length(c.zckjs) - length(replace(c.zckjs,',')))/length(',') times from dual)&gt;=#zckjsCount#
+					</isNotNull>
+					<isNotNull prepend="and" property="zqcyzgks">
+					 instr(c.zqcyzgks,#zqcyzgks#)&gt;0
+					</isNotNull>
+					<isNotNull prepend="and" property="zqcyzgksCount">
+					 (select (length(c.zqcyzgks) - length(replace(c.zqcyzgks,',')))/length(',') times from dual)&gt;=#zqcyzgksCount#
+					</isNotNull>
+					<isNotNull prepend="and" property="studystyle">
+				      d.studystyle like '%$studystyle$%'
+					</isNotNull>
+					<isNotNull property="spename">
+						<iterate prepend="AND" property="spename" open="(" close=")" conjunction="OR">  
+						  	   d.spename like '%$spename[]$%'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="isAudit">
+				      t.is_audit = $isAudit$
+				    </isNotNull>
+				    <isNotNull prepend="and" property="isAudits">
+				      t.is_audit is null
+				    </isNotNull>
+					<isNotNull property="branchCode">
+						<iterate prepend="AND" property="branchCode" open="(" close=")" conjunction="OR"> 
+						     h.branch_code ='$branchCode[]$'
+						</iterate>
+					</isNotNull>
+					<isNotNull prepend="and" property="ifTj">
+				      b.IF_TJ=#ifTj# 
+					</isNotNull>
+					<isNotNull prepend="and" property="isrs">
+				      t.ISRS=#isrs# 
+					</isNotNull>
+					<isNotNull prepend="and" property="rstime">
+				      t.RSTIME=to_date(#rstime#,'yyyy-MM-dd')
+					</isNotNull>
+					<isNotNull property="sql">
+				     $sql$
+					</isNotNull>
+  </select>
+  
+</sqlMap>

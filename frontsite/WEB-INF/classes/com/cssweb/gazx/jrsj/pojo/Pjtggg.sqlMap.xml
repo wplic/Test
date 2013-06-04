@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazx.jrsj.pojo.Pjtggg">
+
+	<typeAlias alias="pjtggg" type="com.cssweb.gazx.jrsj.pojo.Pjtggg" />
+
+	<resultMap id="pjtgggMap" class="pjtggg">
+		<result property="gpdm" column="GPDM" jdbcType="String"/>
+		<result property="gpjc" column="GPJC" jdbcType="String"/>
+		<result property="zhpjzs1" column="BZPJSZ1" jdbcType="Double"/>
+		<result property="zhpjzs2" column="BZPJSZ2" jdbcType="Double"/>
+		<result property="zhpjzs3" column="BZPJSZ3" jdbcType="Double"/>
+	</resultMap>
+
+	<select id="getCountBySql" resultClass="java.lang.Integer">
+		select COUNT(*) from (
+			select a.gpdm,a.gpjc,b.bzpjsz1,b.bzpjsz2,b.bzpjsz3 from GPZB a,bgpjb_bgjbxxb_tj b
+			where a.t_gpzb_id=b.t_gpzb_id
+		)
+	</select>
+	
+	<select id="getPjtgggByPage" parameterClass="java.util.Map" resultMap = "pjtgggMap">
+    	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select a.gpdm,a.gpjc,b.bzpjsz1,b.bzpjsz2,b.bzpjsz3 from GPZB a,bgpjb_bgjbxxb_tj b
+			where a.t_gpzb_id=b.t_gpzb_id
+			order by $orderby$
+		 )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  	</select>
+  
+</sqlMap>

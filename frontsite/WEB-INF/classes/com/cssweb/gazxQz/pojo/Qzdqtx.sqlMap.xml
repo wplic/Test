@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazxQz.pojo.Qzdqtx">
+
+	<typeAlias alias="Qzdqtx" type="com.cssweb.gazxQz.pojo.Qzdqtx"/>
+
+	<!--result map-->
+
+  	<resultMap id="QzdqtxMap" class="Qzdqtx">
+ 		<result property="qzdm" column="QZDM"  jdbcType="String"/>
+ 		<result property="qzjc" column="QZJC" jdbcType="String" />
+ 		<result property="qzlb" column="QZLB" jdbcType="String" />
+		<result property="qzcxzzr" column="QZCXZZR"    jdbcType="Date"/>
+		
+  	</resultMap>
+  	
+  	<select id="getQzdqtx" resultMap = "QzdqtxMap" parameterClass="map">
+			select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	
+		<select id="getQzdqtxCount" resultClass = "Integer">
+		    select count(*) from qzzb a,qzfxyss b where  a.t_qzzb_id= b.t_qzzb_id and a.scbz=0 and a.gkbz=1 and sysdate+7>=b.qzcxzzr order by  b.qzcxzzr desc
+	    </select>
+	
+	
+</sqlMap>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.client.pojo.ZcglWebuser">
+	<typeAlias alias="ZcglWebuser" type="com.cssweb.client.pojo.ZcglWebuser" />
+	
+	<resultMap id="ZcglWebuser" class="ZcglWebuser">
+	    <result property="clientId" column="client_id" jdbcType="java.lang.String"/>
+	    <result property="branchNo" column="branch_no" jdbcType="java.lang.String"/>
+	    <result property="exchangeType" column="exchange_type" jdbcType="java.lang.String"/>
+	    <result property="stockAccount" column="stock_account" jdbcType="java.lang.String"/>
+	</resultMap>
+
+	<select id="getZcglWebuserByClientId" resultMap="ZcglWebuser" parameterClass="java.lang.String">
+		select client_id,branch_no,exchange_type,stock_account from STOCKHOLDER_ZCGLDB1 t where client_id = #clientId#
+	</select>
+
+</sqlMap>

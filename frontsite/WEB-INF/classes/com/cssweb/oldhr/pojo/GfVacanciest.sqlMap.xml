@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.oldhr.pojo.GfVacanciest">
+
+	<typeAlias alias="gfVacanciest" type="com.cssweb.oldhr.pojo.GfVacanciest"/>
+	
+	
+	<!--result map-->
+	<resultMap id="gfVacanciestMap" class="gfVacanciest">
+ 		<result property="vacancyId" column="VACANCY_ID" jdbcType="Long"/>
+ 		<result property="vacancyName" column="VACANCY_NAME" jdbcType="String"/>
+ 		<result property="vacancyDesc" column="VACANCY_DESC" jdbcType="String"/>
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String"/>
+ 		<result property="businessGroupId" column="BUSINESS_GROUP_ID" jdbcType="Long"/>
+ 		<result property="dateFrom" column="DATE_FROM" jdbcType="Date"/>
+ 		<result property="dateTo" column="DATE_TO" jdbcType="Date"/>
+ 		<result property="requestId" column="REQUEST_ID" jdbcType="Long"/>
+ 		<result property="vacancyBody" column="VACANCY_BODY" jdbcType="String"/>
+ 		<result property="numberOfOpenings" column="NUMBER_OF_OPENINGS" jdbcType="Long"/>
+ 		<result property="flag" column="FLAG" jdbcType="String"/>
+ 		<result property="deptcode" column="DEPTCODE" jdbcType="String"/>
+ 		<result property="vtype" column="VTYPE" jdbcType="Long"/>
+ 		<result property="photoType" column="PHOTO_TYPE" jdbcType="Long"/>
+ 		<result property="title" column="TITLE" jdbcType="String"/>
+ 	</resultMap>
+  	
+	<select id="getGfVacanciestById" parameterClass="Long" resultMap = "gfVacanciestMap">
+	  	select * from GF_VACANCIES_T where VACANCY_ID = #vacancyId#
+ 	 </select>
+	
+	<select id="getGfVacanciestPages" parameterClass="java.util.Map" resultMap = "gfVacanciestMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	 </select>
+  
+  
+</sqlMap>

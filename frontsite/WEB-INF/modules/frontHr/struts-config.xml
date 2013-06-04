@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="hrForm"
+			type="org.apache.struts.validator.LazyValidatorForm" />
+	</form-beans>
+	<action-mappings>
+		<action path="/thrPostInfoAction" parameter="method">
+			<forward name="list" path="/job/jobIframe.jsp"/>
+		</action>
+		
+		<action path="/empspeakAction" parameter="method">
+			<forward name="stafflist" path="/job/jobStarffIframe.jsp"/>
+		</action>
+		
+		<action path="/hrUserAction" parameter="method" name="hrForm" scope="request" validate="false">
+			<forward name="success" path="/job/register.jsp"/>
+			<forward name="login" path="/job/job_login.jsp"/>
+			<forward name="applyJobFail" path="/job/jobApp.jsp"/>
+			<forward name="applyJobSuc" path="/job/personInfo.jsp"/>
+			<forward name="sessionout" path="/job/index.jsp"/>
+			<forward name="basicNext" path="/job/educationExp.jsp"/>
+			<forward name="eduNext" path="/job/workExp.jsp"/>
+			<forward name="workNext" path="/job/otherExp.jsp"/>
+			<forward name="otherWorkNext" path="/job/submitResume.jsp"/>
+			<forward name="finaly" path="/job/jobInfo.jsp"/>
+			<forward name="save" path="/job/resumePreview.jsp"/>
+			<forward name="index" path="/job/index.jsp"/>
+			<forward name="submitAnswer" path="/job/submitAnswer.jsp"/>
+			<forward name="updatePass" path="/job/updatePass.jsp"/>
+			<forward name="findPassword" path="/job/findPassword.jsp"/>
+			<forward name="updatePassRe" path="/job/updatePassRe.jsp"/>
+			<forward name="updatePassFalse" path="/job/updatePassword.jsp"/>
+			<forward name="uploadPhoto" path="/job/uploadPhoto.jsp"/>
+		</action>
+		
+		<action path="/gxcpAction" parameter="method" name="hrForm" scope="request" validate="false">
+			<forward name="sessionout" path="/job/gxcpUserInfo.jsp"/>
+			<forward name="gotoIntro" path="/job/gxcpIntro.jsp"/>
+			<forward name="gotoTest" path="/job/gxcpPage.jsp"/>
+		</action>
+		
+		<action path="/gxcpAnswerAction" parameter="method" name="hrForm" scope="request" validate="false">
+			<forward name="sessionout" path="/job/gxcpUserInfo.jsp"/>
+			<forward name="gotoTest" path="/job/gxcpPage.jsp"/>
+			<forward name="gotoMessPage" path="/job/gxcpMessPage.jsp"/>
+		</action>
+		
+		<action path="/hrBbsAction" parameter="method" scope="request">
+			<forward name="success" path="/job/jobBbs_posts.jsp"></forward>
+			<forward name="bbsIndex" path="/job/jobBbs.jsp"></forward>
+			<forward name="infoSuccess" path="/job/topicInfo.jsp"></forward>
+			<forward name="weiDengLu" path="/job/jobBbs_posts.jsp"></forward>
+			<forward name="reply_weiDengLu" path="/job/topicInfo.jsp"></forward>
+		</action>
+	</action-mappings>
+</struts-config>

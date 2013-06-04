@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.otc.pojo.OtcDocument">
+	<typeAlias alias="OtcDocument" type="com.cssweb.otc.pojo.OtcDocument" />
+
+	<resultMap id="otcDocumentresultMap" class="OtcDocument">
+		<result property="id" column="ID" jdbcType="java.lang.Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="upddate" column="UPDDATE" jdbcType="String"/>
+		<result property="contentid" column="CONTENTID" jdbcType="String"/>
+		<result property="fjid" column="FJID" jdbcType="String"/>
+		<result property="doctype" column="DOCTYPE" jdbcType="String"/>
+		<result property="otccode" column="OTCCODE" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="OtcDocument">
+		<![CDATA[
+		 insert into T_OTC_DOCUMENT(ID,
+		 							TITLE,
+		 							UPDDATE,
+		 							DOCTYPE,
+		 							OTCCODE) 
+		 				values(SEQ_T_OTC_DOCUMENT.NEXTVAL,
+								#title#,
+								#upddate#,
+								#doctype#,
+								#otccode#)
+		]]>
+	</insert>
+	<update id="update" parameterClass="OtcDocument">
+		<![CDATA[
+		 update T_OTC_DOCUMENT set TITLE=#title#,
+		 							UPDDATE=#upddate#,
+		 							DOCTYPE=#doctype#,
+		 							OTCCODE=#otccode#,
+		 							CONTENTID=#contentid#,
+		 							FJID=#fjid#
+		 				where ID=#id#
+		]]>
+	</update>
+	<select id="getMaxId" resultClass="long">
+		select max(id) from T_OTC_DOCUMENT
+	</select>
+	<select id="getOtcDocumentById" resultMap="otcDocumentresultMap" parameterClass="long">
+		select ID,
+				TITLE,
+				UPDDATE,
+				DOCTYPE,
+				OTCCODE,
+				CONTENTID,
+				FJID from T_OTC_DOCUMENT
+			where ID = #newId#
+	</select>
+	
+	<select id="getListBySplit" resultMap="otcDocumentresultMap" parameterClass="map">
+		select *
+		   from (select row_.*, rownum rownum_
+		           from (select ID,
+								TITLE,
+								UPDDATE,
+								DOCTYPE,
+								(select name from t_otc_product where code=otccode)OTCCODE,
+								CONTENTID,
+								FJID
+		                   from T_OTC_DOCUMENT t
+		                  where 1=1
+		                    <dynamic>
+		                    	<isNotNull prepend="and" property="docType">
+		                    		DOCTYPE = #docType#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="otcCode">
+		                    		OTCCODE = #otcCode#
+		                    	</isNotNull>
+		                    </dynamic>
+		                  order by UPDDATE desc) row_
+		          where rownum <![CDATA[ <= ]]> #end#)
+		  where rownum_ <![CDATA[ > ]]> #start# 
+	</select>
+	<select id="getDataCount" resultClass="int" parameterClass="map">
+		select count(1) from T_OTC_DOCUMENT where 1=1
+			<dynamic>
+            	<isNotNull prepend="and" property="docType">
+            		DOCTYPE = #docType#
+            	</isNotNull>
+            	<isNotNull prepend="and" property="otcCode">
+            		OTCCODE = #otcCode#
+            	</isNotNull>
+            </dynamic>
+	</select>
+	<select id="getDocumentIsExist" resultClass="int" parameterClass="map">
+		select id from T_OTC_DOCUMENT where DOCTYPE=#docType# and OTCCODE=#otcCode#
+	</select>
+	<delete id="delete" parameterClass="long">
+		delete from T_OTC_DOCUMENT where id=#id#
+	</delete>
+</sqlMap>

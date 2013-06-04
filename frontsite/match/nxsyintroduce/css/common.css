@@ -1,0 +1,137 @@
+﻿body {
+	background: url(../images/bg_top.jpg) center top no-repeat #f1f1f1;
+	display: block;
+	margin:0px;
+	font: 12px/1.8 tahoma, helvetica, clean, sans-serif;
+	font-size: 12px !important;
+}
+html {
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-shadow-color: #D2E5F4;
+	scrollbar-highlight-color: #D2E5F4;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #D2E5F4;
+	overflow-x:hidden;
+}
+table, td, th, ul, li, ol, dl, dt, dd, div, html, p, blockquote, h1, h2, h3, h4, h5, form, html, pre, fieldset {
+	margin:0;
+	padding:0;
+}
+ul li {
+	list-style-type:none;
+	line-height:200%;
+	list-style-type: none;
+}
+img {
+	border:none;
+	cursor:pointer;
+}
+p {
+	line-height:24px;
+}
+.clear {
+	clear:both;
+}
+a {
+	color:#333;
+	text-decoration:none;
+}
+a:hover {
+	color:#014fae;
+}
+.color1 {
+	color:#014fae;
+}
+
+
+
+
+
+.main{ width:970px; margin:0 auto; padding-bottom:70px;}
+.nav{ padding-top:303px; width:970px; height:55px;}
+.profile{background: url(../images/bg_01.jpg) top center no-repeat; height:257px;}
+
+/*宗旨、简介页签*/
+.content_tab{ height:32px; padding:12px 25px;margin-bottom:8px;}
+.content_tab span{ width:175px; height:35px; display:block; float:left; line-height:35px; font-size:14px; padding-left:34px;cursor:pointer;}
+.content_tab .toc1{ background:url(../images/nav_01.png) no-repeat left -35px; }
+.content_tab .toc2{ background:url(../images/nav_01.png) no-repeat left -105px; }
+.content_tab .hover1{ background:url(../images/nav_01.png) no-repeat left 0px; color:#9f0101;}
+.content_tab .hover2{ background:url(../images/nav_01.png) no-repeat left -70px; color:#9f0101;}
+.con_tenet,.con_profile{ width:685px; padding-left:250px; padding-top:15px;}
+.main_mid{ width:952px; margin:0 auto; height:585px;}
+.clause{ width:550px; float:left;}
+.clause p{background:url(../images/icon_01.gif) no-repeat 15px center; height:37px; line-height:37px; font-weight:bold; font-size:16px; padding-left:65px; margin-bottom:5px;}
+
+/*右侧大赛时间*/
+.time{ width:386px; float:right;}
+.time_p{background:url(../images/icon_02.gif) no-repeat 15px center; height:37px; line-height:37px; font-weight:bold; font-size:16px; padding-left:50px; margin-bottom:5px;}
+.winner{background:url(../images/r_bg01.gif) no-repeat top center; height:154px;}
+.winner_t{ font-weight:bold; color:#fff; padding:11px 5px 0px 36px;}
+.winner_t2{ padding:16px 0px 0px 100px; font-weight:bold;}
+.winner_c{ padding-left:107px; padding-top:14px;}
+.winner_c img{ width:52px; height:52px; float:left;}
+.winner_c p{font-size:14px; width:180px; float:right; font-weight:bold; padding:20px 30px 0px 0px; text-align:left; color:#f54306;}
+.winner_li{background:url(../images/r_bg02.gif) no-repeat top center; height:190px; padding:23px 20px 0 130px;}
+.winner_li ul{ width:210px; height:36px; padding:0px; float: left;}
+.winner_li ul li{ float:left;background:url(../images/li_bg.gif) no-repeat center center; width:63px; text-align:center; margin-right:1px; height:16px; line-height:16px;}
+.winner_li p{ color:#f54306;}
+.way{background:url(../images/r_bg03.gif) no-repeat top center; height:95px; margin:6px 0 0; color:#0063af; font-weight:bold; padding:49px 13px 15px;}
+.way a{ font-weight:bold; color:#e42619;}
+.way p{ }
+.way p a{background:url(../images/icon_04.gif) no-repeat center center; display:block; height:57px; width:164px; margin:6px 0 0 100px;}
+.way p a:hover{ background:url(../images/icon_03.gif) no-repeat center center; height:64px; width:174px; margin:0px 0 0 100px}
+
+
+
+/*奖项及排名规则*/
+.main_mid2{ width:952px; margin:0 auto; height:482px;}
+.award{ background:url(../images/l_bg01.gif) no-repeat top left; width:650px; height:; float:left; padding:65px 25px 15px 20px;}
+.award_con{ width:310px; float:right;}
+.award_con p{ font-size:13px; font-weight:bold; color:#1573bb; line-height:21px; padding-bottom:10px;}
+.award_sm{ color:#006998; width:653px; text-align:center; padding-top:30px; float:left;}
+.award_l{ width:241px;}
+.award_l1{background:url(../images/award_bg.gif) no-repeat top left; width:241px; height:135px; }
+.award_l1 img{ width:149px; height:90px; padding-left:50px;}
+.result{ background:url(../images/r_bg04.gif) no-repeat top center; width:209px; float:right;padding:65px 20px 5px 20px; height:400px;}
+.result p{ text-indent:2em; width:155px; padding:0px 30px 0px 40px; line-height:21px;}
+
+
+
+/*参与规则*/
+.result_cy,.result_jy,.attention{ width:952px;padding-bottom:10px; margin:0px auto;}
+.list_tit{ background:url(../images/list_tit.gif) no-repeat top center; padding:5px 0px 0px 55px; font-size:16px; font-weight:bold; height:40px; color:#fff; }
+.list_body{background:url(../images/list_body.gif) repeat-y top center; padding:5px 30px 0;}
+.list_foot{background:url(../images/list_foot.gif) no-repeat center center; height:34px;}
+.result_tab,.result_tab2{width:128px;height:28px; float:left;font-size:14px;font-weight:bold;padding-right:2px; cursor:pointer; text-align:center; line-height:28px;}
+.result_tab{ background:url(../images/icon_tab.gif) no-repeat; color:#d80600;}
+.result_tab2{background:url(../images/icon_tab.gif) no-repeat 0 -28px; color:#fff;}
+.result_con{ width:890px;height:auto;line-height:24px;margin:0 auto;padding-top:10px;padding-bottom:10px;padding-top:35px; *padding-top:15px;}
+.result_cy .result_con strong,.result_jy table tr td strong{ color:#d80600;}
+.attention .list_body p{background:url(../images/dian_01.gif) no-repeat left center; padding-left:15px;}
+
+
+
+/*大赛获奖公告*/
+.win_tab{ background: url(../images/r_bg06.gif) repeat-x; height:31px;}
+.win_tab span{ width:105px; height:31px; display:block; float:left; line-height:31px;cursor:pointer;}
+.win_tab .toc1{ background:url(../images/nav_02.gif) no-repeat left -31px; }
+.win_tab .toc2{ background:url(../images/nav_02.gif) no-repeat left -93px; }
+.win_tab .hover3{ background:url(../images/nav_02.gif) no-repeat left 0px; color:#9f0101;}
+.win_tab .hover4{ background:url(../images/nav_02.gif) no-repeat left -62px; color:#9f0101;}
+.win_c{ background: url(../images/r_bg05.gif) no-repeat; width:348px; height:293px; padding:15px 21px 21px 17px;}
+.result_tab3,.result_tab4{width:112px;height:28px; float:left;font-size:12px;font-weight:bold;cursor:pointer; text-align:center; line-height:28px;}
+.result_tab3{ background:url(../images/icon_tab2.gif) no-repeat; color:#d80600;}
+.result_tab4{background:url(../images/icon_tab2.gif) no-repeat 0 -28px; color:#fff;}
+.result_con2{ width:348px;height:auto;line-height:24px;margin:0 auto;padding-top:10px;padding-bottom:10px;padding-top:40px; *padding-top:15px;}
+
+
+
+#foot{
+	background: url(../images/bg_foot.jpg) bottom center no-repeat;
+	}
+
+
+/*  indexpage  end  */

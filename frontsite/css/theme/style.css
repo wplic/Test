@@ -1,0 +1,23 @@
+@charset "utf-8";
+/* CSS Document */
+body{ margin:0; padding:0;font-size:12px}
+.warp{ width:920px; margin:0 auto}
+.block9{ height:9px; overflow:hidden}
+.tmenu{ background:url(/pic/theme/topmbg.jpg) repeat-x; height:27px; border:1px solid #add9f2}
+.tmenu .txt{ background:url(/pic/theme/topmline.jpg) no-repeat right; width:102px; text-align:center; font-size:14px; height:27px; line-height:27px}
+.tmenu .txt150{ background:url(/pic/theme/topmline.jpg) no-repeat right; width:150px; text-align:center; font-size:14px; height:27px; line-height:27px}
+.f14{ font-size:14px}
+a{ color:#333333; text-decoration:none}
+a:hover{ color:#ff6600; text-decoration:none}
+.zttit1{ background:url(/pic/theme/titbg2.jpg) repeat-x; height:29px; line-height:29px; border:1px solid #add9f2; width:592px; }
+.bold{ font-weight:bold}
+.ztcon1{ background:url(/pic/theme/wzbg1.jpg) repeat-x bottom;width:562px; padding:16px 15px; line-height:30px; }
+.zttit2{ background:url(/pic/theme/titbg3.jpg) no-repeat bottom;width:316px; height:30px; line-height:30px}
+.ztcon2{width:284px; background:#f7fbff; border:1px solid #adb9c2; padding:15px; font-family: "宋体"; line-height:30px}
+.zttit3{ background:url(/pic/theme/titbg1.jpg) no-repeat bottom;width:920px; height:22px; padding-top:12px;font-weight:bold; text-indent:30px}
+.zttit3 span{ float:right; margin-right:6px; font-weight:normal}
+p{ padding:0px; margin:0px}
+.borimg{ background:#ffffff; padding:2px; border:1px solid #cccccc}
+.imgtxt{ width:164px; text-align:center; height:25px; line-height:25px}
+.listtxt{ line-height:30px; font-family: "宋体"}
+.listtxt td{ line-height:30px; font-family: "宋体"; border-bottom:1px solid #e7e7e7; padding-left:7px}

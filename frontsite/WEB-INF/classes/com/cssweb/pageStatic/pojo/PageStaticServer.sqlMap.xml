@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.pageStatic.pojo.PageStaticServer">
+	<typeAlias alias="PageStaticServer" type="com.cssweb.pageStatic.pojo.PageStaticServer"/>
+	
+	<resultMap id="pageStaticServerMap" class="PageStaticServer">
+		<result column="SERVERID" property="serverId" jdbcType="long"/>
+		<result column="SERVERNAME" property="serverName" jdbcType="String"/>
+		<result column="HTTP_SERVER" property="httpServer" jdbcType="String"/>
+		<result column="FTP_SERVER" property="ftpServer" jdbcType="String"/>
+		<result column="TEMP_DIR" property="tempDir" jdbcType="String"/>
+		<result column="SERVER_TYPE" property="serverType" jdbcType="String"/>
+		<result column="LOG_NAME" property="logName" jdbcType="String"/>		
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	<select id="getPageStaticServerByServerId" resultMap="pageStaticServerMap" parameterClass="Long">
+		select SERVERID,SERVERNAME,HTTP_SERVER,FTP_SERVER,TEMP_DIR,SERVER_TYPE,LOG_NAME,EXT1,EXT2,EXT3,EXT4 from PageStatic_Server where SERVERID=#value#
+	</select>
+	<insert id="insert" parameterClass="PageStaticServer">
+		insert into PageStatic_Server(SERVERID,SERVERNAME,HTTP_SERVER,FTP_SERVER,TEMP_DIR,SERVER_TYPE,LOG_NAME,EXT1,EXT2,EXT3,EXT4) 
+					values(#serverId#,#serverName#,#httpServer#,#ftpServer#,#tempDir#,#serverType#,#logName#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	<update id="update" parameterClass="PageStaticServer">
+		update PageStatic_Server set SERVERNAME=#serverName#,HTTP_SERVER=#httpServer#,
+			FTP_SERVER=#ftpServer#,TEMP_DIR=#tempDir#,SERVER_TYPE=#serverType#,LOG_NAME=#logName#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#  where SERVERID = #serverId#
+	</update>
+	<delete id="deleteByServerId" parameterClass="Long">
+		delete from PageStatic_Server where SERVERID = #value#
+	</delete>
+	<select id="getPageStaticServerByCondition" resultMap="pageStaticServerMap" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select> 
+   	<select id="getPageStaticServerCount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+	</select>
+	<select id="getAllPageStaticServer" resultMap="pageStaticServerMap">
+       select * from PageStatic_Server order by serverId desc
+   </select> 
+</sqlMap>

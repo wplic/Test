@@ -1,0 +1,29 @@
+.pagingtext{
+	font-size:12px;
+	height:16px;
+	border:1px solid #CCCCCC;
+}
+
+.pagingimg{
+	cursor:hand;
+	border:0;
+	vertical-align: middle;
+}
+
+.px12{
+	font-size:12px
+}
+.general{
+	font-size:12px;
+	color:#000000;
+}
+
+.heightlight{
+	font-size:12px;
+	color:#FF0000;
+}
+
+.invalid{
+	font-size:12px;
+	color:#CCCCCC;
+}

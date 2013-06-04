@@ -1,0 +1,99 @@
+
+.menu_bg {
+	background: url(../pic/left_bg.jpg) repeat-y left top;
+}
+
+.menu_title {
+	padding-bottom:5px;
+	width:153px;
+	height:29px;
+	font-weight: bold;
+}
+.menu_title li{float:left; width:49%; text-align:center; line-height:30px; display:block; cursor:pointer; color:#999999;}
+
+.menu_title_l_down{ float:left; background-color:#E3E6EB; border:1px solid #A6B5C6;border-top:0px;}
+.menu_title_l_down a{color:#999999;}
+.menu_title_l_down a:hover{color:#333333;}
+.menu_title_l{}
+
+/* main menu */
+.menu {overflow-y:auto; overflow-x:hidden;}
+.menu ul{line-height:24px;}
+.menu ul li {
+    color:#012960;
+	font-weight:bold;
+	text-align:left;
+	padding:1px 0 0 55px;
+	background:url(../pic/left_bg2.jpg) no-repeat;
+}
+.menu ul li a {
+	font-weight:bold;
+}
+
+.menu ul li a:link,
+.menu ul li a:visited {
+	 color:#012960;
+}
+.menu ul li a:hover,
+.menu ul li a:active  {
+	color: #FF5300;
+}
+.menu ul li a.current:link,
+.menu ul li a.current:visited,
+.menu ul li a.current:hover,
+.menu ul li a.current:active  {
+	color: #FF5300;
+}
+
+/* sub menu */
+.menu ul li ul {
+    background: url(../pic/left_bg3.jpg) repeat-y left top;
+    margin-left: -60px;
+	border-width:0;
+}
+.menu ul li ul li {
+	list-style: none;
+	padding: 1px 0 1px 30px;
+    margin-left: 30px;
+	background: url(../pic/left_sub_list.gif) no-repeat 18px 7px;
+}
+.menu ul li ul li a {
+	font-weight: normal;
+}
+.menu ul li ul li a:link,
+.menu ul li ul li a:visited  {
+	color: #333333;
+}
+.menu ul li ul li a:hover,
+.menu ul li ul li a:active  {
+	color: #FF5300;
+}
+
+.menu ul li ul li a.current:link,
+.menu ul li ul li a.current:visited,
+.menu ul li ul li a.current:hover,
+.menu ul li ul li a.current:active  {
+	color: #FF5300;
+}
+
+
+.menu .treeview .hover { color: #FF5300; cursor: pointer; }
+.menu .treeview li { }
+.menu .treeview .collapsable { }
+.menu .treeview .expandable { }
+.menu .treeview .last { }
+.menu .treeview .lastCollapsable { }
+.menu .treeview .lastExpandable { }
+        
+
+#arrowTd {  width:8px;
+            cursor:pointer;
+            background-color:#E3E8EE;
+            padding-left:3px;
+}
+#menuTD {width: 153px;}
+.alltitle{min-width:790px;overflow:hidden;}
+.titleL{float:left;margin-left:20px;display:inline;}
+.titleL li,.titleR li{float:left;margin-right:10px;}
+.titleR{float:right;margin-right:20px;display:inline;}
+.titleR select{margin-top:0;*margin-top:-2px;}

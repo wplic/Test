@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.oldhr.pojo.TmanCertificate">
+
+	<typeAlias alias="tmanCertificate" type="com.cssweb.oldhr.pojo.TmanCertificate"/>
+	
+	
+	<!--result map-->
+	<resultMap id="tmanCertificateMap" class="tmanCertificate">
+ 		<result property="appId" column="APP_ID" jdbcType="Long"/>
+ 		<result property="type" column="TYPE" jdbcType="String"/>
+ 		<result property="no" column="NO" jdbcType="String"/>
+ 		<result property="certificate" column="CERTIFICATE" jdbcType="String"/>
+ 		
+ 	</resultMap>
+  	
+	<select id="getTmanCertificateById" parameterClass="Long" resultMap = "tmanCertificateMap">
+	  	select * from T_MAN_CERTIFICATE where APP_ID = #appId#
+ 	 </select>
+	
+	<select id="gettmanCertificatePages" parameterClass="java.util.Map" resultMap = "tmanCertificateMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	 </select>
+  
+  
+</sqlMap>

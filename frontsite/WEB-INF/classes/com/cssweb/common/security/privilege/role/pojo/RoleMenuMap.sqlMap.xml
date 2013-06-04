@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.security.privilege.role.pojo.RoleMenuMap">
+
+	<typeAlias alias="RoleMenuMap" type="com.cssweb.common.security.privilege.role.pojo.RoleMenuMap"/>
+
+	<!--result map-->
+	<resultMap id="roleMenuMapMap" class="RoleMenuMap">
+ 		<result property="roleId" column="ROLE_ID" jdbcType="Long"/>
+ 		<result property="menuId" column="MENU_ID" jdbcType="Long"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="RoleMenuMap">
+		  insert into ROLE_MENU_MAP (ROLE_ID,MENU_ID) values (#roleId#,#menuId#)
+	</insert>
+	
+	<delete id="delete" parameterClass="RoleMenuMap">
+	  	delete ROLE_MENU_MAP where ROLE_ID=#roleId# and MENU_ID=#menuId#
+	</delete>
+	
+	<select id="getByRoleId" parameterClass="Long" resultMap = "roleMenuMapMap">
+	    select * from ROLE_MENU_MAP where ROLE_ID = #value#
+	 </select>
+	 
+	 <delete id="deleteByRoleId" parameterClass="Long">
+	  	delete ROLE_MENU_MAP where ROLE_ID=#value#
+	</delete>
+
+</sqlMap>

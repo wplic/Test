@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 港澳资讯文本内容表 -->
+<tableNames>
+	<tableName>GSYW</tableName>
+	<tableName>GSJYQKPS</tableName>
+	<tableName>GSTZQKSM</tableName>
+	<tableName>GSGG</tableName>
+	<tableName>GSDSJ</tableName>
+	<tableName>GSBD</tableName>
+	<tableName>GSYJ</tableName>
+	<tableName>GGDP</tableName>
+	
+	<tableName>JJYW</tableName>
+	<tableName>JJJYQKPS</tableName>
+	<tableName>JJQTGG</tableName>
+	<tableName>JJDSJ</tableName>
+	<tableName>JJDTYDP</tableName>
+	
+	<tableName>ZQYW</tableName>
+	<tableName>ZQJYQKPS</tableName>
+	<tableName>ZQTZQKSM</tableName>
+	<tableName>ZQGG</tableName>
+	<tableName>ZQDSJ</tableName>
+	<tableName>ZQDTYDP</tableName>
+</tableNames>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gpdmGazx.pojo.GazxObject">
+
+	<typeAlias alias="GazxObject" type="com.cssweb.gpdmGazx.pojo.GazxObject"/>
+
+	<!--result map-->
+	<resultMap id="GazxObject" class="GazxObject">
+ 		<result property="guid" column="guid" jdbcType="String"/>
+ 		<result property="pgdm" column="pgdm" jdbcType="String"/>
+ 		<result property="pgjc" column="pgjc" jdbcType="String"/>
+ 		<result property="zt" column="zt" jdbcType="String"/>
+ 		<result property="gjz" column="gjz" jdbcType="String"/>
+ 		<result property="nr" column="nr" jdbcType="BLOB"/>
+ 		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+  	</resultMap>
+
+  <select id="getByIdAndTable" parameterClass="String" resultMap = "GazxObject">
+    $sql$
+  </select>
+  
+  <select id="getBygazxObjectList" parameterClass="java.util.Map" resultMap = "GazxObject">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getAllCount" parameterClass="String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+  <!--result map-->
+	<resultMap id="GazxObjectByTable" class="GazxObject">
+ 		<result property="guid" column="guid" jdbcType="String"/>
+ 		<result property="zt" column="zt" jdbcType="String"/>
+ 		<result property="nr" column="nr" jdbcType="BLOB"/>
+ 		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+  	</resultMap>
+  <select id="getByIdAndTableObject" parameterClass="String" resultMap = "GazxObjectByTable">
+    $sql$
+  </select>
+</sqlMap>

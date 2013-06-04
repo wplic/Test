@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings
+			cacheModelsEnabled="true"
+			enhancementEnabled="true"
+			lazyLoadingEnabled="true"
+			maxRequests="20"
+			maxSessions="10"
+			maxTransactions="50"
+			useStatementNamespaces="true"
+			/>
+	<sqlMap resource="com/cssweb/common/sequence/pojo/Sequence.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/common/dictionary/pojo/Dictionary.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/common/menu/pojo/Menu.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/common/security/user/pojo/UserBasicInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/security/user/pojo/UserExtentInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/security/user/pojo/UserExtentBlob.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/security/user/pojo/UserAccountInfo.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/common/branch/pojo/BranchBasicInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/branch/pojo/BranchExtendInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/branch/pojo/BranchUserMap.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/common/security/privilege/role/pojo/RoleInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/security/privilege/role/pojo/RoleMenuMap.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/security/privilege/role/pojo/RoleUserMap.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/friendLink/pojo/FriendLink.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/lcrole/pojo/LcRole.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/common/toDbLob/pojo/FileBlob.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/common/toDbLob/pojo/TextBlob.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/soft/pojo/SoftCategory.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/soft/pojo/SoftBasicInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/soft/pojo/SoftUrlInfo.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/runs/pojo/RunsLantern.sqlMap.xml"/>
+		
+	<sqlMap resource="com/cssweb/notify/pojo/Notify.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/notify/pojo/NotifyDept.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/picmanger/pojo/PicManger.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/admanger/pojo/AdManger.sqlMap.xml"/>
+	
+	<sqlMap resource="com/cssweb/message/pojo/UserMessageInfo.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/video/pojo/TvideoUserStatTraffic.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/video/pojo/TvideoUserExptime.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/video/pojo/TvideoBoard.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/video/pojo/TvideoCategory.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/video/pojo/TvideoProgram.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/video/pojo/TvideoProgramLive.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/handset/pojo/TfinanceCommendHandset.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/questionnaire/pojo/QuestionnaireCategory.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/questionnaire/pojo/Questionnaire.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/questionnaire/pojo/QuestionnaireSubtitle.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/questionnaire/pojo/QuestionnaireOptions.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/questionnaire/pojo/QuestionnaireResult.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/questionnaire/pojo/QuestionnairePerson.sqlMap.xml" />
+	<!-- 系统管理 -->
+	<sqlMap resource="com/cssweb/systemset/pojo/ServiceLevel.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/systemset/pojo/Branch.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/systemset/pojo/BranchNotice.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/systemset/pojo/BranchNoticeMap.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/systemset/pojo/TsystemBranchPic.sqlMap.xml" />
+	<!-- 专家分析师信息维护 -->
+	<sqlMap resource="com/cssweb/complaints/pojo/Complaints.sqlMap.xml" />
+	
+	<!-- 客户投诉建议 -->
+	<sqlMap resource="com/cssweb/complaints/pojo/FinanceAdvice.sqlMap.xml" />
+	
+	<!-- 所有专家回答维护 -->
+	<sqlMap resource="com/cssweb/complaints/pojo/FinanceQuestion.sqlMap.xml" />
+	
+	<!-- 问卷建议信息查询 -->
+	<sqlMap resource="com/cssweb/complaints/pojo/QuestionnairePersonTwo.sqlMap.xml" />
+	
+	<!-- 常用快捷提问维护 -->
+	<sqlMap resource="com/cssweb/complaints/pojo/FinanceUsualQuestion.sqlMap.xml" />
+	
+	<!-- 分支机构 -->
+	<sqlMap resource="com/cssweb/portal/pojo/BranchPortal.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/portal/pojo/BranchPortalElements.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/portal/pojo/BranchPortalImages.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/portal/pojo/BranchPortalItems.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/portal/pojo/BranchPortalZdymk.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/workreport/pojo/UploadFile.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/cmsdocsort/pojo/CmsDocSort.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/invest/pojo/Invest.sqlMap.xml" />
+	<!-- liujk start -->
+	<sqlMap resource="com/cssweb/common/advice/pojo/Advice.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/question/po/Question.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/specialcase/pojo/SpecialCase.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/enterprisesell/pojo/EnterpriseSell.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/credit/pojo/Credit.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/roadshow/pojo/RoadShow.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/common/content/pojo/Content.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/event/pojo/Event.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/event/pojo/EventImage.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/Empspeak.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrApplyRecorder.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserBasicInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserEduExperience.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserWorkExperience.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserItem.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserBearward.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserPubpaper.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserFamily.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserApplyItem.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/HrUseSubmit.sqlMap.xml" />
+	<!-- end -->
+	<!-- 我的自选股 -->
+	<sqlMap resource="com/cssweb/quote/pojo/Myquote.sqlMap.xml" />
+	<!-- 前台登陆登陆模块 -->
+	<sqlMap resource="com/cssweb/client/pojo/TsystemWebuser.sqlMap.xml" />
+	
+	<sqlMap resource="com/css/plugins/count/Count.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/hq/pojo/Quote.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/hq/pojo/RealTimeMarket.sqlMap.xml"/>
+	<!-- 经纪业务荣誉 -->
+	<sqlMap resource="com/cssweb/systemset/pojo/SystemCredit.sqlMap.xml" />
+	<!-- 融资融券 -->
+	<sqlMap resource="com/cssweb/rzrq/pojo/Assure.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/rzrq/pojo/PledgeAndKeep.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/rzrq/pojo/RzrqRate.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/rzrq/pojo/RzrqRateLog.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/rzrq/pojo/AssureLog.sqlMap.xml" />
+	<!-- 融资融券大赛 -->
+	<sqlMap resource="com/cssweb/rzrq/pojo/CustRegister.sqlMap.xml" />
+	<!-- add 2012-6-19-->
+	<sqlMap resource="com/cssweb/rzrq/pojo/Advice.sqlMap.xml" />
+
+	
+	<!-- 资产管理 -->
+    <sqlMap resource="com/cssweb/business/product/pojo/Product.sqlMap.xml"/>
+    <sqlMap resource="com/cssweb/business/product/pojo/ProductNetValue.sqlMap.xml"/>	
+    <sqlMap resource="com/cssweb/assetManager/pojo/AssetManager.sqlMap.xml" />
+
+	<sqlMap resource="com/cssweb/rzrq/pojo/PledgeQuote.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/rzrq/pojo/Aimadjust.sqlMap.xml" />
+	
+	<!-- 资金代销模块 -->
+	<sqlMap resource="com/cssweb/systemset/pojo/Jjylb.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/systemset/pojo/TsystemFundSale.sqlMap.xml" />
+	<!-- Hr管理 -->
+	<sqlMap resource="com/cssweb/hr/pojo/HrUser.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/ThrPostInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/hr/pojo/ThrUserJl.sqlMap.xml" />
+
+	<sqlMap resource="com/cssweb/hr/pojo/HrPurview.sqlMap.xml" />
+
+	<sqlMap resource="com/cssweb/hr/pojo/HrUserAudit.sqlMap.xml" />
+
+	<sqlMap resource="com/cssweb/developer/pojo/TdeveloperGroup.sqlMap.xml" />
+	
+		<!-- 专题活动 -->
+	<sqlMap resource="com/cssweb/theme/pojo/ThemeCategory.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/theme/pojo/ThemeIntro.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/theme/pojo/ThemeNews.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/theme/pojo/ThemeVideo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/theme/pojo/ThemePic.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/theme/pojo/ThemeArticleCategory.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/theme/pojo/ThemeArticle.sqlMap.xml" />
+	
+		<!-- 个性测评 -->
+	<sqlMap resource="com/cssweb/gxcp/pojo/Question.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/gxcp/pojo/Option.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/gxcp/pojo/UserInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/gxcp/pojo/Answer.sqlMap.xml" />
+	
+	<!-- HR历史记录 -->
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanApplicantt.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanCertificate.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/GfVacanciest.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanEducationt.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanWorkExpt.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanProject.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanGift.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanArticles.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/oldhr/pojo/TmanFamily.sqlMap.xml" />
+	
+	<!-- 营业部权限表 -->
+	<sqlMap resource="com/cssweb/systemset/pojo/TbranchView.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/rzrq/pojo/AimadjustLog.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/rzrq/pojo/PledgeAndKeepLog.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/rzrq/pojo/PledgeQuoteLog.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/client/pojo/TclientYdbg.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/client/pojo/TclientYdbgMap.sqlMap.xml" />
+	<!-- 投资策略报告 -->
+	<sqlMap resource="com/cssweb/client/pojo/TclientTzcl.sqlMap.xml" />
+	
+	<!-- 手机证券软件下载 -->
+	<sqlMap resource="com/cssweb/phoneSoft/pojo/PhoneBrandInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/phoneSoft/pojo/PhoneModelInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/phoneSoft/pojo/PhoneSoftUrl.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/phoneSoft/pojo/MbSoftDownCount.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/phoneSoft/pojo/TmobileVideoUserStat.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/complaints/pojo/FinanceMessage.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/question/po/JgjQuestion.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/commission/pojo/Commission.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/collect/pojo/TsystmRecordAssetUser.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/collect/pojo/TcsswebRyxx.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/client/pojo/TassetuserUsername.sqlMap.xml" />
+	<!-- 我的管家资讯 -->
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebFwcpcx.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebFwtcdy.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebFwtcdySfcl.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebFwcpdyCms.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebFwcpdy.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebProFwcptd.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebCppj.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebUserCppj.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebProductidCatid.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebTips.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebFwcpysl.sqlMap.xml" />
+	
+	<!-- 公益基金下的项目管理 -->
+	<sqlMap resource="com/cssweb/item/pojo/Item.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/item/pojo/Donate.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/item/pojo/Apply.sqlMap.xml"/>
+	<!-- 金快线那项目的映射文件 -->
+	<sqlMap resource="com/fortuneage/goldmoney/pojo/GoldMoney.sqlMap.xml"/>
+	<sqlMap resource="com/fortuneage/goldmoney/pojo/GoldMoneyHistory.sqlMap.xml"/>
+	
+	<!-- 公益基金 -->
+	<sqlMap resource="com/fortuneage/fund/pojo/Institution.sqlMap.xml"/>
+	
+	<!-- 短彩信 -->
+<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebDcxorder.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/subscribe/pojo/TcsswebDcxdetail.sqlMap.xml" />
+<!-- 客户短彩信订阅 byQQ124002383 at 20120806-->
+	 <!--  <sqlMap resource="com/cssweb/subscribe/pojo/TcsswebDcxList.sqlMap.xml" />  -->
+	
+	
+	<!-- london2012  2012-7-25-->
+	<sqlMap resource="com/cssweb/london2012/pojo/London2012.sqlMap.xml" />
+	<!-- 深圳branch AccountApply 预约开户 -->
+	<sqlMap resource="com/cssweb/branchcomp/pojo/AccountApply.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/branchcomp/pojo/CmsDocSingleAttr.sqlMap.xml" />
+	<!-- 深圳branch  Department 营业部信息-->
+	<sqlMap resource="com/cssweb/branchcomp/pojo/Department.sqlMap.xml" />
+	<!-- 深圳branch  DepartmentManager 部门经理 -->
+	<sqlMap resource="com/cssweb/branchcomp/pojo/DepartmentManager.sqlMap.xml" />
+	
+	<sqlMap resource="com/cssweb/hr/pojo/HrBbsPosts.sqlMap.xml" /> 
+	<sqlMap resource="com/cssweb/hr/pojo/HrBbsReply.sqlMap.xml" /> 
+	<sqlMap resource="com/cssweb/otc/pojo/OtcDocument.sqlMap.xml" /> 
+	
+	<!-- 估值系统 byQQ124002383 at 20120809
+	 <sqlMap resource="com/cssweb/valueSys/pojo/ValueSysEntity.sqlMap.xml" /> -->
+	<!-- 估值系统 byQQ124002383 at 20120809-->
+	 <!--<sqlMap resource="com/cssweb/valueSys/pojo/ValueSysEntity.sqlMap.xml" /> -->
+	
+</sqlMapConfig>

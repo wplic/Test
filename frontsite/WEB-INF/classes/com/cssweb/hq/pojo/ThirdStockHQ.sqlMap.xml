@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hq.pojo.ThirdStockHQ">
+
+	<typeAlias alias="ThirdStockHQ" type="com.cssweb.hq.pojo.ThirdStockHQ"/>
+
+	<!--result map-->
+	<resultMap id="ThirdStockHQMap" class="ThirdStockHQ">
+ 		<result property="stockCode" column="gpdm" jdbcType="String"/>
+ 		<result property="stockName" column="gpjc" jdbcType="String"/>
+		<result property="openPrice" column="kpj" jdbcType="Double" nullValue="0.00"/>
+		<result property="closePrice" column="spj" jdbcType="Double" nullValue="0.00"/>
+		<result property="maxPrice" column="zgj" jdbcType="Double" nullValue="0.00"/>
+		<result property="minPrice" column="zdj" jdbcType="Double" nullValue="0.00"/>
+		<result property="exchangeVolume" column="cjl" jdbcType="Double" nullValue="0.00"/>
+		<result property="risePrice" column="zd" jdbcType="Double" nullValue="0.00"/>
+		<result property="percentChange" column="zdf" jdbcType="Double" nullValue="0.00"/>
+		<result property="perClosePrice" column="zsp" jdbcType="Double" nullValue="0.00"/>
+		<result property="hqDate" column="zhxgrq" jdbcType="Date"/>
+  	</resultMap>
+  	
+  	<resultMap id="ThirdStockHQMap1" class="ThirdStockHQ">
+ 		<result property="stockCode" column="gpdm" jdbcType="String"/>
+ 		<result property="stockName" column="gpjc" jdbcType="String"/>
+		<result property="exchangeVolume" column="cjl" jdbcType="Double" nullValue="0.00"/>
+		<result property="percentChange" column="zdf" jdbcType="Double" nullValue="0.00"/>
+		<result property="hqDate" column="zhxgrq" jdbcType="Date"/>
+		<result property="openPrice" column="kpj" jdbcType="Double" nullValue="0.00"/>
+		<result property="closePrice" column="spj" jdbcType="Double" nullValue="0.00"/>
+		<result property="maxPrice" column="zgj" jdbcType="Double" nullValue="0.00"/>
+  	</resultMap>
+  	
+  	<select id="getThirdStockHQ" resultMap = "ThirdStockHQMap" parameterClass="map">
+		select a.gpdm,b.gpjc,a.kpj,a.spj,a.zgj,a.zdj,a.cjl,a.zd,a.zdf,a.zsp,a.zhxgrq 
+		from sbhq a,gpzb b 
+		where a.gpdm=b.gpdm and b.gplb='三板股'
+		<dynamic prepend="AND">
+			<isNotEmpty property="stockCode" prepend="AND">
+				a.gpdm=#stockCode#
+			</isNotEmpty>
+			<isNotEmpty property="hqDate" prepend="AND">
+				to_date(to_char(a.zhxgrq,'yyyy-MM-dd'),'yyyy-MM-dd')=to_date(#hqDate#,'yyyy-MM-dd')
+			</isNotEmpty>
+		</dynamic>
+		order by a.zhxgrq desc,a.gpdm
+	</select>
+	
+	<select id="getThirdStockHQNew" resultMap = "ThirdStockHQMap1" parameterClass="map">
+	   SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $condition$ )
+		row_ WHERE ROWNUM &lt;= #endNum# ) WHERE rownum_ &gt;#beginNum#
+	</select>
+	
+	<select id="getThirdStockCount" resultClass="Integer" parameterClass="String">
+	    select count(*) from sbhq a,gpzb b where a.T_GPZB_ID=b.t_gpzb_id and b.gplb=#value# and a.zhxgrq =(select max(zhxgrq) from sbhq where zhxgrq is not null and scbz=0 and gkbz=1 ) and a.zdf is not null 
+	</select>
+	
+	
+	<select id="getMaxFsrq" resultClass="Date">
+	      select max(zhxgrq) from sbhq where zhxgrq is not null and scbz=0 and gkbz=1
+	</select>
+  	
+</sqlMap>

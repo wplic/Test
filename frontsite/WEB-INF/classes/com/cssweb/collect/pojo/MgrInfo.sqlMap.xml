@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.MgrInfo">
+
+	<typeAlias alias="MgrInfo" type="com.cssweb.collect.pojo.MgrInfo"/>
+
+	<!--result map-->
+	<resultMap id="MgrInfo" class="MgrInfo" >
+        <result property="ygbh"  column="ygbh" jdbcType="Long"/>
+        <result property="ygxm" column="ygxm"  jdbcType="String" />
+        <result property="ygxb" column="ygxb"  jdbcType="String"  />
+        <result property="dwbh" column="dwbh" jdbcType="Long"/>
+		<result property="dwmc" column="dwmc" jdbcType="String"/>
+		<result property="zjlx" column="zjlx" jdbcType="String"/>
+		<result property="zjhm" column="zjhm" jdbcType="String"/>
+		<result property="yddh" column="yddh" jdbcType="String"/>
+		<result property="kzYgzp" column="kz_ygzp" jdbcType="String"/>
+		<result property="ygzpImage" column="YGZP_IMAGE" jdbcType="BLOB"/>
+     </resultMap>
+
+	  <select id="getMgrInfoBySearch" parameterClass="java.util.Map" resultMap = "MgrInfo">
+	      select ygbh, ygxm, ygxb, dwbh, dwmc, zjlx, zjhm, yddh, kz_ygzp, ygzp_image from t_yh_cyryxx a 
+	      where 1=1
+	      <dynamic>
+			 <isNotEmpty property="ygbh" prepend="and">
+			  	ygbh=#ygbh# 
+			 </isNotEmpty>
+			 <isNotEmpty property="ygxm" prepend="and">
+			  	ygxm=#ygxm# 
+			 </isNotEmpty>
+			 <isNotEmpty property="dwbh" prepend="and">
+			  	dwbh=#dwbh# 
+			 </isNotEmpty>
+			 <isNotEmpty property="zsbh" prepend="and">
+			  	exists (select 1 from t_yh_zyzgzs b where b.ygbh=a.ygbh and b.zsbh=#zsbh# )
+			 </isNotEmpty>
+			  <isNotEmpty property="yddh" prepend="and">
+			  	yddh=#yddh#
+			 </isNotEmpty>
+		</dynamic>
+	  </select>
+	  
+	   <select id="getMgrInfoBySearchPages" parameterClass="java.util.Map" resultMap = "MgrInfo">
+	   SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+	      select ygbh, ygxm, ygxb, dwbh, dwmc, zjlx, zjhm, yddh, kz_ygzp, ygzp_image from t_yh_cyryxx a 
+	      where 1=1
+	      <dynamic>
+			 <isNotEmpty property="ygbh" prepend="and">
+			  	ygbh=#ygbh# 
+			 </isNotEmpty>
+			 <isNotEmpty property="ygxm" prepend="and">
+			  	ygxm=#ygxm# 
+			 </isNotEmpty>
+			 <isNotEmpty property="dwbh" prepend="and">
+			  	dwbh=#dwbh# 
+			 </isNotEmpty>
+			 <isNotEmpty property="zsbh" prepend="and">
+			  	exists (select 1 from t_yh_zyzgzs b where b.ygbh=a.ygbh and b.zsbh=#zsbh# )
+			 </isNotEmpty>
+			  <isNotEmpty property="yddh" prepend="and">
+			  	yddh=#yddh#
+			 </isNotEmpty>
+		</dynamic>
+			<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	  </select>
+	  
+	  
+	  <select id="getMgrInfoCountBySearch" parameterClass="java.util.Map" resultClass = "Integer">
+	      select count(*) from t_yh_cyryxx a 
+	      where 1=1
+	      <dynamic>
+			 <isNotEmpty property="ygbh" prepend="and">
+			  	ygbh=#ygbh# 
+			 </isNotEmpty>
+			 <isNotEmpty property="ygxm" prepend="and">
+			  	ygxm=#ygxm# 
+			 </isNotEmpty>
+			 <isNotEmpty property="dwbh" prepend="and">
+			  	dwbh=#dwbh# 
+			 </isNotEmpty>
+			 <isNotEmpty property="zsbh" prepend="and">
+			  	exists (select 1 from t_yh_zyzgzs b where b.ygbh=a.ygbh and b.zsbh=#zsbh# )
+			 </isNotEmpty>
+			  <isNotEmpty property="yddh" prepend="and">
+			  	yddh=#yddh#
+			 </isNotEmpty>
+		</dynamic>
+	  </select>
+
+	<!--result map-->
+	<resultMap id="MgrInfozs" class="MgrInfo" >
+	    <result property="lsh"  column="lsh" jdbcType="Long"/>
+        <result property="ygbh"  column="ygbh" jdbcType="Long"/>
+        <result property="zyzglb" column="zyzglb"  jdbcType="String" />
+        <result property="zyzglbmc" column="zyzglbmc"  jdbcType="String"  />
+		<result property="zsbh" column="zsbh" jdbcType="String"/>
+		<result property="zsyxqkssj" column="zsyxqkssj" jdbcType="String"/>
+		<result property="zsyxqjssj" column="zsyxqjssj" jdbcType="String"/>
+		<result property="zyzslrr" column="zyzslrr" jdbcType="String"/>
+		<result property="zyzslrsj" column="zyzslrsj" jdbcType="String"/>
+     </resultMap>
+  	
+	  <select id="getMgrInfoZsByYgbh" parameterClass="Long" resultMap = "MgrInfozs">
+	      select lsh, ygbh, zyzglb, zyzglbmc, zsbh, zsyxqkssj, zsyxqjssj, zyzslrr, zyzslrsj from t_yh_zyzgzs 
+	      where ygbh=#ygbh# 
+	  </select>
+
+	<!--result map-->
+	<resultMap id="MgrInfokm" class="MgrInfo" >
+	    <result property="lsh"  column="lsh" jdbcType="Long"/>
+        <result property="ygbh"  column="ygbh" jdbcType="Long"/>
+        <result property="kskm" column="kskm"  jdbcType="String" />
+        <result property="kskmmc" column="kskmmc"  jdbcType="String"  />
+		<result property="tgrq" column="tgrq" jdbcType="String"/>
+		<result property="lrr" column="lrr" jdbcType="String"/>
+		<result property="lrrq" column="lrrq" jdbcType="String"/>
+     </resultMap>
+  	
+	  <select id="getMgrInfoKmByYgbh" parameterClass="Long" resultMap = "MgrInfokm">
+	      select lsh, ygbh, kskm, kskmmc, tgrq, lrr, lrrq from t_yh_cyzgkskm
+	      where ygbh=#ygbh# 
+	  </select>
+</sqlMap>

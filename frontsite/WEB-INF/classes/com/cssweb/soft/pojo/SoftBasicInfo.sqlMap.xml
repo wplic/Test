@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.soft.pojo.SoftBasicInfo">
+
+	<typeAlias alias="SoftBasicInfo" type="com.cssweb.soft.pojo.SoftBasicInfo" />
+
+	<!--result map-->
+	<resultMap id="SoftBasicInfoMap" class="SoftBasicInfo">
+		<result column="ID" 			property="id" 			jdbcType="java.lang.Long"/>       
+		<result column="SOFT_NAME" 		property="soft_name" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="SOFT_SIZE" 		property="soft_size" 	jdbcType="java.lang.Double"/> 
+		<result column="SOFT_DESC" 		property="soft_desc" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="IMAGE_ID" 		property="image_id" 	jdbcType="java.lang.Long" /> 
+		<result column="CATEGORY_ID"	property="category_id" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="IS_VALID" 		property="is_valid" 	jdbcType="java.lang.Long"/> 
+		<result column="ORDER_NUM" 		property="order_num" 	jdbcType="java.lang.Long"/> 
+		<result column="COUNT"			property="count" 		jdbcType="java.lang.Long" /> 
+		<result column="GXSJ"			property="gxsj" 		jdbcType="java.util.Date"	nullValue="1900/01/01 00:00:00"/> 
+		<result column="EXT3"			property="ext3" 		jdbcType="java.lang.String"/> 
+		<result column="EXT4"			property="ext4" 		jdbcType="java.lang.String"/> 
+	</resultMap>
+	
+	
+ <insert id="insert" parameterClass="SoftBasicInfo">    	
+    insert into SOFT_BASIC_INFO(ID,SOFT_NAME,SOFT_SIZE,SOFT_DESC,IMAGE_ID,CATEGORY_ID,IS_VALID,ORDER_NUM,COUNT,GXSJ,EXT3,EXT4)
+    values(#id#,#soft_name#,#soft_size#,#soft_desc#,#image_id#,#category_id#,#is_valid#,#order_num#,#count#,sysdate,#ext3#,#ext4#)
+  </insert>
+  
+   <update id="update" parameterClass="SoftBasicInfo">    
+     update SOFT_BASIC_INFO
+         set SOFT_NAME=#soft_name#,SOFT_SIZE=#soft_size#,SOFT_DESC=#soft_desc#,IMAGE_ID=#image_id#,CATEGORY_ID=#category_id#,IS_VALID=#is_valid#,ORDER_NUM=#order_num#,
+         COUNT=#count#,GXSJ=sysdate,EXT3=#ext3#,EXT4=#ext4#  where ID=#id#    
+  </update>
+	
+ <select id="selectrecord" parameterClass="java.lang.String" resultMap = "SoftBasicInfoMap">   
+      $sql$   
+ </select>
+ 
+   <select id="getBycateGoryId" parameterClass="java.util.Map" resultMap = "SoftBasicInfoMap">
+    select * from SOFT_BASIC_INFO where IS_VALID=1 and CATEGORY_ID=#cateGoryId# order by ORDER_NUM asc
+  </select>
+ 
+ <select id="selectAll" resultMap = "SoftBasicInfoMap">
+    select * from SOFT_BASIC_INFO
+  </select>
+  
+   <select id="selectAll_1" parameterClass="java.util.Map" resultMap = "SoftBasicInfoMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+    <select id="getSoftById" parameterClass="java.lang.Long" resultMap = "SoftBasicInfoMap">
+    select * from SOFT_BASIC_INFO where id = #value#
+  </select>
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete SOFT_BASIC_INFO where id in ($value$)
+  </delete>
+  
+  
+  
+  <update id="updatePicIdBySoftId" parameterClass="SoftBasicInfo">
+		  update SOFT_BASIC_INFO set IMAGE_ID=#image_id# where ID=#id#
+</update>
+
+<update id="update_count" parameterClass="Long">    
+    update SOFT_BASIC_INFO set COUNT=COUNT+1 where ID=#value#
+  </update>
+  	
+	<!--根据类别取软件列表信息 -->
+   <select id="getSoftListByCategoryId" parameterClass="map" resultMap="SoftBasicInfoMap">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	ID,
+						SOFT_NAME,
+						SOFT_SIZE,
+						SOFT_DESC,
+						IMAGE_ID,
+						CATEGORY_ID,
+						IS_VALID,
+						ORDER_NUM,
+						COUNT,
+						GXSJ,
+						EXT3,
+						EXT4
+				FROM	SOFT_BASIC_INFO
+				WHERE	IS_VALID=1
+			<dynamic>
+				<isNotEmpty property="category_id"	prepend="AND">
+			  		CATEGORY_ID = #category_id#
+				</isNotEmpty>
+			</dynamic>		 
+			<dynamic prepend="order by">
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<!--记录的总数-->
+	<select id="getSoftCountByCategoryId" parameterClass="map" resultClass="Integer">
+			SELECT 	count(*)
+			FROM	SOFT_BASIC_INFO
+			<dynamic>
+				<isNotEmpty property="category_id"	prepend="WHERE">
+			  		CATEGORY_ID = #category_id#
+				</isNotEmpty>
+			</dynamic>		 
+	</select>
+
+</sqlMap>

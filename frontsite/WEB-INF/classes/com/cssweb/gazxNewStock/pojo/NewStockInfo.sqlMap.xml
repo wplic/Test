@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazxNewStock.pojo.NewStockInfo">
+
+	<typeAlias alias="NewStockInfo" type="com.cssweb.gazxNewStock.pojo.NewStockInfo"/>
+
+	<!--result map-->
+	<resultMap id="NewStockInfo" class="NewStockInfo">
+ 		<result property="gpdm" column="gpdm" jdbcType="String"/>
+ 		<result property="gpjc" column="gpjc" jdbcType="String"/>
+ 		<result property="fxjg" column="fxjg" jdbcType="String"/>
+ 		<result property="fxsl" column="fxsl" jdbcType="String"/>
+ 		<result property="wsfxrq" column="wsfxrq" jdbcType="Date"/>
+ 		<result property="ssrq" column="ssrq" jdbcType="Date"/>
+ 		<result property="wxpsrq" column="wxpsrq" jdbcType="Date"/>
+ 		<result property="qmtbfxsyl" column="qmtbfxsyl" jdbcType="String"/>
+  	</resultMap>
+  
+  <select id="getNewStockInfoList" parameterClass="java.util.Map" resultMap = "NewStockInfo">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+    select b.gpdm,b.gpjc,trunc(a.fxjg,2) as fxjg,trunc((a.fxsl/10000),2) as fxsl,
+	a.wsfxrq,a.ssrq,a.wxpsrq,a.qmtbfxsyl
+    from xgfxyss a,gpzb b where a.t_gpzb_id=b.t_gpzb_id AND a.ssrq > sysdate-1
+    order by a.wsfxrq desc nulls last
+     )row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getNewStockInfoCount" resultClass="Integer">
+    select count(1)
+    from xgfxyss a,gpzb b where a.t_gpzb_id=b.t_gpzb_id AND a.ssrq > sysdate-1
+  </select>
+  
+</sqlMap>

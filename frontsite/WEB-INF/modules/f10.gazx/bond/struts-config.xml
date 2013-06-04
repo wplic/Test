@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+<form-beans>
+		<form-bean name="f10Form" type="org.apache.struts.validator.LazyValidatorForm" />
+	</form-beans>
+	<global-forwards></global-forwards>
+
+	<action-mappings>
+	
+		<!-- 债券回售情况 -->
+		<action path="/f10/bond/bondBackToSaleCase" parameter="method" validate="false" name="f10Form">
+			<forward name="bondBackToSaleInfo" path="/f10/bond/bondBackToSaleCase.jsp" />
+	 	</action>
+		
+		<!-- 债券基本信息 -->
+		<action path="/f10/bond/bondInfo" parameter="method" validate="false" name="f10Form">
+			<forward name="bondInfo" path="/f10/bond/bondBasicF10.jsp" />
+		</action>
+		
+		<!-- 债券赎回情况 -->
+		<action path="/f10/bond/bondRedemptionCase" parameter="method" validate="false" name="f10Form">
+			<forward name="bondRedemptionCaseInfo" path="/f10/bond/bondRedemptionCase.jsp" />
+		</action>
+		
+		<!-- 可转债换股情况 -->
+		<action path="/f10/bond/convertibleDebtToStockInfo" parameter="method" validate="false" name="f10Form">
+			<forward name="convertibleDebtToStockInfo" path="/f10/bond/convertibleDebtToStockInfo.jsp" />
+		</action>
+		
+		<!-- 可转债转股价格调整 -->
+		<action path="/f10/bond/convertibleDebtToStockPriceChange" parameter="method" validate="false" name="f10Form">
+			<forward name="convertibleDebtToStockPriceChangeInfo" path="/f10/bond/convertibleDebtToStockPriceChange.jsp" />
+		</action>
+		
+		<!-- 债券实际付息情况 -->
+		<action path="/f10/bond/debtActualPayRateInfo" parameter="method" validate="false" name="f10Form">
+			<forward name="debtActualPayRateInfo" path="/f10/bond/debtActualPayRateInfo.jsp" />
+		</action>
+		
+		<!-- 债券到期收益率 -->
+		<action path="/f10/bond/debtDueYield" parameter="method" validate="false" name="f10Form">
+			<forward name="singleBondBackToSaleInfo" path="/f10/bond/debtDueYield.jsp" />
+		</action>		
+		
+		<!-- 企业债发行与上市 -->
+		<action path="/f10/bond/enterpriseDebtIssueAndTrade" parameter="method" scope="request"  validate="false" name="f10Form">
+			<forward name="singleEnterpriseDebtIssueAndTradeInfo" path="/f10/bond/enterpriseDebtIssueAndTrade.jsp" />
+		</action>	
+		
+		<!-- 国债发行 -->
+		<action path="/f10/bond/nationalDebtIssue" parameter="method" validate="false" name="f10Form">
+			<forward name="nationalDebtIssueInfo" path="/f10/bond/bondF10FundAndStock.jsp" />
+		</action>	
+		
+		<!-- 国债上市 -->
+		<action path="/f10/bond/bationalDebtTrade" parameter="method" validate="false" name="f10Form">
+			<forward name="nationalDebtTradeInfo" path="/f10/bond/nationalDebtTrade.jsp" />
+		</action>		
+		
+		<!-- 金融债发行 -->													
+		<action path="/f10/bond/financialDebtIssue" parameter="method" validate="false" name="f10Form">
+			<forward name="financialDebtIssueInfo" path="/f10/bond/financialDebtIssue.jsp" />
+		</action>	
+
+		<!-- 债券现券折算比率 -->													
+		<action path="/f10/bond/debtConversationRatio" parameter="method" validate="false" name="f10Form">
+			<forward name="debtConversationRatioInfo" path="/f10/bond/debtConversationRatio.jsp" />
+		</action>
+
+		<!-- 可转债发行与上市 -->													
+		<action path="/f10/bond/convertibleDebtIssueAndTrade" parameter="method" validate="false" name="f10Form">
+			<forward name="convertibleDebtIssueAndTradeInfo" path="/f10/bond/convertibleDebtIssueAndTradeInfo.jsp" />
+		</action>
+
+		<!-- 可转债十大持有人情况 -->													
+		<action path="/f10/bond/converiteDebtOwnerInfo" parameter="method" validate="false" name="f10Form">
+			<forward name="converiteDebtOwnerInfo" path="/f10/bond/converiteDebtOwnerInfo.jsp" />
+		</action>
+
+	</action-mappings>
+</struts-config>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.sunnyPOF.pojo.SunnyCust">
+	<typeAlias alias="SunnyCust" type="com.fortuneage.sunnyPOF.pojo.SunnyCust"/>
+	
+	
+	
+	<select id="getCustsBySqltoPage" resultClass="SunnyCust" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	
+	<select id="logCust" resultClass="SunnyCust" parameterClass="java.util.Map">
+		SELECT 
+			CUSTNO,
+			CUSTTYPE,
+			CUSTNAME,
+			CREDENTIALSTYPE,
+			CREDENTIALSNO,
+			PWS,
+			SEX,
+			POSTCODE,
+			ADDRESS,
+			EMAIL,
+			BIRTHDAY,
+			VOCATION,
+			ANNUALINCOME,
+			TEL,
+			MOBILEPHONE,
+			REMARK,
+			SUBCOMPANY,
+		    BUSINESSSECTOR,
+		    CUSTMANAGER,
+		    CUSTMANAGERTEL,
+		    COMPLAINTTEL,
+		    COMPLAINTMAIL
+		FROM 
+			SUNNY_CUST 
+		WHERE
+			CREDENTIALSNO=#credentialsno# and
+			pws=#pws#
+	</select>
+	
+	<select id="getCustByCustNo" resultClass="SunnyCust" parameterClass="java.lang.Integer">
+		SELECT 
+			CUSTNO,
+			CUSTTYPE,
+			CUSTNAME,
+			CREDENTIALSTYPE,
+			CREDENTIALSNO,
+			PWS,
+			SEX,
+			POSTCODE,
+			ADDRESS,
+			EMAIL,
+			BIRTHDAY,
+			VOCATION,
+			ANNUALINCOME,
+			TEL,
+			MOBILEPHONE,
+			REMARK,
+			SUBCOMPANY,
+		    BUSINESSSECTOR,
+		    CUSTMANAGER,
+		    CUSTMANAGERTEL,
+		    COMPLAINTTEL,
+		    COMPLAINTMAIL
+		FROM 
+			SUNNY_CUST 
+		WHERE
+			CustNo=$value$
+				
+	</select>
+	
+	
+	<select id="getSunnyCustGetId" resultClass="java.lang.Integer">
+		select MAX(CUSTNO) from SUNNY_CUST
+	</select>
+	
+	<select id="getSunnyCustCount" resultClass="java.lang.Integer">
+		select count(*) from SUNNY_CUST
+	</select>
+	
+	<select id="getwhereCountByCust" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) from SUNNY_CUST where 1=1 and 
+		custname=#custname# and credentialsno=#credentialsno# and 
+		custmanager=#custmanager# and subcompany=#subcompany#
+	</select>
+	
+	<insert id="insertCust" parameterClass="SunnyCust">
+		
+		INSERT
+		INTO SUNNY_CUST
+		  (
+		    CUSTNO,
+		    CUSTTYPE,
+		    CUSTNAME,
+		    CREDENTIALSTYPE,
+		    CREDENTIALSNO,
+		    PWS,
+		    SEX,
+		    POSTCODE,
+		    ADDRESS,
+		    EMAIL,
+		    BIRTHDAY,
+		    VOCATION,
+		    ANNUALINCOME,
+		    TEL,
+		    MOBILEPHONE,
+		    REMARK,
+		    SUBCOMPANY,
+		  BUSINESSSECTOR,
+		  CUSTMANAGER,
+		  CUSTMANAGERTEL,
+		  COMPLAINTTEL,
+		  COMPLAINTMAIL
+		  )
+		  VALUES
+		  (
+		    #custno#,
+		    #custtype#,
+		    #custname#,
+		    #credentialstype#,
+		    #credentialsno#,
+		    #pws#,
+		    #sex#,
+		    #postcode#,
+		    #address#,
+		    #email#,
+		    #birthday#,
+		    #vocation#,
+		    #annualincome#,
+		    #tel#,
+		    #mobilephone#,
+		    #remark#,
+		    #subcompany#,
+		    #businesssector#,
+		    #custmanager#,
+		    #custmanagertel#,
+		    #complainttel#,
+		    #complaintmail#
+		  )
+	</insert>
+	
+	<update id="updateCust" parameterClass="SunnyCust">
+		UPDATE 
+			SUNNY_CUST
+		SET
+			CUSTNAME             = #custname#,
+			CUSTTYPE             = #custtype#,
+			CREDENTIALSTYPE      = #credentialstype#,
+			CREDENTIALSNO        = #credentialsno#,
+			PWS                  = #pws#,
+			SEX                  = #sex#,
+			POSTCODE             = #postcode#,
+			ADDRESS              = #address#,
+			EMAIL                = #email#,
+			BIRTHDAY             = #birthday#,
+			VOCATION             = #vocation#,
+			ANNUALINCOME         = #annualincome#,
+			TEL                  = #tel#,
+			MOBILEPHONE          = #mobilephone#,
+			REMARK               = #remark#,
+			SUBCOMPANY	=#subcompany#,
+			BUSINESSSECTOR	=#businesssector#,
+			CUSTMANAGER	=#custmanager#,
+			CUSTMANAGERTEL	=#custmanagertel#,
+			COMPLAINTTEL	=#complainttel#,
+			COMPLAINTMAIL	=#complaintmail#
+		WHERE CUSTNO=#custno#
+	</update>
+	
+	<delete id="delSunnyCistByid" parameterClass="java.lang.String">
+		delete from SUNNY_CUST where CUSTNO=#value#
+	</delete>
+</sqlMap>

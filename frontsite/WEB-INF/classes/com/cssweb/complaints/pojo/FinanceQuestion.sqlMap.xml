@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.complaints.pojo.FinanceQuestion">
+
+	<typeAlias alias="financeQuestion"
+		type="com.cssweb.complaints.pojo.FinanceQuestion" />
+
+	<!--result map-->
+	<resultMap id="financeQuestionMap" class="financeQuestion">
+		<!-- ID -->
+		<result column="ID"				property="id" 			jdbcType="java.lang.Long" />
+		<!-- 交易用户ID -->
+		<result column="WEBUSER_ID"		property="webUserId" 	jdbcType="java.lang.Long" />
+		<!-- 分类 1:业务咨询 2:投资咨询  3:技术支持 4:移动交易厅技术咨询 -->
+		<result column="CATEGORY" 		property="category" 	jdbcType="java.lang.String" />
+		<!-- 投资咨询问题类型 1:个股 2:大盘 -->
+		<result column="TYPE_TZ" 		property="typeTz" 		jdbcType="java.lang.String" />
+		<!-- 技术咨询问题类型 1:网上交易 2:移动证券 -->
+		<result column="TYPE_JS" 		property="typeJs" 		jdbcType="java.lang.String" />
+		<!-- 提问内容 -->
+		<result column="ASK_CONTENT" 	property="askContent" 	jdbcType="java.lang.String" />
+		<!-- 提问时间(精确到分钟) -->
+		<result column="ASK_TIME" 		property="askTime" 		jdbcType="java.util.Date" />
+		<!-- 指定回答人ID -->
+		<result column="APOINT_ID" 		property="apointId" 	jdbcType="java.lang.Long" />
+		<!-- 回答人ID -->
+		<result column="ANSWER_ID" 		property="answerId" 	jdbcType="java.lang.Long" />
+		<!-- 回答内容 -->
+		<result column="ANSWER_CONTENT" property="answerContent" jdbcType="java.lang.String" />
+		<!-- 回答时间(精确到分钟) -->
+		<result column="ANSWER_TIME" 	property="answerTime" 	jdbcType="java.util.Date" />
+		<!-- 是否已回答 0:未回答 1:已回答 -->
+		<result column="IS_ANSWER" 		property="isAnswer" 	jdbcType="java.lang.String" />
+		<!-- 提问人姓名 -->
+		<result column="WUNAME" 		property="wuName" 		jdbcType="java.lang.String" />
+		<!-- 回答人姓名 -->
+		<result column="TUNAME" 		property="tuName" 		jdbcType="java.lang.String" />
+	</resultMap>
+
+	<!-- 查找所有 -->
+	<select id="selectAll" resultMap="financeQuestionMap"
+		parameterClass="java.util.Map">
+		select q.id, q.webuser_id, q.category, q.type_tz, q.type_js,
+		q.ask_content, q.ask_time, q.apoint_id, q.answer_id,
+		q.answer_content, q.answer_time, q.is_answer, w.service_name
+		wuname, t.user_name tuname from t_system_webuser w,
+		t_finance_question q, t_system_user t where q.webuser_id = w.id(+)
+		and t.id(+) = q.answer_id
+		<dynamic>
+		    <isNotEmpty prepend="and" property="category">
+				q.CATEGORY = #category# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="apointId">
+				(q.APOINT_ID = #apointId#  or q.APOINT_ID is null)
+			</isNotEmpty>
+		</dynamic>
+		order by q.answer_time desc
+	</select>
+
+	<!-- 查找所有分页 -->
+	<select id="selectAllCutPage" resultMap="financeQuestionMap"
+		parameterClass="java.util.Map">
+		SELECT id, webuser_id, category, type_tz, type_js, ask_content,
+		ask_time, apoint_id, answer_id, answer_content, answer_time,
+		is_answer, wuname, tuname FROM ( SELECT row_.*, ROWNUM rownum_
+		FROM ( select q.id, q.webuser_id, q.category, q.type_tz,
+		q.type_js, q.ask_content, q.ask_time, q.apoint_id, q.answer_id,
+		q.answer_content, q.answer_time, q.is_answer, w.service_name
+		wuname, t.user_name tuname from t_system_webuser w,
+		t_finance_question q, t_system_user t where q.webuser_id = w.id(+)
+		and t.id(+) = q.answer_id 
+		<dynamic>
+		    <isNotEmpty prepend="and" property="category">
+				q.CATEGORY = #category# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="apointId">
+				(q.APOINT_ID = #apointId#  or q.APOINT_ID is null)
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sql">
+				1=1 $sql$
+			</isNotEmpty>
+			
+		</dynamic>
+		 ) row_ WHERE ROWNUM &lt;= #endNum# )
+		WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 查找已经回复 -->
+	<select id="selectReplyedAll" resultMap="financeQuestionMap" parameterClass="java.util.Map">
+		select q.id, q.webuser_id, q.category, q.type_tz, q.type_js,
+		q.ask_content, q.ask_time, q.apoint_id, q.answer_id,
+		q.answer_content, q.answer_time, q.is_answer, w.service_name
+		wuname, t.user_name tuname from t_system_webuser w,
+		t_finance_question q, t_system_user t where q.webuser_id = w.id(+)
+		and t.id(+) = q.answer_id and q.is_answer = '1'
+		<dynamic>
+		    <isNotEmpty prepend="and" property="category">
+				q.CATEGORY = #category# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="apointId">
+				(q.APOINT_ID = #apointId#  or q.APOINT_ID is null)
+			</isNotEmpty>
+		</dynamic>
+		order by q.answer_time desc
+	</select>
+
+	<!-- 查找已经回复带分页 -->
+	<select id="selectReplyedAllCutPage" resultMap="financeQuestionMap" parameterClass="java.util.Map">
+		SELECT id, webuser_id, category, type_tz, type_js, ask_content,
+		ask_time, apoint_id, answer_id, answer_content, answer_time,
+		is_answer, wuname, tuname FROM ( SELECT row_.*, ROWNUM rownum_
+		FROM ( select q.id, q.webuser_id, q.category, q.type_tz,
+		q.type_js, q.ask_content, q.ask_time, q.apoint_id, q.answer_id,
+		q.answer_content, q.answer_time, q.is_answer, w.service_name
+		wuname, t.user_name tuname from t_system_webuser w,
+		t_finance_question q, t_system_user t where q.webuser_id = w.id(+)
+		and t.id(+) = q.answer_id and q.is_answer = '1'
+		<dynamic>
+		     <isNotEmpty prepend="and" property="category">
+				q.CATEGORY = #category# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="apointId">
+				(q.APOINT_ID = #apointId#  or q.APOINT_ID is null)
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sql">
+				1=1 $sql$
+			</isNotEmpty>
+		</dynamic>
+		 ) row_ WHERE ROWNUM &lt;= #endNum# )
+		WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 查找未回复 -->
+	<select id="selectUnReplyedAll" resultMap="financeQuestionMap"
+		parameterClass="java.util.Map">
+		select q.id, q.webuser_id, q.category, q.type_tz, q.type_js,
+		q.ask_content, q.ask_time, q.apoint_id, q.answer_id,
+		q.answer_content, q.answer_time, q.is_answer, w.service_name
+		wuname, t.user_name tuname from t_system_webuser w,
+		t_finance_question q, t_system_user t where q.webuser_id = w.id(+)
+		and t.id(+) = q.answer_id and q.is_answer = '0'
+		<dynamic>
+		    <isNotEmpty prepend="and" property="category">
+				q.CATEGORY = #category# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="apointId">
+				(q.APOINT_ID = #apointId#  or q.APOINT_ID is null)
+			</isNotEmpty>
+		</dynamic>
+		order by q.answer_time desc
+	</select>
+
+	<!-- 查找未回复带分页 -->
+	<select id="selectUnReplyedAllCutPage"
+		resultMap="financeQuestionMap" parameterClass="java.util.Map">
+		SELECT id, webuser_id, category, type_tz, type_js, ask_content,
+		ask_time, apoint_id, answer_id, answer_content, answer_time,
+		is_answer, wuname, tuname FROM ( SELECT row_.*, ROWNUM rownum_
+		FROM ( select q.id, q.webuser_id, q.category, q.type_tz,
+		q.type_js, q.ask_content, q.ask_time, q.apoint_id, q.answer_id,
+		q.answer_content, q.answer_time, q.is_answer, w.service_name
+		wuname, t.user_name tuname from t_system_webuser w,
+		t_finance_question q, t_system_user t where q.webuser_id = w.id(+)
+		and t.id(+) = q.answer_id and q.is_answer = '0'
+		<dynamic>
+		     <isNotEmpty prepend="and" property="category">
+				q.CATEGORY = #category# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="apointId">
+				(q.APOINT_ID = #apointId#  or q.APOINT_ID is null)
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sql">
+				1=1 $sql$
+			</isNotEmpty>
+		</dynamic>
+		 ) row_ WHERE ROWNUM &lt;= #endNum# )
+		WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 根据ID获取 -->
+	<select id="getFinanceQuestionById" resultMap="financeQuestionMap"
+		parameterClass="java.lang.Long">
+		select q.id, q.webuser_id, q.category, q.type_tz, q.type_js,
+		q.ask_content, q.ask_time, q.apoint_id, q.answer_id,
+		q.answer_content, q.answer_time, q.is_answer, w.service_name
+		wuname, t.user_name tuname from t_system_webuser w,
+		t_finance_question q, t_system_user t where q.webuser_id = w.id(+)
+		and t.id(+) = q.answer_id and q.id = #id#
+	</select>
+
+	<!-- 回复 -->
+	<update id="update" parameterClass="financeQuestion">
+		update t_finance_question set ANSWER_TIME=sysdate , answer_id = #answerId#,
+		answer_content = #answerContent#, is_answer = #isAnswer# where id = #id#
+	</update>
+
+	<!-- 根据ID删除 -->
+	<delete id="delete" parameterClass="java.lang.Long">
+		delete t_finance_question where id = #id#
+	</delete>
+	
+	<!-- 有关问答列表，我的全部、已回复和未回复、以及业务、投资、技术问答-->
+
+	<select id="getFinanceQuestionListByPremeter" parameterClass="map" resultMap="financeQuestionMap">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	Q.ID, 
+						Q.WEBUSER_ID, 
+						Q.CATEGORY, 
+						Q.TYPE_TZ, 
+						Q.TYPE_JS,
+						Q.ASK_CONTENT, 
+						Q.ASK_TIME , 
+						Q.APOINT_ID, 
+						Q.ANSWER_ID,
+						Q.ANSWER_CONTENT, 
+						Q.ANSWER_TIME, 
+						Q.IS_ANSWER, 
+						W.SERVICE_NAME WUNAME, 
+						T.REAL_NAME TUNAME 
+				FROM 	T_SYSTEM_WEBUSER 	W,
+						T_FINANCE_QUESTION 	Q, 
+						T_SYSTEM_USER 		T 
+				WHERE 	Q.WEBUSER_ID = W.ID(+)
+				AND 	T.ID(+) = Q.ANSWER_ID 
+			<dynamic>
+				<isNotEmpty property="webuser_id"	prepend="and">
+			  		WEBUSER_ID = #webuser_id#
+				</isNotEmpty>
+				<isNotEmpty property="category"		prepend="and">
+			  		CATEGORY = #category#
+				</isNotEmpty>
+				<isNotEmpty property="is_answer"	prepend="and">
+			  		IS_ANSWER = #is_answer#
+				</isNotEmpty>
+				<isNotEmpty property="type_js"	prepend="and">
+			  		Q.TYPE_JS = #type_js#
+				</isNotEmpty>
+					
+			</dynamic>		 
+			<dynamic prepend="order by">
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	 
+	<!--记录的总数-->
+	<select id="getCountFinanceQuestionByPremeter" parameterClass="map" resultClass="Integer">
+			SELECT 	COUNT(*)
+			FROM 	T_SYSTEM_WEBUSER 	W,
+					T_FINANCE_QUESTION 	Q, 
+					T_SYSTEM_USER 		T 
+			WHERE 	Q.WEBUSER_ID = W.ID(+)
+			AND 	T.ID(+) = Q.ANSWER_ID 
+		<dynamic>
+			<isNotEmpty property="webuser_id" 	prepend="and">
+		  		WEBUSER_ID = #webuser_id#
+			</isNotEmpty>
+			<isNotEmpty property="category" 	prepend="and">
+		  		CATEGORY = #category#
+			</isNotEmpty>
+			<isNotEmpty property="type_js"	prepend="and">
+			  		Q.TYPE_JS = #type_js#
+				</isNotEmpty>
+			<isNotEmpty property="is_answer" 	prepend="and">
+		  		IS_ANSWER = #is_answer#
+			</isNotEmpty>
+		</dynamic>		 
+	</select>
+	<!-- 根据有关条件查询问题，分页-->
+   <select id="getFQListByAnswer" parameterClass="map" resultMap="financeQuestionMap">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	Q.ID, 
+						Q.WEBUSER_ID, 
+						Q.CATEGORY, 
+						Q.TYPE_TZ, 
+						Q.TYPE_JS,
+						Q.ASK_CONTENT, 
+						Q.ASK_TIME , 
+						Q.APOINT_ID, 
+						Q.ANSWER_ID,
+						Q.ANSWER_CONTENT, 
+						Q.ANSWER_TIME, 
+						Q.IS_ANSWER, 
+						W.SERVICE_NAME WUNAME, 
+						T.REAL_NAME TUNAME 
+				FROM 	T_SYSTEM_WEBUSER 	W,
+						T_FINANCE_QUESTION 	Q, 
+						T_SYSTEM_USER 		T 
+				WHERE 	Q.WEBUSER_ID = W.ID(+)
+				AND 	T.ID(+) = Q.ANSWER_ID 
+			<dynamic>
+				<isNotEmpty property="category"	prepend="and">
+			  		Q.CATEGORY = #category#
+				</isNotEmpty>
+				<isNotEmpty property="type_tz"	prepend="and">
+			  		Q.TYPE_TZ = #type_tz#
+				</isNotEmpty>
+				<isNotEmpty property="type_js"	prepend="and">
+			  		Q.TYPE_JS = #type_js#
+				</isNotEmpty>
+				<isNotEmpty property="webuser_id"	prepend="and">
+			  		Q.WEBUSER_ID = #webuser_id#
+				</isNotEmpty>
+				<isNotEmpty property="expert_id"	prepend="and">
+			  		Q.ANSWER_ID = #expert_id#
+				</isNotEmpty>
+				
+				<isNotEmpty property="gpdm"	prepend="and">
+			  		(Q.ASK_CONTENT like '%$gpdm$%'
+						OR
+			  		Q.ANSWER_CONTENT like '%$gpdm$%')
+				</isNotEmpty>
+				
+				<isNotEmpty property="beginTime"	prepend="and">
+			  		Q.ASK_TIME &gt;= to_date(#beginTime#,'yyyy-mm-dd')
+				</isNotEmpty>
+				<isNotEmpty property="endTime"		prepend="and">
+			  		Q.ASK_TIME &lt; to_date(#endTime#,'yyyy-mm-dd')+1
+				</isNotEmpty>
+				<isNotEmpty property="keyWord"	prepend="and">
+			  		(Q.ASK_CONTENT like '%$keyWord$%'
+						OR
+			  		Q.ANSWER_CONTENT like '%$keyWord$%')
+				</isNotEmpty>
+			</dynamic>		 
+			<dynamic prepend="order by">
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<!--记录的总数-->
+	<select id="getFQCountByAnswer" parameterClass="map" resultClass="Integer">
+			SELECT 	COUNT(*)
+			FROM 	T_SYSTEM_WEBUSER 	W,
+					T_FINANCE_QUESTION 	Q, 
+					T_SYSTEM_USER 		T 
+			WHERE 	Q.WEBUSER_ID = W.ID(+)
+			AND 	T.ID(+) = Q.ANSWER_ID 
+			<dynamic>
+				<isNotEmpty property="category"	prepend="and">
+			  		Q.CATEGORY = #category#
+				</isNotEmpty>
+				<isNotEmpty property="type_tz"	prepend="and">
+			  		Q.TYPE_TZ = #type_tz#
+				</isNotEmpty>
+				<isNotEmpty property="type_js"	prepend="and">
+			  		Q.TYPE_JS = #type_js#
+				</isNotEmpty>
+				<isNotEmpty property="webuser_id"	prepend="and">
+			  		Q.WEBUSER_ID = #webuser_id#
+				</isNotEmpty>
+				<isNotEmpty property="expert_id"	prepend="and">
+			  		Q.ANSWER_ID = #expert_id#
+				</isNotEmpty>
+				
+				<isNotEmpty property="gpdm"	prepend="and">
+			  		(Q.ASK_CONTENT like '%$gpdm$%'
+						OR
+			  		Q.ANSWER_CONTENT like '%$gpdm$%')
+				</isNotEmpty>
+				
+				<isNotEmpty property="beginTime"	prepend="and">
+			  		Q.ASK_TIME &gt;= to_date(#beginTime#,'yyyy-mm-dd')
+				</isNotEmpty>
+				<isNotEmpty property="endTime"		prepend="and">
+			  		Q.ASK_TIME &lt; to_date(#endTime#,'yyyy-mm-dd')+1
+				</isNotEmpty>
+				<isNotEmpty property="keyWord"	prepend="and">
+			  		(Q.ASK_CONTENT like '%$keyWord$%'
+						OR
+			  		Q.ANSWER_CONTENT like '%$keyWord$%')
+				</isNotEmpty>
+			</dynamic>		 
+	</select>
+	
+		<!-- 查找所有专家,分析师信息 -->
+	<select id="getComplaintsAllByType" resultMap="financeQuestionMap" parameterClass="java.util.Map">
+				SELECT 	Q.ID, 
+						Q.WEBUSER_ID, 
+						Q.CATEGORY, 
+						Q.TYPE_TZ, 
+						Q.TYPE_JS,
+						Q.ASK_CONTENT, 
+						Q.ASK_TIME , 
+						Q.APOINT_ID, 
+						Q.ANSWER_ID,
+						Q.ANSWER_CONTENT, 
+						Q.ANSWER_TIME, 
+						Q.IS_ANSWER, 
+						W.SERVICE_NAME WUNAME, 
+						T.USER_NAME TUNAME 
+				FROM 	T_SYSTEM_WEBUSER 	W,
+						T_FINANCE_QUESTION 	Q, 
+						T_SYSTEM_USER 		T 
+				WHERE 	Q.WEBUSER_ID = W.ID(+)
+				AND 	T.ID(+) = Q.ANSWER_ID 
+			<dynamic>
+		     <isNotEmpty prepend="and" property="type">
+				Q.TYPE = #type# 
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="isOnline">
+				Q.IS_ONLINE = #isOnline# 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<!-- add添加咨询 -->
+	<insert id="addQuestion" parameterClass="map">
+    insert into t_finance_question
+     (id, webuser_id, category, type_tz, type_js, ask_content, ask_time, apoint_id, is_answer)
+   values
+     (#id#, #webuser_id#, #category#, #type_tz#, #type_js#, #ask_content#, #ask_time#, #apoint_id#,#is_answer#)
+	</insert>
+	
+</sqlMap>

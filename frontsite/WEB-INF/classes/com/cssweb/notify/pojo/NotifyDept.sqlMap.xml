@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.notify.pojo.NotifyDept">
+
+	<typeAlias alias="notifyDept" type="com.cssweb.notify.pojo.NotifyDept"/>
+
+	<!--result map-->
+	<resultMap id="notifyDeptMap" class="notifyDept">
+ 		<result property="nid" column="NID" jdbcType="Long"/>
+ 		<result property="did" column="DID" jdbcType="Long"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String" />
+ 		<result property="ext2" column="EXT2" jdbcType="String" />
+ 		<result property="ext3" column="EXT3" jdbcType="String" />
+ 		<result property="ext4" column="EXT4" jdbcType="String" />
+ 		
+   	</resultMap>
+  	
+	<insert id="insertNotifyDept" parameterClass="notifyDept">
+		  insert into NOTIFYDEPT(NID,DID) values(#nid#,#did#)
+	</insert>
+	
+	<delete id="deleteNotifyDept" parameterClass="Long">
+			delete from NOTIFYDEPT  where NID=#nid#
+	</delete>
+	
+	
+	<delete id="deleteNotifyDeptByDid" parameterClass="Long">
+			delete from NOTIFYDEPT  where DID=#nid#
+	</delete>
+	
+	<select id = "getNotifyDeptById" parameterClass = "Long" resultMap = "notifyDeptMap">
+			select * from NotifyDept where NID=#nid#
+			
+	</select>
+	
+	
+</sqlMap>

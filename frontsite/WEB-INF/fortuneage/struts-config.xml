@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<!-- 注意：本文件已经在web。xml文件进行引用 -->
+<struts-config>
+
+	<!-- ========== Form Bean Definitions =================================== -->
+	<form-beans>
+		<form-bean name="goldMoneyForm" type="com.fortuneage.goldmoney.actionform.GoldMoneyForm"/>
+		<form-bean name="goldMoneyHistoryForm" type="com.fortuneage.goldmoney.actionform.GoldMoneyHistoryForm"></form-bean>
+
+		<!--<form-bean name="ModifyDictionaryItemForm" type="com.css.dictionary.action.DictionaryItemForm"/>-->
+
+	</form-beans>
+
+	<!-- ========== Action Mapping Definitions ============================== -->
+	<action-mappings>
+		<!-- 因为设置了Spring注入所以不需要设置type属性 -->
+		<action path="/goldMoney"
+				name="goldMoneyForm"
+				parameter="method"
+				scope="request">
+			<forward name="goldMoneyView" path="/infoCenter/goldmoney/goldMoneyView.jsp"></forward>
+			<forward name="goldMoneyGuideView" path="/infoCenter/goldmoney/goldMoneyGuideView.jsp"></forward>
+			<forward name="goldMoneyMainView" path="/infoCenter/goldmoney/goldMoneyMainView.jsp"></forward>
+			<forward name="goldMoneyDownload" path="/infoCenter/goldmoney/goldMoneyDownload.jsp"></forward>
+			<forward name="faq" path="/infoCenter/goldmoney/faq.jsp"></forward>
+			<forward name="error" path="/commons/error2.jsp"></forward>
+		</action>
+		
+		<action path="/goldMoneyHistory"
+				parameter="method"
+				name="goldMoneyHistoryForm"
+				scope="request">
+			<forward name="goldMoneyHistoryView" path="/infoCenter/goldmoney/goldMoneyHistoryView.jsp"></forward>
+			<forward name="error" path="/commons/error2.jsp"></forward>
+		</action>
+		
+				<!--公益基金  -->
+		<action path="/institution"
+		        parameter="method"
+		        scope="request">
+		        
+	     <forward name="institutionlistview" path="/gyjj/institution.jsp"></forward>
+	     <forward name="getInstitution" path="/gyjj/updateInstitution.jsp"></forward>
+	     <forward name="updateResult" path="/gyjj/test_addInstitution.jsp"></forward>
+	     <forward name="institutionaddview" path="/gyjj/test_addInstitution.jsp"></forward>
+	     <forward name="showInstitution" path="/gyjj/showInstitution.jsp"></forward>
+		</action>
+		
+		
+		<action path="/itemDocAction"
+				parameter="method">
+					
+		</action>
+		<!-- 阳光私募基金模块   -->
+		<action path="/sunnyCustAction"
+				parameter="method"
+				scope="request">
+			<forward name="sunnyPofExchangeHistory" path="/sunnyPOF/sunnyPofExchangeHistory.jsp"></forward>
+			<forward name="sunnyPofHistory" path="/sunnyPOF/sunnyPofHistory.jsp"></forward>
+			<forward name="sunnyPofBlance" path="/sunnyPOF/sunnyPofBlance.jsp"></forward>
+			<forward name="sunnyPofServiceZhfh" path="/sunnyPOF/sunnyPofServiceZhfh.jsp"></forward>
+			<forward name="sunnyPofServiceKhxx" path="/sunnyPOF/sunnyPofServiceKhxx.jsp"></forward>
+			<forward name="sunnyPofServiceMmxg" path="/sunnyPOF/sunnyPofServiceMmxg.jsp"></forward>
+			<forward name="showMessage" path="/sunnyPOF/showMessage.jsp"></forward>
+			<forward name="login" path="/sunnyPOF/login.jsp"></forward>
+			<forward name="sunnyCpcgwd" path="/sunnyPOF/sunnyPofServiceXxpl.jsp"></forward>
+			<forward name="cpcgwdDown" path="/sunnyPOF/stockList.jsp"></forward>
+		</action>
+		</action-mappings>
+
+	<!--<message-resources parameter="ApplicationResources"/>-->
+</struts-config>

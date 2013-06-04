@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.pageStatic.pojo.PageStaticItem">
+	<typeAlias alias="PageStaticItem" type="com.cssweb.pageStatic.pojo.PageStaticItem"/>
+	
+	<resultMap id="pageStaticItemMap" class="PageStaticItem">
+		<result column="ITEMID" property="itemId" jdbcType="long"/>
+		<result column="ITEMNAME" property="itemName" jdbcType="String"/>
+		<result column="SERVERID" property="serverId" jdbcType="long"/>
+		<result column="SOURCE" property="source" jdbcType="String"/>		
+		<result column="TARGET_PATH" property="targetPath" jdbcType="String"/>
+		<result column="TARGET_FILE" property="targetFile" jdbcType="String"/>
+		<result column="LOCAL_PATH" property="localPath" jdbcType="String"/>
+		<result column="FTP_PATH" property="ftpPath" jdbcType="String"/>
+		<result column="ITEMTYPE" property="itemType" jdbcType="String"/>		
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+		<result column="ORDER_NUM" property="orderNum" jdbcType="long" nullValue="0"/>
+		<result column="ITEM_TYPE" property="item_Type" jdbcType="String"/>
+		<result column="SERVER_PROPERTIES" property="serverProperties" jdbcType="String"/>
+		<result column="GET_SQL" property="getSql" jdbcType="String"/>	
+	</resultMap>
+	
+	<select id="getByItemId" resultMap="pageStaticItemMap">
+		select ITEMID,ITEMNAME,SERVERID,SOURCE,TARGET_PATH,TARGET_FILE,LOCAL_PATH,FTP_PATH,ITEMTYPE,EXT1,EXT2,EXT3,EXT4,ORDER_NUM,ITEM_TYPE,SERVER_PROPERTIES,GET_SQL
+		from PageStatic_item where ITEMID=#value#
+	</select>
+	<insert id="insert" parameterClass="PageStaticItem">
+		insert into PageStatic_item(ITEMID,ITEMNAME,SERVERID,SOURCE,TARGET_PATH,TARGET_FILE,LOCAL_PATH,FTP_PATH,ITEMTYPE,EXT1,EXT2,EXT3,EXT4,ORDER_NUM,ITEM_TYPE,SERVER_PROPERTIES,GET_SQL) 
+					values(#itemId#,#itemName#,#serverId#,#source#,#targetPath#,#targetFile#,#localPath#,#ftpPath#,#itemType#,#ext1#,#ext2#,#ext3#,#ext4#,#orderNum#,#itemType#,#serverProperties#,#getSql#)
+	</insert>
+	<update id="update" parameterClass="PageStaticItem">
+		update PageStatic_item set ITEMNAME=#itemName#,SERVERID=#serverId#,SOURCE=#source#,TARGET_PATH=#targetPath#,TARGET_FILE=#targetFile#,LOCAL_PATH=#localPath#,FTP_PATH=#ftpPath#,ITEMTYPE=#itemType#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#,
+		ORDER_NUM=#orderNum#,ITEM_TYPE=#itemType#,SERVER_PROPERTIES=#serverProperties#,GET_SQL=#getSql#  where ITEMID = #itemId#
+	</update>
+	<delete id="deleteByItemId" parameterClass="Long">
+		delete from PageStatic_item where ITEMID = #value#
+	</delete>
+	<select id="getPageStaticItemByCondition" resultMap="pageStaticItemMap" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select>
+   <select id="getPageStaticItemCount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+	</select> 	
+	<select id="getAllPageStaticItem" resultMap="pageStaticItemMap">
+       select * from PageStatic_Item order by order_num desc,itemId desc
+   </select>
+   	<select id="getPageStaticItemById" resultMap="pageStaticItemMap">
+       select * from PageStatic_Item where itemId in (select itemId from PAGESTATIC_CATEGORY_ITEM_MAP where id=#value#) order by order_num desc,itemId desc
+   </select> 
+      <select id="executeBySql" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		$sql$
+	</select> 	
+	 <select id="getPageStaticItemByServerId" resultMap="pageStaticItemMap"  parameterClass="long">
+       select * from PageStatic_item where serverid=#value# order by order_num desc,itemId desc
+   </select>
+   	 <select id="getPageStaticItemByCategoryId" resultMap="pageStaticItemMap"  parameterClass="long">
+       select * from PageStatic_item where itemId in (select itemId from PAGESTATIC_CATEGORY_ITEM_MAP where id=#value#) order by order_num desc
+   </select>  	
+      <delete id="deletePageStaticCategoryItemMapByItemId" parameterClass="Long">
+		delete from pagestatic_category_item_map where itemid=#value#
+	</delete>  
+</sqlMap>

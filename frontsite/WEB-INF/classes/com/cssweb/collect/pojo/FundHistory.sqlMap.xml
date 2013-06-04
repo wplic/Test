@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.FundHistory">
+
+	<typeAlias alias="fundHistory" type="com.cssweb.collect.pojo.FundHistory"/>
+
+	<!--result map-->
+	<resultMap id="fundHistoryMap" class="fundHistory" >
+		<result property="taaccountId" column="TAACCOUNTID" jdbcType="java.lang.String"/>
+		<result property="distributorCode" column="DISTRIBUTORCODE" jdbcType="String"/>
+		<result property="fundCode" column="FUNDCODE" jdbcType="String" />
+		<result property="accountabbr" column="ACCOUNTABBR" jdbcType="String" />
+		<result property="distributorName" column="DISTRIBUTORNAME" jdbcType="String"/>
+		 <result property="availableVol" column="AVAILABLEVOL" jdbcType="Double" />
+		 <result property="defdividendmethod" column="DEFDIVIDENDMETHOD" jdbcType="String"/>
+		<result property="upLoadDate" column="UPLOADDATE" jdbcType="java.util.Date"/>
+	</resultMap>
+	
+	<resultMap id="fundHistoryMap2" class="fundHistory" >
+		<result property="fundName" column="fundname" jdbcType="String" nullValue=""/>
+		<result property="accountabbr" column="ACCOUNTABBR" jdbcType="String" nullValue="" />
+		<result property="distributorName" column="DISTRIBUTORNAME" jdbcType="String" nullValue=""/>
+		 <result property="availableVol" column="AVAILABLEVOL" jdbcType="Double" />
+		<result property="upLoadDate" column="UPLOADDATE" jdbcType="java.util.Date"/>
+	</resultMap>
+ 	
+   <select id="geFundHistoryPage" parameterClass="java.util.Map" resultMap = "fundHistoryMap">
+  	 SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+  	 	select a.TAACCOUNTID,a.DISTRIBUTORCODE,a.FUNDCODE, b.ACCOUNTABBR,c.DISTRIBUTORNAME,a.AVAILABLEVOL ,a.DEFDIVIDENDMETHOD, 
+  	 	a.UPLOADDATE from ta_fund_history a,ta_fundaccount b,ta_distributor c where a.taaccountid = b.taaccountid 
+		and a.distributorcode = c.distributorcode 
+		<isNotEmpty  property="taaccountId" prepend="AND">
+				 (a.taaccountid=#taaccountId# or a.taaccountid=(select tn.taaccountid_old from ta_new_fundaccount tn where tn.taaccountid=#taaccountId# ))
+		</isNotEmpty>
+		<isNotEmpty  property="startDate" prepend="AND">
+				a.UPLOADDATE &gt;= to_date(#startDate#,'yyyy-mm-dd')  
+		</isNotEmpty>
+		<isNotEmpty  property="endDate" prepend="AND">
+				a.UPLOADDATE &lt;= to_date(#endDate#,'yyyy-mm-dd')  
+		</isNotEmpty>
+		
+		order by a.uploaddate desc
+  	 
+  	  )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  	
+  </select>
+ 	
+	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+   <select id="getAllCountByAccount" parameterClass="java.util.Map" resultClass = "Integer">
+   		 select count(*) from ta_fund_history a,ta_fundaccount b,ta_distributor c where a.taaccountid = b.taaccountid 
+		and a.distributorcode = c.distributorcode 
+		<isNotEmpty  property="taaccountId" prepend="AND">
+				(a.taaccountid=#taaccountId# or a.taaccountid=(select tn.taaccountid_old from ta_new_fundaccount tn where tn.taaccountid=#taaccountId# ))
+		</isNotEmpty>
+		<isNotEmpty  property="startDate" prepend="AND">
+				a.UPLOADDATE &gt;= to_date(#startDate#,'yyyy-mm-dd')  
+		</isNotEmpty>
+		<isNotEmpty  property="endDate" prepend="AND">
+				a.UPLOADDATE &lt;= to_date(#endDate#,'yyyy-mm-dd')  
+		</isNotEmpty>
+  </select>
+  
+  <select id="geFundHistory" parameterClass="java.util.Map" resultMap = "fundHistoryMap2">
+ 		select d.fundname, b.ACCOUNTABBR,c.DISTRIBUTORNAME,a.AVAILABLEVOL*d.net_prc AVAILABLEVOL, 
+		     a.UPLOADDATE from 
+		  (SELECT * FROM 
+			(SELECT f.*,row_number() over(Partition by f.FUNDCODE order by f.UPLOADDATE desc) AS rk
+			from ta_fund_history f  
+			where 1=1 and (f.taaccountid=#taaccountId# or f.taaccountid=(select tn.taaccountid_old from ta_new_fundaccount tn where tn.taaccountid=#taaccountId# ))
+			<isNotEmpty  property="date" prepend="AND">
+			f.uploaddate &lt;= to_date(#date#,'yyyy-mm-dd')
+			</isNotEmpty>
+			) h 
+		   WHERE h.rk=1) a,
+		   ta_fundaccount b,ta_distributor c,ta_fund_prc d where a.taaccountid = b.taaccountid 
+		and a.distributorcode = c.distributorcode and a.uploaddate=d.dt and a.fundcode=d.fundcode
+  </select>
+</sqlMap>

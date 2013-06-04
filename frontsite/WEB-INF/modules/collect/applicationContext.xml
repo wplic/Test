@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">		
+	<bean name="/balFundFundAction" class="com.cssweb.collect.web.BalFundFundAction"/>
+	<bean name="/rightsregAction" class="com.cssweb.collect.web.RightsregAction"/>
+	<bean name="/acctTransAction" class="com.cssweb.collect.web.AcctTransAction"/>
+	<bean name="/acctCustAction" class="com.cssweb.collect.web.AcctCustAction"/>
+	<bean name="/mgrInfoAction" class="com.cssweb.collect.web.MgrInfoAction"/>
+	<bean name="/tradelogAction" class="com.cssweb.collect.web.TradeLogAction"/>
+	<bean name="/fundHistoryAction" class="com.cssweb.collect.web.FundHistoryAction"></bean>
+	<bean name="/statementAction" class="com.cssweb.collect.web.StatementAction"/>
+	<bean name="/commissionAction" class="com.cssweb.commission.web.CommissionAction"/>
+</beans>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.TgfFundInfo">
+
+	<typeAlias alias="tgfFundInfo" type="com.cssweb.systemset.pojo.TgfFundInfo"/>
+
+	<resultMap id="tgfFundInfoMap" class="tgfFundInfo">
+ 		<result property="branch" 			column="BRANCH" 			jdbcType="String"/>
+ 		<result property="address" 	column="ADDRESS" 	jdbcType="String"/>
+ 		<result property="telno" 	column="TELNO" 	jdbcType="String"/>
+ 		<result property="name" 	column="NAME" 		jdbcType="String"/>
+ 	 	<result property="certifytype" 	column="CERTIFYTYPE" 		jdbcType="String"/>
+ 	 	<result property="certifyno" 			column="CERTIFYNO" 			jdbcType="String"/>
+ 	 	<result property="certifyname" 			column="CERTIFYNAME" 			jdbcType="String"/>
+ 	 	<!-- 2011-10-13数据库加上BRANCH_NO字段后作出对应修改 -->
+ 	 	<result property="branch_no" column="BRANCH_NO" jdbcType="Long"/>
+  	</resultMap>
+  	<resultMap id="tgfFundInfoMap1" class="tgfFundInfo">
+ 		<result property="branch" 			column="BRANCH" 			jdbcType="String"/>
+ 		<result property="branch_no" column="BRANCH_NO" jdbcType="Long"/>
+  	</resultMap>
+  	
+  	 <select id="getTgfFundInfoBranch"  resultMap="tgfFundInfoMap1">
+  	 <!--
+	 	 select distinct branch from t_gffundinfo
+	 -->
+	 select distinct branch,branch_no from t_gffundinfo order by branch_no,branch desc
+	 </select>
+  <select id="getTgfFundInfoList" parameterClass="java.util.Map" resultMap="tgfFundInfoMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+  
+	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+    
+
+</sqlMap>

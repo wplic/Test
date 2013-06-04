@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebDcxorder">
+<typeAlias alias="TcsswebDcxorder" type="com.cssweb.subscribe.pojo.TcsswebDcxorder"/>
+	<resultMap id="TcsswebDcxorder" class="TcsswebDcxorder">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="username" column="user_name" jdbcType="java.lang.String"/>
+	    <result property="begindate" column="begin_date" jdbcType="java.lang.Date"/>
+	    <result property="enddate" column="end_date" jdbcType="java.lang.Date"/>
+	    <result property="mobilephone" column="mobilephone" jdbcType="java.lang.String"/>
+	    <result property="email" column="email" jdbcType="java.lang.String"/>
+	    <result property="type" column="type" jdbcType="java.lang.Integer"/>
+	    <result property="operdate" column="oper_date" jdbcType="java.lang.Date"/>
+	    <result property="content" column="content" jdbcType="java.lang.String"/>
+	     <result property="tjrNo" column="tjrNo" jdbcType="java.lang.String"/>
+	</resultMap>
+	<insert id="insertTcsswebDcxorder" parameterClass="TcsswebDcxorder">
+		INSERT into T_CSSWEB_DCXORDER ( ID, USER_NAME, BEGIN_DATE, END_DATE,MOBILEPHONE,EMAIL,TYPE,OPER_DATE,CONTENT,tjrNo) VALUES 
+		(#id#,#username#, #begindate#, #enddate#,#mobilephone#,#email#,#type#,#operdate#,#content#,#tjrNo#)
+	</insert>
+</sqlMap>

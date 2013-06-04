@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.phoneSoft.pojo.TmobileVideoUserStat">
+
+	<typeAlias alias="TmobileVideoUserStat" type="com.cssweb.phoneSoft.pojo.TmobileVideoUserStat"/>
+	
+	<!--result map--> 
+  	
+  	<resultMap id="TmobileVideoUserStat" class="TmobileVideoUserStat">
+ 		<result property="id" column="ID" jdbcType="Long"/> 
+ 		<result property="userPhone" column="USER_PHONE" jdbcType="String"/> 
+ 		<result property="time" column="TIME" jdbcType="java.util.Date"/>  
+ 		<result property="programId" column="PROGRAM_ID" jdbcType="Integer"/>
+ 		<result property="videoType" column="VIDEO_TYPE" jdbcType="Integer"/>  
+		<result property="videoURl" column="VIDEO_URL" jdbcType="String"/>
+ 		<result property="referer" column="REFERER" jdbcType="String"/> 
+ 		<result property="useragent" column="USERAGENT" jdbcType="String"/> 
+  	</resultMap>
+  	<resultMap id="TmobileVideoUserStatMap" class="TmobileVideoUserStat">
+ 		<result property="userPhone" column="USER_PHONE" jdbcType="String"/> 
+ 		<result property="time" column="TIME" jdbcType="java.util.Date"/>
+ 		<result property="count" column="count" jdbcType="Long"/> 
+  	</resultMap>
+  	<resultMap id="ProgramIdMap" class="TmobileVideoUserStat">
+ 		<result property="programId" column="PROGRAM_ID" jdbcType="Integer"/>
+ 		<result property="programName" column="PROGRAM_NAME" jdbcType="String"/> 
+  	</resultMap>
+  	<select id="getProgramIdMapAll" resultMap="ProgramIdMap">
+		SELECT T.ID AS PROGRAM_ID ,T.TITLE AS PROGRAM_NAME FROM T_VIDEO_PROGRAM T ,T_VIDEO_BOARD B WHERE T.VIDEO_BOARD= B.ID ORDER BY UPLOAD_DATE DESC  
+  	</select>
+  	<select id="getStatAll" parameterClass="java.util.Map" resultMap = "TmobileVideoUserStatMap">
+  		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+		select USER_PHONE,count(1) count ,max(TIME) TIME from t_mobile_video_user_stat 
+		where 1=1  
+		<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    to_date(to_char(time,'yyyy-MM-dd'),'yyyy-MM-dd') &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					to_date(to_char(time,'yyyy-MM-dd'),'yyyy-MM-dd') &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="userPhone"	prepend="AND">
+			  		USER_PHONE = #userPhone#
+				</isNotNull>
+				<isNotNull property="programId"	prepend="AND">
+			  		PROGRAM_ID = #programId#
+				</isNotNull>
+				<isNotNull property="videoType"	prepend="AND">
+			  		videoType = #videoType#
+				</isNotNull>
+				<isNotNull property="useragent"	prepend="AND">
+			  		USERAGENT = #useragent#
+				</isNotNull> 
+				<isNotNull property="sql" prepend="AND">
+			  		$sql$
+				</isNotNull>
+			</dynamic>
+		group by USER_PHONE
+		order by
+			<dynamic>
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>,count desc
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id ="getStatAllCount"  resultClass="Integer">
+		select count(1) from (
+  			select USER_PHONE,count(1) count ,max(TIME) TIME from t_mobile_video_user_stat 
+		where 1=1   
+		<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	  to_date(to_char(time,'yyyy-MM-dd'),'yyyy-MM-dd') &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+			      to_date(to_char(time,'yyyy-MM-dd'),'yyyy-MM-dd') &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="userPhone"	prepend="AND">
+			  		USER_PHONE = #userPhone#
+				</isNotNull>
+				<isNotNull property="programId"	prepend="AND">
+			  		PROGRAM_ID = #programId#
+				</isNotNull>
+				<isNotNull property="videoType"	prepend="AND">
+			  		videoType = #videoType#
+				</isNotNull>
+				<isNotNull property="useragent"	prepend="AND">
+			  		USERAGENT = #useragent#
+				</isNotNull>
+				<isNotNull property="sql" prepend="AND">
+			  		$sql$
+				</isNotNull>
+			</dynamic>
+		group by USER_PHONE
+		)
+	</select> 
+  <select id="getTmobileVideoUserStatPaging" parameterClass="java.util.Map" resultMap = "TmobileVideoUserStat">
+  		select * from T_MOBILE_VIDEO_USER_STAT t
+  			where 1=1  
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.TIME &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.TIME &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="userPhone"	prepend="AND">
+			  		t.USER_PHONE = #userPhone#
+				</isNotNull>
+				<isNotNull property="programId"	prepend="AND">
+			  		t.PROGRAM_ID = #programId#
+				</isNotNull>
+				<isNotNull property="videoType"	prepend="AND">
+			  		t.videoType = #videoType#
+				</isNotNull>
+				<isNotNull property="useragent"	prepend="AND">
+			  		t.USERAGENT = #useragent#
+				</isNotNull> 
+			</dynamic>
+	</select>
+  
+	<select id ="getTmobileVideoUserStatPagingCount"  resultClass="Integer">
+		   select count(*) from T_MOBILE_VIDEO_USER_STAT t 
+  		where 1=1  
+  		<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.TIME &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.TIME &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="userPhone"	prepend="AND">
+			  		t.USER_PHONE = #userPhone#
+				</isNotNull>
+				<isNotNull property="programId"	prepend="AND">
+			  		t.PROGRAM_ID = #programId#
+				</isNotNull>
+				<isNotNull property="videoType"	prepend="AND">
+			  		t.videoType = #videoType#
+				</isNotNull>
+				<isNotNull property="useragent"	prepend="AND">
+			  		t.USERAGENT = #useragent#
+				</isNotNull> 
+			</dynamic>
+	</select> 
+	
+	<select id="getTmobileVideoUserStatAll" parameterClass="java.util.Map" resultMap = "TmobileVideoUserStat">
+	  	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	  		select * from T_MOBILE_VIDEO_USER_STAT t
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.TIME &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.TIME &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="userPhone"	prepend="AND">
+			  		t.USER_PHONE = #userPhone#
+				</isNotNull>
+				<isNotNull property="programId"	prepend="AND">
+			  		t.PROGRAM_ID = #programId#
+				</isNotNull>
+				<isNotNull property="videoType"	prepend="AND">
+			  		t.videoType = #videoType#
+				</isNotNull>
+				<isNotNull property="useragent"	prepend="AND">
+			  		t.USERAGENT = #useragent#
+				</isNotNull>
+			</dynamic>
+			order by
+			<dynamic>
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+	  	)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id ="getTmobileVideoUserStatAllCount"  resultClass="Integer">
+		select count(1) from T_MOBILE_VIDEO_USER_STAT t 
+  		where 1=1  
+  			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.TIME &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.TIME &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="userPhone"	prepend="AND">
+			  		t.USER_PHONE = #userPhone#
+				</isNotNull>
+				<isNotNull property="programId"	prepend="AND">
+			  		t.PROGRAM_ID = #programId#
+				</isNotNull>
+				<isNotNull property="videoType"	prepend="AND">
+			  		t.videoType = #videoType#
+				</isNotNull>
+				<isNotNull property="useragent"	prepend="AND">
+			  		t.USERAGENT = #useragent#
+				</isNotNull>
+				<isNotNull property="sql" prepend="AND">
+			  		$sql$
+				</isNotNull>
+			</dynamic>
+	</select> 
+</sqlMap>

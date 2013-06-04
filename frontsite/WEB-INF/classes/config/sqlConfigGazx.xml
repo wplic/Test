@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings
+			cacheModelsEnabled="true"
+			enhancementEnabled="true"
+			lazyLoadingEnabled="true"
+			maxRequests="200"
+			maxSessions="100"
+			maxTransactions="50"
+			useStatementNamespaces="true"
+			/>
+	
+	<!-- gazx -->
+	<sqlMap resource="com/cssweb/gpdmGazx/pojo/GazxObject.sqlMap.xml" />	
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundGsInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundValue.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundMoneyValue.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/NewFundInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundCutInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundSplitInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundStopDeal.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundAbateFare.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/hq/pojo/Zqsyph.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/hq/pojo/Ahbj.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/hq/pojo/Hqgz.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/hq/pojo/Whpj.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/hq/pojo/ThirdStockHQ.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxNewStock/pojo/NewStockInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxQz/pojo/Qzdqtx.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazx/data/pojo/GazxDate.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/gazxfund/pojo/FundFilter.sqlMap.xml"/>
+<!-- F10 begin -->
+<!-- add by Liujk -->
+	<sqlMap resource="com/cssweb/F10/gazx/futures/pojo/FuturesInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/futures/pojo/FuturesQuote.sqlMap.xml"/>
+	<!-- end -->
+	<!--基金净值-->
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundNetValue.sqlMap.xml"/>
+	
+	<!-- linli add start -->
+	<sqlMap resource="com/cssweb/F10/gazx/info/pojo/BaseInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/AssignStock.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/ImportantActivity.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/IncreaseIssueStock.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/LinkRelation.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/NewStockIssue.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/StockStructure.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/ShareMergerReform.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/LimitedShares.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/FinancialAnalysis.sqlMap.xml"/>
+	<!-- linli add end -->
+	
+	<!-- Add by lvfeng -->
+	<sqlMap resource="com/cssweb/F10/gazx/base/pojo/CompanyInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundProfitDistributionSheet.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundBalanceSheet.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/AssetAllocation.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FinancialIndex.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundDividend.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundIssuedAndListed.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundPurAndRed.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/RateAdjustment.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/NetValueChange.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/PositionAdjustment.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/KeyStockPortfolio.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/InvestIndustry.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundHolder.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundHoldStock.sqlMap.xml" />
+
+	<!-- add by yangjing -->
+
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/StockInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/stock/pojo/MajorShareholders.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/base/pojo/PersonalInfo.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/F10/gazx/base/pojo/TopExecutives.sqlMap.xml"/>
+    <sqlMap resource="com/cssweb/F10/gazx/stock/pojo/CashFlow.sqlMap.xml"/>
+    <sqlMap resource="com/cssweb/F10/gazx/stock/pojo/AssetIndebte.sqlMap.xml"/>
+    <sqlMap resource="com/cssweb/F10/gazx/stock/pojo/ProfitAssign.sqlMap.xml"/>
+	<!-- add end -->
+	
+	<!-- FundInfo -->
+	<sqlMap resource="com/cssweb/F10/gazx/fund/pojo/FundInfo.sqlMap.xml"/>
+	
+	<!-- BondInfo -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/BondInfo.sqlMap.xml"/>
+		
+	<!-- NationalDebtIssue -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/NationalDebtIssue.sqlMap.xml"/>
+		
+	<!-- NationalDebtTrade -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/NationalDebtTrade.sqlMap.xml"/>	
+
+	<!-- BondBackToSaleCase -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/BondBackToSaleCase.sqlMap.xml"/>	
+	
+	<!-- BondRedemptionCase -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/BondRedemptionCase.sqlMap.xml"/>	
+	
+	<!-- ConvertibleDebtIssueAndTrade -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/ConvertibleDebtIssueAndTrade.sqlMap.xml"/>		
+
+	<!-- ConvertibleDebtToStockInfo -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/ConvertibleDebtToStockInfo.sqlMap.xml"/>	
+
+	<!-- ConvertibleDebtToStockPriceChange -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/ConvertibleDebtToStockPriceChange.sqlMap.xml"/>	
+
+	<!-- ConveriteDebtOwnerInfo -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/ConveriteDebtOwnerInfo.sqlMap.xml"/>	
+
+	<!-- DebtActualPayRateInfo -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/DebtActualPayRateInfo.sqlMap.xml"/>		
+
+	<!-- DebtDueYield -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/DebtDueYield.sqlMap.xml"/>	
+
+	<!-- EnterpriseDebtIssueAndTrade -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/EnterpriseDebtIssueAndTrade.sqlMap.xml"/>		
+	
+	<!-- EnterpriseDebtIssueAndTrade -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/FinancialDebtIssue.sqlMap.xml"/>		
+	
+	<!-- DebtConversationRatio -->
+	<sqlMap resource="com/cssweb/F10/gazx/bond/pojo/DebtConversationRatio.sqlMap.xml"/>
+	
+	<!-- add by yejiangtao -->
+	<sqlMap resource="com/cssweb/F10/gazx/qz/pojo/QzInfo.sqlMap.xml"/>
+	<!-- add end -->
+	
+	<sqlMap resource="com/cssweb/gazx/jrsj/pojo/Vipgazx.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/gazx/jrsj/pojo/Bgylycb.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/gazx/jrsj/pojo/Zxtzpj.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/gazx/jrsj/pojo/Jggpc.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/gazx/jrsj/pojo/Pjtggg.sqlMap.xml" />
+</sqlMapConfig>

@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--注意事项：1、标题长度不能超过45个中文字符；2、选项长度不能超过15个中文字符；3、选项数量不能超过4个。--> 
+
+<values>
+
+    <question options="3" answers="1">
+        <title>以下不是沪深300指数采用的编制技术的是(    )。</title>
+        <option>
+           <A>分级靠档</A>
+           <B>缓冲区</B> 
+           <C>中位数价格法</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="4" answers="1">
+        <title>沪深300指数原则上每(    )定期调整一次，调整方案提前两周公布。</title>
+        <option>
+           <A>半年</A>
+           <B>1年</B>
+           <C>一季度</C>
+           <D>2年</D>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="2" answers="1">
+        <title>沪深300指数采用成分股的流通市值作为权重计算。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="3" answers="1">
+        <title>如果不考虑管理费用、交易成本和跟踪误差的影响，持有沪深300指数基金的收益率(    )同期指数的收益率。</title>
+        <option>
+           <A>高于</A>
+           <B>等于</B>
+           <C>低于</C>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+    <question options="2" answers="1">
+        <title>沪深300指数所占权重最大的行业是金融行业。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B>
+            
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+ 
+</values>

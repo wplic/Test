@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<bean name="/thrPostInfoAction" class="com.cssweb.hr.web.ThrPostInfoFrontAction"/>
+	<bean name="/empspeakAction" class="com.cssweb.hr.web.EmpspeakFrontAction"/>
+	<bean name="/hrUserAction" class="com.cssweb.hr.web.HrUserFrontAction"/>
+	<bean name="/gxcpAction" class="com.cssweb.gxcp.web.UserInfoAction"/>
+	<bean name="/gxcpAnswerAction" class="com.cssweb.gxcp.web.AnswerAction"/>
+</beans>
+
+

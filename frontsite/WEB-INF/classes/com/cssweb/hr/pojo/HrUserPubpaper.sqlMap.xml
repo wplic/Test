@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUserPubpaper">
+				 
+	<typeAlias alias="HrUserPubpaper" type="com.cssweb.hr.pojo.HrUserPubpaper"/>
+								
+	<!--result map-->
+	<resultMap id="resultMap" class="HrUserPubpaper">
+		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="startTimeYear" column="STARTTIME_YEAR" jdbcType="String"/>
+ 		<result property="startTimeMonth" column="STARTTIME_MONTH" jdbcType="String" />
+ 		<result property="paperName" column="PAPERNAME" jdbcType="String" />
+ 		<result property="publicationName" column="PUBLICATIONNAME" jdbcType="String" />
+ 		<result property="anthorOrder" column="ANTHORORDER" jdbcType="String" />
+ 		
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="HrUserPubpaper">
+		<![CDATA[
+		 insert into T_HR_USER_PUBPAPER(ID,USER_ID,STARTTIME_YEAR,STARTTIME_MONTH,
+		 		PAPERNAME,PUBLICATIONNAME,ANTHORORDER)
+		 	 values(#id#,#userId#,#startTimeYear#,#startTimeMonth#,#paperName#,#publicationName#,
+		 		#anthorOrder#)
+		]]>
+	</insert>
+	
+	<update id="update" parameterClass="HrUserPubpaper">
+		update T_HR_USER_PUBPAPER
+		 set 
+		 	USER_ID=#userId#,STARTTIME_YEAR=#startTimeYear#,STARTTIME_MONTH=#startTimeMonth#,
+		 	PAPERNAME=#paperName#,PUBLICATIONNAME=#publicationName#,ANTHORORDER=#anthorOrder#
+		where ID = #id#
+	</update>
+	
+	<delete id="delete" parameterClass="Long">
+		delete from T_HR_USER_PUBPAPER where USER_ID = #userId#
+	</delete>
+	
+	<select id="getAllWorkList" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_PUBPAPER 
+		    where 
+		     user_id=#userId#
+		     order by STARTTIME_YEAR desc,STARTTIME_MONTH desc
+   </select>
+   
+	<select id="getBeanById" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_PUBPAPER 
+		    where 
+		     id=#id#
+   </select>
+   
+   
+</sqlMap>

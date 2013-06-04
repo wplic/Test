@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundProfitDistributionSheet">
+
+	<typeAlias alias="FundProfitDistributionSheet" type="com.cssweb.F10.gazx.fund.pojo.FundProfitDistributionSheet" />
+
+	<!--result map-->
+	<resultMap id="FundProfitDistributionSheetMap" class="FundProfitDistributionSheet">
+		<result property="fundProfitDistributionSheetid" column="T_JJLRFPB_ID" jdbcType="long" />
+		<result property="fundMainTable" column="T_JJZB_ID" jdbcType="long" />
+		<result property="accountServiceFee" column="ZHFWF" jdbcType="double" />
+		<result property="allocationWarrantInvestmentIncome" column="PGQZTZSR" jdbcType="double" />
+		<result property="applyFreezeInterestIncome" column="SGDJLXSR" jdbcType="double" />
+		<result property="attorneyFee" column="LSF" jdbcType="double" />
+		<result property="auditFee" column="KJSF" jdbcType="double" />
+		<result property="bankBetwTransactionFee" column="YHJJYFY" jdbcType="double" />
+		<result property="bankFee" column="YHFY" jdbcType="double" />
+		<result property="bondInterestIncome" column="ZQLXSR" jdbcType="double" />
+		<result property="boneInvestmentIncome" column="ZQTZSY" jdbcType="double" />
+		<result property="boneSpreadIncome" column="ZHAIQMMCJSR" jdbcType="double" />
+		<result property="boughtSellbackFinancePropertyIncome" column="MRFSZQSR" jdbcType="double" />
+		<result property="commission" column="YJ" jdbcType="double" />	
+		<result property="convertibleBoneInvestmentIncome" column="KZHZQTZSY" jdbcType="double" />
+		<result property="convertibleSpreadIncome" column="KZHZQMMCJSR" jdbcType="double" />
+		<result property="deletionSymbol" column="SCBZ" jdbcType="long" />
+		<result property="depositInterestIncome" column="CKLXSR" jdbcType="double" />
+		<result property="derivationToolIncome" column="PGQZMMCJSR" jdbcType="double" />
+		<result property="dividendIncome" column="GXSR" jdbcType="double" />
+		<result property="duedate" column="JZRQ" jdbcType="java.util.Date" nullValue="" />
+		<result property="finallyRevisionDate" column="ZHXGRQ" jdbcType="java.util.Date" nullValue="" />
+		<result property="financeFee" column="CWFY" jdbcType="double" />
+		<result property="guid" column="GUID" jdbcType="String" />
+		<result property="holderConferenceFee" column="CYRDHF" jdbcType="double" />
+		<result property="infoDisclosureFee" column="XXPLF" jdbcType="double" />
+		<result property="interestExpense" column="LXZC" jdbcType="double" />	
+		<result property="interestIncome" column="LXSR" jdbcType="double" />
+		<result property="investmentIncome" column="TZSR" jdbcType="double" />
+		<result property="listingFee" column="SSFY" jdbcType="double" />
+		<result property="netProfit" column="SJSY" jdbcType="double" />
+		<result property="newestSymbol" column="ZXBZ" jdbcType="long" />
+		<result property="operator" column="CZY" jdbcType="String" />
+		<result property="otherFee" column="QTFY" jdbcType="double" />
+		<result property="otherIncome" column="QTSR" jdbcType="double" />
+		<result property="otherInvestmentIncome" column="QTZCMMCJSR" jdbcType="double" />
+		<result property="others" column="QT" jdbcType="double" />
+		<result property="propertySecuInterestProfit" column="ZCZCZQLXSR" jdbcType="double" />
+		<result property="propertySecuInvestProfit" column="ZCZCZQTZSY" jdbcType="double" />
+		<result property="publicSymbol" column="GKBZ" jdbcType="long" />
+		<result property="publishdate" column="FSRQ" jdbcType="java.util.Date" nullValue="" />	
+		<result property="registrationFee" column="ZCDJF" jdbcType="double" />
+		<result property="releaseExpenseSurplusIncome" column="FXFYJYSR" jdbcType="double" />
+		<result property="repoInterestExpense" column="HGLXZC" jdbcType="double" />
+		<result property="revisionSymbol" column="XDBZ" jdbcType="long" />
+		<result property="rollBackTransactionFee" column="HGJYFY" jdbcType="long" />
+		<result property="saleServiceFee" column="XSYFWFY" jdbcType="double" />
+		<result property="soldRepoFinancePropertyExpense" column="MCHGZQZC" jdbcType="double" />
+		<result property="stockInvestmentIncome" column="GPTZSY" jdbcType="double" />
+		<result property="stockSpreadIncome" column="GPMMCJSR" jdbcType="double" />
+		<result property="totalFee" column="FYHJ" jdbcType="double" />
+		<result property="totalIncome" column="SRHJ" jdbcType="double" />
+		<result property="totalProfit" column="LRZE" jdbcType="double" />
+		<result property="transactionFee" column="JYSJYFY" jdbcType="double" />
+		<result property="trustFee" column="TGF" jdbcType="double" />
+		<result property="valueChangeProfit" column="GYJZBDSY" jdbcType="double" />
+		<result property="whetherMergeReport" column="SFHBBB" jdbcType="String" />
+	</resultMap>
+	
+	<resultMap id="resultMap" class="FundProfitDistributionSheet">
+		<result property="publishdate" column="FSRQ" jdbcType="java.util.Date" nullValue="" />	
+	</resultMap>
+	<!-- 根据基金主表id，返回基金利润分配表信息 -->
+	<select id="getFundProfitDistributionSheetById" resultMap="FundProfitDistributionSheetMap" parameterClass="long">
+		select T_JJLRFPB_ID,T_JJZB_ID,ZHFWF,PGQZTZSR,SGDJLXSR,LSF,KJSF,YHJJYFY,
+				YHFY,ZQLXSR,ZQTZSY,ZHAIQMMCJSR,MRFSZQSR,YJ,KZHZQTZSY,KZHZQMMCJSR,
+				SCBZ,CKLXSR,PGQZMMCJSR,GXSR,JZRQ,ZHXGRQ,CWFY,GUID,CYRDHF,XXPLF,
+				LXZC,LXSR,TZSR,SSFY,SJSY,ZXBZ,CZY,QTFY,QTSR,QTZCMMCJSR,QT,
+				ZCZCZQLXSR,ZCZCZQTZSY,GKBZ,FSRQ,ZCDJF,FXFYJYSR,HGLXZC,XDBZ,HGJYFY,
+				XSYFWFY,MCHGZQZC,GPTZSY,GPMMCJSR,FYHJ,SRHJ,LRZE,JYSJYFY,TGF,
+				GYJZBDSY,SFHBBB
+
+		from JJLRFPB where T_JJZB_ID=#fundMainTable# and SCBZ=0 and GKBZ=1
+	</select>
+	
+	<!-- 根据基金主表id、发生日期、截止日期，返回基金利润分配表信息 -->
+	<select id="getFundProfitDistributionSheetByIdAndDate" resultMap="FundProfitDistributionSheetMap" parameterClass="Map">
+		select T_JJLRFPB_ID,T_JJZB_ID,ZHFWF,PGQZTZSR,SGDJLXSR,LSF,KJSF,YHJJYFY,
+				YHFY,ZQLXSR,ZQTZSY,ZHAIQMMCJSR,MRFSZQSR,YJ,KZHZQTZSY,KZHZQMMCJSR,
+				SCBZ,CKLXSR,PGQZMMCJSR,GXSR,JZRQ,ZHXGRQ,CWFY,GUID,CYRDHF,XXPLF,
+				LXZC,LXSR,TZSR,SSFY,SJSY,ZXBZ,CZY,QTFY,QTSR,QTZCMMCJSR,QT,
+				ZCZCZQLXSR,ZCZCZQTZSY,GKBZ,FSRQ,ZCDJF,FXFYJYSR,HGLXZC,XDBZ,HGJYFY,
+				XSYFWFY,MCHGZQZC,GPTZSY,GPMMCJSR,FYHJ,SRHJ,LRZE,JYSJYFY,TGF,
+				GYJZBDSY,SFHBBB
+
+		from JJLRFPB where T_JJZB_ID=#fundMainTable# and  to_char(FSRQ,'yyyy-MM-dd') &gt;= to_char(#publishdate#,'yyyy-MM-dd') 
+			and to_char(JZRQ,'yyyy-MM-dd') &lt;= to_char(#duedate#,'yyyy-MM-dd') and SCBZ=0 and GKBZ=1
+	</select>	
+	
+	<select id="pageQuery" resultMap="FundProfitDistributionSheetMap" parameterClass="map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select jb.T_JJLRFPB_ID,jb.T_JJZB_ID,jb.ZHFWF,jb.PGQZTZSR,jb.SGDJLXSR,jb.LSF,jb.KJSF,jb.YHJJYFY,jb.
+				YHFY,jb.ZQLXSR,jb.ZQTZSY,jb.ZHAIQMMCJSR,jb.MRFSZQSR,jb.YJ,jb.KZHZQTZSY,jb.KZHZQMMCJSR,jb.
+				SCBZ,jb.CKLXSR,jb.PGQZMMCJSR,jb.GXSR,jb.JZRQ,jb.ZHXGRQ,jb.CWFY,jb.GUID,jb.CYRDHF,jb.XXPLF,jb.
+				LXZC,jb.LXSR,jb.TZSR,jb.SSFY,jb.SJSY,jb.ZXBZ,jb.CZY,jb.QTFY,jb.QTSR,jb.QTZCMMCJSR,jb.QT,jb.
+				ZCZCZQLXSR,jb.ZCZCZQTZSY,jb.GKBZ,jb.FSRQ,jb.ZCDJF,jb.FXFYJYSR,jb.HGLXZC,jb.XDBZ,jb.HGJYFY,jb.
+				XSYFWFY,jb.MCHGZQZC,jb.GPTZSY,jb.GPMMCJSR,jb.FYHJ,jb.SRHJ,jb.LRZE,jb.JYSJYFY,jb.TGF,jb.
+				GYJZBDSY,jb.SFHBBB
+		
+		from JJLRFPB jb, JJZB  j
+    	where jb.T_JJZB_ID=j.T_JJZB_ID and jb.SCBZ=0 and jb.GKBZ=1
+			<dynamic>
+				<isNotNull prepend="and" property="fundCode">
+					j.JJDM= #fundCode#
+				</isNotNull>
+			</dynamic>
+			order by jb.FSRQ desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+	
+	
+	<!-- 根据代码，开始时间，结束时间,返回列表 -->
+	<select id="getFundProfitDistributionSheetListByCodeAndDate" resultMap="FundProfitDistributionSheetMap" parameterClass="Map">
+    	select 
+    		jb.T_JJLRFPB_ID,jb.T_JJZB_ID,jb.ZHFWF,jb.PGQZTZSR,jb.SGDJLXSR,jb.LSF,jb.KJSF,jb.YHJJYFY,jb.
+				YHFY,jb.ZQLXSR,jb.ZQTZSY,jb.ZHAIQMMCJSR,jb.MRFSZQSR,jb.YJ,jb.KZHZQTZSY,jb.KZHZQMMCJSR,jb.
+				SCBZ,jb.CKLXSR,jb.PGQZMMCJSR,jb.GXSR,jb.JZRQ,jb.ZHXGRQ,jb.CWFY,jb.GUID,jb.CYRDHF,jb.XXPLF,jb.
+				LXZC,jb.LXSR,jb.TZSR,jb.SSFY,jb.SJSY,jb.ZXBZ,jb.CZY,jb.QTFY,jb.QTSR,jb.QTZCMMCJSR,jb.QT,jb.
+				ZCZCZQLXSR,jb.ZCZCZQTZSY,jb.GKBZ,jb.FSRQ,jb.ZCDJF,jb.FXFYJYSR,jb.HGLXZC,jb.XDBZ,jb.HGJYFY,jb.
+				XSYFWFY,jb.MCHGZQZC,jb.GPTZSY,jb.GPMMCJSR,jb.FYHJ,jb.SRHJ,jb.LRZE,jb.JYSJYFY,jb.TGF,jb.
+				GYJZBDSY,jb.SFHBBB
+		from JJLRFPB jb, JJZB j
+		where jb.T_JJZB_ID=j.T_JJZB_ID and jb.SCBZ=0 and jb.GKBZ=1
+    	 and j.JJDM= #fundCode# 
+    	<dynamic>
+			<isNotNull prepend="and" property="startDate">
+				jb.FSRQ &gt;=to_date(#startDate#,'yyyy-MM-dd')
+			</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+				jb.FSRQ &lt;=to_date(#endDate#,'yyyy-MM-dd')
+			</isNotNull>
+		</dynamic>
+		order by jb.FSRQ desc	
+	</select>	
+		
+	
+	<select id="getDateListByCode" resultMap="resultMap" parameterClass="String">
+		select distinct jb.FSRQ
+		from JJLRFPB  jb, JJZB  j 
+		where jb.T_JJZB_ID=j.T_JJZB_ID and jb.SCBZ=0 and jb.GKBZ=1 and j.JJDM= #fundCode#   
+		order by jb.FSRQ desc
+	</select>	
+</sqlMap>

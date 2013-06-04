@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.business.mail.pojo.UserMailMobileInfo">
+	<typeAlias alias="UserMailMobileInfo" type="com.cssweb.business.mail.pojo.UserMailMobileInfo" />
+
+	<resultMap id="UserMailMobileInfoMap" class="UserMailMobileInfo">
+		<result property="userId" column="USER_ID" javaType="java.lang.Long"/>
+		<result property="email" column="EMAIL" javaType="java.lang.String"/>
+		<result property="mobilePhone" column="MOBILE_PHONE" javaType="java.lang.String"/>
+		<result property="mailActivateCode" column="MAIL_ACTIVATE_CODE" javaType="java.lang.String"/>
+		<result property="smsValidateCode" column="SMS_VALIDATE_CODE" javaType="java.lang.String"/>
+		<result property="isMailActivate" column="IS_MAIL_ACTIVATE" javaType="java.lang.Long"/>
+		<result property="isSmsValidate" column="IS_SMS_VALIDATE" javaType="java.lang.Long"/>	
+	</resultMap>
+
+<!-- 获取单条记录 -->	
+	<select id="getUserMailMobileInfo" parameterClass="java.lang.Long" resultMap="UserMailMobileInfoMap">
+		SELECT * FROM USER_MAIL_MOBILE_INFO WHERE USER_ID=#userId#	
+	</select>
+</sqlMap>

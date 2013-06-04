@@ -1,0 +1,205 @@
+/* CSS Document */
+
+html{overflow-x: hidden;}
+
+body{font-size:12px;color:#787878;margin:0;padding-top:0px; background:#fff;font-size:12px;}
+
+ 
+table,td,th,ul,li,ol,dl,dt,dd,div,html,p,blockquote,h1,h2,h3,h4,h5,form,html,pre,fieldset{margin:0;padding:0;}
+
+ul li{list-style-type:none;line-height:200%;}
+img{ border:none; cursor:pointer;}
+
+.clear{clear:both;}
+a{color:#666; text-decoration:none;blr:expression(this.onFocus=this.blur());outline:none;border:0px;}
+a:hover{text-decoration:none;}
+.p8{padding-top:8px;}
+
+/*微软雅黑 FONT-FAMILY: Microsoft YaHei, SimHei, Hei; position:absolute;left:50%;margin-left:-625px;overflow:hidden;clear:both;z-index:100000;*/
+
+#newbox{width:920px;height:auto;margin:0 auto;}	
+
+#sps_banner{width:920px;height:203px;margin:0 auto;padding-top:16px; position:relative;padding-bottom:13px;}
+
+#sps_niu {
+	position:absolute;
+	width:475px;
+	height:290px;
+	z-index:1;
+	right:0px;
+	top:16px;
+}
+
+#sps_mainbg{width:920px;height:777px; background:url(../sportimg/wb_mainbg.jpg) no-repeat; margin:0 auto;}
+.sps_weibo{width:467px;height:32px; text-align:right;padding-top:23px;}
+.sps_weibo img{margin-left:15px;}
+
+.sps_wbleft{width:636px;height:647px;float:left;padding-top:75px;}
+
+.sps_wblitbox{width:182px;height:410px;float:left; position:relative;padding:156px 0px 0px 86px;}
+
+.sps_litimg{width:126px;height:96px; overflow:hidden;}
+
+.sps_litimg img{width:61px;height:61px;border:1px solid #7addfa; margin:9px 30px 0px 33px;}
+
+.sps_litimg h1{width:126px; background:url(../sportimg/sps_xx.jpg) no-repeat 9px center;color:#4a4a4a;font-size:14px;font-weight:lighter;line-height:33px; text-align:center;}
+
+
+.sps_wblist{width:312px;height:590px;float:left;}
+
+.sps_wbsayone{width:312px;height:143px;}
+.sps_wblist dl{width:312px;height:143px;}
+.sps_wblist dt{color:#5a5a5a; line-height:24px;padding:9px 12px 13px 12px; position:relative;}
+
+
+#sps_huofont {
+	position:absolute;
+	width:auto;
+	height:22px;
+	z-index:1;
+	line-height:22px;
+	color:#00a7d7;
+}
+
+.sps_wblist dt textarea{width:288px;height:97px; line-height:24px; border:0px; background:none;color:#5a5a5a; font-size:12px;overflow:hidden; text-indent:114px;}
+
+.sps_wblist dt a{color:#00a7d7;}
+.sps_wblist dd { line-height:16px;}
+.sps_wblist dd img{float:right;padding-top:0px;margin:0 3px;}
+.sps_wblist dd span{float:right;padding-top:1px;color:#666;}
+
+
+.sps_rulebox{width:253px;height:590px;padding-top:120px;float:left;}
+
+.sps_rlfont{width:169px;height:315px;padding-left:84px; line-height:20px;color:#fff;}
+.sps_rlfont h2{font-size:14px; font-weight:lighter;}
+
+.sps_video{width:224px;height:182px;padding-left:29px; }
+
+.sps_enbg{width:203px;height:24px;margin-left:29px; background:url(../sportimg/sps_vdbg.jpg) repeat-x;color:#0088d2;padding-left:21px;}
+.sps_anliu{width:140px;height:24px;padding-top:0px;margin:0 auto; line-height:0px;}
+.sps_anliu img{margin:0px 3px;}
+
+.sps_anliu img{ vertical-align:middle;}
+
+.imgmid{display:inline-block;*display:inline;*zoom:1;height:100%;width:1px;margin-left:-1px;vertical-align:middle}
+
+
+
+/*广发产品介绍*/
+.sps_product{width:920px;height:192px;margin:0 auto; background:url(../sportimg/sps_productbg.jpg) no-repeat;position:relative;padding-top:83px;}
+#London_img {
+	position:absolute;
+	width:157px;
+	height:82px;
+	z-index:1;
+	top:-34px;
+	left:751px;
+}
+
+.sps_pdlist{width:893px;height:180px;margin:0 auto; position:relative;}
+
+.sps_pdlist ul li{width:153px;height:auto;margin:0 11px;float:left; display:inline;}
+.sps_pdlist ul li h1{color:#373737;font-size:14px; FONT-FAMILY: Microsoft YaHei, SimHei, Hei; text-align:center; line-height:34px;}
+.sps_pdlist ul li h2{color:#3c80ab; background:#dff1ff;font-size:12px; line-height:23px; text-align:center; font-weight:lighter;}
+
+#sps_jianlt {
+	position:absolute;
+	width:9px;
+	height:13px;
+	z-index:2;
+	left:-9px;
+	top:52px;
+	background:url(../sportimg/sps_jiantou.gif) no-repeat;
+	cursor:pointer;
+}
+
+#sps_jianrt {
+	position:absolute;
+	width:9px;
+	height:13px;
+	z-index:2;
+	right:-9px;
+	top:52px;
+	background:url(../sportimg/sps_jiantou.gif) -9px top no-repeat;
+	cursor:pointer;
+}
+
+/*弹窗下的样式开始*/
+
+
+/*弹窗主背景*/
+#dcDiv{
+    width:100%;
+	height:100%;  
+    top: 0px;
+    left: 0px;
+    right:0px;
+    background-color: #000;
+	filter:alpha(opacity=50);       /* IE */
+    -moz-opacity:0.5;              /* Moz + FF */
+	display: none;  
+	z-index:5;   
+	background:url(../sportimg/blank.png);
+    position:absolute;     /* 支持CSS3的浏览器（FF 1.5也支持）*/ 
+	}
+
+#spt_dc{
+	width:400px;
+	height:233px; 
+	background:url(../sportimg/spt_dc.png) no-repeat; 
+	position:relative; margin:0 auto;
+	padding-top:37px;
+	left:50%;
+    top:50%;
+    margin-top:-135px;
+    margin-left:-200px;
+    z-index:6;
+	}
+
+#spt_x {
+	position:absolute;
+	width:21px;
+	height:21px;
+	z-index:7;
+	top:0px;
+	right:0px;
+	background:url(../sportimg/stp_dcX.png) no-repeat; 
+	cursor:pointer;
+}
+.spt_dctitle{width:288px;height:35px; margin:0 auto; background:url(../sportimg/spt_dctbg.gif) left bottom repeat-x;font-size:21px;color:#0285c4; text-align:center;}
+
+.spt_dctd{color:#000000;font-size:14px; FONT-FAMILY: Microsoft YaHei, SimHei, Hei;margin-top:12px;}
+
+.spt_dcinput{width:172px;height:22px; border:1px solid #ccc; line-height:22px;padding-left:4px;}
+.spt_tf{padding-right:8px;}
+
+/*动画闪光点*/
+#sps_fg {
+	position:absolute;
+	width:50px;
+	height:50px;
+	z-index:1;
+	top:504px;
+	left:5px;
+}
+
+#sps_fg2 {
+	position:absolute;
+	width:50px;
+	height:50px;
+	z-index:1;
+	top:506px;
+	left:200px;
+}
+
+/*新添加底部按钮*/
+#sps_newtwobtn {
+	position:absolute;
+	width:332px;
+	height:31px;
+	z-index:1;
+	left:296px;
+	top:284px;
+}
+#sps_newtwobtn img{margin-right:21px;float:left; display:inline;}

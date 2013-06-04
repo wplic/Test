@@ -1,0 +1,16 @@
+
+.datepicker-input
+{
+	background-color: #F9F9F9;
+	border: 1px solid #CDCDCD;
+	height: 19px;
+	width: 100px;
+}
+
+.datepicker-button
+{
+	border: 0px;
+	width: 19px;
+	height: 19px;
+	background-image: url('images/datepicker-button.gif');
+}

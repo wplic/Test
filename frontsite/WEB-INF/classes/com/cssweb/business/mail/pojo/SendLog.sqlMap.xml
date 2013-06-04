@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.business.mail.pojo.SendLog">
+	<typeAlias alias="SendLog" type="com.cssweb.business.mail.pojo.SendLog" />
+
+	<resultMap id="SendLogMap" class="SendLog">
+		<result property="id" column="ID" javaType="java.lang.Long"/>
+		<result property="userId" column="USER_ID" javaType="java.lang.Long"/>
+		<result property="colNames" column="COL_NAMES" javaType="java.lang.String"/>
+		<result property="sendTime" column="SEND_TIME" javaType="java.util.Date"/>
+		<result property="sendState" column="SEND_STATE" javaType="java.lang.String"/>
+	</resultMap>
+
+<!-- 新增 -->
+	<insert id="insert" parameterClass="SendLog">
+		INSERT INTO SEND_LOG(ID,USER_ID,COL_NAMES,SEND_TIME,SEND_STATE) VALUES (#id#,#userId#,#colNames#,sysdate,#sendState#) 
+	</insert>
+
+<!-- 获取邮件发送日志信息 -->	
+	<select id="getSendLogList" parameterClass="map" resultMap="SendLogMap">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( select * from SEND_LOG )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+			<dynamic prepend="and">
+				<isNotEmpty property="userId">
+					USER_ID=#userId#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="and">
+				<isNotEmpty property="sendState">
+					SEND_STATE=#sendState#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="beginTime">
+	                SEND_TIME &gt;= to_date(#beginTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic   prepend="and">
+	      		<isNotEmpty property="endTime">
+	                SEND_TIME &lt;= to_date(#endTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+	        </dynamic>
+	</select>
+<!-- 获取可定制栏目数量 -->		
+	<select id="getSendLogCount" parameterClass="map" resultClass="java.lang.Integer">
+		SELECT COUNT(*) FROM SEND_LOG where 1=1 
+			<dynamic prepend="and">
+				<isNotEmpty property="userId">
+					USER_ID=#userId#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="and">
+				<isNotEmpty property="sendState">
+					SEND_STATE=#sendState#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="beginTime">
+	                SEND_TIME &gt;= to_date(#beginTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic   prepend="and">
+	      		<isNotEmpty property="endTime">
+	                SEND_TIME &lt;= to_date(#endTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+	        </dynamic>
+	</select>
+</sqlMap>

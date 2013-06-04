@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<import resource="modules/frontTvideo/applicationContext.xml" />
+	<import resource="modules/frontComplaint/applicationContext.xml" />
+	<import resource="modules/frontMyquote/applicationContext.xml" />
+	<!--软件管理-->
+	<import resource="modules/soft/applicationContext.xml" />
+	<!-- 问题 -->
+	<import resource="modules/complaints/applicationContext.xml"/>
+	<import resource="modules/frontHandset/applicationContext.xml" />
+	<import resource="modules/frontUser/applicationContext.xml" />
+	<import resource="modules/frontBranch/applicationContext.xml" />
+	<import resource="modules/gpdmGazx/applicationContext.xml" />
+	<import resource="modules/gazxfund/applicationContext.xml"/>
+	<import resource="modules/hq/applicationContext.xml"/>
+	<import resource="modules/gazxNewStock/applicationContext.xml"/>
+	<import resource="modules/gazxQz/applicationContext.xml"/>
+	<import resource="modules/f10.gazx/bond/applicationContext.xml"/>
+	<import resource="modules/f10.gazx/stock/applicationContext.xml"/>
+	<import resource="modules/f10.gazx/qz/applicationContext.xml"/>
+	<import resource="modules/gazx.info/applicationContext.xml"/>
+	<import resource="modules/gazx.fund/applicationContext.xml"/>
+	<import resource="modules/frontQuestionnaire/applicationContext.xml"/>
+	<import resource="modules/systemCredit/applicationContext.xml"/>
+	<import resource="modules/systemset/applicationContext.xml" />
+	<!--liujk start -->
+	<!-- 中小企业承销 -->
+	<import resource="modules/frontEnterpriseSell/applicationContext.xml" />
+	<!-- 网上路演 -->
+	<import resource="modules/frontRoadShow/applicationContext.xml" />
+	<import resource="modules/frontQuestion/applicationContext.xml" />
+	<import resource="modules/frontAdvice/applicationContext.xml" />
+	<!-- 资产管理 -->
+	<import resource="modules/assetmanager/applicationContext.xml" />
+	<import resource="modules/frontProduct/applicationContext.xml" />
+	<import resource="modules/collect/applicationContext.xml" />
+	<!-- 定向理财 -->
+	<import resource="modules/clientService/applicationContext.xml" />
+	<!-- hr -->
+	<import resource="modules/frontHr/applicationContext.xml" />
+	<!-- end -->
+	<import resource="modules/jrsj/applicationContext.xml" />
+	<import resource="modules/developerGroup/applicationContext.xml"/>
+	<import resource="modules/rzrq/applicationContext.xml"/>
+	
+	<import resource="modules/phoneSoft/applicationContext.xml"/>
+	<!-- 服务订阅 -->
+	<import resource="modules/subscribe/applicationContext.xml"/>
+	<import resource="modules/gyjj/applicationContext.xml"/>
+	</beans>

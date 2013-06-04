@@ -1,0 +1,6 @@
+£¼public:attach event=£¢onfocus£¢ onevent=£¢quit()£¢ /£¾ 
+£¼script language=£¢javascript£¢£¾ 
+function quit(){ 
+this.blur(); 
+} 
+£¼/script£¾

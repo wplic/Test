@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.dictionary.pojo.Dictionary">
+
+	<typeAlias alias="Dictionary" type="com.cssweb.common.dictionary.pojo.Dictionary"/>
+
+	<!--result map-->
+	<resultMap id="dictionaryMap" class="Dictionary">
+		<result property="id" column="ID" jdbcType="Long"/>
+        <result property="parentId" column="PARENT_ID" jdbcType="Long"/>
+        <result property="keyCode" column="KEY_CODE" jdbcType="String"/>
+        <result property="keyName" column="KEY_NAME" jdbcType="String"/>
+ 		<result property="keyShortDesc" column="KEY_SHORT_DESC" jdbcType="String"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="keyValue" column="KEY_VALUE" jdbcType="String"/>
+ 		<result property="keyDesc" column="KEY_DESC" jdbcType="String"/>
+ 		<result property="validFlag" column="VALID_FLAG" jdbcType="String"/>
+ 		<result property="roleId" column="ROLE_ID" jdbcType="Long"/>
+        <result property="sysId" column="SYS_ID" jdbcType="Long"/>
+  	</resultMap>
+  	
+  	<resultMap id="dictionaryMap1" class="Dictionary">
+  	    <result property="id" column="ID" jdbcType="Long"/>
+        <result property="keyName" column="KEY_NAME" jdbcType="String"/>		
+  	</resultMap>
+
+  <insert id="insert" parameterClass="Dictionary">
+    insert into CSSWEB_DICTIONARY (ID,PARENT_ID,KEY_CODE,KEY_NAME,KEY_SHORT_DESC,KEY_VALUE,KEY_DESC,VALID_FLAG,ROLE_ID,SYS_ID,EXT1,EXT2)
+    	values (#id#, #parentId#,#keyCode#,#keyName#,#keyShortDesc#,#keyValue#,#keyDesc#,#validFlag#,#roleId#,#sysId#,#ext1#,#ext2#)
+  </insert>
+
+  <update id="update" parameterClass="Dictionary">
+    update CSSWEB_DICTIONARY 
+    	set KEY_CODE = #keyCode#,KEY_NAME=#keyName#,KEY_SHORT_DESC=#keyShortDesc#,
+    	KEY_VALUE = #keyValue#,KEY_DESC=#keyDesc#,VALID_FLAG=#validFlag#,ROLE_ID = #roleId#,SYS_ID=#sysId#,EXT1=#ext1#,EXT2=#ext2#
+     where ID = #id#
+  </update>
+
+  <delete id="deleteById" parameterClass="Long">
+    delete CSSWEB_DICTIONARY where id = #id#
+  </delete>
+  
+  <delete id="deleteDictionaryByIdsAndChilds" parameterClass="java.lang.String">
+    delete CSSWEB_DICTIONARY where id in ($value$) or parent_id in ($value$)
+  </delete>
+  
+  <delete id="deleteByIdAndChilds" parameterClass="java.lang.Long">
+    delete CSSWEB_DICTIONARY where id = #value# or parent_id = #value#
+  </delete>
+
+  <select id="selectAll" resultMap = "dictionaryMap">
+    select * from CSSWEB_DICTIONARY
+  </select>
+
+  <select id="getDictionaryById" parameterClass="java.lang.Long" resultMap = "dictionaryMap">
+    select * from CSSWEB_DICTIONARY where id = #value#
+  </select>
+  
+  <select id="getDictionaryByKeyCode" parameterClass="java.lang.String" resultMap = "dictionaryMap">
+    select * from CSSWEB_DICTIONARY where KEY_CODE = #value#
+  </select>
+  
+  <select id="getByParentId" parameterClass="java.lang.Long" resultMap = "dictionaryMap">
+    select * from CSSWEB_DICTIONARY where parent_id = #value# order by KEY_NAME
+  </select>
+  
+  <select id="getByParentIdAndMap" parameterClass="java.util.Map" resultMap = "dictionaryMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <update id="changeOrderNumByParentIdAndThisOrderNum" parameterClass="java.util.Map">
+     update CSSWEB_DICTIONARY set EXT1=EXT1+1 where PARENT_ID=#parentId# and EXT1 &gt;=#orderNum#
+  </update>
+
+  <update id="changeOrderNumByParentIdAndOldBiggerNew" parameterClass="java.util.Map">
+     update CSSWEB_DICTIONARY set EXT1=EXT1+1 where PARENT_ID=#parentId# and EXT1 &gt;=#newOrderNum# and EXT1 &lt;#oldOrderNum#
+  </update>
+  <update id="changeOrderNumByParentIdAndNewBiggerOld" parameterClass="java.util.Map">
+     update CSSWEB_DICTIONARY set EXT1=EXT1-1 where PARENT_ID=#parentId# and EXT1 &gt;#oldOrderNum# and EXT1 &lt;=#newOrderNum#
+  </update>
+  
+  
+   <select id="getNameById" parameterClass="String" resultClass = "java.lang.String">
+    select KEY_NAME from CSSWEB_DICTIONARY where KEY_CODE = #value#
+  </select>
+  
+  <select id="getNameByMainId" parameterClass="java.lang.String" resultClass = "java.lang.String">
+    select KEY_NAME from CSSWEB_DICTIONARY where KEY_CODE = #value#
+  </select>
+  
+  
+   <select id="getJosnValue" parameterClass="String"  resultMap = "dictionaryMap1">
+    select id,key_name from cssweb_dictionary where id in
+    (select id from cssweb_dictionary where parent_id=(select id from cssweb_dictionary where key_code='yhfl') and key_code!='yhfl_llyh')
+    and id not in (select user_type_id from role_cms_map group by user_type_id)
+  </select>
+ 
+ 
+  <select id="getJosnValue1" parameterClass="String"  resultMap = "dictionaryMap1">
+    select id,key_name from cssweb_dictionary where id in
+    (select id from cssweb_dictionary where parent_id=(select id from cssweb_dictionary where key_code='yhfl'))
+    and id not in (select user_type_id from role_lc_map group by user_type_id)
+  </select>
+  
+  <select id="getJosnValue2" parameterClass="String"  resultMap = "dictionaryMap1">
+  select id,key_name from cssweb_dictionary where id in
+    (select id from cssweb_dictionary where key_code='yhfl_zcyh')
+    and id not in (select user_type_id from role_lc_map group by user_type_id)
+   
+  </select>
+  
+  
+   <select id="getJosnValue3" parameterClass="String"  resultMap = "dictionaryMap1">
+    select id,key_name from cssweb_dictionary where id in
+    (select id from cssweb_dictionary where parent_id=(select id from cssweb_dictionary where key_code='yhfl'))
+    and id not in (select user_type_id from role_lc_map group by user_type_id)
+  </select>
+  
+  
+    <select id="getDictionaryByParentKeyCode" parameterClass="java.lang.String" resultMap = "dictionaryMap">
+    select 
+    	* 
+    from cssweb_dictionary 
+    	where parent_id = 
+    	(select
+        	id
+   		from
+        	cssweb_dictionary
+    	where
+    		key_code = #value#)
+    order by key_value,id
+  </select>
+  
+   <select id="getDictionaryByParentKeyCodeAndDesc" parameterClass="java.util.Map" resultMap = "dictionaryMap">
+    select 
+    	* 
+    from cssweb_dictionary 
+    	where parent_id = 
+    	(select
+        	id
+   		from
+        	cssweb_dictionary
+    	where
+    		key_code = #keyCode#)
+    	and KEY_SHORT_DESC = #desc#
+        and rownum=1
+  </select>
+  
+</sqlMap>

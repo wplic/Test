@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.NewStockIssue">
+    <typeAlias alias="newStockIssue" type="com.cssweb.F10.gazx.stock.pojo.NewStockIssue"/>
+    <!--result map-->
+    <resultMap id="newStockIssueMap" class="newStockIssue">
+        <result column="MZZE" property="collectAmount" jdbcType="Long"/>
+        <result column="Mjzjje" property="collectIncome" jdbcType="Long"/>
+		<result column="WXPSRQ" property="downNetRationDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="Scltgs" property="firstCirculateStocks" jdbcType="Long"/>
+        <result column="Sclt_zlt_bl" property="firstCirculateStocksProportion" jdbcType="double"/>
+        <result column="Fxfy" property="issueCost" jdbcType="Long"/>
+        <result column="FXJG" property="issuePrice" jdbcType="double"/>
+        <result column="WSFXZQL" property="wsfxzql" jdbcType="double"/>
+        <result column="WXPSZQL" property="wxpszql" jdbcType="double"/>
+        <result column="Sssrkpj" property="sssrkpj" jdbcType="double"/>
+        <result column="Sssrspj" property="sssrspj" jdbcType="double"/>
+        <result column="Sssrhsl" property="sssrhsl" jdbcType="double"/>
+        <result column="FxSL" property="issueQuantity" jdbcType="Long"/>
+        <result column="FRPSGS" property="legalPersonStocks" jdbcType="Long"/>
+        <result column="SSDD" property="marketAddress" jdbcType="String" nullValue=""/>
+		<result column="SSRQ" property="marketDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="WSFXRQ" property="onNetIssueDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="T_GPZB_ID" property="stockID" jdbcType="Long"/>
+        <result column="T_BJJG_ID" property="sponsorAgency" jdbcType="Long"/>
+    </resultMap> 
+    
+    <select id="getNewStockIssue" resultMap="newStockIssueMap" >    
+	     SELECT
+				MZZE,
+				Mjzjje,
+				WXPSRQ,
+				Scltgs,
+				Sclt_zlt_bl,
+				Fxfy,
+				FXJG,
+				Sssrkpj,
+				Sssrspj,
+				Sssrhsl,
+				FxSL,
+				FRPSGS,
+				SSDD,
+				SSRQ,
+				WSFXRQ,
+				T_GPZB_ID,
+				T_BJJG_ID,WSFXZQL,WXPSZQL
+		FROM XGFXYSS
+			  where SCBZ=0 and GKBZ=1
+				<isNotNull prepend="and" property="stockId">
+					T_GPZB_ID = #stockId#
+				</isNotNull>
+	</select>
+</sqlMap>	

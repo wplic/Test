@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.item.pojo.Apply">
+
+	<typeAlias alias="Apply" type="com.cssweb.item.pojo.Apply"/>
+	
+	<resultMap id="ApplyResult" class="Apply">
+		<result column="APPLY_ID" property="applyId" jdbcType="java.lang.Long"/>
+		<result column="APPLY_NAME" property="applyName" jdbcType="java.lang.String"/>
+		<result column="APPLY_FR" property="applyFr" jdbcType="java.lang.String"/>
+		<result column="FR_PHONE" property="frPhone" jdbcType="java.lang.String"/>
+		<result column="APPLY_PEOPLE" property="applyPeople" jdbcType="java.lang.String"/>
+		<result column="MOBLIE" property="moblie" jdbcType="java.lang.String"/>
+		<result column="EMAIL" property="email" jdbcType="java.lang.String"/>
+		<result column="FAX" property="fax" jdbcType="java.lang.String"/>
+		<result column="ADDRESS" property="address" jdbcType="java.lang.String"/>
+		<result column="POSTAL" property="postal" jdbcType="java.lang.String"/>
+		<result column="WEBSITE" property="website" jdbcType="java.lang.String"/>
+		<result column="REG_JG" property="regJg" jdbcType="java.lang.String"/>
+		<result column="REMARK" property="remark" jdbcType="java.lang.String"/>
+	</resultMap>
+
+	
+	<select id="getApplyList" parameterClass="java.util.Map" resultMap="ApplyResult">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+		select 
+			* 
+		from 
+			GYJJ_ITEM_APPLY
+		where
+			1=1
+	        <isNotEmpty property="sql">
+	              $sql$
+	        </isNotEmpty>
+	         
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<select id="getApplyCount" resultClass="java.lang.Integer">
+		select 
+			count(*)  
+		from 
+			GYJJ_ITEM_APPLY
+		where
+			1=1
+	</select>	
+	
+	
+	
+	<insert id="insert" parameterClass="Apply">
+		insert into GYJJ_ITEM_APPLY(
+			APPLY_ID,APPLY_NAME,APPLY_FR,FR_PHONE,APPLY_PEOPLE,MOBLIE,EMAIL,FAX,ADDRESS,POSTAL,WEBSITE,REG_JG,REMARK)
+		values(
+			#applyId#,#applyName#,#applyFr#,#frPhone#,#applyPeople#,#moblie#,#email#,#fax#,#address#,#postal#,#website#,#regJg#,#remark#)
+	</insert>
+		
+</sqlMap>

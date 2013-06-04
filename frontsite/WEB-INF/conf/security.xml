@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?> 
+<security>
+	<!-- 实现类 -->
+    <implementer class="com.css.security.db.DBSecurityManager" />
+    
+	<!-- 加密器 -->
+    <encrypter class="com.css.security.db.user.PasswordEncrypter" />
+
+	<!-- 校验器 -->
+    <validator class="com.css.security.db.user.BasicValidator" />
+    
+    <!-- 是否支持动态角色 -->
+    <dynamic_role_flag value="false" />
+
+	<!-- 基本规则 -->
+    <basicrule pwdMinLen="1" pwdMaxLen="30" chineseUserName="true"
+        nameMinLen="1" nameMaxLen="30" needNameDifPassword="false"/>
+    
+    <!-- 不需要判断的文件扩展名称 -->
+    <extend_names value="*.js,*.css,*.gif,*.jpg,*.png" />
+    
+    <!-- 登录页面文件名称 -->
+    <login_page value="/admin/login/login.jsp" />
+    
+    <!-- 消息提示页面名称 -->
+    <message_page value="/admin/share/JumpWithMessage.jsp" />
+    
+    <!-- 不需要判断的特殊文件名称 -->
+    <!--page_list value="/common/jsp/index.jsp,/build.jsp,/normal/jsp/user/UserLoginForm.jsp,/normal/Logout.jsp,/normal/index.jsp,/normal/jsp/user/ShowMessage.jsp,/normal/jsp/share/top.jsp,/normal/jsp/share/left.jsp,/normal/jsp/share/Bottom.jsp,/normal/jsp/share/switch.jsp" /-->
+       
+    <!-- 不需要过滤的特殊文件名称 -->
+    <ignore_pagelist>
+    	<page value="/index.jsp"/>
+    	<page value="/admin/login/login.jsp"/>
+    	<page value="/admin/login/LoginForm.jsp"/>
+    	<page value="/admin/Login.do"/>
+    	<page value="/admin/login/logout.jsp"/>
+    	<page value="/admin/index/index.jsp"/>
+    	<page value="/admin/index/head.htm"/>
+    	<page value="/admin/index/left.jsp"/>
+    	<page value="/admin/index/center.htm"/>
+    	<page value="/admin/share/JumpWithMessage.jsp"/>
+    </ignore_pagelist>
+</security>

@@ -1,0 +1,77 @@
+body {
+	font-size: 12px;
+}
+a{
+	cursor: hand;
+}
+a:link {
+	color: #5D5D5D;
+	text-decoration: none;
+}
+a:visited {
+	color: #666666;
+	text-decoration: none;
+}
+a:hover {
+	color: #999999;
+	text-decoration: underline;
+}
+img {
+	border: 0;
+	cursor: hand;
+	/*vertical-align: middle;影响行距*/
+}
+table {
+	font-size: 12px;
+}
+select {
+	font-size: 12px;
+}
+.px12 {
+	font-size:12px
+}
+/*高显亮*/
+.lightcolor{
+	background-color: #003399;
+	color: #FFFFFF;
+}
+.gray-scrollbar{
+	scrollbar-face-color: #DBD7D0;
+	scrollbar-shadow-color: #FFFFFF; 
+	scrollbar-highlight-color: #FFFFFF; 
+	scrollbar-3dlight-color: #FFFFFF; 
+	scrollbar-darkshadow-color: #FFFFFF; 
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #000000 ;
+
+	overflow-x: hidden;
+	margin: 0px;
+}
+input{
+	height:12px;
+}
+.table-header{
+	font-weight: bold;
+	background-color:#8FBEE8;
+	
+	/* 蓝色 
+	color:#FFFFFF;
+	filter : progid:DXImageTransform.Microsoft.gradient(startColorStr=#6699CC,endColorStr=#006699);
+	*/
+
+	/* 灰色 */
+	color: #000000;
+	filter : progid:DXImageTransform.Microsoft.gradient(startColorStr=#EFEFEF ,endColorStr=#CDCDCD);
+}
+.table-footer{
+	background-color:#F4F4F4;
+	color:#000000
+}
+/*
+换行
+	word-break:break-all;word-wrap:break-word
+不换行
+	<nobr>
+建议换行标记
+	<wbr>
+*/

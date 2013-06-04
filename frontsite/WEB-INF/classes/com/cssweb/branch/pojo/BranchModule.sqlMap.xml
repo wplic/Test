@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branch.pojo.BranchModule">
+
+	<typeAlias alias="BranchModule" type="com.cssweb.branch.pojo.BranchModule"/>
+
+	<cacheModel id="BranchModuleCache" type="OSCACHE">
+	    <flushInterval hours="24"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchModule.insert"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchModule.update"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchModule.delete"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchModule.deleteByDeptId"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	<!--result map-->
+	<resultMap id="branchModuleMap" class="BranchModule">
+		<result property="id" column="id"/>
+        <result property="userId" column="user_id"  nullValue="-1"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="moduleId" column="module_id"/>
+        <result property="modTime" column="mod_time"/>
+ 		<result property="ext1" column="ext1"/>
+ 		<result property="ext2" column="ext2"/>
+ 		<result property="ext3" column="ext3"/>
+ 		<result property="ext4" column="ext4"/>
+  	</resultMap>
+  	
+  <insert id="insert" parameterClass="BranchModule">
+    insert into Branch_Module 
+           (id,user_id,dept_id,module_id,mod_time,ext1,ext2,ext3,ext4)
+    values (#id#,#userId#,#deptId#,#moduleId#,#modTime#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+
+
+  <update id="update" parameterClass="BranchModule">
+    update Branch_Module 
+    set 
+    		user_id = #userId#, 
+    		dept_id=#deptId#,
+    		module_id=#moduleId#,
+    		mod_time=#modTime#,
+    		ext1=#ext1#,
+    		ext2=#ext2#,
+    		ext3=#ext3#,
+    		ext4=#ext4#
+     where id = #id#
+  </update>
+
+  <delete id="delete" parameterClass="BranchModule">
+    delete Branch_Module where id = #id#
+  </delete>
+   
+  <delete id="deleteAll" parameterClass="java.lang.Long">
+    delete Branch_Module  
+  </delete>
+  
+  <delete id="deleteByDeptId" parameterClass="java.lang.Long">
+    delete Branch_Module where dept_id = #value#
+  </delete>
+  
+
+  <select id="select" resultMap = "branchModuleMap" cacheModel="BranchModuleCache">
+    select
+        *
+    from
+        Branch_Module
+  </select>
+
+  <select id="getBranchModuleById" parameterClass="java.lang.Long" resultMap = "branchModuleMap" cacheModel="BranchModuleCache">
+    select
+        *
+    from
+        Branch_Module
+    where
+    	id = #value#
+  </select>
+  
+  <select id = "getBranchModuleListByDeptId" resultMap = "branchModuleMap" parameterClass="java.lang.Long" cacheModel="BranchModuleCache">
+    	select
+        	*
+    	from
+    	    Branch_Module
+    	where
+        	dept_id = #value#
+  </select>
+</sqlMap>

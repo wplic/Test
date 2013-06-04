@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.PledgeAndKeepLog">
+
+	<typeAlias alias="pledgeAndKeepLog" type="com.cssweb.rzrq.pojo.PledgeAndKeepLog" />
+
+	<resultMap id="pledgeAndKeepLogMap" class="pledgeAndKeepLog">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="beforeAdjust" column="BEFORE_ADJUST" jdbcType="Double"/>
+		<result property="afterAdjust" column="AFTER_ADJUST" jdbcType="Double"/>
+		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+	    <result property="auditing" column="AUDITING" jdbcType="String" />
+	    <result property="parityAdjust" column="PARITY_ADJUST" jdbcType="Double"/>
+	    <result property="guardLine" column="GUARDLINE" jdbcType="Double"/>
+	    <result property="userId" column="USER_ID" jdbcType="Long"/> 
+	    <result property="userName" column="USER_NAME" jdbcType="String" />
+	    <result property="updateDate" column="UPDATE_DATE" jdbcType="DATE" /> 
+	    <result property="keepoldId" column="KEEPOLDID" jdbcType="Long"/> 
+	    
+	</resultMap>
+	
+	<insert id="insertPledgeAndKeepLog" parameterClass="pledgeAndKeepLog">
+		INSERT into T_RZRQ_PLEDGEANDKEEP_LOG ( ID, BEFORE_ADJUST,AFTER_ADJUST,START_DATE,PUBLISH_DATE,AUDITING,PARITY_ADJUST,GUARDLINE,USER_ID,USER_NAME,UPDATE_DATE,KEEPOLDID) VALUES 
+		(#id#,#beforeAdjust#, #afterAdjust#,#startDate#,#publishDate#,#auditing#,#parityAdjust#,#guardLine#,#userId#,#userName#,#updateDate#,#keepoldId#)
+	</insert>
+	
+	<select id="getPledgeAndKeepLogById" parameterClass="Long" resultMap="pledgeAndKeepLogMap">
+		select * from T_RZRQ_PLEDGEANDKEEP_LOG where id= #id#
+	</select>	
+	
+	<select id="getPledgeAndKeepLogByOldId" parameterClass="Long" resultMap="pledgeAndKeepLogMap">
+		select * from T_RZRQ_PLEDGEANDKEEP_LOG where KEEPOLDID= #keepoldId#
+	</select>
+	
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getPledgeAndKeepLogByPage" parameterClass="java.util.Map" resultMap = "pledgeAndKeepLogMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  
+</sqlMap>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.fund.pojo.Institution">
+
+	<typeAlias alias="Institution" type="com.fortuneage.fund.pojo.Institution"/>
+	<resultMap id="InstitutionResult" class="Institution">
+		<result column="ID" property="id" jdbcType="java.lang.Integer"/>
+		<result column="INS_ORDER" property="order" jdbcType="java.lang.Integer"/>
+		<result column="INS_TITLE" property="title" jdbcType="java.lang.String"/>
+		<result column="CONTENT" property="content" jdbcType="java.lang.String"/>
+	</resultMap>
+	    <!--公益基金 -->
+	    <!--获取所有的章节  -->
+	   <select id="institutionList" resultMap="InstitutionResult">
+	       select * from GYJJ_INSTITUTION ORDER BY INS_ORDER
+	   </select>
+	   <select id="institutionMaxId" resultClass="java.lang.Integer">
+	       select Max(id) from GYJJ_INSTITUTION
+	   </select>
+	   <select id="getInstitution" resultMap="InstitutionResult" parameterClass="java.lang.Integer">
+	   		select * from GYJJ_INSTITUTION WHERE ID=#id#
+	   </select>
+	   
+		<insert id="insertNewInstitution" parameterClass="Institution">
+	   		INSERT
+			INTO GYJJ_INSTITUTION
+		  (
+		    ID,
+		    INS_ORDER,
+		    INS_TITLE,
+		    CONTENT
+		  )
+		  VALUES
+		  (
+		    #id#,
+		    #order#,
+		    #title#,
+		    #content#
+		  )
+	   </insert>
+	   
+	   <delete id="delInstitution" parameterClass="java.lang.Integer">
+	   		delete GYJJ_INSTITUTION where ID=#value#
+	   </delete>
+	   
+	   <update id="updateInstitution" parameterClass="Institution">
+	   		update GYJJ_INSTITUTION SET
+	   		INS_ORDER=#order#, INS_TITLE=#title#, CONTENT=#content#
+	   		WHERE ID=#id#
+	   </update>
+	   
+	</sqlMap>
+	

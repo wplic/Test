@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.AssetAllocation">
+
+	<typeAlias alias="assetAllocation" type="com.cssweb.F10.gazx.fund.pojo.AssetAllocation" />
+
+	<!--result map-->
+	<resultMap id="assetAllocationMap" class="assetAllocation">
+		<result property="id" column="T_JJZB_ID" jdbcType="java.lang.Long" />
+		<result property="activeInvestment" column="JJTZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="activeInvestmentPro" column="JJTZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="backBondSale" column="MRFSZQ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="backBondSalePro" column="MRFSZQ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="bondsValue" column="ZQZSZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="bondsValueProportion" column="ZQZSZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="cbondsValue" column="GZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="cbondsValuePro" column="GZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="convertibleBondsValue" column="KZZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="convertibleBondsValuePro" column="KZZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="ebondsValue" column="QYZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="ebondsValuePro" column="QYZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>	
+		<result property="fbondsValue" column="JRZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fbondsValuePro" column="JRZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fundNetAssetValue" column="JJZCJZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="indexOfInvestment" column="ZSHTZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="indexOfInvestmentProportion" column="ZSHTZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="moneyValue" column="HBZJ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="moneyValueProportion" column="HBZJ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="otherAssetValue" column="QTZC" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="otherAssetValuePro" column="QTZC_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="otherBondsValue" column="Qtsz" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="otherBondsValuePro" column="QTSZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="stockValue" column="Gpsz" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="stockValueProportion" column="GP_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="warrant" column="QZSZ" jdbcType="java.lang.Double" nullValue="0.0"/>	
+		<result property="warrantPro" column="QZ_ZSZBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="fundShortName" column="JJJC" jdbcType="java.lang.String" />
+		<result property="fundCode" column="JJDM" jdbcType="java.lang.String" />
+		<result property="fundType" column="JJLX" jdbcType="java.lang.String" />
+	</resultMap>
+	
+	<resultMap id="assetAllocationMapOne" class="assetAllocation">
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>
+	
+	<!-- 根据基金主表id，返回基金投资组合_资产信息 -->
+	<select id="getAssetAllocationListByCode" resultMap="assetAllocationMap" parameterClass="String">
+    	select jz.T_JJZB_ID,jz.JJTZ,jz.JJTZ_zszbl,jz.MRFSZQ,jz.MRFSZQ_zszbl,jz.ZQZSZ,jz.ZQZSZ_ZSZBL,
+			jz.GZ,jz.GZ_zszbl,jz.KZZ,jz.KZZ_zszbl,jz.QYZ,jz.QYZ_zszbl,jz.JRZ,jz.JRZ_zszbl,jz.JJZCJZ,
+			jz.ZSHTZ,jz.ZSHTZ_zszbl,jz.HBZJ,jz.HBZJ_ZSZBL,jz.QTZC,jz.QTZC_zszbl,jz.Qtsz,jz.Qtsz_zszbl,
+			jz.Gpsz,jz.Gp_zszbl,jz.QZSZ,jz.QZ_ZSZBL,jz.FSRQ,j.JJJC,j.JJDM,j.JJLX
+		
+		from JJTZZH_ZC  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1  
+	</select>
+	
+	<!-- 根据代码，开始时间，结束时间,返回基金资产配置列表信息 -->
+	<select id="getAssetAllocationListByCodeAndDate" resultMap="assetAllocationMap" parameterClass="Map">
+    	select jz.T_JJZB_ID,jz.JJTZ,jz.JJTZ_zszbl,jz.MRFSZQ,jz.MRFSZQ_zszbl,jz.ZQZSZ,jz.ZQZSZ_ZSZBL,
+			jz.GZ,jz.GZ_zszbl,jz.KZZ,jz.KZZ_zszbl,jz.QYZ,jz.QYZ_zszbl,jz.JRZ,jz.JRZ_zszbl,jz.JJZCJZ,
+			jz.ZSHTZ,jz.ZSHTZ_zszbl,jz.HBZJ,jz.HBZJ_ZSZBL,jz.QTZC,jz.QTZC_zszbl,jz.Qtsz,jz.Qtsz_zszbl,
+			jz.Gpsz,jz.Gp_zszbl,jz.QZSZ,jz.QZ_ZSZBL,jz.FSRQ,j.JJJC,j.JJDM,j.JJLX
+		
+		from JJTZZH_ZC  jz, JJZB  j
+		
+    	where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+    	<dynamic>
+			<isNotNull prepend="and" property="startDate">
+				jz.FSRQ &gt;=to_date(#startDate#,'yyyy-MM-dd')
+			</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+				jz.FSRQ &lt;=to_date(#endDate#,'yyyy-MM-dd')
+			</isNotNull>
+		</dynamic>
+		order by jz.FSRQ desc	
+	</select>	
+		
+	
+	
+	<!-- 根据基金主表id，返回基金投资组合_资产时间列表信息 -->
+	<select id="getAssetAllocationListByIdrettime" resultMap="assetAllocationMapOne" parameterClass="String">
+		select distinct jz.FSRQ
+		from JJTZZH_ZC  jz, JJZB  j 
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1  
+		order by jz.FSRQ desc
+	</select>	
+	
+	<select id="pageQuery" resultMap="assetAllocationMap" parameterClass="map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select jz.T_JJZB_ID,jz.JJTZ,jz.JJTZ_zszbl,jz.MRFSZQ,jz.MRFSZQ_zszbl,jz.ZQZSZ,jz.ZQZSZ_ZSZBL,
+			jz.GZ,jz.GZ_zszbl,jz.KZZ,jz.KZZ_zszbl,jz.QYZ,jz.QYZ_zszbl,jz.JRZ,jz.JRZ_zszbl,jz.JJZCJZ,
+			jz.ZSHTZ,jz.ZSHTZ_zszbl,jz.HBZJ,jz.HBZJ_ZSZBL,jz.QTZC,jz.QTZC_zszbl,jz.Qtsz,jz.Qtsz_zszbl,
+			jz.Gpsz,jz.Gp_zszbl,jz.QZSZ,jz.QZ_ZSZBL,jz.FSRQ,j.JJJC,j.JJDM,j.JJLX
+		from JJTZZH_ZC  jz, JJZB  j
+    	where jz.T_JJZB_ID=j.T_JJZB_ID and jz.SCBZ=0 and jz.GKBZ=1
+			<dynamic>
+				<isNotNull prepend="and" property="fundCode">
+					j.JJDM= #fundCode#
+				</isNotNull>
+			</dynamic>
+			order by jz.FSRQ desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+</sqlMap>

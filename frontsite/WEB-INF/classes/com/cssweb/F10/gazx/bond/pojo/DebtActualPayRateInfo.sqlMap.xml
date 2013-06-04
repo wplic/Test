@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap
+	namespace="com.cssweb.F10.gazx.bond.pojo.DebtActualPayRateInfo">
+
+	<typeAlias alias="debtActualPayRateInfo"
+		type="com.cssweb.F10.gazx.bond.pojo.DebtActualPayRateInfo" />
+
+	<!--result map-->
+	<resultMap id="debtActualPayRateInfoMap"
+		class="debtActualPayRateInfo">
+
+		<!-- 债券 -->
+		<result property="debt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券实际付息ID -->
+		<result property="debtActualPayRateId" column="T_ZQSJFXQK_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 除权除息日 -->
+		<result property="debtChuQChuXDate" column="CQCXR"
+			jdbcType="java.util.Date" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 本期利率 -->
+		<result property="debtCurrentRate" column="Bqll"
+			jdbcType="java.lang.Float" />
+
+		<!-- 利息支付日 -->
+		<result property="debtPayInterestDate" column="Llzfr"
+			jdbcType="java.util.Date" />
+
+		<!-- 付息年度 -->
+		<result property="debtPayRateTime" column="Fxnd"
+			jdbcType="java.lang.String" />
+
+		<!-- 每百元面值利息 -->
+		<result property="debtPerHundredRate" column="MBYMZLX"
+			jdbcType="java.lang.Double" />
+
+		<!-- 发生日期 -->
+		<result property="debtPublishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 债权登记日 -->
+		<result property="debtRegistrationDate" column="Zqdjr"
+			jdbcType="java.util.Date" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+	</resultMap>
+
+	<!-- 查找该债券的实际付息情况 -->
+	<select id="getDebtActualPayRateInfoByBondCode"
+		resultMap="debtActualPayRateInfoMap" parameterClass="String">
+		SELECT a.T_ZQSJFXQK_ID, a.T_ZQZB_ID, a.Fxnd, a.Bqll, a.MBYMZLX,
+		a.Zqdjr, a.CQCXR, a.Llzfr, a.FSRQ, b.zqjc, b.zqdm FROM ZQSJFXQK
+		a,zqzb b where a.T_ZQZB_ID = b.t_Zqzb_Id and b.zqdm = #debtCode#
+		and a.SCBZ = 0 AND a.GKBZ = 1 and rownum = 1
+	</select>
+
+</sqlMap>

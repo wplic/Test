@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebFwcpcx">
+<typeAlias alias="TcsswebFwcpcx" type="com.cssweb.subscribe.pojo.TcsswebFwcpcx"/>	
+	<resultMap id="TcsswebFwcpcx" class="TcsswebFwcpcx">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="departmentCode" column="DEPARTMENT_CODE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="account" column="ACCOUNT" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="fwqd" column="FWQD" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="effDate" column="EFF_DATE" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="psjsrq" column="PSJSRQ" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="pszt" column="PSZT" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="sbyy" column="SBYY" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="synstat" column="SYNSTAT" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="proddu" column="PRODDU" jdbcType="java.lang.Double"/>
+	    <result property="prodip" column="PRODIP" jdbcType="java.lang.String" nullValue=""/>
+	</resultMap>
+	<resultMap id="TcsswebFwcpcxFreeDy" class="TcsswebFwcpcx">
+	    <result property="packageId" column="PACKAGE_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="packageName" column="PACKAGE_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	</resultMap>
+	
+	<select id="getTcsswebFwcpcxMrListByAccount" parameterClass="java.util.Map" resultMap = "TcsswebFwcpcx">
+			SELECT * FROM T_CSSWEB_FWCPCX_MR t where 1=1
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.ACCOUNT=#account#
+				 </isNotNull>
+			</dynamic>
+		    order by PRODUCT_ID
+	</select>
+	
+	<select id="getTcsswebFwcpcxListByAccount" parameterClass="java.util.Map" resultMap = "TcsswebFwcpcx">
+			SELECT * FROM T_CSSWEB_FWCPCX t where sysdate &gt;=to_date(t.Eff_date,'yyyymmdd') and sysdate &lt;=to_date(decode(t.psjsrq,0,30000000+101,30000000,30000000+101,t.psjsrq),'yyyymmdd')
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.ACCOUNT=#account#
+				 </isNotNull>
+			</dynamic>
+		    and (t.pszt='0' or t.pszt='6' or t.pszt='7')
+	</select>
+	<select id="getFwcpcxByAccountAndProductId" parameterClass="java.util.Map" resultMap = "TcsswebFwcpcx">
+			SELECT * FROM T_CSSWEB_FWCPCX t where 1=1
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.ACCOUNT=#account#
+				 </isNotNull>
+				 <isNotNull property="productId" prepend="and">
+				   t.PRODUCT_ID=#productId#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	<select id="getTcsswebFwcpcxListFree" parameterClass="java.util.Map" resultMap = "TcsswebFwcpcxFreeDy">
+	SELECT t.id as PACKAGE_ID,t.PACKAGE_NAME,h.id as PRODUCT_ID,h.PRODUCT_NAME from T_cssweb_FWTCDY t,T_CSSWEB_TCPTCDYB c ,
+		(
+		SELECT ID, DEPARTMENT_CODE, INTRODUCE, PRODUCT_NAME, NOTE, SFCL_ID, CREAT_DATE, FWQD, ART_ID FROM T_CSSWEB_FWCPDY p where 
+		EXISTS(SELECT 1 from T_CSSWEB_FWCPDY_SFCL l where p.SFCL_ID=l.sfcl_id 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.product_level&lt;=#productLevel#
+				 </isNotNull>
+				 <isNotNull property="commission" prepend="and">
+				   l.commission&lt;=#commission#
+				 </isNotNull>
+			</dynamic>)
+		or EXISTS (
+			SELECT 1 FROM T_CSSWEB_FWCPCX t where p.id=t.product_id 
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.account=#account#
+				 </isNotNull>
+			</dynamic>
+		    and (t.pszt='0' or t.pszt='6')
+			and sysdate &gt;=to_date(t.Eff_date,'yyyymmdd')
+		    and sysdate &lt;=to_date(decode(t.psjsrq,0,30000000+101,30000000,30000000+101,t.psjsrq),'yyyymmdd')
+			)
+		or EXISTS (
+			SELECT 1 FROM TFWCP_MFCL l ,TFWCP_YJLQJ j , 
+				(
+				SELECT JHYJL*1000 as JHYJL FROM  TFX_KHH_QTQK t WHERE 1=1
+				<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.KHH=#account#
+				 </isNotNull>
+			</dynamic>
+				) b where l.id=p.id and j.YJLSX &lt;= b.JHYJL 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.KHJB=#productLevel#
+				 </isNotNull>
+			</dynamic>
+			and l.YJL=j.id
+			)
+		) h
+		where t.id= c.package_id and c.product_id=h.id
+	</select>
+	<insert id="insertTcsswebFwcpcx" parameterClass="TcsswebFwcpcx">
+		INSERT into T_CSSWEB_FWCPCX ( ID, DEPARTMENT_CODE, ACCOUNT, PRODUCT_ID, FWQD,EFF_DATE,PSJSRQ,PSZT,SBYY,SYNSTAT,PRODDU,PRODIP) VALUES 
+		(#id#,#departmentCode#,#account#, #productId#, #fwqd#,#effDate#,#psjsrq#,#pszt#, #sbyy#, #synstat#,#proddu#,#prodip#)
+	</insert>
+	
+	<update id="upTcsswebFwcpcx" parameterClass="TcsswebFwcpcx">
+		update T_CSSWEB_FWCPCX set PRODUCT_ID=#productId#, EFF_DATE=#effDate#,PSJSRQ=#psjsrq#, PSZT=#pszt#,SYNSTAT=#synstat#,PRODDU=#proddu#,PRODIP=#prodip#  where ID=#id#
+	</update>
+	
+	<delete id="delTcsswebFwcpcxByAccount" parameterClass="String">
+		delete from T_CSSWEB_FWCPCX where account=#value#
+	</delete>
+	
+	<select id="getFwcpcxNotListByAccount" parameterClass="java.util.Map" resultMap = "TcsswebFwcpcxFreeDy">
+	SELECT t.id as PACKAGE_ID,t.PACKAGE_NAME,h.id as PRODUCT_ID,h.PRODUCT_NAME from T_cssweb_FWTCDY t,T_CSSWEB_TCPTCDYB c ,
+		(
+		SELECT ID, DEPARTMENT_CODE, INTRODUCE, PRODUCT_NAME, NOTE, SFCL_ID, CREAT_DATE, FWQD, ART_ID FROM T_CSSWEB_FWCPDY p where 
+		NOT EXISTS(SELECT 1 from T_CSSWEB_FWCPDY_SFCL l where p.SFCL_ID=l.sfcl_id 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.product_level&lt;=#productLevel#
+				 </isNotNull>
+				 <isNotNull property="commission" prepend="and">
+				   l.commission&lt;=#commission#
+				 </isNotNull>
+			</dynamic>)
+		AND NOT EXISTS (
+			SELECT 1 FROM T_CSSWEB_FWCPCX t where p.id=t.product_id 
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.account=#account#
+				 </isNotNull>
+			</dynamic>
+		    and (t.pszt='0' or t.pszt='6')
+			and sysdate &gt;=to_date(t.Eff_date,'yyyymmdd')
+		    and sysdate &lt;=to_date(decode(t.psjsrq,0,30000000+101,30000000,30000000+101,t.psjsrq),'yyyymmdd')
+			)
+		AND NOT EXISTS (
+			SELECT 1 FROM TFWCP_MFCL l ,TFWCP_YJLQJ j , 
+				(
+				SELECT JHYJL*1000 as JHYJL FROM  TFX_KHH_QTQK t WHERE 1=1
+				<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.KHH=#account#
+				 </isNotNull>
+			</dynamic>
+				) b where l.id=p.id and j.YJLSX &lt;= b.JHYJL 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.KHJB=#productLevel#
+				 </isNotNull>
+			</dynamic>
+			and l.YJL=j.id
+			)
+		) h
+		where t.id= c.package_id and c.product_id=h.id
+	</select>
+	
+	
+	<select id="getTcsswebFwcpcxListAll" resultMap="TcsswebFwcpcxFreeDy">
+	SELECT t.id as PACKAGE_ID,t.PACKAGE_NAME,h.id as PRODUCT_ID,h.PRODUCT_NAME from T_cssweb_FWTCDY t,T_CSSWEB_TCPTCDYB c ,T_CSSWEB_FWCPDY h
+		where t.id= c.package_id and c.product_id=h.id
+	</select>
+	
+	<resultMap id="TcsswebFwcpcxFreeDyMl" class="TcsswebFwcpcx">
+	    <result property="packageId" column="PACKAGE_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="packageName" column="PACKAGE_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="packageIntroduce" column="INTRODUCE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="cpml" column="CPML" jdbcType="java.lang.Integer"/>
+	</resultMap>
+	
+	<select id="getTcsswebFwcpcxListAllByPackageId" parameterClass="java.util.Map" resultMap="TcsswebFwcpcxFreeDyMl">
+			SELECT t.id as PACKAGE_ID,t.introduce as INTRODUCE, t.PACKAGE_NAME,h.id as PRODUCT_ID,h.PRODUCT_NAME,h.CPML from T_cssweb_FWTCDY t,T_CSSWEB_TCPTCDYB c ,T_CSSWEB_FWCPDY h
+		where t.id= c.package_id and c.product_id=h.id 
+		<dynamic>
+				 <isNotNull property="packageId" prepend="and">
+				   c.package_id=#packageId#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	
+	<select id="getTcsswebFwcpcxListFreeByProductId" parameterClass="java.util.Map" resultMap = "TcsswebFwcpcxFreeDy">
+	SELECT t.* from (
+	SELECT t.id as PACKAGE_ID,t.PACKAGE_NAME,h.id as PRODUCT_ID,h.PRODUCT_NAME from T_cssweb_FWTCDY t,T_CSSWEB_TCPTCDYB c ,
+		(
+		SELECT ID, DEPARTMENT_CODE, INTRODUCE, PRODUCT_NAME, NOTE, SFCL_ID, CREAT_DATE, FWQD, ART_ID FROM T_CSSWEB_FWCPDY p where 
+		EXISTS(SELECT 1 from T_CSSWEB_FWCPDY_SFCL l where p.SFCL_ID=l.sfcl_id 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.product_level&lt;=#productLevel#
+				 </isNotNull>
+				 <isNotNull property="commission" prepend="and">
+				   l.commission&lt;=#commission#
+				 </isNotNull>
+			</dynamic>)
+		or EXISTS (
+			SELECT 1 FROM T_CSSWEB_FWCPCX t where p.id=t.product_id 
+			<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.account=#account#
+				 </isNotNull>
+			</dynamic>
+		    and (t.pszt='0' or t.pszt='6')
+			and sysdate &gt;=to_date(t.Eff_date,'yyyymmdd')
+		    and sysdate &lt;=to_date(decode(t.psjsrq,0,30000000+101,30000000,30000000+101,t.psjsrq),'yyyymmdd')
+			)
+		or EXISTS (
+			SELECT 1 FROM TFWCP_MFCL l ,TFWCP_YJLQJ j , 
+				(
+				SELECT JHYJL*1000 as JHYJL FROM  TFX_KHH_QTQK t WHERE 1=1
+				<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.KHH=#account#
+				 </isNotNull>
+			</dynamic>
+				) b where l.id=p.id and j.YJLSX &lt;= b.JHYJL 
+				<dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.KHJB=#productLevel#
+				 </isNotNull>
+			</dynamic>
+			and l.YJL=j.id
+			)
+		) h
+		where t.id= c.package_id and c.product_id=h.id
+		) t WHERE t.PRODUCT_ID=#productId#
+	</select>
+	
+	<resultMap id="TcsswebFwcpcxFreecCunt" class="TcsswebFwcpcx">
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long"/>
+	    <result property="prcount" column="PRCOUNT" jdbcType="java.lang.Long"/>
+	</resultMap>
+	<select id="getproductIdCount" resultMap="TcsswebFwcpcxFreecCunt">
+	SELECT PRODUCT_ID ,COUNT(PRODUCT_ID) as PRCOUNT from T_CSSWEB_FWCPCX WHERE (PSZT = 0 OR PSZT = 6)
+		GROUP by PRODUCT_ID ORDER BY PRODUCT_ID DESC
+	</select>
+</sqlMap>

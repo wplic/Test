@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.client.pojo.TassetuserUsername">
+	<typeAlias alias="TassetuserUsername" type="com.cssweb.client.pojo.TassetuserUsername" />
+	
+	<resultMap id="TassetuserUsername" class="TassetuserUsername">
+	    <result property="assetuser" column="ASSETUSER" jdbcType="java.lang.String"/>
+	    <result property="username" column="USERNAME" jdbcType="String"/>
+	</resultMap>
+	 <update id="updateTassetuserUsernameByAssetuser" parameterClass="TassetuserUsername">
+		  update T_ASSETUSER_USERNAME set USERNAME=#username# where ASSETUSER=#assetuser#
+	</update>
+
+	<insert id="insertTassetuserUsername" parameterClass="TassetuserUsername">
+		insert into T_ASSETUSER_USERNAME (ASSETUSER,USERNAME) values(#assetuser#,#username#)
+	</insert>
+	
+	<select id="getTassetuserUsernameByAssetuser" resultMap="TassetuserUsername" parameterClass="String">
+		select * from T_ASSETUSER_USERNAME where ASSETUSER=#assetuser#
+	</select>
+	
+	<select id="getTassetuserUsernameByUsername" resultMap="TassetuserUsername" parameterClass="String">
+		select * from T_ASSETUSER_USERNAME where USERNAME=#username#
+	</select>
+		
+	<delete id="deleteTassetuserUsernameByAssetuser" parameterClass="String">
+		delete T_ASSETUSER_USERNAME where ASSETUSER=#assetuser#
+	</delete>
+	
+	<select id="getTassetuserUsernameList" parameterClass="java.util.Map" resultMap = "TassetuserUsername">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+		select * from T_ASSETUSER_USERNAME where 1=1 
+		<dynamic>
+				 <isNotNull property="assetuser" prepend="and">
+				   ASSETUSER like '$assetuser$%'
+				 </isNotNull>
+				 <isNotNull property="username" prepend="and">
+				  	USERNAME like '$username$%'
+				 </isNotNull>
+			</dynamic>
+		 )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+		
+	<select id="getCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) from T_ASSETUSER_USERNAME where 1=1 
+		<dynamic>
+				 <isNotNull property="assetuser" prepend="and">
+				  	ASSETUSER like '$assetuser$%'
+				 </isNotNull>
+				 <isNotNull property="username" prepend="and">
+				  	USERNAME like '$username$%'
+				 </isNotNull>
+			</dynamic>
+	</select>
+</sqlMap>

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.SystemCredit">
+
+	<typeAlias alias="systemCredit" type="com.cssweb.systemset.pojo.SystemCredit"/>
+  
+	<resultMap id="systemCreditMap" class="systemCredit">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="year" 	column="YEAR" 	jdbcType="Long"/>
+ 		<result property="martOrder" 	column="MART_ORDER" 	jdbcType="String"/>
+ 		<result property="tradeallMoney" 	column="TRADEALL_MONEY" 		jdbcType="Double"/>
+ 	 	<result property="stockfundMoney" 	column="STOCKFUND_MONEY" 		jdbcType="Double"/>
+ 	 	<result property="picId" 			column="PIC_ID" 			jdbcType="Long"/>
+  	</resultMap>
+  	
+  	
+  <select id="getCreditList" parameterClass="java.util.Map" resultMap="systemCreditMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+  	<select id="getCreditById" parameterClass="Long" resultMap="systemCreditMap">
+		SELECT * FROM T_SYSTEM_CREDIT WHERE ID=#id#
+	</select>
+  <insert id="insertSystemCredit" parameterClass="systemCredit">
+    INSERT INTO 
+    	T_SYSTEM_CREDIT(
+    		ID,
+    		YEAR,
+    		MART_ORDER,
+    		TRADEALL_MONEY,
+    		STOCKFUND_MONEY)
+    VALUES(
+    		#id#,
+    		#year#,
+    		#martOrder#,
+    		#tradeallMoney#,
+    		#stockfundMoney#)
+  </insert>
+  		
+	<update id="upCreditById" parameterClass="systemCredit">
+		update T_SYSTEM_CREDIT set YEAR = #year#,MART_ORDER=#martOrder#,TRADEALL_MONEY=#tradeallMoney#,STOCKFUND_MONEY=#stockfundMoney# where id = #id#
+	</update>
+	
+	<update id="upCreditPicId" parameterClass="systemCredit">
+		update T_SYSTEM_CREDIT set PIC_ID = #picId# where id = #id#
+	</update>
+	
+	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+    
+  <delete id="deleteCreditById" parameterClass="java.lang.Long" >
+    	delete from T_SYSTEM_CREDIT where ID=#id#
+  </delete>
+</sqlMap>

@@ -1,0 +1,500 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.invest.pojo.Invest">
+
+	<typeAlias alias="Invest" type="com.cssweb.invest.pojo.Invest"/>
+
+	<!--result map-->
+	<resultMap id="investMap1" class="Invest">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="TITLE" property="title" jdbcType="String"/>
+		<result column="BEGIN_TIME" property="beginTime" jdbcType="java.util.Date"/>
+		<result column="END_TIME" property="endTime" jdbcType="java.util.Date"/>
+		<result column="INVEST_NUM" property="investNum" jdbcType="int" nullValue="0"/>
+		<result column="COL_NAME" property="colName" jdbcType="String"/>
+		<result column="STATUS" property="status" jdbcType="int" nullValue="0"/>
+		<result column="DELFLAG" property="delflag" jdbcType="int" nullValue="0"/>
+		<result column="DEPARTMENT" property="department" jdbcType="String"/>
+		<result column="PIC" property="pic" jdbcType="String"/>
+		<result column="MEMO" property="memo" jdbcType="String"/>
+		<result column="SYSTIME" property="systime" jdbcType="java.util.Date"/>
+		<result column="TYPE" property="type" jdbcType="String"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="USERID" property="userid" jdbcType="int" nullValue="0"/>
+	</resultMap>
+	<resultMap id="investMap2" class="Invest">
+	    <result column="ID" property="id" jdbcType="long"/>
+		<result column="INVEST_ID" property="investId" jdbcType="int" nullValue="0"/>
+		<result column="QUESTION" property="question" jdbcType="String"/>
+		<result column="QUESTION_TYPE" property="questionType" jdbcType="String"/>
+		<result column="ANSWER_NUM" property="answerNum" jdbcType="int" nullValue="0"/>
+		<result column="DELFLAG" property="delflag" jdbcType="int" nullValue="0"/>
+	</resultMap>
+	<resultMap id="investMap3" class="Invest">
+	    <result column="ID" property="id" jdbcType="long"/>
+		<result column="INVEST_ID" property="investId" jdbcType="int" nullValue="0"/>
+		<result column="QUESTION_ID" property="questionId" jdbcType="int"/>
+		<result column="ANSWER" property="answer" jdbcType="String"/>
+		<result column="DELFLAG" property="delflag" jdbcType="int" nullValue="0"/>
+	</resultMap>
+	<resultMap id="investMap4" class="Invest">
+	    <result column="USERID" property="userid" jdbcType="int" nullValue="0"/>
+		<result column="USERNAME" property="username" jdbcType="String"/>
+		<result column="INVEST_ID" property="investId" jdbcType="int"/>
+		<result column="IP" property="ip" jdbcType="String"/>
+		<result column="ADDRESS" property="address" jdbcType="String"/>
+		<result column="POSTCARD" property="postcard" jdbcType="String"/>
+		<result column="CARD" property="card" jdbcType="String"/>
+		<result column="TELPHONE" property="telphone" jdbcType="String"/>
+		<result column="SAVEDATE" property="savedate" jdbcType="java.util.Date"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	<resultMap id="investMap5" class="Invest">
+	    <result column="USERID" property="userid" jdbcType="int" nullValue="0"/>
+		<result column="USERNAME" property="username" jdbcType="String"/>		
+		<result column="IP" property="ip" jdbcType="String"/>
+		<result column="INVEST_ID" property="investId" jdbcType="int"/>
+		<result column="QUESTION_ID" property="questionId" jdbcType="int"/>
+		<result column="ANSWER_TYPE" property="answerType" jdbcType="String"/>
+		<result column="CONTENT" property="content" jdbcType="String"/>
+		<result column="SAVEDATE" property="savedate" jdbcType="java.util.Date"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	<resultMap id="investMap6" class="Invest">
+		<result column="PIC" property="pic" jdbcType="String"/>
+	</resultMap>
+	<resultMap id="investMap7" class="Invest">
+	    <result column="DOC_ID" property="docId" jdbcType="int" nullValue="0"/>
+	    <result column="title" property="title" jdbcType="String"/>
+		<result column="upload_date" property="uploadDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+	</resultMap>
+	<resultMap id="investMap8" class="Invest">
+	    <result column="DOC_ID" property="docId" jdbcType="int" nullValue="0"/>
+	    <result column="title" property="title" jdbcType="String"/>
+	    <result column="base_brief" property="baseBrief" jdbcType="String" />
+		<result column="upload_date" property="uploadDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="jjdm" property="jjdm" jdbcType="String"/>
+	    <result column="jjjc" property="title" jdbcType="String"/>
+		<result column="fxqsrq" property="fxqsrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="fxjzrq" property="fxjzrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="jjglr" property="jjglr" jdbcType="String" />
+		<result column="tzlx" property="tzlx" jdbcType="String" />
+		<result column="sgfl" property="sgfl" jdbcType="String" />
+		<result column="shfl" property="shfl" jdbcType="String" />
+		<result column="rgfl" property="rgfl" jdbcType="String" />
+		<result column="rgzdtze" property="rgzdtze" jdbcType="String" />
+		<result column="sgzdtze" property="sgzdtze" jdbcType="String" />
+	</resultMap>
+	
+	<resultMap id="investMap9" class="Invest">
+		<result column="jjdm" property="jjdm" jdbcType="String"/>
+	    <result column="jjjc" property="jjjc" jdbcType="String"/>
+		<result column="fxqsrq" property="fxqsrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="fxjzrq" property="fxjzrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="jjglr" property="jjglr" jdbcType="String" />
+		<result column="tzlx" property="tzlx" jdbcType="String" />
+		<result column="sgfl" property="sgfl" jdbcType="String" />
+		<result column="shfl" property="shfl" jdbcType="String" />
+		<result column="rgfl" property="rgfl" jdbcType="String" />
+		<result column="rgzdtze" property="rgzdtze" jdbcType="String" />
+		<result column="sgzdtze" property="sgzdtze" jdbcType="String" />
+	</resultMap>
+	
+	<resultMap id="investMap10" class="Invest">
+		<result column="guid" property="guid" jdbcType="String"/>
+		<result column="gpdm" property="gpdm" jdbcType="String"/>
+	    <result column="gpjc" property="gpjc" jdbcType="String"/>
+		<result column="wsfxrq" property="wsfxrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="ssrq" property="ssrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="sgdm" property="sgdm" jdbcType="String" />
+		<result column="fxjg" property="fxjg" jdbcType="String" />
+		<result column="fxsl" property="fxsl" jdbcType="String" />
+		<result column="jqpjfxsyl" property="jqpjfxsyl" jdbcType="String" />
+		<result column="wsfxzql" property="wsfxzql" jdbcType="String" />
+		<result column="zqh" property="zqh" jdbcType="String" />
+	</resultMap>
+
+	<resultMap id="investMap11" class="Invest">
+	    <result column="GUID" property="guid" jdbcType="String"/>
+	    <result column="ZT" property="zt" jdbcType="String"/>
+	    <result column="GJZ" property="gjz" jdbcType="String" />
+		<result column="MTLY" property="mtly" jdbcType="String"/>
+		
+	    <result column="ZYXDJ" property="zyxdj" jdbcType="String"/>
+	    <result column="CC" property="cc" jdbcType="String"/>
+	    <result column="ZZ" property="zz" jdbcType="String" />
+		<result column="FLFG" property="flfg" jdbcType="String"/>	
+		
+	    <result column="FSRQ" property="fsrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+	    <result column="ZHXGRQ" property="zhxgrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+	    <result column="SCBZ" property="scbz" jdbcType="String" />
+		<result column="GKBZ" property="gkbz" jdbcType="String"/>			
+		
+	    <result column="CZY" property="czy" jdbcType="String" />
+		<result column="NR" property="nr" jdbcType="BLOB"/>		
+	</resultMap>
+	
+	<resultMap id="investMap12" class="Invest">
+	    <result column="GUID" property="guid" jdbcType="String"/>
+	    <result column="ZT" property="zt" jdbcType="String"/>
+	    <result column="GJZ" property="gjz" jdbcType="String" />
+		<result column="MTLY" property="mtly" jdbcType="String"/>
+	    <result column="CC" property="cc" jdbcType="String"/>		
+	    <result column="FSRQ" property="fsrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+	    <result column="ZHXGRQ" property="zhxgrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00" />
+		<result column="NR" property="nr" jdbcType="BLOB"/>		
+	</resultMap>
+	<resultMap id="investMap13" class="Invest">
+	    <result column="DOC_ID" property="docId" jdbcType="int" nullValue="0"/>
+	    <result column="title" property="title" jdbcType="String"/>
+		<result column="upload_date" property="strUploadDate" jdbcType="String"/>
+	</resultMap>	
+	<resultMap id="investMap14" class="Invest">
+	    <result column="DOC_ID" property="docId" jdbcType="int" nullValue="0"/>
+	    <result column="BGMC" property="bgmc" jdbcType="String"/>
+		<result column="FSRQ" property="fsrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="FJWJMC" property="fjwjmc" jdbcType="String"/>
+	</resultMap>	
+	<resultMap id="investMap15" class="Invest">
+	    <result column="DOC_ID" property="docId" jdbcType="int" nullValue="0"/>
+	    <result column="BGMC" property="bgmc" jdbcType="String"/>
+	    <result column="YJJGMC" property="yjjgmc" jdbcType="String"/>
+	    <result column="FJWJMC" property="fjwjmc" jdbcType="String"/>
+	    <result column="BGFJ" property="bgfj" jdbcType="BLOB"/>
+		<result column="FSRQ" property="fsrq" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+	</resultMap>
+	<resultMap id="investMap19" class="Invest">
+		<result column="node_id" property="nodeId" jdbcType="String" />
+	</resultMap>
+	<cacheModel id="InvestCache" type="OSCACHE">
+	    <flushInterval hours="24"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	<resultMap id="investMap23" class="Invest">
+		<result column="DOC_ID" property="docId" jdbcType="int"
+			nullValue="0" />
+		<result column="title" property="title" jdbcType="String" />
+		<result column="upload_date" property="uploadDate"
+			jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00" />
+		<result column="http_href" property="httpHref" jdbcType="String" />
+		
+		<result column="base_brief" property="baseBrief" jdbcType="String" />
+		<result column="title_color" property="titleColor" jdbcType="String" />
+		<result column="title_striking" property="titleStriking" jdbcType="String" />
+	</resultMap>
+	<insert id="insertInvestBasic" parameterClass="Invest">
+		INSERT INTO INVEST_BASIC ( ID , USERID , TITLE ,BEGIN_TIME , END_TIME ,INVEST_NUM , COL_NAME , STATUS , DELFLAG ,DEPARTMENT , PIC , MEMO ,SYSTIME , TYPE , EXT1 , EXT2) 
+		   VALUES (#id#, #userid#, #title#, #beginTime#, #endTime#, #investNum#, #colName#, #status#, #delflag#, #department#, #pic#, #memo#, sysdate, #type#, #ext1#, #ext2#)
+	</insert>
+	
+	<insert id="insertInvestAnswer" parameterClass="Invest">
+		INSERT INTO INVEST_ANSWER ( ID , QUESTION_ID ,ANSWER , DELFLAG , INVEST_ID) 
+		   VALUES (#id#, #questionId#, #answer#, #delflag#, #investId#)
+	</insert>
+	
+	<insert id="insertInvestQuestion" parameterClass="Invest">
+		INSERT INTO INVEST_QUESTION ( ID , INVEST_ID ,QUESTION , QUESTION_TYPE ,ANSWER_NUM , DELFLAG) 
+		   VALUES (#id#, #investId#, #question#, #questionType#, #answerNum#, #delflag#)
+	</insert>
+	
+	<insert id="insertInvestData" parameterClass="Invest">
+		INSERT INTO INVEST_DATA ( USERID , USERNAME , INVEST_ID ,QUESTION_ID , ANSWER_TYPE , CONTENT , SAVEDATE ,EXT1 , EXT2 , EXT3 , EXT4) 
+		   VALUES (#userid#, #username#, #investId#, #questionId#, #answerType#, #content#, #savedate#, #ext1#, #ext2#, #ext3#, #ext4#)
+	</insert>
+	
+	<insert id="insertInvestUser" parameterClass="Invest">
+		INSERT INTO INVEST_USER ( USERID , USERNAME , INVEST_ID ,IP , ADDRESS , POSTCARD ,CARD , TELPHONE ,SAVEDATE ,EXT1 , EXT2 , EXT3 , EXT4) 
+		   VALUES (#userid#, #username#, #investId#, #ip#, #address#, #postcard#,#card#, #telphone#, #savedate#, #ext1#, #ext2#, #ext3#, #ext4#)
+	</insert>
+	
+	<delete id="deleteInvestBasic" parameterClass="java.lang.Long">
+		DELETE INVEST_BASIC WHERE ID = #id# 
+	</delete>
+	
+	<delete id="deleteInvestQuestion" parameterClass="int">
+		DELETE INVEST_QUESTION WHERE INVEST_ID = #investId# 
+	</delete>
+	
+	<delete id="deleteInvestAnswer" parameterClass="int">
+		DELETE INVEST_Answer WHERE INVEST_ID = #investId# 
+	</delete>
+	
+	<select id="getInvestBasicByCondition" resultMap="investMap1" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select> 
+   
+   <select id="getInvestUser" resultMap="investMap4" parameterClass="java.util.Map">
+	    $condition$
+   </select> 
+   
+   <select id="getInvestData" resultMap="investMap5" parameterClass="java.util.Map">
+	    $condition$
+   </select> 
+   
+   <select id="getInvestDataByCondition" resultMap="investMap5" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select>
+    <select id="getNewsListByKfs" resultMap="investMap9" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select>
+   
+       <select id="getNewsListByXgrl" resultMap="investMap10" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select>
+   
+   <select id="getInvestUserByCondition" resultMap="investMap4" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select> 
+   
+   <select id="getInvestQuestionByCondition" resultMap="investMap2" parameterClass="java.util.Map">
+	    $condition$
+   </select> 
+   
+   <select id="getInvestByCondition" resultMap="investMap1" parameterClass="java.util.Map">
+	    $condition$
+   </select> 
+   
+   <select id="getInvestAnswerByCondition" resultMap="investMap3" parameterClass="java.util.Map">
+	    $condition$
+   </select> 
+   
+   <select id="getCount" parameterClass="map" resultClass="Integer">
+    	$condition$
+  </select>
+  
+  <select id="getNewsPic" resultMap="investMap6" parameterClass="java.util.Map">
+	    $condition$
+   </select> 
+   
+   <select id="getNewsByCondition" resultMap="investMap7" parameterClass="java.util.Map">
+	   SELECT * FROM 
+(
+SELECT A.*, ROWNUM RN 
+FROM (
+		  		$condition$
+    		 ) A 
+)
+WHERE RN BETWEEN #beginNum#  AND #endNum#
+   </select> 
+      <select id="getSSJPNewsByCondition" resultMap="investMap13" parameterClass="java.util.Map">
+	   SELECT * FROM 
+(
+SELECT A.*, ROWNUM RN 
+FROM (
+		  		$condition$
+    		 ) A 
+)
+WHERE RN BETWEEN #beginNum#  AND #endNum#
+   </select> 
+   <select id="getNewsCountByCondition" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+		  		$condition$
+   </select>
+   <select id="getNewsByConditionBrief" resultMap="investMap8" parameterClass="java.util.Map">
+	    select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select> 
+       <select id="getNewsListByFlfg" resultMap="investMap11" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select>
+       <select id="getNewsListByJJ" resultMap="investMap12" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select>
+       <select id="getNewsListByKeyWord" resultMap="investMap12" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select>
+      <select id="getNewsContentByGuid2" resultMap="investMap12" parameterClass="String">
+		select * from JCZS where GUID=#guid# and SCBZ='0' and GKBZ='1'
+   </select>
+      <select id="getNewsContentByGuid3" resultMap="investMap12" parameterClass="String">
+		select * from tjzl where GUID=#guid# and SCBZ='0' and GKBZ='1'
+   </select>
+   <select id="getNewsContentByGuid" resultMap="investMap11" parameterClass="String">
+		select * from flfg where GUID=#guid# and SCBZ='0' and GKBZ='1'
+   </select>  
+  <update id="updateStatus" parameterClass="map">
+		update INVEST_BASIC set STATUS = #status# where id = #id#
+  </update>
+	
+  <update id="updateDelflag" parameterClass="map">
+		update INVEST_BASIC set DELFLAG = #delflag# where id = #id#
+  </update>
+  
+  
+  <select id="getMrkbByCondition" resultMap="investMap14" parameterClass="java.util.Map">
+	   SELECT * FROM 
+(
+SELECT A.*, ROWNUM RN 
+FROM (
+		  		$condition$
+    		 ) A 
+)
+WHERE RN BETWEEN #beginNum#  AND #endNum#
+   </select> 
+   
+     <select id="getInvestByIdForMrkbPDF" resultMap="investMap15" parameterClass="java.lang.Long">
+		select t_bgjbxxb_id as doc_id,bgmc,yjjgmc,bgfj,fsrq,fjwjmc from cstm_bgjbxxb where t_bgjbxxb_id = #id#
+   </select> 
+   <select id="getInvestByIdForbgjbxxBgjbxxb" resultMap="investMap15" parameterClass="java.lang.Long">
+		select t_bgjbxxb_id as doc_id,bgmc,yjjgmc,bgfj,fsrq,fjwjmc from bgjbxxb where t_bgjbxxb_id = #id#
+   </select>
+	<delete id="deleteInvestData" parameterClass="java.lang.Long">
+		DELETE INVEST_DATA WHERE invest_id='159' and userid = #id# 
+	</delete>
+	<select id="findInvestDataById" resultClass="Integer" parameterClass="java.lang.Long">
+		SELECT count(*) FROM INVEST_DATA where invest_id='159' and userid=#id#
+	</select>
+	<select id="getCmsNodeIdListWithChild" resultMap="investMap19">
+		select node_id from cms_category_tree_map where parent_id in (select cat_id from cms_category_basic_info where cat_name in ($catNames$)) or node_id in (select cat_id from cms_category_basic_info where cat_name in ($catNames$))
+	</select>
+	<select id="getCmsNodeIdList" resultMap="investMap19">
+		select cat_id as node_id from cms_category_basic_info where cat_name in ($catNames$)
+	</select>
+	<select id="getNewsByConditionUrl" resultMap="investMap23" parameterClass="java.util.Map">
+		SELECT * FROM ( SELECT A.*, ROWNUM RN FROM ( $condition$ ) A )
+		WHERE RN BETWEEN #beginNum# AND #endNum#
+	</select>
+</sqlMap>

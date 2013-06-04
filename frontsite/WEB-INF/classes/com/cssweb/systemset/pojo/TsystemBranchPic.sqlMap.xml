@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.TsystemBranchPic">
+
+	<typeAlias alias="TsystemBranchPic" type="com.cssweb.systemset.pojo.TsystemBranchPic"/>
+  
+	<resultMap id="TsystemBranchPic" class="TsystemBranchPic">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="branchId" column="BRANCH_ID" jdbcType="Long"/>
+		<result property="picCode" column="PIC_CODE" jdbcType="String"/>
+		<result property="picName" column="PIC_NAME" jdbcType="String"/>
+		<result property="picId" column="PIC_ID" jdbcType="java.lang.Long"/>
+		<result property="position" column="POSITION" jdbcType="String"/>
+		<result property="isShow" column="IS_SHOW" jdbcType="String"/>
+		<result property="uploadDate" column="UPLOAD_DATE" jdbcType="Date"/>
+		<result property="uploadUser" column="UPLOAD_USER" jdbcType="java.lang.Long"/>
+		<result property="picHref" column="PIC_HREF" jdbcType="String"/>
+  	</resultMap>
+  	
+    <insert id="insertTsystemBranchPic" parameterClass="TsystemBranchPic">
+		INSERT into T_SYSTEM_BRANCH_PIC (ID,BRANCH_ID,PIC_CODE,PIC_NAME,PIC_ID,POSITION,IS_SHOW,UPLOAD_DATE,UPLOAD_USER,PIC_HREF) 
+		VALUES (#id#,#branchId#,#picCode#,#picName#,#picId#,#position#,#isShow#,sysdate,#uploadUser#,#picHref#)
+	</insert>
+  	<update id="update" parameterClass="TsystemBranchPic">
+	    UPDATE T_SYSTEM_BRANCH_PIC SET 
+			BRANCH_ID=#branchId#,
+			PIC_CODE=#picCode#,
+			PIC_NAME=#picName#,
+			POSITION=#position#,
+			IS_SHOW=#isShow#,
+			UPLOAD_DATE=sysdate,
+			UPLOAD_USER=#uploadUser#,
+			PIC_HREF=#picHref# WHERE ID = #id#
+	</update>
+	
+  <select id="select" parameterClass="map" resultMap="TsystemBranchPic">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT * FROM T_SYSTEM_BRANCH_PIC where 1=1
+			<dynamic>
+			 <isNotEmpty property="branchId" prepend="and">
+			  BRANCH_ID = #branchId#
+			 </isNotEmpty>		
+			</dynamic>		 
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="count" parameterClass="map" resultClass="Integer">
+		SELECT 	COUNT(*) FROM T_SYSTEM_BRANCH_PIC where 1=1
+			<dynamic>
+			 <isNotEmpty property="branchId" prepend="and">
+			  BRANCH_ID = #branchId#
+			 </isNotEmpty>	
+			</dynamic>
+	</select>
+  	<select id="getTsystemBranchPicById" parameterClass="Long" resultMap="TsystemBranchPic">
+		SELECT * FROM T_SYSTEM_BRANCH_PIC WHERE ID=#id#
+	</select>
+
+	<update id="upPicById" parameterClass="TsystemBranchPic">
+		update T_SYSTEM_BRANCH_PIC set PIC_ID = #picId# where id = #id#
+	</update>
+
+     <update id="upIsShowById" parameterClass="TsystemBranchPic">
+		update T_SYSTEM_BRANCH_PIC set IS_SHOW = #isShow# where id = #id#
+	</update>
+	
+	<select id="getTsystemBranchPicByBranchId" parameterClass="Long" resultMap = "TsystemBranchPic">
+       select * from T_SYSTEM_BRANCH_PIC where BRANCH_ID = #value# 
+    </select>
+    
+    <delete id="delById" parameterClass="Long">
+		delete from T_SYSTEM_BRANCH_PIC where id = #value#
+	</delete>
+</sqlMap>

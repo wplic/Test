@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebDcxList">
+<typeAlias alias="TcsswebDcxList" type="com.cssweb.subscribe.pojo.TcsswebDcxList"/>
+	<resultMap id="TcsswebDcxSmsList" class="TcsswebDcxList">
+	    <result property="id" column="id" jdbcType="java.lang.Long"/>
+	    <result property="pre_send_time" column="pre_send_time" jdbcType="java.lang.Date" />
+	    <result property="pre_send_time2" column="pre_send_time2" jdbcType="java.lang.String" />
+	    <result property="content" column="content" jdbcType="java.lang.String"/>
+	    <result property="psfs" column="psfs" jdbcType="java.lang.Long"/>
+	    <result property="infoto" column="infoto" jdbcType="java.lang.String"/>
+	    <result property="yyb" column="yyb" jdbcType="java.lang.Long"/>
+	    <result property="recvuserid" column="recvuserid" jdbcType="java.lang.String"/>
+	    <result property="contentsize" column="contentsize" jdbcType="java.lang.Long"/>	    
+	    <result property="status" column="status" jdbcType="java.lang.Long"/>
+	    <result property="userid" column="userid" jdbcType="java.lang.String"/>
+	</resultMap>	
+	 <resultMap id="TcsswebDcxMmsList" class="TcsswebDcxList">
+	    <result property="id" column="id" jdbcType="java.lang.Long"/>
+	    <result property="khh" column="khh" jdbcType="java.lang.Long"/>
+	    <result property="fssj" column="fssj" jdbcType="java.lang.Date" />
+	    <result property="sj" column="sj" jdbcType="java.lang.String"/>
+	    <result property="fssj2" column="fssj2" jdbcType="java.lang.String"/>
+	   <result property="mms_id" column="mms_id" jdbcType="java.lang.Long"/>
+	    <result property="mms_title" column="mms_title" jdbcType="java.lang.String"/>
+	    <result property="yyb" column="yyb" jdbcType="java.lang.Long"/>
+	    <result property="czy" column="czy" jdbcType="java.lang.Long"/>
+	    <result property="cxfl" column="cxfl" jdbcType="java.lang.Long"/>    
+	    <result property="status" column="status" jdbcType="java.lang.Long"/>	   
+	</resultMap>  
+	
+	
+	<!-- 短信定制情况查询 -->
+	<select id="getTcsswebSmsListByAccount" parameterClass="java.util.Map" resultMap="TcsswebDcxSmsList">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT s.*, to_char(pre_send_time,'yyyy-mm-dd hh24:mi:ss') pre_send_time2
+		FROM INFOSEND_LS s ,t_client_basic b
+		where s.recvuserid = b.zjzh
+		  and b.khbh = #username# 
+		order by s.pre_send_time desc)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<!-- 短信定制总数 -->
+	<select id="getTcsswebSmsListByAccountCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(*)	FROM INFOSEND_LS s,t_client_basic b
+		where s.recvuserid = b.zjzh
+		  and b.khbh = #username# 
+	</select>
+	
+	<!--  彩信定制情况查询  -->
+	  <select id="getTcsswebMmsListByAccount" parameterClass="java.util.Map" resultMap="TcsswebDcxMmsList">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT  s.*, to_char(fssj,'yyyy-mm-dd hh24:mi:ss') fssj2
+		FROM TINFO_MMS_SEND_LS s ,t_client_basic b
+		where s.khh = b.zjzh and s.cxfl =#cxfl#
+		  and b.khbh = #username#
+		order by s.fssj desc)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	 
+	<!-- 彩信定制总数 -->
+	<select id="getTcsswebMmsListByAccountCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(*)	FROM TINFO_MMS_SEND_LS s,t_client_basic b
+		where s.khh = b.zjzh
+		  and b.khbh = #username# and s.cxfl =#cxfl#
+	</select>
+	
+</sqlMap>

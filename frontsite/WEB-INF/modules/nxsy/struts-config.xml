@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<action-mappings>	
+		<action path="/nxsyLoginAction" parameter="method" scope="request" type="com.cssweb.nxsy.web.NxsyLoginAction">
+			<forward name="login" path="/match/nxsy/login.jsp"></forward>
+			<forward name="logout" path="/match/nxsy/login.jsp"></forward>
+			<forward name="success" path="/match/nxsy/index.jsp"></forward>
+		</action>
+		<action path="/nxsyRegisterAction" parameter="method" scope="request" type="com.cssweb.nxsy.web.NxsyRegisterAction">
+			<forward name="register" path="/match/nxsy/register.jsp"></forward>
+			<forward name="userinfo" path="/match/nxsy/userinfo.jsp"></forward>
+			<forward name="pwd" path="/match/nxsy/pwd.jsp"></forward>
+		</action>
+		<action path="/nxsyBSAction" parameter="method" scope="request" type="com.cssweb.nxsy.web.NxsyBSAction">
+			<forward name="buy" path="/match/nxsy/buy.jsp"></forward>
+			<forward name="bsentrust" path="/match/nxsy/stock/bsEntrust.jsp"></forward>
+			<forward name="DoublebsEntrust" path="/match/nxsy/stock/DoublebsEntrust.jsp"></forward>
+			<forward name="arbitrage" path="/match/nxsy/arbitrage.jsp"></forward>
+		</action>
+		<action path="/nxsyCancelAction" parameter="method" scope="request" type="com.cssweb.nxsy.web.NxsyCancelAction">
+			<forward name="list" path="/match/nxsy/cancel.jsp"></forward>
+		</action>
+		<action path="/nxsyQueryHisAction" parameter="method" scope="request" type="com.cssweb.nxsy.web.NxsyQueryHisAction">
+			<forward name="hisentrust" path="/match/nxsy/entrust_his.jsp"></forward>
+			<forward name="hisdeliver" path="/match/nxsy/deliver_his.jsp"></forward>
+			<forward name="stockjour" path="/match/nxsy/stockjour.jsp"></forward>
+			<forward name="fundjour" path="/match/nxsy/fundjour.jsp"></forward>
+			<forward name="hisprice" path="/match/nxsy/price_his.jsp"></forward>
+		</action>
+		<action path="/nxsyQueryAction" parameter="method" scope="request" type="com.cssweb.nxsy.web.NxsyQueryAction">
+			<forward name="entrust" path="/match/nxsy/entrust.jsp"></forward>
+			<forward name="entrust_sub" path="/match/nxsy/entrust_sub.jsp"></forward>
+			<forward name="deliver" path="/match/nxsy/deliver.jsp"></forward>
+			<forward name="deliver_sub" path="/match/nxsy/deliver_sub.jsp"></forward>
+			<forward name="assetinfo" path="/match/nxsy/assetinfo.jsp"></forward>
+			<forward name="stockhold" path="/match/nxsy/stock/stockHold.jsp"></forward>
+			<forward name="rank" path="/match/nxsy/rank.jsp"></forward>
+			
+		</action>
+		<action path="/nxsyAssetAction" parameter="method" scope="request" type="com.cssweb.nxsy.web.NxsyAssetAction">
+			<forward name="assetday" path="/match/nxsy/asset_day.jsp"></forward>
+			<forward name="assetweek" path="/match/nxsy/asset_week.jsp"></forward>
+			<forward name="assetmonth" path="/match/nxsy/asset_month.jsp"></forward>			
+		</action>
+		<action path="/nxsyQuestion" parameter="method" scope="request">
+			<forward name="success" path="/match/nxsy/question.jsp"></forward>
+		</action>
+	</action-mappings>		
+</struts-config>

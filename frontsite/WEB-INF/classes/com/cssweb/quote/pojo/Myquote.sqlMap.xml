@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.quote.pojo.Myquote">
+
+	<typeAlias alias="Myquote" type="com.cssweb.quote.pojo.Myquote" />
+
+	<resultMap id="Myquote" class="Myquote">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="webuserId" column="WEBUSER_ID" jdbcType="Long"/>
+		<result property="gpdm" column="GPDM" jdbcType="String"/>
+		<result property="gpmc" column="GPMC" jdbcType="String" />
+		<result property="zjcj" column="ZJCJ" jdbcType="Double" />
+		<result property="zf" column="ZF" jdbcType="Double" />
+	</resultMap>
+
+	<resultMap id="Quote" class="Myquote">
+		<result property="gpdm" column="GPDM" jdbcType="String"/>
+		<result property="gpmc" column="GPMC" jdbcType="String" />
+	</resultMap>
+	<insert id="insertMyquote" parameterClass="Myquote">
+		INSERT into T_FINANCE_MYQUOTE ( ID, WEBUSER_ID, GPDM) VALUES (#id#,#webuserId#,#gpdm#)
+	</insert>
+	
+	<update id="upMyquote" parameterClass="Myquote">
+		update T_FINANCE_MYQUOTE set GPDM = #gpdm# where id=#id#
+	</update>
+
+	<delete id="deleteMyquotes" parameterClass="String">
+		delete from T_FINANCE_MYQUOTE where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteMyquoteById" parameterClass="Long">
+		delete from T_FINANCE_MYQUOTE where id = #value#
+	</delete>
+	
+	<!-- 查找所有的我的股票信息，或者根据股票代码查询查询 -->
+	<select id="getMyquoteAll" resultMap="Myquote" parameterClass="java.util.Map">
+		select t.ID as ID,t.WEBUSER_ID as WEBUSER_ID,t.GPDM as GPDM,q.ZQJC as GPMC ,q.ZJCJ as ZJCJ,q.ZF as ZF from T_FINANCE_MYQUOTE t,QUOTE q WHERE t.GPDM=q.ZQDM AND t.WEBUSER_ID=#webuserId# 
+		<dynamic>
+		    <isNotEmpty prepend="and" property="gpdm">
+				    t.GPDM = #gpdm# 
+			</isNotEmpty>
+		</dynamic>
+		order by t.id desc
+	</select>
+
+	<select id="getMyquoteById" parameterClass="Long" resultMap="Myquote">
+		select t.ID as ID,t.WEBUSER_ID as WEBUSER_ID,t.GPDM as GPDM,q.ZQJC as GPMC ,q.ZJCJ as ZJCJ,q.ZF as ZF from T_FINANCE_MYQUOTE t,QUOTE q WHERE t.GPDM=q.ZQDM AND t.ID= #id#
+	</select>	
+	
+	<select id="getQuoteByGpdm" parameterClass="String" resultMap="Quote">
+		select ZQDM AS GPDM, ZQJC AS GPMC from quote t where ZQDM = #gpdm#
+	</select>	
+		
+		
+	<select id="getQuoteByGpdms" parameterClass="String" resultMap="Quote">
+		select ZQDM AS GPDM, ZQJC AS GPMC from quote t where ZQDM  LIKE '$gpdm$%'
+	</select>	
+	
+	<resultMap id="Quote" class="Myquote">
+		<result property="gpdm" column="GPDM" jdbcType="String"/>
+		<result property="gpmc" column="GPMC" jdbcType="String" />
+		<result property="zjcj" column="ZJCJ" jdbcType="Double" />
+		<result property="zf" column="ZF" jdbcType="Double" />
+	</resultMap>
+	<select id="getQuoteZjcj" resultMap="Quote" parameterClass="String">
+		select q.ZQDM as GPDM,q.ZQJC as GPMC ,q.ZJCJ as ZJCJ,q.ZF as ZF from QUOTE q WHERE q.ZQDM = #gpdm# and q.ZQJC not like '%指数'
+	</select>
+</sqlMap>

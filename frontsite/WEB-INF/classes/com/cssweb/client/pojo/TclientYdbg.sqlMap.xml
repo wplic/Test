@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.client.pojo.TclientYdbg">
+	<typeAlias alias="tclientYdbg" type="com.cssweb.client.pojo.TclientYdbg" />
+	
+	<resultMap id="tclientYdbgMap" class="tclientYdbg">
+	    <result property="id" column="ID" jdbcType="Long"/>
+	    <result property="title" column="TITLE" jdbcType="java.lang.String"/>
+	    <result property="recUserId" column="RECUSER_ID" jdbcType="Long"/>
+	    <result property="ydbgDate" column="YDBG_DATE" jdbcType="Date"/>
+	    <result property="connectId" column="CONNECT_ID" jdbcType="Long"/>
+	    <result property="digest" column="DIGEST" jdbcType="String"/>
+	    <result property="fileId" column="FILE_ID" jdbcType="Long"/>
+	    <result property="recDate" column="REC_DATE" jdbcType="Date"/>
+	    <result property="type" column="TYPE" jdbcType="Long"/>
+	</resultMap>
+	 <update id="updateTclientYdbgFileById" parameterClass="tclientYdbg">
+		  update T_CLIENT_YDBG set FILE_ID=#fileId# where ID=#id#
+	</update>
+
+	<insert id="insertYdbg" parameterClass="tclientYdbg">
+		insert into T_CLIENT_YDBG
+		(ID,TITLE,RECUSER_ID,YDBG_DATE,CONNECT_ID,DIGEST,REC_DATE,TYPE)
+		values(#id#,#title#,#recUserId#,#ydbgDate#,#connectId#,#digest#,#recDate#,#type#)
+	</insert>
+	<update id="upTclientYdbg" parameterClass="tclientYdbg">
+		update T_CLIENT_YDBG set 
+		TITLE = #title#,
+		RECUSER_ID = #recUserId#,
+		YDBG_DATE = #ydbgDate#,
+		CONNECT_ID = #connectId#,
+		DIGEST = #digest#
+		where ID = #id#
+	</update>
+	
+	<select id="getTclientYdbgById" resultMap="tclientYdbgMap" parameterClass="Long">
+		select 	*	from T_CLIENT_YDBG where ID = #id#
+	</select>
+		
+	<delete id="deleteTclientYdbgById" parameterClass="Long">
+		delete T_CLIENT_YDBG where ID = #id#
+	</delete>
+	
+	<select id="getTclientYdbgList" parameterClass="java.util.Map" resultMap = "tclientYdbgMap">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getTclientYdbgTotal" parameterClass="String" resultClass = "Integer">
+		  $sql$   
+	</select>
+</sqlMap>

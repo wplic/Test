@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.AimadjustLog">
+
+	<typeAlias alias="aimadjustLog" type="com.cssweb.rzrq.pojo.AimadjustLog" />
+
+	<resultMap id="aimadjustLogMap" class="aimadjustLog">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="type" column="TYPE" jdbcType="String"/>
+		<result property="code" column="CODE" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String" />
+	    <result property="startDate" column="START_DATE" jdbcType="Date" />
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="Date" />
+	    <result property="auditing" column="AUDITING" jdbcType="String" />
+	    <result property="userId" column="USER_ID" jdbcType="Long" />
+	    <result property="userName" column="USER_NAME" jdbcType="String" />
+	    <result property="updateDate" column="UPDATE_DATE" jdbcType="Date" />
+	</resultMap>
+		<insert id="insertAimadjustLog" parameterClass="aimadjustLog">
+		INSERT into T_RZRQ_AIMADJUST_LOG ( ID, TYPE,CODE,NAME,START_DATE,PUBLISH_DATE,AUDITING,USER_ID,USER_NAME,UPDATE_DATE) VALUES 
+		(#id#,#type#, #code#,#name#,#startDate#,#publishDate#,#auditing#,#userId#,#userName#,#updateDate#)
+	</insert>
+	<select id="getAimadjustLog" parameterClass="java.util.Map" resultMap="aimadjustLogMap">
+		select * from T_RZRQ_AIMADJUST_LOG t where 1=1
+	</select>
+
+	
+	<delete id="deleteAimadjustById" parameterClass="Long">
+		delete from T_RZRQ_AIMADJUST_LOG where ID = #id#
+	</delete>
+	
+
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getAimadjustLogByPage" parameterClass="java.util.Map" resultMap = "aimadjustLogMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  
+</sqlMap>

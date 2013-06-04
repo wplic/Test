@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.lcrole.pojo.LcRole">
+
+	<typeAlias alias="LcRole" type="com.cssweb.lcrole.pojo.LcRole"/>
+
+	<!--result map-->
+	<resultMap id="LcRoleMap" class="LcRole">
+		<result property="userTypeId" column="USER_TYPE_ID" jdbcType="Long"/>
+        <result property="cmsId" column="CMS_ID" jdbcType="Long" />
+        <result property="cmsCode" column="CMS_CODE" jdbcType="String" nullValue=""/>
+        <result property="cmsName" column="CMS_NAME" jdbcType="String" nullValue=""/>
+ 	    <result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+
+     <resultMap id="LcRoleMap1" class="LcRole">
+		<result property="userTypeId" column="USER_TYPE_ID" jdbcType="Long"/>
+      
+  	</resultMap>
+
+<insert id="insert" parameterClass="LcRole">
+insert into role_lc_map (USER_TYPE_ID,CMS_ID,CMS_CODE,CMS_NAME,EXT1,EXT2,EXT3,EXT4)
+values(#userTypeId#,#cmsId#,#cmsCode#,#cmsName#,#ext1#,#ext2#,#ext3#,#ext4#)
+</insert>
+
+	<update id="update" parameterClass="LcRole">
+		  update role_lc_map 
+		  	set CMS_ID=#cmsId#,CMS_CODE=#cmsCode#,CMS_NAME=#cmsName#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where USER_TYPE_ID=#userTypeId# and CMS_ID=#cmsId#
+	</update>
+
+
+
+  <select id="selectAll_1" parameterClass="java.util.Map" resultMap = "LcRoleMap1">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+
+     <select id="selectrecord" parameterClass="java.lang.String" resultMap = "LcRoleMap1">   
+     select user_type_id from role_lc_map group by user_type_id  
+     </select>
+     
+     
+      <select id="getCmsName" parameterClass="java.lang.Long" resultMap = "LcRoleMap">   
+      select * from role_lc_map where USER_TYPE_ID=#value#
+     </select>
+     
+   
+      <select id="getcmsrolebyid" parameterClass="java.lang.Long" resultMap = "LcRoleMap">   
+      select * from role_lc_map where USER_TYPE_ID=#value#
+     </select>
+     
+     
+   <delete id="delete" parameterClass="java.lang.String">
+    delete role_lc_map where USER_TYPE_ID in ($value$)
+  </delete>
+  
+  <delete id="deletecmsrolebyid" parameterClass="java.lang.Long">
+    delete role_lc_map where USER_TYPE_ID = #userTypeId#
+  </delete>
+  
+   <select id="checkByWhichCat" parameterClass="java.lang.String" resultMap = "LcRoleMap">   
+      select * from role_lc_map where CMS_CODE=#value#
+     </select>
+     
+     
+      <select id="checkByWhichCatNew" parameterClass="java.util.Map" resultMap = "LcRoleMap">   
+      select * from role_lc_map where CMS_CODE=#whichCat# and USER_TYPE_ID=#userTypeId#
+     </select>
+     
+     <select id="getParentIdByWhichCat" parameterClass="String" resultClass = "String">   
+      select cat_name from cms_category_basic_info where cat_id= (select parent_id  from cms_category_tree_map where node_id= (select cat_id from cms_category_basic_info where cat_name=#value# and delete_flag=0))
+     </select>
+ 
+  
+</sqlMap>

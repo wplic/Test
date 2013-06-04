@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.Branch">
+
+	<typeAlias alias="Branch" type="com.cssweb.systemset.pojo.Branch"/>
+  
+	<resultMap id="Branch" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 		<result property="parentId" 	column="PARENT_ID" 		jdbcType="Long"/>
+ 		<result property="areaId" 		column="AREA_ID" 		jdbcType="Long"/>
+ 		<result property="zphone" 		column="ZPHONE" 		jdbcType="String"/>
+ 		<result property="fax" 			column="FAX" 			jdbcType="String"/>
+ 		<result property="introduceId" 	column="INTRODUCE_ID" 	jdbcType="Long"/>
+ 		<result property="feature" 		column="FEATURE" 		jdbcType="Long"/>
+ 		<result property="address" 		column="ADDRESS" 		jdbcType="String"/>
+ 		<result property="contector" 	column="CONTECTOR" 		jdbcType="String"/>
+ 		<result property="email" 		column="EMAIL" 			jdbcType="String"/>
+ 		<result property="mobile" 		column="MOBILE" 		jdbcType="String"/>
+ 		<result property="post" 		column="POST" 			jdbcType="String"/>
+ 		<result property="wphone" 		column="WPHONE" 		jdbcType="String"/>
+ 		<result property="picId" 		column="PIC_ID" 		jdbcType="Long"/>
+ 		<result property="url" 			column="URL" 			jdbcType="String"/>
+ 		<result property="orderNum" 	column="ORDER_NUM" 		jdbcType="Long"/>
+ 		<result property="state" 		column="STATE" 			jdbcType="String"/>
+ 		<result property="rzrqname" 	column="RZRQNAME" 		jdbcType="String"/>
+ 		<result property="rzrqphone" 	column="RZRQPHONE" 		jdbcType="String"/>
+ 		<result property="rzrqemail" 	column="RZRQEMAIL" 		jdbcType="String"/>
+  	</resultMap>
+  <resultMap id="branchMap" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 		<result property="parentId" 	column="PARENT_ID" 		jdbcType="Long"/>
+ 		<result property="areaId" 		column="AREA_ID" 		jdbcType="Long"/>
+ 		<result property="zphone" 		column="ZPHONE" 		jdbcType="String"/>
+ 		<result property="fax" 			column="FAX" 			jdbcType="String"/>
+ 		<result property="introduceId" 	column="INTRODUCE_ID" 	jdbcType="Long"/>
+ 		<result property="feature" 		column="FEATURE" 		jdbcType="Long"/>
+ 		<result property="address" 		column="ADDRESS" 		jdbcType="String"/>
+ 		<result property="contector" 	column="CONTECTOR" 		jdbcType="String"/>
+ 		<result property="email" 		column="EMAIL" 			jdbcType="String"/>
+ 		<result property="mobile" 		column="MOBILE" 		jdbcType="String"/>
+ 		<result property="post" 		column="POST" 			jdbcType="String"/>
+ 		<result property="wphone" 		column="WPHONE" 		jdbcType="String"/>
+ 		<result property="picId" 		column="PIC_ID" 		jdbcType="Long"/>
+ 		<result property="url" 			column="URL" 			jdbcType="String"/>
+ 		<result property="orderNum" 	column="ORDER_NUM" 		jdbcType="Long"/>
+ 		<result property="state" 		column="STATE" 			jdbcType="String"/>
+ 		<result property="areaName" 		column="KEY_NAME" 			jdbcType="String"/>
+ 		<result property="rzrqname" 	column="RZRQNAME" 		jdbcType="String"/>
+ 		<result property="rzrqphone" 	column="RZRQPHONE" 		jdbcType="String"/>
+ 		<result property="rzrqemail" 	column="RZRQEMAIL" 		jdbcType="String"/>
+  	</resultMap>
+  	
+  	  <resultMap id="branchListMap" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 		<result property="parentId" 	column="PARENT_ID" 		jdbcType="Long"/>
+ 		<result property="areaId" 		column="AREA_ID" 		jdbcType="Long"/>
+ 		<result property="zphone" 		column="ZPHONE" 		jdbcType="String"/>
+ 		<result property="fax" 			column="FAX" 			jdbcType="String"/>
+ 		<result property="introduceId" 	column="INTRODUCE_ID" 	jdbcType="Long"/>
+ 		<result property="feature" 		column="FEATURE" 		jdbcType="Long"/>
+ 		<result property="address" 		column="ADDRESS" 		jdbcType="String"/>
+ 		<result property="contector" 	column="CONTECTOR" 		jdbcType="String"/>
+ 		<result property="email" 		column="EMAIL" 			jdbcType="String"/>
+ 		<result property="mobile" 		column="MOBILE" 		jdbcType="String"/>
+ 		<result property="post" 		column="POST" 			jdbcType="String"/>
+ 		<result property="wphone" 		column="WPHONE" 		jdbcType="String"/>
+ 		<result property="picId" 		column="PIC_ID" 		jdbcType="Long"/>
+ 		<result property="url" 			column="URL" 			jdbcType="String"/>
+ 		<result property="orderNum" 	column="ORDER_NUM" 		jdbcType="Long"/>
+ 		<result property="state" 		column="STATE" 			jdbcType="String"/>
+ 		<result property="province" 	column="PROVINCE" 		jdbcType="String"/>
+ 		<result property="city" 		column="CITY" 			jdbcType="String"/>
+ 		<result property="rzrqname" 	column="RZRQNAME" 		jdbcType="String"/>
+ 		<result property="rzrqphone" 	column="RZRQPHONE" 		jdbcType="String"/>
+ 		<result property="rzrqemail" 	column="RZRQEMAIL" 		jdbcType="String"/>
+  	</resultMap>
+  	  <select id="getBranchListPages" parameterClass="java.util.Map" resultMap = "branchListMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+	<resultMap id="branchList" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 		<result property="address" 		column="ADDRESS" 		jdbcType="String"/>
+ 		<result property="orderNum" 	column="ORDER_NUM" 		jdbcType="String"/>
+  	</resultMap>
+  	
+  	<resultMap id="branchMap1" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 		<result property="address" 		column="ADDRESS" 		jdbcType="String"/>
+ 		<result property="orderNum" 	column="ORDER_NUM" 		jdbcType="String"/>
+ 		<result property="province"     column="PROVINCE"  jdbcType="String"/>
+ 		<result property="city"         column="CITY"  jdbcType="String"/>
+  	</resultMap>
+  	<resultMap id="branchMap2" class="Branch">
+ 		<result property="province"     column="PROVINCE"  jdbcType="String"/>
+ 	</resultMap>
+ 	<select id="getProvince"  resultMap = "branchMap2">
+   		select distinct province from t_system_branch t where province is not null
+   	</select>
+   	
+   	<resultMap id="branchListInfoMap" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 		<result property="address" 		column="ADDRESS" 		jdbcType="String"/>
+ 		<result property="orderNum" 	column="ORDER_NUM" 		jdbcType="String"/>
+ 		<result property="flag" 	column="FLAG" 		jdbcType="String" nullValue=""/>
+  	</resultMap>
+  	
+  	<resultMap id="branchListCodeMap" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 		<result property="address" 		column="ADDRESS" 		jdbcType="String"/>
+ 		<result property="orderNum" 	column="ORDER_NUM" 		jdbcType="String"/>
+ 		<result property="flag" 	column="FLAG" 		jdbcType="String" nullValue=""/>
+  	</resultMap>
+	
+     <select id="selectInfo" parameterClass="map" resultMap="branchListInfoMap">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	ID, 					
+						BRANCH_CODE, 			
+						BRANCH_NAME,		
+						ADDRESS,
+						FLAG,
+						ORDER_NUM			
+				FROM 	T_SYSTEM_BRANCH where STATE='1' 
+			<dynamic>
+			<isNotEmpty property="branchCode" prepend="and">
+			  BRANCH_CODE LIKE '$branchCode$%'
+			</isNotEmpty>
+			<isNotEmpty property="branchName" prepend="and">
+			  BRANCH_NAME LIKE '%$branchName$%'
+			 </isNotEmpty>
+			 <isNotEmpty property="parentId" prepend="and">
+			  PARENT_ID = #parentId#
+			 </isNotEmpty>		
+			</dynamic>		 
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+   
+   	
+  <select id="select" parameterClass="map" resultMap="branchList">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	ID, 					
+						BRANCH_CODE, 			
+						BRANCH_NAME,		
+						ADDRESS,
+						ORDER_NUM			
+				FROM 	T_SYSTEM_BRANCH where STATE='1'
+			<dynamic>
+			<isNotEmpty property="branchCode" prepend="and">
+			  BRANCH_CODE LIKE '$branchCode$%'
+			</isNotEmpty>
+			<isNotEmpty property="branchName" prepend="and">
+			  BRANCH_NAME LIKE '%$branchName$%'
+			 </isNotEmpty>
+			 <isNotEmpty property="parentId" prepend="and">
+			  PARENT_ID = #parentId#
+			 </isNotEmpty>		
+			</dynamic>		 
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	 <select id="searchByBranchCode" parameterClass="map" resultMap="branchList">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	ID, 					
+						BRANCH_CODE, 			
+						BRANCH_NAME,		
+						ADDRESS,
+						ORDER_NUM			
+				FROM 	T_SYSTEM_BRANCH where STATE='1'
+			<dynamic>
+			<isNotEmpty property="branchCode" prepend="and">
+			  BRANCH_CODE = '$branchCode$'
+			</isNotEmpty>
+			<isNotEmpty property="branchName" prepend="and">
+			  BRANCH_NAME LIKE '%$branchName$%'
+			 </isNotEmpty>
+			 <isNotEmpty property="parentId" prepend="and">
+			  PARENT_ID = #parentId#
+			 </isNotEmpty>		
+			</dynamic>		 
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<select id="countByBranchCode" parameterClass="map" resultClass="Integer">
+		SELECT 	COUNT(*) FROM T_SYSTEM_BRANCH where STATE='1'
+			<dynamic>
+			<isNotEmpty property="branchCode" prepend="and">
+			  BRANCH_CODE = '$branchCode$'
+			</isNotEmpty>
+			<isNotEmpty property="branchName" prepend="and">
+			  BRANCH_NAME LIKE '%$branchName$%'
+			 </isNotEmpty>	
+			 <isNotEmpty property="parentId" prepend="and">
+			  PARENT_ID = #parentId#
+			 </isNotEmpty>	
+			</dynamic>
+	</select>
+	<select id="count" parameterClass="map" resultClass="Integer">
+		SELECT 	COUNT(*) FROM T_SYSTEM_BRANCH where STATE='1'
+			<dynamic>
+			<isNotEmpty property="branchCode" prepend="and">
+			  BRANCH_CODE LIKE '$branchCode$%'
+			</isNotEmpty>
+			<isNotEmpty property="branchName" prepend="and">
+			  BRANCH_NAME LIKE '%$branchName$%'
+			 </isNotEmpty>	
+			 <isNotEmpty property="parentId" prepend="and">
+			  PARENT_ID = #parentId#
+			 </isNotEmpty>	
+			</dynamic>
+	</select>
+	
+	
+	
+	
+	 <select id="searchByBranchCodeList" parameterClass="map" resultMap="branchListCodeMap">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	ID, 					
+						BRANCH_CODE, 			
+						BRANCH_NAME,		
+						ADDRESS,
+						ORDER_NUM,
+						FLAG			
+				FROM 	T_SYSTEM_BRANCH where STATE='1'
+			<dynamic>
+			<isNotNull property="branchCode">
+						<iterate prepend="AND" property="branchCode" open="(" close=")" conjunction="OR">  
+						  	 BRANCH_CODE = '$branchCode[]$'
+						</iterate>
+			</isNotNull>
+			<isNotEmpty property="branchName" prepend="and">
+			  BRANCH_NAME LIKE '%$branchName$%'
+			 </isNotEmpty>
+			 <isNotEmpty property="parentId" prepend="and">
+			  PARENT_ID = #parentId#
+			 </isNotEmpty>		
+			</dynamic>		 
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	
+	<select id="countByBranchCodeList" parameterClass="map" resultClass="Integer">
+		SELECT 	COUNT(*) FROM T_SYSTEM_BRANCH where STATE='1'
+			<dynamic>
+			<isNotNull property="branchCode">
+						<iterate prepend="AND" property="branchCode" open="(" close=")" conjunction="OR">  
+						  	 BRANCH_CODE = '$branchCode[]$'
+						</iterate>
+			</isNotNull>
+			<isNotEmpty property="branchName" prepend="and">
+			  BRANCH_NAME LIKE '%$branchName$%'
+			 </isNotEmpty>	
+			 <isNotEmpty property="parentId" prepend="and">
+			  PARENT_ID = #parentId#
+			 </isNotEmpty>	
+			</dynamic>
+	</select>
+	
+  	<select id="selectById" parameterClass="Long" resultMap="branchListMap">
+		SELECT * FROM T_SYSTEM_BRANCH WHERE ID=#id#
+	</select>
+  
+    <select id="selectByBranchCode" parameterClass="java.lang.String" resultMap="Branch">
+		SELECT * FROM T_SYSTEM_BRANCH WHERE BRANCH_CODE=#branchCode#
+	</select>
+	
+  	<update id="update" parameterClass="Branch">
+	    UPDATE T_SYSTEM_BRANCH SET 
+			AREA_ID=#areaId#,
+			ZPHONE=#zphone#,
+			FAX=#fax#,
+			ADDRESS=#address#,
+			CONTECTOR=#contector#,
+			EMAIL=#email#,
+			MOBILE=#mobile#,
+			POST=#post#,
+			WPHONE=#wphone#,
+			URL=#url#,
+			PROVINCE = #province#,
+			CITY = #city#,
+			RZRQNAME = #rzrqname#,
+			RZRQPHONE = #rzrqphone#,
+			RZRQEMAIL = #rzrqemail#,
+			ORDER_NUM=#orderNum# WHERE ID = #id#
+	</update>
+	<update id="upBranchIntroduceIdById" parameterClass="Branch">
+		update T_SYSTEM_BRANCH set INTRODUCE_ID = #introduceId#  where id = #id#
+	</update>
+	
+	<update id="upBranchFeatureById" parameterClass="Branch">
+		update T_SYSTEM_BRANCH set FEATURE = #feature#  where id = #id#
+	</update>
+	
+	<update id="updateFlagByIds" parameterClass="Branch">
+		update T_SYSTEM_BRANCH set FLAG = '$flag$'  where ID = #id#
+	</update>
+	
+	<update id="upBranchPicIdById" parameterClass="Branch">
+		update T_SYSTEM_BRANCH set PIC_ID = #picId# where id = #id#
+	</update>
+	
+	
+	<select id="getByParentId" parameterClass="Long" resultMap = "Branch">
+       select * from T_SYSTEM_BRANCH where STATE='1' and PARENT_ID = #value# order by ORDER_NUM , branch_code  
+    </select>
+    
+    <select id="getByParentIds" parameterClass="Long" resultMap = "Branch">
+       select * from T_SYSTEM_BRANCH where STATE='1' and PARENT_ID = #value# order by id , branch_code  
+    </select>
+    
+    <select id="getBranchByAll" parameterClass="Long" resultMap = "Branch">
+       select * from T_SYSTEM_BRANCH where 1=1 order by ORDER_NUM , branch_code  
+    </select>   
+     
+    <select id="getBranchByAllOrderByName" parameterClass="Long" resultMap = "Branch">
+       select * from T_SYSTEM_BRANCH order by branch_name asc
+    </select>
+    
+    <select id="getBranchPages" parameterClass="java.util.Map" resultMap = "branchMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+    <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+    
+    <select id="getByAreaId" parameterClass="java.lang.String" resultMap = "Branch">
+       select * from T_SYSTEM_BRANCH t ,CSSWEB_DICTIONARY c where t.STATE='1' and 
+       t.AREA_ID = c.ID AND c.KEY_NAME like '%$kryName$%' AND c.PARENT_ID = (select id from cssweb_dictionary where key_code='province') order by T.ORDER_NUM , T.branch_code  
+    </select>
+
+	<select id="getCityByProvince" parameterClass="java.lang.String" resultMap = "branchMap1">
+	select t.id,t.BRANCH_CODE,t.BRANCH_NAME,t.ADDRESS,t.ORDER_NUM,t.PROVINCE,t.CITY from t_system_branch t where t.STATE='1' and t.province like '%$province$%' order by t.ORDER_NUM , t.branch_code  
+  </select>	
+  
+  <!-- 获得全部省份 -->
+  <select id="getProvinces" resultClass="java.lang.String">
+  		select distinct province from t_system_branch where province is not null
+  </select>
+  <!-- 获得省份对应的城市  -->
+  	<select id="getCitysByProvince" parameterClass="java.lang.String" resultClass="java.lang.String">
+  		select distinct city from t_system_branch where province=#value#
+  	</select>
+  	
+  <!-- 通过城市获得营业部 -->
+  	<select id="getBranchByMap" parameterClass="map" resultMap = "branchListMap">
+  		select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	select 
+						 *
+						from 
+						  t_system_branch t 
+						where
+						  t.STATE='1'
+						  <dynamic>
+						  	<isNotEmpty prepend="and" property="city">
+						  		(t.city like #city#)
+						  	</isNotEmpty>
+						  	<isNotEmpty prepend="and" property="province">
+						  		(t.province like #province#)
+						  	</isNotEmpty>
+						  	<isNotEmpty prepend="and" property="branchname">
+						  		(t.branch_name like #branchname#)
+						  	</isNotEmpty>
+						  </dynamic>
+						  order by t.ORDER_NUM , t.branch_code
+			        ) temp
+			    where rownum &lt;=#end#
+			    )
+			where rn&gt;=#begin#
+  		
+  	</select>
+  	
+  	<!-- 潘可荣 -->
+  	<select id="getBranchCountForPage" resultClass="Integer">
+  		select 
+		  count(*)
+		from 
+		  t_system_branch t 
+		where
+		  t.STATE='1'
+		  <dynamic>
+		  	<isNotEmpty prepend="and" property="city">
+		  		(t.city like #city#)
+		  	</isNotEmpty>
+		  	<isNotEmpty prepend="and" property="province">
+		  		(t.province like #province#)
+		  	</isNotEmpty>
+		  	<isNotEmpty prepend="and" property="branchname">
+		  		(t.branch_name like #branchname#)
+		  	</isNotEmpty>
+		  </dynamic>
+  	</select>
+</sqlMap>

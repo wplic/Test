@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gxcp.pojo.Question">
+
+	<typeAlias alias="GxcpQuestion" type="com.cssweb.gxcp.pojo.Question" />
+
+	<resultMap id="QuestionMap" class="GxcpQuestion">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="questionno" column="QUESTION_NO" jdbcType="Long"/>
+		<result property="questiondesc" column="QUESTION_DESC" jdbcType="String"/>
+		<result property="isvalid" column="ISVALID" jdbcType="String"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="GxcpQuestion">
+		INSERT into T_MAN_QUESTIONS (ID, QUESTION_NO,QUESTION_DESC, ISVALID) VALUES (#id#,#questionno#,#questiondesc#,#isvalid#)
+	</insert>
+	
+	<update id="update" parameterClass="GxcpQuestion">
+		update T_MAN_QUESTIONS set QUESTION_NO = #questionno#, QUESTION_DESC = #questiondesc#,ISVALID = #isvalid# where ID=#id#
+	</update>
+	
+	<update id="updateValid" parameterClass="java.util.Map">
+		update T_MAN_QUESTIONS set ISVALID=#isvalid# where ID=#id#
+	</update>
+
+	<delete id="delete" parameterClass="String">
+		delete from T_MAN_QUESTIONS where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_MAN_QUESTIONS where ID = #value#
+	</delete>
+		
+	<select id="getAll" resultMap="QuestionMap">
+		select * from T_MAN_QUESTIONS ORDER BY ID
+	</select>
+
+	<select id="getCountBySql" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="QuestionMap">
+		select * from T_MAN_QUESTIONS where ID= #id#
+	</select>	
+
+	<select id="getByQuestionNo" parameterClass="Long" resultMap="QuestionMap">
+		select * from T_MAN_QUESTIONS where QUESTION_NO= #questionno# and ISVALID='0'
+	</select>	
+
+	<select id="getMaxQuestionNo" resultClass="java.lang.Integer">
+		select max(QUESTION_NO) from T_MAN_QUESTIONS where ISVALID='0'
+	</select>	
+	
+	  <select id="getByMap" parameterClass="java.util.Map" resultMap = "QuestionMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+</sqlMap>

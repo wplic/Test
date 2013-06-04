@@ -1,0 +1,174 @@
+body 
+{
+   background: url(../images/addimg/bg_01.jpg) center top no-repeat;
+    display: block;
+    font: 12px/1.9 "宋体";
+    font-size: 12px !important;
+	margin:0px;
+	padding:0px;
+    
+}
+
+
+html
+{
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-shadow-color: #D2E5F4;
+	scrollbar-highlight-color: #D2E5F4;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #D2E5F4;
+
+	overflow-x:hidden;
+
+}
+table,td,th,ul,li,ol,dl,dt,dd,div,html,p,blockquote,h1,h2,h3,h4,h5,form,html,pre,fieldset{margin:0;padding:0;}
+ul li{list-style-type:none;line-height:200%; list-style-type:}
+img{ border:none; cursor:pointer;}
+
+p{line-height:23px;}
+.clear{clear:both;}
+a{ color:#965304; text-decoration: underline;}
+a:hover{ color:#cc0b06;}
+.fright{ float:right;}
+.w706{width: 706px; overflow: hidden;}
+.main_right{ width:905px; margin:0 auto; padding-top:241px;}
+.foot{ width:970px; height:130px; margin:0 auto;}
+
+
+
+/*请只引用此段样式开始*/
+
+/*腾飞在广发*/
+.fly{background: url(../images/fly_bg.jpg) center 1px no-repeat; height:653px; padding:22px 30px; color:#003c62;}
+.fly_video{ width:340px; height:290px; background: url(../images/video_bg.png) center top no-repeat; margin-left:155px;}
+.fly P{ padding:20px 0px ;}
+.fly_video_con1,.fly_video_con2{ padding-top:33px; padding-left:18px; width:300px; height:235px;}
+.icon_flash{ text-align:center;}
+
+.content_tab .toc1{ background:url(../images/tab_on01.png) no-repeat; width:114px; color:#8B5500;}
+.content_tab .toc2{ background:url(../images/tab_on02.png) no-repeat;width:111px; color:#8B5500}
+.content_tab .hover1{ background:url(../images/tab_in01.png) no-repeat; color:#006ab5; width:114px;}
+.content_tab .hover2{ background:url(../images/tab_in02.png) no-repeat; color:#006ab5;width:111px;}
+.content_tab span{cursor: pointer;
+    display: block;
+    float: left;
+	text-align:center;
+	 height:30px;
+	 font-weight:bold;
+	 line-height:34px;
+    font-size: 12px;
+}
+
+
+
+
+
+/*培训发展*/
+.training{ background: url(../images/training_bg.jpg) center 1px no-repeat; height:983px; padding:22px 35px;color:#003c62;}
+.training p{ padding:20px 0px;}
+
+
+/*企业文化*/
+.culture{ background: url(../images/culture_bg.jpg) center 1px no-repeat; height:1355px; padding:22px 35px;color:#003c62;}
+.culture p{padding:115px 30px 108px 50px;
+    width: 540px;}
+.culture img{ float:left;}
+.culture ul{ width:624px; height:86px; padding:8px; overflow:hidden; margin-bottom:8px; background: url(../images/ul_bg.png) center center no-repeat;}
+.culture ul li{ width:85%; float:left;}
+.culture ul li h4{ background: url(../images/icon_xian.png) left bottom no-repeat;height: 28px;
+    line-height: 21px;
+    padding-left: 15px;}
+.culture ul li h3{ padding-left:15px; height:20px;}
+.culture ul li p{ padding:0 0 0 15px; width:98%; line-height:18px; }
+.activity_flash { padding-top:80px;}
+
+
+
+/*员工活动*/
+.activity{ background: url(../images/activity_bg.jpg) center 1px no-repeat; height:654px; padding:22px 35px;color:#003c62;}
+.activity p{padding:53px 30px 0px 50px;
+    width: 550px;}
+.activity_flash{}
+
+/* BUTTONS */
+
+.buttons a, .buttons button{
+    display:block;
+    float:left;
+    margin:0 7px 0 0;
+    background-color:#f5f5f5;
+    border:1px solid #dedede;
+    border-top:1px solid #eee;
+    border-left:1px solid #eee;
+
+    font-family:"Lucida Grande", Tahoma, Arial, Verdana, sans-serif;
+    font-size:12px;
+    line-height:130%;
+    text-decoration:none;
+    font-weight:bold;
+    color:#565656;
+    cursor:pointer;
+     padding:3px 8px 4px 5px; 
+   
+}
+.buttons button{
+    width:auto;
+    overflow:visible;
+    padding:2px 5px 2px 4px; /* IE6 */
+}
+.buttons button[type]{
+   padding:2px 5px 2px 4px; /* Firefox */
+    line-height:17px; /* Safari */
+}
+*:first-child+html button[type]{
+    padding:2px 5px 2px 4px; /* IE7 */
+}
+.buttons button img, .buttons a img{
+    margin:0 3px -3px 0 !important;
+    padding:0;
+    border:none;
+    width:12px;
+    height:12px;
+}
+
+
+/* POSITIVE */
+
+button.positive, .buttons a.positive{
+	background:#f5f5f5 url("../images/t1.png")  no-repeat;
+	padding-left:24px;
+	text-decoration: none;
+    color:#fa7001;
+}
+.buttons a.positive:hover, button.positive:hover{
+    background-color:#f3e3c0;
+    border:1px solid #f9ceac;
+    color:#fa7001;
+}
+.buttons a.positive:active{
+    background-color:#6299c5;
+    border:1px solid #fb8f38;
+    color:#fff;
+}
+
+/* REGULAR */
+
+button.regular, .buttons a.regular{
+	background:#f5f5f5 url("../images/t2.png")  no-repeat;
+	padding-left:24px;
+	text-decoration: none;
+    color:#046ccb;
+}
+.buttons a.regular:hover, button.regular:hover{
+    background-color:#dff4ff;
+    border:1px solid #c2e1ef;
+    color:#336699;
+}
+.buttons a.regular:active{
+    background-color:#6299c5;
+    border:1px solid #6299c5;
+    color:#fff;
+}
+

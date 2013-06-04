@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUserEduExperience">
+				 
+	<typeAlias alias="HrUserEduExperience" type="com.cssweb.hr.pojo.HrUserEduExperience"/>
+								
+	<!--result map-->
+	<resultMap id="resultMap" class="HrUserEduExperience">
+		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="startDateYear" column="STARTDATE_YEAR" jdbcType="String"/>
+ 		<result property="startDateMonth" column="STARTDATE_MONTH" jdbcType="String" />
+ 		<result property="endDateYear" column="ENDDATE_YEAR" jdbcType="String" />
+ 		<result property="endDateMonth" column="ENDDATE_MONTH" jdbcType="String" />
+ 		<result property="school" column="SCHOOL" jdbcType="String" />
+ 		<result property="spename" column="SPENAME" jdbcType="String" />
+ 		<result property="searchpos" column="SEARCHPOS" jdbcType="String" />
+ 		<result property="studystyle" column="STUDYSTYLE" jdbcType="String" />
+ 		<result property="xueli" column="XUELI" jdbcType="String" />
+ 		<result property="degree" column="DEGREE" jdbcType="String" />
+ 		<result property="classorder" column="CLASSORDER" jdbcType="String" />
+ 		<result property="prover" column="PROVER" jdbcType="String" />
+ 		<result property="prorelation" column="PRORELATION" jdbcType="String" />
+ 		<result property="proverphone" column="PROVERPHONE" jdbcType="String" />
+ 		
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="HrUserEduExperience">
+		<![CDATA[
+		 insert into T_HR_USER_EDUEXP(ID,USER_ID,STARTDATE_YEAR,STARTDATE_MONTH,ENDDATE_YEAR,ENDDATE_MONTH,SCHOOL,
+		 		SPENAME,SEARCHPOS,STUDYSTYLE,XUELI,DEGREE,CLASSORDER,PROVER,PRORELATION,PROVERPHONE)
+		 	 values(#id#,#userId#,#startDateYear#,#startDateMonth#,#endDateYear#,#endDateMonth#,
+		 		#school#,#spename#,#searchpos#,#studystyle#,#xueli#,
+		 		#degree#,#classorder#,#prover#,#prorelation#,#proverphone#
+		 		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterClass="HrUserEduExperience">
+		update T_HR_USER_EDUEXP
+		 set 
+		 	USER_ID = #userId#,STARTDATE_YEAR=#startDateYear#,STARTDATE_MONTH=#startDateMonth#,
+		 	ENDDATE_YEAR=#endDateYear#,ENDDATE_MONTH=#endDateMonth#,SCHOOL=#school#,
+		 	SPENAME=#spename#,SEARCHPOS=#searchpos#,STUDYSTYLE=#studystyle#,XUELI=#xueli#,
+		 	DEGREE=#degree#,CLASSORDER=#classorder#,PROVER=#prover#,PRORELATION=#prorelation#,PROVERPHONE=#proverphone#
+		where ID = #id#
+	</update>
+	
+	<delete id="delete" parameterClass="Long">
+		delete from T_HR_USER_EDUEXP where USER_ID = #userId#
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_HR_USER_EDUEXP where ID = #id#
+	</delete>
+	
+	<select id="getAllEduList" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_EDUEXP 
+		    where 
+		     user_id=#userId#
+		     order by id asc
+   </select>
+   
+	<select id="getBeanById" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_EDUEXP 
+		    where 
+		     id=#id#
+   </select>
+   
+   	<select id="getAllEduCount" parameterClass="Long" resultClass="int">
+   		select 
+   			Count(*)
+		    from T_HR_USER_EDUEXP 
+		    where 
+		      user_id=#userId#
+   </select>
+   
+</sqlMap>

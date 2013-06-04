@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUser">
+	<typeAlias alias="HrUser" type="com.cssweb.hr.pojo.HrUser"/>
+
+	<resultMap id="resultMap" class="HrUser">
+		<result property="id" column="ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="regName" column="REG_NAME" jdbcType="String" nullValue=""/>
+		<result property="passWord" column="PASSWORD" jdbcType="String" nullValue=""/>
+		<result property="passQuestion" column="PASS_QUESTION" jdbcType="String" nullValue=""/>
+		<result property="passAnswer" column="PASS_ANSWER" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="regTime" column="REG_TIME" jdbcType="java.util.Date"/>
+		<result property="preLoginTime" column="PRE_LOGINTIME" jdbcType="java.util.Date"/>
+  	</resultMap>
+  	
+  	<resultMap id="resultMap2" class="HrUser">
+		<result property="regName" column="REG_NAME" jdbcType="String" nullValue=""/>
+		<result property="userName" column="USERNAME" jdbcType="String" nullValue=""/>
+		<result property="passQuestion" column="PASS_QUESTION" jdbcType="String" nullValue=""/>
+		<result property="passAnswer" column="PASS_ANSWER" jdbcType="java.lang.Long" nullValue="0"/>
+  	</resultMap>
+
+	<insert id="insert" parameterClass="HrUser">
+		<![CDATA[
+		 insert into T_HR_USER(ID,REG_NAME,PASSWORD,PASS_QUESTION,PASS_ANSWER,REG_TIME) values(#id#,#regName#,#passWord#,#passQuestion#,#passAnswer#,sysdate)
+		]]>
+	</insert>
+
+
+	<update id="update" parameterClass="HrUser">
+		<![CDATA[
+		update T_HR_USER set REG_NAME=#regName#,PASSWORD=#passWord#,PASS_QUESTION=#passQuestion#,PASS_ANSWER=#passAnswer# where id=#id#
+		]]>
+	</update>
+	
+
+	<select id="getBeanById" parameterClass="long" resultMap="resultMap">
+		select * from T_HR_USER where id=#id#
+	</select>
+
+	<select id="getBeanByName" parameterClass="String" resultMap="resultMap">
+		select * from T_HR_USER where REG_NAME=#name#
+	</select>
+	
+	<select id="getBeanByMail" parameterClass="String" resultMap="resultMap2">
+		select u.reg_name, u.pass_question, u.pass_answer, b.idcard, b.username  from gfzq.t_hr_user u, gfzq.t_hr_user_baseinfo b where u.id = b.user_id and REG_NAME=#name#
+	</select>
+
+	<select id="getBeanByLoginPara" parameterClass="java.util.Map" resultMap="resultMap">
+		select * from T_HR_USER where REG_NAME=#regName# and PASSWORD=#passWord#
+	</select>
+
+	<select id="getBeanByUsername" parameterClass="String" resultMap="resultMap">
+		select * from T_HR_USER where REG_NAME=#regName#
+	</select>
+	
+	<select id="getBeanByIdcard" parameterClass="String" resultMap="resultMap2">
+		select u.reg_name, u.pass_question, u.pass_answer, b.idcard, b.username  from gfzq.t_hr_user u, gfzq.t_hr_user_baseinfo b where u.id = b.user_id and Idcard=#Idcard#
+	</select>
+
+	<select id="getBeanByUsernameAndPassAnswer" parameterClass="java.util.Map" resultMap="resultMap">
+		select * from T_HR_USER where REG_NAME=#regName# and PASS_ANSWER=#passAnswer#
+	</select>
+	
+	<update id="updateLoginTime" parameterClass="long">
+		<![CDATA[
+		update T_HR_USER set PRE_LOGINTIME=sysdate where id=#id#
+		]]>
+	</update>
+	
+	<update id="updatePass" parameterClass="java.util.Map">
+		<![CDATA[
+		update T_HR_USER set PASSWORD=#passWord# where REG_NAME=#regName#
+		]]>
+	</update>
+</sqlMap>

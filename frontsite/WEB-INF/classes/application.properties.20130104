@@ -1,0 +1,123 @@
+# Set application Home
+# {current.location}
+application.home={current.location}/../../..
+deploy.home={current.location}/../..
+current.home={current.location}/../..
+
+# For system log
+log.directory = {application.home}/log/
+log.default = system.log
+
+# For admin directory
+admin.directory = {application.home}/webapp/admin/
+
+# For admin expert
+consultation.max=5
+
+# For Database connection
+database.directory = {current.location}/../conf/
+
+conf.directory = {current.location}/../conf/
+
+#app.data.directory = {application.home}/data/
+app.data.directory = {current.location}/../data/
+
+# Sequence Generator
+idFactory.multiVM=true
+
+#\u9644\u4ef6\u7ec4\u4ef6
+attachment.implement = com.css.attachment.dbimpl.DbAttachmentManager
+
+# mail.cssweb.com.cn configuration 219.239.110.6 liwei Aaa111
+mail.server=192.168.200.75
+mail.address=gfhr@gf.com.cn
+mail.password=hr2006
+
+sendIP=172.1.2.151
+#\u6570\u636e\u5e93\u914d\u7f6e
+gdb.attachment=citicsdb
+gdb.bbs=citicsdb
+gdb.cmsdb=citicsdb
+gdb.db=citicsdb
+gdb.defaultdb=citicsdb
+gdb.dictionary=citicsdb
+gdb.galaxy=citicsdb
+gdb.hq=citicsdb
+gdb.security=citicsdb
+gdb.stock=citicsdb
+gdb.util=citicsdb
+
+ibatis.cms=config/cmsConfig.xml
+ibatis.util=config/cmsConfig.xml
+
+#hangqingDefault url
+hangqingDefaultUrl=http://flash.gf.com.cn/indexes/indexes.php?width=180&height=135
+#hangqing url
+hangqingUrl=http://flash.gf.com.cn/indexes/indexes.php?width=180&height=141
+#hangqing url
+hangqingUrlZWZ=http://flash.gf.com.cn/indexes/indexes.php?width=205&height=135
+#hangqingzx url
+hangqingUrlzx=http://flash.gf.com.cn/indexes/indexes.php
+#loginUrl url
+loginUrl=https://etrade.gf.com.cn/other_login.php?for=login
+#beforeLoginUrl url
+beforeLoginUrl=https://etrade.gf.com.cn/other_login.php?for=index
+hangqingUrlGG=http://www.gf.com.cn/js/minFlash/index.html?code=000776&w=205&h=300
+#mainLoginUrl url
+mainLoginUrl=https://etrade.gf.com.cn/other_login.php?for=loginms
+#mainBeforeLoginUrl url
+mainBeforeLoginUrl=https://etrade.gf.com.cn/other_login.php?for=indexms
+#mncgUrl
+mncg.key=pk%mncg@htsc#cssweb
+mncg.url=http://mncg.gf.com.cn/mncg
+mncgadmin.url=http://mncg.gf.com.cn/mncgadmin/
+#flex
+flexServelUrl=http://121.14.6.138:8001/
+flexUrl=http://www.gf.com.cn/csswebsso.swf
+#flexUrl=http://10.2.124.12:7020/csswebsso.swf
+#flexUrl=http://10.2.125.125:9080/csswebsso.swf
+gfymhq=http://flash.gf.com.cn/
+gfymjy=https://etrade.gf.com.cn
+#gfymjy=https://121.14.6.135/
+
+#yykf=http://119.145.72.232/ECMMS/comjsp/ecmms/custorder/onlineorder/OnlineCustOrder.do
+yykf=https://119.145.72.232/ECMMS/www/comjsp/ecmms/custorder/onlineorder/OnlineCustOrder.do
+videoPath=http://121.14.2.16/
+
+gfzqzcglpassword=gfjhzgpd20
+gfzqdxlcpassword=gfdxzgpd10
+amidnLdapHost=10.2.66.80
+amidnPort=389
+amidnAdminDN=dnzxcs1
+amidnAdminPassword=123456
+
+serviceMhtFileDir=/home/webapp/mht/
+serviceRarFileDir=/home/webapp/
+
+webcall.url=http://10.2.124.12:7060/webcall/client/et_wz_index.jsp
+
+
+mobile_softdown_zq=http://121.14.2.33/download/
+#mobile_softdown_zq=http://www.gf.com.cn/pic/wsyyt/
+#mobile_softdown_zq=http://10.2.117.98/
+mobile_softdown_zc=http://wap.gf.com.cn/gfzqzc/
+
+#mncg2Url
+mncg2.key=pk%mncg@htsc#cssweb
+mncg2.url= http://10.2.89.65:7020/mncg
+mncg2admin.url=http\://10.2.89.65\:7020/mncgadmin/
+
+clientApp.key=BBFAD6D0A3ACD2BBB4AECAFDC2EBD7F7
+dyboolenanbranchCode=301,0301
+
+smsip=10.2.89.60
+smsport=8821
+
+nxsy.mailhost=192.168.200.75
+nxsy.mailuser=nxsy
+nxsy.mailpwd=nxsy2012
+nxsy.domain=http://www.gf.com.cn
+
+hr.mailhost=192.168.200.75
+hr.mailuser=gfhr@gf.com.cn
+hr.mailpwd=gfhr8755

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrBbsReply">
+	<typeAlias alias="HrBbsReply" type="com.cssweb.hr.pojo.HrBbsReply" />
+
+	<resultMap id="hrBbsReplyResultMap" class="HrBbsReply">
+		<result property="replyId" column="REPLY_ID" jdbcType="java.lang.Long"/>
+		<result property="postTitle" column="post_title" jdbcType="String"/>
+		<result property="replyAdminid" column="REPLY_ADMINID" jdbcType="java.lang.Long"/>
+		<result property="replyAdminname" column="REPLY_ADMINNAME" jdbcType="String"/>
+		<result property="replyPostid" column="REPLY_POSTID" jdbcType="java.lang.Long"/>
+		<result property="replyContent" column="REPLY_CONTENT" jdbcType="String"/>
+		<result property="replyCreatetime" column="REPLY_CREATETIME" jdbcType="java.util.Date"/>
+		<result property="replyIsexamine" column="REPLY_ISEXAMINE" jdbcType="String"/>
+  	</resultMap>
+  	<resultMap id="hrBbsReplyResultMap_frontsite" class="HrBbsReply">
+		<result property="replyId" column="REPLY_ID" jdbcType="java.lang.Long"/>
+		<result property="replyAdminid" column="REPLY_ADMINID" jdbcType="java.lang.Long"/>
+		<result property="replyAdminname" column="REPLY_ADMINNAME" jdbcType="String"/>
+		<result property="replyPostid" column="REPLY_POSTID" jdbcType="java.lang.Long"/>
+		<result property="replyContent" column="REPLY_CONTENT" jdbcType="String"/>
+		<result property="replyCreatetime" column="REPLY_CREATETIME" jdbcType="java.util.Date"/>
+		<result property="replyIsexamine" column="REPLY_ISEXAMINE" jdbcType="String"/>
+  	</resultMap>
+  	
+  	<insert id="insert" parameterClass="HrBbsReply">
+  		insert into t_hr_bbs_reply(REPLY_ID,REPLY_ADMINID,
+  							  REPLY_ADMINNAME,REPLY_POSTID,REPLY_CONTENT,
+  							  REPLY_CREATETIME,REPLY_ISEXAMINE)
+  					   values(SEQ_HR_BBS_POSTS.NEXTVAL,#replyAdminid#,
+  					   		  #replyAdminname#,#replyPostid#,#replyContent#,
+  					   		  #replyCreatetime#,#replyIsexamine#)
+  	</insert>
+  	
+	<select id="getListBySplit" resultMap="hrBbsReplyResultMap_frontsite" parameterClass="map">
+		select *
+		   from (select row_.*, rownum rownum_
+		           from (select REPLY_ID,REPLY_ADMINID,REPLY_ADMINNAME,REPLY_POSTID,REPLY_CONTENT,REPLY_CREATETIME,REPLY_ISEXAMINE 
+		                   from t_hr_bbs_reply t
+		                  where REPLY_ISEXAMINE = 1
+		                  	and REPLY_POSTID = #postId#
+		                  order by REPLY_CREATETIME desc) row_
+		          where rownum <![CDATA[ <= ]]> #end#)
+		  where rownum_ <![CDATA[ >= ]]> #start# 
+	</select>
+	
+	<select id="getReplySplitAdmin" resultMap="hrBbsReplyResultMap" parameterClass="map">
+		select *
+		   from (select row_.*, rownum rownum_
+		           from (select a.post_title,
+		                       b.REPLY_ID,
+		                       b.REPLY_ADMINID,
+		                       b.REPLY_ADMINNAME,
+		                       b.REPLY_POSTID,
+		                       b.REPLY_CONTENT,
+		                       b.REPLY_CREATETIME,
+		                       b.REPLY_ISEXAMINE 
+		                   from t_hr_bbs_posts a,t_hr_bbs_reply b
+		                  where a.post_id = b.reply_postid
+	                  	<dynamic>
+	                    	<isNotNull prepend="and" property="replyIsexamine">
+	                    		b.REPLY_ISEXAMINE = #replyIsexamine#
+	                    	</isNotNull>
+	                    	<isNotNull prepend="and" property="replyContent">
+	                    		b.REPLY_CONTENT like '%$replyContent$%'
+	                    	</isNotNull>
+	                    	<isNotNull prepend="and" property="replyAdminname">
+	                    		b.REPLY_ADMINNAME like '%$replyAdminname$%'
+	                    	</isNotNull>
+	                    	<isNotNull prepend="and" property="replyPostid">
+	                    		b.REPLY_POSTID = #replyPostid#
+	                    	</isNotNull>
+	                    </dynamic>
+		                  order by b.REPLY_ISEXAMINE asc,b.REPLY_CREATETIME desc) row_
+		          where rownum <![CDATA[ <= ]]> #end#)
+		  where rownum_ <![CDATA[ >= ]]> #start# 
+	</select>
+	
+	<select id="getReplyCountAdmin" resultClass="int" parameterClass="map">
+		select count(1) from t_hr_bbs_posts a,t_hr_bbs_reply b
+				where a.post_id = b.reply_postid	
+                 	<dynamic>
+                   	<isNotNull prepend="and" property="replyIsexamine">
+                   		b.REPLY_ISEXAMINE = #replyIsexamine#
+                   	</isNotNull>
+                   	<isNotNull prepend="and" property="replyContent">
+                   		b.REPLY_CONTENT like '%$replyContent$%'
+                   	</isNotNull>
+                   	<isNotNull prepend="and" property="replyAdminname">
+                   		b.REPLY_ADMINNAME like '%$replyAdminname$%'
+                   	</isNotNull>
+                   	<isNotNull prepend="and" property="replyPostid">
+                   		b.REPLY_POSTID = #replyPostid#
+                   	</isNotNull>
+                   </dynamic>
+	</select>
+	
+	<update id="updateByPrimaryKeySelective" parameterClass="HrBbsReply">
+        update t_hr_bbs_reply
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="replyContent">
+                REPLY_CONTENT = #replyContent#
+            </isNotNull>
+            <isNotNull prepend="," property="replyIsexamine">
+                REPLY_ISEXAMINE = #replyIsexamine#
+            </isNotNull>
+        </dynamic>
+        where REPLY_ID = #replyId#
+    </update>
+    
+    <delete id="delete" parameterClass="long">
+    	delete from t_hr_bbs_reply where REPLY_ID = #replyId#
+    </delete>
+</sqlMap>

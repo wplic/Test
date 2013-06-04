@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.bond.pojo.DebtDueYield">
+
+	<typeAlias alias="debtDueYield"
+		type="com.cssweb.F10.gazx.bond.pojo.DebtDueYield" />
+
+	<!--result map-->
+	<resultMap id="debtDueYieldMap" class="debtDueYield">
+
+		<!-- 匹配 债券主表 中的债券代码 -->
+		<result property="bondCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 复利收益率 -->
+		<result property="compoundYield" column="FLSYL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+		<!-- 价格 -->
+		<result property="price" column="JG"
+			jdbcType="java.lang.Double" />
+
+		<!-- 单利收益率	-->
+		<result property="singleYield" column="DLSYL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 债券到期收益率ID -->
+		<result property="yieldId" column="T_ZQDQSYL_ID"
+			jdbcType="java.lang.Long" />
+
+	</resultMap>
+
+	<!-- 根据债券代码查找该债券的到期收益率 -->
+	<select id="getDebtDueYieldByBondCode" resultMap="debtDueYieldMap"
+		parameterClass="String">
+		SELECT a.T_ZQDQSYL_ID, a.T_ZQZB_ID, a.JG, a.DLSYL, a.FLSYL,
+		b.zqjc, b.zqdm FROM ZQDQSYL a,zqzb b where a.T_ZQZB_ID =
+		b.t_Zqzb_Id and b.zqjc = #debtShortName# and a.SCBZ = 0 AND
+		a.GKBZ = 1 and rownum = 1
+	</select>
+
+</sqlMap>

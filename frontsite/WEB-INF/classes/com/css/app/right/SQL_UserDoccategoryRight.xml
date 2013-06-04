@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="GB2312"?>
+<sql>
+<com.css.app.right.UserDoccategoryRight>
+	<insert truncated = "false" fetchSize = "0">
+		insert into USER_DOCCATEGORY_RIGHT(
+			USER_NAME,
+			DOC_CATEGORY,
+			DATE_VALIDITY,
+			BEGIN_DATE,
+			END_DATE,
+			MODIFY_DATE,
+			OPERATOR,
+			IS_SHORTCUT)
+		values(
+			<param type="VARCHAR">USER_NAME</param>,
+			<param type="VARCHAR">DOC_CATEGORY</param>,
+			<param type="INTEGER">DATE_VALIDITY</param>,
+			<param type="TIMESTAMP">BEGIN_DATE</param>,
+			<param type="TIMESTAMP">END_DATE</param>,
+			<param type="TIMESTAMP">MODIFY_DATE</param>,
+			<param type="VARCHAR">OPERATOR</param>,
+			<param type="INTEGER">IS_SHORTCUT</param>)
+	</insert>
+	<delete truncated = "false" fetchSize = "0">
+		delete from USER_DOCCATEGORY_RIGHT
+		where
+			DOC_CATEGORY = <param type="VARCHAR">DOC_CATEGORY</param>
+		and
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+	</delete>
+	<deleteByUser truncated = "false" fetchSize = "0">
+		delete from USER_DOCCATEGORY_RIGHT
+		where
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+	</deleteByUser>
+	<deleteByUserAndShortCut truncated = "false" fetchSize = "0">
+		delete from USER_DOCCATEGORY_RIGHT
+		where
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+		and
+			IS_SHORTCUT = <param type="INTEGER">IS_SHORTCUT</param>
+		and 
+		 	DOC_CATEGORY = <param type="VARCHAR">DOC_CATEGORY</param>
+	</deleteByUserAndShortCut>
+	<deleteByDoccategory truncated = "false" fetchSize = "0">
+		delete from USER_DOCCATEGORY_RIGHT
+		where
+			DOC_CATEGORY = <param type="VARCHAR">DOC_CATEGORY</param>
+	</deleteByDoccategory>
+	<update truncated = "false" fetchSize = "0">
+		update USER_DOCCATEGORY_RIGHT set
+			DATE_VALIDITY = <param type="INTEGER">DATE_VALIDITY</param>,
+			BEGIN_DATE = <param type="TIMESTAMP">BEGIN_DATE</param>,
+			END_DATE = <param type="TIMESTAMP">END_DATE</param>,
+			MODIFY_DATE = <param type="TIMESTAMP">MODIFY_DATE</param>,
+			OPERATOR = <param type="VARCHAR">OPERATOR</param>
+		where USER_NAME = <param type="VARCHAR">USER_NAME</param>
+	</update>
+	<select truncated = "false" fetchSize = "0">
+		select
+			USER_NAME,
+			DOC_CATEGORY,
+			DATE_VALIDITY,
+			BEGIN_DATE,
+			END_DATE,
+			MODIFY_DATE,
+			OPERATOR,
+			IS_SHORTCUT
+		from USER_DOCCATEGORY_RIGHT
+	</select>
+	<selectByUser truncated = "false" fetchSize = "0">
+		select
+			USER_NAME,
+			DOC_CATEGORY,
+			DATE_VALIDITY,
+			BEGIN_DATE,
+			END_DATE,
+			MODIFY_DATE,
+			OPERATOR,
+			IS_SHORTCUT
+		from USER_DOCCATEGORY_RIGHT
+		where
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+		and
+			IS_SHORTCUT = 0
+	</selectByUser>
+	<selectByDoccategory truncated = "false" fetchSize = "0">
+		select
+			USER_NAME,
+			DOC_CATEGORY,
+			DATE_VALIDITY,
+			BEGIN_DATE,
+			END_DATE,
+			MODIFY_DATE,
+			OPERATOR,
+			IS_SHORTCUT
+		from USER_DOCCATEGORY_RIGHT
+		where
+			DOC_CATEGORY = <param type="VARCHAR">DOC_CATEGORY</param>
+	</selectByDoccategory>
+	<updateShortCut truncated = "false" fetchSize = "0">
+		update USER_DOCCATEGORY_RIGHT set
+			IS_SHORTCUT = <param type="INTEGER">IS_SHORTCUT</param>
+		where
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+		and
+			DOC_CATEGORY = <param type="VARCHAR">DOC_CATEGORY</param>
+	</updateShortCut>
+	<deleteShortCut truncated = "false" fetchSize = "0">
+		update USER_DOCCATEGORY_RIGHT set
+			IS_SHORTCUT = 0
+		where
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+	</deleteShortCut>
+	<selectByUserAndRight truncated = "false" fetchSize = "0">
+		select
+			USER_NAME,
+			DOC_CATEGORY,
+			DATE_VALIDITY,
+			BEGIN_DATE,
+			END_DATE,
+			MODIFY_DATE,
+			OPERATOR,
+			IS_SHORTCUT
+		from USER_DOCCATEGORY_RIGHT
+		where
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+		and
+			DOC_CATEGORY = <param type="VARCHAR">DOC_CATEGORY</param>
+	</selectByUserAndRight>
+	<selectShortCutCat truncated = "false" fetchSize = "0">
+		select
+			USER_NAME,
+			DOC_CATEGORY,
+			DATE_VALIDITY,
+			BEGIN_DATE,
+			END_DATE,
+			MODIFY_DATE,
+			OPERATOR,
+			IS_SHORTCUT
+		from USER_DOCCATEGORY_RIGHT
+		where
+			USER_NAME = <param type="VARCHAR">USER_NAME</param>
+		and
+			IS_SHORTCUT = 1
+	</selectShortCutCat>
+</com.css.app.right.UserDoccategoryRight>
+</sql>

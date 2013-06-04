@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<action-mappings>
+		
+		<action path="/stock" scope="request" parameter="method" validate="false">
+			<forward name="company" path="/f10/stock/f10Company.jsp"/>
+			<forward name="top" path="/f10/stock/f10Manager.jsp"/>
+			<forward name="man" path="/f10/stock/PersonalInfo.jsp"/>
+			<forward name="newIssue" path="/f10/stock/NewIssue.jsp"/>
+			<forward name="structure" path="/f10/stock/f10Holder.jsp"/>
+			<forward name="shareMergerReform" path="/f10/stock/GuQuanFenZhiBody.jsp"/>
+			<forward name="linkRelation" path="/f10/stock/f10Bind.jsp"/>
+			<forward name="importantActivity" path="/f10/stock/f10Action.jsp"/>
+			<forward name="distribution" path="/f10/stock/f10Edition.jsp"/>
+			<forward name="stockBaseInfo" path="/f10/stock/jbzl.jsp"/>
+			<forward name="fundcg" path="/f10/stock/f10FundHeld.jsp"/>
+			<forward name="caiwu" path="/f10/stock/f10Data.jsp"/>
+			<forward name="caiwu1" path="/f10/stock/cwbb1.jsp"/>
+			<forward name="caiwu2" path="/f10/stock/cwbb2.jsp"/>
+			<forward name="caiwu3" path="/f10/stock/cwbb3.jsp"/>
+ 		</action>
+
+	
+ 		
+	</action-mappings>
+</struts-config>

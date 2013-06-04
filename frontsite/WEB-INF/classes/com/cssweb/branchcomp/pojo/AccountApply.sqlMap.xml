@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branchcomp.pojo.AccountApply">
+
+	<typeAlias alias="AccountApply" type="com.cssweb.branchcomp.pojo.AccountApply" />
+
+	<resultMap id="AccountApplyMap" class="AccountApply">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="address" column="ADDRESS" jdbcType="String"/>
+		<result property="branchno" column="BRANCH_NO" jdbcType="long"/>
+		<result property="name" column="NAME" jdbcType="String"/>
+		<result property="mobile" column="MOBILE" jdbcType="String"/>
+		<result property="applyDate" column="APPLY_DATE" jdbcType="long"/>
+		<result property="ip" column="IP" jdbcType="String"/>
+		<result property="createdate" column="CREATE_DATE" jdbcType="String"/>
+	</resultMap>
+	<insert id="insertInfo" parameterClass="AccountApply">
+		insert into T_BC_ACCOUNT_APPLY (ID,ADDRESS, BRANCH_NO,NAME,MOBILE, APPLY_DATE,IP,CREATE_DATE) 
+		VALUES (seq_t_bc_account_apply.NEXTVAL,#address#,#branchno#,#name#,#mobile#,#applyDate#,#ip#,to_char(sysdate,'yyyy-MM-dd HH24:mi:ss'))
+	</insert>
+	<delete id="deleteInfo" parameterClass="String">
+		delete from T_BC_ACCOUNT_APPLY where ID in (#value#)
+	</delete>
+	
+	<update id="updateInfo" parameterClass="AccountApply">
+		update T_BC_ACCOUNT_APPLY set ADDRESS=#address#, BRANCH_NO=#branchno#,Name=#name#,MOBILE=#mobile#, APPLY_DATE=#applyDate#,IP=#ip#,CREATE_DATE=#createdate# where ID=#id#
+	</update>
+	<select id="getAllInfo" resultMap="AccountApplyMap">
+		select * from T_BC_ACCOUNT_APPLY
+	</select>
+		<select id="getAllInfoByMap" parameterClass="java.util.Map" resultMap="AccountApplyMap">
+		$sql$
+	</select>
+	
+	 <select id="getByPagingMap" parameterClass="java.util.Map" resultMap = "AccountApplyMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+
+</sqlMap>

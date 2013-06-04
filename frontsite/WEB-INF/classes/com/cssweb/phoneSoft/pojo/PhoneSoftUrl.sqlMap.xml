@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.phoneSoft.pojo.PhoneSoftUrl">
+
+	<typeAlias alias="phoneSoftUrl" type="com.cssweb.phoneSoft.pojo.PhoneSoftUrl"/>
+	
+	<!--result map-->
+	<resultMap id="phoneSoftUrlMap" class="phoneSoftUrl">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="modelid" column="MODEL_ID" jdbcType="Long"/>
+ 		<result property="sjzqtype" column="SJZQ_TYPE" jdbcType="Long"/>
+ 		<result property="version" column="VERSION" jdbcType="String"/>
+ 		<result property="versiontime" column="VERSION_TIME" jdbcType="Date"/>
+ 		<result property="updatetime" column="UPDATE_TIME" jdbcType="Date"/>
+ 		<result property="softurl" column="SOFT_URL" jdbcType="String"/>
+ 		<result property="status" column="STATUS" jdbcType="Long"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insertPhoneSoftUrl" parameterClass="phoneSoftUrl" >
+		  insert into T_PHONE_SOFT_URL (ID,MODEL_ID,SJZQ_TYPE,VERSION,VERSION_TIME,UPDATE_TIME,SOFT_URL,STATUS,EXT1,EXT2)
+		  				values (#id#,#modelid#,#sjzqtype#,#version#,#versiontime#,sysdate,#softurl#,#status#,#ext1#,#ext2#)
+	</insert>
+	
+	<update id="updatePhoneSoftUrl" parameterClass="phoneSoftUrl">
+		  update T_PHONE_SOFT_URL 
+		  	set MODEL_ID=#modelid#,SJZQ_TYPE=#sjzqtype#,VERSION=#version#,VERSION_TIME=#versiontime#,UPDATE_TIME=sysdate,SOFT_URL=#softurl#,STATUS=#status#,EXT1=#ext1#,EXT2=#ext2#
+		  where ID=#id#
+	</update>
+	
+	<delete id="deleteById" parameterClass="Long">
+	  	delete T_PHONE_SOFT_URL where ID=#id#
+	</delete>
+	
+	<select id="getById" parameterClass="Long" resultMap = "phoneSoftUrlMap">
+	  	select * from T_PHONE_SOFT_URL where ID = #id#
+	</select>
+  
+	<select id="getPhoneSoftUrlPaging" parameterClass="java.util.Map" resultMap = "phoneSoftUrlMap">
+	  	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	  		select * from T_PHONE_SOFT_URL where 1=1 
+			<dynamic>
+				<isNotEmpty property="modelid"	prepend="AND">
+			  		MODEL_ID = #modelid#
+				</isNotEmpty>
+				<isNotEmpty property="sjzqtype"	prepend="AND">
+			  		SJZQ_TYPE = #sjzqtype#
+				</isNotEmpty>
+				<isNotEmpty property="status"	prepend="AND">
+			  		STATUS = #status#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="order by">
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+	  	)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+  
+	<select id = "getPhoneSoftUrlCount" parameterClass="java.util.Map"  resultClass="Integer">
+	 	select count(*) from T_PHONE_SOFT_URL where 1=1 
+		<dynamic>
+			<isNotEmpty property="modelid"	prepend="AND">
+		  		MODEL_ID = #modelid#
+			</isNotEmpty>
+			<isNotEmpty property="sjzqtype"	prepend="AND">
+		  		SJZQ_TYPE = #sjzqtype#
+			</isNotEmpty>
+			<isNotEmpty property="status"	prepend="AND">
+		  		STATUS = #status#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+  
+	<select id ="getPhoneSoftUrl" parameterClass="java.util.Map" resultMap="phoneSoftUrlMap">
+		select * from T_PHONE_SOFT_URL  where 1=1 
+			<dynamic>
+				<isNotEmpty property="modelid"	prepend="AND">
+			  		MODEL_ID = #modelid#
+				</isNotEmpty>
+				<isNotEmpty property="sjzqtype"	prepend="AND">
+			  		SJZQ_TYPE = #sjzqtype#
+				</isNotEmpty>
+				<isNotEmpty property="status"	prepend="AND">
+			  		STATUS = #status#
+				</isNotEmpty>
+			</dynamic>
+		order by ID desc
+	</select>
+  
+	<select id ="getPhoneSoftUrlByBrand" parameterClass="java.util.Map" resultMap="phoneSoftUrlMap">
+		select * from t_phone_soft_url t 
+		where t.model_id in 
+		      (select a.id from t_phone_model_info a where a.brand_id in 
+		              (select b.id from t_phone_brand_info b 
+		              where 1=1
+						<dynamic>
+							<isNotNull property="brandname">
+								<iterate prepend="AND" property="brandname" open="(" close=")" conjunction="OR">  
+								  	 b.brand_name = '$brandname[]$'
+								</iterate>
+							</isNotNull>
+						</dynamic>
+					)
+					<dynamic>
+						<isNotNull property="model">
+							<iterate prepend="AND" property="model" open="(" close=")" conjunction="OR">  
+							  	 a.model = '$model[]$'
+							</iterate>
+						</isNotNull>
+					</dynamic>
+		      ) 
+		and t.soft_url is not null and t.sjzq_type=1 and t.status=1 and rownum&lt;2
+		order by model_id asc
+	</select>
+  
+</sqlMap>

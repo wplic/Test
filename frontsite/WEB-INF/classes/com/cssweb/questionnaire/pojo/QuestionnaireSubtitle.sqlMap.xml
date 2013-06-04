@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.questionnaire.pojo.QuestionnaireSubtitle">
+
+	<typeAlias alias="QuestionnaireSubtitle" type="com.cssweb.questionnaire.pojo.QuestionnaireSubtitle"/>
+
+	<!--result map-->
+	<resultMap id="subtitleMap" class="QuestionnaireSubtitle">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="questionnaireid" column="QUESTIONNAIRE_ID" jdbcType="Long"/>
+ 		<result property="subtitle" column="SUBTITLE" jdbcType="String"/>
+ 		<result property="subtitletype" column="SUBTITLE_TYPE" jdbcType="String"/>
+ 		<result property="options" column="OPTIONS" jdbcType="Long"/>
+ 		<result property="othershow" column="OTHER_SHOW" jdbcType="String" nullValue=""/>
+  	</resultMap>
+  	
+	<resultMap id="BasicInfoMap" class="QuestionnaireSubtitle">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="subtitle" column="SUBTITLE" jdbcType="String"/>
+  	</resultMap>
+
+  <insert id="insert" parameterClass="QuestionnaireSubtitle">
+    insert into T_QUESTIONNAIRE_SUBTITLE (ID,QUESTIONNAIRE_ID,SUBTITLE,SUBTITLE_TYPE,OPTIONS,OTHER_SHOW)
+    	values (#id#,#questionnaireid#,#subtitle#,#subtitletype#,#options#,#othershow#)
+  </insert>
+
+  <update id="update" parameterClass="QuestionnaireSubtitle">
+    update T_QUESTIONNAIRE_SUBTITLE 
+    	set QUESTIONNAIRE_ID = #questionnaireid#,SUBTITLE=#subtitle#,SUBTITLE_TYPE=#subtitletype#,OPTIONS=#options#,OTHER_SHOW=#othershow#
+     where ID = #id#
+  </update>
+  
+  <select id="getAllInfoList" parameterClass="java.util.Map" resultMap = "subtitleMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getAllInfoTotal" resultClass="java.lang.Long" >
+    SELECT count(*) FROM T_QUESTIONNAIRE_SUBTITLE
+  </select>
+  
+  <select id="getInfoById" parameterClass="java.lang.Long" resultMap="subtitleMap" >
+    SELECT * FROM T_QUESTIONNAIRE_SUBTITLE where ID=#id#
+  </select>
+  
+  <select id="getInfoByQuesId" parameterClass="java.lang.Long" resultMap="subtitleMap" >
+    SELECT * FROM T_QUESTIONNAIRE_SUBTITLE where QUESTIONNAIRE_ID=#id# order by id asc
+  </select>
+  
+  <select id="getIdTitleList" resultMap="BasicInfoMap" >
+    SELECT ID,SUBTITLE FROM T_QUESTIONNAIRE_SUBTITLE
+  </select>
+  
+  <delete id="deleteById" parameterClass="String">
+    delete T_QUESTIONNAIRE_SUBTITLE where ID in ($value$)
+  </delete>
+  
+   <delete id="deleteByQuesId" parameterClass="String">
+    delete T_QUESTIONNAIRE_SUBTITLE where QUESTIONNAIRE_ID in ($value$)
+  </delete>
+  
+  <delete id="deleteByIdNotIn" parameterClass="java.util.Map">
+    delete T_QUESTIONNAIRE_SUBTITLE where QUESTIONNAIRE_ID=#basicid# and ID not in (#value#)
+  </delete>
+  
+</sqlMap>

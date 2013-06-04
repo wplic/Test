@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.client.pojo.TclientYdbgMap">
+	<typeAlias alias="tclientYdbgMap" type="com.cssweb.client.pojo.TclientYdbgMap" />
+	
+	<resultMap id="tclientYdbgList" class="tclientYdbgMap">
+	    <result property="id" column="ID" jdbcType="Long"/>
+	    <result property="clientId" column="CLIENT_ID" jdbcType="java.lang.String"/>
+	    <result property="ydbgId" column="YDBG_ID" jdbcType="Long"/>
+	</resultMap>
+
+	<insert id="insertYdbgMap" parameterClass="tclientYdbgMap">
+		insert into T_CLIENT_YDBG_MAP
+		(ID,CLIENT_ID,YDBG_ID)
+		values(#id#,#clientId#,#ydbgId#)
+	</insert>
+	
+	<select id="getTclientYdbgMapByClientId" resultMap="tclientYdbgList" parameterClass="String">
+		select 	*	from T_CLIENT_YDBG_MAP where CLIENT_ID = #clientId#
+	</select>
+	
+	<select id="getTclientYdbgMapByYdbgId" resultMap="tclientYdbgList" parameterClass="Long">
+		select 	*	from T_CLIENT_YDBG_MAP where YDBG_ID = #ydbgId#
+	</select>
+		
+	<delete id="deleteTclientYdbgMapById" parameterClass="Long">
+		delete T_CLIENT_YDBG_MAP where YDBG_ID = #ydbgId#
+	</delete>
+	
+	<select id="getTclientYdbgList" parameterClass="java.util.Map" resultMap = "tclientYdbgList">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getTclientYdbgTotal" parameterClass="String" resultClass = "Long">
+		  $sql$   
+	</select>
+</sqlMap>

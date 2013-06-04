@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.PledgeQuote">
+
+	<typeAlias alias="pledgeQuote" type="com.cssweb.rzrq.pojo.PledgeQuote" />
+
+	<resultMap id="pledgeQuoteMap" class="pledgeQuote">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="mainId" column="MAIN_ID" jdbcType="Long"/>
+		<result property="code" column="CODE" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String" />
+	    <result property="rzRate" column="RZ_RATE" jdbcType="Double" />
+	    <result property="rqRate" column="RQ_RATE" jdbcType="Double" />
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="String" />
+	</resultMap>
+	<delete id="deletePledgeQuoteByMainId" parameterClass="Long">
+		delete from T_RZRQ_PLEDGEQUOTE where MAIN_ID = #mainId#
+	</delete>
+	<select id="getPledgeQuoteByMainId" parameterClass="Long" resultMap="pledgeQuoteMap">
+		select * from T_RZRQ_PLEDGEQUOTE where MAIN_ID = #mainId#
+	</select>
+	
+
+	<insert id="insertPledgeQuote" parameterClass="pledgeQuote">
+		INSERT into T_RZRQ_PLEDGEQUOTE ( ID, MAIN_ID,CODE,NAME,RZ_RATE,RQ_RATE,PUBLISH_DATE) VALUES 
+		(#id#,#mainId#, #code#,#name#,#rzRate#,#rqRate#,sysdate)
+	</insert>
+	
+	<update id="updatePledgeQuote" parameterClass="pledgeQuote">
+		update T_RZRQ_PLEDGEQUOTE
+		 set 
+		 	MAIN_ID = #mainId#,
+			CODE= #code#,
+			NAME = #name#,
+			RZ_RATE = #rzRate#,
+			RQ_RATE = #rqRate#
+			PUBLISH_DATE = sysdate
+		where id=#id#
+	</update>
+	
+	
+
+	<delete id="deletePledgeQuote" parameterClass="pledgeQuote">
+		delete from T_RZRQ_PLEDGEQUOTE where ID in ($value$)
+	</delete>
+	
+	<delete id="deletePledgeQuoteById" parameterClass="Long">
+		delete from T_RZRQ_PLEDGEQUOTE where id = #value#
+	</delete>
+	
+	<select id="getPledgeQuoteAll" resultMap="pledgeQuoteMap">
+		select * from T_RZRQ_PLEDGEQUOTE 
+	</select>
+
+	<select id="getPledgeQuoteById" parameterClass="Long" resultMap="pledgeQuoteMap">
+		select * from T_RZRQ_PLEDGEQUOTE where id= #id#
+	</select>	
+
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getPledgeQuoteByPage" parameterClass="java.util.Map" resultMap = "pledgeQuoteMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  
+</sqlMap>

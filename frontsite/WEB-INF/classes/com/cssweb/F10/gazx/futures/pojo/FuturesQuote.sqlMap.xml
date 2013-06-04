@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.futures.pojo.FuturesQuote">
+
+	<typeAlias alias="futuresQuote" type="com.cssweb.F10.gazx.futures.pojo.FuturesQuote" />
+
+	<!--result map-->
+	<resultMap id="ResultMap" class="futuresQuote">
+		<result property="change" column="ZD" jdbcType="double" nullValue="0.0"/>
+		<result property="closePrice" column="SPJ" jdbcType="double" nullValue="0.0"/>
+		<result property="futuresQuoteId" column="T_QHHQ_ID" jdbcType="long" />
+		<result property="highPrice" column="ZGJ" jdbcType="double" nullValue="0.0"/>
+		<result property="lowPrice" column="ZDJ" jdbcType="double" nullValue="0.0"/>
+		<result property="openInterest" column="KPL" jdbcType="double" nullValue="0.0"/>
+		<result property="openInterestChange" column="ZJL" jdbcType="double" nullValue="0.0"/>
+		<result property="openPrice" column="KPJ" jdbcType="double" nullValue="0.0"/>
+		<result property="prevSettlePrice" column="ZJS" jdbcType="double" nullValue="0.0"/>
+		<result property="product" column="PZ" jdbcType="String" nullValue=""/>
+		<result property="publishDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="settlementMonth" column="JGY" jdbcType="String" nullValue=""/>
+		<result property="settlePrice" column="JJS" jdbcType="double" nullValue="0.0"/>
+		<result property="turnover" column="CJE" jdbcType="double" nullValue="0.0"/>
+		<result property="volume" column="CJL" jdbcType="double" nullValue=""/>
+	</resultMap>
+	
+	<!-- 根据期货品种，返回所有行情 -->
+	<select id="getFuturesQuote" resultMap="ResultMap" parameterClass="String">
+		select qq.zd,qq.spj,qq.t_qhhq_id,qq.zgj,
+	       qq.zdj,qq.kpl,qq.zjl,qq.kpj,
+	       qq.zjs,qq.pz,qq.fsrq,qq.jgy,
+	       qq.jjs,qq.cje,qq.cjl
+	  from QHHQ qq 
+	  where  qq.SCBZ = 0 AND qq.GKBZ = 1
+	      and qq.pz=#product#
+	</select>
+	
+	<!-- 根据期货品种及交割月份，返回行情 -->
+	<select id="getFuturesQuoteObj" resultMap="ResultMap" parameterClass="map">
+		select qq.zd,qq.spj,qq.t_qhhq_id,qq.zgj,
+	       qq.zdj,qq.kpl,qq.zjl,qq.kpj,
+	       qq.zjs,qq.pz,qq.fsrq,qq.jgy,
+	       qq.jjs,qq.cje,qq.cjl
+	  from QHHQ qq 
+	  where  qq.SCBZ = 0 AND qq.GKBZ = 1
+	  <dynamic>
+			<isNotEmpty property="product">
+	      		and qq.pz=#product#
+	      	</isNotEmpty>
+	      	<isNotEmpty property="deliveryMonth">
+	      		and qq.JGY=#deliveryMonth#
+	      	</isNotEmpty>
+	   </dynamic>
+	  and ROWNUM = 1 
+	</select>
+	
+	
+</sqlMap>

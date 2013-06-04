@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap
+	namespace="com.cssweb.F10.gazx.bond.pojo.ConvertibleDebtIssueAndTrade">
+
+	<typeAlias alias="convertibleDebtIssueAndTrade"
+		type="com.cssweb.F10.gazx.bond.pojo.ConvertibleDebtIssueAndTrade" />
+
+	<!--result map-->
+	<resultMap id="convertibleDebtIssueAndTradeMap"
+		class="convertibleDebtIssueAndTrade">
+
+		<!-- 可转债（在此表中是用ID表示） -->
+		<result property="convertibleDebt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券到期日 -->
+		<result property="convertibleDebtBackDate" column="ZQDQR"
+			jdbcType="java.util.Date" />
+
+		<!-- 发行主体 -->
+		<result property="convertibleDebtCompanyId" column="T_GSZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 结束发行期 -->
+		<result property="convertibleDebtEndDate" column="Fxqx_jsr"
+			jdbcType="java.util.Date" />
+
+		<!-- 开始发行期 -->
+		<result property="convertibleDebtListedDate" column="Fxqx_ksr"
+			jdbcType="java.util.Date" />
+
+		<!-- 计息方式 -->
+		<result property="convertibleDebtMakeRateModel" column="Jxfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券期限 -->
+		<result property="convertibleDebtMaturity" column="ZQQX"
+			jdbcType="java.lang.String" />
+
+		<!-- 可转债名称 -->
+		<result property="convertibleDebtName" column="KZZMC"
+			jdbcType="java.lang.String" />
+
+		<!-- 票面金额 -->
+		<result property="convertibleDebtParValue" column="PMJE"
+			jdbcType="java.lang.Double" />
+
+		<!-- 还本付息方式 -->
+		<result property="convertibleDebtPayModel" column="Hbfxfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 发生日期 -->
+		<result property="convertibleDebtPulishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+		<!-- 公司名称 -->
+		<result property="companyName" column="gsmc"
+			jdbcType="java.lang.String" />
+
+	</resultMap>
+
+	<!-- 根据债券代码，查找该债券的可转债发行与上市情况 -->
+	<select id="getConvertibleDebtIssueAndTradeByBondCode"
+		resultMap="convertibleDebtIssueAndTradeMap" parameterClass="String">
+		SELECT a.T_ZQZB_ID, a.T_GSZB_ID, a.KZZMC, a.ZQQX, a.PMJE,
+		a.Jxfs, a.Hbfxfs, a.Fxqx_ksr, a.Fxqx_jsr, a.ZQDQR, a.FSRQ,
+		b.zqjc, b.zqdm, c.gsmc FROM KZZFXYSS a, zqzb b, gszb c where
+		a.T_ZQZB_ID = b.t_Zqzb_Id and c.t_gszb_id = a.t_gszb_id and
+		b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ = 1 and rownum = 1
+		order by zqdm desc
+	</select>
+
+</sqlMap>

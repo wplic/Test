@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+       
+<struts-config>
+
+<!-- ============ Data Source =================================== -->
+
+<!-- ========== Form Bean Definitions =================================== -->
+<form-beans>
+	<!--栏目表单-->
+	<form-bean name="CategoryTreeNodeForm" type="com.css.cms.category.view.CategoryTreeNodeForm"/>
+
+	<form-bean name="CategoryRightForm" type="com.css.cms.category.view.CategoryRightForm"/>
+</form-beans>
+
+ 
+<!-- ========== Global Forward Definitions ============================== -->
+
+<!-- ========== Action Mapping Definitions ============================== -->
+<action-mappings>
+	<!-- 显示添加分类 -->
+	<action   path="/admin/category/CategoryCreateAction"
+			  parameter="addcat"
+			  type="com.css.cms.category.action.CategoryTreeNodeAction"		
+			  scope="request"
+			  validate="false">
+		<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="failure" redirect="true" path="/admin/category/CategoryListRight.jsp"/>
+		<forward name="success"  path="/admin/category/CategoryTreeNodeForm.jsp"/>
+	</action>
+	<!-- 显示修改分类 -->
+	<action   path="/admin/category/CategoryUpdateAction"
+			  parameter="editcat"
+			  type="com.css.cms.category.action.CategoryTreeNodeAction"
+			  scope="request"
+			  validate="false">
+		<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="failure" redirect="true" path="/admin/category/CategoryListRight.jsp"/>
+		<forward name="success"  path="/admin/category/CategoryTreeNodeForm.jsp"/>
+	</action>
+	<!-- 执行保存分类 -->
+	<action   path="/admin/category/CategorySaveAction"
+			  parameter="savecat"
+			  name="CategoryTreeNodeForm"
+			  type="com.css.cms.category.action.CategoryTreeNodeAction"
+			  scope="request"
+			  input="/admin/category/CategoryTreeNodeForm.jsp"
+			  validate="true">
+		<forward name="treeUrl"  path="/admin/category/CategoryListTree.jsp"/>
+		<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="failure" redirect="true" path="/admin/category/CategoryListRight.jsp"/>
+		<forward name="success"  path="/admin/category/CategoryListRight.jsp"/>
+	</action>
+	<!-- 删除一个分类 -->
+	<action   path="/admin/category/CategoryDeleteAction"
+			  parameter="deletecat"
+			  type="com.css.cms.category.action.CategoryTreeNodeAction"
+			  scope="request"
+			  validate="true">
+		<forward name="treeUrl"  path="/admin/category/CategoryListTree.jsp"/>
+		<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="failure" redirect="true" path="/admin/category/CategoryListRight.jsp"/>
+		<forward name="success"  path="/admin/category/CategoryListRight.jsp"/>
+	</action>
+	<!-- 显示排序分类 -->
+	<action   path="/admin/category/CategoryOrderAction"
+			  parameter="ordercat"
+			  type="com.css.cms.category.action.CategoryTreeNodeAction"
+			  scope="request"
+			  validate="false">
+		<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="failure" redirect="true" path="/admin/category/CategoryListRight.jsp"/>
+		<forward name="success"  path="/admin/category/CategoryListOrder.jsp"/>
+	</action>
+	<!-- 保存排序分类 -->
+	<action   path="/admin/category/CategoryOrderSaveAction"
+			  parameter="ordersave"
+			  type="com.css.cms.category.action.CategoryTreeNodeAction"
+			  scope="request"
+			  input="/admin/category/CategoryListOrder.jsp"
+			  validate="false">
+		<forward name="treeUrl"  path="/admin/category/CategoryListTree.jsp"/>
+		<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="failure" redirect="true" path="/admin/category/CategoryListOrder.jsp"/>
+		<forward name="success"  path="/admin/category/CategoryListRight.jsp"/>
+	</action>
+	<!-- 显示分类 -->
+	<action   path="/admin/category/CategoryShowAction"
+			  parameter="showcat"
+			  type="com.css.cms.category.action.CategoryTreeNodeAction"
+			  scope="request"
+			  validate="false">
+		<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="failure" redirect="true" path="/admin/category/CategoryListRight.jsp"/>
+		<forward name="success"  path="/admin/category/CategoryTreeNodeView.jsp"/>
+	</action>
+
+	<!--快捷栏目初始-->
+	<action   path="/admin/category/CategoryShortcutInit"
+			  type="com.css.cms.category.action.CategoryShortcutInitAction"
+			  scope="request"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/category/ShortcutCategory.jsp"/>
+	</action>
+	<!--快捷栏目分配-->
+	<action   path="/admin/category/CategoryShortcut"
+			  type="com.css.cms.category.action.CategoryShortcutAction"
+			  scope="request"
+			  validate="false">
+		<forward name="target" path="/admin/category/CategoryShortcutInit.do"/>
+	</action>
+
+	<!--栏目权限初始-->
+	<action   path="/admin/category/CategoryRightInit"
+			  type="com.css.cms.category.action.CategoryRightInitAction"
+			  name="CategoryRightForm"
+			  input="/admin/category/CategoryRight.jsp"
+			  scope="request"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/category/CategoryRight.jsp"/>
+	</action>
+
+	<!--栏目权限分配-->
+	<action   path="/admin/category/CategoryRight"
+			  type="com.css.cms.category.action.CategoryRightAction"
+			  scope="request"
+			  name="CategoryRightForm"
+			  input="/admin/category/CategoryRight.jsp"
+			  validate="true">
+		<forward name="target" redirect="true" path="/admin/category/CategoryRightInit.do"/>
+	</action>
+	
+</action-mappings>
+
+</struts-config>

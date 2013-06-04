@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings
+			cacheModelsEnabled="true"
+			enhancementEnabled="true"
+			lazyLoadingEnabled="true"
+			maxRequests="200"
+			maxSessions="100"
+			maxTransactions="50"
+			useStatementNamespaces="true"
+			/>
+	
+	<!-- zcgl -->
+	<sqlMap resource="com/cssweb/rzrq/pojo/ClientBasic.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/rzrq/pojo/ClientAsset.sqlMap.xml"/>
+	<sqlMap resource="com/cssweb/client/pojo/CrmWebuser.sqlMap.xml"/>	
+	<!-- 2012-6-11 -->
+	<sqlMap resource="com/cssweb/rzrq/pojo/ClientBasicRzrq.sqlMap.xml"/>	
+	<!-- DCX 2012-8-27-->
+	 <sqlMap resource="com/cssweb/subscribe/pojo/TcsswebDcxList.sqlMap.xml" /> 
+</sqlMapConfig>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.security.user.pojo.UserExtentBlob">
+
+	<typeAlias alias="UserExtentBlob" type="com.cssweb.common.security.user.pojo.UserExtentBlob"/>
+
+	<!--result map-->
+	<resultMap id="userExtentBlobMap" class="UserExtentBlob">
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="photo" column="PHOTO" jdbcType="BLOB"/>
+ 		<result property="file" column="UPLOAD_FILE" jdbcType="BLOB"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="UserExtentBlob">
+		  insert into USER_EXTENT_BLOB (USER_ID,PHOTO,UPLOAD_FILE,EXT1,EXT2,EXT3,EXT4)
+		  				values (#userId#,#photo#,#file#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	
+	<update id="update" parameterClass="UserExtentBlob">
+		  update USER_EXTENT_BLOB 
+		  	set PHOTO=#photo#,UPLOAD_FILE=#file#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where USER_ID=#userId#
+	</update>
+	
+	<delete id="deleteByUserId" parameterClass="Long">
+	  	delete USER_EXTENT_BLOB where USER_ID=#value#
+	</delete>
+	
+	<select id="getByUserId" parameterClass="Long" resultMap = "userExtentBlobMap">
+	  	select * from USER_EXTENT_BLOB where USER_ID = #value#
+	</select>
+
+</sqlMap>

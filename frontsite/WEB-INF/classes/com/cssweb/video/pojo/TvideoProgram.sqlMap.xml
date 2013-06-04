@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.video.pojo.TvideoProgram">
+
+	<typeAlias alias="TvideoProgram" type="com.cssweb.video.pojo.TvideoProgram" />
+
+	<resultMap id="TvideoProgram" class="TvideoProgram">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="videoBoard" column="VIDEO_BOARD" jdbcType="Long" nullValue="0"/>
+		<result property="category" column="CATEGORY" jdbcType="Long" nullValue="0"/>
+		<result property="docent" column="DOCENT" jdbcType="String"/>
+		<result property="content" column="CONTENT" jdbcType="String"/>
+		<result property="urlLink" column="URL_LINK" jdbcType="String"/>
+		<result property="downLink" column="DOWN_LINK" jdbcType="String"/>
+		<result property="videoSource" column="VIDEO_SOURCE" jdbcType="String"/>
+		<result property="hits" column="HITS" jdbcType="Long" nullValue="0"/>
+		<result property="downCount" column="DOWN_COUNT" jdbcType="Long" nullValue="0"/>
+		<result property="fileSize" column="FILE_SIZE" jdbcType="String"/>
+		<result property="isDown" column="IS_DOWN" jdbcType="String"/>
+		<result property="recommend" column="RECOMMEND" jdbcType="String"/>
+		<result property="fileType" column="FILE_TYPE" jdbcType="String"/>
+		<result property="uploadDate" column="UPLOAD_DATE" jdbcType="Date"/>
+		<result property="state" column="STATE" jdbcType="String"/>
+		<result property="picId" column="PIC_ID" jdbcType="Long" nullValue="0"/>
+		<result property="orderNum" column="ORDER_NUM" jdbcType="Long" nullValue="0"/>
+		<result property="mobileUrl" column="MOBILE_URL" jdbcType="String"/>
+		<result property="voiceUrl" column="VOICE_URL" jdbcType="String"/>
+	</resultMap>
+
+	<resultMap id="TvideoProgramK" class="TvideoProgram">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="videoBoard" column="VIDEO_BOARD" jdbcType="Long"/>
+		<result property="category" column="CATEGORY" jdbcType="Long"/>
+		<result property="docent" column="DOCENT" jdbcType="String"/>
+		<result property="content" column="CONTENT" jdbcType="String"/>
+		<result property="urlLink" column="URL_LINK" jdbcType="String"/>
+		<result property="downLink" column="DOWN_LINK" jdbcType="String"/>
+		<result property="videoSource" column="VIDEO_SOURCE" jdbcType="String"/>
+		<result property="hits" column="HITS" jdbcType="Long"/>
+		<result property="downCount" column="DOWN_COUNT" jdbcType="Long"/>
+		<result property="fileSize" column="FILE_SIZE" jdbcType="String"/>
+		<result property="isDown" column="IS_DOWN" jdbcType="String"/>
+		<result property="recommend" column="RECOMMEND" jdbcType="String"/>
+		<result property="fileType" column="FILE_TYPE" jdbcType="String"/>
+		<result property="uploadDate" column="UPLOAD_DATE" jdbcType="Date"/>
+		<result property="state" column="STATE" jdbcType="String"/>
+		<result property="videoBoardName" column="VIDEO_BOARD_NAME" jdbcType="String"/>
+		<result property="categoryName" column="CATEGORY_NAME" jdbcType="String"/>
+		<result property="picId" column="PIC_ID" jdbcType="Long" nullValue="0"/>
+		<result property="orderNum" column="ORDER_NUM" jdbcType="Long" nullValue="0"/>
+		
+	</resultMap>
+	<insert id="insertTvideoProgram" parameterClass="TvideoProgram">
+		INSERT into T_VIDEO_PROGRAM ( ID, TITLE, VIDEO_BOARD, CATEGORY, DOCENT,CONTENT,URL_LINK,DOWN_LINK, VIDEO_SOURCE, HITS, DOWN_COUNT, FILE_SIZE,IS_DOWN, RECOMMEND, FILE_TYPE, UPLOAD_DATE, STATE,ORDER_NUM, MOBILE_URL, VOICE_URL) 
+		VALUES (#id#,#title#,#videoBoard#, #category#, #docent#,#content#,#urlLink#, #downLink#, #videoSource#,#hits#,#downCount#, #fileSize#, #isDown#,#recommend#, #fileType#, sysdate,#state#,#orderNum#, #mobileUrl#,#voiceUrl#)
+	</insert>
+	
+	<update id="upTvideoProgram" parameterClass="TvideoProgram">
+		update T_VIDEO_PROGRAM set TITLE = #title#, VIDEO_BOARD = #videoBoard#, CATEGORY = #category#, DOCENT = #docent# ,
+		CONTENT = #content#, URL_LINK = #urlLink#, DOWN_LINK = #downLink#, VIDEO_SOURCE = #videoSource# ,  FILE_SIZE = #fileSize#, IS_DOWN = #isDown# ,
+		RECOMMEND = #recommend#, FILE_TYPE = #fileType#, UPLOAD_DATE = sysdate,ORDER_NUM=#orderNum#,MOBILE_URL = #mobileUrl#, VOICE_URL = #voiceUrl# where id=#id#
+	</update>
+     <update id="upProgramStartById" parameterClass="TvideoProgram">
+		update T_VIDEO_PROGRAM set STATE = #state# where id=#id#
+	</update>
+	<update id="upProgramPicIdById" parameterClass="TvideoProgram">
+		update T_VIDEO_PROGRAM set PIC_ID = #picId# where id=#id#
+	</update>
+	<delete id="deleteTvideoPrograms" parameterClass="String">
+		delete from T_VIDEO_PROGRAM where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteTvideoProgramById" parameterClass="Long">
+		delete from T_VIDEO_PROGRAM where id = #value#
+	</delete>
+	
+	<delete id="deleteTvideoProgramByVideoBoardId" parameterClass="Long">
+		delete from T_VIDEO_PROGRAM where VIDEO_BOARD = #value#
+	</delete>
+	
+	<delete id="deleteTvideoProgramByCategoryId" parameterClass="Long">
+		delete from T_VIDEO_PROGRAM where CATEGORY = #value#
+	</delete>
+	
+	<select id="getTvideoProgramAll" resultMap="TvideoProgram">
+		select * from T_VIDEO_PROGRAM 
+	</select>
+
+	<select id="getTvideoProgramById" parameterClass="Long" resultMap="TvideoProgram">
+		select * from T_VIDEO_PROGRAM where id= #id#
+	</select>	
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_VIDEO_PROGRAM 
+	</select>
+	
+	  <select id="getByTvideoProgramMap" parameterClass="java.util.Map" resultMap = "TvideoProgramK">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  	
+  	<select id="getByTvideoProgramBySql" parameterClass="java.util.Map" resultMap = "TvideoProgram">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  	<select id="getByTvideoProgramMapCount" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+	
+	
+	<!-- 按天来查找 前台取开始时间和结束时间全部的视频 -->
+	<select id="getBeginAndEndByDayTvideoAll" parameterClass="java.util.Map" resultMap="TvideoProgram">
+		select t.*, t.rowid from t_video_program t where t.state='1'
+		<dynamic>
+			 <isNotEmpty property="end" prepend="and">
+			  	to_char(t.upload_date, 'yyyyMMdd') &lt;=#end# 
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	to_char(t.upload_date, 'yyyyMMdd') &gt;=#begin#
+			 </isNotEmpty>	
+		</dynamic>
+		 order by t.ORDER_NUM ,t.upload_date desc
+	</select>
+		<!-- 按月来查找 前台取开始时间和结束时间全部的视频 -->
+	<select id="getBeginAndEndByMonthTvideoAll" parameterClass="java.util.Map" resultMap="TvideoProgram">
+		select t.*, t.rowid from t_video_program t where t.state='1'
+		<dynamic>
+			 <isNotEmpty property="end" prepend="and">
+			  	to_char(t.upload_date, 'yyyyMM') &lt;=#end# 
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	to_char(t.upload_date, 'yyyyMM') &gt;=#begin#
+			 </isNotEmpty>	
+		</dynamic>
+		 order by t.ORDER_NUM ,t.upload_date desc
+	</select>
+		<!--按年来查找 前台取开始时间和结束时间全部的视频 -->
+	<select id="getBeginAndEndByYearTvideoAll" parameterClass="java.util.Map" resultMap="TvideoProgram">
+		select t.*, t.rowid from t_video_program t where t.state='1'
+		<dynamic>
+			 <isNotEmpty property="end" prepend="and">
+			  	to_char(t.upload_date, 'yyyy') &lt;=#end# 
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	to_char(t.upload_date, 'yyyy') &gt;=#begin#
+			 </isNotEmpty>	
+		</dynamic>
+		 order by t.ORDER_NUM ,t.upload_date desc	
+	</select>
+	
+	<!--前台根据tvideoCategory视频分类管理来取全部的视频 -->
+	<select id="getTvideoProgramByCategoryId" parameterClass="map" resultMap="TvideoProgram">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			SELECT * from T_VIDEO_PROGRAM t where t.STATE='1'
+		<dynamic prepend="and">
+               <isNotEmpty property="category">
+                     CATEGORY= #category#
+               </isNotEmpty>
+         </dynamic> 
+			<dynamic prepend="and">
+               <isNotEmpty property="title">
+                     TITLE LIKE '%$title$%'
+               </isNotEmpty>
+         </dynamic> 
+         <dynamic prepend="and">
+	      		<isNotEmpty property="videoBoard">
+	                VIDEO_BOARD = #videoBoard#
+	            </isNotEmpty>
+	     </dynamic>
+	     <dynamic prepend="and">
+	      		<isNotEmpty property="newDateTime">
+	               to_char(t.UPLOAD_DATE, 'yyyyMMdd') =#newDateTime#
+	            </isNotEmpty>
+	     </dynamic>
+          order by ORDER_NUM desc, UPLOAD_DATE desc
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<select id="getAllCountByCategoryId" resultClass="java.lang.Integer" parameterClass="map">
+		select count(*) from T_VIDEO_PROGRAM t
+		where t.STATE='1'
+		<dynamic prepend="and">
+             <isNotEmpty property="category">
+                   CATEGORY= #category#
+             </isNotEmpty>
+         </dynamic> 
+		<dynamic prepend="and">
+               <isNotEmpty property="title">
+                     TITLE LIKE '%$title$%'
+               </isNotEmpty>
+         </dynamic> 
+         <dynamic prepend="and">
+	      		<isNotEmpty property="videoBoard">
+	                VIDEO_BOARD = #videoBoard#
+	            </isNotEmpty>
+	     </dynamic>
+	</select>
+	
+		<!-- 投知者教育模块 根据版块代码来取视频拨发信息-->
+	<select id="getTvideoProgramByBoardCode" parameterClass="String" resultMap="TvideoProgram">
+	    select * from (  
+		    SELECT t.* from T_VIDEO_PROGRAM t ,T_VIDEO_BOARD b where t.STATE='1' and 
+		    t.video_board=b.id and b.code=#code# order by t.ORDER_NUM , t.UPLOAD_DATE desc
+		) where ROWNUM	&lt;=10
+	</select>
+	
+		<!-- 投知者教育模块 根据类别代码来取视频拨发信息-->
+	<select id="getTvideoProgramByCateCode" parameterClass="String" resultMap="TvideoProgram">
+	    select * from (  
+		    SELECT t.* from T_VIDEO_PROGRAM t ,t_video_category b where t.STATE='1' and 
+		    category=b.id and b.code=#code# order by t.ORDER_NUM ,t.UPLOAD_DATE desc
+		) where ROWNUM	&lt;=10
+	</select>
+	
+	
+	
+		<!-- 投知者教育模块 取最新的5条视频信息-->
+	<select id="getTvideoProgramByNewVideo"  resultMap="TvideoProgram">
+		SELECT a.* from T_VIDEO_PROGRAM a where a.video_board in  (select d.id from t_video_category t,t_video_board d where d.id=t.board_id and d.code in ('tv_spjy','tv_jgsrx')
+		) and rownum &lt; 6 and  a.pic_id is not null order by a.ORDER_NUM ,a.upload_date desc 
+	</select>
+
+
+<!--前台根据tvideoCategory视频分类管理来取全部的视频  今日回放的全部固定视频-->
+	<select id="getTvideoProgramByIsfix" parameterClass="map" resultMap="TvideoProgram">
+			SELECT t.* from T_VIDEO_PROGRAM t,T_VIDEO_CATEGORY c where c.isfix = '1' and c.id=t.category and t.STATE='1' order by t.order_num
+	</select>
+<!--前台根据tvideoCategory视频分类管理来取全部的视频  今日回放的全部不固定视频-->
+	<select id="getTvideoProgramByNewDate" parameterClass="map" resultMap="TvideoProgram">
+			SELECT t.* from T_VIDEO_PROGRAM t where  t.STATE='1' AND to_char(t.UPLOAD_DATE, 'yyyyMMdd') = to_char(sysdate, 'yyyyMMdd') AND NOT EXISTS(SELECT 1 FROM T_VIDEO_CATEGORY c WHERE c.id=t.category AND c.isfix = '1') order by t.order_num
+	</select>
+</sqlMap>

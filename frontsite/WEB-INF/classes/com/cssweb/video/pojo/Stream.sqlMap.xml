@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.video.pojo.Stream">
+
+	<typeAlias alias="stream" type="com.cssweb.video.pojo.Stream" />
+
+	<resultMap id="streamMap" class="stream">
+		<result property="fileName" column="Filename" jdbcType="String"/>
+		<result property="filePath" column="Filepath" jdbcType="String"/>
+		<result property="startTime" column="Starttime" jdbcType="Date"/>
+		<result property="stopTime" column="Stoptime" jdbcType="Date"/>
+		<result property="remotePath" column="RemotePath" jdbcType="String"/>
+	    <result property="pdName" column="pdname" jdbcType="String" />
+	</resultMap>
+	<select id="getStreamByName" parameterClass="String" resultMap="streamMap">
+		select TOP 10 * from StreamTable where pdname= #fileName# order by Starttime desc
+	</select>
+	<select id="getStreamByNameAll" parameterClass="java.util.Map" resultMap="streamMap">
+		SELECT TOP $counts$ * FROM StreamTable where pdname= #fileName# 
+		<dynamic>
+			 <isNotEmpty property="StartDate" prepend="and">
+			  	#StartDate# &lt;= convert(varchar(11),cast(stoptime as smalldatetime),120)  
+			 </isNotEmpty>
+			 <isNotEmpty property="EndDate" prepend="and">
+			  	#EndDate# &gt;= convert(varchar(11),cast(stoptime as smalldatetime),120)
+			 </isNotEmpty>
+			 <isNotEmpty property="newDateTime" prepend="and">
+			  	#newDateTime# = convert(varchar(11),cast(stoptime as smalldatetime),120)
+			 </isNotEmpty>		
+		</dynamic>
+		 
+		and stoptime not in (SELECT TOP $begin$ stoptime FROM StreamTable where pdname= #fileName# 
+		<dynamic>
+			 <isNotEmpty property="StartDate" prepend="and">
+			  	#StartDate# &lt;= convert(varchar(11),cast(stoptime as smalldatetime),120)  
+			 </isNotEmpty>
+			 <isNotEmpty property="EndDate" prepend="and">
+			  	#EndDate# &gt;= convert(varchar(11),cast(stoptime as smalldatetime),120)
+			 </isNotEmpty>
+			  <isNotEmpty property="newDateTime" prepend="and">
+			  	#newDateTime# = convert(varchar(11),cast(stoptime as smalldatetime),120)
+			 </isNotEmpty>	
+		</dynamic>
+		ORDER BY stoptime desc) ORDER BY stoptime desc
+	</select>
+	
+	<select id="getStreamByNameAllCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) FROM StreamTable where pdname= #fileName# 
+		<dynamic>
+			 <isNotEmpty property="StartDate" prepend="and">
+			  	#StartDate# &lt;= convert(varchar(11),cast(stoptime as smalldatetime),120)  
+			 </isNotEmpty>
+			 <isNotEmpty property="EndDate" prepend="and">
+			  	#EndDate# &gt;= convert(varchar(11),cast(stoptime as smalldatetime),120)
+			 </isNotEmpty>
+			  <isNotEmpty property="newDateTime" prepend="and">
+			  	#newDateTime# = convert(varchar(11),cast(stoptime as smalldatetime),120)
+			 </isNotEmpty>	
+		</dynamic>
+	</select>
+	
+	<select id="getStreamByFileName" parameterClass="String" resultMap="streamMap">
+		select TOP 10 * from StreamTable where Filename= #fileName# order by Starttime desc
+	</select>
+</sqlMap>

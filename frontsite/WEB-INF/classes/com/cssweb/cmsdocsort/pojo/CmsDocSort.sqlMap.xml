@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+  
+<sqlMap namespace="com.cssweb.cmsdocsort.pojo.CmsDocSort">
+	<typeAlias alias="CmsDocSort" type="com.cssweb.cmsdocsort.pojo.CmsDocSort" />
+	<resultMap id="CmsDocSortMap" class="CmsDocSort">
+		<result property="id" column="ID"/>
+		<result property="docId" column="DOC_ID"/>
+		<result property="catId" column="CAT_ID"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="siteNo" column="SITE_NO"/>
+		<result property="fuyiNo" column="FUYI_NO"/>
+		<result property="futongNo" column="FUTONG_NO"/>
+	</resultMap>
+	<resultMap id="CmsDocSortResult" class="CmsDocSort">
+		<result property="id" column="ID"/>
+		<result property="docId" column="DOC_ID"/>
+		<result property="catId" column="CAT_ID"/>
+		<result property="orderNo" column="ORDER_NO"/>
+		<result property="siteNo" column="SITE_NO"/>
+		<result property="fuyiNo" column="FUYI_NO"/>
+		<result property="futongNo" column="FUTONG_NO"/>
+		
+		<result  property="importance" column="IMPORTANCE"/>
+		<result property="title" column="TITLE" />
+		<result property="titleColor" column="TITLE_COLOR"  jdbcType="java.lang.String"/>
+		<result property="httpHref" column="HTTP_HREF"/>
+		<result property="state" column="STATE"/>
+		<result property="sourceDate" column="SOURCE_DATE" jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="CmsDocSort3" class="CmsDocSort">
+		<result property="docId" column="DOC_ID"/>
+		<result  property="importance" column="IMPORTANCE"/>
+		<result property="title" column="TITLE" />
+		<result property="titleColor" column="TITLE_COLOR"  jdbcType="java.lang.String"/>
+		<result property="httpHref" column="HTTP_HREF"/>
+		<result property="state" column="STATE"/>
+		<result property="sourceDate" column="SOURCE_DATE" jdbcType="java.util.Date" />
+	</resultMap>
+	
+	<!-- 用于公益基金的资料下载 -->
+	<resultMap class="CmsDocSort" id="CmsDocSort4">
+		<result property="docId" column="DOC_ID"/>
+		<result property="title" column="TITLE" />
+	</resultMap>
+	
+	<select id="select" resultMap="CmsDocSortMap">
+		select
+			*
+		from
+			CMS_DOC_SORT
+		order by 
+			ORDER_NO
+	</select>
+	
+	<insert id="insert" parameterClass="CmsDocSort">
+		insert into CMS_DOC_SORT
+			(ID,DOC_ID,CAT_ID,ORDER_NO,SITE_NO,FUYI_NO,FUTONG_NO)
+		values
+			(#id#,#docId#,#catId#,#orderNo#,#siteNo#,#fuyiNo#,#futongNo#)
+	</insert>
+	
+	<update id="update" parameterClass="CmsDocSort">
+		update
+			CMS_DOC_SORT
+		set
+			DOC_ID=#docId#,CAT_ID=#catId#,ORDER_NO=#orderNo#,SITE_NO=#siteNo#,FUYI_NO=#fuyiNo#,FUTONG_NO=#futongNo#
+		where 
+			ID = #id#
+	</update>
+	
+	<update id="updateOrderNo" parameterClass="CmsDocSort">
+		update
+			CMS_DOC_SORT
+		set
+			ORDER_NO=#orderNo#
+		where 
+			ID = #id#
+	</update>
+	
+	<update id="orderNoPlus" parameterClass="java.lang.Long">
+		update
+			CMS_DOC_SORT
+		set
+			ORDER_NO=(ORDER_NO+1)
+		where 
+			CAT_ID = #catId#
+	</update>
+	
+	<select id="getMaxOrderNo" resultClass="java.lang.Long" parameterClass="java.lang.Long"> 
+		select nvl(max(ORDER_NO)+1,1) as order_num from CMS_DOC_SORT where CAT_ID=#catId#
+	</select>
+	
+	<select id="getMaxSiteNo" resultClass="java.lang.Long" parameterClass="java.lang.Long"> 
+		select nvl(max(SITE_NO)+1,1) as order_num from CMS_DOC_SORT where CAT_ID=#catId#
+	</select>
+	
+	<select id="getMaxFuyiNo" resultClass="java.lang.Long" parameterClass="java.lang.Long"> 
+		select nvl(max(FUYI_NO)+1,1) as order_num from CMS_DOC_SORT where CAT_ID=#catId#
+	</select>
+	
+	<select id="getMaxFutongNo" resultClass="java.lang.Long" parameterClass="java.lang.Long"> 
+		select nvl(max(FUTONG_NO)+1,1) as order_num from CMS_DOC_SORT where CAT_ID=#catId#
+	</select>
+	
+	<select id="getOrderListByCatId" resultMap="CmsDocSortResult" parameterClass="map">
+		select * from ( select row_.*, ROWNUM rownum_ from (
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.UPLOAD_DATE as SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId# 
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+		a.STATE=#state# 
+			</isNotEmpty>
+		</dynamic>
+		
+		order by a.UPLOAD_DATE desc
+		)
+		row_ where ROWNUM &lt;= #end# ) where rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getOrderListByCatIdCount" resultClass="java.lang.Integer" parameterClass="map">
+		select count(1) from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+		a.STATE=#state# 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	
+	
+	
+	<select id="getCmsListByCatId" resultMap="CmsDocSort3" parameterClass="map">
+		select * from ( select row_.*, ROWNUM rownum_ from (
+			select a.DOC_ID,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.UPLOAD_DATE as SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_CATEGORY_MAP b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId# 
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+		a.STATE=#state# 
+			</isNotEmpty>
+		</dynamic>
+		
+		order by a.UPLOAD_DATE desc
+		)
+		row_ where ROWNUM &lt;= #end# ) where rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getCmsListByCatIdCount" resultClass="java.lang.Integer" parameterClass="map">
+			select count(*) from CMS_DOC_SINGLE_ATTR a,CMS_DOC_CATEGORY_MAP b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId# 
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+		a.STATE=#state# 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	
+	
+	
+	
+	<select id="getCmsDocSortById" resultMap="CmsDocSortMap" parameterClass="java.lang.Long">
+		select * from CMS_DOC_SORT where id=#id#
+	</select>
+	
+	<select id="getOrderListByCatIdNoPaged" resultMap="CmsDocSortResult" parameterClass="java.lang.Long">
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  order by b.ORDER_NO
+	</select>
+	
+	<select id="getOrderListByCatIdNoPagedSite" resultMap="CmsDocSortResult" parameterClass="java.lang.Long">
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  order by b.SITE_NO
+	</select>
+	
+	<select id="getOrderListByCatIdNoPagedFuyi" resultMap="CmsDocSortResult" parameterClass="java.lang.Long">
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  order by b.FUYI_NO
+	</select>
+	
+	<select id="getOrderListByCatIdNoPagedFutong" resultMap="CmsDocSortResult" parameterClass="java.lang.Long">
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b
+		where a.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  order by b.FUTONG_NO
+	</select>
+	
+	<select id="getCmsDocSortByDocId" resultMap="CmsDocSortMap" parameterClass="java.lang.Long">
+		select * from CMS_DOC_SORT where DOC_ID=#docId#
+	</select>
+	
+	<!-- 删除指定ID的记录 -->
+	  <delete id="delete" parameterClass="java.lang.Long">
+	    delete CMS_DOC_SORT where id = #id#
+	  </delete>
+	  
+	<select id="getOrderListByCatIdByPosition" resultMap="CmsDocSortResult" parameterClass="map">
+		select * from ( select row_.*, ROWNUM rownum_ from (
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+		where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  and c.STOCK_ID=#position#
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+		a.STATE=#state# 
+			</isNotEmpty>
+		</dynamic>
+		
+		order by b.ORDER_NO
+		)
+		row_ where ROWNUM &lt;= #end# ) where rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getOrderListByCatIdByPositionOrdered" resultMap="CmsDocSortResult" parameterClass="map">
+		select * from ( select row_.*, ROWNUM rownum_ from (
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+		where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  and c.STOCK_ID=#position#
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+			a.STATE=#state# 
+			</isNotEmpty>
+			<isNotEmpty property="importance" prepend="and">
+			a.IMPORTANCE=#importance# 
+			</isNotEmpty>
+		</dynamic>
+		order by b.$ordered$
+		
+		)
+		row_ where ROWNUM &lt;= #end# ) where rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getOrderListByCatIdByPositionOrderedCount" resultClass="java.lang.Integer" parameterClass="map">
+		select count(1) from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+		where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  and c.STOCK_ID=#position#
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+			a.STATE=#state# 
+			</isNotEmpty>
+			<isNotEmpty property="importance" prepend="and">
+			a.IMPORTANCE=#importance# 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	
+	<!-- 获得指定位置上显示多少条通知 -->
+	<select id="getDisplayCount" resultClass="java.lang.Integer" parameterClass="String">
+		select DISPCOUNT from GGTZ_DISPLAY_COUNT where POSITION=#position#
+	</select>
+	
+	<update id="updateDispcount" parameterClass="map">
+		update
+			GGTZ_DISPLAY_COUNT
+		set
+			DISPCOUNT=#displayNo#
+		where 
+			POSITION = #position#
+	</update>
+	
+	<select id="getSiteShowList" resultClass="java.lang.Long" parameterClass="String">
+		select site_no from CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c where b.doc_id=c.doc_id and stock_id='wangzhan' order by site_no
+	</select>
+	
+	<select id="getFuyiShowList" resultClass="java.lang.Long" parameterClass="String">
+		select fuyi_no from CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c where b.doc_id=c.doc_id and stock_id='fuyi' order by fuyi_no
+	</select>
+	
+	<select id="getFutongShowList" resultClass="java.lang.Long" parameterClass="String">
+		select futong_no from CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c where b.doc_id=c.doc_id and stock_id='futong' order by futong_no
+	</select>
+	
+	<!-- 将通知公告所有资讯的importance非0的置为0 （非展现显示） -->
+	<update id="updateShowType" parameterClass="String">
+		update
+			CMS_DOC_SINGLE_ATTR
+		set
+			IMPORTANCE=0
+		where 
+			IMPORTANCE!=0
+		and 
+			DOC_ID in (select DOC_ID from CMS_DOC_MULTI_ATTR_STOCKID where STOCK_ID in ($queryString$))
+		and
+			DOC_ID in (select DOC_ID from CMS_DOC_SORT)
+	</update>
+	
+	<select id="getNewestFullDispNotify" resultMap="CmsDocSortResult" parameterClass="String">
+		select * from (select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+        where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=1514  and c.STOCK_ID=#position#
+        and a.STATE=1 and a.IMPORTANCE=1 and MODIFY_DATE is not null order by MODIFY_DATE desc)  where rownum  =1
+	</select>
+	
+	<select id="getOrderListByCatIdByPositionOrderedWithOutFullDisp" resultMap="CmsDocSortResult" parameterClass="map">
+		select * from ( select row_.*, ROWNUM rownum_ from (
+			select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+		where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  and c.STOCK_ID=#position#
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+			a.STATE=#state# 
+			</isNotEmpty>
+			<isNotEmpty property="importance" prepend="and">
+			a.IMPORTANCE=#importance# 
+			</isNotEmpty>
+		</dynamic>
+		and b.DOC_ID not in (select DOC_ID from (select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+        where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=1514  and c.STOCK_ID=#position#
+        and a.STATE=1 and a.IMPORTANCE=1 and MODIFY_DATE is not null order by MODIFY_DATE desc)  where rownum  =1)
+		order by b.$ordered$
+		
+		)
+		row_ where ROWNUM &lt;= #end# ) where rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getOrderListByCatIdByPositionOrderedWithOutFullDispCount" resultClass="java.lang.Integer" parameterClass="map">
+		select count(1) from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+		where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=#catId#  and c.STOCK_ID=#position#
+		<dynamic>
+			<isNotEmpty property="state" prepend="and">
+			a.STATE=#state# 
+			</isNotEmpty>
+			<isNotEmpty property="importance" prepend="and">
+			a.IMPORTANCE=#importance# 
+			</isNotEmpty>
+		</dynamic>
+		and b.DOC_ID not in (select DOC_ID from (select b.ID,b.DOC_ID,b.CAT_ID,b.ORDER_NO,b.SITE_NO,b.FUYI_NO,b.FUTONG_NO,a.TITLE,a.TITLE_COLOR,a.HTTP_HREF,a.STATE,a.SOURCE_DATE,a.IMPORTANCE from CMS_DOC_SINGLE_ATTR a,CMS_DOC_SORT b,CMS_DOC_MULTI_ATTR_STOCKID c
+        where a.DOC_ID=b.DOC_ID and c.DOC_ID=b.DOC_ID and b.CAT_ID=1514  and c.STOCK_ID=#position#
+        and a.STATE=1 and a.IMPORTANCE=1 and MODIFY_DATE is not null order by MODIFY_DATE desc)  where rownum  =1)
+	</select>
+	
+	
+	<!-- 2011-10-09 潘可荣 -->
+	<!-- 用于公益基金资料下载,根据项目id和栏目id返回文档列表 -->
+	<select id="getDownloadDoc" resultMap="CmsDocSort4" parameterClass="map">
+	
+		select 
+			a.doc_id, 
+			a.title 
+		from 
+			cms_doc_single_attr a, 
+			cms_multi_attr_item b, 
+			cms_doc_category_map c ,
+			CMS_CATEGORY_BASIC_INFO d
+		where 
+			a.doc_id=b.doc_id 
+			and b.item_id=#itemid# 
+			and a.doc_id=c.doc_id 
+			and c.cat_id = d.cat_id
+			and d.cat_name=#catname#
+			and a.state=1
+		
+	</select>
+	<!-- 根据父id获得子文档id列表 -->
+	<select id="getDocIdByParentId" resultMap="CmsDocSort4" parameterClass="java.lang.Long">
+		select
+			b.doc_id,
+			b.title
+		from
+			cms_doc_body a, cms_doc_single_attr b
+		where
+			a.doc_id = b.doc_id
+			and a.parent_id=#value#
+	</select>
+</sqlMap>

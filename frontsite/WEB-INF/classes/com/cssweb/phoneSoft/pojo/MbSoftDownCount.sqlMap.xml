@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.phoneSoft.pojo.MbSoftDownCount">
+
+	<typeAlias alias="mbSoftDownCount" type="com.cssweb.phoneSoft.pojo.MbSoftDownCount"/>
+	
+	<!--result map--> 
+  	
+  	<resultMap id="mbSoftDownInfoMap" class="mbSoftDownCount">
+ 		<result property="brandId" column="brandid" jdbcType="Long"/>  
+ 		<result property="modelId" column="modelid" jdbcType="Long"/>
+ 		<result property="sjzqType" column="sjzqtype" jdbcType="Long"/>  
+ 		<result property="mbCount" column="mbcount" jdbcType="Integer"/> 
+ 		<result property="brandName" column="brand_name" jdbcType="String"/> 
+ 		<result property="modelName" column="model_name" jdbcType="String"/> 
+  	</resultMap>
+  
+   <resultMap id="mbSoftDownInfoMap1" class="mbSoftDownCount">
+ 		<result property="brandId" column="brandid" jdbcType="Long"/>  
+ 		<result property="sjzqType" column="sjzqtype" jdbcType="Long"/>  
+ 		<result property="mbCount" column="mbcount" jdbcType="Integer"/> 
+ 		<result property="brandName" column="brand_name" jdbcType="String"/> 
+  	</resultMap>
+	 
+	<resultMap id="mbSoftDownInfoMap2" class="mbSoftDownCount">
+		<result property="mbCountId" column="mbcountid" jdbcType="Long"/>  
+ 		<result property="modelId" column="modelid" jdbcType="Long"/>  
+ 		<result property="brandId" column="brandid" jdbcType="Long"/>  
+ 		<result property="mbCount" column="mbcount" jdbcType="Integer"/> 
+ 		<result property="brandName" column="brand_name" jdbcType="String"/> 
+ 		<result property="modelName" column="model_name" jdbcType="String"/> 
+ 		<result property="downDate" column="downdate" jdbcType="java.util.Date"/> 
+ 		<result property="sjzqType" column="sjzqtype" jdbcType="Long"/> 
+  	</resultMap>
+  	
+  	<resultMap id="mbSoftDownInfoMap3" class="mbSoftDownCount"> 
+ 		<result property="sjzqType" column="sjzqtype" jdbcType="Long"/>  
+ 		<result property="mbCount" column="mbcount" jdbcType="Integer"/>
+  	</resultMap>
+ 
+	<select id="getMbSoftDownByModelPaging" parameterClass="java.util.Map" resultMap = "mbSoftDownInfoMap">
+		select a.*,b.brand_name,c.model model_name from (
+	  		select t.brandid,t.modelid,t.mbcount,t.sjzqtype 
+	  		from t_mbsoft_down_count t 
+  			where 1=1  
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>   
+				<isNotNull property="modelId"	prepend="AND">
+			  		t.modelid = #modelId#
+				</isNotNull>
+			</dynamic>  
+		) a,t_phone_brand_info b,t_phone_model_info c
+		where a.brandid=b.id(+) and a.modelid=c.id(+)
+	</select>
+  
+	<select id ="getMbSoftDownByModelCount"  resultClass="Integer">
+		select count(*) from (
+			select distinct t.brandid,t.modelid,vt.mbCount,t.sjzqtype
+			from t_mbsoft_down_count t 
+			left join v_tdsModelCount vt on vt.modelid =  t.modelid 
+  		where 1=1  
+  		<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull> 
+				<isNotNull property="modelId"	prepend="AND">
+			  		t.modelid = #modelId#
+				</isNotNull>
+			</dynamic>
+		)
+	</select> 
+  	
+  <select id="getMbSoftDownByBrandPaging" parameterClass="java.util.Map" resultMap = "mbSoftDownInfoMap1">
+  		select a.*,b.brand_name from (
+	  		select distinct t.brandid,vt.mbCount,t.sjzqtype
+	  		from t_mbsoft_down_count t 
+			left join v_tdsbrandcount vt on vt.brandid =  t.brandid 
+  			where 1=1  
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="brandid"	prepend="AND">
+			  		t.brandid = #brandid#
+				</isNotNull> 
+			</dynamic>
+		) a,t_phone_brand_info b
+		where a.brandid=b.id(+)
+	</select>
+  
+	<select id ="getMbSoftDownByBrandCount"  resultClass="Integer">
+		   select count(distinct t.brandid) from t_mbsoft_down_count t 
+			left join v_tdsbrandcount vt on vt.brandid =  t.brandid
+  		where 1=1  
+  		<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull> 
+				<isNotNull property="brandid"	prepend="AND">
+			  		t.brandid = #brandid#
+				</isNotNull>
+			</dynamic>
+	</select> 
+	
+	<select id="getMbSoftDownByModelDayPaging" parameterClass="java.util.Map" resultMap = "mbSoftDownInfoMap2">
+	  	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	  		select t.mbcountid,t.downdate,t.brandid,a.brand_name,t.modelid,b.model model_name,t.softid,t.sjzqtype,t.mbcount 
+	  		from t_mbsoft_down_count t,t_phone_brand_info a,t_phone_model_info b
+  			where t.brandid=a.id(+) and t.modelid=b.id(+) 
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="brandid"	prepend="AND">
+			  		t.brandid = #brandid#
+				</isNotNull> 
+				<isNotNull property="modelId"	prepend="AND">
+			  		t.modelid = #modelId#
+				</isNotNull>
+			</dynamic>
+			order by
+			<dynamic>
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+			,mbcount desc
+	  	)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id ="getMbSoftDownByModelDayCount"  resultClass="Integer">
+		select count(*) from t_mbsoft_down_count t 
+  		where 1=1  
+  			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="brandid"	prepend="AND">
+			  		t.brandid = #brandid#
+				</isNotNull> 
+				<isNotNull property="modelId"	prepend="AND">
+			  		t.modelid = #modelId#
+				</isNotNull>
+			</dynamic>
+	</select> 
+	
+	<select id ="getByBrandModelSjzqtype" parameterClass="java.util.Map"  resultMap="mbSoftDownInfoMap2">
+		select * from t_mbsoft_down_count t 
+  		where 1=1  
+  			<dynamic>
+				<isNotNull property="nowdate" prepend="and">
+			  	    t.downdate =to_date(#nowdate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="brandid"	prepend="AND">
+			  		t.brandid = #brandid#
+				</isNotNull> 
+				<isNotNull property="modelid"	prepend="AND">
+			  		t.modelid = #modelid#
+				</isNotNull>
+				<isNotNull property="sjzqtype"	prepend="AND">
+			  		t.sjzqtype = #sjzqtype#
+				</isNotNull>
+			</dynamic>
+	</select> 
+	
+	<insert id="addPhoneSoftDownLog" parameterClass="mbSoftDownCount">
+		insert into t_mbsoft_down_count (MBCOUNTID,DOWNDATE,BRANDID,MODELID,SOFTID,SJZQTYPE,MBCOUNT)
+		  		values (#mbCountId#,#downDate#,#brandId#,#modelId#,#softId#,#sjzqType#,1)
+	</insert>
+	
+	<update id="updatePhoneSoftDownLog" parameterClass="java.util.Map">
+		  update t_mbsoft_down_count t
+		  	set t.mbcount=t.mbcount+1
+		  where t.downdate =to_date(#nowdate# , 'yyyy-MM-dd') and t.brandid = #brandid# and t.modelid = #modelid# and t.sjzqtype = #sjzqtype#
+	</update>
+
+		<select id="getMbSoftDownByModelPaging2" parameterClass="java.util.Map" resultMap = "mbSoftDownInfoMap">
+	  	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	  		select MAX(t.brandid) brandid,MAX(a.brand_name) brand_name,MAX(t.modelid) modelid,MAX(b.model) model_name,MAX(t.sjzqtype) sjzqtype,SUM(t.mbcount) mbcount 
+	  		from t_mbsoft_down_count t,t_phone_brand_info a,t_phone_model_info b
+  			where t.brandid=a.id(+) and t.modelid=b.id(+) 
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="sjzqtype"	prepend="and">
+			  		t.sjzqtype = #sjzqtype#
+				</isNotNull>
+			</dynamic>
+			group by t.modelid,t.sjzqtype
+			<dynamic>
+				<isNotNull property="sortName">
+					order by $sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+	  	)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id ="getMbSoftDownByModelPagingCount2"  resultClass="Integer">
+		SELECT COUNT(1) FROM(
+		select 1
+	  		from t_mbsoft_down_count t,t_phone_brand_info a,t_phone_model_info b
+  			where t.brandid=a.id(+) and t.modelid=b.id(+) 
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="sjzqtype"	prepend="AND">
+			  		t.sjzqtype = #sjzqtype#
+				</isNotNull>
+			</dynamic>
+			group by t.modelid,t.sjzqtype )
+	</select>
+	
+	<select id="getMbSoftDownSjzqtypeCount" parameterClass="java.util.Map" resultMap = "mbSoftDownInfoMap3">
+	  		select t.sjzqtype,SUM(t.mbcount) mbcount FROM t_mbsoft_down_count t,t_phone_brand_info a,t_phone_model_info b
+  			where t.brandid=a.id(+) and t.modelid=b.id(+) 
+			<dynamic>
+				<isNotNull property="endStatDate" prepend="and">
+			  	    t.downdate &lt;=to_date(#endStatDate# , 'yyyy-MM-dd')
+				</isNotNull>
+				<isNotNull property="beginStatDate" prepend="and">
+					t.downdate &gt;=to_date(#beginStatDate# , 'yyyy-MM-dd')
+				</isNotNull>  
+				<isNotNull property="sjzqtype"	prepend="and">
+			  		t.sjzqtype = #sjzqtype#
+				</isNotNull>
+			</dynamic>
+			group by t.sjzqtype  
+			
+	</select>
+	
+</sqlMap>

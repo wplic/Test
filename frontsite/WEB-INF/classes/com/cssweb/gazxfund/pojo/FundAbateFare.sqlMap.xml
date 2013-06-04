@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazxfund.pojo.FundAbateFare">
+				 
+	<typeAlias alias="fundAbateFare" type="com.cssweb.gazxfund.pojo.FundAbateFare"/>
+	
+	<!--result map-->
+	<resultMap id="fundAbateFareMap" class="fundAbateFare">
+ 		<result property="jjdm" column="JJDM" jdbcType="String"/>
+ 		<result property="jjjc" column="JJJC" jdbcType="String"/>
+ 		<result property="dwjz" column="DWJZ" jdbcType="Double" />
+ 		<result property="spj" column="SPJ" jdbcType="Double" />
+ 		<result property="ljjz" column="LJJZ" jdbcType="Double" />
+ 		<result property="fsrq" column="FSRQ" jdbcType="java.util.Date" />
+ 		<result property="fare" column="FARE" jdbcType="Double" />
+ 	</resultMap>
+ 	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+  <select id="getFundAbateFarePage" parameterClass="java.util.Map" resultMap = "fundAbateFareMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+</sqlMap>

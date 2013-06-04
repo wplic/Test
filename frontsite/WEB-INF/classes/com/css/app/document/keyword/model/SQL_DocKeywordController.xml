@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="GB2312"?>
+<sql>
+<com.css.app.document.keyword.model.DocKeywordController>
+	<insert truncated = "false" fetchSize = "0">
+		insert into DOC_KEYWORD(
+			WORD_ID,
+			CONTENT,
+			WORD_TYPE)
+		values(
+			<param type="BIGINT">WORD_ID</param>,
+			<param type="VARCHAR">CONTENT</param>,
+			<param type="INTEGER">WORD_TYPE</param>)
+	</insert>
+	<updateContent truncated = "false" fetchSize = "0">
+		update DOC_KEYWORD set
+			CONTENT = <param type="VARCHAR">CONTENT</param>
+		where WORD_ID = <param type="BIGINT">WORD_ID</param>
+	</updateContent>
+	<delete truncated = "false" fetchSize = "0">
+		delete from DOC_KEYWORD
+		where
+			WORD_ID = <param type="BIGINT">WORD_ID</param>
+	</delete>
+	<deleteByIds truncated = "false" fetchSize = "0">
+		delete from DOC_KEYWORD
+		where
+			WORD_ID in (<param>WORD_ID_STR</param>)
+	</deleteByIds>
+	<selectById truncated = "false" fetchSize = "0">
+		select
+			WORD_ID,
+			CONTENT,
+			WORD_TYPE
+		from DOC_KEYWORD
+		where
+			WORD_ID = <param type="BIGINT">WORD_ID</param>
+	</selectById>
+	<selectByType truncated = "false" fetchSize = "0">
+		select
+			WORD_ID,
+			CONTENT,
+			WORD_TYPE
+		from DOC_KEYWORD
+		where
+			WORD_TYPE = <param type="INTEGER">WORD_TYPE</param>
+		order by CONTENT
+	</selectByType>
+	<searchByContent truncated = "false" fetchSize = "0">
+		select
+			WORD_ID,
+			CONTENT,
+			WORD_TYPE
+		from DOC_KEYWORD
+		where
+			CONTENT = <param type="VARCHAR">CONTENT</param>
+	</searchByContent>
+	<checkUnique truncated = "false" fetchSize = "0">
+		select
+			count(WORD_ID)
+		from DOC_KEYWORD
+		where
+			CONTENT = <param type="VARCHAR">CONTENT</param>
+		and
+			WORD_ID != <param type="BIGINT">WORD_ID</param>
+	</checkUnique>
+	<selectByParentId truncated = "false" fetchSize = "0">
+		select
+			WORD_ID,
+			CONTENT,
+			WORD_TYPE
+		from DOC_KEYWORD
+		where
+			WORD_ID in (select CHILD_ID from DOC_KEYWORD_TREE where PARENT_ID = <param type="BIGINT">PARENT_ID</param>)
+		order by CONTENT
+	</selectByParentId>
+	<selectByDocId truncated = "false" fetchSize = "0">
+		select
+			KEY_WORD
+		from DOC_MULTI_ATTR_KEYWORD
+		where
+			DOC_ID = <param type="BIGINT">DOC_ID</param>
+		order by KEY_WORD
+	</selectByDocId>
+</com.css.app.document.keyword.model.DocKeywordController>
+</sql>

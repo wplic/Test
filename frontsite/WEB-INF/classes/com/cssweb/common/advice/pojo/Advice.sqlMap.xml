@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.advice.pojo.Advice">
+	<typeAlias alias="advice" type="com.cssweb.common.advice.pojo.Advice"/>
+	<!--result map-->
+	<resultMap id="adviceMap" class="advice">
+		<result property="id" column="ID" jdbcType="Long" nullValue="0"/>
+		<result property="adviceUserName" column="ADVICE_USER_NAME" jdbcType="String" nullValue=""/>
+		<result property="adviceUserProvince" column="ADVICE_USER_PROVINCE" jdbcType="String" nullValue=""/>
+		<result property="adviceUserPhone" column="ADVICE_USER_PHONE" jdbcType="String" nullValue=""/>
+		<result property="adviceUserMobile" column="ADVICE_USER_MOBILE" jdbcType="String" nullValue=""/>
+		<result property="adviceUserEmail" column="ADVICE_USER_EMAIL" jdbcType="String" nullValue=""/>
+		<result property="feedbackMode" column="FEEDBACK_MODE" jdbcType="String" nullValue=""/>
+		<result property="adviceUserAddr" column="ADVICE_USER_ADDR" jdbcType="String" nullValue=""/>
+		<result property="adviceContent" column="ADVICE_CONTENT" jdbcType="CLOB" nullValue=""/>
+		<result property="adviceFeedback" column="ADVICE_FEEDBACK" jdbcType="String" nullValue=""/>
+		<result property="adviceStatus" column="ADVICE_STATUS" jdbcType="String" nullValue=""/>
+		<result property="adviceDate" column="ADVICE_DATE" jdbcType="java.util.Date"/>
+		<result property="feedbackDate" column="FEEDBACK_DATE" jdbcType="java.util.Date"/>
+		<result property="userType" column="USER_TYPE" jdbcType="String"/>
+  	</resultMap>
+
+  <insert id="addAdvice" parameterClass="advice">
+  	INSERT INTO ADVICE (
+			ID
+			,ADVICE_USER_NAME
+			,ADVICE_USER_PROVINCE
+			,ADVICE_USER_PHONE
+			,ADVICE_USER_MOBILE
+			,ADVICE_USER_EMAIL
+			,FEEDBACK_MODE
+			,ADVICE_USER_ADDR
+			,ADVICE_CONTENT
+			,ADVICE_FEEDBACK
+			,ADVICE_STATUS
+			,USER_TYPE
+		)
+		VALUES
+		(
+			#id#,
+			#adviceUserName#,
+			#adviceUserProvince#,
+			#adviceUserPhone#,
+			#adviceUserMobile#,
+			#adviceUserEmail#,
+			#feedbackMode#,
+			#adviceUserAddr#,
+			#adviceContent#,
+			#adviceFeedback#,
+			#adviceStatus#,
+			#userType#
+		)
+  </insert>
+  
+  <delete id="deleteAdvice" parameterClass="java.lang.Long">
+  	DELETE FROM ADVICE WHERE ID=#id#
+  </delete>
+  
+  <delete id="deleteAdviceByIds" parameterClass="java.lang.String">
+  	DELETE FROM ADVICE WHERE ID IN ($ids$)
+  </delete>
+
+   <select id="getAdviceById" parameterClass="java.lang.Long" resultMap="adviceMap">    
+     SELECT
+			ID
+			,ADVICE_USER_NAME
+			,ADVICE_USER_PROVINCE
+			,ADVICE_USER_PHONE
+			,ADVICE_USER_MOBILE
+			,ADVICE_USER_EMAIL
+			,FEEDBACK_MODE
+			,ADVICE_USER_ADDR
+			,ADVICE_CONTENT
+			,ADVICE_FEEDBACK
+			,ADVICE_STATUS
+			,ADVICE_DATE
+			,FEEDBACK_DATE
+			,USER_TYPE
+	FROM
+		 ADVICE
+	WHERE
+	    ID=#id#
+  </select>
+
+   <update id="auditingAdvice" parameterClass="java.util.Map">    
+    UPDATE ADVICE SET ADVICE_FEEDBACK = #adviceFeedback#,FEEDBACK_DATE = SYSDATE,ADVICE_STATUS = #adviceStatus# WHERE ID=#id#
+  </update>
+	
+	<select id="getPagingAdviceList" parameterClass="java.util.Map" resultMap = "adviceMap">
+	    SELECT * FROM (
+	    	SELECT 
+	    		row_.*, 
+	    		ROWNUM rownum_ 
+	    	FROM ( 
+	    		SELECT * FROM ADVICE
+		   		<dynamic prepend=" WHERE ">
+		   			<isNotEmpty property="adviceUserName" prepend="AND">
+		   				ADVICE_USER_NAME LIKE '%$adviceUserName$%'
+		   			</isNotEmpty>
+		   			<isNotEmpty property="adviceUserProvince" prepend="AND">
+		   				ADVICE_USER_PROVINCE LIKE '%$adviceUserProvince$%'
+		   			</isNotEmpty>
+		   			<isNotEmpty property="feedbackMode" prepend="AND">
+		   				FEEDBACK_MODE = #feedbackMode#
+		   			</isNotEmpty>
+		   			<isNotEmpty property="adviceStatus" prepend="AND">
+		   				ADVICE_STATUS = #adviceStatus#
+		   			</isNotEmpty>
+		   			<isNotEmpty property="adviceDate" prepend="AND">
+		   				ADVICE_DATE &gt;= #adviceDate#
+		   			</isNotEmpty>
+		   		</dynamic>
+	   			<isNotEmpty property="orderBy" prepend="">
+	   				ORDER BY $orderBy$
+	   			</isNotEmpty>
+	   			<isEmpty property="orderBy" prepend="">
+	   				ORDER BY ID DESC
+	   			</isEmpty>
+	    		
+	    	)
+			row_ WHERE ROWNUM &lt;= #end# ) 
+		WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getPagingAdviceListCount" parameterClass="java.util.Map" resultClass = "java.lang.Integer">
+	    SELECT 
+	    	count(1)
+		FROM
+			 ADVICE
+   		<dynamic prepend=" WHERE ">
+   			<isNotEmpty property="adviceUserName" prepend="AND">
+   				ADVICE_USER_NAME LIKE '%$adviceUserName$%'
+   			</isNotEmpty>
+   			<isNotEmpty property="adviceUserProvince" prepend="AND">
+   				ADVICE_USER_PROVINCE LIKE '%$adviceUserProvince$%'
+   			</isNotEmpty>
+   			<isNotEmpty property="feedbackMode" prepend="AND">
+   				FEEDBACK_MODE = #feedbackMode#
+   			</isNotEmpty>
+   			<isNotEmpty property="adviceStatus" prepend="AND">
+   				ADVICE_STATUS = #adviceStatus#
+   			</isNotEmpty>
+   			<isNotEmpty property="adviceDate" prepend="AND">
+   				ADVICE_DATE &gt;= #adviceDate#
+   			</isNotEmpty>
+   		</dynamic>
+	</select>
+ 
+</sqlMap>

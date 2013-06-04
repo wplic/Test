@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap
+	namespace="com.cssweb.F10.gazx.bond.pojo.EnterpriseDebtIssueAndTrade">
+
+	<typeAlias alias="enterpriseDebtIssueAndTrade"
+		type="com.cssweb.F10.gazx.bond.pojo.EnterpriseDebtIssueAndTrade" />
+
+	<!--result map-->
+	<resultMap id="enterpriseDebtIssueAndTradeMap"
+		class="enterpriseDebtIssueAndTrade">
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="ZQJC"
+			jdbcType="java.lang.String" />
+
+		<!-- 实际发行规模 -->
+		<result property="enterprisDebtActualIissueScale"
+			column="SJFXGM" jdbcType="java.lang.Long" />
+
+		<!-- 预计发行规模 -->
+		<result property="enterprisDebtIissueScale" column="YJFXGM"
+			jdbcType="java.lang.String" />
+
+		<!-- 企业债（在此表中是用ID表示） -->
+		<result property="enterpriseDebt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 上市开始日 -->
+		<result property="enterpriseDebtBeginDate" column="SSKSR"
+			jdbcType="java.util.Date" />
+
+		<!-- 计息方式 -->
+		<result property="enterpriseDebtCalModel" column="Jxfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 兑付方式 -->
+		<result property="enterpriseDebtChangeModel" column="Dffs"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行主体,对应公司主表ID -->
+		<result property="enterpriseDebtCompanyId" column="T_GSZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 利息递进方式 -->
+		<result property="enterpriseDebtCompoundMethod" column="Lxdjfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 票面金额 -->
+		<result property="enterpriseDebtCouponNum" column="Pmje"
+			jdbcType="java.lang.Double" />
+
+		<!-- 信用级别 -->
+		<result property="enterpriseDebtCreditLevel" column="Xyjb"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券到期日 -->
+		<result property="enterpriseDebtEndDate" column="ZQDQR"
+			jdbcType="java.util.Date" />
+
+		<!-- 债券形式 -->
+		<result property="enterpriseDebtFormat" column="ZQXS"
+			jdbcType="java.lang.String" />
+
+		<!-- 付息日 -->
+		<result property="enterpriseDebtIntPaymentDate" column="FxR"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行方式 -->
+		<result property="enterpriseDebtIssueMode" column="Fxfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行对象 -->
+		<result property="enterpriseDebtIssueObj" column="Fxdx"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行价格 -->
+		<result property="enterpriseDebtIssurePrice" column="Fxjg"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行期_开始日期 -->
+		<result property="enterpriseDebtListedDate" column="Fxqx_ksr"
+			jdbcType="java.util.Date" />
+
+		<!-- 企业债名称 -->
+		<result property="enterpriseDebtName" column="QYZMC"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券期限 -->
+		<result property="enterpriseDebtPeriod" column="Zqqx"
+			jdbcType="java.lang.String" />
+
+		<!-- 进展说明 -->
+		<result property="enterpriseDebtProcessDes" column="JZSM"
+			jdbcType="java.lang.String" />
+
+		<!-- 发生日期 -->
+		<result property="enterpriseDebtPulishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 债券利率 -->
+		<result property="enterpriseDebtRate" column="Zqll"
+			jdbcType="java.lang.Double" />
+
+		<!-- 上市截止日 -->
+		<result property="enterpriseDebtTradeEndDate" column="SSZJR"
+			jdbcType="java.util.Date" />
+
+		<!-- 上市地点 -->
+		<result property="enterpriseDebtTradePlace" column="SsdD"
+			jdbcType="java.lang.String" />
+
+		<!-- 承销方式 -->
+		<result property="enterpriseDebtUnderwritingMode" column="Cxfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 起息日期 -->
+		<result property="enterpriseDebtValueDate" column="Qxrq"
+			jdbcType="java.util.Date" />
+
+		<!-- 发行期_结束日期 -->
+		<result property="enterpriseDelistDate" column="Fxqx_jsr"
+			jdbcType="java.util.Date" />
+
+	</resultMap>
+
+	<!-- 根据股票代码查找企业债发行与上市 b.zqdm = 'D600801' -->
+	<select id="getEnterpriseDebtIssueAndTradeByBobdCode"
+		resultMap="enterpriseDebtIssueAndTradeMap" parameterClass="String">
+		SELECT a.T_ZQZB_ID, a.T_GSZB_ID, a.QYZMC, a.Xyjb, a.Fxqx_ksr,
+		a.Fxqx_jsr, a.YJFXGM, a.SJFXGM, a.Zqqx, a.Pmje, a.Jxfs, a.Zqll,
+		a.ZQDQR, a.FxR, a.Dffs, a.Fxfs, a.Fxdx, a.Fxjg, a.Cxfs, a.SSKSR,
+		a.SSZJR, a.SsdD, a.ZQXS, a.JZSM, a.Qxrq, a.Lxdjfs, a.FSRQ,
+		b.zqjc, b.zqdm FROM QYZFXYSS a,zqzb b where a.T_ZQZB_ID =
+		b.t_Zqzb_Id and b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ =
+		1 and rownum = 1
+	</select>
+
+</sqlMap>

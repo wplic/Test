@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.goldmoney.pojo.GoldMoneyHistory">
+
+	<typeAlias alias="GoldMoneyHistory" type="com.fortuneage.goldmoney.pojo.GoldMoneyHistory"/>
+	
+	<resultMap id="GoldMoneyHistoryResult" class="GoldMoneyHistory">
+		<result column="ID" property="id" jdbcType="java.lang.Integer"></result>
+		<result column="gmpid" property="gmpid" jdbcType="java.lang.Integer"/>
+		<result column="PUBLISHDATE" property="publishdate" jdbcType="java.util.Date"/>
+		<result column="BUYSCALE" property="buyscale" jdbcType="java.lang.String"/>
+		<result column="TERMINATION" property="termination" jdbcType="java.lang.String"/>
+		<result column="TERMINATIONINCOME" property="terminationincome" jdbcType="java.lang.String"/>
+	</resultMap>
+	<!-- 通过产品pid全部历史记录 -->
+	<select id="getGoldMoneyHistoryListByPid" resultMap="GoldMoneyHistoryResult" parameterClass="java.lang.Integer">
+		select 
+		  * 
+		from 
+		  T_GOLDMONEYHISTORY2 
+		where 
+		  gmpid=#value#
+	</select>
+	<!-- 通过pid查询最后的记录 -->
+	<select id="lastGoldMoneyHistoryByPid" resultMap="GoldMoneyHistoryResult" parameterClass="java.lang.Integer">
+      select 
+        *
+      from  
+      	T_GOLDMONEYHISTORY2 
+      where
+      	ROWNUM=1
+      	and gmpid=#value#
+      order by PUBLISHDATE desc
+   
+   </select>
+	
+	<!-- 插入一个对象  -->
+	<insert id="insertNewGoldMoneyHistory" parameterClass="GoldMoneyHistory">
+		INSERT
+			INTO T_GOLDMONEYHISTORY2
+			  (
+			  	id,
+			    gmpid,
+			    PUBLISHDATE,
+			    BUYSCALE,
+			    TERMINATION,
+			    TERMINATIONINCOME
+			  )
+			  VALUES
+			  (
+			  	seq_goldmoneyHistory.nextval,
+			    #gmpid#,
+			    #publishdate#,
+			    #buyscale#,
+			    #termination#,
+			    #terminationincome#
+			  )
+	</insert>
+	<!-- 更新一个对象 -->
+	<update id="updateGoldMoneyHistory" parameterClass="GoldMoneyHistory">
+		update 
+			T_GOLDMONEYHISTORY2
+		set
+			gmpid=#gmpid#,
+		    PUBLISHDATE=#publishdate#,
+		    BUYSCALE=#buyscale#,
+		    TERMINATION=#termination#,
+		    TERMINATIONINCOME=#terminationincome#
+		where
+			ID=#id#
+	</update>
+	
+	<!-- 返回金快线历史收益的总条数 -->
+	<select id="getHistoryCount" resultClass="java.lang.Integer" parameterClass="java.lang.Integer">
+		select count(*) from T_GOLDMONEYHISTORY2 where gmpid= #value#
+	</select>
+	
+	
+	<!-- 在这个map中需要输入需要查询的sql语句，同时需要传入begin开始的序号和end结束的序号 -->
+	<select id="selectHistoryByPage" resultMap="GoldMoneyHistoryResult" parameterClass="java.util.Map">
+		 <![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	<!-- 通过序号删除一条历史收益 -->
+	<delete id="deleteHistoryById" parameterClass="java.lang.Integer">
+		DELETE
+		FROM T_GOLDMONEYHISTORY2
+		WHERE ID  = #value#
+	</delete>
+</sqlMap>

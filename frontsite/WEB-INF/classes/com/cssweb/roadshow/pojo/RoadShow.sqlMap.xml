@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 
+private long id;
+	
+	private String title;
+	
+	private String content;
+	
+	private long picId;
+	
+	private Date createDate; 
+	
+	private long orderNum;
+-->
+<sqlMap namespace="com.cssweb.roadshow.pojo.RoadShow">
+
+	<typeAlias alias="RoadShow" type="com.cssweb.roadshow.pojo.RoadShow" />
+
+	<!--result map-->
+	<resultMap id="ResultMap" class="RoadShow">
+		<result column="ID" 			property="id" 			jdbcType="java.lang.Long"/>       
+		<result column="TITLE" 			property="title" 		jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="INTRO" 			property="intro" 		jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="START_TIME" 	property="startTime" 	jdbcType="Date"	nullValue=""/> 
+		<result column="END_TIME" 		property="endTime" 		jdbcType="Date"	nullValue=""/> 
+		<result column="PIC_ID" 		property="picId" 		jdbcType="java.lang.Long"/>  
+		<result column="ORDERNUM" 		property="orderNum" 	jdbcType="java.lang.Long"/>  
+		<result column="URL_INFO" 		property="urlInfo" 		jdbcType="java.lang.String"	nullValue=""/> 
+	</resultMap>
+	
+	<select id="selectrecord" parameterClass="java.lang.String" resultMap = "ResultMap">   
+      $sql$   
+ 	</select>
+	
+	<select id="selectAll_1" parameterClass="java.util.Map" resultMap = "ResultMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+  
+
+ 
+  <insert id="insert" parameterClass="RoadShow">    	
+    insert into T_INVESTBANK_ROADSHOW(ID,TITLE,INTRO,START_TIME,END_TIME,PIC_ID,URL_INFO,ORDERNUM)
+    values(#id#,#title#,#intro#,#startTime#,#endTime#,#picId#,#urlInfo#,#orderNum#)
+  </insert>
+ 
+ 
+  <update id="update" parameterClass="RoadShow">    
+     update T_INVESTBANK_ROADSHOW
+         set TITLE=#title#,INTRO=#intro#,START_TIME=#startTime#,END_TIME=#endTime#,
+         URL_INFO=#urlInfo#,ORDERNUM=#orderNum#
+         where ID=#id#    
+  </update>
+  
+ 
+  <select id="getCaseById" parameterClass="java.lang.Long" resultMap = "ResultMap">
+    select * from T_INVESTBANK_ROADSHOW where id = #id#
+  </select>
+    
+    <update id="updatePicIdBySoftId" parameterClass="RoadShow">
+		  update T_INVESTBANK_ROADSHOW set PIC_ID=#picId# where ID=#id#
+	</update>
+
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete T_INVESTBANK_ROADSHOW where id in ($ids$)
+  </delete>
+  
+  
+  <select id="getSellList" parameterClass="java.util.Map" resultMap = "ResultMap">
+  	 SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+  	 	 select * from T_INVESTBANK_ROADSHOW order by START_TIME desc
+  	  )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  	
+  </select>
+  
+  <select id="getSellListCount" resultClass="java.lang.Integer">
+  		select count(*) from T_INVESTBANK_ROADSHOW
+  </select>
+  
+  <select id="getFirstRoadShow" resultMap = "ResultMap">
+  	SELECT row_.*, ROWNUM rownum_ FROM ( 
+  	 	 select * from T_INVESTBANK_ROADSHOW order by START_TIME desc
+  	  )
+		row_ WHERE ROWNUM = 1
+  </select>
+</sqlMap>

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.sunnyPOF.pojo.SunnyCustshareHistory">
+	<typeAlias alias="SunnyCustshareHistory" type="com.fortuneage.sunnyPOF.pojo.SunnyCustshareHistory"/>
+	
+	<resultMap class="SunnyCustshareHistory" id="SunnyCustshareHistory_result">
+		<result property="id" column="id" jdbcType="java.lang.Integer"/>
+		<result property="fundcode" column="fundcode" jdbcType="String"/>
+		<result property="fundname" column="prod_name" jdbcType="String"/>
+		<result property="holdshare" column="holdshare" jdbcType="Double"/>
+		<result property="newnav" column="newnav" jdbcType="Double"/>
+		<result property="marketvalue" column="marketvalue" jdbcType="Double"/>
+		<result property="updatetime" column="updatetime" jdbcType="java.util.Date"/>
+		<result property="custno" column="custno" jdbcType="java.lang.Integer"/>
+		<result property="initdate" column="init_date" jdbcType="java.lang.Integer"/>
+	</resultMap>
+	
+	<select id="getCustshareHistorysBySqltoPage" resultMap="SunnyCustshareHistory_result" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	
+	<select id="getCshCountByCustno" parameterClass="java.lang.Integer" resultClass="java.lang.Integer">
+		select count(*) from sunny_custshare_history where custno=#value#
+	</select>
+	<select id="getshCountByCustno" resultClass="java.lang.Integer">
+		select count(*) from sunny_custshare_history
+	</select>
+	<select id="getwhereCountByCustno" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) from SUNNY_CUSTSHARE_HISTORY hs left join sunny_fundinfo fn on (hs.fundcode=fn.prod_code) where 1=1 and fn.prod_name=#fundname# and hs.updatetime between #select_updatetime# and #select_updatetime1#
+	</select>
+	<select id="getCountByCustnoAndFunno" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) from sunny_custshare_history where FUNDCODE=#fundcode# and custno=#custno#
+	</select>
+	
+	<select id="selectCshById" parameterClass="java.lang.Integer" resultClass="SunnyCustshareHistory">
+		SELECT ID,
+		  FUNDCODE,
+		  prod_name fundname,
+		  HOLDSHARE,
+		  NEWNAV,
+		  MARKETVALUE,
+		  UPDATETIME,
+		  CUSTNO,
+		  init_date
+		FROM 
+		  SUNNY_CUSTSHARE_HISTORY 
+		  left join 
+		    sunny_fundinfo 
+		  on 
+		  (SUNNY_CUSTSHARE_HISTORY.FUNDCODE=sunny_fundinfo.prod_code)
+		where id=#value#
+	</select>
+	
+	<select id="getSunnyHistoryGetId" resultClass="java.lang.Integer">
+		select MAX(id) from sunny_custshare_history
+	</select>
+	
+	<!-- 插入一条数据  -->
+	<insert id="insertCsh" parameterClass="SunnyCustshareHistory">
+		INSERT
+			INTO SUNNY_CUSTSHARE_HISTORY
+			  (
+			    ID,
+			    FUNDCODE,
+			    HOLDSHARE,
+			    NEWNAV,
+			    MARKETVALUE,
+			    UPDATETIME,
+			    CUSTNO,
+			    init_date
+			  )
+			  VALUES
+			  (
+			    SEQ_SUNNY_CS_H.nextval,
+			    #fundcode#,
+			    #holdshare#,
+			    #newnav#,
+			    #marketvalue#,
+			    #updatetime#,
+			    #custno#,
+			    #initdate#
+			  )
+	</insert>
+	
+	<update id="updateSch" parameterClass="SunnyCustshareHistory">
+		UPDATE 
+		  SUNNY_CUSTSHARE_HISTORY
+		set
+		  id=#id#,
+		  fundcode=#fundcode#,
+		  holdshare=#holdshare#,
+		  newnav=#newnav#,
+		  marketvalue=#marketvalue#,
+		  updatetime=#updatetime#,
+		  custno=#custno#,
+		  init_date=#initdate#
+		where
+		  id=#id#
+	</update>
+	<!-- 按时段批量修改历史份额 -->
+	<update id="updateAllTime" parameterClass="java.util.Map">
+		UPDATE 
+		  SUNNY_CUSTSHARE_HISTORY
+		set
+		  holdshare=#holdshare#
+		where
+		 custno=#custNo# AND
+		 fundcode=#fundcode# AND
+		 updatetime BETWEEN #updatetime# AND #updatetime1#
+	</update>
+	
+	<!-- 通过ID删除一条历史记录 -->
+	<delete id="deleteHistoryById" parameterClass="java.lang.Integer">
+		DELETE
+		FROM SUNNY_CUSTSHARE_HISTORY
+		WHERE ID  = #value#
+	</delete>
+</sqlMap>

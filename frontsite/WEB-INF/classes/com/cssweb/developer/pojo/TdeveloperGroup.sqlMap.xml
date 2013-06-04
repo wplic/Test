@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.developer.pojo.TdeveloperGroup">
+				 
+	<typeAlias alias="tdeveloperGroup" type="com.cssweb.developer.pojo.TdeveloperGroup"/>
+	
+	<!--result map-->
+	<resultMap id="tdeveloperGroupMap" class="tdeveloperGroup">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="name" column="NAME" jdbcType="String"/>
+ 		<result property="introId" column="INTRO_ID" jdbcType="Long" />
+ 		<result property="picId" column="PIC_ID" jdbcType="Long" />
+ 		<result property="groupType" column="GROUP_TYPE" jdbcType="Long" />
+ 		<result property="groupDuty" column="GROUP_DUTY" jdbcType="String" />
+ 		<result property="sort" column="SORT" jdbcType="Long" />
+ 		<result property="updateDate" column="UPDATE_DATE" jdbcType="java.util.Date" />
+ 		<result property="ext1" column="EXT1" jdbcType="String" />
+ 		<result property="ext2" column="EXT2" jdbcType="String" />
+ 		<result property="ext3" column="EXT3" jdbcType="String" />
+ 		<result property="ext4" column="EXT4" jdbcType="String" />
+ 	</resultMap>
+ 	
+ 
+	<select id="getTdeveloperGroupPage" parameterClass="java.util.Map" resultMap = "tdeveloperGroupMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+ 	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  <select id="getTdeveloperGroupById" parameterClass="Long" resultMap = "tdeveloperGroupMap">
+   select * from T_DEVELOPER_GROUP where ID = #id#
+  </select>
+  <insert id="insertTdeveloper" parameterClass="tdeveloperGroup">
+		INSERT INTO T_DEVELOPER_GROUP ( ID, NAME,INTRO_ID,GROUP_TYPE,GROUP_DUTY,SORT,UPDATE_DATE,EXT1,EXT2,EXT3,EXT4) VALUES 
+		(#id#,#name#, #introId#,#groupType#,#groupDuty#,#sort#,#updateDate#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	<update id="updateTdeveloperPicById" parameterClass="tdeveloperGroup">
+		  update T_DEVELOPER_GROUP set PIC_ID=#picId# where ID=#id#
+	</update>
+	<update id="updateDeveloperGroup" parameterClass="tdeveloperGroup">
+		update T_DEVELOPER_GROUP
+		 set 
+		 	NAME = #name#,
+			INTRO_ID= #introId#,
+			PIC_ID = #picId#,
+			GROUP_TYPE = #groupType#,
+			GROUP_DUTY = #groupDuty#,
+			SORT = #sort#,
+			UPDATE_DATE = #updateDate#,
+			EXT1 = #ext1#,
+			EXT2 = #ext2#,
+			EXT3 = #ext3#,
+			EXT4 = #ext4#
+		where id=#id#
+	</update>	
+ 	
+	
+
+	 <update id="updateDeveloperPicIdById" parameterClass="tdeveloperGroup">
+		  update T_DEVELOPER_GROUP set PIC_ID=#picId# where ID=#id#
+	</update>
+	
+	<delete id="deleteDeveloperById" parameterClass="Long">
+		delete from T_DEVELOPER_GROUP where id = #id#
+	</delete>
+		
+	  
+	<update id="updateSort" parameterClass="Long">
+	 update T_DEVELOPER_GROUP
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;#sort#
+	</update>
+  	<update id="updateSortAppend" parameterClass="Long">
+	 update T_DEVELOPER_GROUP
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;=#sort#
+	</update>	
+	 <update id="updateSortStartEnd" parameterClass="java.util.Map">
+	 update T_DEVELOPER_GROUP
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>
+	 <update id="updateSortEndStart" parameterClass="java.util.Map">
+	 update T_DEVELOPER_GROUP
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>			  
+</sqlMap>

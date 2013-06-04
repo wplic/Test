@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.RateAdjustment">
+
+	<typeAlias alias="rateAdjustment" type="com.cssweb.F10.gazx.fund.pojo.RateAdjustment" />
+
+	<!--result map-->
+	<resultMap id="rateAdjustmentMap" class="rateAdjustment">
+		<result property="adjustmentDatail" column="TZSM" jdbcType="java.lang.String" />
+		<result property="adjustmentDate" column="TZRQ" jdbcType="java.util.Date" />
+		<result property="rate" column="XL" jdbcType="java.lang.Double" />
+		<result property="rateObject" column="FX" jdbcType="java.lang.String" />
+		<result property="id" column="T_KFSJJFLTZ_ID" jdbcType="java.lang.Long" />		
+	</resultMap>
+	
+	<!-- 根据基金代码查询费率列表 -->	
+	<select id="getRateAdjustmentListByCode" resultMap="rateAdjustmentMap" parameterClass="String">
+    	select kz.TZSM,kz.TZRQ,kz.XL,kz.FX,kz.T_KFSJJFLTZ_ID
+		
+		from KFSJJFLTZ  kz, JJZB  j
+		
+		where kz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and kz.SCBZ=0 and kz.GKBZ=1
+	</select>
+	
+	<!-- 根据基金代码查询费率列表  按调整日期取前五条数据 -->	
+	<select id="getRateAdjustmentListByCodeLimitFive" resultMap="rateAdjustmentMap" parameterClass="String">
+         select * from (	
+         select kz.TZSM,kz.TZRQ,kz.XL,kz.FX,kz.T_KFSJJFLTZ_ID
+		 from KFSJJFLTZ  kz, JJZB  j
+		 where kz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and kz.SCBZ=0 and kz.GKBZ=1 order by  kz.TZRQ desc
+		 ) where rownum &lt; 6 
+	</select>		
+	
+</sqlMap>

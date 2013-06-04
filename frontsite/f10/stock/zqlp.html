@@ -1,0 +1,70 @@
+<html lang="en">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<script src="swfobject.js" language="javascript"></script>
+	
+		<script language="JavaScript" type="text/javascript">
+ 
+ swfobject.embedSWF("zqlp.swf?config=zqlpconfig.xml&width=795&height=450", "zqlp", "795", "450", "9.0.0", "expressInstall.swf");
+ function setStockCode()
+  {
+  	zqlp.setStockCode("sh600001","hdgt");
+  }
+  function load()
+  {
+  	zqlp.load();
+  }
+  function show()
+  {
+  	var obj = new Object();
+  	obj.stockcode = "sh600000";
+  	obj.stockname = "PFYH";
+  	obj.viewtype = "tick";
+  	obj.indicator = "macd";
+  	openWindow.flashshow(obj);
+  }
+  function openNew()
+  {
+  	openWindow = window.open('http://localhost:8088/f10/stock/SingleStock.jsp');
+  }
+  function flashrowclick(o){
+  	alert(o);
+  }
+  function setsize(){
+  	swfobject.embedSWF("zqlp.swf?config=zqlpconfig.xml", "zqlp", txtwidth.value, txtheight.value, "9.0.0", "expressInstall.swf");
+    
+  }
+  var openWindow;
+</script>
+	<style>
+body {
+	margin: 0px;
+	overflow: hidden
+}
+</style>
+	</head>
+	<body>
+        <div id="zqlp"></div>
+		<input type="button" name="dd1" value="分时线"
+			onclick="zqlp.setViewType('tick');" />
+		<input type="button" name="sdd2" value="日K线"
+			onclick="zqlp.setViewType('day');" />
+		<input type="button" name="dd3" value="周K线"
+			onclick="zqlp.setViewType('week');" />
+		<input type="button" name="dd4" value="月K线"
+			onclick="zqlp.setViewType('month');" />
+		<input type="text" name="dd5" id="dd5" value="sh600000"
+			onkeydown="if (event.keyCode==13) zqlp.setStockCode(dd5.value,dd5.value);" />
+		<input type="button" name="dd6" value="查询"
+			onclick="zqlp.setStockCode(dd5.value,dd5.value);" />
+		<input type="text" name="txtwidth" id="txtwidth" value="795" />
+		<input type="text" name="txtheight" id="txtheight" value="450" />
+		<input type="button" name="dd7" value="布局大小"
+			onclick="zqlp.jssetsize(txtwidth.value,txtheight.value);" />
+		<input type="text" name="txt1" id="txt1" value="升序" />
+		<input type="text" name="txt2" id="txt2" value="降序" />
+		<input type="button" name="dd8" value="查询"
+			onclick="zqlp.changeEx(txt1.value,txt2.value);" />
+	</body>
+</html>

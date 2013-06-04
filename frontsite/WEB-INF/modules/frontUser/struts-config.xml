@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<action-mappings>		
+		<action path="/webUser"  scope="request" parameter="method" validate="false">	
+		    <forward name="toLoginLc" path="/bussinesshall/loginLc.jsp"></forward>	
+		    <forward name="ccUrl" path="/bussinesshall/loginLc.jsp?iscc=1"></forward>	
+		    <forward name="zcUrl" path="/share/loginAccount.jsp"></forward>	
+		    <forward name="financingUrl" path="/bussinesshall/financingCzh.jsp?nav=wsyyt&amp;nav1=wdlczx"></forward>																
+		</action>
+		<action path="/tclientYdbgAction" scope="request" parameter="method" validate="false">
+			<forward name="ydbg" path="/assetManage/clientServiceYdbg.jsp"></forward>
+			<forward name="khtz" path="/assetManage/clientServiceKhtz.jsp"></forward>
+		</action>
+	</action-mappings>
+</struts-config>

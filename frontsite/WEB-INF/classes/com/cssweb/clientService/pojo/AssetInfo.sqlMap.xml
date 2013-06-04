@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.clientService.pojo.AssetInfo">
+
+	<typeAlias alias="AssetInfo" type="com.cssweb.clientService.pojo.AssetInfo" />
+
+	<resultMap id="AssetInfoMap" class="AssetInfo">
+		<result property="clientId" column="fund_account" jdbcType="String"/>
+		<result property="accountName" column="CLIENT_NAME" jdbcType="String"/>
+		<result property="moneyType" column="MONEY_TYPE" jdbcType="String"/>
+		<result property="yesterdayBalance" column="BEGIN_BALANCE" jdbcType="Double"  nullValue="0"/>
+		<result property="yesterdayValue" column="YESTERDAY_VALUE" jdbcType="Double" nullValue="0"/>
+		<result property="yesterdayAmount" column="HE" jdbcType="Double" nullValue="0"/>
+		<result property="businessDate" column="business_date" jdbcType="Integer" nullValue="0"/>
+	</resultMap>
+	
+	<select id="getAllInfo" parameterClass="map" resultMap="AssetInfoMap">
+		select k.fund_account,k.client_name,k.money_type,k.begin_balance,m.yesterday_value,(k.begin_balance+nvl(m.yesterday_value,0)) he ,k.business_date
+	      from 
+	      (
+	           select a.fund_account,c.client_name,a.money_type,a.begin_balance,g.business_date
+	  		     from hs_fund_fund a,
+	  			   hs_user_client c,
+	  			   ( 
+	  			   select max(business_date) business_date from hs_fund_fund where client_id=#fundaccount#
+	  			   <dynamic>
+							 <isNotNull property="business_date" prepend="and">
+							    to_date(to_char(sysdate,'YYYYMM')||'01','YYYYMMDD')-1&gt;=to_date(business_date ,'yyyyMMdd')
+							 </isNotNull>
+						</dynamic>
+	                ) g
+	  		     where a.client_id=#fundaccount# and a.client_id=c.client_id and a.business_date=g.business_date
+	      ) k,
+	      (
+	           select nvl(sum(i.sl*j.asset_price),0) yesterday_value 
+	           from 
+	           (
+	                select d.business_date,d.stock_code,d.begin_amount+d.correct_amount sl
+	                from hs_his_stock d,
+	                (
+	                     select max(f.business_date) business_date from hs_fund_fund f where f.client_id=#fundaccount#
+	                     <dynamic>
+							 <isNotNull property="business_date" prepend="and">
+							    to_date(to_char(sysdate,'YYYYMM')||'01','YYYYMMDD')-1&gt;=to_date(business_date ,'yyyyMMdd')
+							 </isNotNull>
+						</dynamic>
+	                  ) g
+	                where d.client_id=#fundaccount# and d.business_date=g.business_date
+	            ) i,hs_his_hisprice j
+	            where i.stock_code=j.stock_code and i.business_date=j.init_date
+	      ) m
+	</select>
+	
+	<resultMap id="AssetInfoMap2" class="AssetInfo">
+	 <result property="clientId" column="fund_account" jdbcType="String"/>
+	 <result property="accountName" column="accountName" jdbcType="String"/>
+	</resultMap>
+	<select id="getAssetInfoByClientId" parameterClass="String" resultMap="AssetInfoMap2">
+	  select cust_no as fund_account,cust_name as accountName from kmms.tb_zc_vip_cust@zgcrmdb t where t.cust_no=#clientId# and t.query_mode=6864
+	</select>
+</sqlMap>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.AssignStock">
+    <typeAlias alias="assignStock" type="com.cssweb.F10.gazx.stock.pojo.AssignStock"/>
+    <!--result map-->
+    <resultMap id="assignStockMap" class="assignStock">
+		<result column="PGSSR" property="assignMarketDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="Pgbl" property="assignProportion" jdbcType="double"/>
+		<result column="Pgnd" property="assignYear" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="MZZE" property="collectAmount" jdbcType="Long"/>
+        <result column="MZJE" property="collectIncome" jdbcType="Long"/>
+        <result column="T_BJJG_ID" property="sponsorAgency" jdbcType="Long"/>
+        <result column="T_GPZB_ID" property="stockId" jdbcType="Long"/>
+        <result column="PGDX" property="assignObject" jdbcType="String" nullValue=""/>
+    </resultMap> 
+    
+	<select id="pageQuery" resultMap="assignStockMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+			     SELECT
+						PGSSR,
+						Pgbl,
+						Pgnd,
+						MZZE,
+						MZJE,
+						T_BJJG_ID,
+						T_GPZB_ID,
+						PGDX
+				FROM PG
+					  where SCBZ=0 and GKBZ=1
+						<isNotNull prepend="and" property="stockId">
+							T_GPZB_ID = #stockId#
+						</isNotNull>
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select> 
+</sqlMap>	

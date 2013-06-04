@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gxcp.pojo.Answer">
+
+	<typeAlias alias="GxcpAnswer" type="com.cssweb.gxcp.pojo.Answer" />
+
+	<resultMap id="GxcpAnswerMap" class="GxcpAnswer">
+		<result property="userid" column="USER_ID" jdbcType="Long"/>
+		<result property="questionid" column="QUESTION_ID" jdbcType="Long"/>
+		<result property="optionno" column="OPTION_NO" jdbcType="String"/>
+		<result property="optionvalue" column="OPTION_VALUE" jdbcType="String"/>
+		<result property="isanswered" column="ISANSWERED" jdbcType="String"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="GxcpAnswer">
+		INSERT into T_MAN_TEST_ANSWERS (USER_ID,QUESTION_ID,OPTION_NO,OPTION_VALUE,ISANSWERED) 
+								VALUES (#userid#,#questionid#,#optionno#,#optionvalue#,#isanswered#)
+	</insert>
+	
+	<update id="updateInfo" parameterClass="GxcpAnswer">
+		update T_MAN_TEST_ANSWERS set OPTION_VALUE=#optionvalue#,ISANSWERED=#isanswered#
+		where USER_ID=#userid# and QUESTION_ID=#questionid# and OPTION_NO=#optionno#
+	</update>
+
+	<delete id="deleteByUserid" parameterClass="Long">
+		delete from T_MAN_TEST_ANSWERS where USER_ID = #userid#
+	</delete>
+	
+	<delete id="deleteByUseridQuestionid" parameterClass="GxcpAnswer">
+		delete from T_MAN_TEST_ANSWERS where USER_ID = #userid# and QUESTION_ID=#questionid#
+	</delete>
+	
+	<delete id="deleteByUseridQuestionidOptionno" parameterClass="GxcpAnswer">
+		delete from T_MAN_TEST_ANSWERS where USER_ID = #userid# and QUESTION_ID=#questionid# and OPTION_NO=#optionno#
+	</delete>
+		
+	<select id="getByUserid" parameterClass="Long" resultMap="GxcpAnswerMap">
+		select * from T_MAN_TEST_ANSWERS where USER_ID = #userid# order by QUESTION_ID asc
+	</select>
+		
+	<select id="getByUseridQuestionid" parameterClass="GxcpAnswer" resultMap="GxcpAnswerMap">
+		select * from T_MAN_TEST_ANSWERS USER_ID = #userid# and QUESTION_ID=#questionid# order by optionno asc
+	</select>
+		
+	<select id="getByUseridQuestionidOptionno" parameterClass="GxcpAnswer" resultMap="GxcpAnswerMap">
+		select * from T_MAN_TEST_ANSWERS USER_ID = #userid# and QUESTION_ID=#questionid# and OPTION_NO=#optionno#
+	</select>
+
+	<select id="getCountBySql" parameterClass="String" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+	
+	  <select id="getByMap" parameterClass="java.util.Map" resultMap = "GxcpAnswerMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+	  <select id="getPoint" parameterClass="java.util.Map" resultClass = "java.lang.Integer">
+    	select count(t.question_id) from t_man_test_answers t,t_man_set_questions m
+		where t.user_id=#userid# and m.type_id=#typeid# and t.question_id=m.question_id and t.option_no=m.option_no and t.option_value=1
+  	</select>
+	
+</sqlMap>

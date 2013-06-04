@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+       
+<struts-config>
+
+<!-- ============ Data Source =================================== -->
+
+<!-- ========== Form Bean Definitions =================================== -->
+<form-beans>
+	<!-- add document form-->
+	<form-bean name="DocumentForm" type="com.css.cms.document.view.DocumentForm"/>
+	<form-bean name="DocumentListForm" type="com.css.cms.document.view.DocumentListForm"/>
+	<form-bean name="QueryDocumentForm" type="com.css.cms.document.view.QueryDocumentForm"/>
+
+	<form-bean name="InfoStatForm" type="com.css.cms.stat.view.InfoStatForm"/>
+</form-beans>
+ 
+<!-- ========== Global Forward Definitions ============================== -->
+
+<!-- ========== Action Mapping Definitions ============================== -->
+<action-mappings>
+	<!-- add document init ,需要参数func[insert-新增/update-修改],辨别重定向目标-->
+	<action   path="/admin/info/DocumentInit"
+			  type="com.css.cms.document.action.DocumentInitAction"
+			  name="DocumentForm"
+			  scope="request"
+			  validate="false">
+		<forward name="insert" redirect="false" path="/admin/info/AddDocumentForm.jsp"/>
+		<forward name="update" redirect="false" path="/admin/info/DocumentUpdateBean.do"/>
+		<forward name="exp" redirect="false" path="/admin/expert/AddDocumentForm.jsp"/>
+		<forward name="jdl" redirect="false" path="/admin/jdlsyl/JdlAddDocumentForm.jsp"/>
+		<forward name="jdy" redirect="false" path="/admin/jdlsyl/JdyAddDocumentForm.jsp"/>
+		<forward name="pjs" redirect="false" path="/admin/jdlsyl/PjsyAddDocumentForm.jsp"/>
+		<forward name="bbg" redirect="false" path="/admin/gazx/AddDocumentForm.jsp"/>
+		<forward name="bln" redirect="false" path="/admin/blcj/AddDocumentForm.jsp"/>
+		<forward name="yjs" redirect="false" path="/admin/investigation/AddDocumentForm.jsp"/>
+		<forward name="zqgg" redirect="false" path="/admin/gdsy/AddDocumentForm.jsp"/>
+		<forward name="lmkzx" redirect="false" path="/admin/lmk/AddDocumentForm.jsp"/>
+		<forward name="fzjg" redirect="false" path="/fzjg2/cms/AddDocumentForm.jsp"/>
+		<forward name="zgcp" redirect="false" path="/admin/productnews/AddDocumentForm.jsp"/>
+		<forward name="bsk" redirect="false" path="/gtjafzjg/share/news/AddDocumentForm.jsp?from=bsk"/>
+		<forward name="scdt" redirect="false" path="/gtjafzjg/share/news/AddDocumentForm.jsp?from=scdt"/>
+		<forward name="scng_hjb" redirect="false" path="/gtjafzjg/share/news/AddDocumentForm.jsp?from=scng_hjb"/>
+		<forward name="scng_zsb" redirect="false" path="/gtjafzjg/share/news/AddDocumentForm.jsp?from=scng_zsb"/>		
+		<forward name="scng_chkb" redirect="false" path="/gtjafzjg/share/news/AddDocumentForm.jsp?from=scng_chkb"/>			
+		<forward name="yxsc" redirect="false" path="/admin/yxsc/AddDocumentForm.jsp"/>
+		<forward name="yxhd" redirect="false" path="/gtjafzjg/share/news/AddDocumentForm.jsp?from=yxhd"/>
+	</action>
+
+	<!--高级查询修改-->
+	<action   path="/admin/info/DocumentInit2"
+			  type="com.css.cms.document.action.DocumentInitAction2"
+			  name="DocumentForm"
+			  scope="request"
+			  validate="false">
+		<forward name="query_update" redirect="false" path="/admin/info/DocumentUpdateBean2.do"/>
+	</action>
+
+	<!-- add document-->
+	<action   path="/admin/info/AddDocument"
+			  type="com.css.cms.document.action.AddDocumentAction"
+			  name="DocumentForm"
+			  scope="request"
+			  input="/admin/info/DocumentInit.do?func=insert"
+			  validate="true">
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="target" redirect="true" path="/admin/info/DocumentInit.do?func=insert"/>
+		<forward name="exp" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=exp"/>
+		<forward name="jdl" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=jdl"/>
+		<forward name="jdy" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=jdy"/>
+		<forward name="pjs" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=pjsy"/>
+		<forward name="bbg" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=bbg"/>
+		<forward name="yjs" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=yjs"/>
+		<forward name="bln" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=bln"/>
+		<forward name="zqgg" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=zqgg"/>
+		<forward name="lmkzx" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=lmkzx"/>
+		<forward name="fzjg" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=fzjg"/>
+		<forward name="zgcp" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=zgcp"/>
+		<forward name="bsk" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=bsk"/>
+		<forward name="scdt" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=scdt"/>
+		<forward name="scng_hjb" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=scng_hjb"/>
+		<forward name="scng_zsb" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=scng_zsb"/>		
+		<forward name="scng_chkb" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=scng_chkb"/>		
+		<forward name="yxsc" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=yxsc"/>
+		<forward name="yxhd" redirect="true" path="/admin/info/DocumentInit.do?func=insert&amp;forw=yxhd"/>
+	</action>
+
+	<action   path="/AddDocumentBolan"
+			  type="com.css.cms.document.action.AddDocumentActionBolan"
+			  name="DocumentForm"
+			  scope="request"
+			parameter="method" validate="false">
+	</action>
+
+	<!--bean-->
+	<action   path="/admin/info/DocumentUpdateBean"
+			  type="com.css.cms.document.action.DocumentUpdateBeanAction"
+			  name="DocumentForm"
+			  scope="request"
+			  validate="false">
+		<forward name="update" redirect="false" path="/admin/info/ModifyDocumentForm.jsp"/>
+	</action>
+
+	<!--for高级查询读取document-->
+	<action   path="/admin/info/DocumentUpdateBean2"
+			  type="com.css.cms.document.action.DocumentUpdateBeanAction2"
+			  name="DocumentForm"
+			  scope="request"
+			  validate="false">
+		<forward name="query_update" redirect="false" path="/admin/info/ModifyDocumentForm2.jsp"/>
+	</action>
+
+	<!--modify document-->
+	<action   path="/admin/info/ModifyDocument"
+			  type="com.css.cms.document.action.ModifyDocumentAction"
+			  name="DocumentForm"
+			  scope="request"
+			  input="/admin/info/DocumentInit.do?func=update"
+			  validate="true">
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="target" redirect="true" path="/admin/info/DocumentList.do"/>
+		<forward name="warrant" redirect="true" path="/admin/warrant/InfoList.do"/>
+	</action>
+
+	<!--for高级查询读取-->
+	<action   path="/admin/info/ModifyDocument2"
+			  type="com.css.cms.document.action.ModifyDocumentAction2"
+			  name="DocumentForm"
+			  scope="request"
+			  input="/admin/info/DocumentInit2.do"
+			  validate="true">
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+		<forward name="query_target" redirect="true" path="/admin/info/QueryNewsList.jsp"/>
+	</action>
+
+	<!-- query init -->
+	<action   path="/admin/info/QueryDocumentInit"
+			  type="com.css.cms.document.action.QueryDocumentInitAction"
+			  scope="request">
+		<forward name="target" redirect="true" path="/admin/info/QueryDocumentForm.jsp"/>
+	</action>
+
+	<!-- query -->
+	<action   path="/admin/info/QueryDocument"
+			  type="com.css.cms.document.action.QueryDocumentAction"
+			  scope="request">
+		<forward name="target" redirect="true" path="/admin/info/QueryDocumentForm.jsp"/>
+	</action>
+
+	<!--document list-->
+	<action   path="/admin/info/DocumentList"
+			  type="com.css.cms.document.action.DocumentListAction"
+			  name="DocumentListForm"
+			  scope="request"
+			  input="/admin/info/DocumentList.do"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/info/NewsList.jsp"/>
+	</action>
+
+	<!--view-->
+	<action   path="/admin/info/DocumentViewBean"
+			  type="com.css.cms.document.action.DocumentViewBeanAction"
+			  scope="request"
+			  validate="false">
+		<forward name="view" redirect="false" path="/admin/info/ViewDocumentDetail.jsp"/>
+	</action>
+
+	<!--audit-->
+	<action   path="/admin/info/AuditDocument"
+			  type="com.css.cms.document.action.AuditDocumentAction"
+			  name="DocumentListForm"
+			  scope="request"
+			  input="/admin/info/DocumentList.do"
+			  validate="false">
+		<forward name="cms" redirect="true" path="/admin/info/DocumentList.do"/>
+		<forward name="warrant" redirect="true" path="/admin/warrant/InfoList.do"/>
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+	</action>
+
+	<!--query audit-->
+	<action   path="/admin/info/AuditDocument2"
+			  type="com.css.cms.document.action.AuditDocumentAction2"
+			  scope="request"
+			  input="/admin/info/QueryDocumentForm.jsp"
+			  validate="false">
+		<forward name="target" redirect="true" path="/admin/info/QueryNewsList.jsp"/>
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+	</action>
+
+	<!--query delete-->
+	<action   path="/admin/info/DeleteDocument2"
+			  type="com.css.cms.document.action.DeleteDocumentAction2"
+			  scope="request"
+			  input="/admin/info/QueryDocumentForm.jsp"
+			  validate="false">
+		<forward name="target" redirect="true" path="/admin/info/QueryNewsList.jsp"/>
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+	</action>
+
+	<!--delete-->
+	<action   path="/admin/info/DeleteDocument"
+			  type="com.css.cms.document.action.DeleteDocumentAction"
+			  name="DocumentListForm"
+			  scope="request"
+			  input="/admin/info/DocumentList.do"
+			  validate="false">
+		<forward name="cms" redirect="true" path="/admin/info/DocumentList.do"/>
+		<forward name="dust" redirect="true" path="/admin/info/DustList.do"/>
+		<forward name="warrant" redirect="true" path="/admin/warrant/InfoList.do"/>
+		<forward name="asset" redirect="true" path="/admin/info/DocumentList.do?isAsset=1"/>
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+	</action>
+
+	<!--remove-->
+	<action   path="/admin/info/RemoveDocument"
+			  type="com.css.cms.document.action.RemoveDocumentAction"
+			  name="DocumentListForm"
+			  scope="request"
+			  input="/admin/info/DustList.do"
+			  validate="false">
+		<forward name="target" redirect="true" path="/admin/info/DustList.do"/>
+		<forward name="transfer" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+	</action>
+
+	<!--dust list-->
+	<action   path="/admin/info/DustList"
+			  type="com.css.cms.document.action.DustListAction"
+			  name="DocumentListForm"
+			  scope="request"
+			  input="/admin/info/DustList.do"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/info/DustList.jsp"/>
+	</action>
+
+	<!--stat user-->
+	<action   path="/admin/info/InfoStatByUser"
+			  type="com.css.cms.stat.action.InfoStatByUserAction"
+			  name="InfoStatForm"
+			  scope="request"
+			  input="/admin/info/InfoStatByUser.jsp"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/info/InfoStatByUser.jsp"/>
+	</action>
+
+	<!--stat cat-->
+	<action   path="/admin/info/InfoStatByCat"
+			  type="com.css.cms.stat.action.InfoStatByCatAction"
+			  name="InfoStatForm"
+			  scope="request"
+			  input="/admin/info/InfoStatByCat.jsp"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/info/InfoStatByCat.jsp"/>
+	</action>
+
+	<!--stat user & cat-->
+	<action   path="/admin/info/MyInfoStat"
+			  type="com.css.cms.stat.action.InfoStatByUserCatAction"
+			  name="InfoStatForm"
+			  scope="request"
+			  input="/admin/info/InfoStatByUserCat.jsp"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/info/InfoStatByUserCat.jsp"/>
+	</action>
+</action-mappings>
+
+</struts-config>

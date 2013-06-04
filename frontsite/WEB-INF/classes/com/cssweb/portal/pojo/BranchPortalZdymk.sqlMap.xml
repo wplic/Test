@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.portal.pojo.BranchPortalZdymk">
+	<typeAlias alias="BranchPortalZdymk" type="com.cssweb.portal.pojo.BranchPortalZdymk"/>
+	<resultMap id="branchPortalZdymkMap" class="BranchPortalZdymk">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="TITLE" property="title" jdbcType="String"/>
+		<result column="COMMENTS" property="comments" jdbcType="String"/>
+		<result column="LINK" property="link" jdbcType="String"/>
+		<result column="PIC_URL" property="picUrl" jdbcType="String"/>
+		<result column="PROVINCE_ID" property="provinceId" jdbcType="String"/>
+		<result column="IFRAME_URL" property="iframeUrl" jdbcType="String"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+
+	<select id="selectByMap" resultMap="branchPortalZdymkMap">
+		select
+		*
+		from BRANCH_PORTAL_ZDYMK
+		<dynamic prepend="where">
+			<isNotNull property="findUniqueBy">
+				<isNotNull prepend="and" property="findUniqueBy">
+					ROWNUM &lt;= 1
+				</isNotNull>
+				<isNotNull prepend="and" property="provinceId">
+					PROVINCE_ID = #provinceId#
+				</isNotNull>
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+</sqlMap>

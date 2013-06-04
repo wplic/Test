@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.oldhr.pojo.TmanProject">
+
+	<typeAlias alias="tmanProject" type="com.cssweb.oldhr.pojo.TmanProject"/>
+	
+	<!--result map-->
+	<resultMap id="tmanProjectMap" class="tmanProject">
+ 		<result property="appId" column="APPID" jdbcType="Long"/>
+ 		<result property="dateFrom" column="DATE_FROM" jdbcType="Date"/>
+ 		<result property="dateTo" column="DATE_TO" jdbcType="Date"/>
+ 		<result property="projectName" column="PROJECT_NAME" jdbcType="String"/>
+ 		<result property="myrole" column="MYROLE" jdbcType="String"/>
+ 		<result property="intype" column="IN_TYPE" jdbcType="String"/>
+ 		<result property="projectOrg" column="PROJECT_ORG" jdbcType="String"/>
+ 		
+ 	</resultMap>
+  	
+	<select id="getTmanProjectByAppId" parameterClass="Long" resultMap = "tmanProjectMap">
+	  	select * from T_MAN_PROJECT where APPID = #appId#
+ 	 </select>
+	
+	<select id="getTmanProjectPages" parameterClass="java.util.Map" resultMap = "tmanProjectMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	 </select>
+  
+  
+</sqlMap>

@@ -1,0 +1,16 @@
+.jgj_bg{background:url(/pic/golden/jgjbg.jpg) no-repeat;width:920;height:611px; position:relative;}
+.jgj_bg .cjh{position:absolute; left:42px; top:370px; width:218px;}
+.jgj_bg .czh{position:absolute; left:355px; top:370px; width:220px;}
+.jgj_bg .cfh{position:absolute; left:652px; top:370px; width:230px;}
+.brownzi{color:#822630;}
+.grayzi{color:#646a6d;}
+.goldenzi{color:#865e2c;}
+.goldentit1{ background:url(/pic/branches/branchtit1.jpg) no-repeat; height:25px; line-height:25px; text-indent:25px; color:#cc0000}
+.goldenp1{ padding:12px 12px 12px 24px;line-height:25px;}
+
+/*2011-04-26*/
+.goldenp2{ padding:5px;line-height:25px;}
+.golTab1{ border:1px solid #d5c9ba}
+.golTab1 .tit1{ background:#d5c9ba url(/pic/Subscribe/dot6.gif) no-repeat 6px center; text-indent:25px; font-weight:bold; color:#cc0001}
+.golTab1 .cont1{ padding:10px }
+.dybtn1{ background:url(/pic/Subscribe/dybtn1.jpg) no-repeat; width:78px; height:26px; line-height:26px; text-align:center; border:0; cursor:pointer}

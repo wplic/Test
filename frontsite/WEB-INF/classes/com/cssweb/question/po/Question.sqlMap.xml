@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.question.po.Question">
+	<typeAlias alias="Question"	type="com.cssweb.question.po.Question" />
+	<typeAlias alias="dictionary" type="com.cssweb.common.dictionary.pojo.Dictionary"/>
+	<resultMap id="dicMap" class="dictionary">
+		<result property="id" column="ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="keyName" column="KEY_NAME" jdbcType="String" nullValue=""/>
+		<result property="keyCode" column="KEY_CODE" jdbcType="String" nullValue=""/>
+  	</resultMap>
+	<resultMap id="QuestionMap" class="Question">
+		<result property="id" column="ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="question" column="QUESTION" jdbcType="String" nullValue=""/>
+		<result property="result" column="RESULT" jdbcType="String" nullValue=""/>
+		<result property="type" column="TYPE" jdbcType="String" nullValue=""/>
+		<result property="sort" column="SORT" jdbcType="String" nullValue=""/>
+		<result property="update_date" column="UPDATE_DATE" jdbcType="java.util.Date"/>
+		<result property="state" column="STATE" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="update_userid" column="UPDATE_USERID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="standby1" column="STANDBY1" jdbcType="String" nullValue=""/>
+		<result property="standby2" column="STANDBY2" jdbcType="String" nullValue=""/>
+		<result property="standby3" column="STANDBY3" jdbcType="String" nullValue=""/>
+		<result property="standby4" column="STANDBY4" jdbcType="String" nullValue=""/>
+  	</resultMap>
+	<resultMap id="QuestionBaseMap" class="Question">
+		<result property="id" column="ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="question" column="QUESTION" jdbcType="String" nullValue=""/>
+  	</resultMap>
+  	
+	<insert id="insertquestion" parameterClass="Question">
+		<![CDATA[
+		 insert into question(id,question,result,type,sort,update_date,state,update_userid) values(#id#,#question#,#result#,#type#,#sort#,to_date(#update_date#,'yyyy-MM-dd'),#state#,#update_userid#)
+		]]>
+	</insert>
+
+
+	<update id="updatequestion" parameterClass="Question">
+		<![CDATA[
+		update question set question=#question#,result=#result#,sort=#sort#,update_date=to_date(#update_date#,'yyyy-MM-dd'),update_userid=#update_userid#,state=#state# where id=#id#
+		]]>
+	</update>
+
+	<delete id="deletequestionById" parameterClass="String">
+		<![CDATA[
+		delete question where id in($value$)
+		]]>
+	</delete>
+
+	<select id="getByPagingMap" parameterClass="java.util.Map"
+		resultClass="Question" >
+		<![CDATA[
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM <=#end#) WHERE rownum_>#begin#
+		]]>
+	</select>
+
+	<select id="getAllCount" resultClass="Integer" parameterClass="java.util.Map">
+		<![CDATA[
+		select count(1) from question $findsql$
+		]]>
+	</select>
+	<!-- 查看字典信息 -->
+	<select id="findtypebytypecode" resultMap="dicMap"
+		parameterClass="java.util.Map">
+		<![CDATA[
+		select id,key_name,key_code from cssweb_dictionary $sql$
+		]]>
+	</select>
+	
+	<!-- 查询修改的信息 -->
+	<select id="findjobbyid" resultClass="Question" parameterClass="Long">
+		<![CDATA[
+		  select * from question where id=#value#
+		]]>
+	</select>
+	
+   <select id="listForPage" parameterClass="java.util.Map" resultClass="Question">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getTotalRecord" parameterClass="java.lang.String" resultClass = "java.lang.Long">   
+      $sql$   
+  </select>
+	
+	 <select id="listForPagetop" resultClass="Question">
+	 <![CDATA[
+   select * from question where state=1 and rownum<=5 and type='question_zxkf' order by id desc
+   ]]>
+  </select>
+  
+   <select id="listForPagetop2" resultClass="Question">
+   <![CDATA[
+   select * from question where state=1 and rownum<=5 and type='question_jyxz' order by id desc
+   ]]>
+  </select>
+  
+   <select id="getQuestionList" parameterClass="java.util.Map" resultMap="QuestionMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+    	row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getQuestionListCount" parameterClass="java.lang.String" resultClass="java.lang.Integer">
+  		select count(*) from QUESTION where TYPE='questionsType' and SORT='$sort$'
+  	
+  </select>
+  
+  <select id="getNumQuestion" parameterClass="java.util.Map" resultMap="QuestionBaseMap">
+    select * from (select ID,QUESTION from question t where t.type='questionsType' and t.sort='$sort$' order by t.UPDATE_DATE desc) where rownum&lt;=#row#
+  </select>
+</sqlMap>

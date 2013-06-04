@@ -1,0 +1,14 @@
+.jrj-l1 li,.logbtn,.sbtn,.bigbtn,.funcarea .tip a,.showcont .arrow,.piclist .arrw_t,.piclist .arrw_b,.textinfo h4,.buttons .btn1,.buttons .btn2,.share a,.prize h4,.prize strong,.joinbtn,.pop .close,.pop .suc,.share2 a{background:url(../pic/bigico.gif) no-repeat;}
+.showcont{overflow:hidden;zoom:1;position:relative; width:729px; height:222px;}
+.showcont .bigpic{float:left;display:inline;}
+.showcont .bigpic div{ width:582px; height:212px; float:left}
+.showcont .bigpic img{width:582px;height:212px;padding:4px;border:1px solid #D5D5D5;background:#FFF3C9;}
+.showcont .arrow{position:absolute;width:11px;height:32px;left:591px; top:0;background-position:-16px 0px;}
+.showcont .piclist{float:right;width:108px;margin-right:11px;display:inline; overflow:hidden;}
+.showcont .piclist .arrw_t,.showcont .piclist .arrw_b{width:16px;height:8px;margin:0 auto 5px;background-position:0 0;cursor:pointer;overflow:hidden;}
+.showcont .piclist .arrw_b{background-position:0 -8px;margin:4px auto 0;}
+.showcont .smallpic{height:195px;overflow:hidden;}
+.showcont .smallpic li{margin-bottom:5px;height:45px; overflow:hidden;}
+.showcont .smallpic li img{border:1px solid #CFCFCF; width:104px; height:41px; padding:1px;}
+.showcont .smallpic li .hover img{border:1px solid #BAB8B9;}
+.showcont .smallpic li img.opacity{ opacity:0.4;filter:alpha(opacity=40);}

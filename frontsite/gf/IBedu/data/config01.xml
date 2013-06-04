@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 注意：
+
+ moviePath             : 影片路径文件夹名
+ bgSoundPath           : 背景音乐路径文件夹名
+ scormVer              : scorm版本 使用1.2 或者 1.3/2004  0为非scorm版
+ scormSingleMode       : 0为多文件模式 1为单文件模式
+ playNextMovie         : 是否自动播放下一动画 0不播放 1播放    (scorm版请使用0)
+ bgSoundVolume         : 背景音量 0到1
+ movieSoundVolume      : 动画音量 0到1
+ moviexmlpath          : 动画列表xml路径
+ bgsoundxmlpath        : 背景音乐列表xml路径
+ testxmlpath           : 测试题xml路径
+ //testResultMode        : 测试题做完后结果显示 0直接显示重新测试 1显示测试结果
+ //questionCount         : 测试题总数 ：0为全部测试题数
+ //questionStartIndex    : 测试题开始游标 不想写就0
+ //questionEndIndex      : 测试题结束游标   不想写就0
+ //questionRandomSort    : 是否打乱测试题顺序  0不打乱顺序 1打乱顺序
+-->
+<config>
+
+    <moviePath>program</moviePath>
+
+    <bgSoundPath>sound</bgSoundPath>
+
+    <scormVer>1.2</scormVer>
+
+    <scormSingleMode>0</scormSingleMode>
+
+    <playNextMovie>0</playNextMovie>
+
+    <playBgSound>1</playBgSound>
+
+    <bgSoundVolume>0.2</bgSoundVolume>
+
+    <movieSoundVolume>1</movieSoundVolume>
+
+    <moviexmlpath>data/movie01.xml</moviexmlpath>
+
+    <bgsoundxmlpath>data/bgsound.xml</bgsoundxmlpath>
+
+    <testxmlpath>data/question01.xml</testxmlpath>
+
+
+</config>
+

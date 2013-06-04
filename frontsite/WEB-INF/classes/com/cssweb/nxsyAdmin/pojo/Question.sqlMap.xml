@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="NxsyQuestion">
+
+	<resultMap id="questionResultMap" class="com.cssweb.nxsyAdmin.pojo.Question">
+		<result property="id" column="ID" jdbcType="java.lang.Long"/>
+		<result property="createId" column="CREATE_ID" jdbcType="java.lang.Long"/>
+		<result property="createName" column="CREATE_NAME" jdbcType="String"/>
+		<result property="createDate" column="CREATE_DATE" jdbcType="java.util.Date"/>
+		<result property="reqContent" column="REQ_CONTENT" jdbcType="String"/>
+		<result property="ansContent" column="ANS_CONTENT" jdbcType="String"/>
+		<result property="status" column="STATUS" jdbcType="String"/>
+  	</resultMap>
+  	
+  	<insert id="insert" parameterClass="com.cssweb.nxsyAdmin.pojo.Question">
+  		insert into t_nxsy_comm_question(ID,CREATE_ID,
+  							  CREATE_NAME,CREATE_DATE,REQ_CONTENT,
+  							  ANS_CONTENT,STATUS)
+  					   values(seq_t_nxsy_question.NEXTVAL,#createId#,
+  					   		  #createName#,#createDate#,#reqContent#,
+  					   		  #ansContent#,#status#)
+  	</insert>
+  	
+	<select id="getListAdmin" resultMap="questionResultMap" parameterClass="map">
+		select *
+		   from (select row_.*, rownum rownum_
+		           from (select ID,CREATE_ID,CREATE_NAME,CREATE_DATE,REQ_CONTENT,ANS_CONTENT,STATUS 
+		                   from t_nxsy_comm_question t
+		                  where 1=1
+		                  <dynamic>
+	                    	<isNotNull prepend="and" property="reqContent">
+	                    		REQ_CONTENT like '%$reqContent$%'
+	                    	</isNotNull>
+	                    	<isNotNull prepend="and" property="ansContent">
+	                    		ANS_CONTENT like '%$ansContent$%'
+	                    	</isNotNull>
+		                   </dynamic>
+		               order by CREATE_DATE desc) row_
+		          where rownum <![CDATA[ <= ]]> #end#)
+		  where rownum_ <![CDATA[ >= ]]> #start# 
+	</select>
+	
+	<select id="getCountAdmin" resultClass="int">
+		select count(1) from t_nxsy_comm_question where 1=1
+		                  <dynamic>
+	                    	<isNotNull prepend="and" property="reqContent">
+	                    		REQ_CONTENT like '%$reqContent$%'
+	                    	</isNotNull>
+	                    	<isNotNull prepend="and" property="ansContent">
+	                    		ANS_CONTENT like '%$ansContent$%'
+	                    	</isNotNull>
+		                   </dynamic>
+	</select>
+	
+	<update id="updateByPrimaryKeySelective" parameterClass="com.cssweb.nxsyAdmin.pojo.Question">
+        update t_nxsy_comm_question
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="reqContent">
+                REQ_CONTENT = #reqContent#
+            </isNotNull>
+            <isNotNull prepend="," property="ansContent">
+                ANS_CONTENT = #ansContent#
+            </isNotNull>
+            <isNotNull prepend="," property="status">
+                STATUS = #status#
+            </isNotNull>
+        </dynamic>
+        where ID = #id#
+    </update>
+    
+    <delete id="delete" parameterClass="long">
+    	delete from t_nxsy_comm_question where ID = #id#
+    </delete>
+</sqlMap>

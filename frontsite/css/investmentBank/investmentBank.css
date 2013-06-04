@@ -1,0 +1,97 @@
+/*投资银行主页*/
+.gg_top{ background:url(/pic/investmentBank/gg_top.gif) no-repeat; width:234px; height:29px; line-height:29px; color:#003a94; font-weight:bold; text-indent:30px}
+.gg_mid{ background:url(/pic/investmentBank/gg_mid.gif) repeat-y; width:210px; padding:9px 12px;}
+.gg_bot{ background:url(/pic/investmentBank/gg_bot.gif) no-repeat; width:234px; height:8px; overflow:hidden}
+#ywfw{ border:1px solid #bfc2c9; width:677px;}
+#ywfw h3{ background: url(/pic/investmentBank/ywfwtit.gif) no-repeat; height:27px; line-height:27px; text-indent:30px;color:#003a94; font-weight:bold;}
+#ywfw ul{ background:url(/pic/investmentBank/ywfwtagbg.gif); height:37px}
+#ywfw li{ background:url(/pic/investmentBank/ywfwtaga.gif) no-repeat; width:108px; height:37px; line-height:37px; margin-left:6px; float:left; display:inline; text-align:center}
+#ywfw li.active{background:url(/pic/investmentBank/ywfwtagh.gif) no-repeat; }
+.cxb_top{ background:url(/pic/investmentBank/cxb_top.gif) no-repeat; width:920px; height:22px; padding-top:11px;color:#003a94; font-weight:bold; text-indent:35px}
+.cxb_mid{ background:url(/pic/investmentBank/cxb_mid.gif);width:860px; padding:10px 30px 0px 30px}
+.cxb_mid span{ display:block; float:left; width:113px;}
+.cxb_mid span img{ padding:1px; background:#ffffff; border:1px solid #cccccc}
+.cxb_mid a:hover img{ padding:1px; background:#ffffff; border:1px solid #003a94}
+.cxb_mid h4{ text-align:center;height:25px;line-height:25px}
+.cxb_bot{ background:url(/pic/investmentBank/cxb_bot.gif) no-repeat; width:920px; height:13px; overflow:hidden}
+
+.rcxb img {padding:1px; background:#ffffff; border:1px solid #cccccc}
+.rcxb img a{padding:1px; background:#ffffff; border:1px solid #cccccc}
+.rcxb a:hover img{ padding:1px; background:#ffffff; border:1px solid #003a94}
+.rcxb h4{ height:25px; line-height:25px;text-align:center; margin-bottom:6px}
+
+.teamT1{ background:url(/pic/investmentBank/teamTxt.gif) no-repeat 0 0; height:16px;}
+.teamT2{ background:url(/pic/investmentBank/teamTxt.gif) no-repeat 0 -16px; height:56px;}
+.teamT3{ background:url(/pic/investmentBank/teamTxt.gif) no-repeat 0 -52px; height:60px;}
+.teamT4{ background:url(/pic/investmentBank/teamTxt.gif) no-repeat 0 -108px; height:20px;}
+
+.zzjgTxt1{ background:url(/pic/investmentBank/zzjgTxt.gif) no-repeat 0 0; height:20px;}
+.zzjgTxt2{ background:url(/pic/investmentBank/zzjgTxt.gif) no-repeat 0 -20px; height:20px;}
+.zzjgTxt3{ background:url(/pic/investmentBank/zzjgTxt.gif) no-repeat 0 -40px; height:20px;}
+.zzjgTxt4{ background:url(/pic/investmentBank/zzjgTxt.gif) no-repeat 0 -60px; height:20px;}
+.zzjgTxt5{ background:url(/pic/investmentBank/zzjgTxt.gif) no-repeat 0 -80px; height:20px;}
+.zzjgTxt6{ background:url(/pic/investmentBank/zzjgTxt.gif) no-repeat 0 -100px; height:20px;}
+.zzjgTxtp{ padding:15px 10px}
+
+.ywfwBox{ background:#f0f0f0; height:22px; padding:7px 0 0 12px}
+.ywfwTxt1{ background:url(/pic/investmentBank/ywkkTxt.gif) no-repeat 0 0; height:14px;}
+.ywfwTxt2{ background:url(/pic/investmentBank/ywkkTxt.gif) no-repeat 0 -14px; height:14px;}
+.ywfwTxt3{ background:url(/pic/investmentBank/ywkkTxt.gif) no-repeat 0 -28px; height:14px;}
+.ywfwTxt4{ background:url(/pic/investmentBank/ywkkTxt.gif) no-repeat 0 -42px; height:14px;}
+.ywfwTxt5{ background:url(/pic/investmentBank/ywkkTxt.gif) no-repeat 0 -56px; height:14px;}
+.ywkksm{ background:#f1f1f1;border-bottom:1px solid #cccccc; border-top:1px solid #cccccc; }
+.ywkksm p{ margin:20px 30px; line-height:22px}
+.ywkkbg{background:#ffffff; border:1px solid #cccccc; padding:10px}
+
+.ywysTxt1{ background:url(/pic/investmentBank/ywysTxt.gif) no-repeat 0 0; height:16px;}
+.ywysTxt2{ background:url(/pic/investmentBank/ywysTxt.gif) no-repeat 0 -16px; height:16px;}
+.ywysTxt3{ background:url(/pic/investmentBank/ywysTxt.gif) no-repeat 0 -32px; height:16px;}
+.ywysTxt4{ background:url(/pic/investmentBank/ywysTxt.gif) no-repeat 0 -48px; height:16px;}
+.ywysTxt5{ background:url(/pic/investmentBank/ywysTxt.gif) no-repeat 0 -64px; height:16px;}
+.ywysTxt6{ background:url(/pic/investmentBank/ywysTxt.gif) no-repeat 0 -82px; height:16px;}
+
+.hhyjTab1{text-align:center} 
+.hhyjTab1 th{ line-height:28px;height:28px;background:url(/pic/investmentBank/hhyjTab1.gif) repeat-x; text-align:center}
+.hhyjTab1 td{ line-height:26px;height:26px;border-bottom:1px solid #cccccc;}
+.hhyjTab1 td.rline{ background:url(/pic/investmentBank/hhyjTab1r.gif) no-repeat right bottom}
+
+.qycxInfo{ background:url(/pic/investmentBank/qycx_bg.jpg) no-repeat; width:495px; height:109px;padding-left:190px; padding-top:33px; margin-left:auto; margin-right:auto}
+.qycxInfo .txt{ color:#103a5d; width:460px; line-height:23px; }
+
+.hyfbInfo{ background:url(/pic/investmentBank/hyfb_bg.jpg) no-repeat; width:490px; height:109px;padding-left:195px; padding-top:33px; margin-left:auto; margin-right:auto}
+.hyfbInfo .txt{ color:#103a5d; width:450px; line-height:23px; }
+
+.qyrrBox{ background:url(/pic/investmentBank/gsrrbg.gif) no-repeat; width:326px; height:247px; vertical-align:top}
+.casebg{ background:url(/pic/investmentBank/casebg.jpg) no-repeat; width:876px; height:134px; margin-left:auto; margin-right:auto}
+.casebg .t1{ background:url(/pic/investmentBank/caset1.jpg) no-repeat left top; height:134px}
+.casebg .t2{ background:url(/pic/investmentBank/caset2.jpg) no-repeat left top; height:134px}
+.casebg .t3{ background:url(/pic/investmentBank/caset3.jpg) no-repeat left top; height:134px}
+.casebg .t4{ background:url(/pic/investmentBank/caset4.jpg) no-repeat left top; height:134px}
+
+.dxaltit{ background:url(/pic/investmentBank/dxaltit.jpg) no-repeat left center; height:26px; width:168px; line-height:26px; text-indent:20px; font-size:14px; font-weight:bold; color:#ffffff}
+
+/*兼并收购、债权融资、私募融资CSS START*/
+.jbsg_info{background:url(/pic/investmentBank/jbsg_03.jpg) no-repeat 10px 10px;padding:0 20px 20px 160px;}
+.jbsg_info h5{font-size:14px;font-weight:bold;color:#333;padding-top:20px;}
+.jbsg_info p{line-height:18px;}
+.jbsg_sam{padding-bottom:70px;}
+.jbsg_sam h4{background:url(/pic/investmentBank/smrz_02.gif) no-repeat;padding:33px 0 0 35px;font-size:14px;font-weight:bold;color:#f00;height:35px;width:614px;}
+.jbsg_sam div{padding:5px 5px 25px 160px;position:relative;height:145px;}
+.jbsg_sam span{position:absolute;left:0;top:0;border:1px solid #dadada;}
+.jbsg_sam h5{font-size:14px;font-weight:bold;color:#333;}
+.jbsg_sam p{line-height:18px;}
+.jbsg_sam p em{font-size:14px;font-weight:bold;color:#ecb06f;}
+.zqrz_banner{float:left;padding:10px 0 10px 10px;}
+.zqrz_info{background:url(/pic/investmentBank/zqrz_02.gif) no-repeat 60px 0;padding:0 60px 0 100px;float:left;}
+.zqrz_info h5{font-size:14px;font-weight:bold;color:#333;height:25px;line-height:25px;}
+.zqrz_info p{line-height:18px;padding-bottom:20px;}
+.zqrz_table1{padding:0 0 70px 20px;}
+.zqrz_table1 h6{font-size:14px;font-weight:bold;color:#f00;}
+.zqrz_tablepic td{padding:0 0 10px 15px;}
+.zqrz_tablepic span{border:1px solid #dadada;display:block;width:176px;height:170px;margin-bottom:8px;}
+.zqrz_tablepic p{padding:0 15px 8px 15px;background:url(/pic/investmentBank/zqrz_tablepbg.gif) no-repeat 2px 4px;color:#7a4e4e;line-height:18px;}
+.smrz_notice{background:url(/pic/investmentBank/smrz_01.gif) no-repeat 10px 10px;padding:150px 20px 20px 260px;height:122px;line-height:20px;}
+.smrz_info{padding:0 10px 20px 50px;}
+.smrz_info h5{background:url(/pic/investmentBank/smrz_02.gif) no-repeat;padding:33px 0 0 35px;font-size:14px;font-weight:bold;color:#f00;height:35px;width:614px;}
+.smrz_info p{padding:0 35px;}
+.smrz_table{padding-bottom:60px;}

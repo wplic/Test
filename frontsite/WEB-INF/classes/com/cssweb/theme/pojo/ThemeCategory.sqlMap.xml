@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.theme.pojo.ThemeCategory">
+
+	<typeAlias alias="ThemeCategory" type="com.cssweb.theme.pojo.ThemeCategory" />
+
+	<resultMap id="ThemeCategoryMap" class="ThemeCategory">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="meettime" column="MEETTIME" jdbcType="Date"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+		<result property="picid" column="PICID" jdbcType="Long" nullValue="0"/>
+		<result property="picurl" column="PICURL" jdbcType="String"/>
+		<result property="picidgq" column="PICIDGQ" jdbcType="Long" nullValue="0"/>
+		<result property="gqisshow" column="GQISSHOW" jdbcType="String"/>
+		<result property="gyjjshow" column="GYJJSHOW" jdbcType="String"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="ThemeCategory">
+		INSERT into T_THEME_CATEGORY (ID, TITLE,MEETTIME, UPDATETIME,PICURL,GQISSHOW,GYJJSHOW) VALUES (#id#,#title#,#meettime#,sysdate,#picurl#,#gqisshow#,#gyjjshow#)
+	</insert>
+	
+	<update id="update" parameterClass="ThemeCategory">
+		update T_THEME_CATEGORY set TITLE = #title#, UPDATETIME = sysdate,MEETTIME = #meettime#,PICURL = #picurl#,GQISSHOW = #gqisshow#,GYJJSHOW = #gyjjshow# where ID=#id#
+	</update>
+	
+	<update id="updatePicid" parameterClass="java.util.Map">
+		update T_THEME_CATEGORY set PICID=#picid# where ID=#id#
+	</update>
+
+    <update id="updatePicidgf" parameterClass="java.util.Map">
+		update T_THEME_CATEGORY set PICIDGQ=#picidgq# where ID=#id#
+	</update>
+	
+	<delete id="delete" parameterClass="String">
+		delete from T_THEME_CATEGORY where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_THEME_CATEGORY where ID = #value#
+	</delete>
+		
+	<select id="getAll" resultMap="ThemeCategoryMap">
+		select * from T_THEME_CATEGORY order by MEETTIME desc
+	</select>
+
+    <select id="getAllByGqisshow" resultMap="ThemeCategoryMap">
+		select * from T_THEME_CATEGORY where gqisshow='1' order by MEETTIME desc
+	</select>
+	
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_THEME_CATEGORY 
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="ThemeCategoryMap">
+		select * from T_THEME_CATEGORY where ID= #id#
+	</select>	
+	
+	  <select id="getByMap" parameterClass="java.util.Map" resultMap = "ThemeCategoryMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+	
+	<select id="getAllByGyjjshow" resultMap="ThemeCategoryMap">
+		select * from T_THEME_CATEGORY where GYJJSHOW='1' order by MEETTIME desc
+	</select>
+	
+</sqlMap>

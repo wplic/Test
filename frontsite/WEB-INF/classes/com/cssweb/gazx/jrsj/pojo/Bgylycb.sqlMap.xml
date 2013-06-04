@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazx.jrsj.pojo.Bgylycb">
+
+	<typeAlias alias="Bgylycb" type="com.cssweb.gazx.jrsj.pojo.Bgylycb"/>
+	
+	<resultMap id="BgylycbGpdmMap" class="Bgylycb">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Long"/>
+ 		<result property="gpjc" column="gpjc" jdbcType="String"/>
+ 		<result property="gpdm" column="gpdm" jdbcType="String"/>
+ 		<result property="tgszbId" column="T_GSZB_ID" jdbcType="Long"/>
+ 		<result property="mgsy" column="ZBZ1" jdbcType="Double"/>
+ 		<result property="zyywsr" column="ZBZ2" jdbcType="Double"/>
+ 		<result property="zyywlr" column="ZBZ3" jdbcType="Double"/>
+ 		<result property="jlr" column="ZBZ4" jdbcType="Double"/>
+ 		<result property="jzcsyl" column="ZBZ5" jdbcType="Double"/>
+  	</resultMap>
+  	 <select id="getBgylycbGpdmList" parameterClass="java.util.Map" resultMap = "BgylycbGpdmMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select b.*,c.zbz zbz1,d.zbz zbz2,e.zbz zbz3,f.zbz zbz4,g.zbz zbz5 from (
+				select g.gpjc ,g.gpdm , g.T_GSZB_ID,a.T_BGJBXXB_ID  from GPZB g,BGYLYCB_GSZB_TJ a
+				where length(g.gpdm)=6 and g.t_gszb_id=a.t_gszb_id 
+				<dynamic>
+				 <isNotEmpty property="gpdm" prepend="and">
+				  	g.gpdm LIKE '%$gpdm$%'
+				 </isNotEmpty>
+				 <isNotEmpty property="gpjc" prepend="and">
+				  	g.gpjc LIKE '%$gpjc$%'
+				 </isNotEmpty>
+				  <isNotEmpty property="EndDate" prepend="and">
+				  	to_char(a.zhxgrq, 'yyyy-MM-dd') &lt;=#EndDate# 
+				 </isNotEmpty>
+				 <isNotEmpty property="StartDate" prepend="and">
+				  	to_char(a.zhxgrq, 'yyyy-MM-dd') &gt;=#StartDate#
+				 </isNotEmpty>		
+				</dynamic>
+				order by a.zhxgrq desc) b 
+			left join BGYLYCB_ZBMC_TJ c on b.T_BGJBXXB_ID=c.T_BGJBXXB_ID and b.T_GSZB_ID=c.t_gszb_id and c.zbmc='$mgsy$'
+			left join BGYLYCB_ZBMC_TJ d on b.T_BGJBXXB_ID=d.T_BGJBXXB_ID and b.T_GSZB_ID=d.t_gszb_id and d.zbmc='$zysr$'
+			left join BGYLYCB_ZBMC_TJ e on b.T_BGJBXXB_ID=e.T_BGJBXXB_ID and b.T_GSZB_ID=e.t_gszb_id and e.zbmc='$zylr$'
+			left join BGYLYCB_ZBMC_TJ f on b.T_BGJBXXB_ID=f.T_BGJBXXB_ID and b.T_GSZB_ID=f.t_gszb_id and f.zbmc='$jlr$'
+			left join BGYLYCB_ZBMC_TJ g on b.T_BGJBXXB_ID=g.T_BGJBXXB_ID and b.T_GSZB_ID=g.t_gszb_id and g.zbmc='$jzc$'
+			where c.zbz is not null or d.zbz is not  null or e.zbz is not  null or f.zbz is not  null or g.zbz is not  null
+	    )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+     </select>
+	  <select id ="getgetBgylycbGpdmListCount" resultClass="Long">
+	      select count(gpdm) from (
+			select b.*,c.zbz zbz1,d.zbz zbz2,e.zbz zbz3,f.zbz zbz4,g.zbz zbz5 from (
+				select g.gpjc ,g.gpdm , g.T_GSZB_ID,a.T_BGJBXXB_ID  from GPZB g,BGYLYCB_GSZB_TJ a
+				where length(g.gpdm)=6 and g.t_gszb_id=a.t_gszb_id 
+			<dynamic>
+			 <isNotEmpty property="gpdm" prepend="and">
+			  	g.gpdm LIKE '%$gpdm$%'
+			 </isNotEmpty>
+			 <isNotEmpty property="gpjc" prepend="and">
+			  	g.gpjc LIKE '%$gpjc$%'
+			 </isNotEmpty>	
+			  <isNotEmpty property="EndDate" prepend="and">
+			  	to_char(a.zhxgrq, 'yyyy-MM-dd') &lt;=#EndDate# 
+			 </isNotEmpty>
+			 <isNotEmpty property="StartDate" prepend="and">
+			  	to_char(a.zhxgrq, 'yyyy-MM-dd') &gt;=#StartDate#
+			 </isNotEmpty>		
+			</dynamic>
+				order by a.zhxgrq desc) b 
+			left join BGYLYCB_ZBMC_TJ c on b.T_BGJBXXB_ID=c.T_BGJBXXB_ID and b.T_GSZB_ID=c.t_gszb_id and c.zbmc='$mgsy$'
+			left join BGYLYCB_ZBMC_TJ d on b.T_BGJBXXB_ID=d.T_BGJBXXB_ID and b.T_GSZB_ID=d.t_gszb_id and d.zbmc='$zysr$'
+			left join BGYLYCB_ZBMC_TJ e on b.T_BGJBXXB_ID=e.T_BGJBXXB_ID and b.T_GSZB_ID=e.t_gszb_id and e.zbmc='$zylr$'
+			left join BGYLYCB_ZBMC_TJ f on b.T_BGJBXXB_ID=f.T_BGJBXXB_ID and b.T_GSZB_ID=f.t_gszb_id and f.zbmc='$jlr$'
+			left join BGYLYCB_ZBMC_TJ g on b.T_BGJBXXB_ID=g.T_BGJBXXB_ID and b.T_GSZB_ID=g.t_gszb_id and g.zbmc='$jzc$'
+			where c.zbz is not null or d.zbz is not  null or e.zbz is not  null or f.zbz is not  null or g.zbz is not  null
+		    )
+	  </select>
+</sqlMap>

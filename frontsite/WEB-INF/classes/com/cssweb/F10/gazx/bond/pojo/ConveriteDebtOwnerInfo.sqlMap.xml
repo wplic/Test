@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap
+	namespace="com.cssweb.F10.gazx.bond.pojo.ConveriteDebtOwnerInfo">
+
+	<typeAlias alias="converiteDebtOwnerInfo"
+		type="com.cssweb.F10.gazx.bond.pojo.ConveriteDebtOwnerInfo" />
+
+	<!--result map-->
+	<resultMap id="converiteDebtOwnerInfoMap"
+		class="converiteDebtOwnerInfo">
+
+		<!-- 可转债 -->
+		<result property="converiteDebt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+		<!-- 持券张数 -->
+		<result property="ownDebtNumber" column="CQZS"
+			jdbcType="java.lang.Long" />
+
+		<!-- 持有人-_公司（ID） -->
+		<result property="ownerCompany" column="CYR_GS_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 持有人-_基金 -->
+		<result property="ownerFund" column="CYR_JJ_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 持有人-_个人 -->
+		<result property="ownerPersonal" column="CYR_GR_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 发生日期 -->
+		<result property="publishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 所占比例 -->
+		<result property="scale" column="SZBL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 股东名称 -->
+		<result property="shareholdersName" column="GDMC"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+	</resultMap>
+
+	<!-- 根据债券代码获可转债十大持有人情况 -->
+	<select id="getConveriteDebtOwnerInfoByBondCode"
+		resultMap="converiteDebtOwnerInfoMap" parameterClass="String">
+		SELECT
+		a.T_ZQZB_ID,a.CYR_GS_ID,a.CYR_GR_ID,a.CYR_JJ_ID,a.GDMC,a.CQZS,a.SZBL,a.FSRQ,
+		b.zqjc, b.zqdm FROM KZZSDCYRQK a,zqzb b where a.T_ZQZB_ID =
+		b.t_Zqzb_Id and b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ =
+		1 and rownum = 1 order by b.zqdm desc
+	</select>
+
+</sqlMap>

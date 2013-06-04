@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.security.user.pojo.UserExtentInfo">
+
+	<typeAlias alias="UserExtentInfo" type="com.cssweb.common.security.user.pojo.UserExtentInfo"/>
+
+	<!--result map-->
+	<resultMap id="userExtentInfoMap" class="UserExtentInfo">
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="sex" column="SEX" jdbcType="Integer"/>
+ 		<result property="birthday" column="BIRTHDAY" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+ 		<result property="phone" column="PHONE" jdbcType="String" nullValue=""/>
+ 		<result property="mobile" column="MOBILE" jdbcType="String" nullValue=""/>
+ 		<result property="address" column="ADDRESS" jdbcType="String" nullValue=""/>
+ 		<result property="email" column="EMAIL" jdbcType="String" nullValue=""/>
+ 		<result property="fax" column="FAX" jdbcType="String" nullValue=""/>
+ 		<result property="postCard" column="POST_CARD" jdbcType="String" nullValue=""/>
+ 		<result property="province" column="PROVINCE" jdbcType="String" nullValue=""/>
+ 		<result property="city" column="CITY" jdbcType="String" nullValue=""/>
+ 		<result property="cardType" column="CARD_TYPE" jdbcType="Integer" />
+ 		<result property="cardNum" column="CARD_NUM" jdbcType="String" nullValue=""/>
+ 		<result property="description" column="DESCRIPTION" jdbcType="String" nullValue=""/>
+ 		<result property="ext1" column="EXT1" jdbcType="String" nullValue=""/>
+ 		<result property="ext2" column="EXT2" jdbcType="String" nullValue=""/>
+ 		<result property="ext3" column="EXT3" jdbcType="String" nullValue=""/>
+ 		<result property="ext4" column="EXT4" jdbcType="String" nullValue=""/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="UserExtentInfo">
+		  insert into USER_EXTENT_INFO (USER_ID,SEX,BIRTHDAY,PHONE,MOBILE,ADDRESS,EMAIL,FAX,
+		  						POST_CARD,PROVINCE,CITY,CARD_TYPE,CARD_NUM,DESCRIPTION,EXT1,EXT2,EXT3,EXT4)
+		  	values (#userId#,#sex#,#birthday#,#phone#,#mobile#,#address#,#email#,#fax#,#postCard#,
+		  					#province#,#city#,#cardType#,#cardNum#,#description#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	
+	<update id="update" parameterClass="UserExtentInfo">
+		  update USER_EXTENT_INFO 
+		  	set SEX=#sex#,BIRTHDAY=#birthday#,PHONE=#phone#,MOBILE=#mobile#,ADDRESS=#address#,EMAIL=#email#,
+				  	FAX=#fax#,POST_CARD=#postCard#,PROVINCE=#province#,CITY=#city#,CARD_TYPE=#cardType#,CARD_NUM=#cardNum#,
+				  	DESCRIPTION=#description#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where USER_ID = #userId#
+	</update>
+	
+	<delete id="deleteByUserId" parameterClass="Long">
+	  	delete USER_EXTENT_INFO where USER_ID=#value#
+	</delete>
+	
+	<select id="getByUserId" parameterClass="Long" resultMap = "userExtentInfoMap">
+	  	select * from USER_EXTENT_INFO where USER_ID = #value#
+	</select>
+
+</sqlMap>

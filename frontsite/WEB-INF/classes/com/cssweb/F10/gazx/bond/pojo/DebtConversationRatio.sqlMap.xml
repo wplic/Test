@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap
+	namespace="com.cssweb.F10.gazx.bond.pojo.DebtConversationRatio">
+
+	<typeAlias alias="debtConversationRatio"
+		type="com.cssweb.F10.gazx.bond.pojo.DebtConversationRatio" />
+
+	<!--result map-->
+	<resultMap id="debtConversationRatioMap"
+		class="debtConversationRatio">
+
+		<!-- 债券现券折算比率 -->
+		<result property="conversationRatioId" column="T_GZXQZSBL_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券 -->
+		<result property="debt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 现券面额 -->
+		<result property="currentDebtParValue" column="Xqme"
+			jdbcType="java.lang.Double" />
+
+		<!-- 折算比率 -->
+		<result property="executeRate" column="Zsbl"
+			jdbcType="java.lang.Float" />
+
+		<!-- 标准券（元） -->
+		<result property="standBond" column="Zhq"
+			jdbcType="java.lang.Double" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+		<!-- 备注 -->
+		<result property="remark" column="Bz"
+			jdbcType="java.lang.String" />
+
+		<!-- 发生日期 -->
+		<result property="publishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 调整日 -->
+		<result property="proccessDate" column="Tzr"
+			jdbcType="java.util.Date" />
+
+	</resultMap>
+
+	<!-- 根据债券代码查找该债券的折算比率 -->
+	<select id="getDebtConversationRatioByBondCode"
+		resultMap="debtConversationRatioMap" parameterClass="String">
+		SELECT
+		a.T_ZQZB_ID,a.T_GZXQZSBL_ID,a.Xqme,a.Zsbl,a.Zhq,a.Tzr,a.Bz,a.FSRQ,
+		b.zqjc, b.zqdm FROM GZXQZSBL a,zqzb b where a.T_ZQZB_ID =
+		b.t_Zqzb_Id and b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ =
+		1 and rownum = 1 order by zqdm desc
+	</select>
+
+</sqlMap>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.bond.pojo.BondRedemptionCase">
+
+	<typeAlias alias="bondRedemptionCase"
+		type="com.cssweb.F10.gazx.bond.pojo.BondRedemptionCase" />
+
+	<!--result map-->
+	<resultMap id="bondRedemptionCaseMap" class="bondRedemptionCase">
+
+		<!-- 资金到帐日 -->
+		<result property="arriveDate" column="ZJDZR"
+			jdbcType="java.util.Date" />
+
+		<!-- 赎回数量 -->
+		<result property="arriveNum" column="SHSL"
+			jdbcType="java.util.Long" />
+
+		<!-- 可转债代码 -->
+		<result property="coveriteDebtCode" column="T_ZQZB_ID"
+			jdbcType="java.util.Long" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券赎回ID -->
+		<result property="debtRedemptionId" column="T_ZQSHQK_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+		<!-- 备注 -->
+		<result property="descrition" column="BZ"
+			jdbcType="java.lang.String" />
+
+		<!-- 付款日 -->
+		<result property="payForDate" column="FKR"
+			jdbcType="java.util.Date" />
+
+		<!-- 发生日期 -->
+		<result property="publishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 赎回价格（税后） -->
+		<result property="redemptionBackPrice" column="SHJGSH"
+			jdbcType="java.lang.Double" />
+
+		<!-- 赎回价格（税前） -->
+		<result property="redemptionBeforePrice" column="SHJGSQ"
+			jdbcType="java.lang.Double" />
+
+		<!-- 赎回条件 -->
+		<result property="redemptionCondition" column="SHTJ"
+			jdbcType="java.lang.String" />
+
+		<!-- 赎回日 -->
+		<result property="redemptionDate" column="SHR"
+			jdbcType="java.util.Date" />
+
+	</resultMap>
+
+	<!-- 根据证券代码查找该证券的赎回信息 -->
+	<select id="getBondRedemptionCaseByBondCode"
+		resultMap="bondRedemptionCaseMap" parameterClass="String">
+		SELECT a.ZJDZR, a.SHSL, a.T_ZQZB_ID, a.T_ZQSHQK_ID, a.BZ, a.FKR,
+		a.FSRQ, a.SHJGSH, a.SHJGSQ, a.SHTJ, a.SHR, b.zqjc, b.zqdm FROM
+		ZQSHQK a,zqzb b where a.T_ZQZB_ID = b.t_Zqzb_Id and b.zqdm =
+		#debtCode# and a.SCBZ = 0 AND a.GKBZ = 1 and rownum = 1 order by
+		zqdm desc
+	</select>
+
+</sqlMap>

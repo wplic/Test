@@ -1,0 +1,388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.BranchNotice">
+
+	<typeAlias alias="BranchNotice" type="com.cssweb.systemset.pojo.BranchNotice"/>
+						
+	<resultMap id="branchNoticeToAudit" class="BranchNotice">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="type" 		column="TYPE" 			jdbcType="String"/>
+ 		<result property="title" 		column="TITLE" 			jdbcType="String"/>
+ 		<result property="isAudit" 		column="IS_AUDIT" 		jdbcType="String"/>
+ 		<result property="auditor" 		column="AUDITOR" 		jdbcType="Long"/>
+ 		<result property="auditDate" 	column="AUDIT_DATE" 	jdbcType="Date"/>
+ 		
+  	</resultMap>
+  	
+	<resultMap id="branchNoticeList" class="BranchNotice">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="type" 		column="TYPE" 			jdbcType="String"/>
+ 		<result property="title" 		column="TITLE" 			jdbcType="String"/>
+ 		<result property="createDate" 	column="CREATE_DATE" 	jdbcType="Date"/>
+ 		<result property="creator" 		column="CREATOR" 		jdbcType="Long"/>
+ 		<result property="creatorName" 	column="REAL_NAME" 		jdbcType="String"/>
+  	</resultMap>
+  	
+  	<resultMap id="branchList" class="Branch">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchName" 	column="branch_name" 	jdbcType="String"/>
+ 		<result property="branchCode" 			column="BRANCH_CODE" 			jdbcType="String"/>
+ 		<result property="orderNum" 			column="ORDER_NUM" 			jdbcType="Long"/>
+  	</resultMap>
+  	
+  	<resultMap id="branchCodeList" class="Branch">
+ 		<result property="branchCode" 			column="BRANCH_CODE" 			jdbcType="String"/>
+ 		<result property="branchName" 	column="branch_name" 	jdbcType="String"/>
+ 		<result property="orderNum" 			column="ORDER_NUM" 			jdbcType="Long"/>
+ 		
+  	</resultMap>
+  	
+	
+  <select id="select" parameterClass="map" resultMap="branchNoticeList">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	T.ID, 					
+						T.TYPE, 			
+						T.TITLE,		
+						T.CREATE_DATE,
+						T.CREATOR,
+						U.REAL_NAME		
+				FROM 	T_SYSTEM_BRANCH_NOTICE T,
+						T_SYSTEM_USER U
+				WHERE	U.ID = T.CREATOR
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<select id="count" resultClass="Integer">
+		SELECT 	count(*)
+		FROM 	T_SYSTEM_BRANCH_NOTICE T,
+				T_SYSTEM_USER U
+		WHERE	U.ID = T.CREATOR
+	</select>
+	
+	<select id="branchList" resultMap="branchList">
+	select * from (
+		SELECT 	DISTINCT id,
+				BRANCH_NAME ,BRANCH_CODE,ORDER_NUM
+		FROM 	T_SYSTEM_BRANCH WHERE STATE='1' ) order by ORDER_NUM , branch_code 
+	</select>
+	
+	<select id="getBranchListByCodeList" parameterClass="map" resultMap="branchList">
+		select * from (
+		SELECT 	DISTINCT id,
+				BRANCH_NAME ,BRANCH_CODE,ORDER_NUM
+		FROM 	T_SYSTEM_BRANCH WHERE STATE='1'
+		<dynamic>
+			<isNotNull property="branchCode">
+						<iterate prepend="AND" property="branchCode" open="(" close=")" conjunction="OR">  
+						  	 BRANCH_CODE = '$branchCode[]$'
+						</iterate>
+			</isNotNull>
+		</dynamic>
+		) order by ORDER_NUM , branch_code 
+	</select>
+	
+	<select id="getBranchCodeList" resultMap="branchCodeList">
+		select * from (
+		SELECT 	DISTINCT BRANCH_CODE,
+				BRANCH_NAME ,ORDER_NUM
+		FROM 	T_SYSTEM_BRANCH  WHERE STATE='1' ) order by ORDER_NUM , branch_code 
+	</select>
+  	<select id="branchNoticeById" resultClass="BranchNotice" parameterClass="Long">
+		SELECT 	*
+		FROM 	T_SYSTEM_BRANCH_NOTICE
+		where	ID=#id#
+	</select>
+	
+	<insert id="insert" parameterClass="BranchNotice">
+	    INSERT INTO 
+	    	T_SYSTEM_BRANCH_NOTICE(
+	    		ID,
+				TYPE,
+				TITLE,
+				CONTENT,
+				CREATE_DATE,
+				CREATOR,
+				IS_AUDIT
+				)
+	    VALUES(
+	    		#id#,
+	    		#type#,
+	    		#title#,
+	    		#content#,
+	    		#createDate#,
+	    		#creator#,
+	    		#isAudit#
+	    		)
+  	</insert>
+  	
+  	<update id="update" parameterClass="BranchNotice">
+	    UPDATE 
+	    	T_SYSTEM_BRANCH_NOTICE
+	    SET 
+	    	TYPE=#type#,
+			TITLE=#title#,
+			CREATOR=#creator#,
+			CREATE_DATE=#createDate#
+	    WHERE ID = #id#
+	  </update>
+  	
+  	<delete id="delete" parameterClass="java.lang.String">
+    	DELETE 
+    		T_SYSTEM_BRANCH_NOTICE
+    	WHERE 
+    		ID	IN ($value$)
+  	</delete>
+  	
+  	<delete id="deleteText" parameterClass="java.lang.String">
+    	DELETE 
+    		COMM_BLOB_TEXT
+    	WHERE 
+    		RELATE_TABLE_ID	IN ($value$)
+  	</delete>
+  	
+	<select id="getAllBranchNoticeToAudit" parameterClass="map" resultMap="branchNoticeToAudit">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	T.ID, 					
+						T.TYPE, 			
+						T.TITLE,
+						T.IS_AUDIT,
+						T.AUDITOR,	
+						T.AUDIT_DATE	
+				FROM 	T_SYSTEM_BRANCH_NOTICE T
+				<dynamic prepend="where">
+					<isNotNull property="isAudit">
+						T.IS_AUDIT=#isAudit#
+					</isNotNull>
+				</dynamic>
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="countToAudit" resultClass="Integer">
+		SELECT 	count(*)	
+		FROM 	T_SYSTEM_BRANCH_NOTICE T
+		<dynamic prepend="where">
+			<isNotNull property="isAudit">
+				T.IS_AUDIT=#isAudit#
+			</isNotNull>
+		</dynamic>
+		<dynamic prepend="order by">
+			<isNotNull property="sortName">
+				$sortName$
+				<isNotNull property="dir">
+					$dir$
+				</isNotNull>
+			</isNotNull>
+		</dynamic>
+	</select>
+	<update id="updateAudit" parameterClass="BranchNotice">
+	    UPDATE 
+	    	T_SYSTEM_BRANCH_NOTICE
+	    SET 
+	    	IS_AUDIT=#isAudit#,
+			AUDITOR=#auditor#,	
+			AUDIT_DATE=#auditDate#
+	    WHERE ID = #id#
+	  </update>
+	  
+<!--  前台页面代码的处理 -->
+	<resultMap id="branchNoticeFrontsite" class="BranchNotice">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="type" 		column="TYPE" 			jdbcType="String"/>
+ 		<result property="title" 		column="TITLE" 			jdbcType="String"/>
+ 		<result property="content" 		column="CONTENT" 		jdbcType="Long"/>
+ 		<result property="createDate" 	column="CREATE_DATE" 	jdbcType="Date"/>
+ 		<result property="creator" 		column="CREATOR" 		jdbcType="Long"/>
+ 		<result property="isAudit" 		column="IS_AUDIT" 		jdbcType="String"/>
+ 		<result property="auditor" 		column="AUDITOR" 		jdbcType="Long"/>
+ 		<result property="auditDate" 	column="AUDIT_DATE" 	jdbcType="Date"/>
+ 		<result property="creatorName" 	column="CREATOR_NAME" 	jdbcType="String"/>
+  	</resultMap>
+  	
+  	<resultMap id="branchNoticeFrontsiteMap" class="BranchNotice">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="type" 		column="TYPE" 			jdbcType="String"/>
+ 		<result property="title" 		column="TITLE" 			jdbcType="String"/>
+ 		<result property="content" 		column="CONTENT" 		jdbcType="Long"/>
+ 		<result property="createDate" 	column="CREATE_DATE" 	jdbcType="Date"/>
+ 		<result property="creator" 		column="CREATOR" 		jdbcType="Long"/>
+ 		<result property="isAudit" 		column="IS_AUDIT" 		jdbcType="String"/>
+ 		<result property="auditor" 		column="AUDITOR" 		jdbcType="Long"/>
+ 		<result property="auditDate" 	column="AUDIT_DATE" 	jdbcType="Date"/>
+  	</resultMap>
+  	<!--  前台页面代码的处理 取营业部信息-->
+	<resultMap id="branchNameFrontsite" class="BranchNotice">
+  	 	<result property="branchCode" 	column="BRANCH_CODE" 	jdbcType="String"/>
+ 		<result property="branchName" 	column="BRANCH_NAME" 	jdbcType="String"/>
+ 	</resultMap>
+ 		
+	<select id="getBranchNoticeByTypeList" parameterClass="map" resultMap="branchNoticeFrontsite">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			SELECT 	T.*,U.REAL_NAME as CREATOR_NAME FROM T_SYSTEM_BRANCH_NOTICE T,T_SYSTEM_USER U 
+			WHERE U.ID = T.CREATOR 
+		<dynamic prepend="and">
+               <isNotEmpty property="type">
+                     T.TYPE= #type#
+               </isNotEmpty>
+         </dynamic>
+         <dynamic prepend="and">
+               <isNotEmpty property="branchCode">
+                     T.ID in (select m.NOTICE_ID as NOTICE_ID from t_system_branch t ,t_system_branch_notice_map m
+where t.BRANCH_CODE= #branchCode# and t.id=m.branch_id)
+               </isNotEmpty>
+         </dynamic> 	
+		<dynamic prepend="and">
+               <isNotEmpty property="isAudit">
+                     T.IS_AUDIT= #isAudit#
+               </isNotEmpty>
+         </dynamic> 
+			<dynamic prepend="and">
+               <isNotEmpty property="title">
+                     T.TITLE LIKE '%$title$%'
+               </isNotEmpty>
+         </dynamic> 
+          order by T.CREATE_DATE desc
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	
+	 	
+	<select id="getBranchNoticeNoUserByTypeList" parameterClass="map" resultMap="branchNoticeFrontsiteMap">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			SELECT 	T.* FROM T_SYSTEM_BRANCH_NOTICE T
+			WHERE 1=1
+		<dynamic prepend="and">
+               <isNotEmpty property="type">
+                     T.TYPE= #type#
+               </isNotEmpty>
+         </dynamic>
+         <dynamic prepend="and">
+               <isNotEmpty property="branchCode">
+                     T.ID in (select m.NOTICE_ID as NOTICE_ID from t_system_branch t ,t_system_branch_notice_map m
+where t.BRANCH_CODE= #branchCode# and t.id=m.branch_id)
+               </isNotEmpty>
+         </dynamic> 	
+		<dynamic prepend="and">
+               <isNotEmpty property="isAudit">
+                     T.IS_AUDIT= #isAudit#
+               </isNotEmpty>
+         </dynamic> 
+			<dynamic prepend="and">
+               <isNotEmpty property="title">
+                     T.TITLE LIKE '%$title$%'
+               </isNotEmpty>
+         </dynamic> 
+          order by T.CREATE_DATE desc
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<select id="getBranchNoticeByTypeCount" resultClass="java.lang.Integer" parameterClass="map">
+		SELECT count(*) FROM T_SYSTEM_BRANCH_NOTICE T,T_SYSTEM_USER U 
+		WHERE U.ID = T.CREATOR 
+		<dynamic prepend="and">
+               <isNotEmpty property="type">
+                     T.TYPE= #type#
+               </isNotEmpty>
+         </dynamic> 
+         <dynamic prepend="and">
+               <isNotEmpty property="branchCode">
+                     T.ID in (select m.NOTICE_ID as NOTICE_ID from t_system_branch t ,t_system_branch_notice_map m
+where t.BRANCH_CODE= #branchCode# and t.id=m.branch_id)
+               </isNotEmpty>
+         </dynamic>
+		<dynamic prepend="and">
+               <isNotEmpty property="isAudit">
+                     T.IS_AUDIT= #isAudit#
+               </isNotEmpty>
+         </dynamic> 
+			<dynamic prepend="and">
+               <isNotEmpty property="title">
+                     T.TITLE LIKE '%$title$%'
+               </isNotEmpty>
+         </dynamic> 
+	</select>
+	
+	
+	<select id="getBranchNoticeNoUserByTypeCount" resultClass="java.lang.Integer" parameterClass="map">
+		SELECT count(*) FROM T_SYSTEM_BRANCH_NOTICE T
+		WHERE 1 = 1 
+		<dynamic prepend="and">
+               <isNotEmpty property="type">
+                     T.TYPE= #type#
+               </isNotEmpty>
+         </dynamic> 
+         <dynamic prepend="and">
+               <isNotEmpty property="branchCode">
+                     T.ID in (select m.NOTICE_ID as NOTICE_ID from t_system_branch t ,t_system_branch_notice_map m
+where t.BRANCH_CODE= #branchCode# and t.id=m.branch_id)
+               </isNotEmpty>
+         </dynamic>
+		<dynamic prepend="and">
+               <isNotEmpty property="isAudit">
+                     T.IS_AUDIT= #isAudit#
+               </isNotEmpty>
+         </dynamic> 
+			<dynamic prepend="and">
+               <isNotEmpty property="title">
+                     T.TITLE LIKE '%$title$%'
+               </isNotEmpty>
+         </dynamic> 
+	</select>
+	
+	<select id="getBranchNameById" parameterClass="java.lang.Long" resultMap="branchNameFrontsite">
+		SELECT B.BRANCH_CODE AS BRANCH_CODE ,B.BRANCH_NAME AS BRANCH_NAME	
+		FROM T_SYSTEM_BRANCH_NOTICE T,T_SYSTEM_BRANCH_NOTICE_MAP M ,T_SYSTEM_BRANCH B
+		WHERE T.ID=#id# AND M.BRANCH_ID=B.ID AND M.NOTICE_ID=T.ID AND NOT exists ( SELECT BRANCH_ID FROM T_SYSTEM_BRANCH_NOTICE_MAP P WHERE P.ID=M.ID AND ( M.BRANCH_ID=1 OR M.BRANCH_ID=2))
+	</select>
+	
+	<select id="getBranchNoticeInfoById" parameterClass="java.lang.Long" resultMap="branchNoticeFrontsite">
+		SELECT 	T.*,U.REAL_NAME as CREATOR_NAME FROM T_SYSTEM_BRANCH_NOTICE T,T_SYSTEM_USER U 
+		WHERE U.ID = T.CREATOR AND T.ID = #id#
+	</select>	
+</sqlMap>

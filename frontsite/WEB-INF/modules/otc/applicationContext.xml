@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<!-- OTC -->
+ 	<bean name="otcDocumentDao" class="com.cssweb.otc.dao.OtcDocumentDao">
+ 		<property name="dataSource" ref="dataSource"></property>
+ 		<property name="sqlMapClient" ref="sqlMapClient"></property>
+ 	</bean>
+	<bean name="otcDocumentService" class="com.cssweb.otc.service.OtcDocumentService">
+		<property name="otcDocumentDao" ref="otcDocumentDao"></property>
+		<property name="lobService" ref="lobService"></property>
+	</bean>
+	<bean name="/front/otcDocumentAction" class="com.cssweb.otc.web.OtcDocumentAction">
+		<property name="otcDocumentService" ref="otcDocumentService"></property>
+		<property name="lobService" ref="lobService"></property>
+		<property name="sequenceService" ref="sequenceService"></property>
+	</bean>
+</beans>
+
+

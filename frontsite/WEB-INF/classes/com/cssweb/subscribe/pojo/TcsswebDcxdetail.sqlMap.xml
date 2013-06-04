@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebDcxdetail">
+<typeAlias alias="TcsswebDcxdetail" type="com.cssweb.subscribe.pojo.TcsswebDcxdetail"/>
+	<resultMap id="TcsswebDcxdetail" class="TcsswebDcxdetail">
+	    <result property="orderid" column="order_id" jdbcType="java.lang.Long"/>
+	    <result property="itemid" column="item_id" jdbcType="java.lang.String"/>
+	    <result property="productfate" column="product_fate" jdbcType="java.lang.Double"/>
+	    <result property="type" column="type" jdbcType="java.lang.Integer"/>
+	    <result property="serialno" column="serial_no" jdbcType="java.lang.String"/>
+	    <result property="errorid" column="error_id" jdbcType="java.lang.Long"/>
+	    <result property="errorinfo" column="error_info" jdbcType="java.lang.String"/>
+	    <result property="orderflag" column="order_flag" jdbcType="java.lang.String"/>
+	    <result property="productname" column="PRODUCT_NAME" jdbcType="java.lang.String"/>
+	</resultMap>
+	<resultMap id="TcsswebDcxdz" class="TcsswebDcxdetail">
+	    <result property="orderid" column="order_id" jdbcType="java.lang.Long"/>
+	    <result property="itemid" column="item_id" jdbcType="java.lang.String"/>
+	    <result property="productfate" column="product_fate" jdbcType="java.lang.Double"/>
+	    <result property="type" column="type" jdbcType="java.lang.Integer"/>
+	    <result property="serialno" column="serial_no" jdbcType="java.lang.String"/>
+	    <result property="errorid" column="error_id" jdbcType="java.lang.Long"/>
+	    <result property="errorinfo" column="error_info" jdbcType="java.lang.String"/>
+	    <result property="username" column="user_name" jdbcType="java.lang.String"/>
+	    <result property="orderflag" column="order_flag" jdbcType="java.lang.String"/>
+	    <result property="productname" column="product_name" jdbcType="java.lang.String"/>
+	    <result property="begindate" column="begin_date" jdbcType="java.lang.Date"/>
+	</resultMap>
+	<!-- 短彩信定制情况查询 ,获取定制流水 -->
+	<select id="getTcsswebDcxdzListByAccount" parameterClass="java.util.Map" resultMap="TcsswebDcxdz">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT a.order_id,a.item_id,a.product_fate,a.type,a.serial_no,a.error_id,a.error_info,b.user_name,
+		a.order_flag,b.begin_date,a.product_name
+		FROM T_CSSWEB_DCXDETAIL a , T_CSSWEB_DCXORDER b 
+		where a.order_id=b.id and b.user_name = #username#
+		order by b.oper_date desc)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id="getTcsswebDcxdzListByAccountCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(*)	FROM T_CSSWEB_DCXDETAIL a , T_CSSWEB_DCXORDER b 
+		where a.order_id=b.id and b.user_name = #username#
+	</select>
+	<insert id="insertTcsswebDcxdetail" parameterClass="TcsswebDcxdetail">
+		INSERT into T_CSSWEB_DCXDETAIL ( order_id, item_id, product_fate, type,serial_no, error_id,error_info,order_flag,PRODUCT_NAME) VALUES 
+		(#orderid#,#itemid#,#productfate#, #type#,#serialno#, #errorid#,#errorinfo#,#orderflag#,#productname#)
+	</insert>
+</sqlMap>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebProductidCatid">
+<typeAlias alias="TcsswebProductidCatid" type="com.cssweb.subscribe.pojo.TcsswebProductidCatid"/>
+	<resultMap id="TcsswebProductidCatid" class="TcsswebProductidCatid">
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="catId" column="CAT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="catName" column="CAT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="displayName" column="DISPLAY_NAME" jdbcType="java.lang.String"/>
+	</resultMap>
+	<resultMap id="TcsswebProductidCatid2Map" class="TcsswebProductidCatid">
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="catIds" column="CAT_ID" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="catName" column="CAT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="displayName" column="DISPLAY_NAME" jdbcType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="getTcsswebProductidCatidByProductId" parameterClass="java.util.Map" resultMap="TcsswebProductidCatid2Map">
+		SELECT d.id as PRODUCT_ID, d.product_name, t.CAT_ID, t.CAT_NAME,t.DISPLAY_NAME from
+			T_CSSWEB_FWCPDY d left join (
+			SELECT c.PRODUCT_ID,wmsys.wm_concat(t.CAT_ID) as CAT_ID,wmsys.wm_concat(t.CAT_NAME) as CAT_NAME,wmsys.wm_concat(t.DISPLAY_NAME) as DISPLAY_NAME FROM
+			T_CSSWEB_PRODUCTID_CATID c ,CMS_CATEGORY_BASIC_INFO t
+			where c.cat_id=t.cat_id  group by c.PRODUCT_ID) t on d.id=t.PRODUCT_ID where 1=1
+		    <dynamic>
+				 <isNotNull property="productId" prepend="and">
+				    d.id=#productId#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	
+	<select id="getAllTcsswebProductidCatid" parameterClass="java.util.Map" resultMap="TcsswebProductidCatid2Map">
+	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT d.id as PRODUCT_ID, d.product_name, t.CAT_ID, t.CAT_NAME,t.DISPLAY_NAME from
+			T_CSSWEB_FWCPDY d left join (
+			SELECT c.PRODUCT_ID,wmsys.wm_concat(t.CAT_ID) as CAT_ID,wmsys.wm_concat(t.CAT_NAME) as CAT_NAME,wmsys.wm_concat(t.DISPLAY_NAME) as DISPLAY_NAME FROM
+			T_CSSWEB_PRODUCTID_CATID c ,CMS_CATEGORY_BASIC_INFO t
+			where c.cat_id=t.cat_id  group by c.PRODUCT_ID) t on d.id=t.PRODUCT_ID where 1=1
+		    <dynamic>
+				 <isNotNull property="productId" prepend="and">
+				    d.id=#productId#
+				 </isNotNull>
+			</dynamic>)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id="getAllTcsswebProductidCatidCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		 SELECT count(d.id) from
+			T_CSSWEB_FWCPDY d left join (
+			SELECT c.PRODUCT_ID,wmsys.wm_concat(t.CAT_ID) as CAT_ID,wmsys.wm_concat(t.CAT_NAME) as CAT_NAME,wmsys.wm_concat(t.DISPLAY_NAME) as DISPLAY_NAME FROM
+			T_CSSWEB_PRODUCTID_CATID c ,CMS_CATEGORY_BASIC_INFO t
+			where c.cat_id=t.cat_id  group by c.PRODUCT_ID) t on d.id=t.PRODUCT_ID where 1=1
+		    <dynamic>
+				 <isNotNull property="productId" prepend="and">
+				    d.id=#productId#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	<select id="getProductidCatidListByProductid" parameterClass="java.util.Map" resultMap="TcsswebProductidCatid">
+		SELECT t.PRODUCT_ID, d.product_name, t.CAT_ID, c.CAT_NAME,C.DISPLAY_NAME
+			FROM T_CSSWEB_PRODUCTID_CATID t ,CMS_CATEGORY_BASIC_INFO c,T_CSSWEB_FWCPDY d
+			where t.CAT_ID=c.CAT_ID and d.id= t.product_id
+		<dynamic>
+				 <isNotNull property="productId" prepend="and">
+				   t.PRODUCT_ID=#productId#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	
+	<insert id="insertTcsswebProductidCatid" parameterClass="TcsswebProductidCatid">
+		INSERT into T_CSSWEB_PRODUCTID_CATID (PRODUCT_ID, CAT_ID) VALUES (#productId#,#catId#)
+	</insert>
+	<delete id="delProductidCatidById" parameterClass="Long">
+		delete from T_CSSWEB_PRODUCTID_CATID where PRODUCT_ID = #value#
+	</delete>
+	
+	
+	<resultMap id="TcsswebCatidMap" class="TcsswebProductidCatid">
+	    <result property="catId" column="CAT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="catName" column="CAT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="displayName" column="DISPLAY_NAME" jdbcType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="getTcsswebCatidMapBySearchName" parameterClass="java.util.Map" resultMap ="TcsswebCatidMap">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		select CAT_ID,CAT_NAME,DISPLAY_NAME from CMS_CATEGORY_BASIC_INFO where CAT_ID!=3 AND DELETE_FLAG=0 AND DISPLAY_NAME like '%$searchStr$%'
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getTcsswebCatidMapBySearchNameCount" parameterClass="String" resultClass = "Integer">
+		select count(*) from CMS_CATEGORY_BASIC_INFO where CAT_ID!=3 AND DELETE_FLAG=0 AND DISPLAY_NAME like '%$value$%'
+	</select>
+	
+	<select id="getTcsswebCatidListByProductId" parameterClass="java.util.Map" resultMap ="TcsswebCatidMap">
+		select CAT_ID,CAT_NAME,DISPLAY_NAME from CMS_CATEGORY_BASIC_INFO where CAT_ID!=3 AND DELETE_FLAG=0 
+		and CAT_ID in (SELECT CAT_ID from T_CSSWEB_PRODUCTID_CATID WHERE PRODUCT_ID = #productId#)
+	</select>
+</sqlMap>

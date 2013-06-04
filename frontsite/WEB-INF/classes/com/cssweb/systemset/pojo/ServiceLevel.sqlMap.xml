@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.ServiceLevel">
+
+	<typeAlias alias="ServiceLevel" type="com.cssweb.systemset.pojo.ServiceLevel"/>
+
+	
+	<resultMap id="serviceLevel" class="ServiceLevel">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="serviceId" 	column="SERVICE_ID" 	jdbcType="Long"/>
+ 		<result property="userLevels" 	column="USER_LEVELS" 	jdbcType="String"/>
+ 		<result property="serviceName" 	column="KEY_NAME" 		jdbcType="String"/>
+  	</resultMap>
+  	<resultMap id="serviceLevelById" class="ServiceLevel">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="serviceId" 	column="SERVICE_ID" 	jdbcType="Long"/>
+ 		<result property="userLevels" 	column="USER_LEVELS" 	jdbcType="String"/>
+ 		<result property="serviceName" 	column="KEY_NAME" 		jdbcType="String"/>
+ 		<result property="intro" 		column="INTRO" 			jdbcType="String"/>
+  	</resultMap>
+  <select id="select" parameterClass="map" resultMap="serviceLevel">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	a.ID 					ID,
+						a.SERVICE_ID 			SERVICE_ID,
+						a.USER_LEVELS 			USER_LEVELS,
+						b.KEY_NAME				KEY_NAME
+				FROM 	T_SYSTEM_SERVICE_LEVEL 	a,
+						CSSWEB_DICTIONARY 		b
+				WHERE	a.SERVICE_ID = b.ID
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="count" resultClass="Integer">
+		SELECT 	COUNT(*)
+		FROM 	T_SYSTEM_SERVICE_LEVEL a,CSSWEB_DICTIONARY b
+		WHERE	a.SERVICE_ID = b.ID
+	</select>
+  <insert id="insert" parameterClass="ServiceLevel">
+    INSERT INTO 
+    	T_SYSTEM_SERVICE_LEVEL(
+    		ID,
+    		SERVICE_ID,
+    		USER_LEVELS,
+    		INTRO)
+    VALUES(
+    		#id#,
+    		#serviceId#,
+    		#userLevels#,
+    		#intro#)
+  </insert>
+
+  <update id="update" parameterClass="ServiceLevel">
+    UPDATE 
+    	T_SYSTEM_SERVICE_LEVEL
+    SET 
+    	ID = #id#,
+    	SERVICE_ID=#serviceId#,
+   		USER_LEVELS=#userLevels#,
+    	INTRO=#intro#
+    WHERE ID = #id#
+  </update>
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    DELETE T_SYSTEM_SERVICE_LEVEL where ID IN ($value$)
+  </delete>
+  
+  <select id="getServiceLevelById" parameterClass="java.lang.Long" resultMap = "serviceLevelById">
+   SELECT 	a.ID,
+			a.SERVICE_ID,
+			a.USER_LEVELS,
+			b.KEY_NAME,
+			a.INTRO
+	FROM 	T_SYSTEM_SERVICE_LEVEL 	a,
+			CSSWEB_DICTIONARY 		b
+	WHERE	a.SERVICE_ID = b.ID
+	AND		a.ID = #id#
+  </select>
+  
+  <select id="getServiceLevelByUserLevels" parameterClass="java.lang.String" resultMap = "serviceLevelById">
+   SELECT a.ID,a.SERVICE_ID,a.USER_LEVELS,b.KEY_NAME,a.INTRO FROM T_SYSTEM_SERVICE_LEVEL a,CSSWEB_DICTIONARY b WHERE a.SERVICE_ID = b.ID AND a.USER_LEVELS like '%$userLevels$%' 
+  </select>
+</sqlMap>

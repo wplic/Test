@@ -1,0 +1,154 @@
+@charset "utf-8";
+@import url('global.css');
+
+/*layout img*/
+.topNav .nav a,
+.topNav .nav s{ background:url(../images/nav_bg.gif) no-repeat;}
+
+.sideNav li a{background:url(../images/icon.gif) no-repeat;}
+
+.sideNav li{ background:url(../images/layout.gif) no-repeat;}
+
+/*top_nav*/
+.topNav{ background-position:0 0; }
+.topNavInner{ height:100px; position:relative;width:960px;}
+.topNav .logo{ width:238px; height:79px; text-indent:-9999px; top:15px; left:5px; z-index:3;}
+.topNav .fuyun{ width:367px; height:69px; background-position:0 -100px; z-index:2; top:0px; left:245px;}
+.topNav .nav{ width:610px; height:30px; line-height:30px; display:block; position:absolute; bottom:0; left:275px; }
+
+/*nav*/
+.topNav .nav a{ height:30px; line-height:30px; font-size:14px; margin:0 10px 0 11px; position:relative; background-position:right 0; padding:0 10px 0 0;}
+.topNav .nav a,.topNav .nav a:visited,.topNav .nav a:hover,.topNav .nav a:active{ color:#fff;}
+.topNav .nav s{ display:block; position:absolute; width:10px; height:30px; top:0; background-position:left 0; margin:0 0 0 -10px;}
+.topNav .nav .hover a,
+.topNav .nav a:hover,
+.topNav .nav a:active{background-position:right -40px;}
+.topNav .nav .hover s,
+.topNav .nav a:hover s,
+.topNav .nav a:active s{background-position:left -40px;}
+
+/*wrap*/
+.wrapOuter{ width:1060px; position:relative;}
+.wrapOuter .wrap-tp,
+.wrapOuter .wrap-bt{position:absolute; display:block; width:50px; height:140px; top:0;}
+.wrapOuter .wrap-tp{ left:0; background-position:-400px 0;}
+.wrapOuter .wrap-bt{ right:0;background-position:-460px 0;}
+.wrap{ width:960px;}
+
+/*content*/
+.content{ position:relative; border-top:4px solid #da251c;}
+.content s.bigArrow{ top:-4px; right:-1px; width:17px; height:21px; background-position:-260px 0;}
+.content.hasConBg{ background:url(../images/content_bg.jpg) no-repeat 0 0;}
+
+
+/*sideLeft*/
+.sideLeft{ width:223px; padding:50px 0 40px 23px; }
+.leftBox{}
+.leftBox h2.head{ height:60px; text-indent:-9999px; background-position:0 -180px;}
+.leftBox h2.gfxd{ height:60px; text-indent:-9999px; background-position:-240px -180px;}
+.leftBox .con{ padding:0 10px;}
+.leftBox .round .hd{ padding:5px 0px 5px 0; height:420px; background:#f3f3f3 url(../images/left_01.jpg) no-repeat 6px bottom;}
+.leftBox .foot{ background-position:-240px -260px; height:17px; }
+
+/*sHeight*/
+.leftBox .round .teamHeight{ height:500px;}
+.sHeight{ height:444px;}
+.teamRightHeight{height:522px;}
+
+
+.sideNav{}
+.sideNav li{ background-position:0 -389px; display:block; height:35px; line-height:35px; vertical-align:bottom;}/*ie7*/
+.sideNav li a{ padding:0 0 0 35px; background-position:25px 12px; display:block; width:80%; position:absolute; z-index:2;}
+.sideNav li.hover a{ background:none;}
+.sideNav li.hover a,
+.sideNav li.hover a:visited,
+.sideNav li.hover a:hover,
+.sideNav li.hover a:active{ color:#fff;}
+
+.leftBox {position:relative;}
+.leftBox .mask{ width:188px; height:26px; background-position:0 -260px; z-index:1;   left:4px;}
+.leftBox #item01{ top:75px;}
+.leftBox #item02{ top:110px;}
+.leftBox #item03{ top:145px;}
+.leftBox #item04{ top:180px;}
+.leftBox #item05{ top:215px;}
+
+/*accBox*/
+.accBox { margin:0 20px 10px;}
+.accBox .desc{ background-color:#FFF; padding:10px; margin:5px 0;}
+.accBox h2.title{ cursor:pointer;}
+.accBox h2.title .fl{}
+.accBox h2.title .fr{ background-position:0 -120px; padding:0 0 0 15px; cursor:pointer;}
+.accBox.color4 h2.title .fr{ background-position:0 -160px; }/*紫色背景*/
+
+
+/*manView*/
+.manView{ width:400px; padding:0px 25px 10px; }
+.manView .photo{ width:142px; height:166px; background-position:0 -430px;}
+.manView .photo img{ width:124px; height:157px; margin:5px;}
+.manView .photoIntro{ width:240px;}
+.manView .photoIntro p{ line-height:25px;}
+
+/*mainList*/
+.manList{ width:179px; margin:0 5px 0 0; padding-left:12px; border-left:1px solid #ccc;}
+.manList a,
+.manList a:visited,
+.manList a:hover,
+.manList a:active{ color:#1c3180; text-decoration:underline;}
+.manList h2.title{ font-size:14px; height:22px; line-height:22px; border-bottom:3px solid #ccc; position:relative;}
+.manList h2.title s{ background-position:-480px -180px; width:62px; height:7px; left:0; top:22px;}
+.manList h2.title s.long{ background-position:-480px -220px; width:105px;}
+
+.manList a{ display:inline-block; height:30px; line-height:30px; white-space:nowrap; margin:0 6px 0 0; font-weight:bold;}
+.manList dt a,
+.manList dd span{ width:62px; display:inline-block;}
+
+
+
+/*mainCon*/
+.mainCon{ width:675px; padding:105px 15px 10px 0;}
+.mainCon .hd{ padding:5px 10px;}
+.head{ position:relative; height:50px; z-index:1}
+.head h2.title{ height:22px; line-height:22px; margin:10px 5px 0 55px; border-bottom:4px solid #e7e7e7;}
+.head b.house{ width:56px; height:47px; background-position:0 -320px; left:0;}
+.head b.team{ width:37px; height:51px; background-position:-160px -320px; left:0;}
+.head b.touzi{ width:43px; height:36px; background-position:-220px -320px; left:0;}
+.head b.tianpin{ width:58px; height:46px; background-position:-80px -320px; left:0;}
+.head b.tel{ width:46px; height:33px; background-position:-300px -320px; left:0;}
+
+/*topTip*/
+.teamHead{ height:65px;}
+.topTip{ height:25px; line-height:25px; margin:0 5px 10px 0; position:absolute; right:0px; bottom:-5px; }
+
+
+
+.desc p{ text-indent:30px; line-height:28px;}
+.desc p.arrow{ background-position:-50px -30px; padding-left:12px;}
+.desc .dotLine{ margin:15px 2em;}
+.desc .wh89_30{ width:89px; height:30px; line-height:30px;}
+
+/*sideContact*/
+.sideContact { width:170px; margin:5px auto;}
+.sideContact h2.title{ height:25px; line-height:23px; background-position:0 -75px; padding:0 0 0 28px; border-bottom:3px solid #ccc;}
+.sideContact .desc{ padding:5px;}
+.sideContact .desc p{ text-indent:0; line-height:25px;}
+
+/*companyBox*/
+.companyBox{ width:600px; margin:0 auto 20px;}
+.companyBox img{ margin:5px 0 0 5px;}
+.companyBox .desc{ width:480px; font-size:14px; padding-top:0;}
+.companyBox .desc h1{ font-size:22px; font-family:"微软雅黑"; margin-bottom:5px;}
+.companyBox .fr p{ text-indent:0;}
+
+/*contact*/
+.contactImg{ padding:20px 0 0 15px;}
+.contactInfo{ margin:150px 0 0 0; width:290px;}
+.contactInfo p{ text-indent:0;}
+.contactSearch{ width:315px; height:43px; background-position:-180px -440px; margin:10px 0 0 0; position:relative;}
+.contactSearch .searchBtn{ display:block; width:140px; height:35px; position:absolute; right:10px; top: 5px; text-indent:-9999px; } 
+
+/*footer*/
+.footer{ padding:15px 0; background-color:#1c3180; color:#fff;}
+
+/*2010-12-30 修改 By Afei*/
+.mainCon .desc{ font-size:14px;}

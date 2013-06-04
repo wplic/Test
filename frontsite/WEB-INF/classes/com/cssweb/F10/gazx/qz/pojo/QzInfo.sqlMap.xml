@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.qz.pojo.QzInfo">
+    <typeAlias alias="qzInfo" type="com.cssweb.F10.gazx.qz.pojo.QzInfo"/>
+    <!--result map-->
+    <resultMap id="qzInfoMap" class="qzInfo">
+        <result column="T_QZZB_ID" property="qzid" jdbcType="Long"/>
+        <result column="QZDM" property="qzdm" jdbcType="String" nullValue=""/>
+        <result column="QZJC" property="qzjc" jdbcType="String" nullValue=""/>
+        <result column="QZLB" property="qzlb" jdbcType="String" nullValue=""/>
+        <result column="QZJCPY" property="qzjcpy" jdbcType="String" nullValue=""/>
+    </resultMap> 
+    
+    <resultMap id="qzInfoMap1" class="qzInfo">
+        <result column="T_QZZB_ID" property="qzid" jdbcType="Long" />
+        <result column="QZDM" property="qzdm" jdbcType="String" nullValue=""/>
+        <result column="QZJC" property="qzjc" jdbcType="String" nullValue=""/>
+        <result column="QZLB" property="qzlb" jdbcType="String" nullValue=""/>
+        <result column="QZJCPY" property="qzjcpy" jdbcType="String" nullValue=""/>
+        <result column="FXDX" property="fxdx" jdbcType="String" nullValue=""/>
+        <result column="FXJG" property="fxjg" jdbcType="java.lang.Double" nullValue="0.0"/>
+        <result column="FXSL" property="fxsl" jdbcType="Long" />
+        <result column="SSDD" property="ssdd" jdbcType="String" nullValue=""/>
+        <result column="XQDM" property="xqdm" jdbcType="String" nullValue=""/>
+        <result column="XQJC" property="xqjc" jdbcType="String" nullValue=""/>
+        <result column="XQFS" property="xqfs" jdbcType="String" nullValue=""/>
+        <result column="JXXQJ" property="jxxqj" jdbcType="java.lang.Double" nullValue="0.0"/>
+        <result column="JXXQBL" property="jxxqbl" jdbcType="java.lang.Double" nullValue="0.0" />
+        <result column="XQR" property="xqr" jdbcType="java.util.Date"  nullValue="1900/01/01 00:00:00"/>
+        <result column="XQZZR" property="xqzzr" jdbcType="java.util.Date"  nullValue="1900/01/01 00:00:00"/>
+        <result column="ZHJYR" property="zhjyr" jdbcType="java.util.Date"  nullValue="1900/01/01 00:00:00"/>
+    </resultMap> 
+    
+    <resultMap id="qzInfoMap2" class="qzInfo">
+        <result column="T_QZZB_ID" property="qzid" jdbcType="Long" />
+        <result column="QZDM" property="qzdm" jdbcType="String" nullValue=""/>
+        <result column="QZJC" property="qzjc" jdbcType="String" nullValue=""/>
+        <result column="BDZQ" property="bdqz" jdbcType="Long" />
+        <result column="BDZQLB" property="bdqzlb" jdbcType="String" nullValue=""/>
+    </resultMap> 
+	<!-- 根据不同传入不同条件返回qzInfo对象 -->
+    <select id="getQzInfo" parameterClass="map" resultMap="qzInfoMap1" >    
+			select a.T_QZZB_ID,
+				a.QZDM,
+				a.QZJC,
+				a.QZLB,
+				a.QZJCPY,
+				b.FXDX,
+				b.FXJG,
+				b.FXSL,
+				b.SSDD,
+				b.XQDM,
+				b.XQJC,
+				b.XQFS,
+				f.JXXQJ,
+				f.JXXQBL,
+				b.XQR,
+				b.XQZZR,
+				b.ZHJYR
+			from QZZB a 
+			left join QZFXYSS b on a.T_QZZB_ID=b.T_QZZB_ID 
+			left join (
+			     select d.T_QZZB_ID,d.JXXQJ,d.JXXQBL from XQJGYXQBLTZ d,(
+			            select T_QZZB_ID,max(FSRQ) FSRQ from XQJGYXQBLTZ c group by c.T_QZZB_ID
+			     ) e
+			     where d.T_QZZB_ID=e.T_QZZB_ID and d.FSRQ=e.FSRQ
+			) f
+			on a.T_QZZB_ID=f.T_QZZB_ID 
+			where a.SCBZ='0' and a.GKBZ='1'
+				<isNotNull prepend="and" property="qzid">
+					a.T_QZZB_ID = #qzid#
+				</isNotNull>
+				<isNotNull prepend="and" property="qzdm">
+					a.QZDM = #qzdm#
+				</isNotNull>
+				<isNotNull prepend="and" property="qzjc">
+					a.QZJC = #qzjc#
+				</isNotNull>
+				<isNotNull prepend="and" property="qzjcpy">
+					a.QZJCPY = #qzjcpy#
+				</isNotNull>
+				<isNotNull prepend="and" property="qzlb">
+					a.QZLB = #qzlb#
+				</isNotNull>
+	</select>
+	
+	<select id="pageQuery" resultMap="qzInfoMap" parameterClass="map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				 SELECT
+					qz.T_QZZB_ID,
+					qz.QZDM,
+					qz.QZJC,
+					qz.QZLB,
+					qz.QZJCPY
+				FROM  QZZB qz
+					  where qz.scbz='0' and qz.gkbz='1'
+			<dynamic>
+				<isNotNull prepend="and" property="qzCode">
+					qz.QZDM  like '$qzCode$%'
+				</isNotNull>
+				<isNotNull prepend="and" property="qzSpell">
+					qz.QZJCPY like '$qzSpell$%'
+				</isNotNull>
+				<isNotNull prepend="and" property="qzName">
+					qz.QZJC like '$qzName$%'
+				</isNotNull>
+			</dynamic>
+			order by qz.QZDM 
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>  
+	
+	<select id="getQzbdInfo" parameterClass="map" resultMap="qzInfoMap2" >    
+		select T_QZZB_ID,QZDM,QZJC,BDZQ,BDZQLB from QZZB where QZDM = '$qzdm$'
+	</select>
+</sqlMap>	

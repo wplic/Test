@@ -1,0 +1,24 @@
+.jhlctit1{ background:url(/pic/assetManage/jhlctit1.jpg) no-repeat; width:113px; height:29px; line-height:29px; text-align:center; font-size:14px; color:#ffffff}
+.jhlctit2{ background:url(/pic/assetManage/jhlctit2.jpg) repeat-x ; height:29px; line-height:29px; text-indent:10px}
+.jhlctit3{ background:url(/pic/assetManage/jhlctit3.jpg) no-repeat; width:5px; height:29px;}
+.funmrgbg{ background:#ededed url(/pic/assetManage/funmrgbg.jpg) repeat-x top; padding:10px; border:1px solid #d2d2d2}
+.jgtl5 td{ padding-left:5px}
+.mxjlbox{ background:url(/pic/assetManage/mxjlbg1.jpg) no-repeat bottom; width:451px; padding:20px; margin-left:auto; margin-right:auto}
+.mxjlbox .name{ background:url(/pic/assetManage/mxjlbg2.jpg) no-repeat; width:332px; height:27px; line-height:27px; text-indent:10px}
+
+/***add by ��˼��  at 20120516***/
+.wrap_3c .mainCont{width:706px; margin-left:2px;}
+.wrap_3c .mainCont .axzlbanner {margin-bottom:5px;}
+.wrap_3c .mainCont .axzlIntro{background:#ededed url(../../images/anzlIntro.jpg) no-repeat;height:149px;}
+.wrap_3c .mainCont .axzlIntro p{font-size:13px; text-indent:2em;line-height:24px; padding:20px 5px 5px} 
+.wrap_3c .mainCont .twoStep p{font-size:13px; text-indent:2em;line-height:24px; padding:7px 20px 0 25px;}
+.wrap_3c .mainCont .twoStep p a {color:#ff7e00;display:inline��float:right; }
+.wrap_3c .mainCont .twoStep .firstStep, .wrap_3c .mainCont .twoStep .secondStep, .wrap_3c .mainCont .twoStep .thirdStep, .wrap_3c .mainCont .twoStep .forthStep, .wrap_3c .mainCont .twoStep .fiveStep{width:350px; height:270px; float:left;}
+.wrap_3c .mainCont .twoStep .firstStep {background:#ededed url(../../images/anzlFirstSta.jpg) no-repeat; margin-right:6px;}
+.wrap_3c .mainCont .twoStep .secondStep{background:#ededed url(../../images/anzlSecondSta.jpg) no-repeat;}
+.wrap_3c .mainCont .twoStep .thirdStep {background:#ededed url(../../images/anzlThirdSta.jpg) no-repeat; margin-right:6px; margin-top:10px;}
+.wrap_3c .mainCont .twoStep .forthStep {background:#ededed url(../../images/anzlForthSta.jpg) no-repeat; margin-top:10px;}
+.wrap_3c .mainCont .twoStep .fiveStep {background:#ededed url(../../images/axzlFive0.jpg) no-repeat; margin-right:6px; margin-top:10px;}
+.wrap_3c .mainCont .twoStep .imageLink{width:320px; height:107px; display:block;margin:45px 0 0 15px !important; _margin:0;}
+.wrap_3c .mainCont .twoStep .imageLink a{display:block;width:320px; height:107px; margin:45px 0 0 15px;}
+.zttit3 {margin-top:15px;}

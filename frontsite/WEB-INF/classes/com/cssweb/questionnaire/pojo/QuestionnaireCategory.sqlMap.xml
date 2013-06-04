@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.questionnaire.pojo.QuestionnaireCategory">
+
+	<typeAlias alias="QuestionnaireCategory" type="com.cssweb.questionnaire.pojo.QuestionnaireCategory"/>
+
+	<!--result map-->
+	<resultMap id="categoryMap" class="QuestionnaireCategory">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="code" column="CODE" jdbcType="String"/>
+ 		<result property="name" column="NAME" jdbcType="String"/>
+ 		<result property="intro" column="INTRO" jdbcType="String"/>
+ 		<result property="isaccount" column="ISACCOUNT" jdbcType="Long"/>
+  	</resultMap>
+  	
+	<resultMap id="categoryBasicInfoMap" class="QuestionnaireCategory">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="name" column="NAME" jdbcType="String"/>
+  	</resultMap>
+
+  <insert id="insert" parameterClass="QuestionnaireCategory">
+    insert into T_QUESTIONNAIRE_CATEGORY (ID,CODE,NAME,INTRO,ISACCOUNT)
+    	values (#id#,#code#,#name#,#intro#,#isaccount#)
+  </insert>
+
+  <update id="update" parameterClass="QuestionnaireCategory">
+    update T_QUESTIONNAIRE_CATEGORY 
+    	set CODE = #code#,NAME=#name#,INTRO=#intro#,ISACCOUNT=#isaccount#
+     where ID = #id#
+  </update>
+  
+  <select id="getBasicInfoList" parameterClass="java.util.Map" resultMap = "categoryMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getBasicInfoTotal" resultClass="java.lang.Long" >
+    SELECT count(*) FROM T_QUESTIONNAIRE_CATEGORY
+  </select>
+  
+    <select id="getCategoryByCode" parameterClass="java.lang.String" resultMap="categoryMap" >
+    SELECT * FROM T_QUESTIONNAIRE_CATEGORY WHERE CODE=#code# AND ROWNUM &lt; 2 AND ISACCOUNT=1
+  </select>
+  
+    <select id="getCategoryByCode2" parameterClass="java.lang.String" resultMap="categoryMap" >
+    SELECT * FROM T_QUESTIONNAIRE_CATEGORY WHERE CODE=#code# AND ROWNUM &lt; 2
+  </select>
+  
+  <select id="getInfoById" parameterClass="java.lang.Long" resultClass="QuestionnaireCategory" >
+    SELECT * FROM T_QUESTIONNAIRE_CATEGORY where ID=#id#
+  </select>
+  
+  <select id="getIdNameList" resultMap="categoryBasicInfoMap" >
+    SELECT ID,NAME FROM T_QUESTIONNAIRE_CATEGORY
+  </select>
+  
+  <select id="getIdNameList2" resultMap="categoryBasicInfoMap" >
+    SELECT ID,NAME FROM T_QUESTIONNAIRE_CATEGORY where CODE='wjdt_zthd'
+  </select>
+  
+  <delete id="deleteById" parameterClass="String">
+    delete T_QUESTIONNAIRE_CATEGORY where ID in ($value$)
+  </delete>
+  
+</sqlMap>

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.item.pojo.Item">
+
+	<typeAlias alias="Item" type="com.cssweb.item.pojo.Item"/>
+	
+	<resultMap id="ItemResult" class="Item">
+		<result column="ITEM_ID" property="itemId" jdbcType="java.lang.Long"/>
+		<result column="ITEM_CAT" property="itemCat" jdbcType="java.lang.Long"/>
+		<result column="ITEM_NAME" property="itemName" jdbcType="java.lang.String"/>
+		<result column="ITEM_CODE" property="itemCode" jdbcType="java.lang.String"/>
+		<result column="ITEM_CREATE_DATE" property="itemCreateDate" jdbcType="java.util.Date"/>
+		<result column="ITEM_STATE" property="itemState" jdbcType="java.lang.Long"/>
+		<result column="ITEM_MARK" property="itemMark" jdbcType="java.lang.String"/>
+	</resultMap>
+
+	<update id="update" parameterClass="Item">
+		update T_ASSET_ITEM	 
+			set ITEM_CAT = #itemCat#,
+				 ITEM_NAME = #itemName#,
+				 ITEM_CODE = #itemCode#,
+				 ITEM_CREATE_DATE = #itemCreateDate#,
+				 ITEM_STATE = #itemState#,
+				 ITEM_MARK = #itemMark# 
+		where ITEM_ID = #itemId#
+	</update>
+	
+	<update id="deleteItem" parameterClass="java.lang.Long">
+		update T_ASSET_ITEM 
+			set ITEM_STATE = 1
+		where ITEM_ID = #value#
+	</update>
+	
+	<update id="resumeItem" parameterClass="java.lang.Long">
+		update T_ASSET_ITEM 
+			set ITEM_STATE = 0
+		where ITEM_ID = #value#
+	</update>
+	
+	<select id="select" resultMap="ItemResult">
+		select * from T_ASSET_ITEM
+	</select>
+	
+	<select id="selectByDictionaryId" resultMap="ItemResult" parameterClass="java.util.Map">
+		select * from T_ASSET_ITEM where ITEM_CAT = #value# and ITEM_STATE = 0
+	</select>
+	
+	<select id="selectByItemId" resultMap="ItemResult" parameterClass="java.lang.Long">
+		select * from T_ASSET_ITEM where ITEM_ID = #value#
+	</select>
+	
+	<select id="selectItemByState" resultMap="ItemResult" parameterClass="java.util.Map">
+		select * from T_ASSET_ITEM where ITEM_STATE = 0 
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="itemCat"> 
+	                ITEM_CAT = #itemCat# 
+	            </isNotEmpty>
+	        </dynamic> 
+		order by ITEM_CODE
+	</select>
+	
+	<select id="selectItemByCode" resultMap="ItemResult" parameterClass="java.lang.String">
+		select * from T_ASSET_ITEM where ITEM_CODE = #value#
+	</select>
+	
+	<select id="getItemByCodeAndNotItemId" resultMap="ItemResult" parameterClass="java.util.Map">
+		select * from T_ASSET_ITEM where ITEM_CODE = #itemCode# and ITEM_ID != #itemId#
+	</select>
+	
+	
+	<select id="getItemList" parameterClass="java.util.Map" resultMap="ItemResult">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+		select 
+			* 
+		from 
+			T_ASSET_ITEM
+		where
+			1=1
+			<dynamic prepend="and">
+               <isNotEmpty property="itemName">
+                     ITEM_NAME like '%$itemName$%'
+               </isNotEmpty>
+         </dynamic>
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="itemCode"> 
+	                ITEM_CODE like '%$itemCode$%' 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic   prepend="and">
+	      		<isNotEmpty property="itemCat"> 
+	                item_CAT = #itemCat# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic  prepend="and">
+	      		<isNotEmpty property="itemState">
+	               ITEM_STATE = #itemState# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <isNotEmpty property="sql">
+	              $sql$
+	        </isNotEmpty>
+	         
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<select id="getItemCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select 
+			count(*)  
+		from 
+			T_ASSET_ITEM
+		where
+			1=1
+			<dynamic prepend="and">
+               <isNotEmpty property="itemName">
+                     ITEM_NAME like '%$itemName$%'
+               </isNotEmpty>
+         </dynamic>
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="itemCode"> 
+	                ITEM_CODE like '%$itemCode$%' 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic   prepend="and">
+	      		<isNotEmpty property="itemCat"> 
+	                ITEM_CAT = #itemCat# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic  prepend="and">
+	      		<isNotEmpty property="itemState">
+	               ITEM_STATE = #itemState# 
+	            </isNotEmpty>
+	        </dynamic>
+	</select>	
+	
+	<delete id="delete" parameterClass="ITEM">
+		delete T_ASSET_ITEM where ITEM_ID = #itemId# 
+	</delete>
+	
+	<delete id="realDeleteItem" parameterClass="java.lang.Long">
+		delete T_ASSET_ITEM where ITEM_ID = #value# 
+	</delete>
+	
+	<insert id="insert" parameterClass="Item">
+		insert into T_ASSET_ITEM(
+			ITEM_ID,ITEM_CAT,ITEM_NAME,ITEM_CODE,ITEM_CREATE_DATE,ITEM_STATE,ITEM_MARK)
+		values(
+			#itemId#,#itemCat#,#itemName#,#itemCode#,#itemCreateDate#,#itemState#,#itemMark#)
+	</insert>
+	
+</sqlMap>

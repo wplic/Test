@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="GB2312"?>
+<sql>
+<com.css.app.document.keyword.model.DocKeywordTreeController>
+	<insert truncated = "false" fetchSize = "0">
+		insert into DOC_KEYWORD_TREE(
+			PARENT_ID,
+			CHILD_ID,
+			ORDER_NUM)
+		values(
+			<param type="BIGINT">PARENT_ID</param>,
+			<param type="BIGINT">CHILD_ID</param>,
+			<param type="INTEGER">ORDER_NUM</param>)
+	</insert>
+	<delete truncated = "false" fetchSize = "0">
+		delete from DOC_KEYWORD_TREE
+		where
+			PARENT_ID = <param type="BIGINT">PARENT_ID</param>
+		and
+			CHILD_ID = <param type="BIGINT">CHILD_ID</param>
+	</delete>
+	<deleteByParentId truncated = "false" fetchSize = "0">
+		delete from DOC_KEYWORD_TREE
+		where
+			PARENT_ID = <param type="BIGINT">PARENT_ID</param>
+	</deleteByParentId>
+	<deleteByChildId truncated = "false" fetchSize = "0">
+		delete from DOC_KEYWORD_TREE
+		where
+			CHILD_ID = <param type="BIGINT">CHILD_ID</param>
+	</deleteByChildId>
+	<selectByParentId truncated = "false" fetchSize = "0">
+		select
+			PARENT_ID,
+			CHILD_ID,
+			ORDER_NUM
+		from DOC_KEYWORD_TREE
+		where
+			PARENT_ID = <param type="BIGINT">PARENT_ID</param>
+	</selectByParentId>
+	<countChild truncated = "false" fetchSize = "0">
+		select
+			count(CHILD_ID)			
+		from DOC_KEYWORD_TREE
+		where
+			PARENT_ID = <param type="BIGINT">PARENT_ID</param>
+	</countChild>
+	<selectByChildId truncated = "false" fetchSize = "0">
+		select
+			PARENT_ID,
+			CHILD_ID,
+			ORDER_NUM
+		from DOC_KEYWORD_TREE
+		where
+			CHILD_ID = <param type="BIGINT">CHILD_ID</param>
+	</selectByChildId>
+	<select truncated = "false" fetchSize = "0">
+		select
+			PARENT_ID,
+			CHILD_ID,
+			ORDER_NUM
+		from DOC_KEYWORD_TREE
+		where
+			PARENT_ID = <param type="BIGINT">PARENT_ID</param>
+		and
+			CHILD_ID = <param type="BIGINT">CHILD_ID</param>
+	</select>
+</com.css.app.document.keyword.model.DocKeywordTreeController>
+</sql>

@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.event.pojo.Event">
+
+	<typeAlias alias="Event" type="com.cssweb.event.pojo.Event" />
+
+	<!--result map-->
+	<resultMap id="eventMap" class="Event">		
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String" nullValue=""/>
+		<result property="content" column="CONTENT" jdbcType="BLOB"/>
+		<result property="issueDate" column="ISSUE_DATE" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result property="ext1" column="EXT1" jdbcType="String" nullValue=""/>
+		<result property="ext2" column="EXT2" jdbcType="String" nullValue=""/>
+		<result property="ext3" column="EXT3" jdbcType="String" nullValue=""/>
+		<result property="ext4" column="EXT4" jdbcType="String" nullValue=""/>
+	</resultMap>		
+	
+	<select id="select" resultMap="eventMap">
+		select
+		*
+		from T_COMM_EVENT
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+		order by ISSUE_DATE desc
+	</select>
+	
+	<insert id="insert" parameterClass="Event">
+		insert into T_COMM_EVENT
+		(
+		ID,
+		TITLE,
+		CONTENT,
+		ISSUE_DATE,
+		EXT1,
+		EXT2,
+		EXT3,
+		EXT4
+		)
+		values
+		(
+		#id#,
+		#title#,
+		#content#,
+		#issueDate#,
+		#ext1#,
+		#ext2#,
+		#ext3#,
+		#ext4#
+		)
+	</insert>
+
+	<update id="update" parameterClass="Event">
+		update
+		T_COMM_EVENT
+		set
+		TITLE=#title#,
+		CONTENT=#content#,
+		ISSUE_DATE=#issueDate#,
+		EXT1=#ext1#,
+		EXT2=#ext2#,
+		EXT3=#ext3#,
+		EXT4=#ext4#
+		where ID = #id#
+	</update>
+
+	<delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from T_COMM_EVENT
+		where ID=#id#
+	</delete>
+	
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		select count(*) from T_COMM_EVENT
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="year">
+				to_char(ISSUE_DATE, 'yyyy') = #year#
+			</isNotNull>
+			<isNotNull prepend="and" property="ext1">
+				EXT1 = #ext1#
+			</isNotNull>
+			<isNotNull prepend="and" property="ext2">
+				EXT2 = #ext2#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="pageQuery" resultMap="eventMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select *
+				from T_COMM_EVENT
+				<dynamic prepend="where">
+					<isNotNull prepend="and" property="year">
+						to_char(ISSUE_DATE, 'yyyy') = #year#
+					</isNotNull>
+					<isNotNull prepend="and" property="ext1">
+						EXT1 = #ext1#
+					</isNotNull>
+					<isNotNull prepend="and" property="ext2">
+						EXT2 = #ext2#
+					</isNotNull>
+				</dynamic>
+				<dynamic prepend="order by">
+					<isNotNull property="sort">
+						<isNotNull property="dir">
+							$sort$ $dir$
+						</isNotNull>
+					</isNotNull>
+					<isNull property="sort">
+						ISSUE_DATE desc
+					</isNull>
+				</dynamic>
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+	
+	<select id="getEventList" resultMap="eventMap" parameterClass="Map">
+	     select * from T_COMM_EVENT  where ext1='event' and ext2='0'  order by ISSUE_DATE desc
+	</select>
+	
+	<select id="getEventEnglishList" resultMap="eventMap" parameterClass="Map">
+	     select * from T_COMM_EVENT  where ext1='event' and ext2='1' order by ISSUE_DATE desc
+	</select>
+	
+	<select id="getDevelopList" resultMap="eventMap" parameterClass="Map">
+	     select * from T_COMM_EVENT  where ext1='develop' and ext2='0'  order by ISSUE_DATE desc
+	</select>
+	
+	<select id="getDevelopEnglishList" resultMap="eventMap" parameterClass="Map">
+	      select * from T_COMM_EVENT  where ext1='develop' and ext2='1'  order by ISSUE_DATE desc
+	</select>
+</sqlMap>

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.RzrqRate">
+
+	<typeAlias alias="rzrqRate" type="com.cssweb.rzrq.pojo.RzrqRate" />
+
+	<resultMap id="rzrqRateMap" class="rzrqRate">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="rzYear" column="RZ_YEAR" jdbcType="Double"/>
+		<result property="rqYear" column="RQ_YEAR" jdbcType="Double"/>
+		<result property="rzFloat" column="RZ_FLOAT" jdbcType="Double"/>
+		<result property="rqFloat" column="RQ_FLOAT" jdbcType="Double"/>
+		<result property="startDate" column="START_DATE" jdbcType="java.util.Date"/>
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+	    <result property="auditing" column="AUDITING" jdbcType="Long" />
+	</resultMap>
+
+	<insert id="insertRzrqRate" parameterClass="rzrqRate">
+		INSERT into T_RZRQ_RATE ( ID, RZ_YEAR,RQ_YEAR, RZ_FLOAT, RQ_FLOAT, START_DATE,PUBLISH_DATE,AUDITING) VALUES 
+		(#id#,#rzYear#,#rqYear#, #rzFloat#, #rqFloat#, #startDate#,#publishDate#,#auditing#)
+	</insert>
+	
+	<update id="updateRzrqRate" parameterClass="rzrqRate">
+		update T_RZRQ_RATE
+		 set 
+		 	RZ_YEAR = #rzYear#, 
+		 	RQ_YEAR = #rqYear#, 
+		 	RZ_FLOAT =#rzFloat#, 
+			RQ_FLOAT = #rqFloat#,
+			START_DATE = #startDate#,
+			PUBLISH_DATE = #publishDate#,
+			AUDITING = #auditing#
+		where id=#id#
+	</update>
+	
+	<update id="updateByAuditIng" parameterClass="rzrqRate">
+		update T_RZRQ_RATE
+		 set 
+		 	AUDITING = #auditing#
+		where id=#id#
+	</update>
+
+	<delete id="deleteRzrqRate" parameterClass="rzrqRate">
+		delete from T_RZRQ_RATE where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteRzrqRateById" parameterClass="Long">
+		delete from T_RZRQ_RATE where id = #value#
+	</delete>
+	
+	<select id="getRzrqRateAll" resultMap="rzrqRateMap">
+		select * from T_RZRQ_RATE 
+	</select>
+
+	<select id="getRzrqRateById" parameterClass="Long" resultMap="rzrqRateMap">
+		select * from T_RZRQ_RATE where id= #id#
+	</select>
+	
+	<select id="getRzrqRateNewStartDate" parameterClass="Long" resultMap="rzrqRateMap">
+		select * from t_rzrq_rate t where 1=1 and AUDITING = 1 and rownum &lt; 2 order by START_DATE desc
+	</select>		
+
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getRzrqRateByPage" parameterClass="java.util.Map" resultMap = "rzrqRateMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+ 
+  
+</sqlMap>

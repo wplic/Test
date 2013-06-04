@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.client.pojo.TclientTzcl">
+	<typeAlias alias="tclientTzcl" type="com.cssweb.client.pojo.TclientTzcl" />
+	
+	<resultMap id="tclientTzclMap" class="tclientTzcl">
+		 <result property="id"           column="ID"              jdbcType="Long"/>
+		 <result property="title"        column="TITLE"           jdbcType="java.lang.String"/>
+		 <result property="digest"       column="DIGEST"          jdbcType="java.lang.String"/>
+		 <result property="recuserId"    column="RECUSER_ID"      jdbcType="Long"/>
+		 <result property="recuserName"  column="RECUSER_NAME"    jdbcType="java.lang.String"/>
+		 <result property="recDate"      column="REC_DATE"        jdbcType="Date"/>
+		 <result property="fjId"         column="FJ_ID"           jdbcType="String"/>
+		 <result property="connectId"    column="CONNECT_ID"      jdbcType="String"/>
+		 <result property="productName"  column="PRODUCT_NAME"    jdbcType="java.lang.String"/>
+		 <result property="productCode"  column="PRODUCT_CODE"    jdbcType="java.lang.String"/>
+	</resultMap>
+	<insert id="insert" parameterClass="tclientTzcl">
+		insert into T_CLIENT_TZCL(ID,
+							TITLE,
+							DIGEST,
+							RECUSER_ID,
+							RECUSER_NAME,
+							REC_DATE,
+							FJ_ID,
+							CONNECT_ID,
+							PRODUCT_NAME,
+							PRODUCT_CODE)
+						values(#id#,
+							#title#,
+							#digest#,
+							#recuserId#,
+							#recuserName#,
+							#recDate#,
+							#fjId#,
+							#connectId#,
+							#productName#,
+							#productCode#)
+	</insert>
+	<update id="upTclientTzcl" parameterClass="tclientTzcl">
+		update T_CLIENT_TZCL set title=#title#,
+				digest=#digest#,
+				recuser_id=#recuserId#,
+				recuser_name=#recuserName#,
+				rec_date=#recDate#,
+				FJ_ID=#fjId#,
+				connect_id=#connectId#,
+				product_name=#productName#,
+				product_code=#productCode#
+			where ID=#id#
+	</update>
+	<update id="updateTclientTzclFileById" parameterClass="tclientTzcl">
+		update T_CLIENT_TZCL set FJ_ID=#fjId# where ID=#id#
+	</update>
+	<select id="getTclientTzclTotal"  resultClass = "Integer">
+		  select count(1) from T_CLIENT_TZCL 
+	</select>
+	<select id="getTclientTzclPage" parameterClass="java.util.Map" resultMap = "tclientTzclMap">
+		SELECT ID,
+			TITLE,
+			DIGEST,
+			RECUSER_ID,
+			RECUSER_NAME,
+			REC_DATE,
+			FJ_ID,
+			CONNECT_ID,
+			PRODUCT_NAME,
+			PRODUCT_CODE
+ 		FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id="getTclientTzclById" parameterClass="java.lang.Long" resultMap = "tclientTzclMap">
+		SELECT ID,
+			TITLE,
+			DIGEST,
+			RECUSER_ID,
+			RECUSER_NAME,
+			REC_DATE,
+			FJ_ID,
+			CONNECT_ID,
+			PRODUCT_NAME,
+			PRODUCT_CODE
+ 		FROM T_CLIENT_TZCL
+ 		where ID=#tzclId#
+	</select>
+	<delete id="deleteTclientTzclById" parameterClass="java.lang.Long">
+		delete from T_CLIENT_TZCL where ID=#id#
+	</delete>
+</sqlMap>

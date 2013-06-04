@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.ClientBasic">
+
+	<typeAlias alias="clientBasic" type="com.cssweb.rzrq.pojo.ClientBasic" />
+	<!-- <result property="zjzh" column="zjzh" jdbcType="String"/>
+		<result property="khbh" column="khbh" jdbcType="String"/>
+		<result property="khxm" column="khxm" jdbcType="String"/>
+		<result property="yyb" column="yyb" jdbcType="Long" />
+	    <result property="zjlb" column="zjlb" jdbcType="Long" />
+	    <result property="zjbh" column="zjbh" jdbcType="String"/>
+		<result property="sj" column="sj" jdbcType="String" />
+	    <result property="sex" column="sex" jdbcType="Long" />
+	    <result property="khrq" column="khrq" jdbcType="String"/>
+		<result property="csrq" column="csrq" jdbcType="String" />
+	    <result property="hyzk" column="hyzk" jdbcType="Long" />
+	    <result property="xl" column="xl" jdbcType="Long"/>
+	    <result property="khzt" column="khzt" jdbcType="Long"/>
+		<result property="dz" column="dz" jdbcType="String" />
+	    <result property="yzbm" column="yzbm" jdbcType="String" />
+	    <result property="email" column="email" jdbcType="String" />
+	     -->
+	<resultMap id="clientBasicMap" class="clientBasic">
+		<result property="zjzh" column="zjzh" jdbcType="String"/>
+		<result property="khbh" column="khbh" jdbcType="String"/>
+		<result property="yyb" column="yyb" jdbcType="Long" />
+		<result property="khxm" column="khxm" jdbcType="String"/>
+	    <result property="zjbh" column="zjbh" jdbcType="String"/>
+	    <result property="khrq" column="khrq" jdbcType="String"/>
+	    <result property="sj" column="sj" jdbcType="String" />
+		<result property="dz" column="dz" jdbcType="String" />
+	</resultMap>
+	 <select id="getUserByServiceNameAndNotInId" parameterClass="String" resultMap="clientBasicMap">
+		$sql$
+	</select>
+	
+</sqlMap>

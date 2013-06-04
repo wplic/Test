@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hq.pojo.Whpj">
+
+	<typeAlias alias="Whpj" type="com.cssweb.hq.pojo.Whpj"/>
+
+	<!--result map-->
+
+  	<resultMap id="WhpjMap" class="Whpj">
+ 		<result property="hbmc" column="HBMC"  jdbcType="String"/>
+ 		<result property="xcmrj" column="XCMRJ" jdbcType="Double" nullValue="0.00"/>
+		<result property="mcj" column="MRJ"    jdbcType="Double" nullValue="0.00"/>
+		<result property="fsrq" column="FSRQ"   jdbcType="Date" />
+  	</resultMap>
+  	
+  	<select id="getWhpj" resultMap = "WhpjMap" parameterClass="map">
+			select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+</sqlMap>
+

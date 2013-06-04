@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+    <form-beans>
+		<form-bean name="ProductForm" type="com.cssweb.business.product.pojo.Product"/>
+	</form-beans>
+	<action-mappings>
+		<action path="/prod/productAction"  scope="request" parameter="method" validate="false">
+	    	<forward name="list" path="/assetManage/prodList.jsp"></forward>
+	    	<forward name="list_yqsy" path="/assetManage/prodList_yqsy.jsp"></forward>
+	    	<forward name="list_rlzq" path="/assetManage/prodList_rlzq.jsp"></forward>
+	    	<forward name="list_dkgg_f" path="/assetManage/prodList_dkgg_f.jsp"></forward>
+	    	<forward name="list_dkgg_s" path="/assetManage/prodList_dkgg_s.jsp"></forward>
+	    	<forward name="calculateFeeRate" path="/assetManage/clientIndex.jsp"></forward>
+	    	<forward name="jsq" path="/assetManage/prodJsq.jsp"></forward>
+		</action>	
+	</action-mappings>
+</struts-config>

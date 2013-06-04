@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.NetValueChange">
+
+	<typeAlias alias="netValueChange" type="com.cssweb.F10.gazx.fund.pojo.NetValueChange" />
+
+	<!--result map-->
+	<resultMap id="netValueChangeMap" class="netValueChange">
+		<result property="adjNetValueChange" column="YSYTZCSDJZBDS" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="beginFundNetValue" column="PCJJJZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="currentProfits" column="JJJSY" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="dividendReInvestment" column="HLZTZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="endFundNetValue" column="TZHQCJJJZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fundChangeAmount" column="JJDWJYCSDJJJZBDS" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fundShallPurchase" column="JJSGK" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="holderNetValueChangeAmount" column="XJJCYRFPSYCSDJJJZBDS" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="id" column="T_JJJZBDB_ID" jdbcType="java.lang.Long" />
+		<result property="lastNetValue" column="QMJJJZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="preAdjustedProfit" column="YQNDSYTZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="redemptionFundShall" column="JJSHK" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="unrealizedProfits" column="WSXLD" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="NVChangeDueToOperating" column="jyhdcsdjjjzbds" jdbcType="java.lang.Double" nullValue="0.0"/>
+	</resultMap>
+	
+	<resultMap id="resultMap" class="netValueChange">
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>
+	<!-- 根据代码查询净值变动列表 -->
+	<select id="getNetValueChangeListByCode" resultMap="netValueChangeMap" parameterClass="String">
+    	select jzb.YSYTZCSDJZBDS,jzb.PCJJJZ,jzb.JJJSY,jzb.HLZTZ,jzb.TZHQCJJJZ,jzb.JJDWJYCSDJJJZBDS,
+    			jzb.JJSGK,jzb.XJJCYRFPSYCSDJJJZBDS,jzb.T_JJJZBDB_ID,jzb.QMJJJZ,jzb.YQNDSYTZ,jzb.jyhdcsdjjjzbds,
+    			jzb.JJSHK,jzb.WSXLD,jzb.FSRQ
+    		
+		from JJJZBDB  jzb, JJZB  j
+		where jzb.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jzb.SCBZ=0 and jzb.GKBZ=1
+	</select>	
+	
+	<!-- 根据代码，开始时间，结束时间查询净值变动列表 -->
+	<select id="getNetValueChangeListByCodeAndDate" resultMap="netValueChangeMap" parameterClass="Map">
+    	select jzb.YSYTZCSDJZBDS,jzb.PCJJJZ,jzb.JJJSY,jzb.HLZTZ,jzb.TZHQCJJJZ,jzb.JJDWJYCSDJJJZBDS,
+    			jzb.JJSGK,jzb.XJJCYRFPSYCSDJJJZBDS,jzb.T_JJJZBDB_ID,jzb.QMJJJZ,jzb.YQNDSYTZ,jzb.jyhdcsdjjjzbds,
+    			jzb.JJSHK,jzb.WSXLD,jzb.FSRQ
+		from JJJZBDB  jzb, JJZB  j
+		where jzb.T_JJZB_ID=j.T_JJZB_ID  
+		and j.JJDM= #fundCode# and jzb.SCBZ=0 and jzb.GKBZ=1
+		<dynamic>
+			<isNotNull prepend="and" property="startDate">
+				jzb.FSRQ &gt;=to_date(#startDate#,'yyyy-MM-dd')
+			</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+				jzb.FSRQ &lt;=to_date(#endDate#,'yyyy-MM-dd')
+			</isNotNull>
+		</dynamic>
+		order by FSRQ desc
+	</select>
+	
+	
+	<!-- 根据代码取时间列表 -->
+	<select id="getDateListByCode" resultMap="resultMap" parameterClass="Map">
+    	select distinct jzb.FSRQ
+		from JJJZBDB  jzb, JJZB  j
+		where jzb.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jzb.SCBZ=0 and jzb.GKBZ=1
+		order by FSRQ desc
+	</select>
+	
+	<select id="pageQuery" resultMap="netValueChangeMap" parameterClass="map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select jzb.YSYTZCSDJZBDS,jzb.PCJJJZ,jzb.JJJSY,jzb.HLZTZ,jzb.TZHQCJJJZ,jzb.JJDWJYCSDJJJZBDS,
+    			jzb.JJSGK,jzb.XJJCYRFPSYCSDJJJZBDS,jzb.T_JJJZBDB_ID,jzb.QMJJJZ,jzb.YQNDSYTZ,jzb.jyhdcsdjjjzbds,
+    			jzb.JJSHK,jzb.WSXLD,jzb.FSRQ
+			from JJJZBDB  jzb, JJZB  j
+			where jzb.T_JJZB_ID=j.T_JJZB_ID  
+			and jzb.SCBZ=0 and jzb.GKBZ=1
+			<dynamic>
+				<isNotNull prepend="and" property="fundCode">
+					j.JJDM= #fundCode#
+				</isNotNull>
+			</dynamic>
+			order by FSRQ desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+</sqlMap>

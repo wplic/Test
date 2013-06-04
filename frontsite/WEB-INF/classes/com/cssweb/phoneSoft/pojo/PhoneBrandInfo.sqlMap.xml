@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.phoneSoft.pojo.PhoneBrandInfo">
+
+	<typeAlias alias="phoneBrandInfo" type="com.cssweb.phoneSoft.pojo.PhoneBrandInfo"/>
+	
+	<!--result map-->
+	<resultMap id="phoneBrandInfoMap" class="phoneBrandInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="brandname" column="BRAND_NAME" jdbcType="String"/>
+ 		<result property="branddesc" column="BRAND_DESC" jdbcType="String"/>
+ 		<result property="createtime" column="CREATE_TIME" jdbcType="java.util.Date"/>
+ 		<result property="status" column="STATUS" jdbcType="Long"/>
+ 		<result property="orderby" column="ORDERBY" jdbcType="Long"/>
+ 		<result property="boid" column="B_OID" jdbcType="Long"/>
+  	</resultMap>
+  	
+	<insert id="insertPhoneBrandInfo" parameterClass="phoneBrandInfo" >
+		  insert into T_PHONE_BRAND_INFO (ID,BRAND_NAME,BRAND_DESC,CREATE_TIME,STATUS,ORDERBY,B_OID)
+		  				values (#id#,#brandname#,#branddesc#,#createtime#,#status#,#orderby#,#boid#)
+	</insert>
+	
+	<update id="updatePhoneBrandInfo" parameterClass="phoneBrandInfo">
+		  update T_PHONE_BRAND_INFO 
+		  	set BRAND_NAME=#brandname#,BRAND_DESC=#branddesc#,CREATE_TIME=#createtime#,STATUS=#status#,ORDERBY=#orderby#,B_OID=#boid#
+		  where ID=#id#
+	</update>
+	
+	<update id="updatePhoneBrandOrderby" parameterClass="java.util.Map">
+		  update T_PHONE_BRAND_INFO 
+		  	set ORDERBY=#orderby#,STATUS=#status#
+		  where ID=#id#
+	</update>
+	
+	<update id="changeOrderNumByThisOrderNum" parameterClass="java.util.Map">
+	   update T_PHONE_BRAND_INFO set ORDERBY=ORDERBY+1 where ORDERBY &gt;=#orderNum#
+	</update>
+	<update id="changeOrderNumByOldBiggerNew" parameterClass="java.util.Map">
+	   update T_PHONE_BRAND_INFO set ORDERBY=ORDERBY+1 where ORDERBY &gt;=#newOrderNum# and ORDERBY &lt;#oldOrderNum#
+	</update>
+	<update id="changeOrderNumByNewBiggerOld" parameterClass="java.util.Map">
+	   update T_PHONE_BRAND_INFO set ORDERBY=ORDERBY-1 where ORDERBY &gt;#oldOrderNum# and ORDERBY &lt;=#newOrderNum#
+	</update>
+	
+	<delete id="deleteById" parameterClass="Long">
+	  	delete T_PHONE_BRAND_INFO where ID=#id#
+	</delete>
+	
+	<select id="getById" parameterClass="Long" resultMap = "phoneBrandInfoMap">
+	  	select * from T_PHONE_BRAND_INFO where ID = #id#
+	</select>
+  
+	<select id="getPhoneBrandInfoPaging" parameterClass="java.util.Map" resultMap = "phoneBrandInfoMap">
+	  	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	  		select * from T_PHONE_BRAND_INFO where 1=1 
+			<dynamic>
+				<isNotEmpty property="brandname"	prepend="AND">
+			  		BRAND_NAME like '%$brandname$%'
+				</isNotEmpty>
+				<isNotEmpty property="status"	prepend="AND">
+			  		STATUS = #status#
+				</isNotEmpty>
+			</dynamic>
+			<dynamic prepend="order by">
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+	  	)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+  
+	<select id = "getPhoneBrandInfoCount" parameterClass="java.util.Map"  resultClass="Integer">
+	 	select count(*) from T_PHONE_BRAND_INFO where 1=1 
+		<dynamic>
+				<isNotEmpty property="brandname"	prepend="AND">
+			  		BRAND_NAME like '%$brandname$%'
+				</isNotEmpty>
+				<isNotEmpty property="status"	prepend="AND">
+			  		STATUS = #status#
+				</isNotEmpty>
+		</dynamic>
+	</select>
+  
+	<select id ="getPhoneBrandInfo" resultMap="phoneBrandInfoMap">
+		select * from T_PHONE_BRAND_INFO  where STATUS = 1 order by orderby asc
+
+	</select>
+  
+</sqlMap>

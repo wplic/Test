@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.branch.pojo.YFIncome">
+	<typeAlias alias="YFIncome" type="com.cssweb.branch.pojo.YFIncome"/>
+	
+	<resultMap id="yFIncomeMap" class="YFIncome">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="START_DATE" property="startDate" jdbcType="java.util.Date"/>
+		<result column="END_DATE" property="endDate" jdbcType="java.util.Date"/>
+		<result column="ASSET_TOTAL_AMOUNT" property="assetTotalAmount" jdbcType="float"/>
+		<result column="WEEKLY_YIELD" property="weeklyYield" jdbcType="float"/>
+		<result column="DAILY_AVERAGE_YIELD" property="dailyAverageYield" jdbcType="float"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+		<result column="SZ300" property="sz300" jdbcType="float"/>
+	</resultMap>
+
+	<select id="select" resultMap="yFIncomeMap">
+		select
+		*
+		from YF_INCOME
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+	</select>
+	
+	<insert id="insert" parameterClass="YFIncome">
+		insert into YF_INCOME(ID,START_DATE,END_DATE,ASSET_TOTAL_AMOUNT,WEEKLY_YIELD,DAILY_AVERAGE_YIELD,EXT1,EXT2,EXT3,EXT4,SZ300) 
+					values(#id#,#startDate#,#endDate#,#assetTotalAmount#,#weeklyYield#,#dailyAverageYield#,#ext1#,#ext2#,#ext3#,#ext4#,#sz300#)
+	</insert>
+	<update id="update" parameterClass="YFIncome">
+		update YF_INCOME set START_DATE = #startDate#,
+							 END_DATE = #endDate#,
+							 ASSET_TOTAL_AMOUNT = #assetTotalAmount#,
+							 WEEKLY_YIELD = #weeklyYield#,
+							 DAILY_AVERAGE_YIELD = #dailyAverageYield#,
+							 EXT1 = #ext1#,
+							 EXT2 = #ext2#,
+							 EXT3 = #ext3#,
+							 EXT4 = #ext4#,
+							 SZ300 = #sz300#
+		where ID = #id#
+	</update>
+   <delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from YF_INCOME where ID = #value#
+	</delete>
+	
+	<select id="pageQuery" resultMap="yFIncomeMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select *
+				from YF_INCOME
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+	
+	<select id="pageCount" resultClass="int">
+		select count(*) from YF_INCOME
+	</select>
+	
+	<!-- Flex 数据 -->
+	<select id="getLastDataByStartDate" resultMap="yFIncomeMap" parameterClass="Integer">
+		select * from (
+			select
+			* 
+			from YF_INCOME
+			order by START_DATE desc
+		) row_
+		where ROWNUM &lt;= #value#
+		order by START_DATE
+	</select>
+</sqlMap>

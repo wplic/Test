@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+
+	<form-beans>
+		<form-bean name="branchPortalElementsForm" type="org.apache.struts.validator.LazyValidatorForm"/>
+		<form-bean name="branchPortalImagesForm" type="org.apache.struts.validator.LazyValidatorForm"/>
+	</form-beans>
+
+	<action-mappings>
+		<action path="/portal" name="branchPortalElementsForm" scope="request" parameter="method" validate="false">
+			<forward name="updateOrder" path="/portal.do?method=getPortal"/>
+			<forward name="cjzxEdit" path="/ext/portal/cjzx/cjzxedit.jsp"/>
+			<forward name="typeset" path="/ext/portal/Typeset.jsp"/>
+			<forward name="typesetCompositive" path="/ext/portal/TypesetCompositive.jsp"/>
+			<forward name="previewCompositive" path="/ext/portal/PreviewCompositive.jsp"/>
+			<forward name="preview" path="/ext/portal/Preview.jsp"/>
+			<forward name="itemsList" path="/ext/portal/ItemsList.jsp"/>
+			<forward name="selectTemplate" path="/ext/portal/SelectTemplate.jsp"/>
+
+		</action>
+		
+		<action path="/portalImages" name="branchPortalImagesForm" scope="request" parameter="method" validate="false">
+		</action>
+	</action-mappings>
+</struts-config>

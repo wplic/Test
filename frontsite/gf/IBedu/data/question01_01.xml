@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--注意事项：1、标题长度不能超过45个中文字符；2、选项长度不能超过15个中文字符；3、选项数量不能超过4个。--> 
+
+<values>
+
+    <question options="4" answers="1">
+        <title>某投资者欲在 IF1005 合约建立多头持仓，则应在该合约(    )。</title>
+        <option>
+           <A>买入开仓</A>
+           <B>买入平仓</B> 
+           <C>卖出开仓</C>
+           <D>卖出平仓</D>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="3" answers="1">
+        <title>某投资者买入开仓 IF1007 合约 6 手，再卖出平仓该合约 4 手后，该投资者对 IF1007 合约的持仓为(    )。</title>
+        <option>
+           <A>10 手多单</A>
+           <B>2 手多单</B>
+           <C>6 手多单、4 手空单</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="3" answers="1">
+        <title>股指期货交易的杠杆性决定了：收益可能成倍放大，损失也可能(    )。</title>
+        <option>
+           <A>不变</A>
+           <B>成倍缩小</B>
+           <C>成倍放大</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="2" answers="1">
+        <title>股指期货实行双向交易，既可先买后卖，也可以先卖后买。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+    <question options="2" answers="1">
+        <title>股指期货合约到期时，交易所将按照交割结算价将投资者持有的未平仓合约进行现金交割，投资者将无法继续持有到期合约。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B>
+            
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+ 
+</values>

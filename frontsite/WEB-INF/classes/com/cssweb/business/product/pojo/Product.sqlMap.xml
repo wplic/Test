@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.business.product.pojo.Product">
+
+	<typeAlias alias="Product" type="com.cssweb.business.product.pojo.Product"/>
+	
+	<resultMap id="ProductResult" class="Product">
+		<result column="PRODUCT_ID" property="productId" jdbcType="java.lang.Long"/>
+		<result column="PRODUCT_CAT" property="productCat" jdbcType="java.lang.Long"/>
+		<result column="PRODUCT_NAME" property="productName" jdbcType="java.lang.String"/>
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="java.lang.String"/>
+		<result column="PRODUCT_DESC" property="productDesc" jdbcType="java.lang.String"/>
+		<result column="PRODUCT_CREATE_DATE" property="productCreateDate" jdbcType="java.util.Date"/>
+		<result column="PRODUCT_STATE" property="productState" jdbcType="java.lang.Long"/>
+		<result column="PRODUCT_VALIDATE" property="productValidate" jdbcType="int"/>
+		<result column="PRODUCT_STYLE" property="productStyle" jdbcType="java.lang.String"/>
+	</resultMap>
+	
+
+
+	<update id="update" parameterClass="Product">
+		update T_ASSET_PRODUCT 
+			set PRODUCT_CAT = #productCat#,
+				 PRODUCT_NAME = #productName#,
+				 PRODUCT_CODE = #productCode#,
+				 PRODUCT_DESC = #productDesc#,
+				 PRODUCT_CREATE_DATE = #productCreateDate#,
+				 PRODUCT_STATE = #productState#,
+				 PRODUCT_VALIDATE = #productValidate#,
+				 PRODUCT_STYLE = #productStyle# 
+		where PRODUCT_ID = #productId#
+	</update>
+	
+	<update id="deleteProduct" parameterClass="java.lang.Long">
+		update T_ASSET_PRODUCT 
+			set PRODUCT_VALIDATE = 1
+		where PRODUCT_ID = #value#
+	</update>
+	
+	<update id="resumeProduct" parameterClass="java.lang.Long">
+		update T_ASSET_PRODUCT 
+			set PRODUCT_VALIDATE = 0
+		where PRODUCT_ID = #value#
+	</update>
+	
+	<select id="select" resultMap="ProductResult">
+		select * from T_ASSET_PRODUCT
+	</select>
+	
+	<select id="selectByDictionaryId" resultMap="ProductResult" parameterClass="map">
+		select * from T_ASSET_PRODUCT where PRODUCT_CAT = #value# and PRODUCT_VALIDATE = 0
+	</select>
+	
+	<select id="selectByProductId" resultMap="ProductResult" parameterClass="java.lang.Long">
+		select * from T_ASSET_PRODUCT where PRODUCT_ID = #value#
+	</select>
+	
+	<select id="selectValidateProducts" resultMap="ProductResult" parameterClass="map">
+		select * from T_ASSET_PRODUCT where PRODUCT_VALIDATE = 0 
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="productCat"> 
+	                PRODUCT_CAT = #productCat# 
+	            </isNotEmpty>
+	        </dynamic> 
+		order by PRODUCT_CODE
+	</select>
+	
+	<select id="selectProductByCode" resultMap="ProductResult" parameterClass="java.lang.String">
+		select * from T_ASSET_PRODUCT where PRODUCT_CODE = #value#
+	</select>
+	
+	<select id="getProductByCodeAndNotProductId" resultMap="ProductResult" parameterClass="map">
+		select * from T_ASSET_PRODUCT where PRODUCT_CODE = #productCode# and PRODUCT_ID != #productId#
+	</select>
+	
+	
+	<select id="getProductsList" parameterClass="map" resultMap="ProductResult">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+		select 
+			* 
+		from 
+			T_ASSET_PRODUCT
+		where
+			PRODUCT_CODE not in('878002','878003')
+			<dynamic prepend="and">
+               <isNotEmpty property="productName">
+                     PRODUCT_NAME like '%$productName$%'
+               </isNotEmpty>
+         </dynamic>
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="productCode"> 
+	                PRODUCT_CODE like '%$productCode$%' 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic  prepend="and">
+	      		<isNotEmpty property="productValidate"> 
+	                PRODUCT_VALIDATE = #productValidate# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic   prepend="and">
+	      		<isNotEmpty property="productCat"> 
+	                PRODUCT_CAT = #productCat# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic  prepend="and">
+	      		<isNotEmpty property="productState">
+	               PRODUCT_STATE = #productState# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <isNotEmpty property="sql">
+	              $sql$
+	        </isNotEmpty>
+	         
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<resultMap id="ProductResult3" class="Product">
+		<result column="PRODUCT_STYLE" property="productStyle" jdbcType="java.lang.String"/>
+	</resultMap>
+
+	<select id="getProductStyle" parameterClass="map" resultMap="ProductResult3">
+	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		select PRODUCT_STYLE  
+		from T_ASSET_PRODUCT
+		where 
+			1=1 and PRODUCT_STYLE IS NOT NULL GROUP BY PRODUCT_STYLE 
+			<isNotEmpty property="sql">
+	              $sql$
+	        </isNotEmpty>
+	         
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<select id="getProductsCount" parameterClass="map" resultClass="java.lang.Integer">
+		select 
+			count(*)  
+		from 
+			T_ASSET_PRODUCT
+		where
+			1=1
+			<dynamic prepend="and">
+               <isNotEmpty property="productName">
+                     PRODUCT_NAME like '%$productName$%'
+               </isNotEmpty>
+         </dynamic>
+			<dynamic   prepend="and">
+	      		<isNotEmpty property="productCode"> 
+	                PRODUCT_CODE like '%$productCode$%' 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic  prepend="and">
+	      		<isNotEmpty property="productValidate"> 
+	                PRODUCT_VALIDATE = #productValidate# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic   prepend="and">
+	      		<isNotEmpty property="productCat"> 
+	                PRODUCT_CAT = #productCat# 
+	            </isNotEmpty>
+	        </dynamic>
+	        <dynamic  prepend="and">
+	      		<isNotEmpty property="productState">
+	               PRODUCT_STATE = #productState# 
+	            </isNotEmpty>
+	        </dynamic>
+	</select>	
+	
+	<delete id="delete" parameterClass="Product">
+		delete T_ASSET_PRODUCT where PRODUCT_ID = #productId# 
+	</delete>
+	
+	<delete id="realDeleteProduct" parameterClass="java.lang.Long">
+		delete T_ASSET_PRODUCT where PRODUCT_ID = #value# 
+	</delete>
+	
+	<insert id="insert" parameterClass="Product">
+		insert into T_ASSET_PRODUCT(
+			PRODUCT_ID,PRODUCT_CAT,PRODUCT_NAME,PRODUCT_CODE,PRODUCT_DESC,PRODUCT_CREATE_DATE,PRODUCT_STATE,PRODUCT_VALIDATE,PRODUCT_STYLE)
+		values(
+			#productId#,#productCat#,#productName#,#productCode#,#productDesc#,#productCreateDate#,#productState#,#productValidate#,#productStyle# )
+	</insert>
+	
+	<resultMap id="ProductResult2" class="Product">
+	 <result column="PRODUCT_CODE" property="productCode" jdbcType="java.lang.String"/>
+	 <result column="userName" property="userName" jdbcType="java.lang.String"/>
+	</resultMap>
+	
+	<select id="getProductCodeByClientId" resultMap="ProductResult2" parameterClass="java.lang.String">
+		select stock_account as userName,fund_code as PRODUCT_CODE from hs_opfund.ofstock@syncdb where client_id= #value# and fund_code in (select product_code from t_asset_product)
+	</select>
+</sqlMap>

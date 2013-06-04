@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.commission.pojo.Commission">
+
+	<typeAlias alias="Commission" type="com.cssweb.commission.pojo.Commission" />
+
+	<resultMap id="Commission" class="Commission">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="taaccountid" column="TAACCOUNTID" jdbcType="String"/>
+		<result property="serviceName" column="SERVICE_NAME" jdbcType="String"/>
+		<result property="type" column="TYPE" jdbcType="String" />
+	    <result property="phone" column="PHONE" jdbcType="String"/>
+		<result property="email" column="EMAIL" jdbcType="String"/>
+		<result property="content" column="CONTENT" jdbcType="String" />
+	    <result property="frequency" column="FREQUENCY" jdbcType="String" />
+	    <result property="statementType" column="STATEMENT_TYPE" jdbcType="String" />
+	    <result property="address" column="ADDRESS" jdbcType="String" />
+	    <result property="post" column="POST" jdbcType="String" />
+	    <result property="homePohe" column="HOME_POHE" jdbcType="String" />
+	    <result property="dzTime" column="DZ_TIME" jdbcType="java.util.Date" />
+	</resultMap>
+	
+	<select id="getCommissionByTypeAndUserName" parameterClass="java.util.Map" resultMap="Commission">
+		select * from T_SYSTEM_COMMISSION t where TAACCOUNTID=#taaccountid# and TYPE=#type# 
+	</select>
+
+	<insert id="insertCommission" parameterClass="Commission">
+		INSERT into T_SYSTEM_COMMISSION ( ID, TAACCOUNTID,SERVICE_NAME,TYPE,PHONE,EMAIL,CONTENT,FREQUENCY,STATEMENT_TYPE,ADDRESS,POST,HOME_POHE,DZ_TIME) VALUES 
+		(#id#,#taaccountid#, #serviceName#,#type#,#phone#,#email#,#content#,#frequency#,#statementType#,#address#,#post#,#homePohe#,#dzTime#)
+	</insert>
+	<update id="updateCommission" parameterClass="Commission">
+		update T_SYSTEM_COMMISSION
+		 set 
+		 	PHONE = #phone#,
+			EMAIL= #email#,
+			CONTENT = #content#,
+			FREQUENCY = #frequency#,
+			STATEMENT_TYPE = #statementType#,
+			ADDRESS= #address#,
+			POST = #post#,
+			HOME_POHE = #homePohe#,
+			DZ_TIME = #dzTime#		
+		where TYPE = #type# and TAACCOUNTID=#taaccountid#
+	</update>
+	
+	<delete id="delCommissionByTypeAndUserName" parameterClass="java.util.Map">
+		delete from T_SYSTEM_COMMISSION where TAACCOUNTID=#taaccountid# and TYPE=#type# 
+	</delete>
+	
+	<update id="updateCommissionByDelCom" parameterClass="java.util.Map">
+		update T_SYSTEM_COMMISSION
+		 set 
+			CONTENT ='',
+			FREQUENCY ='',
+			HOME_POHE='',
+			ADDRESS= '',
+			PHONE = '',
+			STATEMENT_TYPE = '',
+			EMAIL= ''		
+		where TYPE = #type# and TAACCOUNTID=#taaccountid#
+	</update>
+</sqlMap>

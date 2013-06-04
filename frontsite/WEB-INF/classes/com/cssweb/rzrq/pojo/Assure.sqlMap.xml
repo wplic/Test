@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.Assure">
+
+	<typeAlias alias="assure" type="com.cssweb.rzrq.pojo.Assure" />
+
+	<resultMap id="assureMap" class="assure">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="code" column="CODE" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String"/>
+		<result property="convertRate" column="CONVERT_RATE" jdbcType="Double"/>
+		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+	    <result property="auditing" column="AUDITING" jdbcType="Long" />
+	    <result property="ishz" column="ISHZ" jdbcType="String" />
+	</resultMap>
+	
+	<select id="getAssureNewStartDate" parameterClass="Long" resultMap="assureMap">
+		select * from (
+		select t.*,rownum  from T_RZRQ_ASSURE t where 1=1 and AUDITING = 1  order by START_DATE desc)
+		where rownum=1 
+	</select>
+	<select id="getAssureByStartDate" parameterClass="String" resultMap="assureMap">
+		select * from T_RZRQ_ASSURE t where 1=1 and  AUDITING = 1 and to_char(START_DATE,'yyyy-mm-dd') = #startDate#  order by code asc
+	</select>
+	
+	<insert id="insertAssure" parameterClass="assure">
+		INSERT into T_RZRQ_ASSURE ( ID, CODE,NAME, CONVERT_RATE, START_DATE, PUBLISH_DATE,AUDITING,ISHZ) VALUES 
+		(#id#,#code#,#name#, #convertRate#, #startDate#, #publishDate#,#auditing#,#ishz#)
+	</insert>
+	
+	<update id="updateAssure" parameterClass="assure">
+		update T_RZRQ_ASSURE
+		 set 
+		 	CODE = #code#, 
+		 	NAME = #name#, 
+		 	CONVERT_RATE =#convertRate#, 
+			START_DATE = #startDate#,
+			PUBLISH_DATE = #publishDate#,
+			ISHZ = #ishz#,
+			AUDITING='0'
+		where id=#id#
+	</update>
+	
+	<update id="updateAssureByAuditIng" parameterClass="assure">
+		update T_RZRQ_ASSURE
+		 set 
+		 	AUDITING = #auditing#
+		where id=#id#
+	</update>
+
+	<delete id="deleteAssure" parameterClass="assure">
+		delete from T_RZRQ_ASSURE where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteAssureById" parameterClass="Long">
+		delete from T_RZRQ_ASSURE where id = #value#
+	</delete>
+	
+	<select id="getAssureAll" resultMap="assureMap">
+		select * from T_RZRQ_ASSURE order by code asc
+	</select>
+
+	<select id="getAssureById" parameterClass="Long" resultMap="assureMap">
+		select * from T_RZRQ_ASSURE where id= #id#
+	</select>	
+
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getAssureByPage" parameterClass="java.util.Map" resultMap = "assureMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  
+</sqlMap>

@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.oldhr.pojo.TmanApplicantt">
+
+	<typeAlias alias="tmanApplicantt" type="com.cssweb.oldhr.pojo.TmanApplicantt"/>
+	
+	<!--result map-->
+	<resultMap id="tmanApplicanttMap" class="tmanApplicantt">
+ 		<result property="appId" column="APP_ID" jdbcType="Long"/>
+ 		<result property="appName" column="APP_NAME" jdbcType="String"/>
+ 		<result property="vacancyId" column="VACANCY_ID" jdbcType="Long"/>
+ 		<result property="sex" column="SEX" jdbcType="String"/>
+ 		<result property="maritalStatus" column="MARITAL_STATUS" jdbcType="String"/>
+ 		<result property="politicalFace" column="POLITICAL_FACE" jdbcType="String"/>
+ 		<result property="placeOfBirth" column="PLACE_OF_BIRTH" jdbcType="String"/>
+ 		<result property="nationality" column="NATIONALITY" jdbcType="String"/>
+ 		<result property="dateOfBirth" column="DATE_OF_BIRTH" jdbcType="Date"/>
+ 		<result property="nationalId" column="NATIONAL_ID" jdbcType="String"/>
+ 		<result property="placeOfRpr" column="PLACE_OF_RPR" jdbcType="String"/>
+ 		<result property="placeOfFile" column="PLACE_OF_FILE" jdbcType="String"/>
+ 		<result property="workCompany" column="WORK_COMPANY" jdbcType="String"/>
+ 		<result property="studySchool" column="STUDY_SCHOOL" jdbcType="String"/>
+ 		<result property="lastEduExp" column="LAST_EDU_EXP" jdbcType="String"/>
+ 		<result property="lastDegree" column="LAST_DEGREE" jdbcType="String"/>
+ 		<result property="letterAddress" column="LETTER_ADDRESS" jdbcType="String"/>
+ 		<result property="postAlcode" column="POSTALCODE" jdbcType="String"/>
+ 		<result property="familyTel" column="FAMILY_TEL" jdbcType="String"/>
+ 		<result property="mobileTel" column="MOBILE_TEL" jdbcType="String"/>
+ 		<result property="emailAddress" column="EMAIL_ADDRESS" jdbcType="String"/>
+ 		<result property="flag" column="FLAG" jdbcType="String"/>
+ 		<result property="userName" column="USERNAME" jdbcType="String"/>
+ 		<result property="password" column="PASSWORD" jdbcType="String"/>
+ 		<result property="istoerp" column="ISTOERP" jdbcType="String"/>
+ 		<result property="weigh" column="WEIGH" jdbcType="String"/>
+ 		<result property="high" column="HIGH" jdbcType="String"/>
+ 		<result property="speciality_Type" column="SPECIALITY_TYPE" jdbcType="String"/>
+ 		<result property="workYear" column="WORK_YEAR" jdbcType="String"/>
+ 		<result property="personType" column="PERSON_TYPE" jdbcType="String"/>
+ 		<result property="workType" column="WORK_TYPE" jdbcType="String"/>
+ 		<result property="work1" column="WORK1" jdbcType="String"/>
+ 		<result property="work2" column="WORK2" jdbcType="String"/>
+ 		<result property="work3" column="WORK3" jdbcType="String"/>
+ 		<result property="salary" column="SALARY" jdbcType="String"/>
+ 		<result property="workAdd1" column="WORK_ADD1" jdbcType="String"/>
+ 		<result property="workAdd2" column="WORK_ADD2" jdbcType="String"/>
+ 		<result property="workAdd3" column="WORK_ADD3" jdbcType="String"/>
+ 		<result property="comeTime" column="COME_TIME" jdbcType="String"/>
+ 		<result property="knowCity1" column="KNOW_CITY1" jdbcType="String"/>
+ 		<result property="knowCity2" column="KNOW_CITY2" jdbcType="String"/>
+ 		<result property="knowCity3" column="KNOW_CITY3" jdbcType="String"/>
+ 		<result property="specialDetail" column="SPECIAL_DETAIL" jdbcType="String"/>
+ 		<result property="avocation" column="AVOCATION" jdbcType="String"/>
+ 		<result property="theday" column="THEDAY" jdbcType="Date"/>
+ 		<result property="readNo" column="READNO" jdbcType="Long"/>
+ 		<result property="replyNo" column="REPLYNO" jdbcType="Long"/>
+ 		<result property="isHouse" column="ISHOUSE" jdbcType="String"/>
+ 		<result property="personWeb" column="PERSON_WEB" jdbcType="String"/>
+ 		<result property="officeTel" column="OFFICE_TEL" jdbcType="String"/>
+ 		<result property="fileName" column="FILENAME" jdbcType="String"/>
+ 		<result property="docName" column="DOCNAME" jdbcType="String"/>
+ 		<result property="fieldWorkTime" column="FIELDWORK_TIME" jdbcType="String"/>
+ 		<result property="workAddress" column="WORK_ADRESS" jdbcType="String"/>
+ 		<result property="purPose" column="PURPOSE" jdbcType="String"/>
+ 		<result property="natureSuperiority" column="NATURE_SUPERIORITY" jdbcType="String"/>
+ 		<result property="natureWeak" column="NATURE_WEAK" jdbcType="String"/>
+ 		<result property="signName" column="SIGN_NAME" jdbcType="String"/>
+ 		<result property="signTime" column="SIGN_TIME" jdbcType="String"/>
+ 		<result property="otherDetail" column="OTHERDETAIL" jdbcType="String"/>
+ 		<result property="sourceOfStudents" column="SOURCE_OF_STUDENTS" jdbcType="String"/>
+ 		<result property="address" column="ADDRESS" jdbcType="String"/>
+ 		<result property="professionalPost" column="PROFESSIONAL_POST" jdbcType="String"/>
+ 		<result property="someThing" column="SOMETHING" jdbcType="String"/>
+ 		<result property="family" column="FAMILY" jdbcType="String"/>
+ 		<result property="pq" column="PQ" jdbcType="Long"/>
+ 		<result property="lastDegreeDate" column="LAST_DEGREE_DATE" jdbcType="String"/>
+ 		<result property="otherLink" column="OTHER_LINK" jdbcType="String"/>
+ 		<result property="vacancyName" column="VACANCY_NAME" jdbcType="String"/>
+ 		<result property="vtype" column="VTYPE" jdbcType="Long"/>
+ 	</resultMap>
+  	
+	<!--result map-->
+	<resultMap id="tmanApplicanttMap1" class="tmanApplicantt">
+ 		<result property="appId" column="APP_ID" jdbcType="Long"/>
+ 		<result property="appName" column="APP_NAME" jdbcType="String"/>
+ 		<result property="vacancyId" column="VACANCY_ID" jdbcType="Long"/>
+ 		<result property="sex" column="SEX" jdbcType="String"/>
+ 		<result property="maritalStatus" column="MARITAL_STATUS" jdbcType="String"/>
+ 		<result property="politicalFace" column="POLITICAL_FACE" jdbcType="String"/>
+ 		<result property="placeOfBirth" column="PLACE_OF_BIRTH" jdbcType="String"/>
+ 		<result property="nationality" column="NATIONALITY" jdbcType="String"/>
+ 		<result property="dateOfBirth" column="DATE_OF_BIRTH" jdbcType="Date"/>
+ 		<result property="nationalId" column="NATIONAL_ID" jdbcType="String"/>
+ 		<result property="placeOfRpr" column="PLACE_OF_RPR" jdbcType="String"/>
+ 		<result property="placeOfFile" column="PLACE_OF_FILE" jdbcType="String"/>
+ 		<result property="workCompany" column="WORK_COMPANY" jdbcType="String"/>
+ 		<result property="studySchool" column="STUDY_SCHOOL" jdbcType="String"/>
+ 		<result property="lastEduExp" column="LAST_EDU_EXP" jdbcType="String"/>
+ 		<result property="lastDegree" column="LAST_DEGREE" jdbcType="String"/>
+ 		<result property="letterAddress" column="LETTER_ADDRESS" jdbcType="String"/>
+ 		<result property="postAlcode" column="POSTALCODE" jdbcType="String"/>
+ 		<result property="familyTel" column="FAMILY_TEL" jdbcType="String"/>
+ 		<result property="mobileTel" column="MOBILE_TEL" jdbcType="String"/>
+ 		<result property="emailAddress" column="EMAIL_ADDRESS" jdbcType="String"/>
+ 		<result property="flag" column="FLAG" jdbcType="String"/>
+ 		<result property="userName" column="USERNAME" jdbcType="String"/>
+ 		<result property="password" column="PASSWORD" jdbcType="String"/>
+ 		<result property="istoerp" column="ISTOERP" jdbcType="String"/>
+ 		<result property="weigh" column="WEIGH" jdbcType="String"/>
+ 		<result property="high" column="HIGH" jdbcType="String"/>
+ 		<result property="speciality_Type" column="SPECIALITY_TYPE" jdbcType="String"/>
+ 		<result property="workYear" column="WORK_YEAR" jdbcType="String"/>
+ 		<result property="personType" column="PERSON_TYPE" jdbcType="String"/>
+ 		<result property="workType" column="WORK_TYPE" jdbcType="String"/>
+ 		<result property="work1" column="WORK1" jdbcType="String"/>
+ 		<result property="work2" column="WORK2" jdbcType="String"/>
+ 		<result property="work3" column="WORK3" jdbcType="String"/>
+ 		<result property="salary" column="SALARY" jdbcType="String"/>
+ 		<result property="workAdd1" column="WORK_ADD1" jdbcType="String"/>
+ 		<result property="workAdd2" column="WORK_ADD2" jdbcType="String"/>
+ 		<result property="workAdd3" column="WORK_ADD3" jdbcType="String"/>
+ 		<result property="comeTime" column="COME_TIME" jdbcType="String"/>
+ 		<result property="knowCity1" column="KNOW_CITY1" jdbcType="String"/>
+ 		<result property="knowCity2" column="KNOW_CITY2" jdbcType="String"/>
+ 		<result property="knowCity3" column="KNOW_CITY3" jdbcType="String"/>
+ 		<result property="specialDetail" column="SPECIAL_DETAIL" jdbcType="String"/>
+ 		<result property="avocation" column="AVOCATION" jdbcType="String"/>
+ 		<result property="theday" column="THEDAY" jdbcType="Date"/>
+ 		<result property="readNo" column="READNO" jdbcType="Long"/>
+ 		<result property="replyNo" column="REPLYNO" jdbcType="Long"/>
+ 		<result property="isHouse" column="ISHOUSE" jdbcType="String"/>
+ 		<result property="personWeb" column="PERSON_WEB" jdbcType="String"/>
+ 		<result property="officeTel" column="OFFICE_TEL" jdbcType="String"/>
+ 		<result property="fileName" column="FILENAME" jdbcType="String"/>
+ 		<result property="docName" column="DOCNAME" jdbcType="String"/>
+ 		<result property="fieldWorkTime" column="FIELDWORK_TIME" jdbcType="String"/>
+ 		<result property="workAddress" column="WORK_ADRESS" jdbcType="String"/>
+ 		<result property="purPose" column="PURPOSE" jdbcType="String"/>
+ 		<result property="natureSuperiority" column="NATURE_SUPERIORITY" jdbcType="String"/>
+ 		<result property="natureWeak" column="NATURE_WEAK" jdbcType="String"/>
+ 		<result property="signName" column="SIGN_NAME" jdbcType="String"/>
+ 		<result property="signTime" column="SIGN_TIME" jdbcType="String"/>
+ 		<result property="otherDetail" column="OTHERDETAIL" jdbcType="String"/>
+ 		<result property="sourceOfStudents" column="SOURCE_OF_STUDENTS" jdbcType="String"/>
+ 		<result property="address" column="ADDRESS" jdbcType="String"/>
+ 		<result property="professionalPost" column="PROFESSIONAL_POST" jdbcType="String"/>
+ 		<result property="someThing" column="SOMETHING" jdbcType="String"/>
+ 		<result property="family" column="FAMILY" jdbcType="String"/>
+ 		<result property="pq" column="PQ" jdbcType="Long"/>
+ 		<result property="lastDegreeDate" column="LAST_DEGREE_DATE" jdbcType="String"/>
+ 		<result property="otherLink" column="OTHER_LINK" jdbcType="String"/>
+ 		
+ 	</resultMap>
+	<select id="getTmanApplicantByAppId" parameterClass="Long" resultMap = "tmanApplicanttMap1">
+	     select * from T_MAN_APPLICANT_T where APP_ID = #appId#
+ 	 </select>
+	
+	<select id="getTmanApplicanttPages" parameterClass="java.util.Map" resultMap = "tmanApplicanttMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	 </select>
+  	<select id="getCount" parameterClass="String" resultClass = "Integer">
+	     $sql$
+ 	 </select>
+  
+</sqlMap>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.client.pojo.TsystemWebuser">
+	<typeAlias alias="TsystemWebuser" type="com.cssweb.client.pojo.TsystemWebuser" />
+	
+	<resultMap id="TsystemWebuser" class="TsystemWebuser">
+	    <result property="id" column="ID" jdbcType="Long"/>
+	    <result property="userName" column="USER_NAME" jdbcType="java.lang.String"/>
+	    <result property="password" column="PASSWORD" jdbcType="java.lang.String"/>
+	    <result property="branchId" column="BRANCH_ID" jdbcType="Long"/>
+	    <result property="branchCode" column="BRANCH_CODE" jdbcType="java.lang.String"/>
+	    <result property="realName" column="REAL_NAME" jdbcType="java.lang.String"/>
+	    <result property="accountSz" column="ACCOUNT_SZ" jdbcType="java.lang.String"/>
+	    <result property="accountSh" column="ACCOUNT_SH" jdbcType="java.lang.String"/>
+	    <result property="sex" column="SEX" jdbcType="java.lang.String"/>
+	    <result property="card" column="CARD" jdbcType="java.lang.String"/>
+	    <result property="birthday" column="BIRTHDAY" jdbcType="Date"/>
+	    <result property="userType" column="USER_TYPE" jdbcType="java.lang.String"/>
+	    <result property="userLevel" column="USER_LEVEL" jdbcType="Long"/>
+	    <result property="mobile" column="MOBILE" jdbcType="java.lang.String"/>
+	    <result property="phone" column="PHONE" jdbcType="java.lang.String"/>
+	    <result property="email" column="EMAIL" jdbcType="java.lang.String"/>
+ 		<result property="createDate" column="CREATE_DATE" jdbcType="Date"/>
+ 		<result property="userTestday" column="USER_TESTDAY" jdbcType="Long" nullValue="0"/>
+		<result property="province" column="PROVINCE" jdbcType="java.lang.String"/>
+		<result property="city" column="CITY" jdbcType="java.lang.String"/>
+		<result property="address" column="ADDRESS" jdbcType="java.lang.String"/>
+		<result property="post" column="POST" jdbcType="java.lang.String"/>
+		<result property="longinCount" column="LOGIN_COUNT" jdbcType="Long" nullValue="0"/>
+		<result property="lastLoginDate" column="LAST_LOGIN_DATE" jdbcType="Date"/>
+		<result property="userIntegal" column="USER_INTEGRAL" jdbcType="Long" nullValue="0"/>
+		<result property="riskLevel" column="RISK_LEVEL" jdbcType="java.lang.String"/>
+		<result property="serviceName" column="SERVICE_NAME" jdbcType="java.lang.String"/>
+		<result property="isRzrq" column="IS_RZRQ" jdbcType="java.lang.String" nullValue="0"/>
+		<result property="isLc" column="IS_LC" jdbcType="java.lang.String" nullValue="0"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="TsystemWebuser">
+		insert into T_SYSTEM_WEBUSER
+		(ID,USER_NAME,PASSWORD,BRANCH_ID,BRANCH_CODE,REAL_NAME,ACCOUNT_SZ,ACCOUNT_SH,SEX,CARD ,BIRTHDAY,USER_TYPE,USER_LEVEL,MOBILE,PHONE,EMAIL,CREATE_DATE,USER_TESTDAY,PROVINCE,CITY ,ADDRESS,POST,LOGIN_COUNT,LAST_LOGIN_DATE,USER_INTEGRAL,RISK_LEVEL,SERVICE_NAME)
+		values(#id#,#userName#,#password#,#branchId#,#branchCode#,#realName#,#accountSz#,#accountSh#,#sex#,#card#,#birthday#,#userType#,#userLevel#,#mobile#,#phone#,#email#,sysdate,#userTestday#,#province#,#city#,#address#,#post#,#longinCount#,#lastLoginDate#,#userIntegal#,#riskLevel#,#serviceName#)
+	</insert>
+	<update id="upTsystemWebuser" parameterClass="TsystemWebuser">
+		update T_SYSTEM_WEBUSER set 
+		REAL_NAME = #realName#,
+		SEX = #sex#,
+		CARD = #card#,
+		BIRTHDAY = #birthday#,
+		MOBILE = #mobile#,
+		PHONE = #phone#,
+		EMAIL = #email#,
+		PROVINCE = #province#,
+		CITY = #city#,
+		ADDRESS= #address#,
+		POST = #post#,
+		IS_RZRQ= #isRzrq#,
+		IS_LC = #isLc# where ID = #id#
+	</update>
+	
+	<select id="getTsystemWebuserById" resultMap="TsystemWebuser" parameterClass="Long">
+		select ID,USER_NAME,PASSWORD,BRANCH_ID,BRANCH_CODE,REAL_NAME,ACCOUNT_SZ,ACCOUNT_SH,SEX,CARD ,BIRTHDAY,USER_TYPE,USER_LEVEL,MOBILE,PHONE,EMAIL,CREATE_DATE,USER_TESTDAY,PROVINCE,CITY ,ADDRESS,POST,LOGIN_COUNT,LAST_LOGIN_DATE,USER_INTEGRAL,RISK_LEVEL,SERVICE_NAME,IS_RZRQ,IS_LC 
+		from T_SYSTEM_WEBUSER where ID = #id#
+	</select>
+		
+	<delete id="delTsystemWebuserById" parameterClass="Long">
+		delete T_SYSTEM_WEBUSER where ID = #id#
+	</delete>
+	
+	<select id="getTsystemWebuserByBranchCode" resultMap="TsystemWebuser" parameterClass="String">
+		select ID,USER_NAME,PASSWORD,BRANCH_ID,BRANCH_CODE,REAL_NAME,ACCOUNT_SZ,ACCOUNT_SH,SEX,CARD ,BIRTHDAY,USER_TYPE,USER_LEVEL,MOBILE,PHONE,EMAIL,CREATE_DATE,USER_TESTDAY,PROVINCE,CITY ,ADDRESS,POST,LOGIN_COUNT,LAST_LOGIN_DATE,USER_INTEGRAL,RISK_LEVEL,SERVICE_NAME,IS_RZRQ,IS_LC  
+		from T_SYSTEM_WEBUSER where BRANCH_CODE = #branchCode#
+	</select>
+	
+	<select id="getTsystemWebuserByUserName" resultMap="TsystemWebuser" parameterClass="String">
+		select ID,USER_NAME,PASSWORD,BRANCH_ID,BRANCH_CODE,REAL_NAME,ACCOUNT_SZ,ACCOUNT_SH,SEX,CARD ,BIRTHDAY,USER_TYPE,USER_LEVEL,MOBILE,PHONE,EMAIL,CREATE_DATE,USER_TESTDAY,PROVINCE,CITY ,ADDRESS,POST,LOGIN_COUNT,LAST_LOGIN_DATE,USER_INTEGRAL,RISK_LEVEL,SERVICE_NAME,IS_RZRQ,IS_LC 
+		from T_SYSTEM_WEBUSER where USER_NAME = #userName#
+	</select>
+	
+	<select id="getTsystemWebuserByServiceName" resultMap="TsystemWebuser" parameterClass="String">
+		select ID,USER_NAME,PASSWORD,BRANCH_ID,BRANCH_CODE,REAL_NAME,ACCOUNT_SZ,ACCOUNT_SH,SEX,CARD ,BIRTHDAY,USER_TYPE,USER_LEVEL,MOBILE,PHONE,EMAIL,CREATE_DATE,USER_TESTDAY,PROVINCE,CITY ,ADDRESS,POST,LOGIN_COUNT,LAST_LOGIN_DATE,USER_INTEGRAL,RISK_LEVEL,SERVICE_NAME,IS_RZRQ,IS_LC 
+		from T_SYSTEM_WEBUSER where SERVICE_NAME = #serviceName#
+	</select>
+	
+	<update id="upServiceNameAndPasswordById" parameterClass="TsystemWebuser">
+		update T_SYSTEM_WEBUSER set SERVICE_NAME= #serviceName#, PASSWORD = #password# where ID = #id#
+	</update>
+	<update id="updatePassword" parameterClass="map">
+		update T_SYSTEM_WEBUSER set PASSWORD = #password# where ID = #id#
+	</update>
+	<update id="addWebUserlonginCount" parameterClass="Long">
+		update T_SYSTEM_WEBUSER set LAST_LOGIN_DATE=sysdate ,LOGIN_COUNT = nvl(LOGIN_COUNT,0)+1 where ID = #id#
+	</update>
+	
+	<select id="getUserByServiceNameAndPassword" resultMap="TsystemWebuser" parameterClass="java.util.Map">
+		select ID,USER_NAME,PASSWORD,BRANCH_ID,BRANCH_CODE,REAL_NAME,ACCOUNT_SZ,ACCOUNT_SH,SEX,CARD ,BIRTHDAY,USER_TYPE,USER_LEVEL,MOBILE,PHONE,EMAIL,CREATE_DATE,USER_TESTDAY,PROVINCE,CITY ,ADDRESS,POST,LOGIN_COUNT,LAST_LOGIN_DATE,USER_INTEGRAL,RISK_LEVEL,SERVICE_NAME,IS_RZRQ,IS_LC 
+		from T_SYSTEM_WEBUSER where upper(SERVICE_NAME) = upper(#serviceName#)  AND PASSWORD = #password# AND USER_TYPE = #type#
+	</select>
+	
+	<select id="getUserByServiceNameAndNotInId" resultMap="TsystemWebuser" parameterClass="java.util.Map">
+		select ID,USER_NAME,PASSWORD,BRANCH_ID,BRANCH_CODE,REAL_NAME,ACCOUNT_SZ,ACCOUNT_SH,SEX,CARD ,BIRTHDAY,USER_TYPE,USER_LEVEL,MOBILE,PHONE,EMAIL,CREATE_DATE,USER_TESTDAY,PROVINCE,CITY ,ADDRESS,POST,LOGIN_COUNT,LAST_LOGIN_DATE,USER_INTEGRAL,RISK_LEVEL,SERVICE_NAME,IS_RZRQ,IS_LC 
+		from T_SYSTEM_WEBUSER where upper(SERVICE_NAME) = upper(#serviceName#)  AND ID != #id#
+	</select>
+	
+	<delete id="delUerById" parameterClass="Long">
+		delete from T_SYSTEM_WEBUSER where id = #value#
+	</delete>
+	
+	<select id="getList" parameterClass="java.util.Map" resultMap = "TsystemWebuser">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getBasicUserTotal" parameterClass="String" resultClass = "Long">
+		  $sql$   
+	</select>
+</sqlMap>

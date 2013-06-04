@@ -1,0 +1,31 @@
+﻿@charset "utf-8";
+/* CSS Document */
+* {
+  margin:0px;
+  padding:0px;
+ }
+body {background:#fff;
+  color:#666;
+  font-size:12px;
+  font-family:helvetica,arial,sans-serif,"宋体";
+  }
+.bodybg{padding:0 10px;background:#fff;width:960px;}
+h1,h2,h3,h4,h5,h6{margin:0; padding:0; font-size:12px;}
+table,td,tr,th{font-size:12px;}
+li{list-style:none;list-style-position:outside;
+  overflow:hidden;
+  white-space:nowrap;
+  }
+em,cite{font-style:normal;}
+div{margin:0 auto;}
+img{vertical-align:top;border:0;}
+a{color:#04376a;text-decoration:underline;}
+a:hover {color:#f90;text-decoration:underline;}
+.loginbox{width:425px;height:295px;border:1px solid #cdd1d4;}
+.loginbox h3{line-height:25px;height:25px;font-weight:normal;background:url(/pic/webcall/login_tbg.gif) no-repeat;padding-left:20px;color:#fff;}
+.loginbox p{padding:20px 30px 5px 50px;}
+.loginbox p em{width:80px;float:left;display:block;font-size:14px;line-height:25px;text-align:right;color:#006;}
+.input_180{width:180px;height:25px;border:1px solid #dadada;line-height:25px;padding-left:5px;font-size:20px;}
+.input_100{width:48px;height:25px;border:1px solid #dadada;line-height:25px;padding-left:5px;font-size:20px; }
+.loginbutbox{margin-left:80px;}
+.loginbut{background:url(/pic/webcall/login_but.gif) no-repeat;width:104px;height:35px;border:0;line-height:35px;font-size:14px;color:#006;font-weight:bold;}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.ClientBasicRzrq">
+
+	<typeAlias alias="clientBasicRzrq" type="com.cssweb.rzrq.pojo.ClientBasicRzrq" />
+	<resultMap id="clientBasicRzrqMap" class="clientBasicRzrq">
+		<result property="id" column="id" jdbcType="Long"/>
+		<result property="khh" column="khh" jdbcType="String"/>
+		<result property="khxm" column="khxm" jdbcType="String"/>
+		<result property="yyb" column="yyb" jdbcType="Long" />
+		<result property="dh" column="dh" jdbcType="String"/>
+	    <result property="dz" column="dz" jdbcType="String"/>
+	</resultMap>
+	 <select id="getBasicId" parameterClass="String" resultMap="clientBasicRzrqMap">
+		$sql$
+	</select>
+	
+</sqlMap>

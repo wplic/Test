@@ -1,0 +1,30 @@
+.scroll-pane {
+	MARGIN: 0px auto; HEIGHT: 270px; FONT-SIZE: 12px; OVERFLOW: auto; width:auto; padding:10px 21px 15px;_padding:10px 21px 15px;
+}
+.scroll-pane1{MARGIN: 0px auto; HEIGHT: 390px; FONT-SIZE: 12px; OVERFLOW: auto; width:auto;}
+.scroll-pane span{ font-size:14px; color:#bb0000; font-weight:bold;}
+A.jScrollArrowUp {
+	BACKGROUND: url(../images/windows_arrow_up.gif) repeat-x 0px 0px; HEIGHT: 16px
+}
+A.jScrollArrowUp:hover {
+	BACKGROUND-POSITION: 0px -20px
+}
+A.jScrollArrowDown {
+	BACKGROUND: url(../images/windows_arrow_down.gif) repeat-x 0px 0px; HEIGHT: 16px
+}
+A.jScrollArrowDown:hover {
+	BACKGROUND-POSITION: 0px -20px
+}
+A.jScrollActiveArrowButton {
+	BACKGROUND-POSITION: 0px -40px
+}
+A.jScrollActiveArrowButton:hover {
+	BACKGROUND-POSITION: 0px -40px
+}
+.jScrollPaneTrack {
+	BACKGROUND: url(../images/scrollBg.gif);
+
+}
+.jScrollPaneDrag {
+	WIDTH: 9px; BACKGROUND: url(../images/bgDrage.gif) no-repeat 0 center; HEIGHT: 69px
+}

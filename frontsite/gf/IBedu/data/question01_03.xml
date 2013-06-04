@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--注意事项：1、标题长度不能超过45个中文字符；2、选项长度不能超过15个中文字符；3、选项数量不能超过4个。--> 
+
+<values>
+
+   <question options="3" answers="1">
+        <title>股指期货交易的对象是(    )。</title>
+        <option>
+           <A>标的指数股票组合</A>
+           <B>股指期货合约</B>
+             <C>标的指数 ETF 份额</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>沪深300股指期货合约到期日为(    )。</title>
+        <option>
+           <A>合约到期月份的第三个周五</A>
+           <B>合约到期月份的第三个周一</B>
+            <C>合约到期月份的月末</C>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>沪深300股指期货合约的最小变动价位为(    )。</title>
+        <option>
+           <A>0.05点</A>
+           <B>0.1点</B>
+            <C>0.2 点</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>沪深300股指期货合约最后交易日的交易时间为(    )。</title>
+        <option>
+           <A>9：15-11：30（第一节），13：00-15：00（第二节）</A>
+           <B>9：30-11：30（第一节），13：00-15：00（第二节）</B>
+            <C>9：15-11：30（第一节），13：00-15：15（第二节）</C>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+    <question options="4" answers="1">
+        <title>按期货交易的收盘价来确定最后结算价，极易被人为操纵。为避免这种情况发生，股指期货的交割结算价都是依据(    )确定的。</title>
+        <option>
+           <A>现货指数</A>
+           <B>最后交易日当天的最后5分钟期货交易价格的加权平均价</B>
+            <C>从上市至最后交易日的所有期货价格的加权平均价</C>
+           <D>最后交易日当天期货市场开盘价</D>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question> 
+</values>

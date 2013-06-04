@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazx.jrsj.pojo.Jggpc">
+
+	<typeAlias alias="jggpc" type="com.cssweb.gazx.jrsj.pojo.Jggpc" />
+
+	<resultMap id="jggpcMap" class="jggpc">
+		<result property="yjjgmc" column="YJJGMC" jdbcType="String"/>
+		<result property="hylb" column="HYLB" jdbcType="String"/>
+		<result property="gpdm" column="GPDM" jdbcType="String"/>
+		<result property="gpjc" column="GPJC" jdbcType="String"/>
+		<result property="bgjbxxbid" column="T_BGJBXXB_ID" jdbcType="Long"/>
+		<result property="bzpjsz" column="BZPJSZ" jdbcType="String"/>
+		<result property="bgmc" column="BGMC" jdbcType="String"/>
+		<result property="bgzxrq" column="BGZXRQ" jdbcType="java.util.Date"/>
+	</resultMap>
+
+	<select id="getCountBySql" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(a.gpdm) from GPZB a,
+		(
+		  select b.*,c.bgmc,c.bgzxrq,c.yjjgmc,row_number() over(Partition by b.t_gpzb_id order by c.bgzxrq desc) AS rk from BGPJB b,BGJBXXB c
+		  where b.t_bgjbxxb_id=c.t_bgjbxxb_id
+		) h,GSZB j
+		where length(a.gpdm)=6
+		<isNotNull prepend="and" property="gpdm">
+			a.gpdm like '%$gpdm$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="gpjc">
+			a.gpjc like '%$gpjc$%'
+		</isNotNull>
+		and a.t_gpzb_id=h.t_gpzb_id and h.rk=1 and a.t_gszb_id=j.t_gszb_id
+		<isNotNull prepend="and" property="yjjgmc">
+			h.yjjgmc like '%$yjjgmc$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="bzpjsz">
+			h.bzpjsz = #bzpjsz#
+		</isNotNull>
+	</select>
+	
+	<select id="getJggpcByPage" parameterClass="java.util.Map" resultMap = "jggpcMap">
+    	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select h.yjjgmc,j.hylb,a.gpdm,a.gpjc,h.t_bgjbxxb_id,h.bzpjsz,h.bgmc,h.bgzxrq from GPZB a,
+			(
+			  select b.*,c.bgmc,c.bgzxrq,c.yjjgmc,row_number() over(Partition by b.t_gpzb_id order by c.bgzxrq desc) AS rk from BGPJB b,BGJBXXB c
+			  where b.t_bgjbxxb_id=c.t_bgjbxxb_id
+			) h,GSZB j
+			where length(a.gpdm)=6
+			<isNotNull prepend="and" property="gpdm">
+				a.gpdm like '%$gpdm$%'
+			</isNotNull>
+			<isNotNull prepend="and" property="gpjc">
+				a.gpjc like '%$gpjc$%'
+			</isNotNull>
+			and a.t_gpzb_id=h.t_gpzb_id and h.rk=1 and a.t_gszb_id=j.t_gszb_id
+			<isNotNull prepend="and" property="yjjgmc">
+				h.yjjgmc like '%$yjjgmc$%'
+			</isNotNull>
+			<isNotNull prepend="and" property="bzpjsz">
+				h.bzpjsz = #bzpjsz#
+			</isNotNull>
+			order by $orderby$
+		 )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  	</select>
+  
+</sqlMap>

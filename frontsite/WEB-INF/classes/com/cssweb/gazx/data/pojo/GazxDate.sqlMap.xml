@@ -1,0 +1,1690 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="GazxDate">
+
+	<typeAlias alias="GazxDate"
+		type="com.cssweb.gazx.data.pojo.GazxDate" />
+	<cacheModel id="GazxDateCache" type="OSCACHE">
+		<flushInterval hours="1" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	<!--result map-->
+	<resultMap id="gazxDateMap1" class="GazxDate">
+		<result column="jjglr" property="jjglr" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap2" class="GazxDate">
+		<result column="tzdx" property="tzdx" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap3" class="GazxDate">
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="dwjz" property="dwjz" jdbcType="double"
+			nullValue="0" />
+		<result column="ljjz" property="ljjz" jdbcType="double"
+			nullValue="0" />
+		<result column="fsrq" property="fsrq" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap4" class="GazxDate">
+		<result column="fsrq" property="fsrq" jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap5" class="GazxDate">
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjzgm" property="jjzgm" jdbcType="double"
+			nullValue="0" />
+		<result column="dwjz" property="dwjz" jdbcType="double"
+			nullValue="0" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+		<result column="stsl" property="stsl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap6" class="GazxDate">
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="clrq" property="clrq" jdbcType="String" />
+		<result column="fhcs" property="fhcs" jdbcType="String" />
+		<result column="ljfh" property="ljfh" jdbcType="double"
+			nullValue="0" />
+		<result column="zjfh" property="zjfh" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap7" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjzgm" property="jjzgm" jdbcType="double"
+			nullValue="0" />
+		<result column="jjzcjz" property="jjzcjz" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap8" class="GazxDate">
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="wfdwsy" property="wfdwsy" jdbcType="double"
+			nullValue="0" />
+		<result column="nsyl" property="nsyl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap9" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="cgjs" property="cgjs" jdbcType="double"
+			nullValue="0" />
+		<result column="cgsl" property="cgsl" jdbcType="double"
+			nullValue="0" />
+		<result column="zltagbl" property="zltagbl" jdbcType="double"
+			nullValue="0" />
+		<result column="jsqzj" property="jsqzj" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap10" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="cgsz" property="cgsz" jdbcType="double"
+			nullValue="0" />
+		<result column="bqcgsl" property="bqcgsl" jdbcType="double"
+			nullValue="0" />
+		<result column="sqcgsl" property="sqcgsl" jdbcType="double"
+			nullValue="0" />
+		<result column="zcsl" property="zcsl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap11" class="GazxDate">
+		<result column="hyjc" property="hyjc" jdbcType="String" />
+		<result column="bqsz" property="bqsz" jdbcType="double"
+			nullValue="0" />
+		<result column="sqsz" property="sqsz" jdbcType="double"
+			nullValue="0" />
+		<result column="zcfd" property="zcfd" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap12" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjzcjz" property="jjzcjz" jdbcType="double"
+			nullValue="0" />
+		<result column="gpsz" property="gpsz" jdbcType="double"
+			nullValue="0" />
+		<result column="gpzszbl" property="gpzszbl" jdbcType="double"
+			nullValue="0" />
+		<result column="hbzj" property="hbzj" jdbcType="double"
+			nullValue="0" />
+		<result column="hbzszbl" property="hbzszbl" jdbcType="double"
+			nullValue="0" />
+		<result column="zqzsz" property="zqzsz" jdbcType="double"
+			nullValue="0" />
+		<result column="zqzszbl" property="zqzszbl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap13" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="bq" property="bq" jdbcType="double"
+			nullValue="0" />
+		<result column="sq" property="sq" jdbcType="double"
+			nullValue="0" />
+		<result column="zjfd" property="zjfd" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap14" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="bq" property="bq" jdbcType="double"
+			nullValue="0" />
+		<result column="sq" property="sq" jdbcType="double"
+			nullValue="0" />
+		<result column="zjfd" property="zjfd" jdbcType="double"
+			nullValue="0" />
+		<result column="bgqzsgfe" property="bgqzsgfe" jdbcType="double"
+			nullValue="0" />
+		<result column="bgqzshfe" property="bgqzshfe" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap15" class="GazxDate">
+		<result column="zqdm" property="zqdm" jdbcType="String" />
+		<result column="zqjc" property="zqjc" jdbcType="String" />
+		<result column="zqlx" property="zqlx" jdbcType="String" />
+		<result column="pmll" property="pmll" jdbcType="double"
+			nullValue="0" />
+		<result column="fxe" property="fxe" jdbcType="double"
+			nullValue="0" />
+		<result column="gzdqr" property="gzdqr" jdbcType="String" />
+		<result column="fxqx_ksr" property="fxqxKsr" jdbcType="String" />
+		<result column="jg" property="jg" jdbcType="double"
+			nullValue="0" />
+		<result column="dlsyl" property="dlsyl" jdbcType="double"
+			nullValue="0" />
+		<result column="flsyl" property="flsyl" jdbcType="double"
+			nullValue="0" />
+		<result column="fsrq" property="fsrq" jdbcType="java.util.Date"
+			nullValue="1900/01/01 00:00:00" />
+	</resultMap>
+	<resultMap id="gazxDateMap16" class="GazxDate">
+		<result column="zqdm" property="zqdm" jdbcType="String" />
+		<result column="zqjc" property="zqjc" jdbcType="String" />
+		<result column="zqlx" property="zqlx" jdbcType="String" />
+		<result column="zqfxj" property="zqfxj" jdbcType="String" />
+		<result column="fxe" property="fxe" jdbcType="double"
+			nullValue="0" />
+		<result column="ssrq" property="ssrq" jdbcType="String" />
+		<result column="qxrq" property="qxrq" jdbcType="String" />
+		<result column="gzdqr" property="gzdqr" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap17" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="jjcgzs" property="jjcgzs" jdbcType="double"
+			nullValue="0" />
+		<result column="ltag" property="ltag" jdbcType="double"
+			nullValue="0" />
+		<result column="zltagbl" property="zltagbl" jdbcType="double"
+			nullValue="0" />
+		<result column="sq" property="sq" jdbcType="double"
+			nullValue="0" />
+		<result column="zjsl" property="zjsl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap18" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="fsrq" property="fsrq" jdbcType="java.util.Date"
+			nullValue="null" />
+		<result column="kpj" property="kpj" jdbcType="double"
+			nullValue="0" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+		<result column="zgj" property="zgj" jdbcType="double"
+			nullValue="0" />
+		<result column="cjje" property="cjje" jdbcType="double"
+			nullValue="0" />
+		<result column="cjl" property="cjl" jdbcType="double"
+			nullValue="0" />
+		<result column="zjunj" property="zjunj" jdbcType="double"
+			nullValue="0" />
+		<result column="sjltgb" property="sjltgb" jdbcType="double"
+			nullValue="0" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="zf" property="zf" jdbcType="double"
+			nullValue="0" />
+		<result column="hsl" property="hsl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap19" class="GazxDate">
+		<result column="fsrq" property="fsrq" jdbcType="java.util.Date"
+			nullValue="null" />
+		<result column="bgpdm" property="bgpdm" jdbcType="String" />
+		<result column="bgpjc" property="bgpjc" jdbcType="String" />
+		<result column="zgb" property="zgb" jdbcType="double"
+			nullValue="0" />
+		<result column="bggb" property="bggb" jdbcType="double"
+			nullValue="0" />
+		<result column="bgzb" property="bgzb" jdbcType="double"
+			nullValue="0" />
+		<result column="aggb" property="aggb" jdbcType="double"
+			nullValue="0" />
+		<result column="agzb" property="agzb" jdbcType="double"
+			nullValue="0" />
+		<result column="bgspj" property="bgspj" jdbcType="double"
+			nullValue="0" />
+		<result column="bgzsj" property="bgzsj" jdbcType="double"
+			nullValue="0" />
+		<result column="abgjgb" property="abgjgb" jdbcType="double"
+			nullValue="0" />
+		<result column="agspj" property="agspj" jdbcType="double"
+			nullValue="0" />
+		<result column="agpjc" property="agpjc" jdbcType="String" />
+		<result column="aggpjc" property="aggpjc" jdbcType="String" />
+		<result column="bggpjc" property="bggpjc" jdbcType="String" />
+		<result column="agpdm" property="agpdm" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap20" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="sgdm" property="sgdm" jdbcType="String" />
+		<result column="wsfxrq" property="wsfxrq" jdbcType="String" />
+		<result column="ssrq" property="ssrq" jdbcType="String" />
+		<result column="fxjg" property="fxjg" jdbcType="double"
+			nullValue="0" />
+		<result column="fxsl" property="fxsl" jdbcType="double"
+			nullValue="0" />
+		<result column="qmtbfxsyl" property="qmtbfxsyl"
+			jdbcType="double" nullValue="0" />
+		<result column="wsfxzql" property="wsfxzql" jdbcType="double"
+			nullValue="0" />
+		<result column="zqh" property="zqh" jdbcType="String" />
+		<result column="srzdf1" property="srzdf1" jdbcType="double"
+			nullValue="0" />
+		<result column="sssrhsl" property="sssrhsl" jdbcType="double"
+			nullValue="0" />
+		<result column="sssrspj" property="sssrspj" jdbcType="double"
+			nullValue="0" />
+		<result column="sjltrmbptg" property="sjltrmbptg"
+			jdbcType="double" nullValue="0" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap21" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="ygnd" property="ygnd" jdbcType="java.util.Date"
+			nullValue="null" />
+		<result column="yglx" property="yglx" jdbcType="String" />
+		<result column="bblx" property="bblx" jdbcType="String" />
+		<result column="yjbdfd" property="yjbdfd" jdbcType="String" />
+		<result column="yjbdyy" property="yjbdyy" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap22" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="mgsy" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="mgjzc" property="mgjzc" jdbcType="double"
+			nullValue="0" />
+		<result column="jzcsyl" property="jzcsyl" jdbcType="double"
+			nullValue="0" />
+		<result column="jlr" property="jlr" jdbcType="double"
+			nullValue="0" />
+		<result column="mgjyhdxjll" property="mgjyhdxjll"
+			jdbcType="double" nullValue="0" />
+		<result column="jllzzl" property="jllzzl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap23" class="GazxDate">
+		<result column="dm" property="dm" jdbcType="String" />
+		<result column="zdqz" property="zdqz" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap24" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="jzczzl" property="jzczzl" jdbcType="double"
+			nullValue="0" />
+		<result column="jzcsyl" property="jzcsyl" jdbcType="double"
+			nullValue="0" />
+		<result column="zyywsrzzl" property="zyywsrzzl"
+			jdbcType="double" nullValue="0" />
+		<result column="jllzzl" property="jllzzl" jdbcType="double"
+			nullValue="0" />
+		<result column="yylrzzl" property="yylrzzl" jdbcType="double"
+			nullValue="0" />
+		<result column="gdqybl" property="gdqybl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap25" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="yagbr" property="yagbr" jdbcType="String" />
+		<result column="sqpxbl" property="sqpxbl" jdbcType="double"
+			nullValue="0" />
+		<result column="shpxbl" property="shpxbl" jdbcType="double"
+			nullValue="0" />
+		<result column="shgbl" property="shgbl" jdbcType="double"
+			nullValue="0" />
+		<result column="zzgbl" property="zzgbl" jdbcType="double"
+			nullValue="0" />
+		<result column="gqdjr" property="gqdjr" jdbcType="String" />
+		<result column="cqcxr" property="cqcxr" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap26" class="GazxDate">
+		<result column="qzdm" property="qzdm" jdbcType="String" />
+		<result column="qzjc" property="qzjc" jdbcType="String" />
+		<result column="jgmc" property="jgmc" jdbcType="String" />
+		<result column="cssl" property="cssl" jdbcType="double"
+			nullValue="0" />
+		<result column="ssrq" property="ssrq" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap27" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="jgmc" property="jgmc1" jdbcType="String" />
+		<result column="bq" property="bq" jdbcType="double"
+			nullValue="0" />
+		<result column="sq" property="sq" jdbcType="double"
+			nullValue="0" />
+		<result column="zltbl" property="zltbl" jdbcType="double"
+			nullValue="0" />
+		<result column="zjsl" property="zjsl" jdbcType="double"
+			nullValue="0" />
+		<result column="mgsy" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="yssltgfhj" property="yssltgfhj"
+			jdbcType="double" nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap28" class="GazxDate">
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="zrdwjz" property="zrdwjz" jdbcType="double"
+			nullValue="0" />
+		<result column="jrdwjz" property="jrdwjz" jdbcType="double"
+			nullValue="0" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="jrljjz" property="jrljjz" jdbcType="double"
+			nullValue="0" />
+		<result column="monthzdf" property="monthzdf" jdbcType="double"
+			nullValue="0" />
+		<result column="yearzdf" property="yearzdf" jdbcType="double"
+			nullValue="0" />
+		<result column="jjzgm" property="jjzgm" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap29" class="GazxDate">
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjglr" property="jjglr" jdbcType="String" />
+		<result column="jjzgm" property="jjzgm" jdbcType="double"
+			nullValue="0" />
+		<result column="jrdwjz" property="jrdwjz" jdbcType="double"
+			nullValue="0" />
+		<result column="zcl" property="zcl" jdbcType="double"
+			nullValue="0" />
+		<result column="twozcl" property="twozcl" jdbcType="double"
+			nullValue="0" />
+		<result column="oneweekljjz" property="oneweekljjz"
+			jdbcType="double" nullValue="0" />
+		<result column="twoweekljjz" property="twoweekljjz"
+			jdbcType="double" nullValue="0" />
+		<result column="twoweekdwjz" property="twoweekdwjz"
+			jdbcType="double" nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap30" class="GazxDate">
+		<result column="qzdm" property="qzdm" jdbcType="String" />
+		<result column="qzjc" property="qzjc" jdbcType="String" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+		<result column="bdspj" property="bdspj" jdbcType="double"
+			nullValue="0" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="yjl" property="yjl" jdbcType="double"
+			nullValue="0" />
+		<result column="syts" property="syts" jdbcType="int"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap31" class="GazxDate">
+		<result column="jjhymc" property="jjhymc" jdbcType="String" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="halfyearzdf" property="halfyearzdf"
+			jdbcType="double" nullValue="0" />
+		<result column="syl" property="syl" jdbcType="double"
+			nullValue="0" />
+		<result column="hsl" property="hsl" jdbcType="double"
+			nullValue="0" />
+		<result column="ltsz" property="ltsz" jdbcType="double"
+			nullValue="0" />
+		<result column="zb" property="zb" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap32" class="GazxDate">
+		<result column="zsdm" property="zsdm" jdbcType="String" />
+		<result column="guid" property="guid" jdbcType="String" />
+		<result column="zsmc" property="zsmc" jdbcType="String" />
+		<result column="zsjc" property="zsjc" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap33" class="GazxDate">
+		<result column="zsdm" property="zsdm" jdbcType="String" />
+		<result column="sp" property="sp" jdbcType="double"
+			nullValue="0" />
+		<result column="zds" property="zds" jdbcType="double"
+			nullValue="0" />
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap33a" class="GazxDate">
+		<result column="zsdm" property="zsdm" jdbcType="String" />
+		<result column="sp" property="sp" jdbcType="double"
+			nullValue="0" />
+		<result column="zds" property="zds" jdbcType="double"
+			nullValue="0" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap34" class="GazxDate">
+		<result column="jjglr" property="jjglr" jdbcType="String" />
+		<result column="jjwz" property="jjwz" jdbcType="String" />
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap35" class="GazxDate">
+		<result column="jzrq" property="fsrq" jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap36" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="jgmc" property="jgmc" jdbcType="String" />
+		<result column="cgsl" property="cgsl" jdbcType="double"
+			nullValue="0" />
+		<result column="cgbl" property="zltagbl" jdbcType="double"
+			nullValue="0" />
+		<result column="cgzj" property="jsqzj" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap37" class="GazxDate">
+		<result column="guid" property="guid" jdbcType="String" />
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap38" class="GazxDate">
+		<result column="hbmc" property="hbmc" jdbcType="String" />
+		<result column="xhmrj" property="xhmrj" jdbcType="double"
+			nullValue="0" />
+		<result column="xcmrj" property="xcmrj" jdbcType="double"
+			nullValue="0" />
+		<result column="zjj" property="zjj" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+
+
+	<resultMap id="gazxDateMap39" class="GazxDate">
+		<result column="pz" property="pz" jdbcType="String" />
+		<result column="jgy" property="jgy" jdbcType="String" />
+		<result column="zjs" property="zjs" jdbcType="double"
+			nullValue="0" />
+		<result column="kpj" property="kpj" jdbcType="double"
+			nullValue="0" />
+		<result column="zgj" property="zgj" jdbcType="double"
+			nullValue="0" />
+		<result column="zdj" property="zdj" jdbcType="double"
+			nullValue="0" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+		<result column="jjs" property="jjs" jdbcType="double"
+			nullValue="0" />
+		<result column="zd" property="zd" jdbcType="double"
+			nullValue="0" />
+		<result column="cjl" property="cjl" jdbcType="double"
+			nullValue="0" />
+		<result column="kpl" property="kpl" jdbcType="double"
+			nullValue="0" />
+		<result column="zjl" property="zjl" jdbcType="double"
+			nullValue="0" />
+		<result column="cje" property="cje" jdbcType="double"
+			nullValue="0" />
+		<result column="jzrq" property="jzrq" jdbcType="java.util.Date"
+			nullValue="1900/01/01 00:00:00" />
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00" />
+	</resultMap>
+	<resultMap id="gazxDateMap40" class="GazxDate">
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap41" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="mgjzc" property="mgjzc" jdbcType="double"
+			nullValue="0" />
+		<result column="mgsy" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+		<result column="sjl" property="sjl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap42" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="XSMLL" property="xsmll" jdbcType="double"
+			nullValue="0" />
+		<result column="XSJLL" property="xsjll" jdbcType="double"
+			nullValue="0" />
+		<result column="MGSY" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="JLR" property="jlr" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap43" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="MGXJJLL" property="mgxjjll" jdbcType="double"
+			nullValue="0" />
+		<result column="MGSY" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="MGJZC" property="mgjzc" jdbcType="double"
+			nullValue="0" />
+		<result column="JZCSYL" property="jzcsyl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap45" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="MGZBGJJ" property="mgzbgjj" jdbcType="double"
+			nullValue="0" />
+		<result column="JLLZZL" property="jllzzl" jdbcType="double"
+			nullValue="0" />
+		<result column="MGSY" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="MGJZC" property="mgjzc" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap46" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="MGZBGJJ" property="mgzbgjj" jdbcType="double"
+			nullValue="0" />
+		<result column="MGWFPLR" property="mgwfplr" jdbcType="double"
+			nullValue="0" />
+		<result column="MGSY" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="MGJZC" property="mgjzc" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap47" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="JLLZZL" property="jllzzl" jdbcType="double"
+			nullValue="0" />
+		<result column="JLR" property="jlr" jdbcType="double"
+			nullValue="0" />
+		<result column="MGSY" property="mgsy" jdbcType="double"
+			nullValue="0" />
+		<result column="LRZEZZL" property="lrzezzl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap48" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="DWJZ" property="dwjz" jdbcType="double"
+			nullValue="0" />
+		<result column="LJJZ" property="ljjz" jdbcType="double"
+			nullValue="0" />
+		<result column="WFDWSY" property="wfdwsy" jdbcType="double"
+			nullValue="0" />
+		<result column="NSYL" property="nsyl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap49" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="RGFL" property="rgfl" jdbcType="String" />
+		<result column="SGFL" property="sgfl" jdbcType="String" />
+		<result column="SHFL" property="shfl" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap50" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="hyjc" property="hyjc" jdbcType="String" />
+		<result column="sz" property="sz" jdbcType="double"
+			nullValue="0" />
+		<result column="sz_jzbl" property="szJzbl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap51" class="GazxDate">
+		<result column="fsn" property="fsn" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap52" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="ZDF" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="SPJ" property="spj" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap53" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="SQPXBL" property="sqpxbl" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap54" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gdlb" property="gdlb" jdbcType="String" />
+		<result column="gdmc" property="gdmc" jdbcType="String" />
+		<result column="xsgf" property="xsgf" jdbcType="double"
+			nullValue="0" />
+		<result column="ssr" property="ssr" javaType="java.util.Date" />
+		<result column="xzkssgf" property="xzkssgf" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap55" class="GazxDate">
+		<result column="jjdm" property="jjdm" jdbcType="String" />
+		<result column="jjjc" property="jjjc" jdbcType="String" />
+		<result column="jjglr" property="jjglr" jdbcType="String" />
+		<result column="clrq" property="clrq" jdbcType="java.util.Date" />
+		<result column="jjlx" property="jjlx" jdbcType="String" />
+		<result column="jjzgm" property="jjzgm" jdbcType="double"
+			nullValue="0" />
+		<result column="jjwz" property="jjwz" jdbcType="String" />
+		<result column="tzdx" property="tzdx" jdbcType="String" />
+	</resultMap>
+	<resultMap id="gazxDateMap56" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="gpjc" property="gpjc" jdbcType="String" />
+		<result column="wsfxrq" property="wsfxrq"
+			jdbcType="java.util.Date" />
+		<result column="wxpsrq" property="wxpsrq"
+			jdbcType="java.util.Date" />
+		<result column="ssrq" property="ssrq" jdbcType="java.util.Date" />
+		<result column="wsfxzql" property="wsfxzql" jdbcType="double"
+			nullValue="0" />
+		<result column="wxpszql" property="wxpszql" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap57" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="kpj" property="kpj" jdbcType="double"
+			nullValue="0" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+		<result column="zgj" property="zgj" jdbcType="double"
+			nullValue="0" />
+		<result column="zdj" property="zdj" jdbcType="double"
+			nullValue="0" />
+		<result column="cjl" property="cjl" jdbcType="double"
+			nullValue="0" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+	</resultMap>
+	<resultMap id="gazxDateMap58" class="GazxDate">
+		<result column="jzhb" property="jzhb" jdbcType="String" />
+		<result column="rate1" property="rate1" jdbcType="double"
+			nullValue="0" />
+		<result column="rate2" property="rate2" jdbcType="double"
+			nullValue="0" />
+		<result column="rate3" property="rate3" jdbcType="double"
+			nullValue="0" />
+		<result column="rate4" property="rate4" jdbcType="double"
+			nullValue="0" />
+		<result column="rate5" property="rate5" jdbcType="double"
+			nullValue="0" />
+		<result column="rate6" property="rate6" jdbcType="double"
+			nullValue="0" />
+		<result column="rate7" property="rate7" jdbcType="double"
+			nullValue="0" />
+		<result column="rate8" property="rate8" jdbcType="double"
+			nullValue="0" />
+		<result column="rate9" property="rate9" jdbcType="double"
+			nullValue="0" />
+		<result column="rate10" property="rate10" jdbcType="double"
+			nullValue="0" />
+		<result column="fsrq" property="fsrq" jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap59" class="GazxDate">
+		<result column="zsdm" property="zsdm" jdbcType="String" />
+		<result column="zsmc" property="zsmc" jdbcType="String" />
+		<result column="kp" property="kp" jdbcType="double"
+			nullValue="0" />
+		<result column="sp" property="sp" jdbcType="double"
+			nullValue="0" />
+		<result column="zg" property="zg" jdbcType="double"
+			nullValue="0" />
+		<result column="zd" property="zd" jdbcType="double"
+			nullValue="0" />
+		<result column="cjl" property="cjl" jdbcType="double"
+			nullValue="0" />
+		<result column="zdf" property="zdf" jdbcType="double"
+			nullValue="0" />
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" />
+	</resultMap>
+	<resultMap id="gazxDateMap60" class="GazxDate">
+		<result column="gpdm" property="gpdm" jdbcType="String" />
+		<result column="fsrq" property="fsrq" jdbcType="java.util.Date" />
+		<result column="zjunj" property="zjunj" jdbcType="double"
+			nullValue="0" />
+		<result column="kpj" property="kpj" jdbcType="double"
+			nullValue="0" />
+		<result column="zgj" property="zgj" jdbcType="double"
+			nullValue="0" />
+		<result column="zdj" property="zdj" jdbcType="double"
+			nullValue="0" />
+		<result column="spj" property="spj" jdbcType="double"
+			nullValue="0" />
+		<result column="cjl" property="cjl" jdbcType="double"
+			nullValue="0" />
+		<result column="cjje" property="cjje" jdbcType="double"
+			nullValue="0" />
+		<result column="sjltgb" property="sjltgb" jdbcType="double"
+			nullValue="0" />
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" />
+	</resultMap>
+
+	<resultMap id="gazxDateMap61" class="GazxDate">
+		<result column="guid" property="guid" jdbcType="String" />
+		<result column="zt" property="zt" jdbcType="String" />
+		<result column="gjz" property="gjz" jdbcType="String" />
+		<result column="fsrq" property="fsrq" jdbcType="java.util.Date" />
+		<result column="zhxgrq" property="zhxgrq"
+			jdbcType="java.util.Date" />
+	</resultMap>
+	
+	
+
+	<select id="jjglr" resultMap="gazxDateMap1"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="tzdx" resultMap="gazxDateMap2"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="date" resultMap="gazxDateMap4"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+	<select id="date_zhxgrq" resultMap="gazxDateMap40"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="kfsjjjz" resultMap="gazxDateMap3"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="kfsjjjzIndex" resultMap="gazxDateMap3"
+		parameterClass="java.util.Map"  cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="fbsjjjz" resultMap="gazxDateMap3"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="getCount" parameterClass="map" resultClass="Integer">
+		$condition$
+	</select>
+
+	<select id="fbsjjstsph" resultMap="gazxDateMap5"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jjfhph" resultMap="gazxDateMap6"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jjgmph" resultMap="gazxDateMap7"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="hbjjsyph" resultMap="gazxDateMap8"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jjzcgph" resultMap="gazxDateMap9"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jjzcgpph" resultMap="gazxDateMap10"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jjzchyph" resultMap="gazxDateMap11"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jjzcpzdb" resultMap="gazxDateMap12"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jjcgjzddb" resultMap="gazxDateMap13"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="kfsjjfebhph" resultMap="gazxDateMap14"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="zqsyl" resultMap="gazxDateMap15"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="zqlb" resultMap="gazxDateMap16"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+
+	<select id="zxbgqjjzcg" resultMap="gazxDateMap17"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="sczhpm" resultMap="gazxDateMap18"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="abggjdz" resultMap="gazxDateMap19"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="xgfxss" resultMap="gazxDateMap20"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="yjygtj" resultMap="gazxDateMap21"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="yjbg" resultMap="gazxDateMap22"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="hylb" resultMap="gazxDateMap23"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="yjzzqk" resultMap="gazxDateMap24"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="fhsg" resultMap="gazxDateMap25"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="qzcszx" resultMap="gazxDateMap26"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="jgcg" resultMap="gazxDateMap27"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="kfsjjjzNew" resultMap="gazxDateMap28"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="fbsjjjzNew" resultMap="gazxDateMap29"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="mrqzsj" resultMap="gazxDateMap30"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="hyzhpm" resultMap="gazxDateMap31"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="hwzyzs" resultMap="gazxDateMap33"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="hwzyzsa" resultMap="gazxDateMap33a"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="jjgs" resultMap="gazxDateMap34"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="zcgdate" resultMap="gazxDateMap35"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+	<select id="jjzcgphcgmx" resultMap="gazxDateMap36"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="zxxx" resultMap="gazxDateMap37"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+	<select id="whhq" resultMap="gazxDateMap38"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+
+
+	<select id="qhhq" resultMap="gazxDateMap39"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="sjlzdgp" resultMap="gazxDateMap41"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="mllzgssgs" resultMap="gazxDateMap42"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="jzcsylzgssgs" resultMap="gazxDateMap43"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="mggjjzgssgs" resultMap="gazxDateMap45"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="mgwfplrzgdssgs" resultMap="gazxDateMap46"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="zjsnjlzzzk" resultMap="gazxDateMap47"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="jjjzzzbj" resultMap="gazxDateMap48"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="jjfl" resultMap="gazxDateMap49"
+		cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="jjhypz" resultMap="gazxDateMap50"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="getFsn" resultMap="gazxDateMap51"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+	<select id="getZdrq" resultClass="String"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		$condition$
+	</select>
+	<select id="ndljzfzd" resultMap="gazxDateMap52"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="downMaxfrom530" resultMap="gazxDateMap52"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="fhblzg" resultMap="gazxDateMap53"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="xfjj" resultMap="gazxDateMap54"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="jjgslb" resultMap="gazxDateMap55"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="xgzql" resultMap="gazxDateMap56"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="dbgfhq" resultMap="gazxDateMap57"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="whpj" resultMap="gazxDateMap58"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="zshq" resultMap="gazxDateMap59"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="hyscbx" resultMap="gazxDateMap60"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+
+	<select id="getDate" resultClass="java.lang.String"
+		parameterClass="java.lang.String">
+		$condition$
+	</select>
+	
+	<select id="getMyDate" resultClass="java.util.Date"
+		parameterClass="java.lang.String">
+		$condition$
+	</select>
+
+	<select id="jcsj" resultMap="gazxDateMap61"
+		parameterClass="java.util.Map" cacheModel="GazxDateCache">
+		select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	<select id="pageCount1"  resultClass="Long" 
+		parameterClass="java.util.Map">
+		$condition$
+	</select>
+</sqlMap>

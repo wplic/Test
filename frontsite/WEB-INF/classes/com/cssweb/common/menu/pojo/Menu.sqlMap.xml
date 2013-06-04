@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.menu.pojo.Menu">
+
+	<typeAlias alias="Menu" type="com.cssweb.common.menu.pojo.Menu"/>
+
+	<!--result map-->
+	<resultMap id="menuMap" class="Menu">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="name" column="NAME" jdbcType="String"/>
+ 		<result property="parentId" column="PARENT_ID" jdbcType="Long"/>
+ 		<result property="displayName" column="DISPLAY_NAME" jdbcType="String"/>
+ 		<result property="url" column="URL" jdbcType="String"/>
+ 		<result property="showMode" column="SHOW_MODE" jdbcType="Integer"/>
+ 		<result property="tableName" column="TABLE_NAME" jdbcType="String"/>
+ 		<result property="condition" column="CONDITION" jdbcType="String"/>
+ 		<result property="listNum" column="LIST_NUM" jdbcType="Integer"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="orderNum" column="ORDER_NUM" jdbcType="Integer"/>
+ 		<result property="isValid" column="IS_VALID" jdbcType="Integer"/>
+ 		<result property="isShow" column="IS_SHOW" jdbcType="Integer"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+
+  <insert id="insert" parameterClass="Menu">
+    insert into CSSWEB_MENU (ID,NAME,PARENT_ID,DISPLAY_NAME,URL,SHOW_MODE,TABLE_NAME,CONDITION,
+    							LIST_NUM,CATEGORY,ORDER_NUM,IS_VALID,IS_SHOW,EXT1,EXT2,EXT3,EXT4)
+    	values (#id#,#name#,#parentId#,#displayName#,#url#,#showMode#,#tableName#,#condition#,
+    				#listNum#,#category#,#orderNum#,#isValid#,#isShow#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+
+  <update id="update" parameterClass="Menu">
+    update CSSWEB_MENU 
+    	set NAME = #name#,DISPLAY_NAME=#displayName#,URL=#url#,SHOW_MODE=#showMode#,TABLE_NAME=#tableName#,
+    				CONDITION=#condition#,LIST_NUM=#listNum#,CATEGORY=#category#,ORDER_NUM=#orderNum#,
+    				IS_VALID=#isValid#,IS_SHOW=#isShow#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+     where ID = #id#
+  </update>
+  
+  <update id="changeOrderNumByParentIdAndThisOrderNum" parameterClass="java.util.Map">
+     update CSSWEB_MENU set ORDER_NUM=ORDER_NUM+1 where PARENT_ID=#parentId# and ORDER_NUM &gt;=#orderNum#
+  </update>
+
+  <update id="changeOrderNumByParentIdAndOldBiggerNew" parameterClass="java.util.Map">
+     update CSSWEB_MENU set ORDER_NUM=ORDER_NUM+1 where PARENT_ID=#parentId# and ORDER_NUM &gt;=#newOrderNum# and ORDER_NUM &lt;#oldOrderNum#
+  </update>
+  <update id="changeOrderNumByParentIdAndNewBiggerOld" parameterClass="java.util.Map">
+     update CSSWEB_MENU set ORDER_NUM=ORDER_NUM-1 where PARENT_ID=#parentId# and ORDER_NUM &gt;#oldOrderNum# and ORDER_NUM &lt;=#newOrderNum#
+  </update>
+  
+  <delete id="deleteByIdsAndChilds" parameterClass="String">
+    delete CSSWEB_MENU where ID in ($value$) or PARENT_ID in ($value$)
+  </delete>
+  
+  <select id="getMenuById" parameterClass="Long" resultMap = "menuMap">
+    select * from CSSWEB_MENU where ID = #value#
+  </select>
+  
+  <select id="getMenuByName" parameterClass="String" resultMap = "menuMap">
+    select * from CSSWEB_MENU where NAME = #value#
+  </select>
+  
+  <select id="getByParentId" parameterClass="Long" resultMap = "menuMap">
+    select * from CSSWEB_MENU where PARENT_ID = #value# order by ORDER_NUM
+  </select>
+  
+  <select id="getByParentIdAndMap" parameterClass="java.util.Map" resultMap = "menuMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+</sqlMap>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.bond.pojo.NationalDebtTrade">
+
+	<typeAlias alias="nationalDebtTrade"
+		type="com.cssweb.F10.gazx.bond.pojo.NationalDebtTrade" />
+
+	<!--result map-->
+	<resultMap id="nationalDebtTradeMap" class="nationalDebtTrade">
+
+		<!-- 上市开始日 -->
+		<result property="beginDate" column="SSKSR"
+			jdbcType="java.util.Date" />
+
+		<!-- 上市截止日 -->
+		<result property="endDate" column="SSZJR"
+			jdbcType="java.util.Date" />
+
+		<!-- 上市总额 -->
+		<result property="tradeAmount" column="SSZE"
+			jdbcType="java.lang.Double" />
+
+		<!-- 退市日期 -->
+		<result property="delistingDate" column="TSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 交易单位 -->
+		<result property="tradingUnit" column="JYDW"
+			jdbcType="java.lang.String" />
+
+		<!-- 国债CODE -->
+		<result property="bondCode" column="ZQDM"
+			jdbcType="java.lang.String" />
+
+		<!-- 国债全称 -->
+		<result property="bondName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+		<!-- 国债简称ID，通过GZFX表，可以得到国债全称 -->
+		<result property="bondNameId" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 交易地点  -->
+		<result property="tradeAddr" column="SSDD"
+			jdbcType="java.lang.String" />
+
+		<!-- 发生日期 -->
+		<result property="publishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+	</resultMap>
+
+	<!-- 根据国债代码，返回国债上市相关信息 -->
+	<select id="getNationalDebtTradeByCode"
+		resultMap="nationalDebtTradeMap" parameterClass="String">
+		SELECT c.T_GZFX_ID, C.T_ZQZB_ID, B.ZQDM, C.SSDD, C.SSKSR,
+		b.zqjc, C.TSRQ, C.SSZJR, C.SSDD, C.SSZE, C.JYDW, C.FSRQ FROM
+		zqzb b, gzss c where b.t_zqzb_id= c.t_zqzb_id and b.Zqdm =
+		#bondCode# AND C.SCBZ = 0 AND C.GKBZ = 1 and rownum = 1
+	</select>
+
+	<!-- 根据国债简称拼音，返回国债上市相关信息 -->
+	<select id="getNationalDebtTradeByPY"
+		resultMap="nationalDebtTradeMap" parameterClass="String">
+		SELECT c.T_GZFX_ID, C.T_ZQZB_ID, B.ZQDM, C.SSDD, C.SSKSR,
+		b.zqjc, C.TSRQ, C.SSZJR, C.SSDD, C.SSZE, C.JYDW, C.FSRQ FROM
+		zqzb b, gzss c where b.t_zqzb_id= c.t_zqzb_id and b.pyjc =
+		#value# AND C.SCBZ = 0 AND C.GKBZ = 1 and rownum = 1
+	</select>
+
+	<!-- 根据国债简称，返回国债上市相关信息 -->
+	<select id="getNationalDebtTradeByShortName"
+		resultMap="nationalDebtTradeMap" parameterClass="String">
+		SELECT c.T_GZFX_ID, C.T_ZQZB_ID, B.ZQDM, C.SSDD, C.SSKSR,
+		b.zqjc, C.TSRQ, C.SSZJR, C.SSDD, C.SSZE, C.JYDW, C.FSRQ FROM
+		zqzb b, gzss c where b.t_zqzb_id= c.t_zqzb_id and b.zqjc =
+		#value# AND C.SCBZ = 0 AND C.GKBZ = 1 and rownum = 1
+	</select>
+
+</sqlMap>

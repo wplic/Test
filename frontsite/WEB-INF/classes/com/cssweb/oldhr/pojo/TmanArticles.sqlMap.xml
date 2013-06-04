@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.oldhr.pojo.TmanArticles">
+
+	<typeAlias alias="tmanArticles" type="com.cssweb.oldhr.pojo.TmanArticles"/>
+
+	<!--result map-->
+	<resultMap id="tmanArticlesMap" class="tmanArticles">
+ 		<result property="appId" column="APPID" jdbcType="Long"/>
+ 		<result property="author" column="AUTHOR" jdbcType="String"/>
+ 		<result property="title" column="TITLE" jdbcType="String"/>
+ 		<result property="publish" column="PUBLISH" jdbcType="String"/>
+ 		<result property="belong" column="BELONG" jdbcType="String"/>
+ 		<result property="publish_date" column="PUBLISH_DATE" jdbcType="Date"/>
+ 		
+ 	</resultMap>
+  	
+	<select id="getTmanArticlesByAppId" parameterClass="Long" resultMap = "tmanArticlesMap">
+	  	select * from T_MAN_ARTICLES where APPID = #appId#
+ 	 </select>
+	
+	<select id="getTmanArticlesPages" parameterClass="java.util.Map" resultMap = "tmanArticlesMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	 </select>
+  
+  
+</sqlMap>

@@ -1,0 +1,140 @@
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.AssetIndebte">
+    <typeAlias alias="assetIndebte" type="com.cssweb.F10.gazx.stock.pojo.AssetIndebte"/>
+    <!--result map-->
+    <resultMap id="assetIndebteMap" class="assetIndebte">
+     <result column="BZ" property="bz" jdbcType="String" nullValue=""/>
+     <result column="jzrq" property="deadLine" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+     <result column="t_gszb_id" property="companyId"  jdbcType="Long" />
+     
+     
+     
+      <result column="YFGLGSK"   property="yfglgsk"  jdbcType="java.lang.Double" />
+      
+      <result column="GNPZJS"   property="gnpzjs"  jdbcType="java.lang.Double" />
+      
+      <result column="GJPZJS"   property="gjpzjs"  jdbcType="java.lang.Double" />
+      
+      <result column="YFGL"   property="yfgl"  jdbcType="java.lang.Double" />
+      
+      <result column="QTYFK"   property="qtyfk"  jdbcType="java.lang.Double" />
+      
+      <result column="YTFY"   property="ytfy"  jdbcType="java.lang.Double" />
+      
+      <result column="YTFZ"   property="ytfz"  jdbcType="java.lang.Double" />
+      
+      <result column="DIYSY"   property="diysy"  jdbcType="java.lang.Double" />
+      
+      <result column="QTLDFZ"   property="qtldfz"  jdbcType="java.lang.Double" />
+      
+      <result column="LDFZHJ"   property="ldfzhj"  jdbcType="java.lang.Double" />
+      
+      <result column="CQJK"   property="cqjk"  jdbcType="java.lang.Double" />
+      
+      <result column="YFZQ"   property="yfzq"  jdbcType="java.lang.Double" />
+      
+      <result column="CQYFK"   property="cqyfk"  jdbcType="java.lang.Double" />
+      
+      <result column="ZXYFK"   property="zxyfk"  jdbcType="java.lang.Double" />
+      
+      <result column="FZHJ"   property="fzhj"  jdbcType="java.lang.Double" />
+      
+      <result column="SSGDQY"   property="ssgdqy"  jdbcType="java.lang.Double" />
+      
+      <result column="ZBGJ"   property="zbgj"  jdbcType="java.lang.Double" />
+      
+      <result column="YYGJ"   property="yygj"  jdbcType="java.lang.Double" />
+      
+      <result column="GYJ"   property="gyj"  jdbcType="java.lang.Double" />
+      
+      <result column="WFPLR"   property="wfplr"  jdbcType="java.lang.Double" />
+      
+      <result column="HBZJ"   property="currencyFund"  jdbcType="java.lang.Double" />
+      
+      <result column="YSPJ"   property="yspj"  jdbcType="java.lang.Double" />
+      
+      <result column="YSGL"   property="ysgl"  jdbcType="java.lang.Double" />
+      
+      <result column="YSLX"   property="yslx"  jdbcType="java.lang.Double" />
+      
+      <result column="YSZK"   property="yszk"  jdbcType="java.lang.Double" />
+      
+      <result column="QTYSK"   property="qtysk"  jdbcType="java.lang.Double" />
+      
+      <result column="QHBZJ"   property="qhbzj"  jdbcType="java.lang.Double" />
+      
+      <result column="CH"   property="ch"  jdbcType="java.lang.Double" />
+      
+      <result column="DTFY"   property="dtfy"  jdbcType="java.lang.Double" />
+      
+      <result column="QTLDZC"   property="qtldzc"  jdbcType="java.lang.Double" />
+      
+      <result column="YSGLGSK"   property="ysglgsk"  jdbcType="java.lang.Double" />
+      
+      <result column="LDZCHJ"   property="ldzchj"  jdbcType="java.lang.Double" />
+      
+      <result column="CQGQTZ"   property="cqgqtz"  jdbcType="java.lang.Double" />
+      
+      <result column="GCWZ"   property="gcwz"  jdbcType="java.lang.Double" />
+      
+      <result column="ZJGC"   property="zjgc"  jdbcType="java.lang.Double" />
+      
+      <result column="GDZCQL"   property="gdzcql"  jdbcType="java.lang.Double" />
+      
+      <result column="WXZC"   property="wxzc"  jdbcType="java.lang.Double" />
+      
+      <result column="CQDTFY"   property="cqdtfy"  jdbcType="java.lang.Double" />
+      
+      <result column="ZCZJ"   property="zczj"  jdbcType="java.lang.Double" />
+      
+      <result column="DQJK"   property="dqjk"  jdbcType="java.lang.Double" />
+      
+      <result column="YFPJ"   property="yfpj"  jdbcType="java.lang.Double" />
+      
+      <result column="YingFZK"   property="yingfzk"  jdbcType="java.lang.Double" />
+      
+      <result column="XJGL"   property="xjgl"  jdbcType="java.lang.Double" />
+      
+      <result column="ysrzzlk"   property="ysrzzlk"  jdbcType="java.lang.Double" />
+      
+      <result column="yflx"   property="yflx"  jdbcType="java.lang.Double" />
+      
+      <result column="ljwnbzgsks"   property="ljwnbzgsks"  jdbcType="java.lang.Double" />
+      
+      
+    </resultMap> 
+    <!-- 公司ID，然后再根据公司ID取得资产负债信息集合 -->
+	<select id="getAssetIndebteByStockCode" resultMap="assetIndebteMap">    
+	   select BZ,jzrq,t_gszb_id,GNPZJS,GJPZJS,YFGL,QTYFK,YTFY,YTFZ,DIYSY,QTLDFZ,LDFZHJ,CQJK,
+		   YFZQ,CQYFK,ZXYFK,FZHJ,SSGDQY,ZBGJ,YYGJ,GYJ,WFPLR,HBZJ,YSPJ,YSGL,YSLX,YSZK,QTYSK,QHBZJ,
+		   CH,DTFY,QTLDZC,YSGLGSK,LDZCHJ,CQGQTZ,GCWZ,ZJGC,GDZCQL,WXZC,CQDTFY,ZCZJ,DQJK,YFPJ,YingFZK,
+		   XJGL,ysrzzlk,yflx,ljwnbzgsks,YFGLGSK
+	   from ZCFZB_x 
+	   where SCBZ = 0 and GKBZ = 1 and zxbz=1 and xdbz=0
+			<isNotNull prepend="and" property="companyId">
+				T_GSZB_ID = #companyId#
+			</isNotNull>
+			<isNotNull prepend="and" property="startDate">
+				to_char(jzrq,'yyyy-MM-dd')&gt;=#startDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+				to_char(jzrq,'yyyy-MM-dd')&lt;=#endDate#
+			</isNotNull>
+		order by jzrq desc
+	</select>      
+
+    <!-- 取日期列表 -->
+	<select id="getDateList" resultClass="String">    
+		select to_char(jzrq, 'yyyy-MM-dd') from 
+		   (select distinct jzrq
+			   from ZCFZB_x 
+			   where SCBZ = 0 and GKBZ = 1
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+			order by jzrq desc)
+	</select>
+	
+</sqlMap>

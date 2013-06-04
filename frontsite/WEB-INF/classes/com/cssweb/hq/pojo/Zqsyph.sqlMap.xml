@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hq.pojo.Zqsyph">
+
+	<typeAlias alias="Zqsyph" type="com.cssweb.hq.pojo.Zqsyph"/>
+
+	<!--result map-->
+
+  	<resultMap id="ZqsyphMap" class="Zqsyph">
+ 		<result property="zqdm" column="ZQDM"  jdbcType="String"/>
+ 		<result property="zqjc" column="ZQJC" jdbcType="String" />
+		<result property="dlsyl" column="DLSYL"    jdbcType="Double" nullValue="0.00"/>
+		<result property="flsyl" column="FLSYL"    jdbcType="Double" nullValue="0.00" />
+		<result property="fsrq" column="FSRQ"    jdbcType="Date" />
+		<result property="jg" column="JG"    jdbcType="Double" nullValue="0.00" />
+  	</resultMap>
+  	
+  	<select id="getZqsyph" resultMap = "ZqsyphMap" parameterClass="map">
+			select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<select id="getZqsyphgzCount" resultClass = "Integer" parameterClass="String">
+		select count(*) from zqzb a ,zqdqsyl b where a.T_ZQZB_ID=b.T_ZQZB_ID and a.ZQLX=#condition# and b.fsrq=(select max(fsrq)from zqdqsyl) and a.scbz=0 and a.gkbz=1
+	</select>
+	
+	<select id="getZqsyphqzCount" resultClass = "Integer" parameterClass="String">
+		select count(*) from zqzb a ,zqdqsyl b where a.T_ZQZB_ID=b.T_ZQZB_ID and a.ZQLX like '%$condition$' and b.fsrq=(select max(fsrq)from zqdqsyl) and a.scbz=0 and a.gkbz=1
+	</select>
+</sqlMap>
+

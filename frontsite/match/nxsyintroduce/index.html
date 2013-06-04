@@ -1,0 +1,246 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>广发证券"牛熊双赢"模拟交易大赛</title>
+<link href="css/common.css" rel="stylesheet" type="text/css" />
+<!-- Scroll -->
+<SCRIPT type=text/javascript src="js/jquery-1.4.2.min.js"></SCRIPT>
+<LINK rel=stylesheet type=text/css href="js/jScrollPane.css" media=all>
+<LINK rel=stylesheet type=text/css href="js/scrollBar.css" media=all>
+<SCRIPT type=text/javascript src="js/jquery.mousewheel.js"></SCRIPT>
+<SCRIPT type=text/javascript src="js/jScrollPane.js"></SCRIPT>
+</head>
+<body>
+<div id="foot">
+  <div class="main">
+    <div class="nav"><img src="images/nav.png" border="0" usemap="#Map"/>
+      <map name="Map" id="Map">
+        <area shape="rect" coords="76,16,133,33" href="#g_profile" />
+        <area shape="rect" coords="158,17,243,31" href="#main_mid" />
+        <area shape="rect" coords="269,16,325,32" href="#way" />
+        <area shape="rect" coords="349,17,433,32" href="#time" />
+        <area shape="rect" coords="458,17,519,33" href="#result_cy" />
+        <area shape="rect" coords="546,17,600,32" href="#result_jy" />
+        <area shape="rect" coords="628,17,729,34" href="#main_mid2" />
+        <area shape="rect" coords="754,15,813,33" href="#award" />
+        <area shape="rect" coords="840,17,900,35" href="#attention" />
+      </map>
+    </div>
+    <div class="profile">
+      <div class="content_tab"> <span class="toc1 hover1" id="g_tenet"> </span> <span class="toc2" id="g_profile"> </span> </div>
+      <div class="mod_b_bd">
+        <div class="con_tenet" style="display:block;"> 　　牛熊双赢模拟交易大赛,是国内首个由证券公司发起并主办的、以杠杆产品为交易标的的模拟交易赛事，大赛的宗旨是"增进杠杆产品认识，推广交易知识，提高交易水平"。
+          我们的目标是吸引众多投资高手同台竞技、各显身手,不断提高广大证券投资爱好者的操作水平，提供成功机会，让真正的实战高手实现自己的价值! <img alt="本次大赛的交易规则简明、奖品丰厚，期待广大投资爱好者的积极参与！" title="本次大赛的交易规则简明、奖品丰厚，期待广大投资爱好者的积极参与！" src="images/wz_02.jpg"/> </div>
+        <div class="con_profile" style="display:none; height:140px;OVERFLOW-y:auto; overflow-x: hidden;"> 　　本次交易大赛仅以牛熊双赢产品中的看涨份额和看跌份额为交易标的。客户可选择交易看涨份额或看跌份额，进行双向投资。看涨份额和看跌份额两类份额均具有2倍杠杆，即若指数上涨1%，看涨份额的净值将上涨2%，而看跌份额的净值将下跌2%；反之，若指数下跌1%，看跌份额的净值将上涨2%，看涨份额的净值将下跌2%。投资者可根据对市场的走势判断，进行买入看涨份额、买入看跌份额、卖出看涨份额或卖出看跌份额的操作。<br/>
+          <br/>
+ 　　本次交易大赛以一个月作为一期(共三期),每一期采用滚动运作方式。每个参赛者的初始虚拟资金为100万元，所获得的虚拟资金按照虚拟现金：看涨份额：看跌份额=2：1：1的市值比例关系进行统一转换，客户将以这部分资产作为初始资产进行模拟交易；每一周期结束时客户账户中所有资产全部转换为虚拟现金进行收益结算，上一周期结算后的下一交易日为下一周期开始日,并在下一周期开始时按上述相同的转换比例重新进行统一转换，所得资产作为客户下一个模拟交易周期的初始资产。 </div>
+      </div>
+    </div>
+    <div class="main_mid" id="main_mid">
+      <div class="clause">
+        <p>产品主要条款</p>
+        <img src="images/img_02.jpg"/> </div>
+      <div class="time" id="time">
+        <p class="time_p">大赛获奖公告</p>
+        <div class="win_tab"> <span class="toc1 hover3" id="win_a"> </span> <span class="toc2" id="win_m"> </span> </div>
+        <div class="win_c">
+        <div class="con_win1" style="display:block;"><img alt="" title="" src="images/win_01.gif"/></div>
+        <div class="con_win2" style="display:none;">        
+        <div class="result_tab3" onclick="dis2(0)" id=tit2 name=tit2>大赛第一期</div>
+        <div class="result_tab4" onclick="dis2(1)" id=tit2 name=tit2>大赛第二期</div>
+        <div class="result_tab4" onclick="dis2(2)" id=tit2 name=tit2>大赛第三期</div>
+        <div class="result_con2" id=sKey2 name=sKey2 style="display:;"><img alt="" title="" src="images/win_02.gif"/></div>
+        <div class="result_con2" id=sKey2 name=sKey2 style="display:none;"><img alt="" title="" src="images/win_03.gif"/></div>
+        <div class="result_con2" id=sKey2 name=sKey2 style="display:none;"><img alt="" title="" src="images/win_04.gif"/></div> 
+        </div>
+      </div>  
+        <div class="way" id="way"> 　　参赛者请登录广发证券首页<a href="http://www.gf.com.cn" target="_blank">（http://www.gf.com.cn )，</a>阅读相关规则及公告信息，按照页面提示注册参赛。
+          <p><a href="http://www.gf.com.cn/match/nxsy/login.jsp"> </a></p>
+        </div>
+      </div>
+    </div>
+    <div class="main_mid2" id="main_mid2">
+      <div class="award" id="award"><img style="float:left" src="images/addimg/jp_01.jpg"/>
+        <div class="award_con"> 
+          <SCRIPT type=text/javascript>
+	$(document).ready(function(){
+		$("#scrollContent").jScrollPane();
+		$("#scrollContent1").jScrollPane();
+	});
+    </SCRIPT>
+          <p>　　大赛共三期,每期设月度交易状元，三期累计设交易总冠军,计算方法:</p>
+          <div id=scrollContent class="scrollArea scroll-pane">
+            <div style="width:245px;"> <span>"月度收益奖"（共18名）:</span><br />
+              <strong>奖项设置：</strong>按照所有参赛帐户的当月收益率进行排名，每月前六名获得"月度收益奖"。<br />
+              <strong>奖品设置（每一期）：</strong> <br />
+              一等奖（1名）：获得税前奖励1500元（注：本说明中所指的金额数据均为税前奖励金额，广发证券将为获奖者代扣代缴个人所得税，税率为20%。下同）；<br />
+              二等奖（2名）：每人获得税前奖励1200元；<br />
+              三等奖（3名）：每人获得税前奖励1000元；<br />
+              <strong>排名规则：</strong><br />
+              1. 账户当月收益率=账户当月月末资产总值/账户当月月初资产总值-1；账户期初资产总值为参赛者成功申请账户日收盘后，账户的资产总值或本期初始日账户资产总值。<br />
+              2. 参与"月度收益奖"评奖的参赛者，账户注册时间不少于5个交易日或当月交易笔数不低于25笔。<br />
+              3. 若当期出现收益率排名相同名次，则相同名次的参赛者按如下规则顺序进行再排名：<br />
+              （1）当月交易笔数孰多者排名优先；<br />
+              （2）自注册日至当期期末的累计交易笔数孰多者排名优先；<br />
+              （3）注册时间孰早者排名优先。 <br />
+              <br />
+              <span>"收益总冠军"（共9名）：</span><br />
+              奖项设置：按账户三个月累计收益率确定排名，前九名分别获得收益总冠军一、二、三奖。<br />
+              <strong>奖品设置：</strong><br />
+              一等奖（1名）：获得苹果Macbook air一台或税前等值奖金；<br />
+              二等奖（3名）：每人获得苹果New Ipad一台或税前等值奖金；<br />
+              三等奖（5名）：每人获得税前奖励2000元；<br />
+              上述奖项若有调整，主办人将在广发证券网站（<a href="http://www.gf.com.cn" target="_blank">www.gf.com.cn</a>）牛熊双赢模拟交易有奖大赛网页进行公告，敬请参赛者留意。
+              主办人将不因本次大赛的奖项调整而承担任何责任。<br />
+              <strong>排名规则：</strong><br />
+              1. 累计收益率=账户到期日资产总值/初始资产净值（即100万）-1。
+              2. 参与"收益总冠军"评奖的参赛者，账户注册时间不低于20
+              个交易日或交易笔数不低于100笔。
+              3. 获得"收益总冠军"奖的参赛者不参与"月度收益奖"评选。
+              4. 若累计收益排名出现相同名次，则相同名次的参赛者按如下规则顺序进行再排名：
+              （1）自注册日至期末的累计交易笔数孰多者排名优先
+              （2）注册时间孰早者排名优先 </div>
+          </div>
+        </div>
+        <div class="award_sm">为了证明表彰参赛者的操作水平，我们还将给获奖选手颁发"广发证券牛熊双赢模拟交易大赛"获奖证书。</div>
+      </div>
+      <div class="result">
+        <div id=scrollContent1 class="scrollArea scroll-pane1" style=" overflow: auto;">
+          <div style="width:195px; height:562PX;"> <img src="images/addimg/result.gif"/></div>
+        </div>
+      </div>
+    </div>
+    <div class="result_cy" id="result_cy">
+      <div class="list_tit">参与规则</div>
+      <div class="list_body">
+        <div class="result_tab" onclick="dis(0)" id=tit name=tit>参加条件</div>
+        <div class="result_tab2" onclick="dis(1)" id=tit name=tit>参与时间</div>
+        <div class="result_tab2" onclick="dis(2)" id=tit name=tit>账户初始资产</div>
+        <div class="result_con" id=sKey name=sKey style="display:;">　　任何中国公民均可参加，但必须先注册（包括身份证、邮箱及联系电话），身份证信息、个人资料及联系电话请一定准确填写（一个身份证只允许注册一个帐号，不填写正确身份证号码及联系方式将无法参与领奖），且每一电脑MAC地址参与模拟交易大赛的有效人数上限为3人，多于3人本MAC地址所有参赛者取消获奖资格。 </div>
+        <div class="result_con" id=sKey name=sKey style="display:none;">　　投资者可于<strong>2012年9月10日-2012年12月7日</strong>期间任意交易日申请参与。其中，<strong>2012年9月10日-2012年9月14日</strong>为推广期。</div>
+        <div class="result_con" id=sKey name=sKey style="display:none;">　每个帐户的初始虚拟资产为100万，其中包括50万虚拟现金，25万份额的看涨股份与25万份额的看跌股份。 <br />
+          <strong>帐户结算与清算规则 : </strong>系统对每日收盘后对账户当日成交进行清算。<br />
+          <strong>净资产 =虚拟现金余额+看涨份额资产总值+看跌份额资产总值</strong><br />
+          <strong>期末清算:</strong>系统在大赛终止日对所有参赛帐户进行清算并折算为虚拟现金。 </div>
+      </div>
+      <div class="list_foot"></div>
+    </div>
+    <div class="result_jy" id="result_jy">
+      <div class="list_tit">交易规则</div>
+      <div class="list_body">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td width="80"><strong>交易时间:</strong></td>
+            <td>交易时间与沪深两市的正常交易时间相同，为每个交易日的 9:15－11:30,13:00-15:00 </td>
+          </tr>
+          <tr>
+            <td width="80"><strong>交易机制:</strong></td>
+            <td>T+0，当日买入份额可当天卖出</td>
+          </tr>
+          <tr>
+            <td width="80" valign="top"><strong>申报数量:</strong></td>
+            <td>申报数量须为1000份的整数倍,若客户申报卖出且剩余份额低于1000份的,可一次卖出<br />
+              本次模拟交易大赛不设交易费用,即每次交易的手续费为0%. <br />
+              涨跌停板计算：涨停板：份额昨日净值×1.2 ， 跌停板：份额昨日净值×0.8</td>
+          </tr>
+          <tr>
+            <td width="80" valign="top"><strong>撮合成交:</strong></td>
+            <td>本次模拟交易的撮合成交采用协议报价、点击成交的交易方式。投资者可以通过以下两种方式之一进行完成交易成交：<br />
+              （1）自行申报、等待成交：投资者可以通过输入意向买入/卖出的委托数量及意向买入/卖出的委托价格，完成意向委托的申报，等待对手方点
+              击成交该委托申报。<br />
+              （2）点击对手方已有申报，直接成交：通过点击其他客户申报的意向委托，输入愿意买入/卖出的委托数量，完成成交。<br />
+              例如 ：当前有2000份看多份额的卖单申报，价格为1.500元/份，客户愿意按对手方委托的价格成交，并买入1000份的看多份额， 则可以选中
+              该卖单，并输入1000份的委托数量，点击确认完成交易。
+              对于当日未成交的委托，日终自动释放相应的被冻结的资金与份额。</td>
+          </tr>
+          <tr>
+            <td width="80"><strong>未 成 交:</strong></td>
+            <td>对于未成交的委托 , 可以随时撤单。</td>
+          </tr>
+          <tr>
+            <td width="80"><strong>免责条款:</strong></td>
+            <td>如果系统发生软硬件故障 , 导致模拟交易的运行处于非正常状态 , 公司有权暂停有关操作 , 并对异常时期内的买卖操作进行相应的处置。</td>
+          </tr>
+        </table>
+      </div>
+      <div class="list_foot"></div>
+    </div>
+    <div class="attention"  id="attention">
+      <div class="list_tit">注意事项</div>
+      <div class="list_body">
+        <P>申请的用户名必须健康、得体。如有违反，广发证券将及时与该参赛者沟通解决，否则，广发证券有权取消其参赛资格 ；</P>
+        <P>本赛程将不参与牛熊双赢产品以外的其他真实或虚拟投资，请参赛者注意；</P>
+        <P>广发证券有权对规则进行调整与完善，投资者可通过本次大赛的网页查询相关动态，敬请各位参赛者留意。</P>
+      </div>
+      <div class="list_foot"></div>
+    </div>
+  </div>
+</div>
+<!--宗旨、简介页签开始--> 
+<script type="text/javascript">
+$(document).ready(
+	//层切换
+	$("#g_tenet").click(
+		function (){
+			$(this).addClass("hover1");
+			$(".con_tenet").show();
+			$("#g_profile").removeClass("hover2");
+			$(".con_profile").hide();
+		}
+	),
+	$("#g_profile").click(
+		function (){
+			$(this).addClass("hover2");
+			$(".con_profile").show();
+			$("#g_tenet").removeClass("hover1");		
+			$(".con_tenet").hide();
+		}
+	),
+	$("#win_a").click(
+		function (){
+			$(this).addClass("hover3");
+			$(".con_win1").show();
+			$("#win_m").removeClass("hover4");		
+			$(".con_win2").hide();
+		}
+	),
+	$("#win_m").click(
+		function (){
+			$(this).addClass("hover4");
+			$(".con_win2").show();
+			$("#win_a").removeClass("hover3");		
+			$(".con_win1").hide();
+		}
+	)
+	
+);
+</script> 
+<!--宗旨、简介页签结束--> 
+
+<!--参与规则页签-->          
+<script language="javascript">
+  		var TID = 0;
+		var TID2= 0;
+      function dis(ID){
+      if(TID!=ID){
+       document.getElementsByName("sKey")[TID].style.display = "none";
+       document.getElementsByName("tit")[TID].className = "result_tab2";
+       document.getElementsByName("sKey")[ID].style.display = "";
+       document.getElementsByName("tit")[ID].className="result_tab";
+       TID = ID;
+      }
+      }
+	  function dis2(ID){
+	  if(TID2!=ID){
+       document.getElementsByName("sKey2")[TID2].style.display = "none";
+       document.getElementsByName("tit2")[TID2].className = "result_tab4";
+       document.getElementsByName("sKey2")[ID].style.display = "";
+       document.getElementsByName("tit2")[ID].className="result_tab3";
+       TID2 = ID;
+      }
+	  } 
+      </script>     
+<!--结束-->
+</body>
+</html>

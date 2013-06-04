@@ -1,0 +1,20 @@
+
+
+div {	FONT-SIZE: 12px}
+A {	TEXT-DECORATION: none;}
+a {color:#666666;}
+.blk_29 {padding:0; ZOOM: 1; POSITION: relative; height:174px; OVERFLOW: hidden;}
+.blk_29 .LeftBotton {background:url(../sportimg/sps_jiantou.gif) no-repeat; LEFT: 0px; FLOAT: left; WIDTH: 9px; HEIGHT: 13px;CURSOR: pointer; POSITION: absolute; TOP: 52px; }
+.blk_29 .RightBotton {background:url(../sportimg/sps_jiantou.gif) -9px top  no-repeat;RIGHT: 0px; FLOAT: right; WIDTH: 9px; HEIGHT:13px; CURSOR: pointer; POSITION: absolute; TOP: 52px;}
+
+.blk_29 .Cont {MARGIN: 0px auto; OVERFLOW: hidden; WIDTH: 875px; }
+
+.blk_29 .box{FLOAT:left;WIDTH:153px;height:auto; TEXT-ALIGN: center;margin:0px 11px;font-size:12px; display:inline;}
+
+.blk_29 .box IMG{DISPLAY: block; BACKGROUND:#fff; MARGIN: 0px auto;border:none; line-height:0px;WIDTH:153px;height:117px; }
+
+.blk_29 .box h1{color:#373737;font-size:14px; FONT-FAMILY: Microsoft YaHei, SimHei, Hei; text-align:center; line-height:34px;}
+.blk_29 .box h2{color:#3c80ab; background:#dff1ff;font-size:12px; line-height:23px; text-align:center; font-weight:lighter;}
+
+
+.rollphotos {MARGIN-TOP: 0px;WIDTH:893px;}

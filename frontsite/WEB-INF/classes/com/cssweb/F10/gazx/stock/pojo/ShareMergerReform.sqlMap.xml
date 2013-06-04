@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.ShareMergerReform">
+    <typeAlias alias="shareMergerReform" type="com.cssweb.F10.gazx.stock.pojo.ShareMergerReform"/>
+    <!--result map-->
+    <resultMap id="shareMergerReformMap" class="shareMergerReform">
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long"/>
+        <result column="FA" property="program" jdbcType="String" nullValue=""/>
+		<result column="DSHSYR" property="dmDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="GDDHSCCG" property="smFirst" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="GDDHDECCG" property="smSecond" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="GDDHDSCCG" property="smThird" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="GDDHGQDJR" property="smRecordDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="GDDHXCZKSJ" property="smDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="TPDM" property="voteCode" jdbcType="String" nullValue=""/>
+        <result column="TPJC" property="voteShortName" jdbcType="String" nullValue=""/>
+		<result column="LYSJ" property="roadshowDate" jdbcType="String" nullValue=""/>
+        <result column="LYWZ" property="roadshowWebsite" jdbcType="String" nullValue=""/>
+		<result column="GDDHJYGBR" property="smdAnnounceDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="LTGZCP" property="sharesApprovedTSH" jdbcType="double"/>
+        <result column="LTGFDP" property="sharesOpposedTSH" jdbcType="double"/>
+        <result column="LTGQQP" property="sharesDisclaimedTSH" jdbcType="double"/>
+        <result column="CJRS" property="joinNumber" jdbcType="Long"/>
+        <result column="CJBJLTGZS" property="totalShares" jdbcType="Long"/>
+        <result column="FLTGGDCNSX" property="ntshRepresentedComm" jdbcType="String" nullValue=""/>
+        <result column="SFTG" property="isPass" jdbcType="String" nullValue=""/>
+        <result column="SSQZGB" property="capitalBeforeChange" jdbcType="Long"/>
+        <result column="SSHZGB" property="capitalAfterChange" jdbcType="Long"/>
+        <result column="SSQLTGB" property="shareCapitalBeforeChange" jdbcType="Long"/>
+        <result column="SSHLTGB" property="shareCapitalAfterChange" jdbcType="Long"/>
+		<result column="GQDJR" property="recordDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="SSR" property="listDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="XJFFR" property="payDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="SM" property="comments" jdbcType="String" nullValue=""/>
+		<result column="JZRQ" property="endDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="WLTPQSR" property="webVoteStartDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="WLTPZZR" property="webVoteEndDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="GDDHTPQSR" property="suspensionStartDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result column="CQCXR" property="dividendDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+    </resultMap> 
+    
+    <select id="getShareMergerReform" resultMap="shareMergerReformMap" >    
+    	SELECT * FROM (   
+	     SELECT
+				T_GSZB_ID,
+				FA,
+				DSHSYR,
+				GDDHSCCG,
+				GDDHDECCG,
+				GDDHDSCCG,
+				GDDHGQDJR,
+				GDDHXCZKSJ,
+				TPDM,
+				TPJC,
+				LYSJ,
+				LYWZ,
+				GDDHJYGBR,
+				LTGZCP,
+				LTGFDP,
+				LTGQQP,
+				CJRS,
+				CJBJLTGZS,
+				FLTGGDCNSX,
+				SFTG,
+				SSQZGB,
+				SSHZGB,
+				SSQLTGB,
+				SSHLTGB,
+				GQDJR,
+				SSR,
+				XJFFR,
+				SM,
+				JZRQ,
+				WLTPQSR,
+				WLTPZZR,
+				GDDHTPQSR,
+				CQCXR
+		FROM GQFZ
+			  where SCBZ=0 and GKBZ=1
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+		order by JZRQ desc
+		) WHERE ROWNUM = 1
+	</select>
+</sqlMap>	

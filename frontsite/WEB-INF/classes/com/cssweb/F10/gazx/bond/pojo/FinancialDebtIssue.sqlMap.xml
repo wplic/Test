@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.bond.pojo.FinancialDebtIssue">
+
+	<typeAlias alias="financialDebtIssue"
+		type="com.cssweb.F10.gazx.bond.pojo.FinancialDebtIssue" />
+
+	<!--result map-->
+	<resultMap id="financialDebtIssueMap" class="financialDebtIssue">
+
+		<!-- 发行主体 -->
+		<result property="companyId" column="T_GSZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券 -->
+		<result property="debt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc"
+			jdbcType="java.lang.String" />
+
+		<!-- 实际发行规模 -->
+		<result property="financeDebtActualIssueModel" column="SJFxGM"
+			jdbcType="java.lang.Long" />
+
+		<!-- 参考收益率 -->
+		<result property="financeDebtCompareSyRate" column="CKSYL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 票面金额 -->
+		<result property="financeDebtCouponNum" column="PMJE"
+			jdbcType="java.lang.Double" />
+
+		<!-- 票面利率 -->
+		<result property="financeDebtCouponRate" column="PMLL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 缴款日 -->
+		<result property="financeDebtDueDate" column="JKR"
+			jdbcType="java.util.Date" />
+
+		<!-- 发行日 -->
+		<result property="financeDebtIssueDate" column="FxR"
+			jdbcType="java.util.Date" />
+
+		<!-- 金融债发行ID -->
+		<result property="financeDebtIssueId" column="T_JRZFX_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 发行价格 -->
+		<result property="financeDebtIssuePrice" column="Fxjg"
+			jdbcType="java.lang.String" />
+
+		<!-- 预计发行规模 -->
+		<result property="financeDebtIssueSize" column="YJFxGM"
+			jdbcType="java.lang.String" />
+
+		<!-- 退市日 -->
+		<result property="financeDebtLeftDate" column="TSR"
+			jdbcType="java.util.Date" />
+
+		<!-- 债券交易地点 -->
+		<result property="financeDebtMakePlace" column="ZQJYDD"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券期限 -->
+		<result property="financeDebtMaturity" column="ZQQX"
+			jdbcType="java.lang.String" />
+
+		<!-- 到期日 -->
+		<result property="financeDebtMaturityDate" column="DQR"
+			jdbcType="java.util.Date" />
+
+		<!-- 金融债名称 -->
+		<result property="financeDebtName" column="JRZMC"
+			jdbcType="java.lang.String" />
+
+		<!-- 兑付期 -->
+		<result property="financeDebtPaymentPeriod" column="DFQ"
+			jdbcType="java.lang.String" />
+
+		<!-- 年付息次数 -->
+		<result property="financeDebtPayRateTimes" column="Hbfxfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 计息方式 -->
+		<result property="financeDebtRecordRateModel" column="Jxfs"
+			jdbcType="java.lang.String" />
+
+		<!-- 债权债务登记日 -->
+		<result property="financeDebtRegistrationDate" column="ZQZWDJR"
+			jdbcType="java.util.Date" />
+
+		<!-- 上市日 -->
+		<result property="financeDebtTradeDate" column="SSR"
+			jdbcType="java.util.Date" />
+
+		<!-- 金融债类型 -->
+		<result property="financeDebtType" column="JRZLX"
+			jdbcType="java.lang.String" />
+
+		<!-- 起息日 -->
+		<result property="financeDebtValueDate" column="QXR"
+			jdbcType="java.util.Date" />
+
+		<!-- 公司名称 -->
+		<result property="companyName" column="gsmc"
+			jdbcType="java.util.Date" />
+
+	</resultMap>
+
+	<!-- 根据债券代码查找金融债发行 -->
+	<select id="getFinancialDebtIssueByBondCode"
+		resultMap="financialDebtIssueMap" parameterClass="String">
+		SELECT a.T_ZQZB_ID, a.T_JRZFX_ID, a.T_GSZB_ID, a.JRZMC, a.JRZLX,
+		a.YJFxGM, a.SJFxGM, a.PMJE, a.PMLL, a.Jxfs, a.Hbfxfs, a.Fxjg,
+		a.ZQQX, a.CKSYL, a.FxR, a.QXR, a.ZQZWDJR, a.JKR, a.DQR, a.SSR,
+		a.TSR, a.DFQ, a.ZQJYDD, b.zqjc, b.zqdm, c.gsmc FROM JRZFX a,zqzb
+		b, gszb c where a.T_ZQZB_ID = b.t_Zqzb_Id and c.t_gszb_id =
+		a.t_gszb_id and b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ = 1
+		and rownum = 1 order by zqdm desc
+	</select>
+
+</sqlMap>

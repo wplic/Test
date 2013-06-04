@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.sunnyPOF.pojo.SunnyExchange">
+	<typeAlias alias="SunnyExchange" type="com.fortuneage.sunnyPOF.pojo.SunnyExchange"/>
+	
+	<resultMap class="SunnyExchange" id="SunnyExchangeResult">
+		<result property="id" column="id" jdbcType="java.lang.Integer"/>
+		<result property="fundcode" column="fundcode" jdbcType="String"/>
+		<result property="fundname" column="prod_name" jdbcType="String"/>
+		<result property="custno" column="custno" jdbcType="java.lang.Integer"/>
+		<result property="exchangetype" column="exchangetype" jdbcType="String"/>
+		<result property="exchangedate" column="exchangedate" jdbcType="Date"/>
+		<result property="exchangeshare" column="exchangeshare" jdbcType="java.lang.Double"/>
+		<result property="exchangemoney" column="exchangemoney" jdbcType="java.lang.Double"/>
+		<result property="exchangeprice" column="exchangeprice" jdbcType="java.lang.Double"/>
+		<result property="dividendsmethod" column="dividendsmethod" jdbcType="String"/>
+		<result property="dividendsscale" column="dividendsscale" jdbcType="java.lang.Double"/>
+		<result property="dividendsdate" column="dividendsdate" jdbcType="Date"/>
+	</resultMap>
+	<select id="getSunnyExchangesBySqltoPage" resultMap="SunnyExchangeResult" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	
+	<select id="getSunnyExchangeCountByCustNo" resultClass="java.lang.Integer" parameterClass="java.lang.Integer">
+		select count(*) from sunny_exchange where custno=#value#
+	</select>
+	
+	<select id="getCountByEXno" resultClass="java.lang.Integer">
+		select count(*) from SUNNY_EXCHANGE
+	</select>
+	
+	<select id="getwhereSECountByCustno" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) from SUNNY_EXCHANGE ec left join sunny_fundinfo fn on (ec.fundcode=fn.prod_code) where 1 = 1 and fn.prod_name=#fundname# and ec.EXCHANGETYPE=#select_exchangedate# and ec.EXCHANGEDATE between #select_exchangedate# and #select_exchangedate1#
+	</select>
+	
+	<select id="getSunnyExchangeGetId" resultClass="java.lang.Integer">
+		select MAX(id) from sunny_exchange
+	</select>
+	<select id="selectExchangeById" parameterClass="java.lang.Integer" resultClass="SunnyExchange">
+		SELECT ID,
+		  FUNDCODE,
+		  prod_name,
+		  CUSTNO,
+		  EXCHANGETYPE,
+		  EXCHANGEDATE,
+		  EXCHANGESHARE,
+		  EXCHANGEMONEY,
+		  EXCHANGEPRICE,
+		  DIVIDENDSMETHOD,
+		  DIVIDENDSSCALE,
+		  DIVIDENDSDATE
+		FROM 
+		  SUNNY_EXCHANGE 
+		  left join 
+		    sunny_fundinfo 
+		  on 
+		    (SUNNY_EXCHANGE.fundcode=sunny_fundinfo.prod_code) 
+		where SUNNY_EXCHANGE.id=#value#
+	</select>
+	
+	<!-- 查询分红讯息   -->
+	<select id="selectDividendsByCust" parameterClass="java.lang.Integer" resultMap="SunnyExchangeResult">
+		SELECT ID,
+		  FUNDCODE,
+		  prod_name,
+		  CUSTNO,
+		  EXCHANGETYPE,
+		  EXCHANGEDATE,
+		  EXCHANGESHARE,
+		  EXCHANGEMONEY,
+		  EXCHANGEPRICE,
+		  DIVIDENDSMETHOD,
+		  DIVIDENDSSCALE,
+		  DIVIDENDSDATE
+		FROM 
+		  SUNNY_EXCHANGE 
+		  left join 
+		    sunny_fundinfo 
+		  on 
+		    (SUNNY_EXCHANGE.fundcode=sunny_fundinfo.prod_code) 
+		where SUNNY_EXCHANGE.custno=#custno# 
+		      and SUNNY_EXCHANGE.EXCHANGETYPE='分红'
+		order by EXCHANGEDATE desc
+	</select>
+	<insert id="insertSunnyExchange" parameterClass="SunnyExchange">
+		INSERT
+		INTO SUNNY_EXCHANGE
+		  (
+		    ID,
+		    FUNDCODE,
+		    CUSTNO,
+		    EXCHANGETYPE,
+		    EXCHANGEDATE,
+		    EXCHANGESHARE,
+		    EXCHANGEMONEY,
+		    EXCHANGEPRICE,
+		    DIVIDENDSMETHOD,
+		    DIVIDENDSSCALE,
+		    DIVIDENDSDATE
+		  )
+		  VALUES
+		  (
+		    #id#,
+		    #fundcode#,
+		    #custno#,
+		    #exchangetype#,
+		    #exchangedate#,
+		    #exchangeshare#,
+		    #exchangemoney#,
+		    #exchangeprice#,
+		    #dividendsmethod#,
+		    #dividendsscale#,
+		    #dividendsdate#
+		  )
+	</insert>
+	
+	<update id="updateSunnyExchange" parameterClass="SunnyExchange">
+		UPDATE SUNNY_EXCHANGE
+		SET
+			ID=#id#,
+		    FUNDCODE=#fundcode#,
+		    CUSTNO=#custno#,
+		    EXCHANGETYPE=#exchangetype#,
+		    EXCHANGEDATE=#exchangedate#,
+		    EXCHANGESHARE=#exchangeshare#,
+		    EXCHANGEMONEY=#exchangemoney#,
+		    EXCHANGEPRICE=#exchangeprice#,
+		    DIVIDENDSMETHOD=#dividendsmethod#,
+		    DIVIDENDSSCALE=#dividendsscale#,
+		    DIVIDENDSDATE=#dividendsdate#
+		WHERE ID            = #id#
+	</update>
+	
+	<!-- 通过ID删除一条历史记录 -->
+	<delete id="delExchangeById" parameterClass="java.lang.Integer">
+		DELETE
+		FROM SUNNY_EXCHANGE
+		WHERE ID  = #value#
+	</delete>
+</sqlMap>

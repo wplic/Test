@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMapConfig PUBLIC "-//iBATIS.com//DTD SQL Map Config 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-config-2.dtd">
+<sqlMapConfig>
+	<settings
+			cacheModelsEnabled="true"
+			enhancementEnabled="true"
+			lazyLoadingEnabled="true"
+			maxRequests="20"
+			maxSessions="10"
+			maxTransactions="50"
+			useStatementNamespaces="true"
+			/>
+	
+	
+	<sqlMap resource="com/cssweb/collect/pojo/BalFund.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/collect/pojo/Rightsreg.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/clientService/pojo/AssetInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/clientService/pojo/TradeNote.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/clientService/pojo/FundHold.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/clientService/pojo/LcUserInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/collect/pojo/AcctTrans.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/collect/pojo/AcctCust.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/assetManager/pojo/AssetUser.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/assetManager/pojo/StockZcgl.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/client/pojo/ZcglWebuser.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/systemset/pojo/TgfFundInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/collect/pojo/MgrInfo.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/collect/pojo/TradeLog.sqlMap.xml" />
+	<sqlMap resource="com/cssweb/collect/pojo/FundHistory.sqlMap.xml" />
+	
+	<!-- 下面配置属于阳光私募模块   -->
+	<sqlMap resource="com/fortuneage/sunnyPOF/pojo/SunnyCust.sqlMap.xml"/>
+	<sqlMap resource="com/fortuneage/sunnyPOF/pojo/SunnyCustshareHistory.sqlMap.xml"/>
+	<sqlMap resource="com/fortuneage/sunnyPOF/pojo/SunnyExchange.sqlMap.xml"/>
+	<sqlMap resource="com/fortuneage/sunnyPOF/pojo/SunnyFundinfo.sqlMap.xml"/>
+	<sqlMap resource="com/fortuneage/sunnyPOF/pojo/SunnyFundPrc.sqlMap.xml"/>
+	<sqlMap resource="com/fortuneage/sunnyPOF/pojo/SunnyCpcgwd.sqlMap.xml"/>
+	
+	</sqlMapConfig>

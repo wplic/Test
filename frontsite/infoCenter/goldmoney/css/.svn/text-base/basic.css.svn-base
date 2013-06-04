@@ -1,0 +1,131 @@
+@charset "utf-8";
+/* CSS Document */
+
+/** reset **/
+body{margin:0;font:12px/1.5 \5b8b\4f53, Simsun, Arial, sans-serif;}
+body, select, input, button, h1, h2, h3, h4, h5, h6 {font-size:12px}
+body, h1, h2, h3, h4, h5, h6, ul, ol, li, form, fieldset, p, dl, dt, dd, table, th, td, img, blockquote{margin:0;padding:0;border:0}
+input, button, textarea, img{line-height:normal;}
+abbr, acronym, address, cite, q, em, code, var, dfn, ins{font-style:normal;text-decoration:none;border:0}
+q:before, q:after{content:""}
+ul, ol, li{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+select, input, button{vertical-align:middle}
+a{text-decoration:none;color:#4d473f;}
+a:hover{text-decoration:underline;} 
+
+
+
+/**============ top ============**/
+.gflogo{padding:25px 0 0 40px;}
+.fl {float:left;}
+.gflogo a{background:url(../pic/logo.png) no-repeat;width:361px;height:46px;display:block;}
+.white{ color:#ffffff;}
+.white a{ color:#ffffff; text-decoration:none}
+.white a:hover{ color:#ffffff; text-decoration:none}
+.blank5 {clear:both;font-size:0px;height:5px;margin:0 auto; overflow:hidden}
+.blank10 {clear:both;font-size:0px;height:10px;margin:0 auto; overflow:hidden}
+
+/**============ 导航和底部图片 ===========**/
+.body_bg{ background:url(../pic/body_bg.png) no-repeat top center; margin:0 auto}
+.top{ background:url(../pic/logo.jpg) no-repeat center left; width:921px; height:69px; margin:0 auto}
+.topmenu{ width:921px; height:40px; background:url(../pic/menu_bg.jpg); margin:0 auto; text-align:center; font-size:14px; font-weight:bold}
+.topmenu_a{ width:146px;}
+.topmenu_a a:hover{ width:146px; height:40px;line-height:40px;background:url(../pic/menu_hover.jpg) no-repeat; text-align:center; display:block}
+.topmenu_hover{ width:146px;background:url(../pic/menu_hover.jpg) no-repeat; text-align:center}
+.login_bg{ background:url(../pic/login_bg2.jpg) repeat-x bottom; vertical-align:top; width:230px;height:212px}
+.input108{ width:106px; border:1px solid #c3c3c3;}
+.marqu{ background:url(../pic/list_line.gif) repeat-x bottom; line-height:34px; font-family:"宋体"}
+.cjh_con{ background:url(../pic/cjh_bg.jpg) no-repeat; width:353px; height:164px; margin:0 auto}
+.czh_con{ background:url(../pic/czh_bg.jpg) no-repeat; width:353px; height:164px; margin:0 auto}
+.cfh_con{ background:url(../pic/cfh_bg.jpg) no-repeat; width:353px; height:164px; margin:0 auto}
+.topsubmenu{ width:901px; margin:0 auto; height:23px; background:#ebecec; padding-left:20px}
+.topsubmenu li{ float:left; display:block; line-height:23px;}
+
+.topsubmenu .al{ background:url(../pic/list_02.jpg) no-repeat left center; text-indent:15px; margin-right:18px; display:block}
+.topsubmenu .al a:hover,.topsubmenu .al .active{ background:url(../pic/list_03.jpg) no-repeat left center;display:block}
+.login_txt{ width:178px; margin-left:auto; margin-right:auto; background:url(../pic/list_05.gif) no-repeat left center; height:20px; line-height:20px; font-weight:bold; font-size:14px; color:#000000; text-indent:15px;}
+
+/**============ 底部 ==============**/
+.gffoot{background:url("../pic/gffooterbg.gif") no-repeat scroll 0 0 #FFFFFF;padding:45px 40px 0;width:890px;}
+.tc{text-align: center;}
+.gffoot table{color:#333333;}
+
+
+/** global **/ 
+body{background:url(../images/collbdbgRepeat-x.png) top repeat-x;}
+.phd, .pbd, .pft{width:920px;margin:0 auto;}
+.cl{clear:both;height:0;overflow:hidden;}
+.mod{margin-bottom:10px;}
+.mft{overflow:hidden;}
+.mhd .more{float:right; margin-right:9px; display:inline;color:#a5aaaf; outline:none}
+.date{ float:right;color:#4c4747;}
+
+.pbd{width:922px;margin:0 auto;overflow:hidden;}
+.pt-side{width:200px;float:left;}
+.pt-main{width:708px;float:right;}
+
+/* location */
+.location{height:34px;line-height:34px;color:#6f6f6f;}
+.location a{margin:0 5px;color:#6f6f6f;}
+
+/* mod01 */
+.mod01{margin-bottom:4px;}
+.mod01 .mhd{heigth:37px;padding-left:50px;background:url(../images/lanmu.png) no-repeat;}
+.mod01 .mhd h2{color:#1a4f93;line-height:37px;font-size:14px;}
+.mod01 .mbd{border:1px solid #c1c1bf;border-width:0 1px;}
+
+/* mod02 */
+.mod02{margin-bottom:8px;}
+.mod02 .mhd{height:25px;padding:4px 0 0 35px;background:url(../images/lanmu02.png) no-repeat;}
+.mod02 .mhd h2{color:#cc0001;}
+.mod02 .mbd{padding-top:4px;}
+
+/* mod02 */
+.mod03{margin-bottom:8px;}
+.mod03 .mhd{height:25px;padding:4px 0 0 35px;background:url(../images/lanmu02.png) no-repeat 0 -40px;}
+.mod03 .mhd h2{color:#cc0001;}
+.mod03 .mbd{padding-top:4px;}
+
+/* discli01 */
+.discli01{vertical-align:top;}
+.discli01 li{padding-left:65px;border-bottom:2px solid #ebebeb;line-height:32px;background:url(../images/discli01.png) no-repeat 53px 13px; vertical-align:top;}
+
+/* table01 */
+.table01{width:100%;}
+.table01 th{height:32px;line-height:32px; border:1px solid #d1d1cf;border-bottom:2px solid #ebebeb;background-color:#f7f7f7; color:#133864;}
+.table01 td{height:32px;line-height:32px;text-align:center;border:1px solid #d1d1cf;}
+.table01 .cpmc{width:99px;}
+.table01 .rq{width:111px;}
+.table01 .kmgm{width:112px;}
+.table01 .dqn{width:131px;}
+.table01 .tqz{width:144px;}
+.table01 .butt01{width:44px;height:21px;color:#fff;line-height:20px;display:inline-block;background:url(../images/butt.png) no-repeat;}
+
+/* table02 */
+.table02{width:100%;color:#6e6e6e;}
+.table02 th{width:120px;height:32px;line-height:32px;padding-right:11px; font-weight:normal;border:1px solid #d1d1cf;border-bottom:2px solid #ebebeb;background-color:#f7f7f7; border-right:2px solid #ebebeb; text-align:right;}
+.table02 td{height:32px;padding-left:6px;text-align:left;border:1px solid #d1d1cf;border-bottom:2px solid #ebebeb;}
+.table02 .cpmc{width:99px;}
+.table02 .rq{width:111px;}
+
+/* table03 */
+.table03{width:100%; }
+.table03 th{height:32px;line-height:32px; border:1px solid #d1d1cf;border-bottom:2px solid #ebebeb;background-color:#f7f7f7; color:#133864;}
+.table03 td{height:32px;line-height:32px; color:#6d6d6d;text-align:center;border:1px solid #d1d1cf;}
+.table03 .cpmc{width:108px;}
+.table03 .rq{width:116px;}
+.table03 .kmgm{width:161px;}
+.table03 .dqn{}
+.table03 .butt01{width:44px;height:21px;color:#fff;line-height:20px;display:inline-block;background:url(../images/butt.png) no-repeat;}
+
+/* mod-fxts */
+.mod-fxts .mbd{padding:12px 14px;line-height:22px;color:#6e6e6e; border-bottom:1px solid #c1c1bf;}
+
+/* pageBar */
+.pageBar{text-align:center;padding:20px 0 8px;color:#575757;}
+.pageBar .summary{margin-right:5px;}
+.pageBar a{margin:0 5px; color:#575757;}
+.pageBar a:hover{color:#ff0101;}
+.pageBar font{margin:0 5px;color:#ff0101;text-decoration:underline;}
+.pageBar input{margin-right:6px;}

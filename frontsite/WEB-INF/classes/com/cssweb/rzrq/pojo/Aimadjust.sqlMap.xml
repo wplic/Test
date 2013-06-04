@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.Aimadjust">
+
+	<typeAlias alias="aimadjust" type="com.cssweb.rzrq.pojo.Aimadjust" />
+
+	<resultMap id="aimadjustMap" class="aimadjust">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="type" column="TYPE" jdbcType="String"/>
+		<result property="code" column="CODE" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String" />
+	    <result property="startDate" column="START_DATE" jdbcType="Date" />
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="Date" />
+	    <result property="auditing" column="AUDITING" jdbcType="String" />
+	</resultMap>
+	
+	<select id="getAimadjustByTypeAndStartDate" parameterClass="java.util.Map" resultMap="aimadjustMap">
+		 <![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$
+			        ) temp
+			    
+			    )
+			
+		 ]]> 
+	</select>
+
+	<insert id="insertAimadjust" parameterClass="aimadjust">
+		INSERT into T_RZRQ_AIMADJUST ( ID, TYPE,CODE,NAME,START_DATE,PUBLISH_DATE) VALUES 
+		(#id#,#type#, #code#,#name#,#startDate#,#publishDate#)
+	</insert>
+	<select id="getAimadjustNewStartDate" parameterClass="Long" resultMap="aimadjustMap">
+		select * from T_RZRQ_AIMADJUST t where 1=1 and rownum &lt; 2  order by START_DATE desc
+	</select>
+	
+	<select id="getAimadjustByStartDate" parameterClass="String" resultMap="aimadjustMap">
+		select * from T_RZRQ_AIMADJUST t where 1=1 and to_char(START_DATE,'yyyy-mm-dd') = #startDate#
+	</select>
+	
+	<update id="updateAimadjust" parameterClass="aimadjust">
+		update T_RZRQ_AIMADJUST
+		 set 
+		 	TYPE = #type#,
+			CODE= #code#,
+			NAME = #name#,
+			START_DATE = #startDate#,
+			PUBLISH_DATE = #publishDate#,
+			AUDITING='0'
+		where id=#id#
+	</update>
+	<update id="updateAimadjustByAuditIng" parameterClass="aimadjust">
+		update T_RZRQ_AIMADJUST
+		 set 
+		 	AUDITING = #auditing#
+		where id=#id#
+	</update>
+	
+
+	<delete id="deleteAimadjust" parameterClass="aimadjust">
+		delete from T_RZRQ_AIMADJUST where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteAimadjustById" parameterClass="Long">
+		delete from T_RZRQ_AIMADJUST where id = #value#
+	</delete>
+	
+	<select id="getAimadjustAll" resultMap="aimadjustMap">
+		select * from T_RZRQ_AIMADJUST 
+	</select>
+
+	<select id="getAimadjustById" parameterClass="Long" resultMap="aimadjustMap">
+		select * from T_RZRQ_AIMADJUST where id= #id#
+	</select>	
+
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getAimadjustByPage" parameterClass="java.util.Map" resultMap = "aimadjustMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  
+</sqlMap>

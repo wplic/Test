@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.notify.pojo.Notify">
+
+	<typeAlias alias="notify" type="com.cssweb.notify.pojo.Notify"/>
+	
+	<!--result map-->
+	<resultMap id="notifyMap" class="notify">
+ 		<result property="id" column="INFO_ID" jdbcType="Long"/>
+ 		<result property="title" column="INFO_TITLE" jdbcType="String"/>
+ 		<result property="contentId" column="INFO_CONTENTID" jdbcType="Long"/>
+ 		<result property="time" column="INFO_TIME" jdbcType="Date"/>
+ 		<result property="state" column="INFO_STATE" jdbcType="Long"/>
+ 		<result property="inputName" column="INPUTNAME" jdbcType="String"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insertNotify" parameterClass="notify" >
+		  insert into NOTIFY (INFO_ID,INFO_TITLE,INFO_CONTENTID,INFO_TIME,INFO_STATE,INPUTNAME,EXT1,EXT2,EXT3,EXT4)
+		  				values (#id#,#title#,#contentId#,#time#,#state#,#inputName#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	
+	<update id="updateNotify" parameterClass="notify">
+		  update NOTIFY 
+		  	set INFO_TITLE=#title#,INFO_CONTENTID=#contentId#,INFO_TIME=#time#,INFO_STATE=#state#,
+		  			INPUTNAME=#inputName#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where INFO_ID=#id#
+	</update>
+	
+	<delete id="deleteById" parameterClass="Long">
+	  	delete NOTIFY where INFO_ID=#id#
+	</delete>
+	
+	<select id="getById" parameterClass="Long" resultMap = "notifyMap">
+	  	select * from NOTIFY where INFO_ID = #id#
+	</select>
+	
+
+  
+    <select id="getNotifyPagingMap" parameterClass="java.util.Map" resultMap = "notifyMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id ="getNotifyAll" resultMap="notifyMap">
+  		select * from NOTIFY 
+  </select>
+  
+  <select id = "getNotifydtInfo" resultMap="notifyMap" parameterClass="String">
+        select * from NOTIFY where EXT1=#ext1# and ROWNUM &lt; 5
+  </select>
+  
+  <select id = "getNotifyggInfo" resultMap="notifyMap">
+  		 select * from NOTIFY where EXT1=#ext1# and ROWNUM &lt; 5
+  
+  </select>
+  
+  
+  <select id = "getNotifyInfoByDeptId" parameterClass="Long" resultMap="notifyMap">
+  		select * from ( select * from NOTIFY where  INFO_ID in  (select NID from NOTIFYDEPT where  DID = #DID#) and Ext1='0' order by INFO_TIME desc)    where rownum &lt; 7	
+  </select>
+  
+  <select id = "getNotifyByAllCount" parameterClass="String"  resultMap="notifyMap">
+ 	 $sql$
+  </select>
+ 
+  <select id = "getNotifyInfoggByDeptId" parameterClass = "Long" resultMap="notifyMap">
+  		select * from ( select * from NOTIFY where  INFO_ID in  (select NID from NOTIFYDEPT where  DID = #DID#) and Ext1='1' order by INFO_TIME desc)    where rownum &lt; 6	
+  </select>
+
+
+  
+  <select id = "getNotifyInfoByTypeMap" parameterClass = "java.util.Map" resultMap="notifyMap">
+  		   SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ ) row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+</sqlMap>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hq.pojo.Hqgz">
+
+	<typeAlias alias="Hqgz" type="com.cssweb.hq.pojo.Hqgz"/>
+
+	<!--result map-->
+
+  	<resultMap id="HqgzMap" class="Hqgz">
+ 		<result property="gjydq" column="gjydq"  jdbcType="String"/>
+ 		<result property="zsfl" column="zsfl"  jdbcType="String"/>
+ 		<result property="zsmc" column="zsmc"  jdbcType="String"/>
+ 		<result property="sp" column="sp" jdbcType="Double" nullValue="0.00"/>
+		<result property="kp" column="kp"    jdbcType="Double" nullValue="0.00"/>
+		<result property="zdf" column="zdf"    jdbcType="Double" nullValue="0.00"/>
+		<result property="fsrq" column="fsrq"   jdbcType="Date" />
+  	</resultMap>
+  	
+  	<select id="getHqgz" resultMap = "HqgzMap" parameterClass="map">
+			select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+</sqlMap>
+

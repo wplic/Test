@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.ThrPostInfo">
+				 
+	<typeAlias alias="thrPostInfo" type="com.cssweb.hr.pojo.ThrPostInfo"/>
+								
+	<!--result map-->
+	<resultMap id="thrPostInfoMap" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchId" column="BRAHCN_ID" jdbcType="Long" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 		<result property="sort" column="SORT" jdbcType="Long" />
+ 	</resultMap>
+ 	<resultMap id="thrPostInfoMap1" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchName" column="BRANCH_NAME" jdbcType="String" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 	</resultMap>
+ 	
+ 	<resultMap id="thrPostInfoPojoMap" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchId" column="BRAHCN_ID" jdbcType="Long" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 		<result property="fileId" column="FILEID" jdbcType="Long" />
+ 		<result property="sort" column="SORT" jdbcType="Long" />
+ 	</resultMap>
+ 	<resultMap id="thrPostInfoMaps1" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchName" column="BRANCH_NAME" jdbcType="String" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 		<result property="fileId" column="FILEID" jdbcType="Long" />
+ 	</resultMap>
+ 	
+ 	<resultMap id="thrPostInfoMap5" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchId" column="BRAHCN_ID" jdbcType="Long" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 		<result property="sort" column="SORT" jdbcType="Long" />
+ 	</resultMap>
+ 	
+ 	<resultMap id="thrPostInfoMap3" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchId" column="BRAHCN_ID" jdbcType="Long" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 		<result property="wish" column="WISH" jdbcType="String" />
+ 	</resultMap>
+ 	
+ 	<resultMap id="thrPostInfoMap4" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchId" column="BRAHCN_ID" jdbcType="Long" />
+ 		<result property="branchName" column="BRANCH_NAME" jdbcType="String" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 		<result property="wish" column="WISH" jdbcType="String" />
+ 	</resultMap>
+   <resultMap id="thrPostInfoMap9" class="thrPostInfo">
+ 		<result property="branchId" column="BRAHCN_ID" jdbcType="Long" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="branchName" column="BRANCH_NAME" jdbcType="String" />
+ 	</resultMap>	
+ 	<resultMap id="thrPostInfoMap10" class="thrPostInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="category" column="CATEGORY" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String" />
+ 		<result property="branchId" column="BRAHCN_ID" jdbcType="Long" />
+ 		<result property="branchName" column="BRANCH_NAME" jdbcType="String" />
+ 		<result property="postName" column="POST_NAME" jdbcType="String" />
+ 		<result property="postDetail" column="POST_DETAIL" jdbcType="String" />
+ 		<result property="workPlace" column="WORK_PLACE" jdbcType="String" />
+ 		<result property="postDuty" column="POST_DUTY" jdbcType="String" />
+ 		<result property="count" column="COUNT" jdbcType="Long" />
+ 		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+ 		<result property="endDate" column="END_DATE" jdbcType="java.util.Date" />
+ 		<result property="isHot" column="IS_HOT" jdbcType="String" />
+ 		<result property="auditing" column="AUDITING" jdbcType="String" />
+ 		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+ 	</resultMap>
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+  <insert id="insertThrPostInfo" parameterClass="thrPostInfo">
+		INSERT into T_HR_POSTINFO ( ID, CATEGORY,TYPE,BRAHCN_ID,POST_NAME,POST_DETAIL,WORK_PLACE,POST_DUTY,COUNT,START_DATE,END_DATE,IS_HOT,AUDITING,PUBLISH_DATE,SORT) VALUES 
+		(#id#,#category#, #type#,#branchId#,#postName#,#postDetail#,#workPlace#,#postDuty#,#count#,#startDate#,#endDate#,#isHot#,#auditing#,#publishDate#,#sort#)
+	</insert>
+
+	<update id="updateThrPostInfo" parameterClass="thrPostInfo">
+		update T_HR_POSTINFO
+		 set 
+		 	CATEGORY = #category#,
+			TYPE= #type#,
+			BRAHCN_ID = #branchId#,
+			POST_NAME = #postName#,
+			POST_DETAIL = #postDetail#,
+			WORK_PLACE = #workPlace#,
+			POST_DUTY = #postDuty#,
+			COUNT = #count#,
+			START_DATE = #startDate#,
+			END_DATE = #endDate#,
+			IS_HOT = #isHot#,
+			AUDITING = #auditing#,
+			PUBLISH_DATE = #publishDate#,
+			SORT = #sort#
+		where id=#id#
+	</update>
+	 <update id="updateThrPostInfoFileById" parameterClass="thrPostInfo">
+		  update T_HR_POSTINFO set FILEID=#fileId# where ID=#id#
+	</update>
+	<update id="updateThrPostInfoByAuditIng" parameterClass="thrPostInfo">
+		update T_HR_POSTINFO
+		 set 
+		 	AUDITING = #auditing#
+		where id=#id#
+	</update>
+	
+	<delete id="deleteThrPostInfoById" parameterClass="Long">
+		delete from T_HR_POSTINFO where id = #value#
+	</delete>
+		
+   <select id="getAllList" resultMap="thrPostInfoMap1" parameterClass="String">
+   		$sql$
+   </select>
+		
+   <select id="getAllList2" resultMap="thrPostInfoMap10" parameterClass="String">
+   		$sql$
+   </select>
+  
+  		
+   <select id="getPostByUserId" resultMap="thrPostInfoMap3" parameterClass="String">
+   		$sql$
+   </select>
+  		
+   <select id="getPostByUserId2" resultMap="thrPostInfoMap4" parameterClass="String">
+   		$sql$
+   </select>
+   
+   
+  <select id="getThrPostInfoPage" parameterClass="java.util.Map" resultMap = "thrPostInfoMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+   <select id="getThrPostList" parameterClass="java.util.Map" resultMap = "thrPostInfoMap1">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+    	select  tfo.ID, tfo.CATEGORY,tfo.TYPE,th.BRANCH_NAME,tfo.POST_NAME,tfo.POST_DETAIL,
+    			tfo.WORK_PLACE,tfo.POST_DUTY,tfo.COUNT,tfo.START_DATE,tfo.END_DATE,
+    			tfo.IS_HOT,tfo.AUDITING,tfo.PUBLISH_DATE 
+		    from T_HR_POSTINFO tfo,t_system_branch th 
+		    where tfo.END_DATE>=sysdate-1 and tfo.BRAHCN_ID=th.id and  tfo.AUDITING=1 
+    	<dynamic>
+    			
+					<iterate prepend="AND" property="category" open="(" close=")" conjunction="OR">  
+					  	 tfo.CATEGORY = '$category[]$'
+					</iterate>
+			
+				<!-- 
+						<isNotEmpty property="category"	prepend="AND">
+					  		tfo.CATEGORY = #category#
+						</isNotEmpty>
+				 -->	
+				
+				<isNotEmpty property="type"	prepend="AND">
+			  		tfo.TYPE = #type#
+				</isNotEmpty>
+	    </dynamic>	
+	  <!-- order by PUBLISH_DATE desc --> order by sort asc 
+     )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+   <select id="getThrPostListCount" parameterClass="java.util.Map" resultClass = "Integer">
+  		select  Count(*)
+		    from T_HR_POSTINFO tfo,t_system_branch th 
+		    where  tfo.END_DATE>=sysdate-1 and tfo.BRAHCN_ID=th.id and  tfo.AUDITING=1 
+    	<dynamic>
+    			<iterate prepend="AND" property="category" open="(" close=")" conjunction="OR">  
+					  	 tfo.CATEGORY = '$category[]$'
+				</iterate>
+    			<!--  
+				<isNotEmpty property="category"	prepend="AND">
+			  		tfo.CATEGORY = #category#
+				</isNotEmpty>-->
+				<isNotEmpty property="type"	prepend="AND">
+			  		tfo.TYPE = #type#
+				</isNotEmpty>
+	    </dynamic>	
+  </select>
+    <select id="getThrPostInfoById" parameterClass="Long" resultMap = "thrPostInfoPojoMap">
+    select * from T_HR_POSTINFO where 1=1 and ID = #id#
+  </select>
+  
+    <select id="getThrPostInfoPojoById" parameterClass="Long" resultMap = "thrPostInfoPojoMap">
+    select * from T_HR_POSTINFO where 1=1 and ID = #id#
+  </select>
+  <select id="getThrPostInfoById1" parameterClass="String" resultMap = "thrPostInfoMaps1">
+    $sql$
+  </select>
+   <select id="getThrPostInfoById5" parameterClass="String" resultMap = "thrPostInfoMap5">
+    $sql$
+  </select>
+
+	 <select id="getBranchNameAndPostNameByUserId" parameterClass="Long" resultMap = "thrPostInfoMap9">
+	    select f.BRAHCN_ID,s.BRANCH_NAME ,f.post_name from T_HR_APPLY_RECORDER t,T_HR_POSTINFO f ,t_system_branch s
+	  where f.BRAHCN_ID=s.id and f.AUDITING=1 and t.job_id=f.id and t.user_id=#userId#
+	  </select>
+	  
+	<update id="updateSort" parameterClass="Long">
+	 update T_HR_POSTINFO
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;#sort#
+	</update>
+  	<update id="updateSortAppend" parameterClass="Long">
+	 update T_HR_POSTINFO
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;=#sort#
+	</update>	
+	 <update id="updateSortStartEnd" parameterClass="java.util.Map">
+	 update T_HR_POSTINFO
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>
+	 <update id="updateSortEndStart" parameterClass="java.util.Map">
+	 update T_HR_POSTINFO
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>			  
+</sqlMap>

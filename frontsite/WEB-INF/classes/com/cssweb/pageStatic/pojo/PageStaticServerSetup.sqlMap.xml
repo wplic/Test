@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.pageStatic.pojo.PageStaticServerSetup">
+	<typeAlias alias="PageStaticServerSetup" type="com.cssweb.pageStatic.pojo.PageStaticServerSetup"/>
+	
+	<resultMap id="PageStaticServerSetupMap" class="PageStaticServerSetup">
+		<result column="SERVERID" property="serverId" jdbcType="long"/>
+		<result column="SETID" property="setId" jdbcType="long"/>
+		<result column="SERVER_TYPE" property="serverType" jdbcType="String"/>
+		<result column="SETUP_VALIDATE" property="setupValidate" jdbcType="String"/>
+		<result column="STARTTIME" property="startTime" jdbcType="java.util.Date"/>
+		<result column="CYCLE_TIME" property="cycleTime" jdbcType="long"/>
+		<result column="CYCLE_TOTLE_TIME" property="cycleTotleTime" jdbcType="long"/>	
+		<result column="LAST_RUN_TIME" property="lastRunTime" jdbcType="java.util.Date"/>
+		<result column="NEXT_RUN_TIME" property="nextRunTime" jdbcType="java.util.Date"/>		
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	
+	<select id="getServerSetupBySetId" resultMap="PageStaticServerSetupMap" parameterClass="long">
+		select SERVERID,SETID,SERVER_TYPE,SETUP_VALIDATE,STARTTIME,CYCLE_TIME,CYCLE_TOTLE_TIME,LAST_RUN_TIME,NEXT_RUN_TIME,EXT1,EXT2,EXT3,EXT4
+		FROM PAGESTATIC_SERVER_SETUP
+		where SETID = #setId# 
+	</select>
+	<update id="update" parameterClass="PageStaticServerSetup">
+		update PAGESTATIC_SERVER_SETUP set SERVERID=#serverId#,SERVER_TYPE = #serverType#, SETUP_VALIDATE =#setupValidate#, STARTTIME = #startTime#, CYCLE_TIME = #cycleTime#,
+		CYCLE_TOTLE_TIME = #cycleTotleTime#, LAST_RUN_TIME = #lastRunTime#, NEXT_RUN_TIME = #nextRunTime#,EXT1 = #ext1#, EXT2 = #ext2#, EXT3 = #ext3#, EXT4 = #ext4#
+	    where SETID = #setId# 
+	</update>
+	<insert id="insert" parameterClass="PageStaticServerSetup">
+		insert into PAGESTATIC_SERVER_SETUP(SERVERID,SETID,SERVER_TYPE,SETUP_VALIDATE,STARTTIME,CYCLE_TIME,CYCLE_TOTLE_TIME,LAST_RUN_TIME,NEXT_RUN_TIME,EXT1,EXT2,EXT3,EXT4) 
+					values(#serverId#,#setId#, #serverType#,#setupValidate#,#startTime#,#cycleTime#,#cycleTotleTime#,#lastRunTime#,#nextRunTime#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+    <delete id="deleteServerSetupByServerIdAndSetId"  parameterClass="long">
+		delete from PAGESTATIC_SERVER_SETUP where SETID = #setId# 
+	</delete>
+	<select id="getPageStaticServerSetupCount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+	</select>
+	<select id="getAllPageStaticServerSetup" resultMap="PageStaticServerSetupMap">
+       select * from PageStatic_Server_setup order by setid desc
+   </select> 
+</sqlMap>

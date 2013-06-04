@@ -1,0 +1,30 @@
+/*主页样式*/
+.branchtit1{ background:url(/pic/branches/branchtit1.jpg) no-repeat; height:25px; line-height:25px; text-indent:25px; color:#cc0000}
+.branchp1{ padding:12px; text-indent:2em; line-height:25px;}
+.kline{background-color:#eaeef1;padding:6px;}
+.kline .qieh{background:url(/pic/infoCenter/f10/klqh_bg.gif) repeat-x; height:27px; line-height:27px;}
+.kline .qieh ul{text-align:center;}
+.kline .qieh li{float:left; width:96px; height:27px; line-height:27px; font-size:14px; color:#3f4955; cursor:pointer;}
+.kline .qieh .down{ background:url(/pic/infoCenter/f10/kline_qh.jpg) no-repeat;color:#da251c;}
+.kline .qiebg{background-color:#FFF;border:1px solid #d5d5d7;padding:8px;}
+.kline .qiebg .neir{margin:0 auto; width:98%;}
+.kline .qiebg .neir .nleft{float:left; width:439px;}
+.kline .qiebg .neir .nright{float:right; width:209px; background:url(/pic/infoCenter/f10/mwu_bg.jpg) repeat-x bottom; border:1px solid #CCCCCC; padding:4px;}
+.kline .qiebg .neir .nright table{line-height:16px; text-align:left}
+.kline .qiebg .neir .nright table td{width:25%;}
+.f10_tab02{background:url(/pic/infoCenter/f10/f10_th02.jpg) repeat-x; line-height:25px; height:25px}
+.tab_xuxian25{}
+.tab_xuxian25 th{ text-align:center; background-image:url(/pic/infoCenter/f10/xuxian50.gif); line-height:25px;}
+.tab_xuxian25 td{background-image:url(/pic/infoCenter/f10/xuxian25.gif);line-height:25px;}
+.bcolor_white{background-color:#FFF;}
+.pd6{padding:6px;}
+.tab_sdgd .thtt{background:url(/pic/infoCenter/f10/sdgd_tt.jpg) repeat-x;border-left:1px solid #CCC;border-right:1px solid #CCC; line-height:28px;}
+
+#yywdcon{ width:688px; float:left}
+.serchbg{ background:url(/pic/branches/serchbg.gif) repeat-x; height:31px; line-height:31px; border:1px solid #cfcfcf;text-align:center}
+#yywdside{ width:226px; float:right; background:#eceff4}
+.yywd_box{ width:920px; margin:0 auto; background:url(/pic/branches/yywd_box.jpg);}
+.yywd_dz{ background:#ffffff url(/pic/branches/yywd_dz.jpg) no-repeat right bottom; }
+
+.f10_tab01 td{ padding-left:5px;}
+.f10_tab01 th{ background:url(/pic/infoCenter/f10/f10_th01.jpg) repeat-x bottom; padding-left:5px;}

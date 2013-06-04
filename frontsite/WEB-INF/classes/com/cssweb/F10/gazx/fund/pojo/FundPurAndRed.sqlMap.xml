@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundPurAndRed">
+
+	<typeAlias alias="fundPurAndRed" type="com.cssweb.F10.gazx.fund.pojo.FundPurAndRed" />
+
+	<!--result map-->
+	<resultMap id="fundPurAndRedMap" class="fundPurAndRed">
+		<result property="leastTransitionCount" column="ZDZHFE" jdbcType="java.lang.String" />
+		<result property="purchaseMostRates" column="ZGSGFL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="purchaseRates" column="SGFL" jdbcType="java.lang.String" />
+		<result property="purchaseStartDate" column="SGKSSJ" jdbcType="java.util.Date" />
+		<result property="redemptionStartDate" column="SHKSSJ" jdbcType="java.util.Date" />
+		<result property="id" column="T_JJSGYSHGD_ID" jdbcType="java.lang.Long" nullValue="0"/>		
+		<result property="purLeastCount" column="ZDSHFE" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="purLeastInvest" column="RGZDTZE" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="redemptionMostRates" column="ZGSHFL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="redemptionRates" column="SHFL" jdbcType="java.lang.String" />		
+		<result property="redLeastInvest" column="SGZDTZE" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="subscriptionRates" column="RGFL" jdbcType="java.lang.String" />
+		<result property="transitionDate" column="ZHKSSJ" jdbcType="java.util.Date" />
+	</resultMap>
+	
+	<!-- 根据基金代码查询申购与赎回规定对象 -->	
+	<select id="getFundPurAndRedListByCode" resultMap="fundPurAndRedMap" parameterClass="String">
+    	select jsd.ZDZHFE,jsd.ZGSGFL,jsd.SGFL,jsd.SGKSSJ,jsd.SHKSSJ,jsd.T_JJSGYSHGD_ID,jsd.ZDSHFE,
+    	jsd.RGZDTZE,jsd.ZGSHFL,jsd.SHFL,jsd.SGZDTZE,jsd.RGFL,jsd.ZHKSSJ
+		
+		from JJSGYSHGD  jsd, JJZB  j
+		
+		where jsd.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jsd.SCBZ=0 and jsd.GKBZ=1
+	</select>
+	
+</sqlMap>

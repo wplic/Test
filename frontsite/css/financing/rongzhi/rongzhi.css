@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+/**融智杯”融资融券仿真交易竞赛   by 陈思亮 2012/05/22**/
+#erp_staff {margin-left:20px; padding:0 15px 0 5px;}
+#regCustomForm .nickname {width:440px; margin:0 auto;}
+
+
+.columnMain .matchDetail {font-weight:800; font-size:14px;}
+.wrapright .columnOut h2 {font-weight:600;line-height:27px;}
+.columnOut .matchApply {border-left:1px solid #B1C8D7; border-right:1px solid #B1C8D7;}
+.columnMain .matchNoTextIndent {text-indent:0;}
+.columnMain .matchAward {font-weight:600;text-indent:0;}
+
+.feedback {margin-left:34px;}
+
+.feedback td {float:left; display:inline-block;}
+.feedback .ml100{margin-left:20px;}
+.feedback td input {width:170px;margin-bottom:15px; display:block; height:18px;}
+.feedback .w70{width:70px;}
+.feedback .w174{width:174px;}
+
+.tab_title li {float:left; line-height:30px; border:1px solid #C1DAD7; font-weight:700; text-align:center; width:15%; font-size:13px; color:#4F6B72;}
+.tab_title .rankNum {width:6%;}
+.tab_title .depart {width:25%;}
+.tab_title  .nick_name {width:17%;}
+.paging {float:right; padding-top:10px;}

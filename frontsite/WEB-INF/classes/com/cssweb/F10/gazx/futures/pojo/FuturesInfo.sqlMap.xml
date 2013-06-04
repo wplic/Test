@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.futures.pojo.FuturesInfo">
+
+	<typeAlias alias="futuresInfo" type="com.cssweb.F10.gazx.futures.pojo.FuturesInfo" />
+
+	<!--result map-->
+	<resultMap id="ResultMap" class="futuresInfo">
+		<result property="changePriceLimit" column="MRJGZDBDXZ" jdbcType="java.lang.String" />
+		<result property="contractMutil" column="JYDW" jdbcType="java.lang.String" />
+		<result property="contractOption" column="BZJGPZ" jdbcType="java.lang.String" />
+		<result property="contractOption1" column="TDJGPZ" jdbcType="java.lang.String" />
+		<result property="deliveryAddress" column="JGDD" jdbcType="java.lang.String" />
+		<result property="deliveryDate" column="JGRQ" jdbcType="java.lang.String" />
+		<result property="deliveryMethod" column="JGFS" jdbcType="java.lang.String" />
+		<result property="deliveryMonth" column="JGYF" jdbcType="java.lang.String" />
+		<result property="exchange" column="QHJYS" jdbcType="java.lang.String" />
+		<result property="fee" column="JYSXF" jdbcType="java.lang.String" />
+		<result property="futuresId" column="T_QHZB_ID" jdbcType="java.lang.Long" />
+		<result property="lastTradingDate" column="ZHJYR" jdbcType="java.lang.String" />
+		<result property="maintainRatio" column="JYBZJ" jdbcType="java.lang.String" />
+		<result property="priceUnit" column="BJDW" jdbcType="java.lang.String" />
+		<result property="product" column="QHPZ" jdbcType="java.lang.String" />
+		<result property="publishDate" column="FSRQ" jdbcType="java.lang.String" />	
+		<result property="tradingCode" column="JYDM" jdbcType="java.lang.String" />
+	</resultMap>
+	
+	
+	<!-- 根据期货主表ID，返回期货基本信息 -->
+	<select id="getFuturesInfo" resultMap="ResultMap" parameterClass="long">
+		select qb.mrjgzdbdxz,qb.jydw,qb.bzjgpz,
+	       qb.tdjgpz,qb.jgdd,qb.jgrq,qb.jgfs,
+	       qb.jgyf,qb.qhjys,qb.jysxf,qb.t_qhzb_id,
+	       qb.zhjyr,qb.jybzj,qb.bjdw,qb.qhpz,
+	       qb.fsrq,qb.jydm 
+	    from QHZB qb
+	    where  SCBZ = 0 AND GKBZ = 1
+		and qb.t_qhzb_id=#futuresId#
+		AND ROWNUM = 1 
+	</select>
+	
+	<!-- 根据期货交易所，返回该交易所所有品种 -->
+	<select id="getFuturesInfoByExchange" resultMap="ResultMap" parameterClass="String">
+		select qb.mrjgzdbdxz,qb.jydw,qb.bzjgpz,
+	       qb.tdjgpz,qb.jgdd,qb.jgrq,qb.jgfs,
+	       qb.jgyf,qb.qhjys,qb.jysxf,qb.t_qhzb_id,
+	       qb.zhjyr,qb.jybzj,qb.bjdw,qb.qhpz,
+	       qb.fsrq,qb.jydm 
+	    from QHZB qb
+	    where  SCBZ = 0 AND GKBZ = 1
+		and qb.QHJYS=#exchange#
+	</select>
+	
+	<!-- 根据交易代码，返回期货信息 -->
+	<select id="getFuturesInfoByTradingCode" resultMap="ResultMap" parameterClass="String">
+		select qb.mrjgzdbdxz,qb.jydw,qb.bzjgpz,
+	       qb.tdjgpz,qb.jgdd,qb.jgrq,qb.jgfs,
+	       qb.jgyf,qb.qhjys,qb.jysxf,qb.t_qhzb_id,
+	       qb.zhjyr,qb.jybzj,qb.bjdw,qb.qhpz,
+	       qb.fsrq,qb.jydm 
+	    from QHZB qb
+	    where  SCBZ = 0 AND GKBZ = 1
+		and qb.JYDM=#tradingCode#
+		AND ROWNUM = 1 
+	</select>
+	
+	
+</sqlMap>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.portal.pojo.BranchPortalElements">
+	<typeAlias alias="BranchPortalElements" type="com.cssweb.portal.pojo.BranchPortalElements"/>
+	<resultMap id="branchPortalElementsMap" class="BranchPortalElements">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="PROVINCE_ID" property="provinceId" jdbcType="String"/>
+		<result column="ELEMENT_ID" property="elementId" jdbcType="String"/>
+		<result column="ELEMENT_NAME" property="elementName" jdbcType="String"/>
+		<result column="TEMPLATE" property="template" jdbcType="String"/>
+		<result column="ORDER_NUM" property="orderNum" jdbcType="int"/>
+		<result column="Y_POSITION" property="y_Position" jdbcType="int"/>
+		<result column="STATE" property="state" jdbcType="int"/>
+		<result column="URL" property="url" jdbcType="String"/>
+		<result column="UPLOAD_ID" property="uploadId" jdbcType="int"/>
+		<result column="HEIGHT" property="height" jdbcType="int"/>
+		<result column="TYPE" property="type" jdbcType="String"/>
+		<result column="TITLE" property="title" jdbcType="String"/>
+		<result column="CONTENT" property="content" jdbcType="String"/>
+		<result column="HAS_SETUP" property="hasSetup" jdbcType="int"/>
+		<result column="SETUP_DIV_WIDTH" property="setupDivWidth" jdbcType="int"/>
+		<result column="SETUP_DIV_HEIGHT" property="setupDivHeight" jdbcType="int"/>
+		<result column="SETUP_DIV_TYPE" property="setupDivType" jdbcType="int"/>
+		<result column="SETUP_ACTION" property="setupAction" jdbcType="String"/>
+		<result column="SETUP_HAS_IMG_DIV" property="setupHasImgDiv" jdbcType="String"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+		<result column="EXT5" property="ext5" jdbcType="String"/>
+		<result column="EXT6" property="ext6" jdbcType="String"/>
+	</resultMap>
+
+	<select id="select" resultMap="branchPortalElementsMap">
+		select
+		*
+		from BRANCH_PORTAL_ELEMENTS
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+	</select>
+	
+	<insert id="insert" parameterClass="BranchPortalElements">
+		insert into BRANCH_PORTAL_ELEMENTS(ID,PROVINCE_ID,ELEMENT_ID,ELEMENT_NAME,TEMPLATE,ORDER_NUM,Y_POSITION,STATE,URL,UPLOAD_ID,TYPE,TITLE,CONTENT,HEIGHT,HAS_SETUP,SETUP_DIV_WIDTH,SETUP_DIV_HEIGHT,SETUP_DIV_TYPE,SETUP_ACTION,SETUP_HAS_IMG_DIV,EXT1,EXT2,EXT3,EXT4,EXT5,EXT6) 
+					values(#id#,#provinceId#,#elementId#,#elementName#,#template#,#orderNum#,#y_Position#,#state#,#url#,#uploadId#,#type#,#title#,#content#,#height#,#hasSetup#,#setupDivWidth#,#setupDivHeight#,#setupDivType#,#setupAction#,#setupHasImgDiv#,#ext1#,#ext2#,#ext3#,#ext4#,#ext5#,#ext6#)
+	</insert>
+	
+	<insert id="createTemporaryDataByMap">
+		insert into BRANCH_PORTAL_ELEMENTS(ID,PROVINCE_ID,ELEMENT_ID,ELEMENT_NAME,TEMPLATE,ORDER_NUM,Y_POSITION,STATE,URL,UPLOAD_ID,TYPE,TITLE,CONTENT,HEIGHT,HAS_SETUP,SETUP_DIV_WIDTH,SETUP_DIV_HEIGHT,SETUP_DIV_TYPE,SETUP_ACTION,SETUP_HAS_IMG_DIV,EXT1,EXT2,EXT3,EXT4,EXT5,EXT6) 
+		<isNotNull property="+">
+			select id+9000000000,province_id,element_id,element_name,template,order_num,y_position,9,url,upload_id,type,title,content,height,hasSetup,setupDivWidth,setupDivHeight,setupDivType,setupAction,setupHasImgDiv,ext1,ext2,ext3,ext4,ext5,ext6
+			from branch_portal_elements
+			where PROVINCE_ID = #provinceId# and STATE = 0
+		</isNotNull>
+		<isNotNull property="-">
+			select id-9000000000,province_id,element_id,element_name,template,order_num,y_position,0,url,upload_id,type,title,content,height,hasSetup,setupDivWidth,setupDivHeight,setupDivType,setupAction,setupHasImgDiv,ext1,ext2,ext3,ext4,ext5,ext6
+			from branch_portal_elements
+			where PROVINCE_ID = #provinceId# and STATE = 9
+		</isNotNull>
+	</insert>
+	
+	<update id="update" parameterClass="BranchPortalElements">
+		update BRANCH_PORTAL_ELEMENTS set PROVINCE_ID = #provinceId#,
+											ELEMENT_ID = #elementId#,
+											ELEMENT_NAME = #elementName#,
+								 			TEMPLATE = #template#,
+								 			ORDER_NUM = #orderNum#,
+								 			Y_POSITION = #y_Position#,
+											STATE = #state#,
+											URL = #url#,
+											UPLOAD_ID = #uploadId#,
+											TYPE = #type#,
+											TITLE = #title#,
+											CONTENT = #content#,
+											HEIGHT = #height#,
+											HAS_SETUP = #hasSetup#,
+											SETUP_DIV_WIDTH = #setupDivWidth#,
+											SETUP_DIV_HEIGHT = #setupDivHeight#,
+											SETUP_DIV_TYPE = #setupDivType#,
+											SETUP_ACTION = #setupAction#,
+											SETUP_HAS_IMG_DIV = #setupHasImgDiv#,
+											EXT1 = #ext1#,
+											EXT2 = #ext2#,
+											EXT3 = #ext3#,
+											EXT4 = #ext4#,
+											EXT5 = #ext5#,
+											EXT6 = #ext6#
+		where ID = #id#
+	</update>
+    <delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from BRANCH_PORTAL_ELEMENTS where ID = #value#
+	</delete>
+	
+	<delete id="deleteByMap">
+		delete 
+		from BRANCH_PORTAL_ELEMENTS 
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="provinceId">
+				PROVINCE_ID = #provinceId#
+			</isNotNull>
+			<isNotNull prepend="and" property="state">
+				STATE = #state#
+			</isNotNull>
+		</dynamic>
+	</delete>
+	
+	<select id="pageQuery" resultMap="branchPortalElementsMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select *
+				from BRANCH_PORTAL_ELEMENTS
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+	
+	<select id="pageCount" resultClass="int">
+		select count(*) from BRANCH_PORTAL_ELEMENTS
+	</select>
+	
+	<select id="selectByMap" resultMap="branchPortalElementsMap">
+		select
+		*
+		from BRANCH_PORTAL_ELEMENTS
+		<dynamic prepend="where">
+			<isNotNull property="findUniqueBy">
+				<isNotNull prepend="and" property="provinceId">
+					PROVINCE_ID = #provinceId#
+				</isNotNull>
+				<isNotNull prepend="and" property="state">
+					STATE = #state#
+				</isNotNull>
+				<isNotNull prepend="and" property="orderNum">
+					ORDER_NUM = #orderNum#
+				</isNotNull>
+				<isNotNull prepend="and" property="elementName">
+					ELEMENT_NAME = #elementName#
+				</isNotNull>
+				<isNotNull prepend="and" property="findUniqueBy">
+					ROWNUM &lt;= 1
+				</isNotNull>
+			</isNotNull>
+			
+			<isNotNull property="findBy">
+				<isNotNull prepend="and" property="provinceId">
+					PROVINCE_ID = #provinceId#
+				</isNotNull>
+				<isNotNull prepend="and" property="state">
+					STATE = #state#
+				</isNotNull>
+				<isNotNull prepend="and" property="orderNum">
+					ORDER_NUM = #orderNum#
+				</isNotNull>
+				<isNotNull prepend="and" property="like_elementName">
+					ELEMENT_NAME like '%$like_elementName$%'
+				</isNotNull>
+			</isNotNull>
+		</dynamic>
+		order by ORDER_NUM,Y_POSITION
+	</select>
+	
+	<select id="pageCountByMap" resultClass="int">
+		select count(*) from BRANCH_PORTAL_ELEMENTS
+		<dynamic prepend="where">
+			<isNotNull property="equalsearch">
+				<isNotNull prepend="and" property="provinceId">
+					PROVINCE_ID = #provinceId#
+				</isNotNull>
+				<isNotNull prepend="and" property="state">
+					STATE = #state#
+				</isNotNull>
+				<isNotNull prepend="and" property="orderNum">
+					ORDER_NUM = #orderNum#
+				</isNotNull>
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+	<select id="getIntByMap" resultClass="int">
+		select max(to_number(substr(ELEMENT_NAME,#elementNameLength2#)))
+		from BRANCH_PORTAL_ELEMENTS
+		where PROVINCE_ID = #provinceId#
+		and STATE = #state#
+		and substr(ELEMENT_NAME,1,#elementNameLength1#)=#elementName#
+	</select>
+</sqlMap>

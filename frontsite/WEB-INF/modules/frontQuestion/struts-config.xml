@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="question" type="com.cssweb.question.po.Question" />
+	</form-beans>
+	<action-mappings>
+		<action path="/question"  scope="request" parameter="method" validate="false">
+	    	<forward name="questionlist" path="/investmentBank/faq.jsp"></forward>
+	    	<forward name="rzrqQuestionlist" path="/financing/faq.jsp"></forward>
+	    	<forward name="assetQuestionlist" path="/assetManage/faq.jsp"></forward>
+			<forward name="hrquestionlist" path="/job/faqMore.jsp"></forward>
+			<forward name="gyjjquestionlist" path="/gyjj/questions.jsp"></forward>
+		</action>	
+		<action path="/jgjQuesAction" scope="request" parameter="method" validate="false">
+				<forward name="jgjquestionlist" path="/mobile/faq.jsp"></forward>
+		</action>
+	</action-mappings>
+</struts-config>

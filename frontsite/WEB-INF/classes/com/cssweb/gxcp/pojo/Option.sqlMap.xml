@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gxcp.pojo.Option">
+
+	<typeAlias alias="Option" type="com.cssweb.gxcp.pojo.Option" />
+
+	<resultMap id="OptionMap" class="Option">
+		<result property="questionid" column="QUESTION_ID" jdbcType="Long"/>
+		<result property="optionno" column="OPTION_NO" jdbcType="String"/>
+		<result property="optiondesc" column="OPTION_DESC" jdbcType="String"/>
+		<result property="typeid" column="TYPE_ID" jdbcType="Long"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="Option">
+		INSERT into T_MAN_SET_QUESTIONS (QUESTION_ID, OPTION_NO,OPTION_DESC, TYPE_ID) VALUES (#questionid#,#optionno#,#optiondesc#,#typeid#)
+	</insert>
+	
+	<update id="update" parameterClass="Option">
+		update T_MAN_SET_QUESTIONS set OPTION_DESC=#optiondesc#,TYPE_ID=#typeid# where QUESTION_ID=#questionid#, OPTION_NO=#optionno#
+	</update>
+	
+	<update id="updateType" parameterClass="java.util.Map">
+		update T_MAN_SET_QUESTIONS set TYPE_ID=#typeid# where ID=#id#
+	</update>
+
+	<delete id="delete" parameterClass="String">
+		delete from T_MAN_SET_QUESTIONS where QUESTION_ID in ($value$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_MAN_SET_QUESTIONS where QUESTION_ID = #value#
+	</delete>
+		
+	<select id="getAll" resultMap="OptionMap">
+		select * from T_MAN_SET_QUESTIONS ORDER BY ID
+	</select>
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_MAN_SET_QUESTIONS 
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="OptionMap">
+		select * from T_MAN_SET_QUESTIONS where ID= #id#
+	</select>	
+
+	<select id="getByQuestionid" parameterClass="Long" resultMap="OptionMap">
+		select * from T_MAN_SET_QUESTIONS where QUESTION_ID= #questionid#
+	</select>	
+	
+	  <select id="getByMap" parameterClass="java.util.Map" resultMap = "OptionMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+</sqlMap>

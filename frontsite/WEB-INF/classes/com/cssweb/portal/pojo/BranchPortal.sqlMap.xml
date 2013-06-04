@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.portal.pojo.BranchPortal">
+	<typeAlias alias="BranchPortal" type="com.cssweb.portal.pojo.BranchPortal"/>
+	<resultMap id="branchPortalMap" class="BranchPortal">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="PROVINCE_ID" property="provinceId" jdbcType="String"/>
+		<result column="TEMPLATE" property="template" jdbcType="String"/>
+		<result column="STATE" property="state" jdbcType="int"/>
+		<result column="EDITOR_ID" property="editorId" jdbcType="int"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+		<result column="HAS_PMD" property="hasPmd" jdbcType="int"/>
+		<result column="DEFAULT_PMD" property="defaultPmd" jdbcType="int"/>
+		<result column="PMD_TITLE1" property="pmdTitle1" jdbcType="String"/>
+		<result column="PMD_TITLE2" property="pmdTitle2" jdbcType="String"/>
+		<result column="PMD_TITLE3" property="pmdTitle3" jdbcType="String"/>
+		<result column="PMD_LINK1" property="pmdLink1" jdbcType="String"/>
+		<result column="PMD_LINK2" property="pmdLink2" jdbcType="String"/>
+		<result column="PMD_LINK3" property="pmdLink3" jdbcType="String"/>
+	</resultMap>
+
+	<select id="select" resultMap="branchPortalMap">
+		select
+		*
+		from BRANCH_PORTAL
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+	</select>
+	
+	<insert id="insert" parameterClass="BranchPortal">
+		insert into BRANCH_PORTAL(ID,PROVINCE_ID,TEMPLATE,STATE,EDITOR_ID,EXT1,EXT2,EXT3,EXT4,HAS_PMD,DEFAULT_PMD,PMD_TITLE1,PMD_TITLE2,PMD_TITLE3,PMD_LINK1,PMD_LINK2,PMD_LINK3) 
+					values(#id#,#provinceId#,#template#,#state#,#editorId#,#ext1#,#ext2#,#ext3#,#ext4#,#hasPmd#,#defaultPmd#,#pmdTitle1#,#pmdTitle2#,#pmdTitle3#,#pmdLink1#,#pmdLink2#,#pmdLink3#)
+	</insert>
+	<update id="update" parameterClass="BranchPortal">
+		update BRANCH_PORTAL set PROVINCE_ID = #provinceId#,
+								 TEMPLATE = #template#,
+								 STATE = #state#,
+								 EDITOR_ID = #editorId#,
+								 EXT1 = #ext1#,
+								 EXT2 = #ext2#,
+								 EXT3 = #ext3#,
+								 EXT4 = #ext4#,
+								 HAS_PMD = #hasPmd#,
+								 DEFAULT_PMD = #defaultPmd#,
+								 PMD_TITLE1 = #pmdTitle1#,
+								 PMD_TITLE2 = #pmdTitle2#,
+								 PMD_TITLE3 = #pmdTitle3#,
+								 PMD_LINK1 = #pmdLink1#,
+								 PMD_LINK2 = #pmdLink2#,
+								 PMD_LINK3 = #pmdLink3#
+		where ID = #id#
+	</update>
+   <delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from BRANCH_PORTAL where ID = #value#
+	</delete>
+	
+	<select id="pageQuery" resultMap="branchPortalMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select *
+				from BRANCH_PORTAL
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+	
+	<select id="pageCount" resultClass="int">
+		select count(*) from BRANCH_PORTAL
+	</select>
+	
+	<select id="selectByMap" resultMap="branchPortalMap">
+		select
+		*
+		from BRANCH_PORTAL
+		<dynamic prepend="where">
+			<isNotNull property="findUniqueBy">
+				<isNotNull prepend="and" property="provinceId">
+					PROVINCE_ID = #provinceId#
+				</isNotNull>
+				<isNotNull prepend="and" property="state">
+					STATE = #state#
+				</isNotNull>
+				<isNotNull prepend="and" property="findUniqueBy">
+					ROWNUM &lt;= 1
+				</isNotNull>
+			</isNotNull>
+		</dynamic>
+	</select>
+	
+</sqlMap>

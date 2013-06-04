@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.complaints.pojo.FinanceUsualQuestion">
+
+	<typeAlias alias="financeUsualQuestion"
+		type="com.cssweb.complaints.pojo.FinanceUsualQuestion" />
+
+	<!--result map-->
+	<resultMap id="financeUsualQuestionMap"
+		class="financeUsualQuestion">
+
+		<!-- ID -->
+		<result column="ID" property="id" jdbcType="java.lang.Long" />
+
+		<!-- 内容 -->
+		<result column="CONTENT" property="content"
+			jdbcType="java.lang.String" />
+		
+		<result column="TYPE" property="type"
+			jdbcType="java.lang.String" />
+	</resultMap>
+
+	<!-- 查找所有 -->
+	<select id="selectAll" resultMap="financeUsualQuestionMap">
+		SELECT ID, CONTENT,TYPE FROM T_FINANCE_USUALQUESTION
+	</select>
+
+	<!-- 查找所有专家分析师信息带分页 -->
+	<select id="selectQueryAllByPage"
+		resultMap="financeUsualQuestionMap" parameterClass="java.util.Map">
+		SELECT ID, CONTENT,TYPE FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT ID, CONTENT,TYPE FROM T_FINANCE_USUALQUESTION ) row_ WHERE
+		ROWNUM &lt;= #endNum# ) WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterClass="financeUsualQuestion">
+		insert into T_FINANCE_USUALQUESTION(ID, CONTENT,TYPE) values(#id#,
+		#content#,#type#)
+	</insert>
+
+	<!-- 修改 -->
+	<update id="update" parameterClass="financeUsualQuestion">
+		update T_FINANCE_USUALQUESTION set CONTENT = #content#,TYPE=#type# where
+		ID=#id#
+	</update>
+
+	<!-- 删除 -->
+	<delete id="delete" parameterClass="java.lang.Long">
+		delete T_FINANCE_USUALQUESTION where ID = #id#
+	</delete>
+
+	<!-- 根据专家分析师ID获取相关信息 -->
+	<select id="getFinanceusualQuestionById"
+		parameterClass="java.lang.Long" resultMap="financeUsualQuestionMap">
+		select ID, CONTENT,TYPE from T_FINANCE_USUALQUESTION where ID = #id#
+	</select>
+	
+	<!-- 根据类型查询,1为个股,2为大盘 -->
+	<select id="selectByType" resultMap="financeUsualQuestionMap"  parameterClass="java.util.Map">
+		SELECT ID, CONTENT,TYPE FROM T_FINANCE_USUALQUESTION u WHERE u.type = #type#
+	</select>
+	
+</sqlMap>

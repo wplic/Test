@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.TsystmRecordAssetUser">
+
+	<typeAlias alias="TsystmRecordAssetUser" type="com.cssweb.collect.pojo.TsystmRecordAssetUser"/>
+
+	<!--result map-->
+	<resultMap id="TsystmRecordAssetUser" class="TsystmRecordAssetUser" >
+		<result property="id" column="ID" jdbcType="java.lang.Long"/>
+		<result property="userName" column="USER_NAME" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String" />
+		<result property="telno" column="TELNO" jdbcType="String"/>
+	    <result property="mobiletelno" column="MOBILETELNO" jdbcType="String"/>
+	    <result property="hometelno" column="HOMETELNO" jdbcType="String"/>
+	    <result property="faxno" column="FAXNO" jdbcType="String"/>
+	    <result property="emailaddress" column="EMAILADDRESS" jdbcType="String"/>
+	    <result property="address" column="ADDRESS" jdbcType="String"/>
+		<result property="postcode" column="POSTCODE" jdbcType="String"/>
+		<result property="acctcardmailflag" column="ACCTCARDMAILFLAG" jdbcType="String"/>	
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>	
+	</resultMap>
+ 	
+ 	
+ 	 <insert id="insert" parameterClass="TsystmRecordAssetUser">
+		  insert into T_SYSTEM_RECORD_ASSET_USER (ID,USER_NAME,NAME,TELNO,MOBILETELNO,HOMETELNO,FAXNO,
+		  	EMAILADDRESS,ADDRESS,POSTCODE,ACCTCARDMAILFLAG,UPDATETIME)
+		  	values (#id#,#userName#,#name#,#telno#,#mobiletelno#,#hometelno#,#faxno#,
+		  	#emailaddress#,#address#,#postcode#,#acctcardmailflag#,sysdate)
+	</insert>
+	
+	 <select id="getTsystmRecordAssetUserAll" parameterClass="map" resultMap="TsystmRecordAssetUser">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT * FROM T_SYSTEM_RECORD_ASSET_USER where 1=1 
+			<dynamic>
+			<isNotEmpty property="userName" prepend="and">
+			  USER_NAME LIKE '$userName$%'
+			</isNotEmpty>
+			<isNotEmpty property="startUpdateDate" prepend="and">
+			  to_char(UPDATETIME,'yyyy-MM-dd')&gt;= #startUpdateDate#
+			</isNotEmpty>
+			<isNotEmpty property="endUpdateDate" prepend="and">
+			  to_char(UPDATETIME,'yyyy-MM-dd')&lt;= #endUpdateDate#
+			</isNotEmpty>	
+			</dynamic>		 
+				<dynamic prepend="order by">
+					<isNotNull property="sortName">
+						$sortName$
+						<isNotNull property="dir">
+							$dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	 <select id="getTsystmRecordAssetUserAllCount" parameterClass="map" resultClass="Integer">
+	 
+		SELECT count(*) FROM T_SYSTEM_RECORD_ASSET_USER where 1=1 
+			<dynamic>
+			<isNotEmpty property="userName" prepend="and">
+			  USER_NAME LIKE '$userName$%'
+			</isNotEmpty>
+			<isNotEmpty property="startUpdateDate" prepend="and">
+			  to_char(UPDATETIME,'yyyy-MM-dd')&gt;= #startUpdateDate#
+			</isNotEmpty>
+			<isNotEmpty property="endUpdateDate" prepend="and">
+			  to_char(UPDATETIME,'yyyy-MM-dd')&lt;= #endUpdateDate#
+			</isNotEmpty>
+			</dynamic>
+	</select>
+</sqlMap>

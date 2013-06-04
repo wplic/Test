@@ -1,0 +1,23 @@
+.sr_bg{background:url(/pic/stockResearch/index_bg.jpg) top no-repeat;}
+.sr_left{width:601px;}
+.sr_right{width:307px;border:1px solid #e7e7e7; background-color:#FFF;}
+.sr_left .l558{width:558px; margin:0 auto;}
+.bmdsj{background:url(/pic/stockResearch/bmdsj_bg.jpg) repeat-x; line-height:29px; height:29px;border-left:1px solid #cfcfcf;border-right:1px solid #cfcfcf;}
+.bmdsj_bk{background:url(/pic/stockResearch/bmdsj_bk.jpg) no-repeat top; width:558px;}
+.bmdsj_bk td{padding-left:24px; padding-top:16px;}
+.bmdsj_bk2{background:url(/pic/stockResearch/bmdsj_bk2.jpg) no-repeat top; width:558px;}
+.bmdsj_bk2 td{padding-left:24px; padding-top:16px;}
+.yjdt{background:url(/pic/stockResearch/yjdt.gif) repeat-x; line-height:29px;}
+.xuxian10{background:url(/pic/stockResearch/xuxian10.gif) repeat-x left center;}
+.w133{width:133px;}
+.yjbg_button_up li{float:left;background:url(/pic/stockResearch/yjbg_button_up.jpg) repeat-x; border:1px solid #CCCCCC; text-align:center; font-size:14px; width:133px; height:34px;display:block; line-height:34px;cursor:pointer;margin-right:8px; margin-top:10px;}
+.yjbg_button_up li a{display:block; }
+.yjbg_button_up li a:hover{background:url(/pic/stockResearch/yjbg_button_down.jpg) repeat-x;display:block; color:#FFF; font-weight:bold; border-color:#1f54bc;}
+.yftd_tt{background:url(/pic/stockResearch/yftd_tt.jpg) no-repeat left; width:683px; line-height:31px; text-indent:44px;}
+
+.tab_zzpm th{ background-color:#f8f4ef;border-bottom:1px solid #FFFFFF; text-align:center;}
+.tab_zzpm .dibu{background-color:#f8f4ef;border-bottom:1px solid #CCCCCC; text-align:center;}
+.tab_zzpm .hy{ background:url(/pic/stockResearch/tab_hy.jpg) repeat-x; line-height:49px;}
+.tab_zzpm .pm{ background:url(/pic/stockResearch/tab_pm.jpg) repeat-x; line-height:22px;}
+.tab_zzpm .nf{ background:url(/pic/stockResearch/tab_nf.jpg) repeat-x; line-height:27px;}
+

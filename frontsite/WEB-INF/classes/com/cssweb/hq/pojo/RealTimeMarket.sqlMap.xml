@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hq.pojo.RealTimeMarket">
+
+	<typeAlias alias="RealTimeMarket" type="com.cssweb.hq.pojo.RealTimeMarket"/>
+
+	<!--result map-->
+	<resultMap id="realTimeMarketMap" class="RealTimeMarket">
+ 		<result property="zqdm" column="ZQDM" jdbcType="String"/>
+		<result property="zqjc" column="ZQJC" jdbcType="String"/>
+		<result property="exchange" column="EXCHANGE" jdbcType="Integer"/>
+		<result property="sjw5" column="SJW5" jdbcType="Double"/>
+		<result property="ssl5" column="SSL5" jdbcType="Long"/>
+		<result property="sjw4" column="SJW4" jdbcType="Double"/>
+		<result property="ssl4" column="SSL4" jdbcType="Long"/>
+		<result property="sjw3" column="SJW3" jdbcType="Double"/>
+		<result property="ssl3" column="SSL3" jdbcType="Long"/>
+		<result property="sjw2" column="SJW2" jdbcType="Double"/>
+		<result property="ssl2" column="SSL2" jdbcType="Long"/>
+		<result property="sjw1" column="SJW1" jdbcType="Double"/>
+		<result property="ssl1" column="SSL1" jdbcType="Long"/>
+		<result property="bjw1" column="BJW1" jdbcType="Double"/>
+		<result property="bsl1" column="BSL1" jdbcType="Long"/>
+		<result property="bjw2" column="BJW2" jdbcType="Double"/>
+		<result property="bsl2" column="BSL2" jdbcType="Long"/>
+		<result property="bjw3" column="BJW3" jdbcType="Double"/>
+		<result property="bsl3" column="BSL3" jdbcType="Long"/>
+		<result property="bjw4" column="BJW4" jdbcType="Double"/>
+		<result property="bsl4" column="BSL4" jdbcType="Long"/>
+		<result property="bjw5" column="BJW5" jdbcType="Double"/>
+		<result property="bsl5" column="BSL5" jdbcType="Long"/>
+		<result property="zjcj" column="ZJCJ" jdbcType="Double"/>
+		<result property="jrkp" column="JRKP" jdbcType="Double"/>
+		<result property="zrsp" column="ZRSP" jdbcType="Double"/>
+		<result property="zgcj" column="ZGCJ" jdbcType="Double"/>
+		<result property="zdcj" column="ZDCJ" jdbcType="Double"/>
+		<result property="cjsl" column="CJSL" jdbcType="Long"/>
+		<result property="cjje" column="CJJE" jdbcType="Double"/>
+		<result property="pjjg" column="PJJG" jdbcType="Double"/>
+  	</resultMap>
+  	
+  	<select id="getQuoteMaxTime" resultClass = "java.util.Date">
+		select max(quote_time) maxtime from quote
+	</select>
+	
+	<select id="getByQuoteSql" parameterClass="String" resultMap = "realTimeMarketMap">
+		select q.*,(case q.CJSL when 0 then 0 else (q.CJJE/q.CJSL/100) end) pjjg from ( $sql$ ) q
+	</select>
+  	
+</sqlMap>

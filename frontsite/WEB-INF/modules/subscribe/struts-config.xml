@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<action-mappings>		
+		<action path="/tcsswebFwcpcxAction"  scope="request" parameter="method" validate="false">
+		 <forward name="nosee" path="/share/login.jsp"></forward> 
+		 <forward name="list" path="/Subscribe/indexWdy.jsp"></forward>
+		 <forward name="listpage" path="/Subscribe/list.jsp"></forward>
+		 <forward name="listdy" path="/Subscribe/ydy.jsp"></forward>
+		</action>
+		<action path="/tcsswebFwtcdyAtion" scope="request" parameter="method" validate="false">
+		<forward name="list" path="/Subscribe/zzdy.jsp"></forward>
+		<forward name="dylist" path="/Subscribe/dylc4.jsp"></forward>
+		<forward name="listPro" path="/Subscribe/dySearch.jsp"></forward>
+		</action>
+		<action path="/tcsswebUserCppjAtion" scope="request" parameter="method" validate="false">
+		<forward name="savecppj" path="/Subscribe/evaluation.jsp"></forward>
+		</action>
+		
+		<action path="/tcsswebFwcpyslAtion" scope="request" parameter="method" validate="false">
+		<forward name="listpage" path="/Subscribe/tcdzcx.jsp"></forward>
+		</action>
+		<action path="/tcsswebDcxdzAction" scope="request" parameter="method" validate="false">
+		<forward name="listpage" path="/Subscribe/tcdzcx.jsp"></forward>
+		</action>
+		<action path="/tcsswebDcxListAction" scope="request" parameter="method" validate="false">
+		
+		</action>
+	</action-mappings>
+</struts-config>

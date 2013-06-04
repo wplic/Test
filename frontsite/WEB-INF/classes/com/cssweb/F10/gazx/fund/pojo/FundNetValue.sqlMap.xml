@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundNetValue">
+	<typeAlias alias="FundNetValue"
+		type="com.cssweb.F10.gazx.fund.pojo.FundNetValue" />
+
+	<resultMap 	id="fundNetValue" 				class="FundNetValue">
+		<result property="fundNetValueId" 		column="T_JJJZCZ_ID"	jdbcType="Long" 	nullValue="0" />
+		<result property="fundId" 				column="T_JJZB_ID" 		jdbcType="Long" 	nullValue="0" />
+		<result property="NAV" 					column="Dwjz" 			jdbcType="Double" 	nullValue="0.0000" />
+		<result property="totalNetValue" 		column="Ljjz" 			jdbcType="Double" 	nullValue="0.0000" />
+		<result property="netValueDate" 		column="FSRQ" 			jdbcType="Date" />
+		<result property="tenThousandNetValue" 	column="WFDWSY" 		jdbcType="Double" 	nullValue="0.0000" />
+		<result property="annualYield" 			column="NSYL" 			jdbcType="Double" 	nullValue="0.0000" />
+		<result property="fundCode" 			column="JJDM" 			jdbcType="String"/>
+		<result property="fundShortName" 		column="JJJC" 			jdbcType="String" />		
+	</resultMap>
+	
+	<resultMap 	id="funtNetValueByAll" 		class="FundNetValue">
+		<result property="companyName" 		column="gsmc"	jdbcType="String"/>
+		<result property="fundCode" 		column="jjdm" 	jdbcType="String"/>
+		<result property="fundShortName" 	column="jjjc" 	jdbcType="String"/>
+		<result property="NAV" 				column="Dwjz" 	jdbcType="Double" 	nullValue="0.0000" />
+		<result property="totalNetValue" 	column="Ljjz" 	jdbcType="Double" 	nullValue="0.0000" />
+		<result property="netValueDate" 	column="FSRQ" 	jdbcType="Date" />
+	</resultMap>
+	
+	<resultMap id="funtNetValueByCodeAndDate" class="FundNetValue">
+		<result property="NAV" 					column="Dwjz" 			jdbcType="Double" 	nullValue="0.0000" />
+		<result property="totalNetValue" 		column="Ljjz" 			jdbcType="Double" 	nullValue="0.0000" />
+		<result property="netValueDate" 		column="FSRQ" 			jdbcType="Date" />
+	</resultMap>	
+	
+	<resultMap 	id="companyByFundInfo" 	class="com.cssweb.F10.gazx.base.pojo.CompanyInfo">
+		<result property="companyName" 	column="GSMC" jdbcType="String" />
+	</resultMap>
+	
+	<resultMap 	id="fundInfoByInverstType" class="FundNetValue">
+		<result property="investType" 	column="tzlx" jdbcType="String" />
+	</resultMap>
+	
+	<resultMap 	id="fundInfoAll" 		class="com.cssweb.F10.gazx.fund.pojo.FundInfo">
+		<result property="fundType" 	column="JJLX" jdbcType="String" />
+	</resultMap>
+	
+	<resultMap 	id="investeAll" 		class="com.cssweb.F10.gazx.fund.pojo.FundInfo">
+		<result property="investee" 	column="Tzdx" jdbcType="String" />
+	</resultMap>
+	
+	<resultMap 	id="funtNetValueByOther" 	class="FundNetValue">
+		<result property="fundShortName" 	column="jjjc" 	jdbcType="String"/>
+		<result property="fundCode" 		column="jjdm" 	jdbcType="String"/>
+		<result property="companyName" 		column="gsmc"	jdbcType="String"/>
+		<result property="foundationDate" 	column="clrq"	jdbcType="Date"/>
+		<result property="totalScale" 		column="jjzgm" 	jdbcType="Double" 	nullValue="0.0000" />
+		<result property="fundType" 		column="jjlx"	jdbcType="String"/>
+		<result property="investmentStyle" 	column="tzfg"	jdbcType="String"/>
+		<result property="investee" 		column="tzdx"	jdbcType="String"/>
+		<result property="NAV" 				column="dwjz" 	jdbcType="Double" 	nullValue="0.0000" />
+		<result property="totalNetValue" 	column="ljjz" 	jdbcType="Double" 	nullValue="0.0000" />
+	</resultMap>
+	
+	<!--返回当天的所有基金净值 -->
+	<select id="getFundNetValueByDate" parameterClass="map" resultMap="fundNetValue">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	a.T_JJJZCZ_ID,
+						a.T_JJZB_ID,
+						b.jjdm,
+						b.JJJC,
+						a.DWJZ,
+						a.LJJZ,
+						a.FSRQ,
+						a.WFDWSY,
+						a.NSYL 
+				FROM 	JJJZCZ a,
+						jjzb b
+				WHERE 	a.T_JJZB_ID=b.t_jjzb_id 
+						AND a.fsrq=to_date( #date#,'yyyy-mm-dd') 
+						AND b.scbz=0
+						AND b.gkbz=1
+				ORDER by b.jjdm 
+				)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<!-- 根据基金CODE，T_JJZB_ID表中的JJDM，返回基金净值对象 -->
+	<select id="getFundNetValueByFundCode" parameterClass="map" resultMap="fundNetValue">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	a.T_JJJZCZ_ID,
+						a.T_JJZB_ID,
+						b.jjdm,
+						b.JJJC,
+						a.DWJZ,
+						a.LJJZ,
+						a.FSRQ,
+						a.WFDWSY,
+						a.NSYL 
+				FROM 	JJJZCZ a,
+						jjzb b
+				WHERE a.t_jjzb_id=b.t_jjzb_id 
+					AND b.jjdm=#fundCode#
+					AND b.scbz=0
+					AND b.gkbz=1
+				ORDER BY a.fsrq DESC )row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<!-- 根据基金ID，T_JJZB_ID表中的ID，返回基金净值对象 -->
+	<select id="getFundNetValueByFundId" parameterClass="map" resultMap="fundNetValue">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	a.T_JJJZCZ_ID,
+						a.T_JJZB_ID,
+						b.jjdm,
+						b.JJJC,
+						a.DWJZ,
+						a.LJJZ,
+						a.FSRQ,
+						a.WFDWSY,
+						a.NSYL 
+				FROM 	JJJZCZ a,
+						jjzb b
+				WHERE a.t_jjzb_id=b.t_jjzb_id 
+					AND b.t_jjzb_id=#fundId#
+					AND b.scbz=0
+					AND b.gkbz=1
+				ORDER BY a.fsrq DESC )row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<!-- 根据基金公司、基金代码、基金类型、报告日期查询基金净值列表( GSZB.GSMC 、JJZB.JJDM 、JJZB.JJLX 、JJJZCZ.FSRQ )-->
+	<select id="getFuntNetValueByAll" parameterClass="map" resultMap="funtNetValueByAll">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM (
+				SELECT  nvl(g.gsmc,' ') gsmc,
+						nvl(jz.jjdm,' ') jjdm,
+						nvl(jz.jjjc,' ') jjjc,
+						nvl(jc.dwjz,0.0000) dwjz,
+						nvl(jc.ljjz,0.0000) ljjz,
+						nvl(jc.fsrq,sysdate) fsrq 
+				FROM 	gszb g,
+						jjzb jz,
+						jjjzcz jc
+				WHERE  g.t_gszb_id=jz.jjglr_id
+					AND jz.t_jjzb_id=jc.t_jjzb_id
+					<dynamic>
+						<isNotEmpty property="companyName">
+							AND	g.gsmc=#companyName#
+						</isNotEmpty>
+						<isNotEmpty property="fundCode">
+							AND jz.jjdm=#fundCode#
+						</isNotEmpty>
+						<isNotEmpty property="investType">
+							AND jz.tzlx=#investType#
+						</isNotEmpty>
+						<isNotEmpty property="netValueDate">
+							AND jc.fsrq=to_date(#netValueDate#,'yyyy-mm-dd')
+						</isNotEmpty>
+						<isNotEmpty property="fundType">
+							AND jz.jjlx like '%'||#fundType#||'%'
+						</isNotEmpty>
+					</dynamic>
+					AND jz.scbz=0
+					AND jz.gkbz=1
+					AND g.scbz=0
+					AND g.gkbz=1
+				ORDER BY 	jc.fsrq DESC,
+							NLSSORT(g.gsmc,'NLS_SORT=SCHINESE_PINYIN_M') ASC,
+							jz.jjdm DESC,
+							jz.tzlx DESC 
+				)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<!-- 根据基金公司、基金代码、基金类型、报告日期查询基金净值列表总数( GSZB.GSMC 、JJZB.JJDM 、JJZB.JJLX 、JJJZCZ.FSRQ )-->
+	<select id="getFuntNetValueCountByAll" resultClass="Integer">
+		SELECT  count(*)
+		FROM 	gszb g,
+				jjzb jz,
+				jjjzcz jc
+		WHERE  g.t_gszb_id=jz.jjglr_id
+		AND jz.t_jjzb_id=jc.t_jjzb_id
+		<dynamic>
+			<isNotEmpty property="companyName">
+				AND	g.gsmc=#companyName#
+			</isNotEmpty>
+			<isNotEmpty property="fundCode">
+				AND jz.jjdm=#fundCode#
+			</isNotEmpty>
+			<isNotEmpty property="investType">
+				AND jz.tzlx=#investType#
+			</isNotEmpty>
+			<isNotEmpty property="netValueDate">
+				AND jc.fsrq=to_date(#netValueDate#,'yyyy-mm-dd')
+			</isNotEmpty>
+			<isNotEmpty property="fundType">
+							AND jz.jjlx like '%'||#fundType#||'%'
+			</isNotEmpty>
+		</dynamic>
+		AND jz.scbz=0
+		AND jz.gkbz=1
+		AND g.scbz=0
+		AND g.gkbz=1
+	</select>
+	
+	<!-- 获取基金公司列表 -->
+	<select id="getCompanyByFundInfo" parameterClass="map" resultMap="companyByFundInfo">
+		 SELECT DISTINCT g.gsmc 
+		 FROM 	gszb g,
+		 		jjzb j 
+		 WHERE g.t_gszb_id=j.jjglr_id
+		 ORDER BY nlssort(g.gsmc,'NLS_SORT=SCHINESE_PINYIN_M') ASC 
+	</select>
+	<!-- 获取投资类型 -->
+	<select id="fundInfoByInverstType" parameterClass="map" resultMap="fundInfoByInverstType">
+		SELECT DISTINCT tzlx 
+		FROM jjzb
+	</select>
+	
+	<!-- 获取基金类型列表 -->
+	<select id="getFundTypeList"  resultMap="fundInfoAll">
+		SELECT DISTINCT JJLX 
+		FROM jjzb
+	</select>
+	<!-- 获取投资对象列表 -->
+	<select id="getInvesteList" parameterClass="map" resultMap="investeAll">
+		SELECT DISTINCT tzdx
+		FROM jjzb
+	</select>
+	
+	<!-- 根据基金类型(jjzb.jjlx)、投资对象(jjzb.tzdx)、基金规模(jjzb.jjzgm)、基金净值(jjjzcz.dwjz)查询基金净值列表
+	( 基金简称jjzb.jjjc 、基金代码JJZB.JJDM 、基金管理公司gszb.gsmc、基金成立日期jjzb.clrq、总份额jjzb.jjzgm、市场类型jjzb.jjlx、投资风格jjzb.tzfg、
+	投资对象jjzb.tzdx、单位净值jjjzcz.dwjz、累计净值jjjzcz.ljjz)-->
+	<select id="getFuntNetValueByOther" parameterClass="map" resultMap="funtNetValueByOther">
+		SELECT * FROM ( 
+			SELECT row_.*,
+			rownum rownum_ 
+			FROM (
+				SELECT  nvl(jz.jjjc,' ') jjjc,
+						nvl(jz.jjdm,' ') jjdm,
+						nvl(g.gsmc,' ') gsmc,
+						nvl(jz.clrq,sysdate) clrq,
+						nvl(jz.jjzgm,0.0000) jjzgm,
+						nvl(jz.jjlx,' ') jjlx,
+						nvl(jz.tzfg,' ') tzfg,
+						nvl(jz.tzdx,' ') tzdx,
+						nvl(jc.dwjz,0.0000) dwjz,
+						nvl(jc.ljjz,0.0000) ljjz
+				FROM 	gszb g,
+						jjzb jz,
+						jjjzcz jc,
+           				( SELECT	j.jjdm jjdm ,
+           							MAX(z.fsrq)  fsrq 
+                         FROM   jjzb j ,jjjzcz z
+                         WHERE j.t_jjzb_id=z.t_jjzb_id  
+                         GROUP BY  j.jjdm
+                         ) jj
+				WHERE  g.t_gszb_id=jz.jjglr_id
+					AND jz.t_jjzb_id=jc.t_jjzb_id
+          			AND jz.jjdm = jj.jjdm
+          			AND jc.fsrq = jj.fsrq
+					<dynamic>
+						<isNotEmpty property="fundType">
+							AND	jz.jjlx=#fundType#
+						</isNotEmpty>
+						<isNotEmpty property="investee">
+							AND jz.tzdx=#investee#
+						</isNotEmpty>
+						<isNotEmpty property="totalScale1">
+							AND jz.jjzgm &gt; #totalScale1#
+						</isNotEmpty>
+						<isNotEmpty property="totalScale2">
+							AND jz.jjzgm &lt;= #totalScale2#
+						</isNotEmpty>
+						<isNotEmpty property="NAV1">
+							AND jc.dwjz &gt; #NAV1#
+						</isNotEmpty>
+						<isNotEmpty property="NAV2">
+							AND jc.dwjz &lt;= #NAV2#
+						</isNotEmpty>
+					</dynamic>
+					AND jz.scbz=0
+					AND jz.gkbz=1
+					AND g.scbz=0
+					AND g.gkbz=1
+				ORDER BY jc.fsrq DESC,
+						NLSSORT(g.gsmc,'NLS_SORT=SCHINESE_PINYIN_M') ASC,
+						jz.jjdm DESC,
+						jz.tzlx DESC 
+				)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				WHERE rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				WHERE rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+	
+	<select id="getFundCount" resultClass="Integer">
+		SELECT  count(*)
+				FROM 	gszb g,
+						jjzb jz,
+						jjjzcz jc,
+           				( SELECT	j.jjdm jjdm ,
+           							MAX(z.fsrq)  fsrq 
+                         FROM   jjzb j ,jjjzcz z
+                         WHERE j.t_jjzb_id=z.t_jjzb_id  
+                         GROUP BY  j.jjdm
+                         ) jj
+				WHERE  g.t_gszb_id=jz.jjglr_id
+					AND jz.t_jjzb_id=jc.t_jjzb_id
+          			AND jz.jjdm = jj.jjdm
+          			AND jc.fsrq = jj.fsrq
+					<dynamic>
+						<isNotEmpty property="fundType">
+							AND	jz.jjlx=#fundType#
+						</isNotEmpty>
+						<isNotEmpty property="investee">
+							AND jz.tzdx=#investee#
+						</isNotEmpty>
+						<isNotEmpty property="totalScale1">
+							AND jz.jjzgm &gt; #totalScale1#
+						</isNotEmpty>
+						<isNotEmpty property="totalScale2">
+							AND jz.jjzgm &lt;= #totalScale2#
+						</isNotEmpty>
+						<isNotEmpty property="NAV1">
+							AND jc.dwjz &gt; #NAV1#
+						</isNotEmpty>
+						<isNotEmpty property="NAV2">
+							AND jc.dwjz &lt;= #NAV2#
+						</isNotEmpty>
+					</dynamic>
+					AND jz.scbz=0
+					AND jz.gkbz=1
+					AND g.scbz=0
+					AND g.gkbz=1
+	</select>
+	
+<!-- 根据基金代码、报告日期查询基金净值列表总数( JJZB.JJDM 、JJJZCZ.FSRQ )-->
+	<select id="getFuntNetValueCountByCodeAndDate" resultClass="Integer">
+		SELECT  count(*)
+		FROM jjzb jz,jjjzcz jc
+		WHERE  jz.t_jjzb_id=jc.t_jjzb_id
+		<dynamic>
+			<isNotEmpty property="fundCode">
+				AND jz.jjdm=#fundCode#
+			</isNotEmpty>
+			
+			<isNotEmpty property="startDate">
+				AND  to_char(jc.FSRQ,'yyyy-mm-dd') &gt;=#startDate#
+			</isNotEmpty>
+			<isNotEmpty property="endDate">
+				AND  to_char(jc.FSRQ,'yyyy-mm-dd') &lt;=#endDate#
+			</isNotEmpty>			
+		</dynamic>
+		AND jz.scbz=0
+		AND jz.gkbz=1
+	</select>
+	
+	<!-- 根据代码查询基金净值列表分页  -->
+	<select id="pageQuery" parameterClass="map" resultMap="funtNetValueByCodeAndDate">
+		SELECT * FROM ( 
+				SELECT row_.*, ROWNUM rownum_ FROM 
+					( 
+						SELECT  jc.FSRQ,jc.DWJZ,jc.LJJZ
+						FROM JJZB j,JJJZCZ jc
+						WHERE  	j.t_jjzb_id=jc.t_jjzb_id and  
+								jc.SCBZ=0 and 
+								jc.GKBZ=1 
+								<dynamic>
+									<isNotNull prepend="and" property="fundCode">
+										j.JJDM= #fundCode#
+									</isNotNull>
+									<isNotNull prepend="and" property="startDate">
+										to_char(jc.FSRQ,'yyyy-mm-dd') &gt;= #startDate#  
+									</isNotNull>
+									<isNotNull prepend="and" property="endDate">
+										to_char(jc.FSRQ,'yyyy-mm-dd') &lt;= #endDate#
+									</isNotNull>
+								</dynamic>	
+								order by jc.FSRQ desc	
+					) row_ WHERE ROWNUM &lt;= #endNum#
+		) r WHERE rownum_ &gt;#beginNum#
+	</select>	
+</sqlMap>

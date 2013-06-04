@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.AcctTrans">
+
+	<typeAlias alias="acctTrans" type="com.cssweb.collect.pojo.AcctTrans"/>
+
+	<!--result map-->
+	<resultMap id="acctTransMap" class="acctTrans" >
+		<result property="depositacct" column="DEPOSITACCT"  jdbcType="String" />
+        <result property="lcpass" column="WEBPASSWORD"  jdbcType="String"  />
+     </resultMap>
+  	
+  <update id="updateByDepositacct" parameterClass="acctTrans">
+	 update TA_CUST  set WEBPASSWORD = #lcpass# where 
+	 custno=(select a.custno from TA_CUST a , TA_FUNDACCOUNT b where a.custno=b.custno and b.TAACCOUNTID = #depositacct#)
+  </update>
+ 
+  <select id="getAcctTransByDepositacct" parameterClass="java.lang.String" resultClass = "acctTrans">
+     select b.TAACCOUNTID as depositacct, a.webpassword as lcpass from TA_CUST a , TA_FUNDACCOUNT b 
+     where a.custno=b.custno and  b.TAACCOUNTID = #depositacct# and rownum &lt; 2
+  </select>
+  <select id="getAcctTransByDepositacctAndLcpass" parameterClass="java.util.HashMap" resultClass = "acctTrans">
+     select b.TAACCOUNTID as depositacct, a.webpassword as lcpass from TA_CUST a , TA_FUNDACCOUNT b
+      where a.custno=b.custno and  b.TAACCOUNTID = #depositacct# and a.webpassword = #lcpass# and rownum &lt; 2
+  </select>
+</sqlMap>

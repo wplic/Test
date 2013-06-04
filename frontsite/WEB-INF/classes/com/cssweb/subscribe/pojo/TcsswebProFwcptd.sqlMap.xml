@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebProFwcptd">
+<typeAlias alias="TcsswebProFwcptd" type="com.cssweb.subscribe.pojo.TcsswebProFwcptd"/>	
+	<resultMap id="TcsswebProFwcptd" class="TcsswebProFwcptd">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="departmentCode" column="DEPARTMENT_CODE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="account" column="ACCOUNT" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="oret" column="O_RET" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="oretc" column="O_RET_C" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="iqqly" column="I_QQLY" jdbcType="java.lang.Long" nullValue="1"/>
+	    <result property="proTome" column="PRO_TOME" jdbcType="java.util.Date" />
+	    <result property="proddu" column="PRODDU" jdbcType="java.lang.Double"/>
+	    <result property="prodip" column="PRODIP" jdbcType="java.lang.String" nullValue=""/>
+	</resultMap>
+	<select id="getTcsswebProFwcptdListByAccount" parameterClass="java.util.Map" resultMap = "TcsswebProFwcptd">
+			SELECT * FROM T_CSSWEB_PRO_FWCPTD t where t.ACCOUNT=#account#
+			<dynamic>
+				 <isNotNull property="proTome" prepend="and">
+				   sysdate &gt;#proTome#
+				 </isNotNull>
+				 <isNotNull property="endProTome" prepend="and">
+				   sysdate &lt;#endProTome#
+				 </isNotNull>
+			</dynamic> ORDER BY PRO_TOME DESC
+	</select>
+	<insert id="insertTcsswebProFwcptd" parameterClass="TcsswebProFwcptd">
+		INSERT into T_CSSWEB_PRO_FWCPTD ( ID, DEPARTMENT_CODE, ACCOUNT, PRODUCT_ID, O_RET,O_RET_C,I_QQLY,PRO_TOME,PRODDU,PRODIP) VALUES 
+		(#id#,#departmentCode#,#account#, #productId#, #oret#,#oretc#,#iqqly#,#proTome#,#proddu#,#prodip#)
+	</insert>
+	<resultMap id="TcsswebProFwcptdProName" class="TcsswebProFwcptd">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="departmentCode" column="DEPARTMENT_CODE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="account" column="ACCOUNT" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="oret" column="O_RET" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="oretc" column="O_RET_C" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="iqqly" column="I_QQLY" jdbcType="java.lang.Long" nullValue="1"/>
+	    <result property="proTome" column="PRO_TOME" jdbcType="java.util.Date" />
+	    <result property="productName" column="PRODUCT_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="proddu" column="PRODDU" jdbcType="java.lang.Double"/>
+	    <result property="prodip" column="PRODIP" jdbcType="java.lang.String" nullValue=""/>
+	</resultMap>
+	<select id="getAllTcsswebProFwcptdListByAccount" parameterClass="java.util.Map" resultMap = "TcsswebProFwcptdProName">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT t.*, p.PRODUCT_NAME FROM T_CSSWEB_PRO_FWCPTD t ,T_CSSWEB_FWCPDY p where t.product_id= p.id AND t.ACCOUNT=#account#
+				<dynamic>
+				 <isNotNull property="proTome" prepend="and">
+				   sysdate &gt;#proTome#
+				 </isNotNull>
+				 <isNotNull property="endProTome" prepend="and">
+				   sysdate &lt;#endProTome#
+				 </isNotNull>
+			</dynamic> ORDER BY PRO_TOME DESC
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getAllTcsswebProFwcptdListByAccountCount" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		select count(*) from T_CSSWEB_PRO_FWCPTD t where t.ACCOUNT=#account#
+		<dynamic>
+				 <isNotNull property="proTome" prepend="and">
+				   sysdate &gt;#proTome#
+				 </isNotNull>
+				 <isNotNull property="endProTome" prepend="and">
+				   sysdate &lt;#endProTome#
+				 </isNotNull>
+			</dynamic>
+	</select>
+</sqlMap>

@@ -1,0 +1,47 @@
+.treetext{
+	font-size:12px;
+	/*width:250;*/
+	background-color:#F9F9F9;
+	border:1px solid #CDCDCD;
+}
+
+.treespan{
+	/*width:249px;*/
+	border:1px solid #CDCDCD; 
+	position:relative;
+}
+
+.treeselectinnerspan{
+	font-size:12px;
+	/*width:253px;*/
+	margin:-3px
+}
+
+.treebtn{
+	height:18px; 
+	border: 1px solid #CDCDCD; 
+	font:ËÎÌו;
+}
+
+.treeimg{
+	border:0;
+	vertical-align: middle;
+}
+
+.px12{
+	font-size:12px
+}
+
+a:link{
+	text-decoration:none;
+	color:#000000
+}
+
+a:visited {
+	text-decoration:none;
+	color:#000000
+}
+
+.treeinput {
+	vertical-align: middle;
+}

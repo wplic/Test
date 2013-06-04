@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.complaints.pojo.QuestionnairePersonTwo">
+
+	<typeAlias alias="questionnairePersonTwo"
+		type="com.cssweb.complaints.pojo.QuestionnairePersonTwo" />
+
+	<!--result map-->
+	<resultMap id="questionnairePersonTwoMap"
+		class="questionnairePersonTwo">
+
+		<!-- ID -->
+		<result column="ID" property="id" jdbcType="java.lang.Long" />
+
+		<!-- 问卷ID -->
+		<result column="QUESTIONNAIRE_ID" property="questionnaireId"
+			jdbcType="java.lang.Long" />
+
+		<!-- 问卷类别名称 -->
+		<result column="NAME" property="type"
+			jdbcType="java.lang.String" />
+
+		<!-- 问卷标题 -->
+		<result column="TITLE" property="title"
+			jdbcType="java.lang.String" />
+
+		<!-- 交易用户ID -->
+		<result column="WEBUSER_ID" property="webUserId"
+			jdbcType="java.lang.Long" />
+
+		<!-- 真实姓名 -->
+		<result column="REAL_NAME" property="realName"
+			jdbcType="java.lang.String" />
+
+		<!-- 性别 -->
+		<result column="SEX" property="sex" jdbcType="java.lang.String" />
+
+		<!-- 年龄 -->
+		<result column="AGE" property="age" jdbcType="java.lang.Long" />
+
+		<!-- 电话 -->
+		<result column="PHONE" property="phone"
+			jdbcType="java.lang.String" />
+
+		<!-- 邮件 -->
+		<result column="EMAIL" property="email"
+			jdbcType="java.lang.String" />
+
+		<!-- 联系地址 -->
+		<result column="ADDRESS" property="address"
+			jdbcType="java.lang.String" />
+
+		<!-- 建议内容 -->
+		<result column="CONTENT" property="content"
+			jdbcType="java.lang.String" />
+
+		<!-- 建议时间(精确到分钟) -->
+		<result column="CREATE_TIME" property="createTime"
+			jdbcType="java.util.Date" />
+
+	</resultMap>
+
+	<!-- 查找所有 -->
+	<select id="selectAll" resultMap="questionnairePersonTwoMap">
+		select t.id, t.questionnaire_id, t.webuser_id, t.real_name,
+		t.sex, t.age, t.phone, t.email, t.address, t.content,
+		t.create_time, i.title, c.name from t_questionnaire_person t,
+		t_questionnaire_info i, T_QUESTIONNAIRE_CATEGORY c WHERE
+		t.questionnaire_id = i.id and i.category_id = c.id order by
+		t.create_time desc
+	</select>
+
+	<!-- 查找所有带分页 -->
+	<select id="selectQueryAllByPage"
+		resultMap="questionnairePersonTwoMap"
+		parameterClass="java.util.Map">
+		select id, questionnaire_id, webuser_id, real_name, sex, age,
+		phone, email, address, content, create_time, title, name from (
+		SELECT row_.*, ROWNUM rownum_ FROM ( select t.id,
+		t.questionnaire_id, t.webuser_id, t.real_name, t.sex, t.age,
+		t.phone, t.email, t.address, t.content, t.create_time, i.title,
+		c.name from t_questionnaire_person t, t_questionnaire_info i,
+		T_QUESTIONNAIRE_CATEGORY c WHERE t.questionnaire_id = i.id and
+		i.category_id = c.id order by t.create_time desc ) row_ WHERE
+		ROWNUM &lt;= #endNum# ) WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 根据类别、标题、建议时间查找 or -->
+	<select id="selectQuestionnairePerson"
+		parameterClass="java.util.Map"
+		resultMap="questionnairePersonTwoMap">
+		select t.id, t.questionnaire_id, t.webuser_id, t.real_name,
+		t.sex, t.age, t.phone, t.email, t.address, t.content,
+		t.create_time, i.title, c.name from t_questionnaire_person t,
+		t_questionnaire_info i, T_QUESTIONNAIRE_CATEGORY c where
+		t.questionnaire_id = i.id and i.category_id = c.id
+
+		<dynamic prepend="AND">
+			(
+			<isNotEmpty property="title" prepend="or">
+				i.title = #title#
+			</isNotEmpty>
+			<isNotEmpty property="type" prepend="or">
+				c.code = #type#
+			</isNotEmpty>
+			<isNotEmpty property="createTime" prepend="or">
+				to_char(t.CREATE_TIME,'yyyy-MM-dd hh:mm') between
+				#startTime# and #endTime#
+			</isNotEmpty>
+			)
+		</dynamic>
+
+		order by t.create_time desc
+	</select>
+
+	<!-- 根据类别、标题、建议时间查找 or 带分页 -->
+	<select id="selectQuestionnairePersonCutPage"
+		parameterClass="java.util.Map"
+		resultMap="questionnairePersonTwoMap">
+		select id, questionnaire_id, webuser_id, real_name, sex, age,
+		phone, email, address, content, create_time, title, name from (
+		SELECT row_.*, ROWNUM rownum_ FROM ( select t.id,
+		t.questionnaire_id, t.webuser_id, t.real_name, t.sex, t.age,
+		t.phone, t.email, t.address, t.content, t.create_time, i.title,
+		c.name from t_questionnaire_person t, t_questionnaire_info i,
+		T_QUESTIONNAIRE_CATEGORY c where t.questionnaire_id = i.id and
+		i.category_id = c.id
+
+		<dynamic prepend="AND">
+			(
+			<isNotEmpty property="title" prepend="or">
+				i.title = #title#
+			</isNotEmpty>
+			<isNotEmpty property="type" prepend="or">
+				c.code = #type#
+			</isNotEmpty>
+			<isNotEmpty property="createTime" prepend="or">
+				to_char(t.CREATE_TIME,'yyyy-MM-dd hh:mm') between
+				#startTime# and #endTime#
+			</isNotEmpty>
+			)
+		</dynamic>
+
+		order by t.create_time desc) row_ WHERE ROWNUM &lt;= #endNum# )
+		WHERE rownum_ &gt; #beginNum#
+	</select>
+
+	<!-- 根据ID获取相关信息 -->
+	<select id="getQuestionnairePersonById"
+		parameterClass="java.lang.Long"
+		resultMap="questionnairePersonTwoMap">
+		select t.id, t.questionnaire_id, t.webuser_id, t.real_name,
+		t.sex, t.age, t.phone, t.email, t.address, t.content,
+		t.create_time, i.title, c.name from t_questionnaire_person t,
+		t_questionnaire_info i, T_QUESTIONNAIRE_CATEGORY c WHERE
+		t.questionnaire_id = i.id and i.category_id = c.id and t.id =
+		#id#
+	</select>
+
+</sqlMap>

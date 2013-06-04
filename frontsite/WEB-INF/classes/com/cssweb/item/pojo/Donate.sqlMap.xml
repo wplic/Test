@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.item.pojo.Donate">
+
+	<typeAlias alias="Donate" type="com.cssweb.item.pojo.Donate"/>
+	
+	<resultMap id="DonateResult" class="Donate">
+		<result column="DONATE_ID" property="donateId" jdbcType="java.lang.Long"/>
+		<result column="DONATE_NAME" property="donateName" jdbcType="java.lang.String"/>
+		<result column="REMARK" property="remark" jdbcType="java.lang.String"/>
+		<result column="DONATE_TIME" property="donateTime" jdbcType="java.util.Date"/>
+		<result column="CREATE_DATE" property="createDate" jdbcType="java.util.Date"/>
+	</resultMap>
+
+	<update id="update" parameterClass="Donate">
+		update GYJJ_DONATE 
+			set  DONATE_NAME = #donateName#,
+				 REMARK = #remark#, 
+				 DONATE_TIME = #donateTime#
+		where DONATE_ID = #donateId#
+	</update>
+	
+	<select id="getDonateList" parameterClass="java.util.Map" resultMap="DonateResult">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+		select 
+			* 
+		from 
+			GYJJ_DONATE
+		where
+			1=1
+	        <isNotEmpty property="sql">
+	              $sql$
+	        </isNotEmpty>
+	         
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<select id="getDonateCount" resultClass="java.lang.Integer">
+		select 
+			count(*)  
+		from 
+			GYJJ_DONATE
+		where
+			1=1
+	</select>	
+	
+	<delete id="delete" parameterClass="Long">
+		delete GYJJ_DONATE where DONATE_ID = #value# 
+	</delete>
+	
+	<insert id="insert" parameterClass="Donate">
+		insert into GYJJ_DONATE(
+			DONATE_ID,DONATE_NAME,REMARK,DONATE_TIME,CREATE_DATE)
+		values(
+			#donateId#,#donateName#,#remark#,#donateTime#,#createDate#)
+	</insert>
+	<select id="selectById" parameterClass="Long" resultMap="DonateResult">
+		select 
+			*  
+		from 
+			GYJJ_DONATE
+		where
+			DONATE_ID=#value#
+	</select>	
+</sqlMap>

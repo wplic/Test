@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hq.pojo.Ahbj">
+
+	<typeAlias alias="Ahbj" type="com.cssweb.hq.pojo.Ahbj"/>
+
+
+   <cacheModel id="user-cache" type="OSCache" readOnly="true"  
+        serialize="true">  
+        <flushInterval hours="12" />  
+        <property value="500" name="size" />  
+    </cacheModel>  
+   
+	<!--result map-->
+
+  	<resultMap id="AhbjMap" class="Ahbj">
+ 		<result property="gsmc" column="GSMC"  jdbcType="String"/>
+ 		<result property="sspj" column="SSPJ"  jdbcType="Long" />
+		<result property="hspj" column="HSPJ"  jdbcType="Long"/>
+  	</resultMap>
+  	
+  	<select id="getAhbj" resultMap = "AhbjMap" parameterClass="map" cacheModel="user-cache">
+			select * from ( select row_.*,rownum rownum_ from ( $condition$
+		)row_
+		<dynamic>
+			<isGreaterThan property="endNum" compareValue="0">
+				where rownum &lt;=#endNum#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="beginNum" compareValue="0">
+				where rownum_ &gt;#beginNum#
+			</isGreaterThan>
+		</dynamic>
+	</select>
+</sqlMap>
+

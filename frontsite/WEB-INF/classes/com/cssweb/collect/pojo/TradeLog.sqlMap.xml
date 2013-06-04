@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.TradeLog">
+
+	<typeAlias alias="tradeLog" type="com.cssweb.collect.pojo.TradeLog"/>
+
+	<!--result map-->
+	<resultMap id="tradeLogMap" class="tradeLog">
+        <result property="accountabbr" column="ACCOUNTABBR" jdbcType="String"/>
+        <result property="fundcode" column="FUNDCODE"  jdbcType="String"  />
+		<result property="fundname" column="FUNDNAME"  jdbcType="String" />
+		<result property="transactioncfmdate" column="TRANSACTIONCFMDATE"  jdbcType="String" />
+		<result property="businesstype" column="PMNM"  jdbcType="String" />
+        <result property="confirmedprice" column="NAV"  jdbcType="Double"  nullValue="0.0"/>
+        <result property="confirmednumber" column="CONFIRMEDVOL" jdbcType="Double"  nullValue="0.0" />
+ 		<result property="confirmedamount" column="CONFIRMEDAMOUNT" jdbcType="Double"  nullValue="0.0"/>
+ 	</resultMap>
+  	
+ 
+  	<select id="getTradeLog" parameterClass="java.util.Map" resultMap = "tradeLogMap" >
+   		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+   			select NAV,fundcode,fundname,accountabbr,transactioncfmdate,confirmedvol,confirmedamount,pmnm
+			from (
+			select tex.NAV,tex.fundcode,tf.fundname,tfa.accountabbr accountabbr,tex.transactioncfmdate,tex.confirmedvol,tex.confirmedamount,tp1.c_businname pmnm from ta_exchange tex,ta_FUNDINFO tf,(select distinct a.distributorcode,a.distributorname from ta_distributor a) td,ta_hsbusiflag tp1,ta_fundaccount tfa
+			where tex.distributorcode = td.distributorcode
+			and   tex.fundcode = tf.fundcode
+			and   tex.businesscode = tp1.c_businflag and tex.oorgno=tp1.c_requestflag 
+			and   nvl(tex.detailflag,1)=1
+  			and   tex.taaccountid =tfa.taaccountid(+) and returncode like '%0000%'
+			and (tex.taaccountid=#taaccountid#	or tex.taaccountid=(select tn.taaccountid_old from ta_new_fundaccount tn where tn.taaccountid=#taaccountid# ))
+			<dynamic>
+				 <isNotNull property="startdate" prepend="and">
+				  	transactioncfmdate &gt;= #startdate#
+				 </isNotNull>
+				 <isNotNull property="enddate" prepend="and">
+				  	transactioncfmdate &lt;= #enddate#
+				 </isNotNull>
+			</dynamic>
+			union all 
+			select tex.NAV,tex.fundcode,tf.fundname,tfa.accountabbr accountabbr,tex.transactioncfmdate,tex.confirmedvol,tex.confirmedamount,tp1.pmnm from ta_exchange tex,ta_FUNDINFO tf,(select distinct a.distributorcode,a.distributorname from ta_distributor a) td,ta_parameter tp1,ta_fundaccount tfa
+			where tex.distributorcode = td.distributorcode
+			and   tex.fundcode = tf.fundcode
+			and   tex.businesscode = tp1.pmco
+			and   (tp1.pmky='BUSINESSCODE' or tp1.pmky='DEFDIVIDENDMETHOD') 
+			and   nvl(tex.detailflag,1)=1
+  			and   tex.taaccountid =tfa.taaccountid(+) and returncode like '%0000%'
+			and (tex.taaccountid=#taaccountid#	or tex.taaccountid=(select tn.taaccountid_old from ta_new_fundaccount tn where tn.taaccountid=#taaccountid# ))
+			<dynamic>
+				 <isNotNull property="startdate" prepend="and">
+				  	transactioncfmdate &gt;= #startdate#
+				 </isNotNull>
+				 <isNotNull property="enddate" prepend="and">
+				  	transactioncfmdate &lt;= #enddate#
+				 </isNotNull>
+			</dynamic>
+			) order by transactioncfmdate desc
+   		) row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	</select>
+ 
+    <select id="getTradeLogAllCount" parameterClass="java.util.Map" resultClass = "Integer">
+   			select count(*) CT 
+			from (
+			select tex.NAV,tex.fundcode,tf.fundname,tfa.accountabbr accountabbr,tex.transactioncfmdate,tex.confirmedvol,tex.confirmedamount,tp1.c_businname pmnm from ta_exchange tex,ta_FUNDINFO tf,(select distinct a.distributorcode,a.distributorname from ta_distributor a) td,ta_hsbusiflag tp1,ta_fundaccount tfa
+			where tex.distributorcode = td.distributorcode
+			and   tex.fundcode = tf.fundcode
+			and   tex.businesscode = tp1.c_businflag and tex.oorgno=tp1.c_requestflag 
+			and   nvl(tex.detailflag,1)=1
+  			and   tex.taaccountid =tfa.taaccountid(+) and returncode like '%0000%'
+			and (tex.taaccountid=#taaccountid#	or tex.taaccountid=(select tn.taaccountid_old from ta_new_fundaccount tn where tn.taaccountid=#taaccountid# ))
+			<dynamic>
+				 <isNotNull property="startdate" prepend="and">
+				  	transactioncfmdate &gt;= #startdate#
+				 </isNotNull>
+				 <isNotNull property="enddate" prepend="and">
+				  	transactioncfmdate &lt;= #enddate#
+				 </isNotNull>
+			</dynamic>
+			union all 
+			select tex.NAV,tex.fundcode,tf.fundname,tfa.accountabbr accountabbr,tex.transactioncfmdate,tex.confirmedvol,tex.confirmedamount,tp1.pmnm from ta_exchange tex,ta_FUNDINFO tf,(select distinct a.distributorcode,a.distributorname from ta_distributor a) td,ta_parameter tp1,ta_fundaccount tfa
+			where tex.distributorcode = td.distributorcode
+			and   tex.fundcode = tf.fundcode
+			and   tex.businesscode = tp1.pmco
+			and   (tp1.pmky='BUSINESSCODE' or tp1.pmky='DEFDIVIDENDMETHOD') 
+			and   nvl(tex.detailflag,1)=1
+  			and   tex.taaccountid =tfa.taaccountid(+) and returncode like '%0000%'
+			and (tex.taaccountid=#taaccountid#	or tex.taaccountid=(select tn.taaccountid_old from ta_new_fundaccount tn where tn.taaccountid=#taaccountid# ))
+			<dynamic>
+				 <isNotNull property="startdate" prepend="and">
+				  	transactioncfmdate &gt;= #startdate#
+				 </isNotNull>
+				 <isNotNull property="enddate" prepend="and">
+				  	transactioncfmdate &lt;= #enddate#
+				 </isNotNull>
+			</dynamic>
+			)
+  </select>
+  
+</sqlMap>

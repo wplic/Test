@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+<form-beans>
+	<!-- 申请用户 -->
+	<form-bean name="accountapplyform" type="com.cssweb.branchcomp.web.actionform.AccountApplyForm"></form-bean>
+	<!-- 部门信息展示 -->
+	<form-bean name="departmentform" type="com.cssweb.branchcomp.web.actionform.DepartmentForm"></form-bean>
+	</form-beans>
+	
+	<global-forwards>
+		<forward name="homepage" path="/init_sz.do?method=initInfoCenter"></forward>
+	</global-forwards>
+	
+	<action-mappings>	 
+		<!--预约开户 -->
+		<action name="accountapplyform" parameter="op" path="/sz/accountApplyAction" scope="request" >
+			<forward name="accountApplypage" path="/sz/yuye.jsp"></forward>
+		</action>
+		
+		<action parameter="method" path="/sz/init_sz" scope="request">
+			<forward name="index_" path="/sz/index.jsp"></forward>
+		</action>
+		
+		
+		<!-- 部门信息 -->
+		<action name="departmentform" parameter="op" path="/sz/departmentAction" scope="request" >
+			<forward name="accountApplypage" path="/sz/yuye.jsp"></forward>
+		</action>
+		<!-- 部门经理信息 -->
+		<action parameter="op" path="/sz/departmentManagerAction" scope="request">
+			<forward name="managerspage" path="/sz/dmangers.jsp"></forward>
+		</action>
+		
+	</action-mappings>		
+</struts-config>

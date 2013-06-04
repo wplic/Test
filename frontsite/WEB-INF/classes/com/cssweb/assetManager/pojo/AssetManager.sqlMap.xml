@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.assetManager.pojo.AssetManager">
+
+	<typeAlias alias="AssetManager" type="com.cssweb.assetManager.pojo.AssetManager" />
+
+	<resultMap id="AssetManagerMap" class="AssetManager">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="name" column="NAME" jdbcType="String"/>
+		<result property="job" column="JOB" jdbcType="String"/>
+		<result property="sex" column="SEX" jdbcType="String"/>
+		<result property="age" column="AGE" jdbcType="String"/>
+		<result property="eduction" column="EDUCTION" jdbcType="String"/>
+		<result property="workyear" column="WORKYEAR" jdbcType="String"/>
+		<result property="intro" column="INTRO" jdbcType="String"/>
+		<result property="flag" column="FLAG" jdbcType="String"/>
+		<result property="pic" column="PIC" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+	<resultMap id="AssetManagerMap2" class="AssetManager">
+		<result property="id" column="MANAGER_ID" jdbcType="Long"/>
+		<result property="pic" column="PRODUCT_ID" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+	<insert id="insertInfo" parameterClass="AssetManager">
+		insert into T_ASSET_MANAGERINFO ( ID, NAME, JOB,SEX,AGE, EDUCTION,WORKYEAR,INTRO,FLAG,PIC) 
+		VALUES (#id#,#name#,#job#,#sex#,#age#,#eduction#,#workyear#,#intro#,#flag#,#pic#)
+	</insert>
+	
+	<insert id="insertManaProMap" parameterClass="java.util.Map">
+		insert into T_ASSET_MANAGERPRO ( MANAGER_ID, PRODUCT_ID) VALUES (#managerid#,#productid#)
+	</insert>
+	
+	<update id="updateInfo" parameterClass="AssetManager">
+		update T_ASSET_MANAGERINFO set NAME=#name#,JOB=#job#,SEX=#sex#,AGE=#age#,EDUCTION=#eduction#,WORKYEAR=#workyear#,INTRO=#intro#,FLAG=#flag# where id=#id#
+	</update>
+	
+     <update id="updateFlag" parameterClass="AssetManager">
+		update T_ASSET_MANAGERINFO set FLAG = #flag# where id=#id#
+	</update>
+	
+	<update id="updatePicById" parameterClass="AssetManager">
+		update T_ASSET_MANAGERINFO set PIC = #pic# where id = #id#
+	</update>
+	
+	<delete id="deleteInfo" parameterClass="String">
+		delete from T_ASSET_MANAGERINFO where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteInfoById" parameterClass="Long">
+		delete from T_ASSET_MANAGERINFO where id = #value#
+	</delete>
+	
+	<delete id="deleteManaProMap" parameterClass="Long">
+		delete from T_ASSET_MANAGERPRO where MANAGER_ID = #managerid#
+	</delete>
+	
+	<select id="getAllInfo" resultMap="AssetManagerMap">
+		select * from T_ASSET_MANAGERINFO 
+	</select>
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_ASSET_MANAGERINFO 
+	</select>
+
+	<select id="getInfoById" parameterClass="Long" resultMap="AssetManagerMap">
+		select * from T_ASSET_MANAGERINFO where id= #id#
+	</select>	
+	
+	<select id="getInfoByMap" parameterClass="java.util.Map" resultMap = "AssetManagerMap">
+    	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select *  from T_ASSET_MANAGERINFO where 1=1
+			<isNotNull prepend="and" property="name">
+				NAME like '%$name$%'
+			</isNotNull>
+			<isNotNull prepend="and" property="sex">
+				SEX = '$sex$'
+			</isNotNull>
+			<isNotNull prepend="and" property="age">
+				AGE = '$age$'
+			</isNotNull>
+			<isNotNull prepend="and" property="eduction">
+				EDUCTION like '%$eduction$%'
+			</isNotNull>
+			<isNotNull prepend="and" property="workyear">
+				WORKYEAR like '%$workyear$%'
+			</isNotNull>
+			<isNotNull prepend="and" property="flag">
+				flag = '$flag$'
+			</isNotNull>
+			order by ID
+		 )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  	</select>
+  	
+  	<select id="getInfoCountByMap" resultClass="java.lang.Integer">
+		select count(*)  from T_ASSET_MANAGERINFO where 1=1
+		<isNotNull prepend="and" property="name">
+			NAME like '%$name$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="sex">
+			SEX = '$sex$'
+		</isNotNull>
+		<isNotNull prepend="and" property="age">
+			AGE = '$age$'
+		</isNotNull>
+		<isNotNull prepend="and" property="eduction">
+			EDUCTION like '%$eduction$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="workyear">
+			WORKYEAR like '%$workyear$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="flag">
+			flag = '$flag$'
+		</isNotNull>
+	</select>
+	
+	<select id="getNumAssetManager" parameterClass="java.util.Map" resultMap="AssetManagerMap">
+    	select * from (select * from T_ASSET_MANAGERINFO t where t.flag='$flag$' order by t.ID) where rownum&lt;=#row#
+	</select>
+	
+	<select id="getManagerInfoByProductId" parameterClass="Long" resultMap = "AssetManagerMap">
+		select t.*  from T_ASSET_MANAGERINFO t,T_ASSET_MANAGERPRO p where p.PRODUCT_ID=#productid# and p.manager_id=t.id
+  	</select>
+  	
+  	<delete id="deleteManagerproByManagerId" parameterClass="Long">
+		delete from T_ASSET_MANAGERPRO where MANAGER_ID = #value#
+	</delete>
+	
+	<select id="getProductIdByManageId" parameterClass="Long" resultMap = "AssetManagerMap2">
+		select PRODUCT_ID,manager_id  from T_ASSET_MANAGERPRO p where p.manager_id=#managerid#
+  	</select>
+</sqlMap>

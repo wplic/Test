@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+ 
+<config>
+
+    <xmlPath>getlogo.xml</xmlPath>
+    <xmlScan>0.7</xmlScan>
+    <bigx>373</bigx>
+    <bigy>306</bigy>
+    <smallx>741</smallx>
+    <smally>618</smally>
+ 
+</config>
+

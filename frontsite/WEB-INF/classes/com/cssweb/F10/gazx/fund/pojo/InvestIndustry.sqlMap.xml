@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.InvestIndustry">
+
+	<typeAlias alias="investIndustry" type="com.cssweb.F10.gazx.fund.pojo.InvestIndustry" />
+
+	<!--result map-->
+	<resultMap id="investIndustryMap" class="investIndustry">
+		<result property="industryCode" column="HYDM" jdbcType="java.lang.String" />
+		<result property="industryName" column="HYJC" jdbcType="java.lang.String" />
+		<result property="infoPublDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="id" column="T_JJTZZH_HY_ID" jdbcType="java.lang.Long" />
+		<result property="ratioInNV" column="SZ_JZBL" jdbcType="java.lang.Double" />
+		<result property="marketValue" column="SZ" jdbcType="java.lang.Double" />
+		<result property="fundCode" column="JJDM" jdbcType="java.lang.String" />
+		<result property="fundShortName" column="JJJC" jdbcType="java.lang.String" />
+		<result property="fundType" column="JJLX" jdbcType="java.lang.String" />
+	</resultMap>
+	
+	<resultMap id="investIndustryByCodeMap" class="investIndustry">
+		<result property="infoPublDate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>	
+	
+	<!-- 根据代码查询时间列表 -->
+	<select id="getDateListByCode" resultMap="investIndustryByCodeMap" parameterClass="String">
+		select distinct jz.FSRQ  
+		from JJTZZH_HY  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+		order by jz.FSRQ desc
+	</select>	
+	
+	<!-- 根据代码查询行业投资组合列表 -->
+	<select id="getInvestIndustryListByCode" resultMap="investIndustryMap" parameterClass="String">
+    	select jz.HYDM,jz.HYJC,jz.FSRQ,jz.T_JJTZZH_HY_ID,jz.SZ_JZBL,jz.SZ,j.JJDM,j.JJJC,j.JJLX
+		
+		from JJTZZH_HY  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>
+	
+	<!-- 根据代码查询行业投资组合列表 -->
+	<select id="getInvestIndustryListByCodeAndDate" resultMap="investIndustryMap" parameterClass="Map">
+    	select jz.HYDM,jz.HYJC,jz.FSRQ,jz.T_JJTZZH_HY_ID,jz.SZ_JZBL,jz.SZ,j.JJDM,j.JJJC,j.JJLX
+		
+		from JJTZZH_HY  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID  and to_char(jz.FSRQ,'yyyy-mm-dd') &lt;= #infoPublDate# 
+    		 and j.JJDM= #secCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>
+	
+	<!-- 根据代码、时间查询行业投资组合的记录数 -->	
+	<select id="getInvestIndustryListOfCount" resultClass="Integer" parameterClass="Map">
+    	select count(*)
+		
+		from JJTZZH_HY  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID  
+    		 and jz.SCBZ=0 and jz.GKBZ=1
+    	<dynamic>
+			<isNotEmpty property="fundCode"><!--基金代码  -->
+				AND j.jjdm=#fundCode#
+			</isNotEmpty>
+			<isNotEmpty property="infoPublDate"><!--报告日期 -->
+				AND  to_char(jz.FSRQ,'yyyy-mm-dd') =#infoPublDate#
+			</isNotEmpty>			
+		</dynamic>
+	</select>		
+	
+	<!-- 根据代码查询行业投资组合列表  分页 -->
+	<select id="pageQuery" resultMap="investIndustryMap" parameterClass="Map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+		    	select jz.HYDM,jz.HYJC,jz.FSRQ,jz.T_JJTZZH_HY_ID,jz.SZ_JZBL,jz.SZ,j.JJDM,j.JJJC,j.JJLX
+				
+				from JJTZZH_HY  jz, JJZB  j
+				
+				where jz.T_JJZB_ID=j.T_JJZB_ID  
+		    		  and jz.SCBZ=0 and jz.GKBZ=1
+    		 			<dynamic>
+							<isNotNull prepend="and" property="fundCode">
+								j.JJDM= #fundCode#
+							</isNotNull>
+							<isNotNull prepend="and" property="endDate">
+								to_char(jz.FSRQ,'yyyy-mm-dd')= #endDate# 
+							</isNotNull>
+						</dynamic>
+		    		 order by jz.HYDM
+			) row_ WHERE ROWNUM &lt;= #endNum#
+		) r WHERE rownum_ &gt;#beginNum#
+	</select>	
+	
+	<select id="getLeastDateByCode" resultClass="java.util.Date" parameterClass="String">
+		select max(jj.FSRQ)  as FSRQ
+		from JJTZZH_HY  jj, JJZB  j
+		where jj.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jj.SCBZ=0 and jj.GKBZ=1
+	</select>	
+
+</sqlMap>

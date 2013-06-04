@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.BranchNoticeMap">
+
+	<typeAlias alias="BranchNoticeMap" type="com.cssweb.systemset.pojo.BranchNoticeMap"/>
+	
+	<resultMap id="BranchNoticeMap" class="BranchNoticeMap">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="branchId" 	column="BRANCH_ID" 		jdbcType="Long"/>
+ 		<result property="noticeId" 	column="NOTICE_ID" 		jdbcType="Long"/>
+  	</resultMap>
+
+	<insert id="insert" parameterClass="BranchNoticeMap">
+	    INSERT INTO 
+	    	T_SYSTEM_BRANCH_NOTICE_MAP(
+	    		ID,
+				BRANCH_ID,
+				NOTICE_ID)
+	    VALUES(
+	    		#id#,
+	    		#branchId#,
+	    		#noticeId#)
+  	</insert>
+  	
+  	<delete id="delete" parameterClass="java.lang.String">
+    	DELETE 
+    		T_SYSTEM_BRANCH_NOTICE_MAP 
+    	WHERE 
+    		NOTICE_ID	IN ($value$)
+  	</delete>
+  	<select id="select" parameterClass="Long" resultMap="BranchNoticeMap">
+  		SELECT	* 
+  		FROM	T_SYSTEM_BRANCH_NOTICE_MAP
+  		WHERE	NOTICE_ID=#id#
+  	</select>
+  	
+</sqlMap>

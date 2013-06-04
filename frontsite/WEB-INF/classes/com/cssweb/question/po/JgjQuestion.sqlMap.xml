@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.question.po.JgjQuestion">
+	<typeAlias alias="jgjQuestion"	type="com.cssweb.question.po.JgjQuestion" />
+	
+	
+	<resultMap id="jgjQuestionMap" class="jgjQuestion">
+		<result property="id" column="ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="question" column="QUESTION" jdbcType="String" nullValue=""/>
+		<result property="result" column="RESULT" jdbcType="String" nullValue=""/>
+		<result property="type" column="TYPE" jdbcType="String" nullValue=""/>
+		
+		<result property="updateDate" column="UPDATE_DATE" jdbcType="java.util.Date"/>
+		<result property="state" column="STATE" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="updateUserId" column="UPDATE_USERID" jdbcType="java.lang.Long" nullValue="0"/>
+		
+		<result property="sort" column="SORT" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="ext1" column="EXT1" jdbcType="String" nullValue=""/>
+		<result property="ext2" column="EXT2" jdbcType="String" nullValue=""/>
+		<result property="ext3" column="EXT3" jdbcType="String" nullValue=""/>
+		<result property="ext4" column="EXT4" jdbcType="String" nullValue=""/>
+  	</resultMap>
+	<update id="updateJgjQuestion" parameterClass="jgjQuestion">
+		<![CDATA[
+		update JGJ_QUESTION set QUESTION=#question#,RESULT=#result#,TYPE=#type#,
+		UPDATE_DATE=#updateDate#,STATE=#state#,UPDATE_USERID=#updateUserId#,SORT=#sort#,
+		EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		 where id=#id#
+		]]>
+	</update>
+  	
+	<insert id="insertJgjQuestion" parameterClass="jgjQuestion">
+		<![CDATA[
+		 INSERT INTO JGJ_QUESTION(ID,QUESTION,RESULT,TYPE,UPDATE_DATE,STATE,UPDATE_USERID,SORT,EXT1,EXT2,EXT3,EXT4) 
+		 values(#id#,#question#,#result#,#type#,#updateDate#,#state#,#updateUserId#,#sort#,#ext1#,#ext2#,#ext3#,#ext4#)
+		]]>
+	</insert>
+
+
+	
+
+	<delete id="deleteJgjQuestionById" parameterClass="Long">
+		<![CDATA[
+		DELETE FROM  JGJ_QUESTION WHERE ID = #id#
+		]]>
+	</delete>
+
+	
+
+	<select id="getAllCount" resultClass="Integer" parameterClass="java.util.Map">
+		<![CDATA[
+		select count(1) from JGJ_QUESTION $findsql$
+		]]>
+	</select>
+	
+	
+	<select id="getJgjQuestionById" resultMap="jgjQuestionMap" parameterClass="Long">
+		<![CDATA[
+		  SELECT * FROM  JGJ_QUESTION WHERE ID=#id#
+		]]>
+	</select>
+	
+
+  
+  <select id="getTotalRecord" parameterClass="java.lang.String" resultClass = "java.lang.Long" >   
+      $sql$   
+  </select>
+	
+  
+  
+   <select id="getJgjQuestionList" parameterClass="java.util.Map" resultMap="jgjQuestionMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+    	row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+
+  
+	<update id="updateSort" parameterClass="Long">
+	 update JGJ_QUESTION
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;#sort#
+	</update>
+  	<update id="updateSortAppend" parameterClass="Long">
+	 update JGJ_QUESTION
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;=#sort#
+	</update>	
+	 <update id="updateSortStartEnd" parameterClass="java.util.Map">
+	 update JGJ_QUESTION
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>
+	 <update id="updateSortEndStart" parameterClass="java.util.Map">
+	 update JGJ_QUESTION
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>		
+</sqlMap>

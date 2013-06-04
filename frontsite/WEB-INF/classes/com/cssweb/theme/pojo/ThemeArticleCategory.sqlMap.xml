@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.theme.pojo.ThemeArticleCategory">
+
+	<typeAlias alias="ThemeArticleCategory" type="com.cssweb.theme.pojo.ThemeArticleCategory" />
+
+	<resultMap id="ThemeArticleCategoryMap" class="ThemeArticleCategory">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="categoryid" column="CATEGORYID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+	</resultMap>
+
+	<resultMap id="ThemeArticleCategoryMap2" class="ThemeArticleCategory">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="category" column="CATEGORY" jdbcType="String"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="ThemeArticleCategory">
+		INSERT into T_THEME_ARTICLE_CATEGORY (ID,CATEGORYID,TITLE,UPDATETIME) VALUES (#id#,#categoryid#,#title#,sysdate)
+	</insert>
+	
+	<update id="update" parameterClass="ThemeArticleCategory">
+		update T_THEME_ARTICLE_CATEGORY set CATEGORYID=#categoryid#,TITLE=#title#,UPDATETIME=sysdate where ID=#id#
+	</update>
+
+	<delete id="delete" parameterClass="String">
+		delete from T_THEME_ARTICLE_CATEGORY where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_THEME_ARTICLE_CATEGORY where ID = #value#
+	</delete>
+		
+	<select id="getAll" resultMap="ThemeArticleCategoryMap">
+		select * from T_THEME_ARTICLE_CATEGORY ORDER BY ID
+	</select>
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_THEME_ARTICLE_CATEGORY 
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="ThemeArticleCategoryMap">
+		select * from T_THEME_ARTICLE_CATEGORY where ID= #id#
+	</select>	
+	
+	  <select id="getFrontByMap" parameterClass="java.util.Map" resultMap = "ThemeArticleCategoryMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+	  <select id="getAdminByMap" parameterClass="java.util.Map" resultMap = "ThemeArticleCategoryMap2">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+</sqlMap>

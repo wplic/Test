@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.video.pojo.TvideoProgramLive">
+
+	<typeAlias alias="TvideoProgramLive" type="com.cssweb.video.pojo.TvideoProgramLive" />
+
+	<resultMap id="TvideoProgramLive" class="TvideoProgramLive">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="docent" column="DOCENT" jdbcType="String"/>
+		<result property="content" column="CONTENT" jdbcType="String"/>
+		<result property="urlLink" column="URL_LINK" jdbcType="String"/>
+		<result property="guestIntro" column="GUEST_INTRO" jdbcType="String"/>
+		<result property="guestPic" column="GUEST_PIC" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="hostIntro" column="HOST_INTRO" jdbcType="String"/>
+		<result property="hostPic" column="HOST_PIC" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="uploadDate" column="UPLOAD_DATE" jdbcType="Date"/>
+		<result property="liveTime" column="LIVE_TIME" jdbcType="Date"/>
+		<result property="recommend" column="RECOMMEND" jdbcType="String"/>
+		<result property="state" column="STATE" jdbcType="String"/>
+		<result property="week" column="WEEK" jdbcType="String"/>
+		<result property="intro" column="INTRO" jdbcType="java.lang.Long"/>
+	</resultMap>
+	
+	<insert id="insertTvideoProgramIntro" parameterClass="TvideoProgramLive">
+		INSERT into T_VIDEO_PROGRAM_LIVE ( ID, UPLOAD_DATE, WEEK, INTRO) 
+		VALUES (#id#,#uploadDate#, #week#,#intro#)
+	</insert>
+	
+	<insert id="insertTvideoProgramLive" parameterClass="TvideoProgramLive">
+		INSERT into T_VIDEO_PROGRAM_LIVE ( ID, TITLE, DOCENT,CONTENT,URL_LINK,GUEST_INTRO, HOST_INTRO, UPLOAD_DATE, LIVE_TIME, RECOMMEND, STATE) 
+		VALUES (#id#,#title#, #docent#,#content#,#urlLink#, #guestIntro#, #hostIntro#,sysdate,#liveTime#,#recommend#,#state#)
+	</insert>
+	
+	<update id="upTvideoProgramLive" parameterClass="TvideoProgramLive">
+		update T_VIDEO_PROGRAM_LIVE set TITLE = #title#, DOCENT = #docent# ,CONTENT = #content#, URL_LINK = #urlLink#, GUEST_INTRO = #guestIntro#, HOST_INTRO = #hostIntro# , 
+		UPLOAD_DATE = sysdate ,LIVE_TIME = #liveTime#, RECOMMEND = #recommend# where id=#id#
+	</update>
+	<update id="updateTvideoProgramLives" parameterClass="TvideoProgramLive">
+		update T_VIDEO_PROGRAM_LIVE set   UPLOAD_DATE = sysdate ,WEEK = #week#, INTRO = #intro# where id=#id#
+	</update>
+	
+     <update id="upProgramStartById" parameterClass="TvideoProgramLive">
+		update T_VIDEO_PROGRAM_LIVE set STATE = #state# where id=#id#
+	</update>
+	<delete id="deleteTvideoProgramLives" parameterClass="String">
+		delete from T_VIDEO_PROGRAM_LIVE where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteTvideoProgramLiveById" parameterClass="Long">
+		delete from T_VIDEO_PROGRAM_LIVE where id = #value#
+	</delete>
+	
+	<update id="upTvideoProgramLiveGuestPicById" parameterClass="TvideoProgramLive">
+		update T_VIDEO_PROGRAM_LIVE set GUEST_PIC = #guestPic#  where id = #id#
+	</update>
+	
+	<update id="upTvideoProgramLiveHostPicById" parameterClass="TvideoProgramLive">
+		update T_VIDEO_PROGRAM_LIVE set HOST_PIC = #hostPic# where id = #id#
+	</update>
+	
+	<select id="getTvideoProgramLiveAll" resultMap="TvideoProgramLive">
+		select * from T_VIDEO_PROGRAM_LIVE 
+	</select>
+
+	<select id="getTvideoProgramLiveById" parameterClass="Long" resultMap="TvideoProgramLive">
+		select * from T_VIDEO_PROGRAM_LIVE where id= #id#
+	</select>	
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_VIDEO_PROGRAM_LIVE 
+	</select>
+	
+	  <select id="getByTvideoProgramLiveMap" parameterClass="java.util.Map" resultMap = "TvideoProgramLive">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  	
+  	<select id="getByTvideoProgramLiveMapCount" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+	
+	<!-- 最近时间段的视频 即将播放-->
+	<select id="getNewDateTimeTvideo" resultMap="TvideoProgramLive">
+	    select * from (
+		select t.* from T_VIDEO_PROGRAM_LIVE t where t.state='1' and LIVE_TIME &gt;=sysdate order by t.LIVE_TIME  
+		) where ROWNUM	&lt;=10
+	</select>
+	
+	<!-- 按天来查找 前台取开始时间和结束时间全部的视频 -->
+	<select id="getBeginAndEndByDayTvideoAll" parameterClass="java.util.Map" resultMap="TvideoProgramLive">
+		select t.* from T_VIDEO_PROGRAM_LIVE t where t.state='1'
+		<dynamic>
+			 <isNotEmpty property="end" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyyMMdd') &lt;=#end# 
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyyMMdd') &gt;=#begin#
+			 </isNotEmpty>	
+		</dynamic>
+		 order by t.LIVE_TIME 	
+	</select>
+	<!-- 按月来查找 前台取开始时间和结束时间全部的视频 -->
+	<select id="getBeginAndEndByMonthTvideoAll" parameterClass="java.util.Map" resultMap="TvideoProgramLive">
+		select t.* from T_VIDEO_PROGRAM_LIVE t where t.state='1'
+		<dynamic>
+			 <isNotEmpty property="end" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyyMM') &lt;=#end# 
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyyMM') &gt;=#begin#
+			 </isNotEmpty>	
+		</dynamic>
+		 order by t.LIVE_TIME 	
+	</select>
+		<!--按年来查找 前台取开始时间和结束时间全部的视频 -->
+	<select id="getBeginAndEndByYearTvideoAll" parameterClass="java.util.Map" resultMap="TvideoProgramLive">
+		select t.* from T_VIDEO_PROGRAM_LIVE t where t.state='1'
+		<dynamic>
+			 <isNotEmpty property="end" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyy') &lt;=#end# 
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyy') &gt;=#begin#
+			 </isNotEmpty>	
+		</dynamic>
+		 order by t.LIVE_TIME 	
+	</select>
+	
+	<resultMap id="DayTvideoList" class="TvideoProgramLive">
+		<result property="dayTvideo" column="DAY_TVIDEO" jdbcType="String"/>
+	</resultMap>	
+	<!-- 按年月来查找 前台全部的视频的时间天数 -->
+	<select id="getDayAllByYearMon" parameterClass="java.util.Map" resultMap="DayTvideoList">
+		select distinct to_char(t.LIVE_TIME, 'yyyyMMdd') as DAY_TVIDEO from t_video_program_live t where t.state='1'
+		<dynamic>
+			 <isNotEmpty property="end" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyyMM') &lt;=#end# 
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	to_char(t.LIVE_TIME, 'yyyyMM') &gt;=#begin#
+			 </isNotEmpty>	
+		</dynamic>
+		 order by to_char(t.LIVE_TIME, 'yyyyMMdd')	
+	</select>	
+	
+	<select id="getTvideoProgramLiveByWeek" parameterClass="String" resultMap="TvideoProgramLive">
+		select * from T_VIDEO_PROGRAM_LIVE where Week= #week#
+	</select>
+</sqlMap>

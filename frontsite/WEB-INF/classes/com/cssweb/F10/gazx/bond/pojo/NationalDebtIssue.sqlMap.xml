@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.bond.pojo.NationalDebtIssue">
+
+	<typeAlias alias="nationalDebtIssue"
+		type="com.cssweb.F10.gazx.bond.pojo.NationalDebtIssue" />
+
+	<!--result map-->
+	<resultMap id="nationalDebtIssueMap" class="nationalDebtIssue">
+
+		<!-- 发行额 -->
+		<result property="actualIssueSize" column="FXE"
+			jdbcType="java.lang.Long" />
+
+		<!-- 国债名称 -->
+		<result property="bondName" column="GZMC"
+			jdbcType="java.lang.String" />
+
+		<!-- 国债简称 -->
+		<result property="bondShortName" column="ZQJC"
+			jdbcType="java.lang.String" />
+
+		<!-- 国债类型 -->
+		<result property="bondType" column="GZLX"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行主体 -->
+		<result property="companyId" column="FXZT"
+			jdbcType="java.lang.Long" />
+
+		<!-- 通过发行主体ID,从公司主表查找公司名称 -->
+		<result property="companyName" column="GSMC"
+			jdbcType="java.lang.String" />
+
+		<!-- 利息递进方式	-->
+		<result property="compoundMethod" column="LXDJFS"
+			jdbcType="java.sql.String" />
+
+		<!-- 票面利率 -->
+		<result property="couponRate" column="PMLL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 发行期_结束日期 -->
+		<result property="delistDate" column="FXQX_JSR"
+			jdbcType="java.util.Date" />
+
+		<!-- 国债到期日 -->
+		<result property="endDate" column="GZDQR"
+			jdbcType="java.util.Date" />
+
+		<!-- 基本利差 -->
+		<result property="FRNMargin" column="JBLC"
+			jdbcType="java.lang.String" />
+
+		<!-- 付息日 -->
+		<result property="intPaymentDate" column="FXR"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行方式 -->
+		<result property="issueMode" column="FXFS"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行对象	-->
+		<result property="issueObject" column="FXDX"
+			jdbcType="java.lang.String" />
+
+		<!-- 预计发行额 -->
+		<result property="issueSize" column="YJFXE"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行价格 -->
+		<result property="issurePrice" column="FXJG"
+			jdbcType="java.lang.String" />
+
+		<!-- 发行期_开始日期 -->
+		<result property="listedDate" column="FXQX_KSR"
+			jdbcType="java.util.Date" />
+
+		<!-- 国债期限 -->
+		<result property="maturity" column="GZQX"
+			jdbcType="java.lang.String" />
+
+		<!-- 国债面值 -->
+		<result property="parValue" column="GZMZ"
+			jdbcType="java.lang.Double" />
+
+		<!-- 发生日期 -->
+		<result property="pulishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 承销方式	-->
+		<result property="underwritingMode" column="CXFS"
+			jdbcType="java.lang.String" />
+
+		<!-- 起息日期 -->
+		<result property="valueDate" column="QXRQ"
+			jdbcType="java.util.Date" />
+
+	</resultMap>
+
+	<!-- 根据国债代码，返回国债发行对象 -->
+	<select id="getNationalDebtIssueByCode"
+		resultMap="nationalDebtIssueMap" parameterClass="String">
+		SELECT a.FXZT, a.fxe, B.ZQDM, a.Gzmc, b.ZQJC, a.GZLX, a.FXZT,
+		c.GSMC, a.Gzmc, a.Lxdjfs, a.Pmll, a.Fxqx_jsr, a.GZDQR, a.Jblc,
+		a.FxR, a.Fxfs, a.Fxdx, a.yjfxe, a.Fxjg, a.Fxqx_ksr, a.Gzqx,
+		a.Gzmz, a.FSRQ, a.Cxfs, a.Qxrq FROM gzfx a,zqzb b, gszb c where
+		a.fxzt = c.T_GSZB_ID and b.t_zqzb_id= a.t_gzfx_id and b.Zqdm =
+		#value# AND a.SCBZ = 0 AND a.GKBZ = 1 and rownum=1
+	</select>
+
+	<!-- 根据国债简称拼音，返回国债发行对象 -->
+	<select id="getNationalDebtIssueByPY"
+		resultMap="nationalDebtIssueMap" parameterClass="String">
+		SELECT a.FXZT, a.fxe, B.ZQDM, a.Gzmc, b.ZQJC, a.GZLX, a.FXZT,
+		d.GSMC, a.Gzmc, a.Lxdjfs, a.Pmll, a.Fxqx_jsr, a.GZDQR, a.Jblc,
+		a.FxR, a.Fxfs, a.Fxdx, a.yjfxe, a.Fxjg, a.Fxqx_ksr, a.Gzqx,
+		a.Gzmz, a.FSRQ, a.Cxfs, a.Qxrq FROM gzfx a,zqzb b,gzss c, gszb d
+		where a.t_gzfx_id= c.t_gzfx_id and a.fxzt = d.T_GSZB_ID and
+		b.t_zqzb_id= c.t_zqzb_id and b.pyjc = #value# AND C.SCBZ = 0 AND
+		C.GKBZ = 1 and rownum = 1
+	</select>
+
+	<!-- 根据国债简称，返回国债发行对象 -->
+	<select id="getNationalDebtIssueByShortName"
+		resultMap="nationalDebtIssueMap" parameterClass="String">
+		SELECT a.FXZT, a.fxe, B.ZQDM, a.Gzmc, b.ZQJC, a.GZLX, a.FXZT,
+		d.GSMC, a.Gzmc, a.Lxdjfs, a.Pmll, a.Fxqx_jsr, a.GZDQR, a.Jblc,
+		a.FxR, a.Fxfs, a.Fxdx, a.yjfxe, a.Fxjg, a.Fxqx_ksr, a.Gzqx,
+		a.Gzmz, a.FSRQ, a.Cxfs, a.Qxrq FROM gzfx a,zqzb b,gzss c, gszb d
+		where a.t_gzfx_id= c.t_gzfx_id and a.fxzt = d.T_GSZB_ID and
+		b.t_zqzb_id= c.t_zqzb_id and b.ZQJC = #value# AND C.SCBZ = 0 AND
+		C.GKBZ = 1 and rownum = 1
+	</select>
+
+</sqlMap>

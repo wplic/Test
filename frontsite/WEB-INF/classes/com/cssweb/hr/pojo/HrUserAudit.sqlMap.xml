@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUserAudit">
+				 
+	<typeAlias alias="HrUserAudit" type="com.cssweb.hr.pojo.HrUserAudit"/>
+								
+	<!--result map-->
+	<resultMap id="HrUserAudit" class="HrUserAudit">
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="name" column="NAME" jdbcType="String" />
+ 		<result property="isAudit" column="IS_AUDIT" jdbcType="String" />
+ 		<result property="isInterview" column="IS_INTERVIEW" jdbcType="String" />
+ 		<result property="interviewtime" column="INTERVIEWTIME" jdbcType="java.util.Date" />
+ 		<result property="interviewadrr" column="INTERVIEWADRR" jdbcType="String" />
+ 		<result property="interviewoff" column="INTERVIEWOFF" jdbcType="String" />
+ 		<result property="interviewresult" column="INTERVIEWRESULT" jdbcType="String" />
+ 		<result property="isInternship" column="IS_INTERNSHIP" jdbcType="String" />
+ 		<result property="isRecruitment" column="IS_RECRUITMENT" jdbcType="String" />
+ 		<result property="uptime" column="UPTIME" jdbcType="java.util.Date" />
+ 		<result property="isrs" column="ISRS" jdbcType="String" />
+ 		<result property="rstime" column="RSTIME" jdbcType="java.util.Date" />
+ 	</resultMap>
+  
+   <select id="getHrUserAuditByUserId" parameterClass="Long" resultMap = "HrUserAudit">
+   		select USER_ID, NAME, IS_AUDIT, IS_INTERVIEW, INTERVIEWTIME, INTERVIEWADRR, INTERVIEWOFF, IS_INTERNSHIP, IS_RECRUITMENT, UPTIME, INTERVIEWRESULT,ISRS,RSTIME 
+   		from t_hr_user_audit where USER_ID=#userId#
+  </select>
+	<insert id="addHrUserAudit" parameterClass="HrUserAudit">
+		 insert into t_hr_user_audit(USER_ID, NAME, IS_AUDIT, IS_INTERVIEW, INTERVIEWTIME, INTERVIEWADRR, INTERVIEWOFF, IS_INTERNSHIP, IS_RECRUITMENT, UPTIME, INTERVIEWRESULT,ISRS,RSTIME) values
+		 (#userId#,#name#,#isAudit#,#isInterview#,#interviewtime#,#interviewadrr#,#interviewoff#,#isInternship#,#isRecruitment#,sysdate,#interviewresult#,#isrs#,#rstime#)
+	</insert>
+  <update id="saveHrUserAuditByUserId" parameterClass="HrUserAudit">
+		update t_hr_user_audit 
+		set NAME=#name#,IS_AUDIT=#isAudit#,IS_INTERVIEW=#isInterview#,
+		INTERVIEWTIME=#interviewtime#,INTERVIEWADRR=#interviewadrr#,INTERVIEWOFF=#interviewoff#,
+		INTERVIEWRESULT=#interviewresult#,IS_INTERNSHIP=#isInternship#,IS_RECRUITMENT=#isRecruitment#,UPTIME=sysdate,ISRS=#isrs#,RSTIME=#rstime#
+		where USER_ID=#userId#
+	</update>
+</sqlMap>

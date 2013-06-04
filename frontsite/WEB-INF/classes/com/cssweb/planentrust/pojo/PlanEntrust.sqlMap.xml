@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.planentrust.pojo.PlanEntrust">
+
+	<typeAlias alias="PlanEntrust" type="com.cssweb.planentrust.pojo.PlanEntrust"/>
+
+	<cacheModel id="PlanEntrustCache" type="OSCACHE">
+	    <flushInterval hours="24"/>
+	    <flushOnExecute statement="com.cssweb.planentrust.pojo.PlanEntrust.insert"/>
+	    <flushOnExecute statement="com.cssweb.planentrust.pojo.PlanEntrust.update"/>
+	    <flushOnExecute statement="com.cssweb.planentrust.pojo.PlanEntrust.delete"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	<!--result map-->
+	<resultMap id="PlanEntrustMap" class="PlanEntrust">
+		<result property="id"              column="id"/>
+        <result property="stockholderCode" column="stockholder_code"  />
+        <result property="plantype"            column="plantype"/>
+        <result property="stockCode"       column="stock_code"/>
+        <result property="stockName"       column="stock_name"/>
+        <result property="price"           column="price"     nullValue="0"/>
+        <result property="stocknum"        column="stocknum"  nullValue="0"/>
+        <result property="sendFlag"        column="send_flag"/>
+        <result property="meno"            column="meno"/>
+        <result property="branchCode"      column="branch_code"/>
+        <result property="plandate"        column="plandate"/>  
+ 		<result property="ext1"            column="ext1"/>
+ 		<result property="ext2"            column="ext2"/>
+ 		<result property="ext3"            column="ext3"/>
+ 		<result property="ext4"            column="ext4"/>
+  	</resultMap>
+  	
+  <insert id="insert" parameterClass="PlanEntrust">
+    insert into Plan_Entrust 
+          (id,    stockholder_code,     plantype,         stock_code,     stock_name,
+          
+           price, stocknum,               send_flag,    meno,           branch_code,
+           
+           plandate,                    ext1,         ext2,           ext3,               ext4)
+           
+    values(#id#,  #stockholderCode#,    #plantype#,       #stockCode#,    #stockName#,
+    
+           #price#,#stocknum#,            #sendFlag#,   #meno#,         #branchCode#,
+           
+           #plandate#,                  #ext1#,       #ext2#,         #ext3#,             #ext4#)
+  </insert>
+
+
+  <update id="update" parameterClass="PlanEntrust">
+    update Plan_Entrust 
+    set 
+    		stockholder_code = #stockholderCode#, 
+    		plantype=#plantype#,
+    		stock_code=#stockCode#,
+    		stock_name=#stockName#,
+    		price=#price#,
+    		stocknum=#stocknum#,
+    		send_flag=#sendFlag#,
+    		meno=#meno#,
+    		branch_code=#branchCode#,
+    		plandate=#plandate#,
+    		ext1=#ext1#,
+    		ext2=#ext2#,
+    		ext3=#ext3#,
+    		ext4=#ext4#
+     where id = #id#
+  </update>
+
+  <delete id="delete" parameterClass="PlanEntrust">
+    delete Plan_Entrust where id = #id#
+  </delete>
+   
+  <delete id="deleteAll" parameterClass="java.lang.Long">
+    delete Plan_Entrust  
+  </delete>
+  
+  
+
+  <select id="select" resultMap = "PlanEntrustMap" cacheModel="PlanEntrustCache">
+    select
+        *
+    from
+        Plan_Entrust
+  </select>
+
+  <select id="getPlanEntrustById" parameterClass="java.lang.Long" resultMap = "PlanEntrustMap" cacheModel="PlanEntrustCache">
+    select
+        *
+    from
+        Plan_Entrust
+    where
+    	id = #value#
+  </select>
+  
+ 
+  <select id="getPlanEntrustByProperties" parameterClass="java.util.Map" resultMap = "PlanEntrustMap" cacheModel="PlanEntrustCache">
+    select
+        *
+    from
+        Plan_Entrust
+    <dynamic prepend="WHERE">
+    	<isNotEmpty prepend="AND" property="id">
+    		id = #id#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="type">
+    		type = #type#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="stockholderCode">
+    		stockholder_Code = #stockholderCode#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="stockCode">
+    		stock_code = #stockCode#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="stockName">
+    		stock_name = #stockName#
+    	</isNotEmpty>
+    </dynamic>
+  </select>
+  
+  <select id="pageSelect" resultMap="PlanEntrustMap"
+		parameterClass="map">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+ 
+  <select id="selectCount" resultClass="java.lang.Integer"
+		parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+  </select>
+  
+</sqlMap>

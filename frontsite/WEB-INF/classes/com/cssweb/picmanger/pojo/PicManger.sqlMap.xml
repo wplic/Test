@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.picmanger.pojo.PicManger">
+
+	<typeAlias alias="PicManger" type="com.cssweb.picmanger.pojo.PicManger" />
+
+	<!--result map-->
+	<resultMap id="PicMangerMap" class="PicManger">
+		<result column="ID" property="id" jdbcType="java.lang.Long"/>       
+		<result column="PICNAME" property="picName" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="PICDESCRIPTION" property="picDescription" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="PICCATEGORY" property="picCategory" jdbcType="java.lang.String" nullValue=""/> 
+		<result column="PICID" property="picId" jdbcType="java.lang.Long" /> 
+		<result column="SHZT" property="shzt" jdbcType="java.lang.String" /> 
+		<result column="EXT1" property="ext1" jdbcType="java.lang.String"/> 
+		<result column="EXT2" property="ext2" jdbcType="java.lang.String"/> 
+		<result column="EXT3" property="ext3" jdbcType="java.lang.String"/> 
+		<result column="EXT4" property="ext4" jdbcType="java.lang.String"/> 
+	</resultMap>
+	
+ <select id="selectrecord" parameterClass="java.lang.String" resultMap = "PicMangerMap">   
+      $sql$   
+ </select>
+ 
+ <insert id="insert" parameterClass="PicManger">    	
+    insert into PIC_MANGER(ID,PICNAME,PICDESCRIPTION,PICCATEGORY,PICID,SHZT,EXT1,EXT2,EXT3,EXT4)
+        values(#id#,#picName#,#picDescription#,#picCategory#,#picId#,#shzt#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+ 
+  <update id="update" parameterClass="PicManger">    
+     update PIC_MANGER
+         set PICNAME=#picName#,PICDESCRIPTION=#picDescription#,PICCATEGORY=#picCategory#,PICID=#picId#,SHZT=#shzt#,
+         EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#  where ID=#id#    
+  </update>
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete PIC_MANGER where id in ($value$)
+  </delete>
+  
+  <select id="selectAll" resultMap = "PicMangerMap">
+    select * from PIC_MANGER
+  </select>
+  
+   <select id="selectAll_1" parameterClass="java.util.Map" resultMap = "PicMangerMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+    <select id="getPicById" parameterClass="java.lang.Long" resultMap = "PicMangerMap">
+    select * from PIC_MANGER where id = #value#
+  </select>
+  
+  <update id="updatePicIdBypicId" parameterClass="PicManger">
+		  update PIC_MANGER set PICID=#picId# where ID=#id#
+</update>
+  
+  
+</sqlMap>
+

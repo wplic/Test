@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.security.user.pojo.UserBasicInfo">
+
+	<typeAlias alias="UserBasicInfo" type="com.cssweb.common.security.user.pojo.UserBasicInfo"/>
+
+	<!--result map-->
+	<resultMap id="userBasicInfoMap" class="UserBasicInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userName" column="USER_NAME" jdbcType="String"/>
+ 		<result property="realName" column="REAL_NAME" jdbcType="String"/>
+ 		<result property="branchId" column="BRANCH_ID" jdbcType="Long" nullValue="0"/>
+ 		<result property="branchCode" column="BRANCH_CODE" jdbcType="String" />
+ 		<result property="sex" column="SEX" jdbcType="String"/>
+ 		<result property="birthday" column="BIRTHDAY" jdbcType="java.util.Date"/>
+ 		<result property="mobile" column="MOBILE" jdbcType="String"/>
+ 		<result property="phone" column="PHONE" jdbcType="String"/>
+ 		<result property="email" column="EMAIL" jdbcType="String"/>
+ 		<result property="createDate" column="CREATE_DATE" jdbcType="java.util.Date"/>
+ 		<result property="loginCount" column="LOGIN_COUNT" jdbcType="Long" nullValue="0"/>
+ 		<result property="state" column="STATE" jdbcType="String"/>
+ 		<result property="password" column="PASSWORD" jdbcType="String"/>
+ 		<result property="type" column="TYPE" jdbcType="String"/>
+  	</resultMap>
+  	
+  
+  	
+  	<resultMap id="userBasicInfoMap1" class="UserBasicInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userName" column="USER_NAME" jdbcType="String"/>
+ 		<result property="realName" column="REAL_NAME" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="UserBasicInfo">
+		  insert into T_SYSTEM_USER (
+		  	ID,
+		  	USER_NAME,
+		  	REAL_NAME,
+		  	BRANCH_ID,
+		  	BRANCH_CODE,
+		  	SEX,
+		  	BIRTHDAY,
+		  	MOBILE,
+		  	PHONE,
+			EMAIL,
+		  	CREATE_DATE,
+			LOGIN_COUNT,
+			STATE,
+			PASSWORD,
+			TYPE)
+		  	values (#id#,
+		  			#userName#,
+		  			#realName#,
+		  			#branchId#,
+		  			#branchCode#,
+		  			#sex#,
+		  			#birthday#,
+		  			#mobile#,
+		  			#phone#,
+		  			#email#,
+		  			#createDate#,
+		  			#loginCount#,
+		  			#state#,
+		  			#password#,
+		  			#type#)
+	</insert>
+	<select id = "getUserBasicInfoByRoleUserId" parameterClass="Long" resultMap = "userBasicInfoMap">
+  		select * from T_SYSTEM_USER where id in (select User_Id from ROLE_USER_MAP where Role_id = $roleId$)
+  	
+  	</select>
+	<update id="update" parameterClass="UserBasicInfo">
+		  update T_SYSTEM_USER 
+		  	set USER_NAME=#userName#,
+		  		REAL_NAME=#realName#,
+		  		BRANCH_ID=#branchId#,
+		  		BRANCH_CODE=#branchCode#,
+		  		SEX=#sex#,
+		  		BIRTHDAY=#birthday#,
+		  		MOBILE=#mobile#,
+		  		PHONE=#phone#,
+		  		EMAIL=#email#,
+		  		LOGIN_COUNT=#loginCount#,
+		  		CREATE_DATE=#createDate#,
+		  		STATE=#state#,
+		  		PASSWORD=#password#,
+		  		TYPE=#type#
+		  where ID = #id#
+	</update>
+	<select id="getById" parameterClass="Long" resultMap = "userBasicInfoMap">
+	  	select * from T_SYSTEM_USER where ID = #value#
+	</select>
+	
+	<select id="getByUserName" parameterClass="String" resultMap = "userBasicInfoMap">
+		select * from T_SYSTEM_USER where UPPER(USER_NAME) = UPPER(#value#)
+	</select>
+	
+	<select id="getByUserNameAndPassword" parameterClass="java.util.Map" resultMap = "userBasicInfoMap">
+		select * from T_SYSTEM_USER where UPPER(USER_NAME) = UPPER(#username#) and PASSWORD=#password# and TYPE=#type#
+	</select>
+	
+	<select id="getByUserNameAndType" parameterClass="java.util.Map" resultMap = "userBasicInfoMap">
+		select * from T_SYSTEM_USER where UPPER(USER_NAME) = UPPER(#username#) and TYPE=#type#
+	</select>
+	
+	<select id="getUserBasicInfoCountBySearchName" parameterClass="String" resultClass = "Integer">
+		select count(*) from T_SYSTEM_USER where USER_NAME like '%$value$%' or REAL_NAME like '%$value$%'
+	</select>
+	
+	<select id="getUserBasicInfoListByPagingMap" parameterClass="java.util.Map" resultMap = "userBasicInfoMap">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getUserBasicInfoByRoleId" parameterClass="Long" resultMap = "userBasicInfoMap">
+		select * from T_SYSTEM_USER where id in (select USER_ID from ROLE_USER_MAP where ROLE_ID = #value#)
+	</select>
+	
+	<select id="getUserBasicInfoByBranchId" parameterClass="Long" resultMap = "userBasicInfoMap">
+		select * from T_SYSTEM_USER where branch_code = (#value#)
+	</select>
+	<select id="selectrecord" parameterClass="String" resultMap = "userBasicInfoMap">
+		  $sql$   
+	</select>
+
+	<select id="selectUserTotal" parameterClass="String" resultClass = "Long">
+		  $sql$   
+	</select>
+</sqlMap>

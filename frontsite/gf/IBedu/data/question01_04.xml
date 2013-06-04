@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--注意事项：1、标题长度不能超过45个中文字符；2、选项长度不能超过15个中文字符；3、选项数量不能超过4个。--> 
+
+<values>
+ <question options="3" answers="1">
+        <title>某投资者以 4000 点买入 1 手 IF1009 合约开仓，该合约的当日结算价为 3950 点，收盘价为 3900 点，如果不考虑手续费，当日结算后该笔持仓的浮动亏损为(    )。</title>
+        <option>
+           <A>30000 元</A>
+           <B>20000 元</B>
+            <C>15000 元</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>涨跌停板一般是以合约上一交易日的(    )为基准确定的。</title>
+        <option>
+           <A>收盘价</A>
+           <B>开盘价</B>
+            <C>结算价</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>股指期货投资者交易保证金不足，且未在规定时间内补足的，其部分或全部持仓将被(    )。</title>
+        <option>
+           <A>强行平仓</A>
+           <B>强制减仓</B>
+            <C>协议平仓</C>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>在极端行情下，股指期货投资者面临的亏损(    )。</title>
+        <option>
+           <A>不可能超过投资本金</A>
+           <B>可能会超过投资本金</B>
+            <C>不可能等于投资本金</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="4" answers="1">
+        <title>股指期货采取的交割方式为(    )。</title>
+        <option>
+           <A>规定投资者必须自己平仓了结</A>
+           <B>交割成分股</B>
+            <C>交割对应ETF基金份额</C>
+            <D>现金交割</D>
+        </option>
+        <answer>D</answer>
+        <comment></comment>
+    </question>
+ 
+</values>

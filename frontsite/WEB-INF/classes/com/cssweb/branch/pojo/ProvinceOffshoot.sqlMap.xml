@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branch.pojo.ProvinceOffshoot">
+	<typeAlias alias="ProvinceOffshoot" type="com.cssweb.branch.pojo.ProvinceOffshoot"/>
+	
+	<cacheModel id="ProvinceOffshootCache" type="OSCACHE">
+	    <flushInterval minutes="5" />
+	    <flushOnExecute statement="com.cssweb.branch.pojo.ProvinceOffshoot.deleteByCondition"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.ProvinceOffshoot.insert"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	
+	<resultMap id="ProvinceOffshootMap" class="ProvinceOffshoot">
+		<result property="provinceId" column="PROVINCE_ID"/>
+        <result property="offshootId" column="OFFSHOOT_ID"/>
+  	</resultMap>
+  	
+  	<resultMap id="BrOffshootWithoutBlobMap" class="BrOffshoot" >
+		<result property="id"              column="id"/>
+        <result property="userId"          column="user_id"  />
+        <result property="deptId"          column="dept_id"/>
+        <result property="branchName"      column="branch_name"/>
+        <result property="branchBriefname" column="branch_briefname"/>
+        <result property="branchAddress"   column="branch_address"/>
+        <result property="branchPost"      column="branch_post"/>
+        <result property="branchContacter" column="branch_contacter"/>
+        <result property="branchZphone"    column="branch_zphone"/>
+        <result property="branchWphone"    column="branch_wphone"/>
+        <result property="branchEmail"     column="branch_email"/>
+        <result property="branchUrl"       column="branch_url"/>
+        <result property="branchCatchword" column="branch_catchword"/>
+        <result property="modTime"         column="mod_time"/>
+ 		<result property="branchChief"     column="branch_chief"/>
+ 		<result property="ext1"            column="ext1"/>
+ 		<result property="ext3"            column="ext3"/>
+ 		<result property="ext4"            column="ext4"/>
+ 		<result property="provinceId"      column="province_Id"/>
+ 		<result property="branchNo"       column="branch_no"/>
+ 		<result property="branchSeatnum"    column="branch_seatnum"/>
+ 		<result property="isyy"    column="isyy"/>
+  	</resultMap>
+	
+	
+	<select id="getProvinceOffshootByCondition" resultMap = "ProvinceOffshootMap" parameterClass="ProvinceOffshoot" cacheModel="ProvinceOffshootCache">
+    select 
+    	PROVINCE_ID,OFFSHOOT_ID
+    from
+        cssweb_dictionary_renew 
+    where 
+    	1=1
+    	<dynamic>
+		  <isNotEmpty property="provinceId" prepend="and">
+			PROVINCE_ID = #provinceId#
+		  </isNotEmpty>
+		  <isNotEmpty property="offshootId" prepend="and">
+			OFFSHOOT_ID = #offshootId#
+		  </isNotEmpty>
+		</dynamic>
+	</select>
+  	
+  	<delete id="deleteByCondition" parameterClass="ProvinceOffshoot">
+    delete province_offshoot where 1=1
+    	<dynamic>
+		  <isNotEmpty property="provinceId" prepend="and">
+			PROVINCE_ID = #provinceId#
+		  </isNotEmpty>
+		  <isNotEmpty property="offshootId" prepend="and">
+			OFFSHOOT_ID = #offshootId#
+		  </isNotEmpty>
+		</dynamic>
+  </delete>
+  
+  <select id="getBrOffshootByDictionaryNewCode" resultMap = "BrOffshootWithoutBlobMap" parameterClass="Map" cacheModel="ProvinceOffshootCache">
+	  select 
+	  	a.* 
+	  from 
+	  	br_offshoot a,province_offshoot b 
+	  where 
+	  	a.ID = b.OFFSHOOT_ID
+	  	and b.PROVINCE_ID = #keyCode#
+	  	<dynamic>
+		  <isNotEmpty property="ext4" prepend="and">
+		  	a.EXT4 in ($ext4$)
+		  </isNotEmpty>
+		</dynamic>
+  </select>
+  
+  <select id="getBrOffshootNoRelation" resultMap = "BrOffshootWithoutBlobMap" parameterClass="Map" cacheModel="ProvinceOffshootCache">
+  	select a.*
+	from br_offshoot a
+	where a.id not in(select distinct(offshoot_id) from province_offshoot)
+  	<dynamic>
+		  <isNotEmpty property="ext4" prepend="and">
+		  	a.EXT4 in ($ext4$)
+		</isNotEmpty>
+		</dynamic>
+  </select>
+  
+  <insert id="insert" parameterClass="ProvinceOffshoot">
+		INSERT INTO
+			PROVINCE_OFFSHOOT(PROVINCE_ID,OFFSHOOT_ID)
+		VALUES
+			(#provinceId#,#offshootId#)
+  </insert>
+</sqlMap>

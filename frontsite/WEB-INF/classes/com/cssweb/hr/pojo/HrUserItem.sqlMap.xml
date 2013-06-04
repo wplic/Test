@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUserItem">
+				 
+	<typeAlias alias="HrUserItem" type="com.cssweb.hr.pojo.HrUserItem"/>
+								
+	<!--result map-->
+	<resultMap id="resultMap" class="HrUserItem">
+		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="startDateYear" column="STARTTIME_YEAR" jdbcType="String"/>
+ 		<result property="startDateMonth" column="STARTTIME_MONTH" jdbcType="String" />
+ 		<result property="endDateYear" column="ENDTIME_YEAR" jdbcType="String" />
+ 		<result property="endDateMonth" column="ENDTIME_MONTH" jdbcType="String" />
+ 		<result property="itemName" column="ITEMNAME" jdbcType="String" />
+ 		<result property="itemOrg" column="ITEMORG" jdbcType="String" />
+ 		<result property="roleName" column="ROLENAME" jdbcType="String" />
+ 		<result property="itemIntro" column="ITEMINTRO" jdbcType="String" />
+ 		<result property="prover" column="PROVER" jdbcType="String" />
+ 		<result property="prorelation" column="PRORELATION" jdbcType="String" />
+ 		<result property="proverphone" column="PROVERPHONE" jdbcType="String" />
+ 		
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="HrUserItem">
+		<![CDATA[
+		 insert into T_HR_USER_ITEM(ID,USER_ID,STARTTIME_YEAR,STARTTIME_MONTH,ENDTIME_YEAR,ENDTIME_MONTH,
+		 		ITEMNAME,ITEMORG,ROLENAME,ITEMINTRO,PROVER,PRORELATION,PROVERPHONE)
+		 	 values(#id#,#userId#,#startDateYear#,#startDateMonth#,#endDateYear#,#endDateMonth#,
+		 		#itemName#,#itemOrg#,#roleName#,#itemIntro#,#prover#,
+		 		#prorelation#,#proverphone#
+		 		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterClass="HrUserItem">
+		update T_HR_USER_ITEM
+		 set 
+		 	USER_ID=#userId#,STARTTIME_YEAR=#startDateYear#,STARTTIME_MONTH=#startDateMonth#,
+		 	ENDTIME_YEAR=#endDateYear#,ENDTIME_MONTH=#endDateMonth#,
+		 	ITEMNAME=#itemName#,ITEMORG=#itemOrg#,ROLENAME=#roleName#,ITEMINTRO=#itemIntro#,PROVER=#prover#,
+		 	PRORELATION=#prorelation#,PROVERPHONE=#proverphone#
+		where ID = #id#
+	</update>
+	
+	<delete id="delete" parameterClass="Long">
+		delete from T_HR_USER_ITEM where USER_ID = #userId#
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_HR_USER_ITEM where ID = #id#
+	</delete>
+	
+	<select id="getAllWorkList" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_ITEM 
+		    where 
+		     user_id=#userId#
+		     order by STARTTIME_YEAR desc,STARTTIME_MONTH desc
+   </select>
+   
+	<select id="getBeanById" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_ITEM 
+		    where 
+		     id=#id#
+   </select>
+   
+   
+</sqlMap>

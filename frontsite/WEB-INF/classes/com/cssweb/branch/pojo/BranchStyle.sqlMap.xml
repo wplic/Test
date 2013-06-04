@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branch.pojo.BranchStyle">
+
+	<typeAlias alias="BranchStyle" type="com.cssweb.branch.pojo.BranchStyle"/>
+
+	<cacheModel id="BranchStyleCache" type="OSCACHE">
+	    <flushInterval hours="24"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchStyle.insert"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchStyle.update"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchStyle.delete"/>
+	    <flushOnExecute statement="com.cssweb.branch.pojo.BranchStyle.deleteAll"/>
+	    <property name="size" value="1000"/>
+	</cacheModel>
+	<!--result map-->
+	<resultMap id="branchStyleMap" class="BranchStyle">
+		<result property="id" column="id"/>
+        <result property="userId" column="user_id"  nullValue="-1"/>
+        <result property="deptId" column="dept_id"/>
+        <result property="styleId" column="style_id"/>
+        <result property="modTime" column="mod_time"/>
+ 		<result property="ext1" column="ext1"/>
+ 		<result property="ext2" column="ext2"/>
+ 		<result property="ext3" column="ext3"/>
+ 		<result property="ext4" column="ext4"/>
+  	</resultMap>
+  	
+  <insert id="insert" parameterClass="BranchStyle">
+    insert into Branch_Style 
+           (id,user_id,dept_id,style_id,mod_time,ext1,ext2,ext3,ext4)
+    values (#id#,#userId#,#deptId#,#styleId#,#modTime#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+
+
+  <update id="update" parameterClass="BranchStyle">
+    update Branch_Style 
+    set 
+    		user_id = #userId#, 
+    		dept_id=#deptId#,
+    		style_id=#styleId#,
+    		mod_time=#modTime#,
+    		ext1=#ext1#,
+    		ext2=#ext2#,
+    		ext3=#ext3#,
+    		ext4=#ext4#
+     where id = #id#
+  </update>
+
+  <delete id="delete" parameterClass="BranchStyle">
+    delete Branch_Style where id = #id#
+  </delete>
+   
+  <delete id="deleteAll" parameterClass="java.lang.Long">
+    delete Branch_Style  
+  </delete>
+  
+   <delete id="deleteByDeptId" parameterClass="java.lang.Long">
+    delete Branch_Style where dept_id = #id#
+  </delete>
+
+  <select id="select" resultMap = "branchStyleMap" cacheModel="BranchStyleCache">
+    select
+        *
+    from
+        Branch_Style
+  </select>
+
+  <select id="getBranchStyleById" parameterClass="java.lang.Long" resultMap = "branchStyleMap" cacheModel="BranchStyleCache">
+    select
+        *
+    from
+        Branch_Style
+    where
+    	id = #value#
+  </select>
+  
+  <select id = "getBranchStyleByDeptId" resultMap = "branchStyleMap" parameterClass="java.lang.Long" cacheModel="BranchStyleCache">
+    	select
+        	*
+    	from
+    	    Branch_Style
+    	where
+        	dept_id = #value#
+  </select>
+  
+   <select id="getBranchStyleByProperties" parameterClass="java.util.Map" resultMap = "branchStyleMap" cacheModel="BranchStyleCache">
+    select
+        *
+    from
+        Branch_Style
+    <dynamic prepend="WHERE">
+    	<isNotEmpty prepend="AND" property="id">
+    		id = #id#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="deptId">
+    		dept_id = #deptId#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="userId">
+    		user_id = #userId#
+    	</isNotEmpty>
+    	<isNotEmpty prepend="AND" property="styleId">
+    		style_id = #styleId#
+    	</isNotEmpty>
+    </dynamic>
+  </select>
+</sqlMap>

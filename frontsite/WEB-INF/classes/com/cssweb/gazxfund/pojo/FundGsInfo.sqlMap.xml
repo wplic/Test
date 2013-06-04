@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazxfund.pojo.FundGsInfo">
+				 
+	<typeAlias alias="fundGsInfo" type="com.cssweb.gazxfund.pojo.FundGsInfo"/>
+										
+	<!--result map-->
+	<resultMap id="fundGsInfoMap" class="fundGsInfo">
+ 		<result property="jjdm" column="JJDM" jdbcType="String"/>
+ 		<result property="jjjc" column="JJJC" jdbcType="String"/>
+ 		<result property="gsmc" column="GSMC" jdbcType="String"/>
+ 		<result property="jjlx" column="JJLX" jdbcType="String"/>
+ 		<result property="clrq" column="CLRQ" jdbcType="java.util.Date"/>
+ 		<result property="jjzgm" column="JJZGM" jdbcType="Long" nullValue="0"/>
+ 		<result property="tzdx" column="TZDX" jdbcType="String"/>
+ 	</resultMap>
+ 	
+ 	
+ 	<resultMap id="fundGsMap" class="fundGsInfo">
+ 		<result property="gsmc" column="GSMC" jdbcType="String"/>
+ 	</resultMap>
+ 	
+ 	<resultMap id="fundTzdxMap" class="fundGsInfo">
+ 		<result property="tzdx" column="TZDX" jdbcType="String"/>
+ 	</resultMap>
+ 	
+ 	<resultMap id="fundJjlxMap" class="fundGsInfo">
+ 		<result property="jjlx" column="JJLX" jdbcType="String"/>
+ 	</resultMap>
+ 	<resultMap id="fundTzlxMap" class="fundGsInfo">
+ 		<result property="tzlx" column="TZLX" jdbcType="String"/>
+ 	</resultMap>
+ 	<resultMap id="fundTzfgMap" class="fundGsInfo">
+ 		<result property="tzfg" column="TZFG" jdbcType="String"/>
+ 	</resultMap>
+ 	<select id = "getTzfg" resultMap = "fundTzfgMap">
+  		select distinct tzfg from jjzb where tzfg is not null
+  </select>
+ 	<select id = "getTzlx" resultMap = "fundTzlxMap">
+  		select distinct tzlx from jjzb where tzlx is not null
+  </select>
+  <select id = "getJjlx" resultMap = "fundJjlxMap">
+  		select distinct jjlx from jjzb where jjlx is not null
+  </select>
+ 	
+  <select id = "getTzdx" resultMap = "fundTzdxMap">
+  		select distinct tzdx from jjzb t  where tzdx is not null
+  </select>
+ 	
+ <select id = "getJjGs" resultMap = "fundGsMap">
+  		select distinct b.gsmc from jjzb a, gszb b where a.jjglr_id=b.t_gszb_id 
+  </select>
+  	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+  
+  
+  <select id="getFundGsInfoPage" parameterClass="java.util.Map" resultMap = "fundGsInfoMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+</sqlMap>

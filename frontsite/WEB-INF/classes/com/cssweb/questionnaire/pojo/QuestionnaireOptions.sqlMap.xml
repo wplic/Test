@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.questionnaire.pojo.QuestionnaireOptions">
+
+	<typeAlias alias="QuestionnaireOptions" type="com.cssweb.questionnaire.pojo.QuestionnaireOptions"/>
+
+	<!--result map-->
+	<resultMap id="optionsMap" class="QuestionnaireOptions">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="subtitleid" column="SUBTITLE_ID" jdbcType="Long"/>
+ 		<result property="optioncontent" column="OPTION_CONTENT" jdbcType="String" nullValue=""/>
+ 		<result property="optionvalue" column="OPTION_VALUE" jdbcType="Long"/>
+  	</resultMap>
+  	
+  	<resultMap id="optionsMap1" class="QuestionnaireOptions">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="subtitleid" column="SUBTITLE_ID" jdbcType="Long"/>
+ 		<result property="optioncontent" column="OPTION_CONTENT" jdbcType="String" nullValue=""/>
+ 		<result property="optionvalue" column="OPTION_VALUE" jdbcType="Long"/>
+ 		<result property="source" column="SOURCE" jdbcType="Double"/>
+  	</resultMap>
+  	
+	<resultMap id="BasicInfoMap" class="QuestionnaireOptions">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="optioncontent" column="OPTION_CONTENT" jdbcType="String" nullValue=""/>
+  	</resultMap>
+
+  <insert id="insert" parameterClass="QuestionnaireOptions">
+    insert into T_QUESTIONNAIRE_OPTIONS (ID,SUBTITLE_ID,OPTION_CONTENT,OPTION_VALUE)
+    	values (#id#,#subtitleid#,#optioncontent#,#optionvalue#)
+  </insert>
+  
+  <insert id="insertSource" parameterClass="QuestionnaireOptions">
+    insert into T_QUESTIONNAIRE_OPTIONS (ID,SUBTITLE_ID,OPTION_CONTENT,OPTION_VALUE,SOURCE)
+    	values (#id#,#subtitleid#,#optioncontent#,#optionvalue#,#source#)
+  </insert>
+
+  <update id="update" parameterClass="QuestionnaireOptions">
+    update T_QUESTIONNAIRE_OPTIONS 
+    	set SUBTITLE_ID = #subtitleid#,OPTION_CONTENT=#optioncontent#,OPTION_VALUE=#optionvalue#
+     where ID = #id#
+  </update>
+  
+  <select id="getAllInfoList" parameterClass="java.util.Map" resultMap = "optionsMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getAllInfoTotal" resultClass="java.lang.Long" >
+    SELECT count(*) FROM T_QUESTIONNAIRE_OPTIONS
+  </select>
+  
+  <select id="getInfoById" parameterClass="java.lang.Long" resultMap="optionsMap" >
+    SELECT * FROM T_QUESTIONNAIRE_OPTIONS where ID=#id#
+  </select>
+  
+  <select id="getInfoBySubId" parameterClass="String" resultMap="optionsMap" >
+    SELECT * FROM T_QUESTIONNAIRE_OPTIONS where SUBTITLE_ID in ($subidstr$)
+  </select>
+  
+    <select id="getInfoSourceBySubId" parameterClass="String" resultMap="optionsMap1" >
+    SELECT * FROM T_QUESTIONNAIRE_OPTIONS where SUBTITLE_ID in ($subidstr$)
+  </select>
+  
+  <select id="getInfoBySubId2" parameterClass="java.lang.Long" resultMap="optionsMap" >
+    SELECT * FROM T_QUESTIONNAIRE_OPTIONS where SUBTITLE_ID = #id# order by id
+  </select>
+  
+  <select id="getIdOptionList" resultMap="BasicInfoMap" >
+    SELECT ID,OPTION_CONTENT FROM T_QUESTIONNAIRE_OPTIONS
+  </select>
+  
+  <delete id="deleteById" parameterClass="String">
+    delete T_QUESTIONNAIRE_OPTIONS where ID in ($value$)
+  </delete>  
+  
+  <delete id="deleteBySubtitleId" parameterClass="String">
+    delete T_QUESTIONNAIRE_OPTIONS where SUBTITLE_ID in ($value$)
+  </delete>
+  
+  <delete id="deleteByIdNotIn" parameterClass="java.util.Map">
+    delete T_QUESTIONNAIRE_OPTIONS where SUBTITLE_ID=#basicid# and ID not in (#value#)
+  </delete>
+  
+</sqlMap>

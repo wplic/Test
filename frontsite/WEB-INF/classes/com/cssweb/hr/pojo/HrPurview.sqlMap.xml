@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrPurview">
+	<typeAlias alias="hrPurview"	type="com.cssweb.hr.pojo.HrPurview" />
+	
+	<resultMap id="hrPurviewMap" class="hrPurview">
+		<result property= "id"  column="ID" jdbcType="java.lang.Long" />
+		<result property="userId" column="USER_ID" jdbcType="java.lang.Long" />
+		<result property="branchCode" column="BRANCH_CODE" jdbcType="String" nullValue=""/>
+		<result property="userName" column="USER_NAME" jdbcType="String" nullValue=""/>
+		<result property="realName" column="REAL_NAME" jdbcType="String" nullValue=""/>
+		<result property="branchName" column="BRANCH_NAME" jdbcType="String" nullValue=""/>
+	</resultMap>
+	
+	<resultMap id="hrPurviewMap1" class="hrPurview">
+		<result property= "id"  column="ID" jdbcType="java.lang.Long" />
+		<result property="userId" column="USER_ID" jdbcType="java.lang.Long" />
+		<result property="branchCode" column="BRANCH_CODE" jdbcType="String" nullValue=""/>
+		
+	</resultMap>
+	<select id="getHrPurviewByUserId" parameterClass="Long" resultMap="hrPurviewMap1">
+		select * from T_HR_PURVIEW where USER_ID=#userId#
+	</select>
+  	<update id="updateHrPurview" parameterClass="hrPurview">
+		  update T_HR_PURVIEW 
+		  	set USER_ID=#userId#,
+		  		BRANCH_CODE=#branchCode#
+		  where ID = #id#
+	</update>
+  
+	<insert id="insert" parameterClass="hrPurview">
+		<![CDATA[
+		 insert into T_HR_PURVIEW(ID,USER_ID,BRANCH_CODE) values(#id#,#userId#,#branchCode#)
+		]]>
+	</insert>
+	
+	<delete id="deleteById" parameterClass="java.lang.Long">
+		<![CDATA[
+		delete from T_HR_PURVIEW where ID = #id#
+		]]>
+	</delete>
+
+	<delete id="delete" parameterClass="java.lang.String">
+		<![CDATA[
+		delete from T_HR_PURVIEW where id in ($ids$)
+		]]>
+	</delete>
+	
+	<select id="getHrPurviewById" parameterClass="Long" resultMap="hrPurviewMap1">
+		select * from T_HR_PURVIEW where ID=#id#
+	</select>
+	
+	<select id="getHrPurviewByBranchCode" parameterClass="String" resultMap="hrPurviewMap1">
+		select * from T_HR_PURVIEW where BRANCH_CODE=#branchCode#
+	</select>
+
+	  <select id="getHrPurviewPage" parameterClass="java.util.Map" resultMap = "hrPurviewMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	  </select>
+
+	<select id="getAllCount" resultClass="Integer" parameterClass="String">
+		<![CDATA[
+			$sql$ 
+		]]>
+	</select>
+  
+ </sqlMap>

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.complaints.pojo.FinanceMessage">
+
+	<typeAlias alias="financeMessage" type="com.cssweb.complaints.pojo.FinanceMessage"/>
+	
+	<!--result map-->
+	<resultMap id="financeMessageMap" class="financeMessage" >
+		<result property="id" column="ID" jdbcType="java.lang.Long"/>
+		<result property="name" column="NAME" jdbcType="String"/>
+		<result property="telephone" column="TELEPHONE" jdbcType="String" />
+		<result property="email" column="EMAIL" jdbcType="String" />
+		<result property="address" column="ADDRESS"  jdbcType="String"  />
+		<result property="msgConnect" column="MSG_CONNECT" jdbcType="String"/>
+		<result property="msgTime" column="MSG_TIME" jdbcType="Date"/>
+		<result property="answerId" column="ANSWER_ID" jdbcType="Long"/>
+		<result property="answerConnect" column="ANSWER_CONNECT" jdbcType="String"/>
+		<result property="answerTime" column="ANSWER_TIME" jdbcType="Date"/>
+		<result property="isAnswer" column="IS_ANSWER" jdbcType="String"/>
+		<result property="ext1" column="EXT1" jdbcType="String"/>
+		<result property="ext2" column="EXT2" jdbcType="String"/>
+		<result property="ext3" column="EXT3" jdbcType="String"/>
+		<result property="auditing" column="AUDITING" jdbcType="String"/>
+	</resultMap>
+	<insert id="saveFinanceMessage" parameterClass="financeMessage">
+			INSERT INTO T_FINANCE_MESSAGE(ID,NAME,TELEPHONE,EMAIL,ADDRESS,MSG_CONNECT,MSG_TIME,EXT1,EXT2,EXT3)
+			 VALUES(#id#,#name#,#telephone#,#email#,#address#,#msgConnect#,#msgTime#,#ext1#,#ext2#,#ext3#)
+  </insert>  
+	<update id="shFinanceMessage" parameterClass="financeMessage">
+		update T_FINANCE_MESSAGE set AUDITING = #auditing#  where ID = #id#
+  </update>   
+ 	
+ 	<insert id="insertFinanceMessage" parameterClass="financeMessage" >
+    		insert into T_FINANCE_MESSAGE(ID,NAME,TELEPHONE,EMAIL,ADDRESS,MSG_CONNECT,MSG_TIME,ANSWER_ID,ANSWER_CONNECT,ANSWER_TIME,IS_ANSWER,EXT1,EXT2,EXT3,AUDITING)
+    		 values(#id#,#name#,#telephone#,#email#,#address#,#msgConnect#,#msgTime#,#answerId#,#answerConnect#,#answerTime#,#isAnswer#,#ext1#,#ext2#,#ext3#,#auditing#)
+    </insert>
+ 	
+	<select id="getMessageByIsAnswerPage"
+		resultMap="financeMessageMap" parameterClass="java.util.Map">
+		SELECT ID,NAME,TELEPHONE,EMAIL,ADDRESS,MSG_CONNECT,MSG_TIME,ANSWER_ID,ANSWER_CONNECT,ANSWER_TIME,IS_ANSWER,EXT1,EXT2,EXT3,AUDITING FROM (
+		SELECT row_.*, ROWNUM rownum_ 	FROM ( 
+		SELECT * FROM T_FINANCE_MESSAGE T WHERE 1=1
+		<dynamic>
+		     <isNotEmpty prepend="and" property="isAnswer">
+				IS_ANSWER = #isAnswer#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="auditing">
+				AUDITING = #auditing#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="ext3">
+				EXT3 = #ext3#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="sql">
+				 $sql$
+			</isNotEmpty>
+		</dynamic>
+		ORDER BY MSG_TIME DESC
+		 ) row_ WHERE ROWNUM &lt;= #end# )
+		WHERE rownum_ &gt; #begin#
+	</select>
+	
+	
+	<select id="getMessageById" resultMap="financeMessageMap" parameterClass="java.lang.Long">
+		SELECT * FROM T_FINANCE_MESSAGE T  WHERE ID=#id#
+	</select>
+	
+  <update id="updateFinanceMessage" parameterClass="financeMessage">
+		update T_FINANCE_MESSAGE set NAME = #name#,TELEPHONE = #telephone#,EMAIL = #email#,ADDRESS = #address#,MSG_CONNECT=#msgConnect#,
+		MSG_TIME = #msgTime#,ANSWER_ID=#answerId#,ANSWER_CONNECT=#answerConnect#,ANSWER_TIME=#answerTime#,IS_ANSWER=#isAnswer# 
+		EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,AUDITING=#auditing# where ID = #id#
+  </update>   
+   
+  <update id="replyFinanceMessage" parameterClass="financeMessage">
+		update T_FINANCE_MESSAGE set ANSWER_ID = #answerId#,ANSWER_CONNECT = #answerConnect#,ANSWER_TIME=#answerTime#,IS_ANSWER=#isAnswer#  where ID = #id#
+  </update>   
+
+	
+	<delete id="delFinanceMessageById" parameterClass="Long">
+			delete from T_FINANCE_MESSAGE where id = #value#
+		</delete>
+	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+</sqlMap>

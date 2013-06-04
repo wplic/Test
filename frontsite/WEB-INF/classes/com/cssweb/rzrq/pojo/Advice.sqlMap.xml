@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.Advice">
+
+	<typeAlias alias="adviceRzrq" type="com.cssweb.rzrq.pojo.Advice" />
+		
+	<resultMap id="adviceRzrqMap" class="adviceRzrq">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="branch_code" column="BRANCH_CODE" jdbcType="String"/>
+		<result property="branch_name" column="BRANCH_NAME" jdbcType="String"/>
+		<result property="custNo" column="CUSTNo" jdbcType="String" />
+	    <result property="custName" column="CUSTName" jdbcType="String" />
+	    <result property="email" column="EMAIL" jdbcType="String"/>
+		<result property="phone" column="PHONE" jdbcType="String" />
+	    <result property="advice" column="ADVICE" jdbcType="String" />
+	    <result property="adviceDate" column="adviceDate" jdbcType="java.util.Date"/>
+	    <result property="is_no" column="IS_NO" jdbcType="String" />
+	</resultMap>
+	
+	
+   <insert id="insert" parameterClass="adviceRzrq">
+		insert into T_RZRQ_ADVICE
+		(ID,BRANCH_CODE,BRANCH_NAME,CUSTNo,CUSTName,EMAIL,PHONE,ADVICE,adviceDate,IS_NO)
+		values(#id#,#branch_code#,#branch_name#,#custNo#,#custName#,#email#,#phone#,#advice#,#adviceDate#,#is_no#)
+	</insert>
+
+</sqlMap>

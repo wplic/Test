@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_attr_map>
+	<!--category node extend attr list start-->
+	<db name="cms"/>
+	<attr name="cms_category_ext_info.auto_audit" type="long" desc="是否自动审核标志" idname="NODE_ID" table="cms_category_ext_info" column="auto_audit"/>
+	<attr name="cms_category_ext_info.auto_release" type="long" desc="是否自动发布标志" idname="NODE_ID" table="cms_category_ext_info" column="auto_release"/>
+	<attr name="cms_category_ext_info.delete_flag" type="long" desc="删除标志" idname="NODE_ID" table="cms_category_ext_info" column="delete_flag"/>
+	<attr name="cms_category_ext_info.show_flag" type="long" desc="显示标志" idname="NODE_ID" table="cms_category_ext_info" column="show_flag"/>
+	<!--category node extend attr list end-->
+</config_attr_map>

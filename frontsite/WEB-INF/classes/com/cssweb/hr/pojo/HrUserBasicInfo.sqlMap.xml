@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUserBasicInfo">
+				 
+	<typeAlias alias="HrUserBasicInfo" type="com.cssweb.hr.pojo.HrUserBasicInfo"/>
+								
+	<!--result map-->
+	<resultMap id="resultMap" class="HrUserBasicInfo">
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="inviteType" column="INVITE_TYPE" jdbcType="String"/>
+ 		<result property="picId" column="PICID" jdbcType="Long" />
+ 		<result property="sex" column="SEX" jdbcType="String" />
+ 		<result property="birthday" column="BIRTHDAY" jdbcType="java.util.Date" />
+ 		<result property="minzu" column="MINZU" jdbcType="String" />
+ 		<result property="zzmm" column="ZZMM" jdbcType="String" />
+ 		<result property="bornaddr" column="BORNADDR" jdbcType="String" />
+ 		<result property="stature" column="STATURE" jdbcType="String" />
+ 		<result property="weight" column="WEIGHT" jdbcType="String" />
+ 		<result property="idcard" column="IDCARD" jdbcType="String" />
+ 		<result property="marrystate" column="MARRYSTATE" jdbcType="String" />
+ 		<result property="worktime" column="WORKTIME" jdbcType="String" />
+ 		<result property="nowaddr" column="NOWADDR" jdbcType="String" />
+ 		<result property="highdegree" column="HIGHDEGREE" jdbcType="String" />
+ 		<result property="highxl" column="HIGHXL" jdbcType="String" />
+ 		<result property="specialtype" column="SPECIALTYPE" jdbcType="String" />
+ 		<result property="school" column="SCHOOL" jdbcType="String" />
+ 		<result property="graduateyear" column="GRADUATEYEAR" jdbcType="String" />
+ 		<result property="graduatemonth" column="GRADUATEMONTH" jdbcType="String" />
+ 		<result property="paywant" column="PAYWANT" jdbcType="String" />
+ 		<result property="docuaddr" column="DOCUADDR" jdbcType="String" />
+ 		<result property="hukouaddr" column="HUKOUADDR" jdbcType="String" />
+ 		<result property="practisetime" column="PRACTISETIME" jdbcType="String" />
+ 		<result property="jointime" column="JOINTIME" jdbcType="String" />
+ 		<result property="hopeworkaddr" column="HOPEWORKADDR" jdbcType="String" />
+ 		<result property="mobil" column="MOBIL" jdbcType="String" />
+ 		<result property="urgentphone" column="URGENTPHONE" jdbcType="String" />
+ 		<result property="curentaddr" column="CURENTADDR" jdbcType="String" />
+ 		<result property="post" column="POST" jdbcType="String" />
+ 		<result property="engletter" column="ENGLETTER" jdbcType="String" />
+ 		<result property="englettercount" column="ENGLETTERCOUNT" jdbcType="String" />
+ 		<result property="otherengletter" column="OTHERENGLETTER" jdbcType="String" />
+ 		<result property="computerletter" column="COMPUTERLETTER" jdbcType="String" />
+ 		<result property="gjsfks" column="GJSFKS" jdbcType="String" />
+ 		<result property="zckjs" column="ZCKJS" jdbcType="String" />
+ 		<result property="zqcyzgks" column="ZQCYZGKS" jdbcType="String" />
+ 		<result property="haveposition" column="HAVEPOSITION" jdbcType="String" />
+ 		<result property="otherposition" column="OTHERPOSITION" jdbcType="String" />
+ 		<result property="strongskill" column="STRONGSKILL" jdbcType="String" />
+ 		<result property="course" column="COURSE" jdbcType="String" />
+ 		<result property="userName" column="USERNAME" jdbcType="String" />
+ 		<result property="email" column="EMAIL" jdbcType="String" />
+ 		<result property="nowcompany" column="NOWCOMPANY" jdbcType="String" />
+ 		<result property="tzzxzg" column="TZZXZG" jdbcType="String" />
+ 		<result property="tzzxzgno" column="TZZXZGNO" jdbcType="String" />
+ 		<result property="ifworkaddr" column="IFWORKADDR" jdbcType="String" />
+ 		
+ 		<result property="undergraduateSchool" column="UNDERGRADUATESCHOOL" jdbcType="String" />
+ 		<result property="undergraduateTime" column="UNDERGRADUATETIME" jdbcType="java.util.Dates" />
+ 		<result property="isInsuranceAgents" column="ISINSURANCEAGENTS" jdbcType="String" />
+ 		<result property="undergraduateSjType" column="UNDERGRADUATESJTYPE" jdbcType="String" />
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="HrUserBasicInfo">
+		<![CDATA[
+		 insert into T_HR_USER_BASEINFO(USER_ID,INVITE_TYPE,PICID,SEX,BIRTHDAY,MINZU,
+		 		ZZMM,BORNADDR,STATURE,WEIGHT,IDCARD,MARRYSTATE,WORKTIME,NOWADDR,HIGHDEGREE,HIGHXL,SPECIALTYPE,
+		 		SCHOOL,GRADUATEYEAR,GRADUATEMONTH,PAYWANT,DOCUADDR,HUKOUADDR,PRACTISETIME,JOINTIME,HOPEWORKADDR,MOBIL,URGENTPHONE,
+		 		CURENTADDR,POST,ENGLETTER,ENGLETTERCOUNT,OTHERENGLETTER,COMPUTERLETTER,GJSFKS,ZCKJS,ZQCYZGKS,HAVEPOSITION,
+		 		OTHERPOSITION,STRONGSKILL,COURSE,USERNAME,EMAIL,NOWCOMPANY,TZZXZG,TZZXZGNO,IFWORKADDR,
+		 		UNDERGRADUATESCHOOL,UNDERGRADUATETIME,ISINSURANCEAGENTS,UNDERGRADUATESJTYPE)
+		 	 values(#userId#,#inviteType#,#picId#,#sex#,#birthday#,
+		 		#minzu#,#zzmm#,#bornaddr#,#stature#,#weight#,
+		 		#idcard#,#marrystate#,#worktime#,#nowaddr#,#highdegree#,#highxl#,#specialtype#,
+		 		#school#,#graduateyear#,#graduatemonth#,#paywant#,#docuaddr#,#hukouaddr#,#practisetime#,
+		 		#jointime#,#hopeworkaddr#,#mobil#,#urgentphone#,#curentaddr#,#post#,#engletter#,
+		 		#englettercount#,#otherengletter#,#computerletter#,#gjsfks#,#zckjs#,#zqcyzgks#,
+		 		#haveposition#,#otherposition#,#strongskill#,#course#,#userName#,#email#,#nowcompany#,#tzzxzg#,#tzzxzgno#,#ifworkaddr#,
+		 		#undergraduateSchool#,#undergraduateTime#,#isInsuranceAgents#,#undergraduateSjType#)
+		]]>
+	</insert>
+	
+	<update id="update" parameterClass="HrUserBasicInfo">
+		update T_HR_USER_BASEINFO
+		 set 
+		 	INVITE_TYPE=#inviteType#,SEX=#sex#,BIRTHDAY=#birthday#,PICID=#picId#,MINZU=#minzu#,
+		 	ZZMM=#zzmm#,BORNADDR=#bornaddr#,STATURE=#stature#,WEIGHT=#weight#,IDCARD=#idcard#,
+		 	MARRYSTATE=#marrystate#,WORKTIME=#worktime#,NOWADDR=#nowaddr#,HIGHDEGREE=#highdegree#,
+		 	HIGHXL=#highxl#,SPECIALTYPE=#specialtype#,SCHOOL=#school#,GRADUATEYEAR=#graduateyear#,GRADUATEMONTH=#graduatemonth#,
+		 	PAYWANT=#paywant#,DOCUADDR=#docuaddr#,HUKOUADDR=#hukouaddr#,PRACTISETIME=#practisetime#,
+		 	JOINTIME=#jointime#,HOPEWORKADDR=#hopeworkaddr#,MOBIL=#mobil#,URGENTPHONE=#urgentphone#,
+		 	CURENTADDR=#curentaddr#,POST=#post#,ENGLETTER=#engletter#,ENGLETTERCOUNT=#englettercount#,
+		 	OTHERENGLETTER=#otherengletter#,COMPUTERLETTER=#computerletter#,GJSFKS=#gjsfks#,ZCKJS=#zckjs#,
+		 	ZQCYZGKS=#zqcyzgks#,HAVEPOSITION=#haveposition#,OTHERPOSITION=#otherposition#,STRONGSKILL=#strongskill#,
+		 	COURSE=#course#,USERNAME=#userName#,EMAIL=#email#,NOWCOMPANY=#nowcompany#,TZZXZG=#tzzxzg#,TZZXZGNO=#tzzxzgno#,IFWORKADDR=#ifworkaddr#,
+		 	UNDERGRADUATESCHOOL=#undergraduateSchool#,UNDERGRADUATETIME=#undergraduateTime#,ISINSURANCEAGENTS=#isInsuranceAgents#,
+		 	UNDERGRADUATESJTYPE=#undergraduateSjType#
+		where USER_ID = #userId#
+	</update>
+	
+	<delete id="delete" parameterClass="Long">
+		delete from T_HR_USER_BASEINFO where USER_ID = #userId#
+	</delete>
+	
+	<select id="getBasicInfoByUser" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_BASEINFO 
+		    where 
+		     user_id=#userId#
+   </select>
+	
+	<select id="getBasicInfoByIdcard" parameterClass="String" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_BASEINFO 
+		    where 
+		     IDCARD=#idcard#
+   </select>
+   
+   <update id="updatePicIdByUserId" parameterClass="map">
+   	update T_HR_USER_BASEINFO
+		 set 
+		 	PICID=#picId#
+		where USER_ID = #userId#
+   </update>
+</sqlMap>

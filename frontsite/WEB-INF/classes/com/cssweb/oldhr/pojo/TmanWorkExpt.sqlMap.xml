@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.oldhr.pojo.TmanWorkExpt">
+
+	<typeAlias alias="tmanWorkExpt" type="com.cssweb.oldhr.pojo.TmanWorkExpt"/>
+	
+
+	<!--result map-->
+	<resultMap id="tmanWorkExptMap" class="tmanWorkExpt">
+ 		<result property="appId" column="APP_ID" jdbcType="Long"/>
+ 		<result property="dateFrom" column="DATE_FROM" jdbcType="Date"/>
+ 		<result property="dateTo" column="DATE_TO" jdbcType="Date"/>
+ 		<result property="company" column="COMPANY" jdbcType="String"/>
+ 		<result property="station" column="STATION" jdbcType="String"/>
+ 		<result property="duty" column="DUTY" jdbcType="String"/>
+ 	</resultMap>
+  	
+	<select id="getTmanWorkExptById" parameterClass="Long" resultMap = "tmanWorkExptMap">
+	  	select * from T_MAN_WORK_EXP_T where APP_ID = #appId#
+ 	 </select>
+	
+	<select id="getTmanWorkExptPages" parameterClass="java.util.Map" resultMap = "tmanWorkExptMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	 </select>
+  
+  
+</sqlMap>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.sunnyPOF.pojo.SunnyFundPrc">
+	<typeAlias alias="SunnyFundPrc" type="com.fortuneage.sunnyPOF.pojo.SunnyFundPrc"/>
+	<select id="getSunnyFundPrcsBySqltoPage" resultClass="SunnyFundPrc" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	
+	<!-- 通过历史净值记录id获得一个历史净值对象 -->
+	<select id="getSunnyFundPrcById" resultClass="SunnyFundPrc" parameterClass="java.lang.Long">
+		select 
+		  sunny_fund_prc.id,
+		  sunny_fund_prc.prod_code,
+		  sunny_fund_prc.net_prc,
+		  sunny_fund_prc.accum_prc,
+		  sunny_fund_prc.szsyl,
+		  sunny_fund_prc.ljsyl,
+		  sunny_fund_prc.init_date
+		from 
+		  sunny_fund_prc 
+		  left join 
+		    sunny_fundinfo 
+		  on
+		  (sunny_fund_prc.prod_code=sunny_fundinfo.prod_code)
+		  where sunny_fund_prc.id=#value#
+	</select>
+	
+	<!-- 通过产品编号获取全部的历史份额讯息  -->
+	<select id="getAllSFPByFuncode" resultClass="SunnyFundPrc" parameterClass="java.lang.Long">
+		select 
+		  sunny_fund_prc.id,
+		  sunny_fund_prc.prod_code,
+		  sunny_fund_prc.net_prc,
+		  sunny_fund_prc.accum_prc,
+		  sunny_fund_prc.szsyl,
+		  sunny_fund_prc.ljsyl,
+		  sunny_fund_prc.init_date
+		from 
+		  sunny_fund_prc 
+		  left join 
+		    sunny_fundinfo 
+		  on
+		  (sunny_fund_prc.prod_code=sunny_fundinfo.prod_code)
+		  where sunny_fund_prc.prod_code=#value#
+	</select>
+	
+	<!-- 通过产品编号获取对应的最新净值讯息  -->
+	<select id="getLastSFPByCode" resultClass="SunnyFundPrc" parameterClass="java.lang.Long">
+		      select 
+		  sfp.* 
+		from (
+		      select 
+		        * 
+		      from 
+		        sunny_fund_prc 
+		      where 
+		        prod_code=#value#
+		      order by 
+		        init_date desc
+		      ) sfp
+		where 
+		  rownum=1
+
+	</select>
+</sqlMap>

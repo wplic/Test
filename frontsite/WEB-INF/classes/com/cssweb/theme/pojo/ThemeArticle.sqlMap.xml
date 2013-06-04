@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.theme.pojo.ThemeArticle">
+
+	<typeAlias alias="ThemeArticle" type="com.cssweb.theme.pojo.ThemeArticle" />
+
+	<resultMap id="ThemeArticleMap" class="ThemeArticle">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="articlecategoryid" column="ARTICLECATEGORYID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="content" column="CONTENT" jdbcType="Blob"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+		<result property="fileid" column="FILEID" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+
+	<resultMap id="ThemeArticleMap2" class="ThemeArticle">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="articlecategory" column="ARTICLECATEGORY" jdbcType="String"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="content" column="CONTENT" jdbcType="Blob"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+		<result property="fileid" column="FILEID" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="ThemeArticle">
+		INSERT into T_THEME_ARTICLE (ID,ARTICLECATEGORYID,TITLE,CONTENT,UPDATETIME) VALUES (#id#,#articlecategoryid#,#title#,#content#,sysdate)
+	</insert>
+	
+	<update id="update" parameterClass="ThemeArticle">
+		update T_THEME_ARTICLE set ARTICLECATEGORYID=#articlecategoryid#,TITLE=#title#,CONTENT=#content#,UPDATETIME=sysdate where ID=#id#
+	</update>
+
+	<update id="updateFileid" parameterClass="ThemeArticle">
+		update T_THEME_ARTICLE set FILEID=#fileid#  where ID=#id#
+	</update>
+	
+	<delete id="delete" parameterClass="String">
+		delete from T_THEME_ARTICLE where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_THEME_ARTICLE where ID = #value#
+	</delete>
+		
+	<select id="getAll" resultMap="ThemeArticleMap">
+		select * from T_THEME_ARTICLE ORDER BY ID
+	</select>
+
+	<select id="getCountByCategory" parameterClass="Long" resultClass="java.lang.Integer">
+		select count(*) from T_THEME_ARTICLE where ARTICLECATEGORYID = #categoryid#
+	</select>
+
+	<select id="getCountBySql" parameterClass="String" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="ThemeArticleMap">
+		select * from T_THEME_ARTICLE where ID= #id#
+	</select>	
+	
+	  <select id="getFrontByMap" parameterClass="java.util.Map" resultMap = "ThemeArticleMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+	  <select id="getAdminByMap" parameterClass="java.util.Map" resultMap = "ThemeArticleMap2">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+</sqlMap>

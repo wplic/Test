@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.branch.pojo.BranchUserMap">
+
+	<typeAlias alias="BranchUserMap" type="com.cssweb.common.branch.pojo.BranchUserMap"/>
+
+	<!--result map-->
+	<resultMap id="branchUserMapMap" class="BranchUserMap">
+ 		<result property="branchId" column="BRANCH_ID" jdbcType="Long"/>
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="BranchUserMap">
+		  insert into BRANCH_USER_MAP (BRANCH_ID,USER_ID) values (#branchId#,#userId#)
+	</insert>
+	
+	<delete id="deleteByUserId" parameterClass="Long">
+	  	delete BRANCH_USER_MAP where USER_ID=#value#
+	</delete>
+	
+	<delete id="deleteByBranchId" parameterClass="Long">
+	  	delete BRANCH_USER_MAP where BRANCH_ID=#value#
+	</delete>
+		
+	<select id="getByUserId" parameterClass="Long" resultMap = "branchUserMapMap">
+	  	select * from BRANCH_USER_MAP where USER_ID = #value#
+	</select>
+
+</sqlMap>

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 注意：！-->
+<!-- soundlist列表为所有背景音乐列表 -->
+<!-- 如需某动画使用特定的背景音乐，添加特定影片标签如： <STUDY0101><SOUND01>BG01</SOUND01></STUDY0101> -->
+
+	<bgsounds>
+		<DEFAULT>			
+			<SOUND01>BG01</SOUND01>
+			<SOUND02>BG02</SOUND02>
+		</DEFAULT>
+		
+	</bgsounds>
+

@@ -1,0 +1,103 @@
+.mobox{ width:921px; background:url(../pic/mobile/wrap2left.gif) repeat-y; margin:0 auto}
+.moleft{ width:210px; float:left}
+.moright{width:700px; float:right}
+.moclear{ clear:both; font-size:0; line-height:0}
+.moLeft{ background:url(../pic/mobile/moleft1.jpg) repeat-y; width:204px; margin:4px 0 5px 3px }
+.moLeft .leftTit{ background:url(../pic/mobile/moleft2.jpg) no-repeat; height:71px;}
+.moLeft .leftbot{ background:url(../pic/mobile/moleft3.jpg) no-repeat; height:8px; font-size:0; line-height:0}
+.nav_s{ background:url(../pic/mobile/leftnav.jpg); width:189px; line-height:33px; text-indent:23px; color:#ffffff; margin:0 auto 1px auto}
+.nav{ background:url(../pic/mobile/leftnav2.jpg); width:189px; line-height:33px; text-indent:23px; color:#1e3d61; margin:0 auto 1px auto}
+.mofonnavWarp{ background:url(../pic/mobile/subnav.jpg) no-repeat bottom; width:189px; margin:0 auto; padding:5px 0}
+.mofonnav_s{ background:url(../pic/mobile/dot1.gif) no-repeat left center; line-height:21px; color:#d20900; margin-left:20px;text-indent:15px}
+.mofonnav_s a{ color:#d20900}
+.mofonnav_s a:hover{ color:#ae0700}
+.mofonnav{ background:url(../pic/mobile/dot2.gif) no-repeat left center; line-height:21px; color:#7e7e7e; margin-left:20px; text-indent:15px}
+.mofonnav a{ color:#7e7e7e}
+.mofonnav a:hover{ color:#333333}
+.lc_tit{ background: url(../pic/mobile/lc_tit.jpg) no-repeat; width:698px; height:43px}
+.lc_box{ background: url(../pic/mobile/lc_box.jpg) no-repeat left bottom; padding:20px 15px 20px 15px;_padding:20px 12px 0px 12px;*+padding:20px 12px 0px 12px;}
+.lc_box .left{ float:left; width:403px; }
+.lc_box .right{ float:right; width:246px; background:url(../pic/mobile/tyjgj.gif) no-repeat center; height:108px; text-align:center}
+.lc_box .left li{ line-height:35px;font-size:14px; color:#1e3d61;}
+.lc_box .left li.a01{ background:url(../pic/mobile/lc01.gif) no-repeat left center; text-indent:40px;}
+.lc_box .left li.a02{ background:url(../pic/mobile/lc02.gif) no-repeat left center; text-indent:40px;}
+.lc_box .left li.a03{ background:url(../pic/mobile/lc03.gif) no-repeat left center; text-indent:40px;}
+.f12{ font-size:12px;}
+.btndow{ margin:47px auto 0 auto; text-align:center}
+.rtit1{ background:url(../pic/mobile/rtit1.jpg) no-repeat left; height:33px; line-height:33px; text-indent:30px; color:#1e3d61; font-weight:bold}
+.rtit1 span.more{ float:right; font-size:12px; color:#5b5f6b; margin-right:10px; font-weight:normal}
+.tjjx{ text-align:center; margin:20px 2px}
+.tjjx li{ width:139px; float:left}
+.tjjx li p{ height:35px; line-height:35px}
+.rtit2{ background:url(../pic/mobile/rtit2.jpg) no-repeat left; height:28px; line-height:28px; text-indent:30px; color:#1e3d61; font-weight:bold}
+.rtit2 span.more{ float:right; font-size:12px; color:#5b5f6b; margin-right:10px; font-weight:normal}
+.newlist{ margin:15px 10px}
+.newlist li{ line-height:26px; font-family:"宋体"; color:#666666; background:url(../pic/mobile/dot3.gif) repeat-x bottom}
+.newlist li span{ float:right; color:#999999}
+.softbox{ background:#f8f9fb url(../pic/mobile/softdown4.jpg) no-repeat left bottom; margin-top:15px}
+.softbox .content{ padding:16px;}
+.softbox .tit1{ background:url(../pic/mobile/softdown1.jpg) no-repeat left; height:35px;}
+.softbox .tit2{ background:url(../pic/mobile/softdown2.jpg) no-repeat left; height:35px;}
+.softbox .tit3{ background:url(../pic/mobile/softdown3.jpg) no-repeat left; height:35px;}
+.computerA{ width:190px; float:left; display:inline}
+.mb5{ margin-bottom:5px;}
+.mb15{ margin-bottom:15px;}
+.mb20{ margin-bottom:20px;}
+.computerB{ width:155px; float:left; display:inline}
+.computerC{ width:298px; height:123px;float:left; display:inline; background:#fff; padding:10px; line-height:25px}
+.blank0{ clear:both; font-size:0; line-height:0}
+.ynbox{ width:141px; height:150px; padding-top:5px; line-height:155px;text-align:center; vertical-align:middle; background:#fff; border:1px solid #e6e9f0; overflow:hidden}
+.motags{ background:url(../pic/mobile/tabbg.jpg); height:26px; margin:20px 0 15px 0;}
+.motags li{ float:left; background:url(../pic/mobile/taglink.jpg) no-repeat; width:93px; text-align:center; margin-right:2px; line-height:26px; cursor:pointer}
+.motags li.active{background:url(../pic/mobile/taghov.jpg) no-repeat; color:#fff}
+.tabstxt{ line-height:28px; color:#666666; padding:10px}
+.guidebox{ background:url(../pic/mobile/moznbg.jpg) no-repeat left top; min-height:519px;_height:519px; margin-top:15px; padding:22px 15px 0 15px; width:668px;}
+.guidebox .left{ width:250px; float:left}
+.guidebox .right{ width:393px; float:right}
+.mlinfo{ background:url(../pic/mobile/sjbz_bg1.gif) repeat-y; width:251px}
+.mlinfo h4{ background:url(../pic/mobile/sjbz_bg2.gif) no-repeat; height:35px; line-height:35px; text-indent:12px; color:#1e3d61; font-weight:bold}
+.mlinfo .content{ padding:15px 15px 10px 15px; line-height:22px; color:#818181}
+.mlinfo .bottom{ background:url(../pic/mobile/sjbz_bg3.gif) no-repeat; height:6px; font-size:0; line-height:0}
+.texcenter{ text-align:center}
+.yxsm{ background:url(../pic/mobile/tj_titbg.gif) no-repeat center bottom; min-height:9px; _height:90px;padding:17px 11px}
+.yxrztab{ margin:10px auto 0 auto}
+.yxrztab td{ line-height:22px; font-family:"宋体"; color:#6c6c6c}
+.dot6{ background:url(../pic/mobile/dot6.png) no-repeat left center; text-indent:23px; width:72px; margin:0 auto}
+.dot7{ background:url(../pic/mobile/dot7.png) no-repeat left center; text-indent:23px; width:72px; margin:0 auto}
+.dot8{ background:url(../pic/mobile/dot8.png) no-repeat left center; text-indent:23px; width:72px; margin:0 auto}
+.tjjx2{ text-align:center; margin:0px 2px;*border-top:1px solid #fff}
+.tjjx2 li{ width:138px; float:left; border-right:1px solid #e5e5e5}
+.tjjx2 li p{ margin-top:10px;}
+.tjjxline{ background:url(../pic/mobile/dot9.gif) repeat-x left center; height:25px;}
+.zctab1{ border-collapse:collapse;}
+.zctab1 td{ padding:5px; line-height:20px}
+.zctab1 th{ background:url(../pic/mobile/zctabth.gif) repeat-x; height:29px; line-height:29px; text-align:center}
+.zygltit{ background:url(../pic/mobile/dot10.gif) no-repeat 10px center; font-size:14px; font-weight:bold; color:#254871; text-indent:25px; height:30px; line-height:30px;}
+.zygl dl{ width:216px; float:left; margin-left:13px;}
+.zygl dl dt{ float:right; width:150px; height:25px; color:#40759e; font-weight:bold}
+.zygl dl dd.pic{ float:left; width:50px; margin-top:3px}
+.zygl dl dd.text{ float:right; width:150px; color:#737373; line-height:21px}
+.zygl dl:after{content:".";display:block;height:0;clear:both;visibility:hidden;} 
+.rjys{border-top:1px solid #99bad1;}
+.rjys dl{ padding:13px 3px 8px 3px;}
+.rjys dl dt{ float:right; width:600px; font-size:14px; color:#4386b4; height:26px;_height:18px}
+.rjys dl dd.text{ float:right; width:600px; line-height:22px; color:#737373;_margin-bottom:7px;}
+.rjys dl dd.pic{ float:left; width:82px; margin-top:3px}
+.rjys dl:after{content:".";display:block;height:0;clear:both;visibility:hidden;}
+.zx_search{ background:url(../pic/mobile/search.jpg) no-repeat center; height:38px; overflow:hidden; padding-top:10px}
+.faqlist{ background:url(../pic/mobile/tj_titbg.gif) center bottom no-repeat;padding-top:30px}
+.faqlist dt{ font-size:12px; color:#284689; font-weight:bold; background:url(../pic/mobile/dot11.gif) left center no-repeat; padding-left:22px}
+.faqlist dt a{color:#284689; text-decoration:none}
+.faqlist dt a:hover{color:#0c2459; text-decoration:none}
+.faqlist dt span{ float:right; font-size:12px; font-weight:normal; color:#666666; padding-right:15px}
+.faqlist dd{ padding:18px 20px; line-height:21px;}
+.black_overlay{display:none;position: absolute;top: 0%;left: 0%;width: 100%;height: 100%;background-color: black;z-index:1001;-moz-opacity: 0.8;
+opacity:.50;filter: alpha(opacity=50);_height:900px}
+.white_content {display:none;position: absolute;top:25%;left:45%;width:220px;background-color: white;z-index:500;}
+.white_content .top{ background:url(../pic/mobile/zxpop1.gif) no-repeat; height:37px; line-height:37px; text-indent:35px; font-weight:bold; width:220px}
+.white_content .top span{ float:right; padding-right:10px; padding-top:8px;}
+.white_content .con{ background:url(../pic/mobile/zxpop2.gif) ; padding:20px 15px;}
+.white_content .bottom{ background:url(../pic/mobile/zxpop3.gif) no-repeat; height:50px; text-align:center; padding-top:16px}
+.poptab1{ background:url(../pic/mobile/zxpop6.gif) no-repeat center top; padding:10px 0}
+.boxcen{ margin:0 auto}
+.btn_pop1{ background:url(../pic/mobile/zxpop5.gif) no-repeat; width:70px; height:25px; line-height:25px; text-align:center; border:0px; color:#fff; font-weight:bold; cursor:pointer}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebTips">
+<typeAlias alias="TcsswebTips" type="com.cssweb.subscribe.pojo.TcsswebTips"/>
+	<resultMap id="TcsswebTips" class="TcsswebTips">
+	    <result property="account" column="ACCOUNT" jdbcType="java.lang.String"/>
+	    <result property="type" column="TYPE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="tipsdate" column="TIPSTIME" jdbcType="Date"/>
+	</resultMap>
+	<select id="getAllTcsswebTipsByAccount" parameterClass="java.util.Map" resultMap="TcsswebTips">
+		SELECT * FROM T_CSSWEB_TIPS t WHERE 1=1 
+		<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   t.ACCOUNT=#account#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	
+	<delete id="delTcsswebTipsByAccount" parameterClass="String">
+		delete from T_CSSWEB_TIPS where account=#value#
+	</delete>
+	
+	<insert id="insertTcsswebTips" parameterClass="TcsswebTips">
+		INSERT into T_CSSWEB_TIPS ( ACCOUNT, TYPE,TIPSTIME) VALUES 
+		(#account#, #type#, #tipsdate#)
+	</insert>
+	
+</sqlMap>

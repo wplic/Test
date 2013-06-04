@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.Jjylb">
+
+	<typeAlias alias="Jjylb" type="com.cssweb.systemset.pojo.Jjylb"/>
+  
+	<resultMap id="Jjylb" class="Jjylb">
+ 		<result property="fundCode" column="fund_code" jdbcType="String"/>
+ 		<result property="fundName" column="fund_name" jdbcType="String"/>
+ 		<result property="fundType" column="fund_type" jdbcType="String"/>
+ 		<result property="risklevel" column="risklevel" jdbcType="String"/>
+ 		<result property="chargeType" column="charge_type" jdbcType="String"/>
+ 		<result property="status" column="STATUS" jdbcType="String"/>
+ 		<result property="sgdm" column="sgdm" jdbcType="String"/>
+ 		<result property="shkssj" column="SHKSSJ" jdbcType="Long"/>
+ 		<result property="shkssjks" column="SHKSSJKS" jdbcType="Long"/>
+ 		<result property="gsmc" column="GSMC" jdbcType="String"/>
+ 		<result property="gsjc" column="GSJC" jdbcType="String"/>
+ 		<result property="xm" column="xm" jdbcType="String"/>
+ 		<result property="dwjz" column="dwjz" jdbcType="Double"/>
+   	</resultMap>
+
+  	<select id="getFundJjylb" resultMap="Jjylb" parameterClass="java.util.HashMap">
+				    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+								    select t.* ,g.xm,s.GSMC as GSJC,s.GSJC as GSMC from (
+								select a.codesimple_name as fund_name,a.fund_code,a.fund_code as sgdm , c.dict_prompt fund_type,e.dict_prompt risklevel,d.dict_prompt charge_type,
+								b.dict_prompt STATUS ,g.nav as dwjz,a.issue_date as SHKSSJKS,a.setup_date as SHKSSJ
+								from hs_opfund.ofstkcode@syncdb a  
+								left join hs_user.sysdictionary@syncdb b on b.dict_entry = 2015 and b.subentry = a.fund_status   
+								left join hs_user.sysdictionary@syncdb c on c.dict_entry = 2022 and c.subentry = a.stock_type  
+								left join hs_user.sysdictionary@syncdb d on d.dict_entry = 2026 and d.subentry = a.charge_type  
+								left join hs_user.sysdictionary@syncdb e on e.dict_entry = 2029 and e.subentry = a.fund_risklevel 
+								left join hs_opfund.offundcompany@syncdb f on a.fund_company=f.fund_company
+								left join hs_opfund.ofprice@syncdb g on a.fund_code=g.fund_code
+								where a.fund_status='1' and a.charge_type&lt;&gt;'1' and  fund_company in (select fund_company from hs_opfund.ofexcharg@syncdb)
+								<dynamic>
+									<isNotNull property="fundCode" prepend="and">
+										  	 a.fund_code LIKE '%$fundCode$%'
+								</isNotNull>
+								<isNotNull property="gsmc" prepend="and">
+										  	a.codesimple_name LIKE '%$gsmc$%'
+								</isNotNull>
+								<isNotNull property="fundType" prepend="and">
+										  	 c.dict_prompt LIKE '%$fundType$%'
+								</isNotNull>
+								<isNotNull property="status" prepend="and">
+										  	 b.dict_prompt LIKE '%$status$%'
+								</isNotNull>
+							</dynamic>   
+								)t 
+							left join (select t_jjzb_id,jjglr_id,jjdm from jjzb where scbz = 0 and gkbz = 1
+				            union
+				            select a.t_jjzb_id,b.jjglr_id,a.dm from jjxgdm a,jjzb b where a.t_jjzb_id = b.t_jjzb_id and  
+				            (a.zdmc like '%B%' or a.zdmc like '%C%' or a.zdmc like '%A%' ) and a.scbz = 0 and a.gkbz = 1
+				            ) z on t.fund_code=z.jjdm 
+						left join GSZB s on s.t_gszb_id=z.JJGLR_ID
+						left join (SELECT b.T_GSZB_ID as T_GSZB_ID ,wmsys.wm_concat (a.xm) as xm FROM RYRZQK b,GRZB a where a.t_grzb_id=b.t_grzb_id and sysdate-1&gt;b.RZQSR and sysdate-1&lt;(nvl(b.RZZZR,sysdate)) GROUP BY b.T_GSZB_ID) g
+						 on g.T_GSZB_ID=z.t_jjzb_id  where 1=1 
+						 <dynamic>
+							<isNotNull property="fundName" prepend="and">
+									s.GSMC LIKE '%$fundName$%'
+							</isNotNull>
+						</dynamic>	
+						order by t.SHKSSJ desc		
+								)
+						row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id="getFundJjylbCount" resultClass="Integer" parameterClass="java.util.HashMap">
+				   select count(*) from (
+								select a.codesimple_name as fund_name,a.fund_code,a.fund_code as sgdm , c.dict_prompt fund_type,e.dict_prompt risklevel,d.dict_prompt charge_type,
+								b.dict_prompt STATUS ,g.nav as dwjz
+								from hs_opfund.ofstkcode@syncdb a  
+								left join hs_user.sysdictionary@syncdb b on b.dict_entry = 2015 and b.subentry = a.fund_status   
+								left join hs_user.sysdictionary@syncdb c on c.dict_entry = 2022 and c.subentry = a.stock_type  
+								left join hs_user.sysdictionary@syncdb d on d.dict_entry = 2026 and d.subentry = a.charge_type  
+								left join hs_user.sysdictionary@syncdb e on e.dict_entry = 2029 and e.subentry = a.fund_risklevel 
+								left join hs_opfund.offundcompany@syncdb f on a.fund_company=f.fund_company
+								left join hs_opfund.ofprice@syncdb g on a.fund_code=g.fund_code
+								where a.fund_status='1' and a.charge_type&lt;&gt;'1' and  fund_company in (select fund_company from hs_opfund.ofexcharg@syncdb)
+								<dynamic>
+									<isNotNull property="fundCode" prepend="and">
+										  	 a.fund_code LIKE '%$fundCode$%'
+								</isNotNull>
+								<isNotNull property="gsmc" prepend="and">
+										  	a.codesimple_name LIKE '%$gsmc$%'
+								</isNotNull>
+								<isNotNull property="fundType" prepend="and">
+										  	 c.dict_prompt LIKE '%$fundType$%'
+								</isNotNull>
+								<isNotNull property="status" prepend="and">
+										  	 b.dict_prompt LIKE '%$status$%'
+								</isNotNull>
+							</dynamic>   
+								)t 
+							left join (select t_jjzb_id,jjglr_id,jjdm from jjzb where scbz = 0 and gkbz = 1
+				            union
+				            select a.t_jjzb_id,b.jjglr_id,a.dm from jjxgdm a,jjzb b where a.t_jjzb_id = b.t_jjzb_id and  
+				            (a.zdmc like '%B%' or a.zdmc like '%C%' or a.zdmc like '%A%' ) and a.scbz = 0 and a.gkbz = 1
+				            ) z on t.fund_code=z.jjdm 
+						left join GSZB s on s.t_gszb_id=z.JJGLR_ID
+						left join (SELECT b.T_GSZB_ID as T_GSZB_ID ,wmsys.wm_concat (a.xm) as xm FROM RYRZQK b,GRZB a where a.t_grzb_id=b.t_grzb_id and sysdate-1&gt;b.RZQSR and sysdate-1&lt;(nvl(b.RZZZR,sysdate)) GROUP BY b.T_GSZB_ID) g
+						 on g.T_GSZB_ID=z.t_jjzb_id  where 1=1 
+						 <dynamic>
+							<isNotNull property="fundName" prepend="and">
+									s.GSMC LIKE '%$fundName$%'
+							</isNotNull>
+						</dynamic>
+			</select>
+	
+	<resultMap id="Jjylb2" class="Jjylb">
+ 		<result property="fundCode" column="fund_code" jdbcType="String"/>
+ 		<result property="fundName" column="fund_name" jdbcType="String"/>
+ 		<result property="fundType" column="fund_type" jdbcType="String"/>
+ 		<result property="risklevel" column="risklevel" jdbcType="String"/>
+ 		<result property="chargeType" column="charge_type" jdbcType="String"/>
+ 		<result property="status" column="STATUS" jdbcType="String"/>
+ 		<result property="sgdm" column="sgdm" jdbcType="String"/>
+ 		<result property="gsmc" column="GSMC" jdbcType="String"/>
+ 		<result property="gsjc" column="GSJC" jdbcType="String"/>
+ 		<result property="xm" column="xm" jdbcType="String"/>
+ 		<result property="dwjz" column="dwjz" jdbcType="Double"/>
+   	</resultMap>
+
+  	<select id="getFundJjsgylb" resultMap="Jjylb2" parameterClass="java.util.HashMap">
+				    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+						    select t.* ,g.xm,s.GSMC as GSJC,s.GSJC as GSMC from (
+						select a.codesimple_name as fund_name,a.fund_code,a.fund_code as sgdm , c.dict_prompt fund_type,e.dict_prompt risklevel,d.dict_prompt charge_type,
+						b.dict_prompt STATUS ,g.nav as dwjz,a.setup_date
+						from hs_opfund.ofstkcode@syncdb a  
+						left join hs_user.sysdictionary@syncdb b on b.dict_entry = 2015 and b.subentry = a.fund_status   
+						left join hs_user.sysdictionary@syncdb c on c.dict_entry = 2022 and c.subentry = a.stock_type  
+						left join hs_user.sysdictionary@syncdb d on d.dict_entry = 2026 and d.subentry = a.charge_type  
+						left join hs_user.sysdictionary@syncdb e on e.dict_entry = 2029 and e.subentry = a.fund_risklevel 
+						left join hs_opfund.offundcompany@syncdb f on a.fund_company=f.fund_company
+						left join hs_opfund.ofprice@syncdb g on a.fund_code=g.fund_code
+						where a.fund_status='0' and a.charge_type&lt;&gt;'1' and fund_company in (select fund_company from hs_opfund.ofexcharg@syncdb)
+							<dynamic>
+								<isNotNull property="fundCode" prepend="and">
+										  	 a.fund_code LIKE '%$fundCode$%'
+								</isNotNull>
+								<isNotNull property="gsmc" prepend="and">
+										  	a.codesimple_name LIKE '%$gsmc$%'
+								</isNotNull>
+								<isNotNull property="fundType" prepend="and">
+										  	 c.dict_prompt LIKE '%$fundType$%'
+								</isNotNull>
+								<isNotNull property="status" prepend="and">
+										  	 b.dict_prompt LIKE '%$status$%'
+								</isNotNull>
+							</dynamic>   
+								)t 
+						left join (select t_jjzb_id,jjglr_id,jjdm from jjzb where scbz = 0 and gkbz = 1
+				            union
+				            select a.t_jjzb_id,b.jjglr_id,a.dm from jjxgdm a,jjzb b where a.t_jjzb_id = b.t_jjzb_id and  
+				            (a.zdmc like '%B%' or a.zdmc like '%C%' or a.zdmc like '%A%' ) and a.scbz = 0 and a.gkbz = 1
+				            ) z on t.fund_code=z.jjdm 
+						left join GSZB s on s.t_gszb_id=z.JJGLR_ID
+						left join (SELECT b.T_GSZB_ID as T_GSZB_ID ,wmsys.wm_concat (a.xm) as xm FROM RYRZQK b,GRZB a where a.t_grzb_id=b.t_grzb_id and sysdate-1&gt;b.RZQSR and sysdate-1&lt;(nvl(b.RZZZR,sysdate)) GROUP BY b.T_GSZB_ID) g
+						 on g.T_GSZB_ID=z.t_jjzb_id where 1=1 
+						 <dynamic>
+							<isNotNull property="fundName" prepend="and">
+									s.GSMC LIKE '%$fundName$%'
+							</isNotNull>
+						</dynamic>
+						order by t.setup_date desc
+)
+						row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id="getFundJjsgylbCount" resultClass="Integer" parameterClass="java.util.HashMap">
+				  select count(*) from (
+						select a.codesimple_name as fund_name,a.fund_code,a.fund_code as sgdm , c.dict_prompt fund_type,e.dict_prompt risklevel,d.dict_prompt charge_type,
+						b.dict_prompt STATUS ,g.nav as dwjz
+						from hs_opfund.ofstkcode@syncdb a  
+						left join hs_user.sysdictionary@syncdb b on b.dict_entry = 2015 and b.subentry = a.fund_status   
+						left join hs_user.sysdictionary@syncdb c on c.dict_entry = 2022 and c.subentry = a.stock_type  
+						left join hs_user.sysdictionary@syncdb d on d.dict_entry = 2026 and d.subentry = a.charge_type  
+						left join hs_user.sysdictionary@syncdb e on e.dict_entry = 2029 and e.subentry = a.fund_risklevel 
+						left join hs_opfund.offundcompany@syncdb f on a.fund_company=f.fund_company
+						left join hs_opfund.ofprice@syncdb g on a.fund_code=g.fund_code
+						where a.fund_status='0' and a.charge_type&lt;&gt;'1' and fund_company in (select fund_company from hs_opfund.ofexcharg@syncdb)
+							<dynamic>
+								<isNotNull property="fundCode" prepend="and">
+										  	 a.fund_code LIKE '%$fundCode$%'
+								</isNotNull>
+								<isNotNull property="gsmc" prepend="and">
+										  	a.codesimple_name LIKE '%$gsmc$%'
+								</isNotNull>
+								<isNotNull property="fundType" prepend="and">
+										  	 c.dict_prompt LIKE '%$fundType$%'
+								</isNotNull>
+								<isNotNull property="status" prepend="and">
+										  	 b.dict_prompt LIKE '%$status$%'
+								</isNotNull>
+							</dynamic>   
+								)t 
+							left join (select t_jjzb_id,jjglr_id,jjdm from jjzb where scbz = 0 and gkbz = 1
+				            union
+				            select a.t_jjzb_id,b.jjglr_id,a.dm from jjxgdm a,jjzb b where a.t_jjzb_id = b.t_jjzb_id and  
+				            (a.zdmc like '%B%' or a.zdmc like '%C%' or a.zdmc like '%A%' ) and a.scbz = 0 and a.gkbz = 1
+				            ) z on t.fund_code=z.jjdm 
+						left join GSZB s on s.t_gszb_id=z.JJGLR_ID
+						left join (SELECT b.T_GSZB_ID as T_GSZB_ID ,wmsys.wm_concat (a.xm) as xm FROM RYRZQK b,GRZB a where a.t_grzb_id=b.t_grzb_id and sysdate-1&gt;b.RZQSR and sysdate-1&lt;(nvl(b.RZZZR,sysdate)) GROUP BY b.T_GSZB_ID) g
+						 on g.T_GSZB_ID=z.t_jjzb_id where 1=1 
+						 <dynamic>
+							<isNotNull property="fundName" prepend="and">
+									s.GSMC LIKE '%$fundName$%'
+							</isNotNull>
+						</dynamic>
+	</select>
+	
+	<resultMap id="Jjylbmz" class="Jjylb">
+ 		<result property="fundName" column="fund_name" jdbcType="String"/>
+ 	</resultMap>
+	<select id = "getJjlx" resultMap = "Jjylbmz">
+  		select distinct company_name as fund_name from hs_opfund.offundcompany@syncdb where company_name is not null
+  </select>
+  <resultMap id="Jjylblx2" class="Jjylb">
+ 		<result property="fundType" column="dict_prompt" jdbcType="String"/>
+ 	</resultMap>
+	<select id = "getJjlxlx" resultMap = "Jjylblx2">
+  		select distinct dict_prompt  from hs_user.sysdictionary@syncdb b where  b.dict_entry = 2022 and dict_prompt is not null
+     </select>
+  <resultMap id="Jjylbzd" class="Jjylb">
+ 		<result property="status" column="STATUS" jdbcType="String"/>
+ 	</resultMap>
+	<select id = "getJjlxzd" resultMap = "Jjylbzd">
+  		select distinct dict_prompt as status from hs_user.sysdictionary@syncdb b where  b.dict_entry = 2015 and dict_prompt is not null
+   </select>
+	
+</sqlMap>

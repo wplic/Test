@@ -1,0 +1,386 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>参与指南</title>
+<link href="css/basic.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/css/global.css" rel="stylesheet" type="text/css" />
+<link href="${ctx}/css/wsyyt/wsyyt.css" rel="stylesheet" type="text/css" />
+<script src="${ctx}/js/setTab.js"></script>
+<link href="${ctx }/infoCenter/goldmoney/css/basic.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="${ctx }/infoCenter/goldmoney/js/topmenu.js"></script>
+</head>
+
+<body>
+
+<jsp:include page="${ctx }/share/top.jsp" />
+<div class="wjdc_box">
+  <p class="wjdc"><a href="${ctx }/investorEdu/investorSurvey.html"><img src="${ctx }/pic/index/wzdc.jpg"/></a></p>
+</div>
+<div class="body_bg">
+<!--页头-->
+<!--页头end-->
+
+<!--主体-->
+	<div class="pbd">
+		<div class="pt-side">
+		<div class="mod mod-jtlxlcc mod01">
+			<div class="mhd"><h2><a href="/goldMoney.do?method=showMainGoldPage">金天利系列产品</a></h2></div>
+			<div class="mbd">
+				<ul class="discli01">
+				<!-- 先判断后台返回的数据是否为空，不为空就开始遍历出来 -->
+				<c:choose>
+					<c:when test="${empty goldMoneyList}">
+						<li>暂时没有数据</li>
+					</c:when>
+					<c:otherwise>
+						<c:forEach items="${goldMoneyList}" var="goldMoneyValue">
+							<li><a href="/goldMoney.do?method=showGoldMoney&pid=${goldMoneyValue.pid}">${goldMoneyValue.sotname}</a></li>
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+				</ul>
+			</div>
+		</div>
+		<div class="mod mod01">
+			<div class="mhd"><h2>客户服务</h2></div>
+			<div class="mbd">
+				<ul class="discli01">
+					<li><a href="/goldMoney.do?method=showGoldMoneyGuide">参与指南</a></li>
+					<li><a href="/goldMoney.do?method=showGoldMoneyDownload">资料下载</a></li>
+					<li><a href="${ctx }/infoCenter/goldmoney/faq.jsp">常见问题解答</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="mod mod-fxts mod01">
+			<div class="mhd"><h2>风险提示</h2></div>
+			<div class="mbd">
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;金快线产品作为一种债券质押式报价回购业务，为低风险投资产品，具有与股票、基金和债券等不同的风险收益特征，本网站上的宣传介绍内容仅供投资者参考，并非我公司金快线产品的法律文件。投资者做出投资决策前，应认真阅读《广发证券股份有限公司债券质押式报价回购风险揭示书》和《广发证券股份有限公司债券质押式报价回购客户协议》，并自行承担投资风险。本网站上的宣传介绍文字与前述法律文件不一致的，以前述法律文件为准。
+				</p>
+			</div>
+		</div>
+		<div class="mod  mod01">
+			<div class="mhd"><h2>服务热线</h2></div>
+			<div class="mbd">
+				<ul class="discli01">
+					<li>全国统一服务热线：95575</li>
+					<li>客户投诉受理专线：95575</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="pt-main">
+		<div class="location">当前位置：<a href="/default.jsp">首页</a> > <a href="/goldMoney.do?method=showMainGoldPage">金快线</a> >  常见问题解答    </div>
+		<div class="mod  mod02">
+			<div class="mhd"><h2>指南</h2></div>
+			<div class="mbd">
+				<table class="table03" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th class="cpmc">常见问题及解答</th>
+						</tr>    
+					</thead>
+					<tbody>
+						 <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px; text-align:left;">问：债券质押式报价回购是什么交易品种？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：债券质押式报价回购是一种限定在证券公司与符合条件的该证券公司客户之间、通过上交所大宗交易系统交易、登记结算公司提供资券结算的特定债券质押式回购。
+</td>	
+  </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：什么是金快线债券质押式报价回购系列产品？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线系列产品是一种经中国证监会同意的债券质押式报价回购创新产品，该产品是广发证券以足额债券质押在中国证券登记公司作为担保，限定与广发客户之间进行的一种特定债券回购。该产品包括多个期限品种，广发证券客户可以通过证券保证金帐户象买卖股票一样随意选择交易，灵活管理自己暂时闲置的股票投资资金，从而获得高于活期存款利息数倍的现金收益。</td>			              </tr>  
+  
+	 <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线债券质押式报价回购系列产品是否通过了中国证监会批准？</td>
+              </tr>
+              <tr>
+	<td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：中国证监会机构部部函【2009】198号文件正式通过了广发证券开展债券质押式报价回购业务。
+</td>			              </tr>  
+  
+	 <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线债券质押式报价回购系列产品是否通过了交易所的批复？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：上海证券交易所文件上证会字【2009】10号发布了“关于同意广发证券股份有限公司开展债券质押式报价回购业务试点的通知”。
+</td>			              </tr>  
+  <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线与银行理财和一般券商理财产品有何区别？</td>
+              </tr>
+  <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线属于债券回购业务，即券商提供全额债券作为质押担保，客户将资金融出给券商，获取利息。而一般理财产品是指银行或券商客户将资金集中，并代其进行投资管理，未发生资金融入和融出。
+</td>			              </tr>  
+   <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线包括哪些交易品种？</td>
+              </tr>
+              <tr>
+           <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：<P class=MsoNormal style="MARGIN: 0cm 0cm 0pt; TEXT-ALIGN: left; mso-pagination: widow-orphan" align=left><SPAN style="FONT-FAMILY: 宋体; mso-bidi-font-size: 10.5pt">目前金快线包括期限不同的五个系列产品：
+            
+            
+            
+            
+            
+            
+            
+               <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线为何期限设定为1天、7天、14天和28天和91天？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线是目前交易所债券质押式回购业务的一种特例，因此期限设定与其一致。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线产品的天数是按照自然日还是交易日来计算?</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线产品的天数是按自然日来计算的。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：一天回购产品有什么特点？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线01产品1天到期，到期后客户未购回，本金自动续做，利息每天计提隔日支付；客户随时可终止，资金T＋0到帐、T+1可取。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：非一天回购的产品有什么特点？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：7、14、28、91天回购（固定期限）：到期期限分别为7、14、28、91天的四种产品，遇节假日顺延，本金利息到期一次支付，可申请提前终止，资金T+0到帐、T+1可取。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：固定期限的几个产品比1天的非固定期限的产品又有何优势所在?</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：一般情况下，长期限产品年化收益率高于短期限产品，另外，对不同期限产品的选择取决于客户对资金流动性的需求。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线回购资金的投资品种及期限怎样设定的？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：剩余期限五年以内、AA级（含AA）以上、流动性强的金融工具，现金、逆回购不低于回购资金得50％。具体投资品种和期限包括：银行协议存款、银行定期存款、期限在三个月（含）以内的债券逆回购、新股（债）申购、评级在AA以上（含）的短期融资券、评级在AA以上（含）期限在五年以内（含）的国债、央票、金融债、企业（公司）债、资产支持证券和可转债，其中可转债不受剩余期限在五年以内（含）限制，以及中国证监会、中国人民银行认可的具有良好流动性的金融工具。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线回购资金的投资是否有担保？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线产品已经提供了全额债券质押担保，由中国证券结算登记公司进行质押物管理。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线有什么特色？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线的特点主要表现在安全、便利、灵活、收益等方面。易买卖：资金T+0实时可用，T+1可取；稳回报：收益率高于同期银行存款；高保障：足额债券质押；低门槛：资金起点5万；零费用：暂不向客户收取任何费用。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：所有客户都可以参与金快线么？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线仅提供给在广发证券开立资金账户6个月以上、指定上海A股交易、账户总资产20万以上的客户。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：账户资产20万是如何界定的？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：提交审核期间，客户在我公司托管资产和资金余额合计不低于20万。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：怎样才能参与，要开专门的账户么？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：签订相关协议，经过交易所及我公司部门审核后即可开通。开户确认不超过5个工作日，尽量2个工作日内完成。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：持有产品期间是否可以办理撤销上海指定？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：在报价回购中，如果客户有报价回购委托、有未到期报价回购委托，是不允许做撤销指定、不允许撤销此客户对应资金帐号的‘金快线交易权限’的。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：交易时间是否与股票一样？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：不完全一样，交易时间为每个交易日的9：30-11：30，12：00-15：00。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：如何交易购买金快线？ </td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：通过通达信系统交易、网上营业厅交易、营业部柜台委托以及金太阳手机证券委托，系统自动撮合。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线产品是否挂牌上市？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：是挂牌上市，但只有广发证券客户可以参与，其交易通过上交所，由中国证券结算公司提供结算。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：如何获取每天的行情报价及可交易的总量？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：行情报价：每个交易日开盘前通过广发证券网上交易客户端、网上营业厅、鑫网金快线专栏进行公布；可交易的总量：每个交易日开盘前通过广发证券鑫网金快线专栏进行公布。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：成交原则是什么？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：价格约定，时间优先。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：交易原则是什么？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线实行T+0回转交易，当天卖出当天即可再买进，当天买进需T+1卖出；当天卖出证券所得资金不能买入金快线。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：申报价格如何确定？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：为每百元资金到期年收益、每百元资金提前终止年收益。每天开盘前报价。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：申报数量如何确定？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：最低申报数量为50手，超出部分以1手的整倍数增加（1手即1000元）。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：购买金快线可以提前委托吗?</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：不可以提前委托，每个交易日9：30开始，系统接受客户交易委托，提前委托无效。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：如何撤单？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线实行即时成交原则，不提供撤单功能。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：为什么我做的第一笔委托没有成交，第二笔却有成交？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：在当天新增额度用完后，如有已购买产品客户发出“提前终止”指令，系统会相应增加金快线可用额度，此时如有客户下单，系统会撮合成交。这样就有可能出现先下单客户没有成交，后下单客户可能成交的现象。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：如果当天客户委托已经超过了资金部设置的总量，那么系统还会接受客户的金快线委托吗？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：如额度用完，系统提示客户不能成交。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：卖出报价回购产品资金何时到账？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：当天卖出报价回购产品，资金T＋0实时到帐可用，T+1日可取。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：交易是否需要手续费？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：所有交易暂不收取任何费用。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：当天卖出证券所得资金是否可以立即再买入金快线？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：当天卖出证券所得资金，须在T+1日可买入报价回购产品。
+</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：是否所有的产品都可以自动续作？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：只有一天回购产品（金快线01）系统会自动续作，即每天自动将本金按一天回购申报。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：客户购买金快线后怎样查询自己的份额?</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：客户可以在交易终端、网点柜台查询已认购份额及交易记录。也可以直接向中国证券登记公司上海分公司查询（需申请中登公司PROP个人用户权限，即上交所证券数字证书，免费，可通过我公司资金运营部申请）。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：金快线01是否可以随时不再自动续作，收益如何到账？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：金快线01可以在交易时间随时不再自动续作。自动续作期间所得收益每日计算，当日清算之后支付。到期终止当日本金T＋0实时到帐，所得利息当日清算之后支付，T+1可取。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：到期终止如何计算收益，收益如何到账？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：回购到期总收益=回购成交日我司公布的到期年收益率*回购金额*实际持有天数/365；其中，实际持有天数为成交日起至到期终止日（不含该日）期间的日历天数。到期终止当日本金T＋0实时到帐，所得利息当日清算之后支付，T+1可取。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：提前终止如何计算收益，收益如何到账？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：提前终止总收益=回购成交日我司公布的提前终止年收益率*回购金额*实际持有天数/365；其中，实际持有天数为成交日起至提前终止日（不含该日）期间的日历天数。到期终止当日本金T＋0实时到帐，所得利息当日清算之后支付，T+1可取。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：是否会出现赎回申请不被受理的情况？</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：当出现大额购回时，会出现赎回申请不被受理的情况。1）、金快线01：回购的当日累计不再续做委托总金额超过上一交易日该品种未到期余额的30%时；2）、金快线07-金快线91：在任一交易日内，若任一回购品种的当日累计提前终止委托总金额超过上一交易日该品种未到期余额的30%，或当日提前终止委托累计金额超过人民币3000万元且没有在前一交易日15:00之前与我司进行预约，即认为发生大额赎回，此时我司有权拒绝提前终止委托申请。</td>			              </tr>  
+  
+              <tr>
+                <td valign="top" bgcolor="#F6F6F6"  style="padding:3px 0 3px 5px;text-align:left;">问：大额客户如果提前终止的话要怎样预约?</td>
+              </tr>
+              <tr>
+                <td valign="top" bgcolor="#FFFFFF"  style="padding:3px 0 3px 5px;text-align:left;">答：客户需要通过营业部业务电话专线预约，营业部将及时根据客户要求通过柜台系统进行预约。</td>			              </tr>  
+					</tbody>
+				</table>
+			</div>
+		</div>
+		</div>
+	</div>
+<!--主体end-->
+
+<!--底部图标-->
+<div class="clear"></div>
+<div class="blank10"></div>
+<table align="center" style="margin:0 auto;">
+	<tbody>
+	<tr>
+		<td><a href="###"><img src="pic/botban1.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban2.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban3.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban4.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban5.jpg"></a></td>
+	</tr>
+	</tbody>
+</table>
+<div class="blank10"></div>
+<!--底部图标end-->
+
+<!--底部-->
+<jsp:include page="${ctx }/share/bottom.jsp" />
+<!--底部end-->
+
+</div>
+</body>
+</html>

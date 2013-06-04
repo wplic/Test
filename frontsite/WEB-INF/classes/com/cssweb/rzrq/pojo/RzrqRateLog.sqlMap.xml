@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.RzrqRateLog">
+
+	<typeAlias alias="rzrqRateLog" type="com.cssweb.rzrq.pojo.RzrqRateLog" />
+
+	<resultMap id="rzrqRateLogMap" class="rzrqRateLog">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="rzYear" column="RZ_YEAR" jdbcType="Double"/>
+		<result property="rqYear" column="RQ_YEAR" jdbcType="Double"/>
+		<result property="rzFloat" column="RZ_FLOAT" jdbcType="Double"/>
+		<result property="rqFloat" column="RQ_FLOAT" jdbcType="Double"/>
+		<result property="startDate" column="START_DATE" jdbcType="java.util.Date"/>
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+	    <result property="auditing" column="AUDITING" jdbcType="Long" />
+		<result property="userid" column="USER_ID" jdbcType="Long"/>
+		<result property="userName" column="USER_NAME" jdbcType="String"/>
+		<result property="updateDate" column="UPDATE_DATE" jdbcType="java.util.Date"/>
+	</resultMap>
+
+	<insert id="insertRzrqRateLog" parameterClass="rzrqRateLog">
+		INSERT into T_RZRQ_RATE_LOG ( ID, RZ_YEAR,RQ_YEAR, RZ_FLOAT, RQ_FLOAT, START_DATE,PUBLISH_DATE,AUDITING,USER_ID,USER_NAME,UPDATE_DATE) 
+		VALUES (#id#,#rzYear#,#rqYear#, #rzFloat#, #rqFloat#, #startDate#,#publishDate#,#auditing#,#userid#,#userName#,#updateDate#)
+	</insert>
+	
+	<select id="getRzrqRateLogAll" resultMap="rzrqRateLogMap">
+		select * from T_RZRQ_RATE_LOG 
+	</select>
+
+	<select id="getRzrqRateLogById" parameterClass="Long" resultMap="rzrqRateLogMap">
+		select * from T_RZRQ_RATE_LOG where id= #id#
+	</select>
+	
+	<select id="getRzrqRateLogNewStartDate" parameterClass="Long" resultMap="rzrqRateLogMap">
+		select * from T_RZRQ_RATE_LOG t where 1=1 and AUDITING = 1 and rownum &lt; 2 order by START_DATE desc
+	</select>		
+
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getRzrqRateLogByPage" parameterClass="java.util.Map" resultMap = "rzrqRateLogMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+ 
+  
+</sqlMap>

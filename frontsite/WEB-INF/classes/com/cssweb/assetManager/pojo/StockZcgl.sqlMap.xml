@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.assetManager.pojo.StockZcgl">
+
+	<typeAlias alias="StockZcgl" type="com.cssweb.assetManager.pojo.StockZcgl" />
+
+	<resultMap id="StockZcgl" class="StockZcgl">
+		<result property="accont" column="ACCOUNT" jdbcType="String"/>
+		<result property="gpdm" column="GPDM" jdbcType="String"/>
+		<result property="gpmc" column="GPMC" jdbcType="String" />
+	</resultMap>
+	
+	<!-- 查找所有的股票信息，或者根据股票代码查询查询 -->
+	<select id="getStockZcglList" resultMap="StockZcgl" parameterClass="java.util.Map">
+		select t.CLIENT_ID as ACCOUNT, t.stock_code as GPDM ,t.stock_name as GPMC from stock_zcgldb1 t 
+        where t.CLIENT_ID=#account# 
+		<dynamic>
+		    <isNotEmpty prepend="and" property="gpdm">
+				    t.stock_code = #gpdm# 
+			</isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<resultMap id="StockZcglGpdm" class="StockZcgl">
+		<result property="accont" column="ACCOUNT" jdbcType="String"/>
+		<result property="gpdm" column="GPDM" jdbcType="String"/>
+		<result property="gpmc" column="GPMC" jdbcType="String" />
+	</resultMap>
+	
+	<!-- 查找所有的股票信息，或者根据股票代码查询查询 -->
+	<select id="getStockZcglGpdmList" resultMap="StockZcglGpdm" parameterClass="java.util.Map">
+		select t.fund_account as ACCOUNT, t.stock_code as GPDM ,t.stock_name as GPMC from stock_zcgldb1 t 
+        where t.CLIENT_ID=#account# 
+	</select>
+</sqlMap>

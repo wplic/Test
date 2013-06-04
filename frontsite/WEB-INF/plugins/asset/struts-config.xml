@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+       
+<struts-config>
+
+<!-- ============ Data Source =================================== -->
+
+<!-- ========== Form Bean Definitions =================================== -->
+<form-beans>
+	<!-- add document form-->
+	<form-bean name="InvestDemoForm" type="com.citics.invest.view.ClientInvestDemoForm"/>
+	<form-bean name="productForm" type="com.css.asset.view.ProductForm" />
+	<form-bean name="faqForm" type="com.css.asset.view.FaqForm" />
+	<form-bean name="faqCategoryForm" type="com.css.asset.view.FaqCategoryForm" />
+	<form-bean name="netGridForm" type="com.css.asset.view.NetGridForm" />
+	<form-bean name="netGridSearchForm" type="com.css.asset.view.NetGridSearchForm" />
+	<form-bean name="netValueForm" type="com.css.asset.view.NetValueForm" />
+</form-beans>
+ 
+<!-- ========== Global Forward Definitions ============================== -->
+
+<!-- ========== Action Mapping Definitions ============================== -->
+<action-mappings>
+	<!-- invest demo list-->
+	<action   path="/admin/asset/InvestList"
+			  type="com.citics.invest.action.InvestDemoListAction"
+			  scope="request">
+		<forward name="target" redirect="true" path="/admin/asset/InvestList.jsp"/>
+	</action>
+
+	<action   path="/admin/asset/InvestDemoBean"
+			  type="com.citics.invest.action.InvestDemoBeanAction"
+			  name="InvestDemoForm"
+			  scope="request"
+			  validate="false">
+		<forward name="target" redirect="false" path="/admin/asset/ViewInvestDemo.jsp"/>
+	</action>
+	<action   path="/admin/asset/ProductAdd"
+			  type="com.css.asset.action.ProductAction"
+			  name="productForm"
+			  scope="request"
+			  validate="false" parameter="add">
+		<forward name="form" redirect="false" path="/admin/asset/AddProductForm.jsp"/>
+	</action>
+	<action path="/admin/asset/ProductSave" type="com.css.asset.action.ProductAction" name="productForm"
+	scope="request" validate="true" parameter="save" input="/admin/asset/AddProductForm.jsp">
+		<forward name="list" redirect="false" path="/admin/asset/ProductList.do" />
+	</action>
+	<action path="/admin/asset/ProductList" type="com.css.asset.action.ProductAction" scope="request" validate="false" parameter="list">
+		<forward name="list" redirect="false" path="/admin/asset/ProductList.jsp" />
+	</action>
+	<action path="/admin/asset/ProductEdit" type="com.css.asset.action.ProductAction" name="productForm" 
+	scope="request" validate="false" parameter="edit">
+		<forward name="form" redirect="false" path="/admin/asset/AddProductForm.jsp" />
+	</action>
+	<action path="/admin/asset/ProductDelete" type="com.css.asset.action.ProductAction" scope="request" validate="false" parameter="delete">
+		<forward name="list" redirect="false" path="/admin/asset/ProductList.do" />
+	</action>
+	<action   path="/admin/asset/FaqAdd"
+			  type="com.css.asset.action.FaqAction"
+			  name="faqForm"
+			  scope="request"
+			  validate="false" parameter="add">
+		<forward name="form" redirect="false" path="/admin/asset/AddFaqForm.jsp"/>
+	</action>
+	<action path="/admin/asset/FaqSave" type="com.css.asset.action.FaqAction" name="faqForm"
+	scope="request" validate="true" parameter="save" input="/admin/asset/AddFaqForm.jsp">
+		<forward name="list" redirect="false" path="/admin/asset/FaqList.do" />
+	</action>
+	<action path="/admin/asset/FaqList" type="com.css.asset.action.FaqAction" scope="request" validate="false" parameter="list">
+		<forward name="list" redirect="false" path="/admin/asset/FaqList.jsp" />
+	</action>
+	<action path="/admin/asset/FaqEdit" type="com.css.asset.action.FaqAction" name="faqForm" 
+	scope="request" validate="false" parameter="edit">
+		<forward name="form" redirect="false" path="/admin/asset/AddFaqForm.jsp" />
+	</action>
+	<action path="/admin/asset/FaqDelete" type="com.css.asset.action.FaqAction" scope="request" validate="false" parameter="delete">
+		<forward name="list" redirect="false" path="/admin/asset/FaqList.do" />
+	</action>
+	<action   path="/admin/asset/FaqCategoryAdd"
+			  type="com.css.asset.action.FaqCategoryAction"
+			  name="faqCategoryForm"
+			  scope="request"
+			  validate="false" parameter="add">
+		<forward name="form" redirect="false" path="/admin/asset/AddFaqCategoryForm.jsp"/>
+	</action>
+	<action path="/admin/asset/FaqCategorySave" type="com.css.asset.action.FaqCategoryAction" name="faqCategoryForm"
+	scope="request" validate="true" parameter="save" input="/admin/asset/AddFaqCategoryForm.jsp">
+		<forward name="list" redirect="false" path="/admin/asset/FaqCategoryList.do" />
+	</action>
+	<action path="/admin/asset/FaqCategoryList" type="com.css.asset.action.FaqCategoryAction" scope="request" validate="false" parameter="list">
+		<forward name="list" redirect="false" path="/admin/asset/FaqCategoryList.jsp" />
+	</action>
+	<action path="/admin/asset/FaqCategoryEdit" type="com.css.asset.action.FaqCategoryAction" scope="request" validate="false" parameter="edit">
+		<forward name="list" redirect="false" path="/admin/asset/FaqCategoryList.do" />
+	</action>
+	<action path="/admin/asset/FaqCategoryDelete" type="com.css.asset.action.FaqCategoryAction" scope="request" validate="false" parameter="delete">
+		<forward name="list" redirect="false" path="/admin/asset/FaqCategoryList.do" />
+	</action>
+	
+	<action   path="/admin/asset/NetGridAdd"
+			  type="com.css.asset.action.NetGridAction"
+			  name="netGridForm"
+			  scope="request"
+			  validate="false" parameter="add">
+		<forward name="form" redirect="false" path="/admin/asset/AddNetGridForm.jsp"/>
+	</action>
+	<action path="/admin/asset/NetGridSave" type="com.css.asset.action.NetGridAction" name="netGridForm"
+	scope="request" validate="true" parameter="save" input="/admin/asset/AddNetGridForm.jsp">
+		<forward name="list" redirect="true" path="/admin/asset/NetGridList.do" />
+	</action>
+	<action path="/admin/asset/NetGridList" type="com.css.asset.action.NetGridAction" name="netGridSearchForm" scope="request" validate="false" parameter="list">
+		<forward name="list" redirect="false" path="/admin/asset/NetGridList.jsp" />
+	</action>
+	<action path="/admin/asset/NetGridEdit" type="com.css.asset.action.NetGridAction" name="netGridForm" 
+	scope="request" validate="false" parameter="edit">
+		<forward name="form" redirect="false" path="/admin/asset/AddNetGridForm.jsp" />
+	</action>
+	<action path="/admin/asset/NetGridDelete" type="com.css.asset.action.NetGridAction" scope="request" validate="false" parameter="delete">
+		<forward name="list" redirect="false" path="/admin/asset/NetGridList.do" />
+	</action>
+	
+	
+	
+	
+	<action   path="/admin/asset/NetValueAdd"
+			  type="com.css.asset.action.NetValueAction"
+			  name="netValueForm"
+			  scope="request"
+			  validate="false" parameter="add">
+		<forward name="form" redirect="false" path="/admin/asset/AddNetValueForm.jsp"/>
+	</action>
+	<action path="/admin/asset/NetValueSave" type="com.css.asset.action.NetValueAction" name="netValueForm"
+	scope="request" validate="true" parameter="save" input="/admin/asset/AddNetValueForm.jsp">
+		<forward name="list" redirect="false" path="/admin/asset/NetValueList.do" />
+	</action>
+	<action path="/admin/asset/NetValueList" type="com.css.asset.action.NetValueAction" scope="request" validate="false" parameter="list">
+		<forward name="list" redirect="false" path="/admin/asset/NetValueList.jsp" />
+	</action>
+	<action path="/admin/asset/NetValueEdit" type="com.css.asset.action.NetValueAction" name="netValueForm" 
+	scope="request" validate="false" parameter="edit">
+		<forward name="form" redirect="false" path="/admin/asset/AddNetValueForm.jsp" />
+	</action>
+	<action path="/admin/asset/NetValueDelete" type="com.css.asset.action.NetValueAction" scope="request" validate="false" parameter="delete">
+		<forward name="list" redirect="false" path="/admin/asset/NetValueList.do" />
+	</action>
+</action-mappings>
+
+</struts-config>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.TsystemFundSale">
+
+	<typeAlias alias="tsystemFundSale" type="com.cssweb.systemset.pojo.TsystemFundSale"/>
+  
+	<resultMap id="tsystemFundSaleMap" class="tsystemFundSale">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="code" column="CODE" jdbcType="String"/>
+ 		<result property="gsmc" column="GSMC" jdbcType="String"/>
+ 		<result property="jjmc" column="JJMC" jdbcType="String"/>
+ 		<result property="jjjc" column="JJJC" jdbcType="String"/>
+ 		<result property="jjlx" column="JJLX" jdbcType="String"/>
+   	</resultMap>
+   	
+   <resultMap id="JJListMap" class="tsystemFundSale">
+		<result  property="gsmc" column="GSMC" jdbcType="String" />
+		<result property="code" column="CODE"  jdbcType="String" />
+		<result  property="jjmc" column="JJMC" jdbcType="String" />
+	</resultMap>
+	<resultMap id="JJGSMap" class="tsystemFundSale">
+		<result property="gsmc" column="GSMC"  jdbcType="String" />
+	</resultMap>
+  	<select id="getAllFundPages" resultMap="tsystemFundSaleMap" parameterClass="java.util.HashMap">
+				    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+						row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id="getFundSaleCount" resultClass="Integer" parameterClass="String">
+				  $sql$
+	</select>
+
+	<select id="getAllJJGS" resultMap="JJGSMap">
+					select  DISTINCT b.gsmc as GSMC from jjzb a, gszb b where a.jjglr_id=b.t_gszb_id
+	</select>
+	
+	<insert id ="insertFundSale" parameterClass="tsystemFundSale">
+				insert into T_SYSTEM_FUNDSALE(ID,CODE) values(#id#,#code#)
+	</insert>
+	
+	<select id="getJJList" resultMap="JJListMap" parameterClass="String">
+		select JJDM as CODE,k.gsmc as GSMC,JJMC from jjzb jj,gszb k where jj.jjglr_id = k.t_gszb_id and   k.gsmc = #gsmc# and
+		JJDM not in (select code from T_SYSTEM_FUNDSALE)
+	</select>
+	
+	<delete id = "deleteById" parameterClass="Long">
+				delete from T_SYSTEM_FUNDSALE where ID = #id#
+	</delete>
+	
+	<resultMap id="FrontTsystemFundSaleMap" class="tsystemFundSale">
+	 	<result property="ljjz" column="LJJZ" jdbcType="Double"/>
+	 	<result property="dwjz" column="DWJZ" jdbcType="Double"/>
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="code" column="CODE" jdbcType="String"/>
+ 		<result property="gsmc" column="GSMC" jdbcType="String"/>
+ 		<result property="jjmc" column="JJMC" jdbcType="String"/>
+ 		<result property="jjjc" column="JJJC" jdbcType="String"/>
+ 		<result property="jjlx" column="JJLX" jdbcType="String"/>
+   	</resultMap>
+   	  <select id="getFrontAllFund" resultMap="FrontTsystemFundSaleMap" parameterClass="java.util.HashMap">
+		 SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ ) row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+   	
+</sqlMap>

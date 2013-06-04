@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<sqlMap namespace="com.cssweb.systemset.pojo.TbranchView">
+
+	<typeAlias alias="tbranchView" type="com.cssweb.systemset.pojo.TbranchView"/>
+ 
+	<resultMap id="tbranchViewMap" class="tbranchView">
+ 		<result property="id" 			column="ID" 			jdbcType="Long"/>
+ 		<result property="userId" 	column="USER_ID" 	jdbcType="Long"/>
+ 		<result property="branchCode" 	column="BRANCHCODE" 	jdbcType="String"/>
+   	</resultMap>
+ 	<resultMap id="tbranchViewMap1" class="tbranchView">
+ 		<result property="userId" 	column="USER_ID" 	jdbcType="Long"/>
+ 		<result property="realName" 	column="REAL_NAME" 	jdbcType="String"/>
+   	</resultMap>
+  	<insert id="insertTbranchView" parameterClass="tbranchView">
+	    INSERT INTO 
+	    	T_BRANCH_VIEW(
+	    		ID,
+				USER_ID,
+				BRANCHCODE)
+	    VALUES(
+	    		#id#,
+	    		#userId#,
+	    		#branchCode#)
+  	</insert>
+  	
+  	<delete id="deleteTbranchViewByUserId" parameterClass="Long">
+    	DELETE 
+    		T_BRANCH_VIEW 
+    	WHERE 
+    		USER_ID	= #userId#
+  	</delete>
+  <select id="getTbranchViewByUserId" parameterClass="Long" resultMap = "tbranchViewMap">
+	select * from T_branch_view where USER_ID = #userId#
+  </select>
+  <select id="getTbranchViewSql" parameterClass="String" resultMap = "tbranchViewMap1">
+  		$sql$
+  </select>
+  
+  	<select id="getTbranchViewList" resultMap="tbranchViewMap1" parameterClass="map">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>		
+</sqlMap>

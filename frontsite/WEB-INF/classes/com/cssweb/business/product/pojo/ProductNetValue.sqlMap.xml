@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.business.product.pojo.ProductNetValue">
+	<typeAlias alias="ProductNetValue" type="com.cssweb.business.product.pojo.ProductNetValue" />
+	
+	<resultMap id="ProductNetValueResult" class="ProductNetValue">
+		<result column="NET_VALUE_ID" property="netValueId" jdbcType="java.lang.Long"/>
+		<result column="PRODUCT_CODE" property="productCode" jdbcType="java.lang.String"/>
+		<result column="INSERT_DATE" property="insertDate" jdbcType="java.util.Date"/>
+		<result column="YEAR_INCOME_RATIO" property="yearIncomeRatio" jdbcType="java.lang.Double"/>
+		<result column="PRODUCT_NET_VALUE" property="productNetValue" jdbcType="java.lang.Double"/>
+		<result column="CUMULATE_NET_VALUE" property="cumulateNetValue" jdbcType="java.lang.Double"/>
+		<result column="CUMULATION_INCOME_RATIO" property="cumulationIncomeRatio" jdbcType="java.lang.Double"/>
+		<result column="NET_VALUE_DATE" property="netValueDate" jdbcType="java.util.Date"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="ProductNetValue">
+		insert into T_ASSET_PRODUCT_VALUE(
+			NET_VALUE_ID, PRODUCT_CODE, INSERT_DATE, YEAR_INCOME_RATIO, PRODUCT_NET_VALUE, CUMULATE_NET_VALUE,CUMULATION_INCOME_RATIO, NET_VALUE_DATE)
+		values(
+			#netValueId#,#productCode#,sysdate,#yearIncomeRatio#,#productNetValue#,#cumulateNetValue#,#cumulationIncomeRatio#,#netValueDate#)
+	</insert>
+	
+	<update id="update" parameterClass="ProductNetValue">
+		update T_ASSET_PRODUCT_VALUE 
+			set PRODUCT_CODE = #productCode#,
+				 INSERT_DATE = sysdate,
+				 YEAR_INCOME_RATIO = #yearIncomeRatio#,
+				 CUMULATION_INCOME_RATIO = #cumulationIncomeRatio#,
+				 PRODUCT_NET_VALUE = #productNetValue#,
+				 CUMULATE_NET_VALUE = #cumulateNetValue#,
+				 NET_VALUE_DATE = #netValueDate# 
+		where NET_VALUE_ID = #netValueId#
+	</update>
+	
+	<select id="getProductNetValues" parameterClass="map" resultMap="ProductNetValueResult">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select NET_VALUE_ID, PRODUCT_CODE ,INSERT_DATE ,YEAR_INCOME_RATIO ,PRODUCT_NET_VALUE ,CUMULATE_NET_VALUE,
+			CUMULATION_INCOME_RATIO,NET_VALUE_DATE from T_ASSET_PRODUCT_VALUE  tan where 1=1
+			<dynamic prepend="and">
+               <isNotEmpty property="productCode">
+                     PRODUCT_CODE = #productCode#
+               </isNotEmpty>
+         </dynamic> 
+         <dynamic   prepend="and">
+	      		<isNotEmpty property="startTime">
+	                NET_VALUE_DATE &gt;= to_date(#startTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+	     </dynamic>
+	    <dynamic   prepend="and">
+	      		<isNotEmpty property="endTime">
+	                NET_VALUE_DATE &lt;= to_date(#endTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+        </dynamic>
+         <isNotEmpty property="sql">
+	              $sql$
+	        </isNotEmpty>
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+	
+	<select id="getNonTradingDaysByMinDateAndMaxDate" parameterClass="map" resultClass="java.util.Date">
+		select n.dt as nonTradingDays from (
+		select to_date(#minDate#,'YYYY-mm-DD')+n-1 as dt from dual,
+		(select level n from dual connect by level&lt;=(to_date(#maxDate#,'YYYY-mm-DD')-to_date(#minDate#,'YYYY-mm-DD')))) n where
+		not exists(select 1 from T_ASSET_PRODUCT_VALUE v where v.PRODUCT_CODE = #productCode# AND v.NET_VALUE_DATE = n.dt)  
+	</select>
+	
+	<select id="getProductNetValuesCount" resultClass="java.lang.Integer">
+			select count(*) from T_ASSET_PRODUCT_VALUE
+	</select>	
+	
+	<select id="getNetValuesByProCount" resultClass="java.lang.Integer" parameterClass="map">
+			select count(*) from T_ASSET_PRODUCT_VALUE 
+			where
+			1=1
+			<dynamic prepend="and">
+               <isNotEmpty property="productCode">
+                     PRODUCT_CODE = #productCode#
+               </isNotEmpty>
+         </dynamic> 
+         <dynamic   prepend="and">
+	      		<isNotEmpty property="startTime">
+	                NET_VALUE_DATE &gt;= to_date(#startTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+	     </dynamic>
+	    <dynamic   prepend="and">
+	      		<isNotEmpty property="endTime">
+	                NET_VALUE_DATE &lt;= to_date(#endTime#,'yyyy-MM-dd')
+	            </isNotEmpty>
+        </dynamic>
+	</select>	
+	
+	<select id="getProductNetValueById" resultMap="ProductNetValueResult" parameterClass="java.lang.Long">
+					 select NET_VALUE_ID, PRODUCT_CODE ,INSERT_DATE ,YEAR_INCOME_RATIO ,PRODUCT_NET_VALUE ,CUMULATE_NET_VALUE,
+					 CUMULATION_INCOME_RATIO,NET_VALUE_DATE from T_ASSET_PRODUCT_VALUE  tan where NET_VALUE_ID = #value# 		 
+	</select>	
+	
+	<select id="getProductNetValueByCode" resultMap="ProductNetValueResult" parameterClass="java.lang.String">
+					select NET_VALUE_ID, PRODUCT_CODE ,INSERT_DATE , YEAR_INCOME_RATIO ,PRODUCT_NET_VALUE ,CUMULATE_NET_VALUE,
+					 CUMULATION_INCOME_RATIO,NET_VALUE_DATE
+		from T_ASSET_PRODUCT_VALUE  tan  where PRODUCT_CODE = #value# 
+	</select>	
+	
+	<delete id="deleteProductNetValue" parameterClass="java.lang.Long">
+		delete T_ASSET_PRODUCT_VALUE where NET_VALUE_ID = #value# 
+	</delete>
+	
+	<select id="getNetValuesByCodeAndDate" resultMap="ProductNetValueResult" parameterClass="map">
+			 select NET_VALUE_ID, PRODUCT_CODE ,INSERT_DATE ,YEAR_INCOME_RATIO ,PRODUCT_NET_VALUE ,CUMULATE_NET_VALUE,
+		CUMULATION_INCOME_RATIO,NET_VALUE_DATE
+		from T_ASSET_PRODUCT_VALUE  tan  where product_code =#productCode#  and to_char(NET_VALUE_DATE,'yyyy-MM-dd') = #netValueDate#
+	</select>
+	
+	<select id="getMaxProductNetValue" resultClass="java.util.Date">
+	  select max(net_value_date) as net_value_date from T_ASSET_PRODUCT_VALUE
+	</select>
+	
+</sqlMap>

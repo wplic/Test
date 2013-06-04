@@ -1,0 +1,297 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<!-- 注意：如有需要分段的动画，请在MOVIE01这样的标签后标明侦数frames与id,id从"0"开始，依次排下去！-->
+
+  <movie>
+      <STUDY01>
+			<MOVIE01   moviename="开篇"  filename="TESTSTAR" parentName="开篇" >
+                         
+                        </MOVIE01>	
+			 	
+    </STUDY01>
+      <STUDY01>
+			<MOVIE01   moviename="学习目标"  filename="STUDY010100" parentName="学习目标" >
+                         
+                        </MOVIE01>	
+			 	
+    </STUDY01>
+      <STUDY01>
+			<MOVIE01   moviename="摸底前测"  filename="TEST010101"  parentName="摸底前测" >
+                      
+                        </MOVIE01>	
+			 	
+    </STUDY01>
+    <STUDY02>
+			<MOVIE01    moviename="股指期货交易的特点"  filename="STUDY010201"  parentName="股指期货交易的特点"  >
+                             
+                        </MOVIE01>
+			 
+    </STUDY02> 
+    <STUDY02>
+			<MOVIE01    moviename="什么是股指期货"  filename="STUDY010202"  parentName="股指期货交易的特点"  >
+                             
+                        </MOVIE01>
+			 
+    </STUDY02> 
+    <STUDY02>
+			<MOVIE01    moviename="保证金交易(杠杆交易)"  filename="STUDY010203" parentName="股指期货交易的特点" >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="双向操作"  filename="STUDY010204"   parentName="股指期货交易的特点" >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="T+0制度"  filename="STUDY010205"   parentName="股指期货交易的特点"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="到期交割"  filename="STUDY010206"   parentName="股指期货交易的特点"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="股票现货与股指期货交易比较"  filename="STUDY010207"   parentName="股指期货交易的特点"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="小结"  filename="STUDY010208"   parentName="股指期货交易的特点"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="课后练习"  filename="TEST010209"   parentName="股指期货交易的特点"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="沪深300指数介绍"  filename="STUDY010301"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="沪深300指数简介"  filename="STUDY010302"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="沪深300指数选取标准"  filename="STUDY010303"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="沪深300指数的计算"  filename="STUDY010304"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="沪深300指数的行业影响力"  filename="STUDY010305"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ 
+ <STUDY02>
+			<MOVIE01    moviename="沪深指数的调整和修正"  filename="STUDY010306"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="小结"  filename="STUDY010307"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="课后练习"  filename="TEST010308"   parentName="沪深300指数介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="沪深300股指期货合约介绍"  filename="STUDY010401"   parentName="沪深300股指期货合约介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+
+ <STUDY02>
+			<MOVIE01    moviename="合约标的"  filename="STUDY010402"   parentName="沪深300股指期货合约介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="合约乘数与合约价值"  filename="STUDY010403"   parentName="沪深300股指期货合约介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="合约月份"  filename="STUDY010404"   parentName="沪深300股指期货合约介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="交易时间"  filename="STUDY010405"   parentName="沪深300股指期货合约介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="小结"  filename="STUDY010406"   parentName="沪深300股指期货合约介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="课后练习"  filename="TEST010407"   parentName="沪深300股指期货合约介绍"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="沪深300股指期货交易制度"  filename="STUDY010501"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="投资者适当性制度"  filename="STUDY010502"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="保证金制度"  filename="STUDY010503"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="当日无负债结算制度"  filename="STUDY010504"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="强行平仓制度"  filename="STUDY010505"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="涨跌停板制度"  filename="STUDY010509"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>
+ <STUDY02>
+			<MOVIE01    moviename="持仓限额制度"  filename="STUDY010507"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>  
+ <STUDY02>
+			<MOVIE01    moviename="大户持仓报告制度"  filename="STUDY010508"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="强制减仓制度"  filename="STUDY010511"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="现金交割制度"  filename="STUDY010506"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>  
+ <STUDY02>
+			<MOVIE01    moviename="小结"  filename="STUDY010510"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02> 
+ <STUDY02>
+			<MOVIE01    moviename="课后练习"  filename="TEST010511"   parentName="沪深300股指期货交易制度"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>
+ <STUDY02>
+			<MOVIE01    moviename="仿真操作演示"  filename="STUDY010601"  parentName="仿真操作演示"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>    
+ <STUDY02>
+			<MOVIE01    moviename="申请账号"  filename="STUDY010602"  parentName="申请账号"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>   
+ <STUDY02>
+			<MOVIE01    moviename="申请账号"  filename="TEST010601"  parentName="申请账号"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>  
+ <STUDY02>
+			<MOVIE01    moviename="软件下载"  filename="STUDY010603"  parentName="软件下载"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>  
+ <STUDY02>
+			<MOVIE01    moviename="软件下载"  filename="TEST010602"  parentName="软件下载"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>  
+ <STUDY02>
+			<MOVIE01    moviename="如何交易"  filename="STUDY010604"  parentName="如何交易"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>  
+ <STUDY02>
+			<MOVIE01    moviename="如何交易"  filename="TEST010603"  parentName="如何交易"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>    
+  
+ <STUDY02>
+			<MOVIE01    moviename="课后测试"  filename="TEST01"  parentName="课后测试"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>    
+ <STUDY02>
+			<MOVIE01    moviename="鸣谢"  filename="TESTMX"  parentName="鸣谢"  >
+                              
+                        </MOVIE01>
+			 
+    </STUDY02>    
+
+  </movie>

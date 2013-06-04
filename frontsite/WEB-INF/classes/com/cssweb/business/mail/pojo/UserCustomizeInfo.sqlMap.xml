@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.business.mail.pojo.UserCustomizeInfo">
+	<typeAlias alias="UserCustomizeInfo" type="com.cssweb.business.mail.pojo.UserCustomizeInfo" />
+
+	<resultMap id="UserCustomizeInfoMap" class="UserCustomizeInfo">
+		<result property="id" column="ID" javaType="java.lang.Long"/>
+		<result property="userId" column="USER_ID" javaType="java.lang.Long"/>
+		<result property="colId" column="COL_ID" javaType="java.lang.Long"/>		
+	</resultMap>
+	<resultMap id="UserIdMap" class="UserCustomizeInfo">
+		<result property="userId" column="USER_ID" javaType="java.lang.Long"/>	
+	</resultMap>
+	
+<!-- 根据用户编号获取获取用户定制信息列表 -->
+	<select id="getUserCustomizeInfoList" parameterClass="java.lang.Long" resultMap="UserCustomizeInfoMap">
+		select * from USER_CUSTOMIZE_INFO WHERE USER_ID =#userId#
+	</select>
+	
+<!-- 获取已定制了栏目的用户编号列表 -->
+	<select id="getUserIdList" resultMap="UserIdMap">
+		select distinct(USER_ID) from USER_CUSTOMIZE_INFO
+	</select>
+	
+</sqlMap>

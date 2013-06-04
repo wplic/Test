@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GB2312"?>
+<sql>
+<com.css.asset.model.ProductController>
+	<insert truncated = "false" fetchSize = "0">
+		insert into PRODUCT(
+			ID,
+			PRODUCT_NAME,
+			PRODUCT_DETAIL)
+		values(
+			<param type="BIGINT">ID</param>,
+			<param type="VARCHAR">PRODUCT_NAME</param>,
+			<param type="VARCHAR">PRODUCT_DETAIL</param>)
+	</insert>
+	<update truncated = "false" fetchSize = "0">
+		update PRODUCT set
+			PRODUCT_NAME = <param type="VARCHAR">PRODUCT_NAME</param>,
+			PRODUCT_DETAIL = <param type="VARCHAR">PRODUCT_DETAIL</param>
+		where ID = <param type="BIGINT">ID</param>
+	</update>
+	<selectForListProvider truncated = "true" fetchSize = "0">
+		select
+			ID,
+			PRODUCT_NAME,
+			PRODUCT_DETAIL
+		from PRODUCT
+	</selectForListProvider>
+	<selectById truncated = "false" fetchSize = "0">
+		select
+			ID,
+			PRODUCT_NAME,
+			PRODUCT_DETAIL
+		from PRODUCT
+		where
+			ID = <param type="BIGINT">ID</param>
+	</selectById>
+	<delete truncated = "false" fetchSize = "0">
+		delete from PRODUCT
+		where
+			ID = <param type="BIGINT">ID</param>
+	</delete>
+	<selectForArray truncated = "false" fetchSize = "0">
+		select
+			ID,
+			PRODUCT_NAME,
+			PRODUCT_DETAIL
+		from PRODUCT
+	</selectForArray>
+	<selectForArrayWithSql truncated = "false" fetchSize = "0">
+		select
+			ID,
+			PRODUCT_NAME,
+			PRODUCT_DETAIL
+		from PRODUCT 
+		where
+			<param type="TEXT">SQL</param>
+	</selectForArrayWithSql>
+</com.css.asset.model.ProductController>
+</sql>

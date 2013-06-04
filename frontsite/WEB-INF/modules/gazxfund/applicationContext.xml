@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">		
+	<bean name="/fundGsInfoAction" class="com.cssweb.gazxfund.web.FundGsInfoAction"/>
+	<bean name="/fundValueAction" class="com.cssweb.gazxfund.web.FundValueAction"/>
+	<bean name="/fundMoneyValueAction" class="com.cssweb.gazxfund.web.FundMoneyValueAction"/>
+	<bean name="/newFundInfoAction" class="com.cssweb.gazxfund.web.NewFundInfoAction" />
+	<bean name="/fundCutInfoAction" class="com.cssweb.gazxfund.web.FundCutInfoAction"></bean>
+	<bean name="/fundSplitInfoAction" class="com.cssweb.gazxfund.web.FundSplitInfoAction"></bean>
+	<bean name="/fundStopDealAction" class="com.cssweb.gazxfund.web.FundStopDealAction"></bean>
+	<bean name="/fundInfoAction" class="com.cssweb.gazxfund.web.FundInfoAction"></bean>
+	<bean name="/fundAbateFareAction" class="com.cssweb.gazxfund.web.FundAbateFareAction" ></bean>
+	<bean name="/fundFilterAction" class="com.cssweb.gazxfund.web.FundFilterAction" ></bean>
+	<bean name="/fundAIPAction" class="com.cssweb.gazxfund.web.FundAIPAction"></bean>
+	<bean name="/jsStockAction" class="com.cssweb.gazxfund.web.JsStockAction"></bean>
+</beans>

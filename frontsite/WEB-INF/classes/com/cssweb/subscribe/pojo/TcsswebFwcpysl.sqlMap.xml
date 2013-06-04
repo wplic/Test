@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebFwcpysl">
+<typeAlias alias="TcsswebFwcpysl" type="com.cssweb.subscribe.pojo.TcsswebFwcpysl"/>
+	<resultMap id="TcsswebFwcpysl" class="TcsswebFwcpysl">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="account" column="ACCOUNT" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productIdApplyfor" column="PRODUCT_ID_APPLYFOR" jdbcType="java.lang.Long"/>
+	    <result property="productIdOriginal" column="PRODUCT_ID_ORIGINAL" jdbcType="java.lang.Long"/>
+	    <result property="dzqyjl" column="DZQYJL" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="dzhyjl" column="DZHYJL" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="lxdh" column="LXDH" jdbcType="java.lang.Long"/>
+	    <result property="jkqd" column="JKQD" jdbcType="java.lang.Long"/>
+	    <result property="dzrq" column="DZRQ" jdbcType="java.lang.Long"/>
+	    <result property="czr" column="CZR" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="czrq" column="CZRQ" jdbcType="java.lang.Long"/>
+	    <result property="prodip" column="PRODIP" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="sqzt" column="SQZT" jdbcType="java.lang.Long"/>
+	    <result property="sqjg" column="SQJG" jdbcType="java.lang.Long"/>
+	    <result property="msg" column="MSG" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="synstat" column="SYNSTAT" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="newdate" column="NEWDATE" jdbcType="Date"/>
+	</resultMap>
+	<insert id="insertTcsswebFwcpysl" parameterClass="TcsswebFwcpysl">
+		INSERT into T_CSSWEB_FWCPYSL ( ID, ACCOUNT, PRODUCT_ID_APPLYFOR, PRODUCT_ID_ORIGINAL, DZQYJL,DZHYJL,LXDH,JKQD,DZRQ,CZR,CZRQ,PRODIP,SQZT,SQJG,MSG,SYNSTAT) VALUES 
+		(#id#,#account#,#productIdApplyfor#, #productIdOriginal#, #dzqyjl#,#dzhyjl#,#lxdh#,#jkqd#, #dzrq#, #czr#,#czrq#,#prodip#, #sqzt#, #sqjg#,#msg#,#synstat#)
+	</insert>
+	<update id="upTcsswebFwcpysl" parameterClass="TcsswebFwcpysl">
+		update T_CSSWEB_FWCPYSL set SQZT=#sqzt#,SQJG=#sqjg#,PRODIP=#prodip#,NEWDATE=sysdate where ID=#id#
+	</update>
+	<select id="getAllTcsswebFwcpyslByAccount" parameterClass="java.util.Map"  resultMap="TcsswebFwcpysl">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT * FROM T_CSSWEB_FWCPYSL WHERE ACCOUNT = #account# ORDER BY DZRQ DESC,NEWDATE DESC
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	<select id="getAllTcsswebFwcpyslByAccountCount" parameterClass="java.util.Map"  resultClass="java.lang.Integer">
+		SELECT count(*) FROM T_CSSWEB_FWCPYSL WHERE ACCOUNT = #account# 
+	</select>
+	<select id="getTcsswebFwcpyslById" parameterClass="java.util.Map"  resultMap="TcsswebFwcpysl">
+		SELECT * FROM T_CSSWEB_FWCPYSL WHERE ID = #id# 
+	</select>
+	<select id="getFwcpyslByAccount" parameterClass="java.util.Map"  resultMap="TcsswebFwcpysl">
+		SELECT * FROM T_CSSWEB_FWCPYSL WHERE ACCOUNT = #account# AND SQZT in ('1','2','3') ORDER BY DZRQ DESC,NEWDATE DESC
+	</select>
+	
+	<resultMap id="TcsswebFwcpysldh" class="TcsswebFwcpysl">
+	    <result property="lxdh" column="LXDH" jdbcType="java.lang.Long"/>
+	</resultMap>
+	<select id="getDhFwcpyslByAccount" parameterClass="java.util.Map"  resultMap="TcsswebFwcpysldh">
+		SELECT distinct(LXDH) FROM T_CSSWEB_FWCPYSL WHERE ACCOUNT = #account# 
+	</select>
+</sqlMap>

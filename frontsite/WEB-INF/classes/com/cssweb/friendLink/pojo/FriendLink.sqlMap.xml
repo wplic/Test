@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.friendLink.pojo.FriendLink">
+
+	<typeAlias alias="FriendLink" type="com.cssweb.friendLink.pojo.FriendLink"/>
+
+	<!--result map-->
+	<resultMap id="friendLinkMap" class="FriendLink">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="linkName" column="LINK_NAME" jdbcType="String"/>
+ 		<result property="linkURL" column="LINK_URL" jdbcType="String"/>
+ 		<result property="orderNum" column="ORDER_NUM" jdbcType="Integer"/>
+ 		<result property="isShow" column="IS_SHOW" jdbcType="Integer"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+
+  <insert id="insert" parameterClass="FriendLink">
+    insert into FRIEND_LINK (ID,LINK_NAME,LINK_URL,ORDER_NUM,IS_SHOW,EXT1,EXT2,EXT3,EXT4)
+    	values (#id#,#linkName#,#linkURL#,#orderNum#,#isShow#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+
+  <update id="update" parameterClass="FriendLink">
+    update FRIEND_LINK 
+    	set LINK_NAME=#linkName#,LINK_URL=#linkURL#,ORDER_NUM=#orderNum#,
+    		IS_SHOW=#isShow#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+     where ID = #id#
+  </update>
+  
+  <select id="getById" parameterClass="Long" resultMap = "friendLinkMap">
+    select * from FRIEND_LINK where id=#value#
+  </select>
+  
+  <delete id="deleteById" parameterClass="Long">
+    delete FRIEND_LINK where id=#value#
+  </delete>
+  
+  <delete id="deleteByIds" parameterClass="String">
+    delete FRIEND_LINK where ID in ($value$)
+  </delete>
+  
+  <update id="changeOrderNumByThisOrderNum" parameterClass="Integer">
+     update FRIEND_LINK set ORDER_NUM=ORDER_NUM+1 where ORDER_NUM &gt;=#value#
+  </update>
+
+  <update id="changeOrderNumByOldBiggerNew" parameterClass="java.util.Map">
+     update FRIEND_LINK set ORDER_NUM=ORDER_NUM+1 where ORDER_NUM &gt;=#newOrderNum# and ORDER_NUM &lt;#oldOrderNum#
+  </update>
+  <update id="changeOrderNumByNewBiggerOld" parameterClass="java.util.Map">
+     update FRIEND_LINK set ORDER_NUM=ORDER_NUM-1 where ORDER_NUM &gt;#oldOrderNum# and ORDER_NUM &lt;=#newOrderNum#
+  </update>
+  
+  <select id="getByPagingMap" parameterClass="java.util.Map" resultMap = "friendLinkMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getAllShowFriendLink" resultMap = "friendLinkMap">
+    select * from FRIEND_LINK where IS_SHOW=1 order by ORDER_NUM
+  </select>
+  
+  <select id="getAllCount" resultClass = "Integer">
+    select count(*) from FRIEND_LINK
+  </select>
+  
+</sqlMap>

@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+       
+<struts-config>
+
+	<!-- ========== Form Bean Definitions =================================== -->
+	<form-beans>
+		
+		<form-bean name="CreateDictionaryCategoryForm" type="com.css.dictionary.action.DictionaryCategoryForm"/>
+		<form-bean name="ModifyDictionaryCategoryForm" type="com.css.dictionary.action.DictionaryCategoryForm"/>
+
+		<form-bean name="CreateDictionaryItemForm" type="com.css.dictionary.action.DictionaryItemForm"/>
+		<form-bean name="ModifyDictionaryItemForm" type="com.css.dictionary.action.DictionaryItemForm"/>
+
+	</form-beans>
+
+	<!-- ========== Action Mapping Definitions ============================== -->
+	<action-mappings>
+		
+		<!-- 新增一个数据字典分类 -->
+		<action   path="/createDictionaryCategoryAction"
+				  type="com.css.dictionary.action.CreateDictionaryCategory"
+				  name="CreateDictionaryCategoryForm"
+				  scope="request"
+				  input="/admin/dictionary/CreateDictionaryCategory.jsp"
+				  validate="true">
+			
+			<forward name="createDictionaryCategorySuccess" redirect="true" path="/admin/share/JumpWithMessage.jsp?url=/admin/dictionary/CreateDictionaryCategory.jsp"/>
+
+		</action>
+
+		<!-- 修改一个数据字典分类 -->
+		<action   path="/modifyDictionaryCategoryAction"
+				  type="com.css.dictionary.action.ModifyDictionaryCategory"
+				  name="ModifyDictionaryCategoryForm"
+				  scope="request"
+				  input="/admin/dictionary/ModifyDictionaryCategory.jsp"
+				  validate="true">	
+			<!--forward name="modifyDictionaryCategorySuccess" redirect="true" path="/normal/jsp/dictionary/DictionaryTypeList.jsp"/-->
+			<forward name="modifyDictionaryCategorySuccess" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="nextUrl" path="/admin/dictionary/DictionaryTypeList.jsp" />
+		</action>
+		
+		<!-- 删除一组数据字典分类 -->
+		<action   path="/deleteDictionaryCategorys"
+				  type="com.css.dictionary.action.DeleteDictionaryCategorys"
+				  input="/admin/dictionary/DictionaryTypeList.jsp">
+				<forward name="deleteDictionaryCategorysSuccess" path="/admin/dictionary/DictionaryTypeList.jsp"/>
+		</action>
+		<!-- 注销一组数据字典分类 -->
+		<action   path="/trashDictionaryCategorys"
+				  type="com.css.dictionary.action.TrashDictionaryCategorys"
+				  input="/admin/dictionary/DictionaryTypeList.jsp">
+				<forward name="trashDictionaryCategorysSuccess" path="/admin/dictionary/DictionaryTypeList.jsp?listType=trash"/>
+		</action>
+		<!-- 恢复注销一组数据字典分类 -->
+		<action   path="/restoreDictionaryCategorys"
+				  type="com.css.dictionary.action.RestoreDictionaryCategorys"
+				  input="/admin/dictionary/DictionaryTypeList.jsp">
+				<forward name="restoreDictionaryCategorysSuccess" path="/admin/dictionary/DictionaryTypeList.jsp"/>
+		</action>    
+		
+		<!-- 新增一个数据字典信息 -->
+		<action   path="/createDictionaryItemAction"
+				  type="com.css.dictionary.action.CreateDictionaryItem"
+				  name="CreateDictionaryItemForm"
+				  scope="request"
+				  input="/admin/dictionary/CreateDictionaryItem.jsp"
+				  validate="true">
+				<forward name="createDictionaryItemSuccess" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+				<forward name="treeUrl" path="/admin/dictionary/DictionaryTree.jsp"/>
+				<forward name="nextUrl" path="/admin/dictionary/CreateDictionaryItem.jsp"/>
+		</action>
+		<!-- 修改一个数据字典信息 -->
+		<action   path="/modifyDictionaryItemAction"
+				  type="com.css.dictionary.action.ModifyDictionaryItem"
+				  name="ModifyDictionaryItemForm"
+				  scope="request"
+				  input="/admin/dictionary/ModifyDictionaryItem.jsp"
+				  validate="true">
+				<forward name="modifyDictionaryItemSuccess" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+				<forward name="treeUrl" path="/admin/dictionary/DictionaryTree.jsp"/>
+				<forward name="nextUrl" redirect="true" path="/admin/dictionary/DictionaryListRight.jsp"/>
+		</action>
+		<!-- 删除一组数据字典信息 -->
+		<action   path="/deleteDictionaryItems"
+				  type="com.css.dictionary.action.DeleteDictionaryItems"
+				  input="/admin/dictionary/DictionaryListRight.jsp">
+				<forward name="deleteDictionaryItemsSuccess" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+				<forward name="treeUrl" path="/admin/dictionary/DictionaryTree.jsp"/>
+				<forward name="nextUrl" path="/admin/dictionary/DictionaryListRight.jsp"/>
+		</action>
+		<!-- 注销一组数据字典信息 -->
+		<action   path="/trashDictionaryItems"
+				  type="com.css.dictionary.action.TrashDictionaryItems"
+				  input="/admin/dictionary/DictionaryListRight.jsp">
+				<forward name="trashDictionaryItemsSuccess" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+				<forward name="treeUrl" path="/admin/dictionary/DictionaryTree.jsp"/>
+				<forward name="nextUrl" path="/admin/dictionary/DictionaryListRight.jsp"/>
+		</action>
+		<!-- 恢复一组数据字典信息 -->
+		<action   path="/restoreDictionaryItems"
+				  type="com.css.dictionary.action.RestoreDictionaryItems"
+				  input="/admin/dictionary/DictionaryListRight.jsp">
+				<forward name="restoreDictionaryItemsSuccess" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+				<forward name="treeUrl" path="/admin/dictionary/DictionaryTree.jsp"/>
+				<forward name="nextUrl" path="/admin/dictionary/DictionaryListRight.jsp"/>
+		</action>
+	</action-mappings>
+
+	<message-resources parameter="ApplicationResources"/>
+
+</struts-config>

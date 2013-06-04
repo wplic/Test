@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.StockInfo">
+    <typeAlias alias="stockInfo" type="com.cssweb.F10.gazx.stock.pojo.StockInfo"/>
+    <!--result map-->
+    <resultMap id="stockInfoMap" class="stockInfo">
+        <result column="T_GPZB_ID" property="stockId" jdbcType="Long" nullValue=""/>
+        <result column="GPDM" property="stockCode" jdbcType="String" nullValue=""/>
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long" nullValue=""/>
+        <result column="GPJC" property="stockShortName" jdbcType="String" nullValue=""/>
+        <result column="GPLB" property="stockType" jdbcType="String" nullValue=""/>
+        <result column="GPJCPY" property="stockShortPY" jdbcType="String" nullValue=""/>
+        <result column="GSMC" property="companyName" jdbcType="String" nullValue=""/>
+    </resultMap> 
+    
+     <resultMap id="stockInfoMap1" class="stockInfo">
+        <result column="T_GPZB_ID" property="stockId" jdbcType="Long" nullValue=""/>
+        <result column="GPDM" property="stockCode" jdbcType="String" nullValue=""/>
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long" nullValue=""/>
+        <result column="GPJC" property="stockShortName" jdbcType="String" nullValue=""/>
+        <result column="GPLB" property="stockType" jdbcType="String" nullValue=""/>
+        <result column="GPJCPY" property="stockShortPY" jdbcType="String" nullValue=""/>
+    </resultMap> 
+    <!-- 根据不同传入不同条件返回StockInfo对象 -->
+    <select id="getStockInfo" parameterClass="map" resultMap="stockInfoMap" >    
+	     SELECT
+				gp.T_GPZB_ID,
+				gp.GPDM,
+				gp.T_GSZB_ID,
+				gp.GPJC,
+				gp.GPLB,
+				gp.GPJCPY,
+				gs.GSMC
+		FROM  GPZB gp,gszb gs
+			  where gp.scbz='0' and gp.gkbz='1'and gs.scbz='0'and gs.gkbz='1' and gp.T_GSZB_ID=gs.T_GSZB_ID
+				<isNotNull prepend="and" property="stockId">
+					gp.T_GPZB_ID = #stockId#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockCode">
+					gp.GPDM = #stockCode#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockShortName">
+					gp.GPJC = #stockShortName#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockShortPY">
+					gp.GPJCPY = #stockShortPY#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockType">
+					gp.GPLB = #stockType#
+				</isNotNull>
+	</select>
+	
+	
+	 <!-- 根据不同传入不同条件返回StockInfo对象 -->
+    <select id="getStockInfo1" parameterClass="map" resultMap="stockInfoMap1" >    
+	     SELECT
+				gp.T_GPZB_ID,
+				gp.GPDM,
+				gp.T_GSZB_ID,
+				gp.GPJC,
+				gp.GPLB,
+				gp.GPJCPY
+				
+		FROM  GPZB gp
+			  where gp.scbz='0' and gp.gkbz='1'
+				<isNotNull prepend="and" property="stockId">
+					gp.T_GPZB_ID = #stockId#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockCode">
+					gp.GPDM = #stockCode#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockShortName">
+					gp.GPJC = #stockShortName#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockShortPY">
+					gp.GPJCPY = #stockShortPY#
+				</isNotNull>
+				<isNotNull prepend="and" property="stockType">
+					gp.GPLB = #stockType#
+				</isNotNull>
+	</select>
+    <!-- 根据股票代码查询返回上市公司的ID -->
+	<select id="getCompanyIdByStockCode" parameterClass="java.lang.String" resultClass="long">    
+	     SELECT
+				T_GSZB_ID
+		FROM
+			 GPZB
+		WHERE
+		    GPDM=#stockCode#
+	</select> 
+	 <!-- 根据股票代码查询返回股票ID -->
+	<select id="getStockIdByStockCode" parameterClass="java.lang.String" resultClass="long">    
+	     SELECT
+				T_GPZB_ID
+		FROM
+			 GPZB
+		WHERE
+		    GPDM=#stockCode#
+	</select>   
+	
+	<select id="pageQuery" resultMap="stockInfoMap" parameterClass="map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				 SELECT
+					gp.T_GPZB_ID,
+					gp.GPDM,
+					gp.T_GSZB_ID,
+					gp.GPJC,
+					gp.GPLB,
+					gp.GPJCPY,
+					rownum as GSMC
+				FROM  GPZB gp
+					  where gp.scbz='0' and gp.gkbz='1'
+			<dynamic>
+				<isNotNull prepend="and" property="stockCode">
+					gp.GPDM  like '$stockCode$%'
+				</isNotNull>
+				<isNotNull prepend="and" property="stockSpell">
+					gp.GPJCPY like '$stockSpell$%'
+				</isNotNull>
+				<isNotNull prepend="and" property="stockName">
+					gp.GPJC like '$stockName$%'
+				</isNotNull>
+			</dynamic>
+			order by gp.GPDM 
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>  
+	
+	<select id="getWarranById" parameterClass="map" resultClass="long">
+		select QZDM,QZJC from QZZB where scbz='0' and gkbz='1' and T_QZZB_ID=#id#
+	</select>
+	
+	
+	<resultMap id="stockInfoMapTzzjy" class="stockInfo">
+        <result column="T_GPZB_ID" property="stockId" jdbcType="Long" nullValue=""/>
+        <result column="GPDM" property="stockCode" jdbcType="String" nullValue=""/>
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long" nullValue=""/>
+        <result column="GPJC" property="stockShortName" jdbcType="String" nullValue=""/>
+        <result column="GPLB" property="stockType" jdbcType="String" nullValue=""/>
+        <result column="GPJCPY" property="stockShortPY" jdbcType="String" nullValue=""/>
+        <result column="FPND" property="fpnd" jdbcType="Date"/>
+        <result column="SFFP" property="sffp" jdbcType="String" nullValue=""/>
+        <result column="JZSM" property="jzsm" jdbcType="String" nullValue=""/>
+        <result column="YAGBR" property="yagbr" jdbcType="Date"/>
+        <result column="GDDHSYR" property="gddhsyr" jdbcType="Date"/>
+        <result column="SZGZBL" property="szgzbl" jdbcType="String" nullValue=""/>
+         <result column="SQPXBL" property="sqpxbl"  jdbcType="String" nullValue=""/>
+         <result column="SHGBL" property="shgbl"  jdbcType="String" nullValue=""/>
+          <result column="ZZGBL" property="zzgbl"  jdbcType="String" nullValue=""/>
+        <result column="BZ" property="bz" jdbcType="String" nullValue=""/>
+    </resultMap>
+    <select id="getStockInfoMapTzzjy" parameterClass="java.util.Map" resultMap="stockInfoMapTzzjy">    
+		SELECT row_.*, ROWNUM rownum_ FROM (
+		SELECT gp.T_GPZB_ID,gp.GPDM,gp.T_GSZB_ID,gp.GPJC,gp.GPLB,gp.GPJCPY,f.FPND, f.SFFP,f.JZSM,f.YAGBR,f.GDDHSYR,f.BZ,decode(f.SQPXBL,null,null,#sqpxbl#||f.SQPXBL) SQPXBL,decode(f.SHGBL,null,null,#shgbl#||f.SHGBL) SHGBL,decode(f.ZZGBL,null,null,#zzgbl#||f.ZZGBL) ZZGBL,decode(f.SZGZBL,null,null,#szgzbl#||f.SZGZBL) SZGZBL
+			FROM  GPZB gp ,FHKG f
+			 where gp.scbz='0' and gp.gkbz='1'and  gp.T_GSZB_ID=f.T_GSZB_ID
+						<isNotNull prepend="and" property="stockId">
+							gp.T_GPZB_ID = #stockId#
+						</isNotNull>
+						<isNotNull prepend="and" property="sffp">
+							f.SFFP = #sffp#
+						</isNotNull>
+						<isNotNull prepend="and" property="stockCode">
+							gp.GPDM = #stockCode#
+						</isNotNull>
+						<isNotNull prepend="and" property="stockShortName">
+							gp.GPJC = #stockShortName#
+						</isNotNull>
+						<isNotNull prepend="and" property="stockShortPY">
+							gp.GPJCPY = #stockShortPY#
+						</isNotNull>
+						<isNotNull prepend="and" property="stockType">
+							gp.GPLB = #stockType#
+						</isNotNull>
+						<isNotNull prepend="and" property="fpnd">
+							to_char(f.FPND,'yyyy-MM-dd') &gt; #fpnd#
+						</isNotNull>
+						order by f.FPND desc ) row_ WHERE ROWNUM &lt;= 5
+	</select>
+</sqlMap>	

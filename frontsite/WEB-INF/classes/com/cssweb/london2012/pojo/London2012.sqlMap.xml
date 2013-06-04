@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.london2012.pojo.London2012">
+				 
+	<typeAlias alias="London2012" type="com.cssweb.london2012.pojo.London2012"/>
+								
+	<!--result map-->
+	
+	<resultMap id="London2012" class="London2012">
+		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="custName" column="CUSTNAME" jdbcType="String"/>
+ 		<result property="phone" column="PHONE" jdbcType="String"/>
+ 		<result property="isNotGf" column="IS_NOT_GF" jdbcType="String" />
+ 		<result property="intoDate" column="INTODATE" jdbcType="Date" />
+ 		
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="London2012">
+		<![CDATA[
+		 insert into LONDON2012(ID,CUSTNAME,PHONE,IS_NOT_GF,INTODATE)
+		 	 values(#id#,#custName#,#phone#,#isNotGf#,sysdate)
+		]]>
+	</insert>
+   
+</sqlMap>

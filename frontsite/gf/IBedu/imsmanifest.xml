@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This is a Reload version 2.5.5 SCORM 1.2 Content Package document-->
+<!--Spawned from the Reload Content Package Generator - http://www.reload.ac.uk-->
+<manifest xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:imsmd="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" identifier="MANIFEST-66296D15DC133D350550BDC816779C63" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <organizations default="ORG-B1781D85FF11EC1290C2596F058DF7F5">
+    <organization identifier="ORG-B1781D85FF11EC1290C2596F058DF7F5" structure="hierarchical">
+      <title>广发证券 - 股指期货基础知识</title>
+      <item identifier="ITEM-22A4B23E26B1071CC20F70D634952535" identifierref="RES-444144672D44F16D29472FF788DA0C54">
+        <title>学习目标</title>
+      </item>
+      <item identifier="ITEM-8D5B2CED1AF8B0EF73CF5DC4CFAD694F" identifierref="RES-DB3063DC22868C158B43DE4FB7E51976">
+        <title>课前测试</title>
+      </item>
+      <item identifier="ITEM-002F63218BE18B756D12F67497809914" isvisible="true">
+        <title>股指期货交易的特点</title>
+        <item identifier="ITEM-A699F41C8C5220BE7C6AFAC3A0641A5E" identifierref="RES-C3E59B3437705059C6E968D5A0387359">
+          <title>什么是股指期货</title>
+        </item>
+        <item identifier="ITEM-D59F35EF041B12300B86AFB2AA9012BF" identifierref="RES-33D0B0474E239A0F580F929E5C6ECC6C">
+          <title>保证金交易</title>
+        </item>
+        <item identifier="ITEM-2DF9DF2515E0DC65621D026C65DE1646" identifierref="RES-CCE7F01DE30858E54F63105830D6E534">
+          <title>双向操作</title>
+        </item>
+        <item identifier="ITEM-0830A875A88BE2445966345DB522C37D" identifierref="RES-152A515844B6938CE908D871A863C6F8">
+          <title>T+0交易制度</title>
+        </item>
+        <item identifier="ITEM-889FE726D55B5EB95922A32DBB208572" identifierref="RES-B45809F7B03D9068364ED321C11B02C2">
+          <title>到期交割</title>
+        </item>
+        <item identifier="ITEM-64A16DC743715BF076540A05878F58D2" identifierref="RES-7A6676BCEA872E0F75B43737B35455F0">
+          <title>期货交易的其他特点</title>
+        </item>
+        <item identifier="ITEM-9FC829EDDD183F6F1027F0C06922C663" identifierref="RES-51724B071254DB05C74FEC66B2C785D9">
+          <title>小结</title>
+        </item>
+        <item identifier="ITEM-4C94B8F00392CB884B1B143B36EC8011" identifierref="RES-061B95ACED088EF34A4A45084A278615">
+          <title>课后练习</title>
+        </item>
+      </item>
+      <item identifier="ITEM-B165C80BCBEF4F977F463012CAA784C7" isvisible="true">
+        <title>沪深300指数介绍</title>
+        <item identifier="ITEM-D38F45758CDC7969C191FAAD9F477143" identifierref="RES-D64CAE07A27258FA18F400F134AB1630">
+          <title>沪深300指数简介</title>
+        </item>
+        <item identifier="ITEM-698D73E34CB3663AA3D5FB5F8CA7034D" identifierref="RES-2AA5F8E00A38CFEF00022BC2AAFC9B99">
+          <title>沪深300指数选取标准</title>
+        </item>
+        <item identifier="ITEM-538E138DF98775387A5BD1E39E25C315" identifierref="RES-ADF6B98641FBB2E63343063C7AA841B1">
+          <title>沪深300指数的计算方法</title>
+        </item>
+        <item identifier="ITEM-8206BAA45C844B803D39808BA232B778" identifierref="RES-B7992ACDD3A2D10CB3712A5D5A3DF326">
+          <title>沪深300指数的行业影响力</title>
+        </item>
+        <item identifier="ITEM-2651F64846E081B3336D06E6C0781A11" identifierref="RES-04540B8523E10FB4B82C40BFD18007EF">
+          <title>沪深指数的调整和修正</title>
+        </item>
+        <item identifier="ITEM-D67D34CF3BE7D0E831B62CE0E58F93AB" identifierref="RES-4B32ED2BEEF9C20E5250BD6C74357BAF">
+          <title>小结</title>
+        </item>
+        <item identifier="ITEM-516125BE1D1A2994F4E829EC9E14B959" identifierref="RES-F9D827A0DC11728027FD41FF81135DE2">
+          <title>课后练习</title>
+        </item>
+      </item>
+      <item identifier="ITEM-2CE83F447DEB337D77F8A463A9570576" isvisible="true">
+        <title>沪深300股票指数期货合约要素介绍</title>
+        <item identifier="ITEM-B177797E23117D2707693E7A4FE3870D" identifierref="RES-7E6EBF359BC5205A012C6541F5199967">
+          <title>合约标的</title>
+        </item>
+        <item identifier="ITEM-36B9B61B88DF3E995DC89771E3C82955" identifierref="RES-1BF8680FB03E938837C11FEDEEFF3822">
+          <title>合约价值</title>
+        </item>
+        <item identifier="ITEM-4F1FA5D92727DD86F4DB25639D9AE2FE" identifierref="RES-B9DA515EC21896F6EDB71F4613309FF5">
+          <title>合约月份</title>
+        </item>
+        <item identifier="ITEM-1DBAE59EFFB0749E7FF0535BF405668B" identifierref="RES-AA4ED711F134197504DEA22E0EA7F2C7">
+          <title>交易时间</title>
+        </item>
+        <item identifier="ITEM-C8317872C4E4ADAB48B943A6D5DC9727" identifierref="RES-6A8C197DA84A9C91112E2D096269E2EA">
+          <title>小结</title>
+        </item>
+        <item identifier="ITEM-0327709D26A4A71A77B715CC072C1D2D" identifierref="RES-19D626286AE62A2DE891E4DAD628E68E">
+          <title>课后练习</title>
+        </item>
+      </item>
+      <item identifier="ITEM-B142410E64DE46F64EBECD4D59B093DE" isvisible="true">
+        <title>股指期货交易制度</title>
+        <item identifier="ITEM-58A214736A741AF75D3CFA9BB023DD77" identifierref="RES-8CE6D66784006AFC06EA60C8009AC3A6">
+          <title>投资者适当性制度</title>
+        </item>
+        <item identifier="ITEM-293DF4AD7674628707E68F28B78C2ECE" identifierref="RES-FF483DCAE1185F0E7B3D3B288083EB2E">
+          <title>保证金制度</title>
+        </item>
+        <item identifier="ITEM-814BC6B319EA070AD6D0896EDF15FE5F" identifierref="RES-7ED3C9036C68C6422D51FA3AB62AB74E">
+          <title>当日无负债结算制度</title>
+        </item>
+        <item identifier="ITEM-12F536AF2CFDB582DD2C4F8AE58D2F1B" identifierref="RES-90037BA08EA55B8B7159645C19EA64AF">
+          <title>强行平仓制度</title>
+        </item>
+        <item identifier="ITEM-D0CBB7779DE1038F641C917CE7A7F575" identifierref="RES-1CB0E549E15EC2314862E9987432B2F8">
+          <title>涨跌停板制度</title>
+        </item>
+        <item identifier="ITEM-BC10FA75E9E8FBBA873EEB52CCC961AE" identifierref="RES-0D4A9D0B28162FB54BE6295C59FB883E">
+          <title>持仓限额制度</title>
+        </item>
+        <item identifier="ITEM-BCE34ADAD977BEE8C0013C971982CF24" identifierref="RES-79ADF783DBF187BB1DD2AADB5D5A5C58">
+          <title>大户持仓报告制度</title>
+        </item>
+        <item identifier="ITEM-89C1E00D5F5A68A3E96A147D237187BD" identifierref="RES-0523C6D44E9D5B4CFE81384AB2EBED14">
+          <title>强制减仓制度</title>
+        </item>
+        <item identifier="ITEM-A99515A0C93D2952DCB571C6A4604371" identifierref="RES-DC24667BF39DFECD87D5DBD13E42C246">
+          <title>现金交割制度</title>
+        </item>
+        <item identifier="ITEM-63DE084BDA78E1E6314824F313DAFEDF" identifierref="RES-489005F82669762CDE668B949F8FD237">
+          <title>小结</title>
+        </item>
+        <item identifier="ITEM-25431C72C093E8FF5E2CC30F0AE8B2FF" identifierref="RES-A6CAA901CC094C818EE96ED59B796BBB">
+          <title>课后练习</title>
+        </item>
+      </item>
+      <item identifier="ITEM-2E383EC738ACF69034A0333D47B6F047" isvisible="true">
+        <title>仿真操作演示</title>
+        <item identifier="ITEM-85F29C67629EDCBABDFB00F56DB7DA41" identifierref="RES-24F7E6932F4F0F272B502CC7CF23F887">
+          <title>开篇</title>
+        </item>
+        <item identifier="ITEM-36F087D03D13EECE296861BAD46D4EEC" identifierref="RES-BDB738E6807B2E78A1CF0DA019DB8A31">
+          <title>申请账号</title>
+        </item>
+        <item identifier="ITEM-77594E2A86E080334C12176488C48523" identifierref="RES-4E8ACEDDDBF1FB069AFEA09C182216B3">
+          <title>软件下载</title>
+        </item>
+        <item identifier="ITEM-6901F6A659CB2EF3A19819F477BBE832" identifierref="RES-2B4400CF959B87FAA55062BF0B3A8262" isvisible="true">
+          <title>如何交易</title>
+        </item>
+      </item>
+      <item identifier="ITEM-FC24FDCB46B54D7ADAEF68829EC91939" identifierref="RES-325CB58A233EFDC23D5734A6ED218FA1">
+        <title>课后测试</title>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource href="STUDY010100.html" identifier="RES-444144672D44F16D29472FF788DA0C54" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010100.html" />
+    </resource>
+    <resource href="TEST010101.html" identifier="RES-DB3063DC22868C158B43DE4FB7E51976" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010101.html" />
+    </resource>
+    <resource href="STUDY010202.html" identifier="RES-C3E59B3437705059C6E968D5A0387359" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010202.html" />
+    </resource>
+    <resource href="STUDY010203.html" identifier="RES-33D0B0474E239A0F580F929E5C6ECC6C" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010203.html" />
+    </resource>
+    <resource href="STUDY010204.html" identifier="RES-CCE7F01DE30858E54F63105830D6E534" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010204.html" />
+    </resource>
+    <resource href="STUDY010205.html" identifier="RES-152A515844B6938CE908D871A863C6F8" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010205.html" />
+    </resource>
+    <resource href="STUDY010206.html" identifier="RES-B45809F7B03D9068364ED321C11B02C2" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010206.html" />
+    </resource>
+    <resource href="STUDY010207.html" identifier="RES-7A6676BCEA872E0F75B43737B35455F0" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010207.html" />
+    </resource>
+    <resource href="STUDY010208.html" identifier="RES-51724B071254DB05C74FEC66B2C785D9" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010208.html" />
+    </resource>
+    <resource href="TEST010209.html" identifier="RES-061B95ACED088EF34A4A45084A278615" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010209.html" />
+    </resource>
+    <resource href="STUDY010302.html" identifier="RES-D64CAE07A27258FA18F400F134AB1630" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010302.html" />
+    </resource>
+    <resource href="STUDY010303.html" identifier="RES-2AA5F8E00A38CFEF00022BC2AAFC9B99" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010303.html" />
+    </resource>
+    <resource href="STUDY010304.html" identifier="RES-ADF6B98641FBB2E63343063C7AA841B1" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010304.html" />
+    </resource>
+    <resource href="STUDY010305.html" identifier="RES-B7992ACDD3A2D10CB3712A5D5A3DF326" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010305.html" />
+    </resource>
+    <resource href="STUDY010306.html" identifier="RES-04540B8523E10FB4B82C40BFD18007EF" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010306.html" />
+    </resource>
+    <resource href="STUDY010307.html" identifier="RES-4B32ED2BEEF9C20E5250BD6C74357BAF" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010307.html" />
+    </resource>
+    <resource href="TEST010308.html" identifier="RES-F9D827A0DC11728027FD41FF81135DE2" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010308.html" />
+    </resource>
+    <resource href="STUDY010402.html" identifier="RES-7E6EBF359BC5205A012C6541F5199967" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010402.html" />
+    </resource>
+    <resource href="STUDY010403.html" identifier="RES-1BF8680FB03E938837C11FEDEEFF3822" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010403.html" />
+    </resource>
+    <resource href="STUDY010404.html" identifier="RES-B9DA515EC21896F6EDB71F4613309FF5" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010404.html" />
+    </resource>
+    <resource href="STUDY010405.html" identifier="RES-AA4ED711F134197504DEA22E0EA7F2C7" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010405.html" />
+    </resource>
+    <resource href="STUDY010406.html" identifier="RES-6A8C197DA84A9C91112E2D096269E2EA" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010406.html" />
+    </resource>
+    <resource href="TEST010407.html" identifier="RES-19D626286AE62A2DE891E4DAD628E68E" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010407.html" />
+    </resource>
+    <resource href="STUDY010502.html" identifier="RES-8CE6D66784006AFC06EA60C8009AC3A6" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010502.html" />
+    </resource>
+    <resource href="STUDY010503.html" identifier="RES-FF483DCAE1185F0E7B3D3B288083EB2E" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010503.html" />
+    </resource>
+    <resource href="STUDY010504.html" identifier="RES-7ED3C9036C68C6422D51FA3AB62AB74E" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010504.html" />
+    </resource>
+    <resource href="STUDY010505.html" identifier="RES-90037BA08EA55B8B7159645C19EA64AF" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010505.html" />
+    </resource>
+    <resource href="STUDY010506.html" identifier="RES-DC24667BF39DFECD87D5DBD13E42C246" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010506.html" />
+    </resource>
+    <resource href="STUDY010507.html" identifier="RES-0D4A9D0B28162FB54BE6295C59FB883E" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010507.html" />
+    </resource>
+    <resource href="STUDY010508.html" identifier="RES-79ADF783DBF187BB1DD2AADB5D5A5C58" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010508.html" />
+    </resource>
+    <resource href="STUDY010511.html" identifier="RES-0523C6D44E9D5B4CFE81384AB2EBED14" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010511.html" />
+    </resource>
+    <resource href="STUDY010506.html" identifier="RES-0B42321993B31CBE21D3C7EEAE90B029" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010506.html" />
+    </resource>
+    <resource href="STUDY010509.html" identifier="RES-1CB0E549E15EC2314862E9987432B2F8" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010509.html" />
+    </resource>
+    <resource href="STUDY010510.html" identifier="RES-489005F82669762CDE668B949F8FD237" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010510.html" />
+    </resource>
+    <resource href="TEST010511.html" identifier="RES-A6CAA901CC094C818EE96ED59B796BBB" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010511.html" />
+    </resource>
+    <resource href="STUDY010601.html" identifier="RES-24F7E6932F4F0F272B502CC7CF23F887" adlcp:scormtype="sco" type="webcontent">
+      <file href="STUDY010601.html" />
+    </resource>
+    <resource href="TEST010601.html" identifier="RES-BDB738E6807B2E78A1CF0DA019DB8A31" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010601.html" />
+    </resource>
+    <resource href="TEST010602.html" identifier="RES-4E8ACEDDDBF1FB069AFEA09C182216B3" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010602.html" />
+    </resource>
+    <resource href="TEST010603.html" identifier="RES-2B4400CF959B87FAA55062BF0B3A8262" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST010603.html" />
+    </resource>
+    <resource href="TEST01.html" identifier="RES-325CB58A233EFDC23D5734A6ED218FA1" adlcp:scormtype="sco" type="webcontent">
+      <file href="TEST01.html" />
+    </resource>
+  </resources>
+</manifest>
+

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.bond.pojo.BondInfo">
+
+	<typeAlias alias="bondInfo"
+		type="com.cssweb.F10.gazx.bond.pojo.BondInfo" />
+
+	<!--result map-->
+	<resultMap id="bondInfoMap" class="bondInfo">
+
+		<!-- 债券ID -->
+		<result property="bondId" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券代码 -->
+		<result property="bondCode" column="ZQDM"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券简称 -->
+		<result property="bondShortName" column="ZQJC"
+			jdbcType="java.lang.String" />
+
+		<!-- 拼音简称 -->
+		<result property="bondPY" column="PYJC"
+			jdbcType="java.lang.String" />
+
+		<!-- 债券类型 -->
+		<result property="bondType" column="ZQLX"
+			jdbcType="java.lang.String" />
+
+		<!-- 回购品种 -->
+		<result property="buyBackBreed" column="HGPZ"
+			jdbcType="java.lang.String" />
+
+		<!-- 最后修改日期 -->
+		<result property="updateDate" column="ZHXGRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 交易场所 -->
+		<result property="bondPlace" column="SSBZ"
+			jdbcType="java.lang.String" />
+
+	</resultMap>
+
+	<!-- 通过债券代码，债券简称，债券拼音查询债券基本信息 -->
+	<select id="getBondInfo" resultMap="bondInfoMap"
+		parameterClass="String">
+		SELECT T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ
+		FROM ZQZB WHERE SCBZ = 0 AND GKBZ = 1
+
+		<dynamic prepend="AND">
+
+			<isParameterPresent prepend="OR">
+				ZQDM = #value#
+			</isParameterPresent>
+
+			<isParameterPresent prepend="OR">
+				ZQJC = #value#
+			</isParameterPresent>
+
+			<isParameterPresent prepend="OR">
+				PYJC = #value#
+			</isParameterPresent>
+
+		</dynamic>
+
+		AND ROWNUM = 1
+	</select>
+
+	<!-- 通过债券代码查询债券基本信息 -->
+	<select id="getBondInfoByBondCode" resultMap="bondInfoMap"
+		parameterClass="String">
+		SELECT T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ
+		FROM ZQZB WHERE ZQDM = #bondCode# AND SCBZ = 0 AND GKBZ = 1
+	</select>
+	
+	<!-- 通过债券ID查询债券基本信息 -->
+	<select id="getBondInfoByBondId" resultMap="bondInfoMap" parameterClass="long">
+		SELECT T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ 
+		FROM ZQZB WHERE T_ZQZB_ID = #bondId# AND SCBZ = 0 AND GKBZ = 1
+	</select>
+
+
+	<!-- 通过债券拼音查询债券基本信息 -->
+	<select id="getBondInfoByBondPY" resultMap="bondInfoMap"
+		parameterClass="String">
+		SELECT T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ
+		FROM ZQZB WHERE PYJC = #bondPY# AND SCBZ = 0 AND GKBZ = 1
+	</select>
+
+	<!-- 通过债券简称查询债券基本信息 -->
+	<select id="getBondInfoByShortName" resultMap="bondInfoMap"
+		parameterClass="String">
+		SELECT T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ
+		FROM ZQZB WHERE ZQJC = #bondShortName# AND SCBZ = 0 AND GKBZ = 1
+	</select>
+
+	<!-- 通过债券类型查询债券基本信息 -->
+	<select id="getBondInfoByType" resultMap="bondInfoMap"
+		parameterClass="String">
+		SELECT T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ
+		FROM ZQZB WHERE ZQLX = #bondType# AND SCBZ = 0 AND GKBZ = 1
+		ORDER BY ZQDM DESC
+	</select>
+
+	<!-- 返回所有债券的信息，并按照债券代码进行排序 -->
+	<select id="getBondInfos" resultMap="bondInfoMap">
+		SELECT T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ
+		FROM ZQZB WHERE SCBZ = 0 AND GKBZ = 1 ORDER BY ZQDM DESC
+	</select>
+
+	<select id="pageQuery" resultMap="bondInfoMap"
+		parameterClass="map">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( SELECT
+		T_ZQZB_ID, ZQLX, ZQDM, PYJC, ZQJC, SSBZ, HGPZ, ZHXGRQ FROM ZQZB
+		WHERE SCBZ = 0 AND GKBZ = 1
+		<dynamic>
+			<isNotNull prepend="and" property="bondCode">
+				ZQDM like '$bondCode$%'
+			</isNotNull>
+			<isNotNull prepend="and" property="bondSpell">
+				PYJC like '$bondSpell$%'
+			</isNotNull>
+			<isNotNull prepend="and" property="bondName">
+				ZQJC like '$bondName$%'
+			</isNotNull>
+		</dynamic>
+		order by ZQDM ) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+</sqlMap>

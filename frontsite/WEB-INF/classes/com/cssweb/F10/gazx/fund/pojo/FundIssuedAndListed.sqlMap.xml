@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundIssuedAndListed">
+
+	<typeAlias alias="fundIssuedAndListed" type="com.cssweb.F10.gazx.fund.pojo.FundIssuedAndListed" />
+
+	<!--result map-->
+	<resultMap id="fundIssuedAndListedMap" class="fundIssuedAndListed">
+		<result property="circulationCount" column="XZKLTFE" jdbcType="java.lang.Long" nullValue="0" />
+		<result property="freezeAmount" column="FXDJZJ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fundPrice" column="JJMZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fundsNetAmount" column="MJJE" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="id" column="T_JJFXYSS_ID" jdbcType="java.lang.Long" nullValue="0" />		
+		<result property="issueAmount" column="FXZSZ" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="issueEndDate" column="FXJZRQ" jdbcType="java.util.Date" />
+		<result property="issuePrice" column="FXJG" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="issueRate" column="FXFY" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="issueScope" column="FXGM" jdbcType="java.lang.Long" nullValue="0"/>		
+		<result property="issueStartDate" column="FXQSRQ" jdbcType="java.util.Date" />
+		<result property="listedAddress" column="SSDD" jdbcType="java.lang.String" />
+		<result property="listedDate" column="SSRQ" jdbcType="java.util.Date" />
+		<result property="netIssueAmount" column="SWDJFXFE" jdbcType="java.lang.Long" nullValue="0" />
+		<result property="purchaseAmount" column="FQRRGFE" jdbcType="java.lang.Long" nullValue="0" />
+		<result property="successRate" column="ZQL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fundShortName" column="JJJC" jdbcType="java.lang.String"/>
+	</resultMap>
+	
+	<!-- 根据代码查询基金发行与上市列表 -->	
+	<select id="getFundIssuedAndListedListByCode" resultMap="fundIssuedAndListedMap" parameterClass="String">
+    	select jsf.XZKLTFE,jsf.FXDJZJ,jsf.JJMZ,jsf.MJJE,jsf.T_JJFXYSS_ID,jsf.FXZSZ,jsf.FXJZRQ,
+    	jsf.FXJG,jsf.FXFY,jsf.FXGM,jsf.FXQSRQ,jsf.SSDD,jsf.SSRQ,jsf.SWDJFXFE,jsf.FQRRGFE,jsf.ZQL,j.JJJC
+		
+		from JJFXYSS  jsf, JJZB  j
+		
+		where jsf.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #code# and jsf.SCBZ=0 and jsf.GKBZ=1 and rownum = 1 order by j.JJDM desc
+	</select>
+	
+</sqlMap>

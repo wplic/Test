@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.LinkRelation">
+    <typeAlias alias="linkRelation" type="com.cssweb.F10.gazx.stock.pojo.LinkRelation"/>
+    <!--result map-->
+    <resultMap id="linkRelationMap" class="linkRelation">
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long"/>
+        <result column="SFKZGX" property="controlRelation" jdbcType="String" nullValue=""/>
+        <result column="GLGX" property="linkRelation" jdbcType="String" nullValue=""/>
+        <result column="GLFMC" property="relationName" jdbcType="String" nullValue=""/>
+        <result column="BEIZHU" property="remark" jdbcType="String" nullValue=""/>
+    </resultMap> 
+    
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		select count(*) from GLFGX
+		where SCBZ = 0 and GKBZ = 1
+		<isNotNull prepend="and" property="companyId">
+			T_GSZB_ID = #companyId#
+		</isNotNull>
+	</select>
+
+	<select id="pageQuery" resultMap="linkRelationMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select
+					T_GSZB_ID,
+					SFKZGX,
+					GLGX,
+					GLFMC,
+					BEIZHU
+				from GLFGX
+				where SCBZ = 0 and GKBZ = 1
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+				order by zhxgrq desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select> 
+	
+</sqlMap>	

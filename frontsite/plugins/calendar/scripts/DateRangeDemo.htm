@@ -1,0 +1,45 @@
+<HTML>
+<HEAD><TITLE>Date Range Constraint Demo</TITLE>
+</HEAD>
+<BODY bgcolor="#dcdcdc">
+
+<BR>
+An excellent example to show you how simple it is to use the dynamical date range constraint.<BR><BR>
+
+<UL>NOTE:
+<LI>You won't be able to start after the end-date or end before the start-date.
+<LI>2 additional plugin functions are defined in plugins.js in order to support the range checking.
+<LI>The input boxes are made readonly in this demo, by checking the onblur event.
+<LI>The normal theme used has been modified a bit.
+</UL>
+<BR><BR>
+
+
+<FORM name="demoform" onsubmit="alert('form submit');">
+<table width=600>
+<tr>
+	<td>
+Start Date: <input name="dc1" value="" size="12" onfocus="this.blur()" readonly><a href="javascript:void(0)" onclick="gfPop.fStartPop(document.demoform.dc1,document.demoform.dc2);return false;" HIDEFOCUS><img name="popcal" align="absbottom" src="calbtn.gif" width="34" height="22" border="0" alt=""></a>
+	</td>
+	<td>
+End Date: <input name="dc2" value="" size="12" onfocus="this.blur()" readonly><a href="javascript:void(0)" onclick="gfPop.fEndPop(document.demoform.dc1,document.demoform.dc2);return false;" HIDEFOCUS><img name="popcal" align="absbottom" src="calbtn.gif" width="34" height="22" border="0" alt=""></a>
+	</td>
+</tr>
+</table>
+</FORM>
+
+
+
+
+<font size=-1><BR><BR>
+<hr size="1">
+<em>Copyright &copy; 2001-2003 CalendarXP.net, Liming Weng</em></font>
+
+
+
+<!--  PopCalendar(tag name and id must match) Tags should sit at the page bottom -->
+<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; left:-500px; top:0px;">
+</iframe>
+</BODY>
+</HTML>
+

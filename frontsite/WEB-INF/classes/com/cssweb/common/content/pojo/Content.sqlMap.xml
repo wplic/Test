@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.content.pojo.Content">
+
+	<typeAlias alias="Content" type="com.cssweb.common.content.pojo.Content" />
+	
+	<!--result map-->
+	<resultMap id="contentMap" class="Content">
+		<result property="id" column="ID" jdbcType="Long" />
+		<result property="description" column="DESCRIPTION" jdbcType="String" nullValue=""/>
+		<result property="css" column="CSS" jdbcType="String" nullValue=""/>
+		<result property="content" column="CONTENT" jdbcType="BLOB"/>
+		<result property="resourceId" column="RESOURCE_ID" jdbcType="Long" />
+		<result property="version" column="VERSION" jdbcType="String" nullValue=""/>
+		<result property="show" column="SHOW" jdbcType="Integer" nullValue="0" />
+		<result property="createDate" column="CREATE_DATE" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+	</resultMap>
+	
+	
+	<select id="select" resultMap="contentMap">
+		select
+		*
+		from t_comm_content
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+	</select>
+	
+	<insert id="insert" parameterClass="Content">
+		insert into t_comm_content
+		(
+		ID,
+		DESCRIPTION,
+		CSS,
+		CONTENT,
+		RESOURCE_ID,
+		VERSION,
+		SHOW
+		)
+		values
+		(
+		#id#,
+		#description#,
+		#css#,
+		#content#,
+		#resourceId#,
+		#version#,
+		#show#
+		)
+	</insert>
+	
+	<update id="update" parameterClass="Content">
+		update
+		t_comm_content
+		set
+		DESCRIPTION=#description#,
+		CSS=#css#,
+		CONTENT=#content#,
+		RESOURCE_ID=#resourceId#,
+		VERSION=#version#,
+		SHOW=#show#
+		where ID = #id#
+	</update>
+	
+	<delete id="deleteByPrimaryKey">
+		delete from t_comm_content
+		where ID=#value#
+	</delete>
+
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		select count(*) from t_comm_content
+		<dynamic prepend="where">
+			<isNotNull prepend="and" property="resourceId">
+				RESOURCE_ID = #resourceId#
+			</isNotNull>
+			<isNotNull prepend="and" property="show">
+				SHOW = #show#
+			</isNotNull>
+		</dynamic>
+	</select>
+
+	<select id="pageQuery" resultMap="contentMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select *
+				from t_comm_content
+				<dynamic prepend="where">
+					<isNotNull prepend="and" property="resourceId">
+						RESOURCE_ID = #resourceId#
+					</isNotNull>
+					<isNotNull prepend="and" property="show">
+						SHOW = #show#
+					</isNotNull>
+				</dynamic>
+				<dynamic prepend="order by">
+					<isNotNull property="sort">
+						<isNotNull property="dir">
+							$sort$ $dir$
+						</isNotNull>
+					</isNotNull>
+				</dynamic>
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+	
+</sqlMap>

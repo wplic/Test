@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundHolder">
+
+	<typeAlias alias="fundHolder" type="com.cssweb.F10.gazx.fund.pojo.FundHolder" />
+
+	<!--result map-->
+	<resultMap id="fundHolderMap" class="fundHolder">
+		<result property="fundHolderId" column="T_JJCYRQK_ID" jdbcType="java.lang.Long" />
+		<result property="fundHolderName" column="JJGDMC" jdbcType="java.lang.String" />
+		<result property="fundHolderDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="holderCount" column="CYFE" jdbcType="java.lang.Long" />
+		<result property="holderProportion" column="CYBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+		<result property="fundCode" column="JJDM" jdbcType="java.lang.String" />
+		<result property="fundShortName" column="JJJC" jdbcType="java.lang.String" />
+		<result property="fundType" column="JJLX" jdbcType="java.lang.String" />
+	</resultMap>
+	
+	<resultMap id="timeByCodeMap" class="fundHolder">
+		<result property="fundHolderDate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>	
+	
+	<resultMap id="fundHolderByCodeMap" class="fundHolder">
+		<result property="fundHolderName" column="JJGDMC" jdbcType="java.lang.String" />
+	</resultMap>	
+	
+	<!--result map-->
+	<resultMap id="fundHolderMapByCodeAndDate" class="fundHolder">
+		<result property="fundHolderName" column="JJGDMC" jdbcType="java.lang.String" />
+		<result property="fundHolderDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="holderCount" column="CYFE" jdbcType="java.lang.Long" />
+		<result property="holderProportion" column="CYBL" jdbcType="java.lang.Double" nullValue="0.0"/>
+	</resultMap>	
+	
+	<!-- 根据基金代码查询时间列表，时间按倒序排列 -->
+	<select id="getDateListByCode" resultMap="timeByCodeMap" parameterClass="String">
+		select distinct jz.FSRQ  
+		from JJCYRQK  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+		order by jz.FSRQ desc
+	</select>	
+	
+	<!-- 根据基金代码取的所有持有人 -->
+	<select id="getFundHolderListByCode" resultMap="fundHolderByCodeMap" parameterClass="String">
+		select jz.JJGDMC  
+		from JJCYRQK  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>	
+	
+	<!-- 根据基金代码跟时间取相应列表 -->
+	<select id="getFundHolderListByCodeAndDate" resultMap="fundHolderMap" parameterClass="Map">
+    	select jz.T_JJCYRQK_ID,jz.JJGDMC,jz.FSRQ,jz.CYFE,jz.CYBL,j.JJDM,j.JJJC,j.JJLX
+		
+		from JJCYRQK  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID  and to_char(jz.FSRQ,'yyyy-MM-dd') = #fundHolderDate# 
+    		 and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+    		 order by jz.CYFE desc
+	</select>
+
+	<select id="getLeastDateByCode" resultClass="java.util.Date" parameterClass="String">
+		select max(jz.FSRQ)  as FSRQ
+		from JJCYRQK  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>
+	
+	<!-- 根据代码、时间查询所有持有人的记录数 -->	
+	<select id="getFundHolderListOfCount" resultClass="Integer" parameterClass="Map">
+    	select count(*)
+		
+		from JJCYRQK  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID  and to_char(jz.FSRQ,'yyyy-mm-dd') &lt;= #endDate# 
+  			and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>		
+	
+	<!-- 根据代码、时间查询持有人列表  分页 -->
+	<select id="pageQuery" resultMap="fundHolderMapByCodeAndDate" parameterClass="Map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+		    	select jz.JJGDMC,jz.CYFE,jz.FSRQ,jz.CYBL
+				
+				from JJCYRQK  jz, JJZB  j
+				
+				where jz.T_JJZB_ID=j.T_JJZB_ID  and to_char(jz.FSRQ,'yyyy-mm-dd') &lt;= #endDate# 
+		  			and jz.SCBZ=0 and jz.GKBZ=1
+    		 			<dynamic>
+							<isNotNull prepend="and" property="fundCode">
+								j.JJDM= #fundCode#
+							</isNotNull>
+						</dynamic>
+		    		 order by jz.FSRQ desc
+			) row_ WHERE ROWNUM &lt;= #endNum#
+		) r WHERE rownum_ &gt;#beginNum#
+	</select>			
+</sqlMap>

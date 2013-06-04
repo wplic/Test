@@ -1,0 +1,125 @@
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.ProfitAssign">
+    <typeAlias alias="profitAssign" type="com.cssweb.F10.gazx.stock.pojo.ProfitAssign"/>
+    <!--result map-->
+    <resultMap id="profitAssignMap" class="profitAssign">
+     <result column="t_gszb_id" property="companyId"  jdbcType="Long" />
+     
+     <result column="YYZSR"   property="incomeTotal"  jdbcType="java.lang.Double" />
+     
+     <result column="YYSR"   property="income"  jdbcType="java.lang.Double" />
+     
+     <result column="QTYWSR"   property="otherBusinessIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="LXSR"   property="interest"  jdbcType="java.lang.Double" />
+     
+     <result column="SXFJYJXR"   property="formalitiesCommissionIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="YYZCB"   property="tradeTotalCosts"  jdbcType="java.lang.Double" />
+     
+     <result column="YYCB"   property="tradeCost"  jdbcType="java.lang.Double" />
+     
+     <result column="LXZC"   property="interestPayout"  jdbcType="java.lang.Double" />
+     
+     <result column="SXFJYJZC"   property="formalitiesCommissionCost"  jdbcType="java.lang.Double" />
+     
+     <result column="YYSJJFJ"   property="tradeScotAnnex"  jdbcType="java.lang.Double" />
+     
+     <result column="YYFY"   property="sellCost"  jdbcType="java.lang.Double" />
+     
+     <result column="GLFY"   property="managerCost"  jdbcType="java.lang.Double" />
+     
+     <result column="CWFY"   property="financialCost"  jdbcType="java.lang.Double" />
+     
+     <result column="Ktfy"   property="prospectCost"  jdbcType="java.lang.Double" />
+     
+     <result column="ZCJZSS"   property="assetDevalueLoss"  jdbcType="java.lang.Double" />
+     
+     <result column="GYJZBDSY"   property="gyjzbdsy"  jdbcType="java.lang.Double" />
+     
+     <result column="TZSY"   property="tzsy"  jdbcType="java.lang.Double" />
+     
+     <result column="DLYQYHHYQYRTZSY"   property="dlyqyhhyqyrtzsy"  jdbcType="java.lang.Double" />
+     
+     <result column="HDSY"   property="transferIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="YYLR"   property="tradeProfitAssign"  jdbcType="java.lang.Double" />
+     
+     <result column="YYWSR"   property="tradeOutIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="YYWZC"   property="tradeOutCost"  jdbcType="java.lang.Double" />
+     
+     <result column="FLDZCCLSS"   property="fldzcclss"  jdbcType="java.lang.Double" />
+     
+     <result column="YQNDSYTZ"   property="yqndsytz"  jdbcType="java.lang.Double" />
+     
+     <result column="LRZE"   property="profitTotal"  jdbcType="java.lang.Double" />
+     
+     <result column="SDS"   property="incometax"  jdbcType="java.lang.Double" />
+     
+     <result column="WQRTZSS"   property="wqrtzss"  jdbcType="java.lang.Double" />
+     
+     <result column="JLR"   property="incomeProfit"  jdbcType="java.lang.Double" />
+     
+     <result column="TYKZXHBZBHBFHBQSXDJLR"   property="tykzxhbzbhbfhbqsxdjlr"  jdbcType="java.lang.Double" />
+     
+     <result column="GSYMGSSYZDJLR"   property="gsymgssyzdjlr"  jdbcType="java.lang.Double" />
+     
+     <result column="SSGDSY"   property="ssgdsy"  jdbcType="java.lang.Double" />
+     
+     <result column="QTYWSR"   property="otherBusinessIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="QTYWSR"   property="otherBusinessIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="QTYWSR"   property="otherBusinessIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="QTYWSR"   property="otherBusinessIncome"  jdbcType="java.lang.Double" />
+     
+     <result column="jzrq" property="deadline" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+     
+     <result column="BZ" property="remark" jdbcType="String" nullValue=""/>
+    </resultMap> 
+    <!-- 公司ID，然后再根据公司ID取得现金流量信息集合 -->
+	<select id="getProfitAssignByStockCode" parameterClass="map" resultMap="profitAssignMap">    
+	   select  T_GSZB_ID,YYZSR,YYSR, QTYWSR,LXSR,SXFJYJXR,YYZCB,YYCB,QTYWCB,LXZC,SXFJYJZC,
+	   YYSJJFJ,YYFY,GLFY,CWFY,Ktfy,ZCJZSS,GYJZBDSY,TZSY,DLYQYHHYQYRTZSY,HDSY,YYLR,YYWSR,
+	   YYWZC,FLDZCCLSS,YQNDSYTZ,LRZE,SDS,WQRTZSS,JLR,TYKZXHBZBHBFHBQSXDJLR,GSYMGSSYZDJLR,
+	   SSGDSY,JZRQ,BZ
+	   
+	   
+	   from LRFPB_X 
+	   where  SCBZ = 0 and GKBZ = 1 and zxbz=1 and xdbz=0 
+	   <isNotNull prepend="and" property="companyId">
+				T_GSZB_ID = #companyId#
+			</isNotNull>
+			<isNotNull prepend="and" property="startDate">
+				to_char(jzrq,'yyyy-MM-dd')&gt;=#startDate#
+			</isNotNull>
+			<isNotNull prepend="and" property="endDate">
+				to_char(jzrq,'yyyy-MM-dd')&lt;=#endDate#
+			</isNotNull>
+       order by jzrq desc
+	</select>      
+	
+	
+	 <!-- 取日期列表 -->
+	<select id="getDateList" resultClass="String">    
+		select to_char(jzrq, 'yyyy-MM-dd') from 
+		   (select distinct jzrq
+			   from LRFPB_X 
+			   where SCBZ = 0 and GKBZ = 1
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+			order by jzrq desc)
+	</select>
+	
+	
+</sqlMap>
+
+
+
+
+

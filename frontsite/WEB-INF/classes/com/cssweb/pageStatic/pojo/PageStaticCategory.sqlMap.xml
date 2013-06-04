@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.pageStatic.pojo.PageStaticCategory">
+	<typeAlias alias="PageStaticCategory" type="com.cssweb.pageStatic.pojo.PageStaticCategory"/>
+	
+	<resultMap id="pageStaticCategoryMap" class="PageStaticCategory">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="CATEGORY_NAME" property="categoryName" jdbcType="String"/>
+		<result column="CAT_NAME" property="catName" jdbcType="String"/>
+		<result column="CATTYPE" property="catType" jdbcType="String"/>
+		<result column="FAILNUM" property="failNum" jdbcType="String"/>		
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	<resultMap id="pageStaticCategoryItemMap" class="PageStaticCategory">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="ITEMID" property="itemId" jdbcType="long"/>
+	</resultMap>
+	
+	<select id="getPageStaticCategoryById" resultMap="pageStaticCategoryMap">
+		select ID,CATEGORY_NAME,CAT_NAME,CATTYPE,FAILNUM,EXT1,EXT2,EXT3,EXT4
+		from PageStatic_category where ID=#value#
+	</select>
+	<insert id="insert" parameterClass="pageStaticCategory">
+		insert into PageStatic_category(ID,CATEGORY_NAME,CAT_NAME,CATTYPE,FAILNUM,EXT1,EXT2,EXT3,EXT4) 
+					values(#id#,#categoryName#,#catName#,#catType#,#failNum#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+		<delete id="deleteById" parameterClass="Long">
+		delete from PageStatic_category where id = #value#
+	</delete>
+	<update id="update" parameterClass="pageStaticCategory">
+		update PageStatic_category set CATEGORY_NAME=#categoryName#,CAT_NAME=#catName#,
+			EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#  where ID = #id#
+	</update>
+		<select id="getPageStaticCategoryByCondition" resultMap="pageStaticCategoryMap" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select> 
+   	<select id="getAllPageStaticCategory" resultMap="pageStaticCategoryMap">
+       select * from PageStatic_Category order by id desc
+   </select> 
+   	 <select id="getPageStaticCategoryByItemId" resultMap="pageStaticCategoryMap"  parameterClass="long">
+       select * from PageStatic_Category where id in(select id from pagestatic_category_item_map where itemid=#value#) order by id desc
+   </select> 
+   <select id="getPageStaticCategoryByCatName" resultMap="pageStaticCategoryMap" parameterClass="java.lang.String">
+       select * from PageStatic_Category where cat_name=#value# order by id desc
+   </select>
+   <delete id="deletePageStaticCategoryItemMapById" parameterClass="Long">
+		delete from pagestatic_category_item_map where id=#value#
+	</delete> 
+   	<select id="getPageStaticCategoryItemMapByIdAndItemId" resultMap="pageStaticCategoryItemMap">
+       select * from ( $sql$ ) order by id desc
+   </select> 
+      <select id="getPageStaticCategoryCount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+	</select> 	
+	<select id="getCategoryByCatNameAndCatType" resultMap="pageStaticCategoryMap" parameterClass="java.util.Map">
+       select * from pageStatic_Category where cat_name=#catName# and cattype=#catType#
+   </select> 	
+</sqlMap>

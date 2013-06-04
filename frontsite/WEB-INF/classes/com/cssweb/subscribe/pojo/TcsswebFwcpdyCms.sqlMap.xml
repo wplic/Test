@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebFwcpdyCms">
+<typeAlias alias="TcsswebFwcpdyCms" type="com.cssweb.subscribe.pojo.TcsswebFwcpdyCms"/>
+	<resultMap id="TcsswebFwcpdyCms" class="TcsswebFwcpdyCms">
+	    <result property="id" column="ID" jdbcType="java.lang.Integer"/>
+	    <result property="fid" column="FID" jdbcType="java.lang.Integer"/>
+	    <result property="grade" column="GRADE" jdbcType="java.lang.Integer"/>
+	    <result property="type" column="TYPE" jdbcType="java.lang.Integer"/>
+	    <result property="name" column="NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="fdncode" column="FDNCODE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="note" column="NOTE" jdbcType="java.lang.String" nullValue=""/>
+	</resultMap>
+	
+	<select id="getTcsswebFwcpMlByListByFid" parameterClass="java.lang.Integer" resultMap = "TcsswebFwcpdyCms">
+		SELECT ID, FID, GRADE, TYPE, NAME, FDNCODE, NOTE FROM T_CSSWEB_TFWCP_ML WHERE FID=#value#
+	</select>
+	
+	<select id="getTcsswebFwcpMlByListById" parameterClass="java.lang.Integer" resultMap = "TcsswebFwcpdyCms">
+		SELECT ID, FID, GRADE, TYPE, NAME, FDNCODE, NOTE FROM T_CSSWEB_TFWCP_ML WHERE ID=#value#
+	</select>
+	
+	<select id="getNotByListByPackageid" parameterClass="java.lang.Long" resultMap = "TcsswebFwcpdyCms">
+		SELECT ID, FID, GRADE, TYPE, NAME, FDNCODE, NOTE FROM T_CSSWEB_TFWCP_ML t where 
+			not EXISTS(SELECT 1 from T_CSSWEB_FWCPDY y,T_CSSWEB_TCPTCDYB b where b.package_id=#value#
+			and y.id= b.product_id and y.cpml= t.id)
+	</select>
+</sqlMap>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.common.toDbLob.pojo.TextBlob">
+	<typeAlias alias="TextBlob" type="com.cssweb.common.toDbLob.pojo.TextBlob"/>
+	
+	<resultMap id="textBlobMap" class="TextBlob">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="CONTENT_SIZE" property="size" jdbcType="Integer"/>
+		<result column="TEXT_SOURCE" property="source" jdbcType="BLOB"/>
+		<result column="MODIFY_DATE" property="modifyDate" jdbcType="java.util.Date"/>
+		<result column="REMARK" property="remark" jdbcType="String"/>
+		<result column="RELATE_TABLE_NAME" property="relateTableName" jdbcType="String" />
+		<result column="RELATE_TABLE_ID" property="relateTableId" jdbcType="Long"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	
+	<insert id="insert" parameterClass="TextBlob">
+		insert into COMM_BLOB_TEXT(ID,CONTENT_SIZE,TEXT_SOURCE,MODIFY_DATE,REMARK,RELATE_TABLE_NAME,RELATE_TABLE_ID,EXT1,EXT2,EXT3,EXT4) 
+				values(#id#,#size#,#source#,#modifyDate#,#remark#,#relateTableName#,#relateTableId#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	<update id="update" parameterClass="TextBlob">
+		update COMM_BLOB_TEXT 
+				set CONTENT_SIZE = #size#, TEXT_SOURCE =#source#, MODIFY_DATE = #modifyDate#, REMARK = #remark#,
+									RELATE_TABLE_NAME = #relateTableName#, RELATE_TABLE_ID = #relateTableId#,
+									EXT1 = #ext1#,EXT2 = #ext2#, EXT3 = #ext3#, EXT4 = #ext4# 
+		where ID = #id#
+	</update>
+   <delete id="deleteById" parameterClass="Long">
+		delete from COMM_BLOB_TEXT where ID = #value#
+	</delete>
+	<select id="getById" parameterClass="Long"  resultMap="textBlobMap">
+		select * from COMM_BLOB_TEXT where ID=#value#
+	</select>
+</sqlMap>

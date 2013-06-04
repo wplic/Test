@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.portal.pojo.BranchPortalImages">
+	<typeAlias alias="BranchPortalImages" type="com.cssweb.portal.pojo.BranchPortalImages"/>
+	
+	<resultMap id="branchPortalImagesMap" class="BranchPortalImages">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="FILE_TYPE" property="fileType" jdbcType="String"/>
+		<result column="FILE_NAME" property="fileName" jdbcType="String"/>
+		<result column="FILE_SIZE" property="size" jdbcType="long"/>
+		<result column="ADD_DATE" property="addDate" jdbcType="java.util.Date"/>
+		<result column="FILE_SOURCE" property="source" jdbcType="BLOB"/>
+		<result column="REMARK" property="remark" jdbcType="String"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+		<result column="HIDE" property="hide" jdbcType="int"/>
+		<result column="ORDER_TYPE" property="orderType" jdbcType="int"/>
+		<result column="PROVINCE_ID" property="provinceId" jdbcType="String"/>
+	</resultMap>
+	
+	<select id="select" resultMap="branchPortalImagesMap">
+		select
+		*
+		from BRANCH_PORTAL_IMAGES
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+	</select>
+
+	<insert id="insert" parameterClass="BranchPortalImages">
+		insert into BRANCH_PORTAL_IMAGES(ID,FILE_TYPE,FILE_NAME,FILE_SIZE,ADD_DATE,FILE_SOURCE,REMARK,EXT1,EXT2,EXT3,EXT4,HIDE,ORDER_TYPE,PROVINCE_ID) 
+					values(#id#,#fileType#,#fileName#,#size#,#addDate#,#source#,#remark#,#ext1#,#ext2#,#ext3#,#ext4#,#hide#,#orderType#,#provinceId#)
+	</insert>
+	<update id="update" parameterClass="BranchPortalImages">
+		update BRANCH_PORTAL_IMAGES set FILE_TYPE = #fileType#, FILE_NAME =#fileName#, FILE_SIZE = #size#, ADD_DATE = #addDate#,
+		FILE_SOURCE = #source#, REMARK = #remark#,EXT1 = #ext1#, EXT2 = #ext2#, EXT3 = #ext3#, EXT4 = #ext4#, HIDE = #hide#, ORDER_TYPE = #orderType#, PROVINCE_ID = #provinceId# where ID = #id#
+	</update>
+    <delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from BRANCH_PORTAL_IMAGES where ID = #value#
+	</delete>
+	
+	<select id="selectByMap" resultMap="branchPortalImagesMap">
+		select
+		*
+		from BRANCH_PORTAL_IMAGES
+		<dynamic prepend="where">
+			<isNotNull property="findBy">
+				<isNotNull prepend="and" property="fileName">
+					FILE_NAME = #fileName#
+				</isNotNull>
+				<isNotNull prepend="and" property="hide">
+					HIDE = #hide#
+				</isNotNull>
+			</isNotNull>
+			<isNotNull property="findForStore">
+				<isNotNull property="tpkgl">
+					HIDE = 1 AND PROVINCE_ID = #provinceId#
+				</isNotNull>
+				<isNull property="tpkgl">
+					HIDE = 0 OR PROVINCE_ID = #provinceId#
+				</isNull>
+			</isNotNull>			
+		</dynamic>
+	</select>
+
+</sqlMap>

@@ -1,0 +1,189 @@
+﻿body {
+	background: url(../images/bg.jpg) center top repeat-x;
+	background-color:#840606;
+	display: block;
+	color:#333;
+	font: 12px/1.9 "宋体";
+	font-size: 12px !important;
+	margin:0px auto;
+	width:950px;
+	padding:0px;
+}
+html {
+	scrollbar-face-color: #FFFFFF;
+	scrollbar-shadow-color: #D2E5F4;
+	scrollbar-highlight-color: #D2E5F4;
+	scrollbar-3dlight-color: #FFFFFF;
+	scrollbar-darkshadow-color: #FFFFFF;
+	scrollbar-track-color: #FFFFFF;
+	scrollbar-arrow-color: #D2E5F4;
+	overflow-x:hidden;
+}
+table, td, th, ul, li, ol, dl, dt, dd, div, html, p, blockquote, h1, h2, h3, h4, h5, form, html, pre, fieldset, input {
+	margin:0;
+	padding:0;
+}
+ul li {
+	list-style-type:none;
+	line-height:200%;
+list-style-type:
+}
+img {
+	border:none;
+	cursor:pointer;
+}
+p {
+	line-height:24px;
+}
+.clear {
+	clear:both;
+}
+a {
+	color:#05597e;
+	text-decoration: underline;
+	outline:none;
+	behavior:url(＂../js/outline..htc＂)
+}
+a,area { blr:expression(this.onFocus=this.blur()) } /* for IE */
+:focus { -moz-outline-style: none; } /* for Firefox */
+a:hover {
+	color:#cc0b06;
+}
+
+.main {
+	background-color:#fff;
+	margin-bottom:80px;
+}
+.gf_icon {
+	width:250px;
+	padding-top:5px;
+	float:right;
+}
+.gf_icon img {
+	padding-right:10px;
+}
+/*  页签 */
+.gf_listitle {
+	width:892px;
+	height:43px;
+	margin:0 auto;
+	padding-top:14px;
+	border-bottom:2px solid #800605;
+}
+.gf_tab {
+	width:193px;
+	height:31px;
+	float:left;
+	background:url(../images/icon_in.gif) no-repeat;
+	text-align:center;
+	line-height:31px;
+	font-size:16px;
+	padding-top:3px;
+	color:#fff;
+	margin-left:10px;
+	font-weight:bold;
+	padding-right:10px;
+	cursor:pointer;
+}
+.gf_tab2 {
+	width:193px;
+	height:31px;
+	padding-top:3px;
+	line-height:31px;
+	margin-left:10px;
+	float:left;
+	text-align:center;
+	background:url(../images/icon_on.gif) no-repeat;
+	font-size:16px;
+	padding-right:10px;
+	color:#666;
+	font-weight:bold;
+	cursor:pointer;
+}
+.gf_con {
+	width:810px;
+	height:auto;
+	line-height:24px;
+	color:#000000;
+	margin:0 auto;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-top:25px;
+}
+.gf_con input {
+	margin-right:3px;
+	margin-left:26px;
+}
+.gf_con h2 {
+	font-size:20px;
+	font-weight:bold;
+	width:100%;
+	text-align:center;
+	height:50px;
+	line-height:50px;
+	padding-bottom:20px;
+}
+.gf_con p {
+	text-indent:2em;
+	padding-bottom:25px;
+}
+.gf_con .agree {
+	margin-top:2px;
+	margin-right:5px;
+	line-height:24px;
+	height:24px;
+}
+.submit {
+	height:26px;
+	text-align:center;
+	padding-top:50px;
+	margin-bottom:30px;
+}
+/*  弹窗 */
+#tc {
+	background:url(../images/bg_tc.png) no-repeat;
+	_background:url(../images/bg_tc.gif) no-repeat;
+	height: 253px;
+	padding: 0 0 10px 40px;
+	width: 430px;
+	position:absolute;
+	z-index:99999;
+ 	
+}
+#close{ padding-top: 7px;
+    text-align: right;
+    width: 398px;}
+.close a{ display:block;}
+.tc table {
+	width:85%;
+	margin-top:15px;
+	border:0;
+}
+.tc table td {
+	height:36px;
+	line-height:36px;
+}
+.tc table td input {
+	height:24px;
+	width:242px;
+}
+.tc_submit {
+	background:url(../images/icon_bg.gif) no-repeat center 13px;
+	padding-top:10px;
+	text-align:center;
+	color:#fff;
+}
+.tc_submit a {
+	color:#fff;
+	display:block;
+	text-decoration:none;
+}
+.shade{filter:alpha(opacity=50);-moz-opacity:0.5;position:absolute; background-color:#777;display:none;z-index:100; _ background-color:none;}
+
+
+
+
+
+
+
+/*  indexpage  end  */

@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.goldmoney.pojo.GoldMoney">
+
+	<typeAlias alias="GoldMoney" type="com.fortuneage.goldmoney.pojo.GoldMoney"/>
+	<typeAlias alias="GoldMoneyHistory" type="com.fortuneage.goldmoney.pojo.GoldMoneyHistory"></typeAlias>
+	
+	<resultMap id="GoldMoneyResult" class="GoldMoney">
+		<result column="PID" property="pid" jdbcType="java.lang.Integer"/>
+		<result column="FULLNAME" property="fullname" jdbcType="java.lang.String"/>
+		<result column="SOTNAME" property="sotname" jdbcType="java.lang.String"/>
+		<result column="MONEYTYPE" property="moneytype" jdbcType="java.lang.String"/>
+		<result column="PROFIT" property="profit" jdbcType="java.lang.String"/>
+		<result column="REQUIREMENT" property="requirement" jdbcType="java.lang.String"/>
+		<result column="DEADLINE" property="deadline" jdbcType="java.lang.String"/>
+		<result column="TRADEPOINT" property="tradepoint" jdbcType="java.lang.String"/>
+		<result column="LISTINGDATE" property="listingDate" jdbcType="java.util.Date"/>
+		<result column="PROGRAMSIZE" property="programsize" jdbcType="java.lang.String"/>
+		<result column="INTERESTINFO" property="interestinfo" jdbcType="java.lang.String"/>
+		<result column="PAYINTEREST" property="payinterest" jdbcType="java.lang.String"/>
+		<result column="PURCHASEMETHOD" property="purchasemethod" jdbcType="java.lang.String"/>
+		<result column="HOLIDAYINFO" property="holidayinfo" jdbcType="java.lang.String"/>
+		<result column="TRADINGDAY" property="tradingday" jdbcType="java.lang.String"/>
+		<result column="TRANSACTIONTIME" property="transactiontime" jdbcType="java.lang.String"/>
+		<result column="TRANSACTIONPLACE" property="transactionplace" jdbcType="java.lang.String"/>
+		<result column="LIQUIDATION" property="liquidation" jdbcType="java.lang.String"/>
+		<result column="THEPLEDGE" property="thepledge" jdbcType="java.lang.String"/>
+		<result column="PID" property="goldMoneyHistory" select="com.fortuneage.goldmoney.pojo.GoldMoney.getHistory"></result>
+	</resultMap>
+	
+	<resultMap id="GoldMoneyResult2" class="GoldMoney">
+		<result column="PID" property="pid" jdbcType="java.lang.Integer"/>
+		<result column="FULLNAME" property="fullname" jdbcType="java.lang.String"/>
+		<result column="SOTNAME" property="sotname" jdbcType="java.lang.String"/>
+		<result column="MONEYTYPE" property="moneytype" jdbcType="java.lang.String"/>
+		<result column="PROFIT" property="profit" jdbcType="java.lang.String"/>
+		<result column="REQUIREMENT" property="requirement" jdbcType="java.lang.String"/>
+		<result column="DEADLINE" property="deadline" jdbcType="java.lang.String"/>
+		<result column="TRADEPOINT" property="tradepoint" jdbcType="java.lang.String"/>
+		<result column="LISTINGDATE" property="listingDate" jdbcType="java.util.Date"/>
+		<result column="PROGRAMSIZE" property="programsize" jdbcType="java.lang.String"/>
+		<result column="INTERESTINFO" property="interestinfo" jdbcType="java.lang.String"/>
+		<result column="PAYINTEREST" property="payinterest" jdbcType="java.lang.String"/>
+		<result column="PURCHASEMETHOD" property="purchasemethod" jdbcType="java.lang.String"/>
+		<result column="HOLIDAYINFO" property="holidayinfo" jdbcType="java.lang.String"/>
+		<result column="TRADINGDAY" property="tradingday" jdbcType="java.lang.String"/>
+		<result column="TRANSACTIONTIME" property="transactiontime" jdbcType="java.lang.String"/>
+		<result column="TRANSACTIONPLACE" property="transactionplace" jdbcType="java.lang.String"/>
+		<result column="LIQUIDATION" property="liquidation" jdbcType="java.lang.String"/>
+		<result column="THEPLEDGE" property="thepledge" jdbcType="java.lang.String"/>
+	</resultMap>
+	<!-- 通过产品id获取产品对象 -->
+	<select id="selectGoldMoneyByPid" resultMap="GoldMoneyResult" parameterClass="java.lang.Integer">
+		select 
+		  * 
+		from 
+		  t_goldmoney 
+		where 
+		  PID=#value#
+	</select>
+	
+	<!-- 返回金快线的总条数 -->
+	<select id="getGoldMoneyCount" resultClass="java.lang.Integer">
+		select count(*) from t_goldmoney
+	</select>
+	
+	
+	<!-- 在这个map中需要输入需要查询的sql语句，同时需要传入begin开始的序号和end结束的序号 -->
+	<select id="selectGoldMoneyByPage" resultMap="GoldMoneyResult2" parameterClass="java.util.Map">
+		 <![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+
+	<select id="getGoldMoneyList" resultMap="GoldMoneyResult">
+		select * from t_goldmoney order by pid asc
+	</select>
+	<!-- 用于一对多链接 -->
+	<select id="getHistory" resultClass="GoldMoneyHistory" parameterClass="java.lang.Integer">
+		select
+			*
+		from
+			T_GOLDMONEYHISTORY2
+		where
+			GMPID=#pid#
+		order by  PUBLISHDATE desc
+	</select>
+	
+	
+	
+	<!-- 插入一个对象  -->
+	<insert id="insertNewGoldMoney" parameterClass="GoldMoney">
+		INSERT
+		INTO T_GOLDMONEY
+		  (
+		    PID,
+		    FULLNAME,
+		    SOTNAME,
+		    MONEYTYPE,
+		    PROFIT,
+		    REQUIREMENT,
+		    DEADLINE,
+		    TRADEPOINT,
+		    LISTINGDATE,
+		    PROGRAMSIZE,
+		    INTERESTINFO,
+		    PAYINTEREST,
+		    PURCHASEMETHOD,
+		    HOLIDAYINFO,
+		    TRADINGDAY,
+		    TRANSACTIONTIME,
+		    TRANSACTIONPLACE,
+		    LIQUIDATION,
+		    THEPLEDGE
+		  )
+		  VALUES
+		  (
+		    #pid#,
+		    #fullname#,
+		    #sotname#,
+		    #moneytype#,
+		    #profit#,
+		    #requirement#,
+		    #deadline#,
+		    #tradepoint#,
+		    #listingDate#,
+		    #programsize#,
+		    #interestinfo#,
+		    #payinterest#,
+		    #purchasemethod#,
+		    #holidayinfo#,
+		    #tradingday#,
+		    #transactiontime#,
+		    #transactionplace#,
+		    #liquidation#,
+		    #thepledge#
+		  )
+	</insert>
+	<!-- 更新一个对象 -->
+	<update id="updateGoldMoney" parameterClass="GoldMoney">
+		update 
+			T_GOLDMONEY 
+		set
+			PID=#pid#,
+		    FULLNAME=#fullname#,
+		    SOTNAME= #sotname#,
+		    MONEYTYPE=#moneytype#,
+		    PROFIT=#profit#,
+		    REQUIREMENT=#requirement#,
+		    DEADLINE=#deadline#,
+		    TRADEPOINT=#tradepoint#,
+		    LISTINGDATE=#listingDate#,
+		    PROGRAMSIZE=#programsize#,
+		    INTERESTINFO=#interestinfo#,
+		    PAYINTEREST=#payinterest#,
+		    PURCHASEMETHOD=#purchasemethod#,
+		    HOLIDAYINFO=#holidayinfo#,
+		    TRADINGDAY=#tradingday#,
+		    TRANSACTIONTIME=#transactiontime#,
+		    TRANSACTIONPLACE=#transactionplace#,
+		    LIQUIDATION=#liquidation#,
+		    THEPLEDGE=#thepledge#
+		 where
+		 	PID=#pid#
+	</update>
+	
+	<delete id="delGoldMoneyByPid" parameterClass="java.lang.String">
+		delete from t_goldmoney where pid=#value#
+	</delete>
+</sqlMap>

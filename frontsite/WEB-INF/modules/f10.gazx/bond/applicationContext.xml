@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+
+<beans default-autowire="byName" default-lazy-init="true">
+	
+		<!-- 债券回售情况 -->
+		<bean name="/f10/bond/bondBackToSaleCase" class="com.cssweb.F10.gazx.bond.web.BondBackToSaleCaseAction"/>
+		
+		<!-- 债券基本信息 -->
+		<bean name="/f10/bond/bondInfo" class="com.cssweb.F10.gazx.bond.web.BondInfoAction"/>
+		
+		<!-- 债券赎回情况 -->
+		<bean name="/f10/bond/bondRedemptionCase" class="com.cssweb.F10.gazx.bond.web.BondRedemptionCaseAction"/>
+		
+		<!-- 可转债换股情况 -->
+		<bean name="/f10/bond/convertibleDebtToStockInfo" class="com.cssweb.F10.gazx.bond.web.ConvertibleDebtToStockInfoAction"/>
+		
+		<!-- 可转债转股价格调整 -->
+		<bean name="/f10/bond/convertibleDebtToStockPriceChange" class="com.cssweb.F10.gazx.bond.web.ConvertibleDebtToStockPriceChangeAction"/>
+		
+		<!-- 债券实际付息情况 -->
+		<bean name="/f10/bond/debtActualPayRateInfo" class="com.cssweb.F10.gazx.bond.web.DebtActualPayRateInfoAction"/>
+		
+		<!-- 债券到期收益率 -->
+		<bean name="/f10/bond/debtDueYield" class="com.cssweb.F10.gazx.bond.web.DebtDueYieldAction"/>		
+		
+		<!-- 企业债发行与上市 -->
+		<bean name="/f10/bond/enterpriseDebtIssueAndTrade" class="com.cssweb.F10.gazx.bond.web.EnterpriseDebtIssueAndTradeAction"/>
+		
+		<!-- 国债发行 -->
+		<bean name="/f10/bond/nationalDebtIssue" class="com.cssweb.F10.gazx.bond.web.NationalDebtIssueAction"/>	
+		
+		<!-- 国债上市 -->
+		<bean name="/f10/bond/bationalDebtTrade" class="com.cssweb.F10.gazx.bond.web.NationalDebtTradeAction"/>					
+
+		<!-- 金融债发行 -->		
+		<bean name="/f10/bond/financialDebtIssue" class="com.cssweb.F10.gazx.bond.web.FinancialDebtIssueAction"/>	
+		
+		<!-- 债券现券折算比率 -->		
+		<bean name="/f10/bond/debtConversationRatio" class="com.cssweb.F10.gazx.bond.web.DebtConversationRatioAction"/>	
+
+		<!-- 可转债发行与上市 -->	
+		<bean name="/f10/bond/convertibleDebtIssueAndTrade" class="com.cssweb.F10.gazx.bond.web.ConvertibleDebtIssueAndTradeAction"/>	
+
+		<!-- 可转债十大持有人情况 -->		
+		<bean name="/f10/bond/converiteDebtOwnerInfo" class="com.cssweb.F10.gazx.bond.web.ConveriteDebtOwnerInfoAction"/>												
+</beans>
+
+

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.assetManager.pojo.AssetUser">
+
+	<typeAlias alias="AssetUser" type="com.cssweb.assetManager.pojo.AssetUser" />
+
+	<resultMap id="AssetUserMap" class="AssetUser">
+		<result property="fundAccount" column="fundAccount" jdbcType="String"/>
+		<result property="clientName" column="clientName" jdbcType="String"/>
+	</resultMap>
+	<resultMap id="AssetUserMap2" class="AssetUser">
+		<result property="fundAccount" column="taaccountid" jdbcType="String"/>
+		<result property="clientName" column="taaccountid_old" jdbcType="String"/>
+	</resultMap>
+
+	<select id="getLcAssetUser" parameterClass="java.util.Map" resultMap="AssetUserMap">
+	    select b.TAACCOUNTID as fundAccount, a.ACCOUNTABBR as clientname from TA_CUST a, TA_FUNDACCOUNT b 
+        where a.custno=b.custno 
+        <dynamic>
+		     <isNotEmpty prepend="and" property="fundAccount">
+				b.TAACCOUNTID=#fundAccount#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="certificateno">
+				a.certificateno = #certificateno# and b.TAACCOUNTID like '98%'
+			</isNotEmpty>
+		</dynamic>
+         and a.webpassword=#password#
+	</select>
+	
+	<select id="getTxAssetUser" parameterClass="java.util.Map" resultMap = "AssetUserMap">
+		select a.client_id as fundAccount, a.CLIENT_NAME as clientName from HS_USER_CLIENT a  where a.client_id =#fundAccount# and a.LCPASS=#password#
+  	</select>
+  	
+	<select id="getNewAccount" parameterClass="String" resultMap="AssetUserMap2">
+    	select taaccountid,taaccountid_old from ta_new_fundaccount where taaccountid_old='$oldaccount$'
+	</select>
+	
+	<select id="getLcAccountByfundAccount" parameterClass="java.util.Map" resultMap = "AssetUserMap">
+		select b.TAACCOUNTID as fundAccount, a.ACCOUNTABBR as clientname from TA_CUST a, TA_FUNDACCOUNT b 
+        where a.custno=b.custno 
+        <dynamic>
+		     <isNotEmpty prepend="and" property="fundAccount">
+				b.TAACCOUNTID=#fundAccount#
+			</isNotEmpty>
+			<isNotEmpty prepend="and" property="certificateno">
+				a.certificateno = #certificateno# and b.TAACCOUNTID like '98%'
+			</isNotEmpty>
+		</dynamic>
+  	</select>
+  	
+  	<select id="getTxAccountByfundAccount" parameterClass="String" resultMap = "AssetUserMap">
+		select a.client_id as fundAccount, a.CLIENT_NAME as clientName from HS_USER_CLIENT a  where a.client_id =#fundAccount#
+  	</select>
+</sqlMap>

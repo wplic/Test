@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FinancialIndex">
+
+	<typeAlias alias="financialIndex" type="com.cssweb.F10.gazx.fund.pojo.FinancialIndex" />
+
+	<!--result map-->
+	<resultMap id="financialIndexMap" class="financialIndex">
+		<result property="accumulatedNVGrowthRat" column="LJJZZZL" jdbcType="java.lang.Double" />
+		<result property="comparingPerformance" column="YJBJJZSYL" jdbcType="java.lang.Double" />
+		<result property="compPerStandDeviation" column="YJBJJZSYLBZC" jdbcType="java.lang.Double" />
+		<result property="id" column="T_JJZYCWZB_ID" jdbcType="java.lang.Long" />
+		<result property="netGrowthRate" column="JZZZLBZC" jdbcType="java.lang.Double" />
+		<result property="nvGrowthRate" column="JZZZL" jdbcType="java.lang.Double" />
+		<result property="nvProfitRatio" column="ZCJZSYL" jdbcType="java.lang.Double" />
+		<result property="profit" column="BQLR" jdbcType="java.lang.Double" />
+		<result property="totalAsset" column="ZCZZ" jdbcType="java.lang.Double" />
+		<result property="totalNetAsset" column="ZCJZ" jdbcType="java.lang.Double" />
+		<result property="unitNV" column="DWZCJZ" jdbcType="java.lang.Double" />
+		<result property="weightedAverage" column="JQPJDWJSY" jdbcType="java.lang.Double" />
+		<result property="weightedNetAssetValue" column="JQPJZCJZSYL" jdbcType="java.lang.Double" />
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="fundShortName" column="JJJC" jdbcType="java.lang.String" />
+		<result property="fundCode" column="JJDM" jdbcType="java.lang.String" />
+		<result property="fundType" column="JJLX" jdbcType="java.lang.String" />
+	</resultMap>
+	
+	<resultMap id="financialIndexMapByCode" class="financialIndex">
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>	
+	
+	<!-- 根据代码查询时间列表 -->
+	<select id="getDateListByCode" resultMap="financialIndexMapByCode" parameterClass="String">
+    	select distinct jz.FSRQ
+		from JJZYCWZB  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+		order by jz.FSRQ desc
+	</select>	
+	
+	<!-- 根据代码，开始时间，结束时间查询财务指标列表 -->
+	<select id="getFinancialListByCodeAndDate" resultMap="financialIndexMap" parameterClass="Map">
+    	select jz.LJJZZZL,jz.YJBJJZSYL,jz.YJBJJZSYLBZC,jz.T_JJZYCWZB_ID,jz.JZZZLBZC,
+    		jz.JZZZL,jz.ZCJZSYL,jz.BQLR,jz.ZCZZ,jz.ZCJZ,jz.DWZCJZ,jz.JQPJDWJSY,
+    		jz.JQPJZCJZSYL,jz.FSRQ,j.JJJC,j.JJDM,j.JJLX
+		from JJZYCWZB  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID  and  j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+		<dynamic   prepend="and">
+	      		<isNotEmpty property="startDate"> 
+	              	jz.FSRQ &gt;=to_date('$startDate$','yyyy-mm-dd')
+	            </isNotEmpty>
+	    </dynamic>
+		<dynamic prepend="and">
+			<isNotNull property="endDate">
+				jz.FSRQ &lt;=to_date('$endDate$','yyyy-mm-dd')
+			</isNotNull>
+		</dynamic>
+		order by jz.FSRQ desc
+	</select>
+	<select id="pageQuery" resultMap="financialIndexMap" parameterClass="map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select jz.LJJZZZL,jz.YJBJJZSYL,jz.YJBJJZSYLBZC,jz.T_JJZYCWZB_ID,jz.JZZZLBZC,
+    		jz.JZZZL,jz.ZCJZSYL,jz.BQLR,jz.ZCZZ,jz.ZCJZ,jz.DWZCJZ,jz.JQPJDWJSY,
+    		jz.JQPJZCJZSYL,jz.FSRQ,j.JJJC,j.JJDM,j.JJLX
+		
+		from JJZYCWZB  jz, JJZB  j
+    	where jz.T_JJZB_ID=j.T_JJZB_ID and jz.SCBZ=0 and jz.GKBZ=1
+			<dynamic>
+				<isNotNull prepend="and" property="fundCode">
+					j.JJDM= #fundCode#
+				</isNotNull>
+			</dynamic>
+			order by jz.FSRQ desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+</sqlMap>

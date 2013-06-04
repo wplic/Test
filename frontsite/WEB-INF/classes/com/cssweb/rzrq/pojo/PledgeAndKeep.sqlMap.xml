@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.PledgeAndKeep">
+
+	<typeAlias alias="pledgeAndKeep" type="com.cssweb.rzrq.pojo.PledgeAndKeep" />
+
+	<resultMap id="pledgeAndKeepMap" class="pledgeAndKeep">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="beforeAdjust" column="BEFORE_ADJUST" jdbcType="Double"/>
+		<result property="afterAdjust" column="AFTER_ADJUST" jdbcType="Double"/>
+		<result property="startDate" column="START_DATE" jdbcType="java.util.Date" />
+	    <result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" />
+	    <result property="auditing" column="AUDITING" jdbcType="String" />
+	    <result property="parityAdjust" column="PARITY_ADJUST" jdbcType="Double"/>
+	     <result property="guardLine" column="GUARDLINE" jdbcType="Double"/>
+	</resultMap>
+	<select id="getPledgeAndKeepNewStartDate" parameterClass="Long" resultMap="pledgeAndKeepMap">
+		select * from (
+			select * from T_RZRQ_PLEDGEANDKEEP t where 1=1 and  AUDITING = 1  order by START_DATE desc)
+			where rownum=1 
+	</select>
+	
+	<select id="getPledgeAndKeepByStartDate" parameterClass="String" resultMap="pledgeAndKeepMap">
+		select * from T_RZRQ_PLEDGEANDKEEP t where 1=1  and to_char(START_DATE,'yyyy-mm-dd') = #startDate#
+	</select>
+	<insert id="insertPledgeAndKeep" parameterClass="pledgeAndKeep">
+		INSERT into T_RZRQ_PLEDGEANDKEEP ( ID, BEFORE_ADJUST,AFTER_ADJUST,START_DATE,PUBLISH_DATE,AUDITING,PARITY_ADJUST,GUARDLINE) VALUES 
+		(#id#,#beforeAdjust#, #afterAdjust#,#startDate#,#publishDate#,#auditing#,#parityAdjust#,#guardLine#)
+	</insert>
+	
+	<update id="updatePledgeAndKeep" parameterClass="pledgeAndKeep">
+		update T_RZRQ_PLEDGEANDKEEP
+		 set 
+		 	BEFORE_ADJUST = #beforeAdjust#,
+			AFTER_ADJUST= #afterAdjust#,
+			START_DATE = #startDate#,
+			PUBLISH_DATE = #publishDate#,
+			PARITY_ADJUST = #parityAdjust#,
+			GUARDLINE = #guardLine#,
+			AUDITING='0'
+		where id=#id#
+	</update>
+	
+	<update id="updateByAuditIng" parameterClass="pledgeAndKeep">
+		update T_RZRQ_PLEDGEANDKEEP
+		 set 
+		 	AUDITING = #auditing#
+		where id=#id#
+	</update>
+
+	<delete id="deletePledgeAndKeep" parameterClass="pledgeAndKeep">
+		delete from T_RZRQ_PLEDGEANDKEEP where ID in ($value$)
+	</delete>
+	
+	<delete id="deletePledgeAndKeepById" parameterClass="Long">
+		delete from T_RZRQ_PLEDGEANDKEEP where id = #value#
+	</delete>
+	
+	<select id="getPledgeAndKeepAll" resultMap="pledgeAndKeepMap">
+		select * from T_RZRQ_PLEDGEANDKEEP 
+	</select>
+
+	<select id="getPledgeAndKeepById" parameterClass="Long" resultMap="pledgeAndKeepMap">
+		select * from T_RZRQ_PLEDGEANDKEEP where id= #id#
+	</select>	
+
+	<select id="getCountBySql" resultClass="java.lang.Integer" parameterClass="String">
+		$sql$
+	</select>
+	
+	  <select id="getPledgeAndKeepByPage" parameterClass="java.util.Map" resultMap = "pledgeAndKeepMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  
+</sqlMap>

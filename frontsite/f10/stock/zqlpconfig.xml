@@ -1,0 +1,51 @@
+<config>
+	<iplist>  
+		 <item ip="218.80.247.163" port="9001"/>  
+	</iplist>
+<title></title>
+<size>
+	<width>790</width>
+	<height>412</height>
+	<global>
+		<fontSize>12</fontSize>									<!-- 分时，k线字体大小 -->
+		<fontHeight>12</fontHeight>
+		<KlineViewtype>3</KlineViewtype>						<!-- 2,3  表示k线页面分两块块显示还是分三块显示 -->
+		<K_rightwidth>60</K_rightwidth>							<!-- k线图右边label栏宽度 -->
+		<K_titleHeight>20</K_titleHeight>						<!-- k线图title栏高度 -->
+		<DEF_SHAPE_WIDTH>4</DEF_SHAPE_WIDTH>					<!--  -->
+		<DEF_SPACE_WIDTH>3</DEF_SPACE_WIDTH>					<!--  -->
+		<TickLabelHeight>14</TickLabelHeight>					<!--  -->
+		<TickLeftWidth>60</TickLeftWidth>	
+		
+		<colorPriceRed>0xff0000</colorPriceRed>					<!--  -->
+		<colorPriceGreen>0x008000</colorPriceGreen>				<!--  -->
+		<colorPriceWhite>0x193967</colorPriceWhite>				<!--  -->
+		<colorGridLine>0x76A9ED</colorGridLine>					<!--  -->
+		<colorBackgroud>0xfefefe</colorBackgroud> 				<!--  -->
+		<clrGridGreen>0x008000</clrGridGreen>					<!--  -->
+		<colorVolume>0x006699</colorVolume>						<!--  -->
+		<colorFZLine>0xe08000</colorFZLine>						<!-- 分时线 颜色-->
+		<colorFZAvePriceLine>0x204080</colorFZAvePriceLine>		<!-- 分时均价线 颜色-->
+		<colorVolumeLine>0x8a8a8a</colorVolumeLine>
+		<colorLabel>0x000000</colorLabel>
+		
+		<colorTitle>0x000000</colorTitle>						<!-- 5档成交标题颜色 -->
+		<colorPriveVolumeLabel>0x8a8a8a</colorPriveVolumeLabel>
+		<colorM5>0xb58064</colorM5>
+		<colorM10>0xff39ff</colorM10>
+		<colorM20>0x9b56c9</colorM20>
+		<colorM60>0x0000ff</colorM60>
+		<colorKdown>0x22b14c</colorKdown>
+		<colorKping>0xbf2525</colorKping>
+		<colorKup>0xfefefe</colorKup>
+		<colorKlabel>0xff5252</colorKlabel>
+		
+		<AllowRefreshYN>1</AllowRefreshYN> 					<!-- 1,0 交易时间段是否刷新-->
+		<REFRESH_TIME>3000</REFRESH_TIME>					<!-- 刷新频率 毫秒 -->
+		<PriveVolumeWidth>200</PriveVolumeWidth>				<!-- 五档行情宽度 -->
+		<PriveVolumefontSize>12</PriveVolumefontSize>			<!-- 五档行情字体大小 -->
+		
+		<HaveMenuYN>0</HaveMenuYN>								<!--true,false 是否包含菜单页面 -->
+	</global>
+</size> 
+</config>

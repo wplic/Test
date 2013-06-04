@@ -1,0 +1,226 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="zh-CN" lang="zh-CN">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<META HTTP-EQUIV="Pragma"   CONTENT="no-cache">    
+<META HTTP-EQUIV="Cache-Control"   CONTENT="no-cache">    
+<META HTTP-EQUIV="Expires"   CONTENT="0">    
+<title>external2</title>
+</head>
+<body bgcolor="#ffffff">
+
+<script language=javascript>
+	function CallFlexLogin(valIn){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		me.FlexSetServerUrl("http://10.101.5.84/");
+		me.FlexLogin(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,"idm",document.getElementById("text8").value,"127.0.0.1","E0-F1-G2-H3","");
+	}
+	function CallFlexLogout(valIn){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//me.FlexLogin(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,"1");
+		document.getElementById("text1").value=me.FlexLogout(document.getElementById("text2").value,document.getElementById("text3").value,"5");
+		
+		//me.FlexLogout(document.getElementById("text2").value,document.getElementById("text3").value,"5");
+	}
+	function CallFlexLoginUser(valIn){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		me.FlexLoginUser(document.getElementById("text4").value,document.getElementById("text5").value,"idm","idm","127.0.0.1","E0-F1-G2-H3","");
+	}
+	function CallFlexLogoutUser(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//me.FlexLogin(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,"1");
+		document.getElementById("text1").value=me.FlexLogoutUser(document.getElementById("text4").value,"6");
+	}
+	function CallFlexModifyPassword(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//me.FlexLogin(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,"1");
+		me.FlexModifyPassword(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,document.getElementById("text6").value,"idm","127.0.0.1","E0-F1-G2-H3");
+	}
+	function CallFlexModifyPasswordUser(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//me.FlexLogin(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,"1");
+		me.FlexModifyPasswordUser(document.getElementById("text4").value,document.getElementById("text5").value,document.getElementById("text6").value,"idm","127.0.0.1","E0-F1-G2-H3");
+	}
+	function CallFlexLoginOri(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		document.getElementById("text1").value=me.FlexLoginOri(document.getElementById("text7").value,"idm","");
+	}
+	
+	
+	function CallFlexLoginCommon(valIn){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//document.getElementById("text1").value="a";
+		me.FlexSetServerUrl("http://121.14.6.138:8001/");
+		me.FlexLoginCommon(document.getElementById("text4").value,document.getElementById("text5").value,"idm","idm","127.0.0.1","E0-F1-G2-H3","");
+	}
+	function CallFlexLogoutCommon(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//me.FlexLogin(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,"1");
+		document.getElementById("text1").value=me.FlexLogoutCommon(document.getElementById("text4").value);
+	}
+	function CallFlexModifyPasswordCommon(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//me.FlexLogin(document.getElementById("text2").value,document.getElementById("text3").value,document.getElementById("text5").value,"1");
+		me.FlexModifyPasswordCommon(document.getElementById("text4").value,document.getElementById("text5").value,document.getElementById("text6").value,"idm","127.0.0.1","E0-F1-G2-H3");
+	}
+
+	function CallFlexInsertUser(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		//me.FlexInsertUser(document.getElementById("text9").value,document.getElementById("text4").value,document.getElementById("text5").value,"idm","127.0.0.1","E0-F1-G2-H3");
+		me.FlexSetServerUrl("http://121.14.6.138:8001/");
+		me.FlexInsertUser("TSahlOtlCVOFoYJsPsg0MK+8J/AA+t7dDfWEuAml4HNc3srC2KPc0f0ctVG/PaxSVVqCxrG1rUXdTNqOcoNP/gPebLU2JVS8nxcgxDMp9Hk=","idm","127.0.0.1","E0-F1-G2-H3");
+	}
+
+	function CallFlexLoginOriCommon(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		document.getElementById("text1").value=me.FlexLoginOriCommon(document.getElementById("text7").value,"idm","");
+	}
+	function CallFlexLoginRefresh(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		me.FlexLoginRefresh(document.getElementById("text2").value,document.getElementById("text3").value);
+	}
+	function CallFlexLoginRefreshUser(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		me.FlexLoginRefreshUser(document.getElementById("text4").value);
+	}
+
+	function CallFlexLoginRefreshCommon(){
+		document.getElementById("text1").value="";
+		var me;
+		if(navigator.appName.indexOf("Microsoft")>-1){
+			me=document.getElementById("IeCssLogin");
+		}else{
+			me= document.getElementById("FfCssLogin");
+		}
+		me.FlexLoginRefreshCommon(document.getElementById("text4").value);
+	}
+
+	
+	function CallBackFlex(valIn){
+		document.getElementById("text1").value=valIn;
+	}
+</script>
+
+<OBJECT id=IeCssLogin 
+codeBase=http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0 
+height=1 width=1 align=middle 
+classid=clsid:d27cdb6e-ae6d-11cf-96b8-444553540000><PARAM NAME="_cx" VALUE="26"><PARAM NAME="_cy" VALUE="26"><PARAM NAME="FlashVars" VALUE=""><PARAM NAME="Movie" VALUE="http://localhost:9080/csswebsso.swf"><PARAM NAME="Src" VALUE="http://localhost:9080/csswebsso.swf"><PARAM NAME="WMode" VALUE="Window"><PARAM NAME="Play" VALUE="-1"><PARAM NAME="Loop" VALUE="-1"><PARAM NAME="Quality" VALUE="High"><PARAM NAME="SAlign" VALUE=""><PARAM NAME="Menu" VALUE="-1"><PARAM NAME="Base" VALUE=""><PARAM NAME="AllowScriptAccess" VALUE="always"><PARAM NAME="Scale" VALUE="ShowAll"><PARAM NAME="DeviceFont" VALUE="0"><PARAM NAME="EmbedMovie" VALUE="0"><PARAM NAME="BGColor" VALUE=""><PARAM NAME="SWRemote" VALUE="TRUE"><PARAM NAME="MovieData" VALUE=""><PARAM NAME="SeamlessTabbing" VALUE="1"><PARAM NAME="Profile" VALUE="0"><PARAM NAME="ProfileAddress" VALUE=""><PARAM NAME="ProfilePort" VALUE="0"><PARAM NAME="AllowNetworking" VALUE="all"><PARAM NAME="AllowFullScreen" VALUE="false">
+<embed src="http://localhost:9080/csswebsso.swf" width="1" height="1" id="FfCssLogin" allowScriptAccess="always"'>
+</embed></OBJECT>
+
+<P><INPUT id=text1 name=text1 style="WIDTH: 808px; HEIGHT: 22px" size=103></P>
+
+<P><LABEL></LABEL><LABEL></LABEL>营业部：&nbsp;&nbsp; 
+&nbsp;<INPUT id=text2 value=3106 name=text2></P>
+
+<P>资金帐号：<INPUT id=text3 name=text3 value=68008601></P>
+<P>用户名：&nbsp;&nbsp;&nbsp; <INPUT id=text4 name=text4 value=gftest></P>
+<P>客户号：&nbsp;&nbsp;&nbsp; <INPUT id=text9 name=text9 value=030180003901></P>
+<P>密码：&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <INPUT id=text5 name=text5 value=test123></P>
+<P>新密码：&nbsp;&nbsp;&nbsp; <INPUT id=text6 name=text6 value=sa></P>
+<P>现有帐号登录类型：<INPUT id=text7 name=text7 value=1></P>
+<P>来源：<INPUT id=text8 name=text8 value=TDX-JY></P>
+
+<P><INPUT id=button1 type=button value=资金帐号登录 name=button1 onclick='CallFlexLogin("abc")'>
+<INPUT id=button2 name=button2 onclick='CallFlexLogout("a")' type=button value=资金帐号退出>
+<INPUT id=button3 name=button3 onclick='CallFlexLoginUser("a")'   type=button value=客户号登录>
+<INPUT id=button4 name=button4 onclick='CallFlexLogoutUser()' type=button value=客户号退出>
+<INPUT id=button5 name=button5 onclick='CallFlexModifyPassword()' type=button value=资金帐号修改密码>
+<INPUT id=button6 name=button6 onclick='CallFlexModifyPasswordUser()' type=button value=客户号修改密码>
+<INPUT id=button7 name=button7 onclick='CallFlexLoginOri()'  value=现有帐号登录 type=button>
+<INPUT id=button12 type=button onclick='CallFlexLoginRefresh()' value=资金帐号刷新 name=button12>
+<INPUT id=button14 type=button onclick='CallFlexLoginRefreshUser()' value=客户号刷新 name=button14></P>
+<P>
+<INPUT id=button8 name=button8 onclick='CallFlexLoginCommon()' type=button value=普通用户登录>
+<INPUT id=button9 name=button9 onclick='CallFlexLogoutCommon()' type=button value=普通用户退出>
+<INPUT id=button10 name=button10 onclick='CallFlexModifyPasswordCommon()' type=button value=普通用户修改密码>
+<INPUT id=button11 name=button11 onclick='CallFlexLoginOriCommon()' type=button value=普通用户现有帐号登录>
+<INPUT id=button13 type=button onclick='CallFlexLoginRefreshCommon()' value=普通用户刷新 name=button13></P>
+<INPUT id=button14 name=button14 onclick='CallFlexInsertUser()' type=button value=普通用户注册>
+<P>&nbsp;</P>
+
+</body>
+</html>

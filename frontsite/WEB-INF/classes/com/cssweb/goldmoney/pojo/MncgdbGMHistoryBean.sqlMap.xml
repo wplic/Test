@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.goldmoney.pojo.MncgdbGMHistoryBean">
+
+	<typeAlias alias="MncgdbGMHistoryBean" type="com.fortuneage.goldmoney.pojo.MncgdbGMHistoryBean"/>
+	
+	<resultMap id="MncgdbGMHistoryBeanResult" class="MncgdbGMHistoryBean">
+		<result property="stockcode" column="stock_code" jdbcType="Integer"/>
+		<result property="expireYearRate" column="EXPIRE_YEAR_RATE" jdbcType="Double"/>
+		<result property="preendYearRate" column="PREEND_YEAR_RATE" jdbcType="Double"/>
+		<result property="buyscale" column="buyscale" jdbcType="String"/>
+		<result property="initdate" column="init_date" jdbcType="String"/>
+	</resultMap>
+	
+	<resultMap id="MncgdbGMHistoryBeanResult2" class="MncgdbGMHistoryBean">
+		<result property="stockcode" column="stock_code" jdbcType="Integer"/>
+		<result property="initdate" column="init_date" jdbcType="String"/>
+	</resultMap>
+	
+	<select id="getAllMncgdbGMHCodeAndDate" resultMap="MncgdbGMHistoryBeanResult2">
+		select max(init_date) init_date ,stock_code from hs_secu.qrpcode q group by stock_code
+	</select>
+	
+	<!--  -->
+	<select id="getMGMHByCodeAndDate" resultMap="MncgdbGMHistoryBeanResult" parameterClass="MncgdbGMHistoryBean">
+	<![CDATA[
+
+		select 
+		  q.stock_code, 
+		  q.expire_year_rate, 
+		  q.preend_year_rate,
+		  k.buyscale,
+		  q.init_date
+		from 
+		  hs_secu.qrpcode q,(
+		                    select 
+		                      least(b.quota, a.allquota) buyscale, 
+		                      b.stock_code
+		                    from 
+		                      (
+		                      select 
+		                        least(a.qrp_approv_quota,a.qrp_actual_quota,a.qrp_impawn_balance) - a.qrp_buy_balance + a.qrp_term_balance - a.qrp_undue_balance as allquota,
+		                        stock_code
+		                      from 
+		                        hs_secu.qrpquota a
+		                      where a.stock_code = '!'
+		                      ) a,
+		                      (
+		                      select 
+		                        a.qrp_actual_quota - a.qrp_buy_balance + a.qrp_term_balance - a.qrp_undue_balance as quota,
+		                        stock_code
+		                      from 
+		                        hs_secu.qrpquota a
+		                      where a.stock_code <> '!'
+		                      ) b
+		                    ) k
+		where 
+		  k.stock_code=q.stock_code and q.stock_code=#stockcode# and q.init_date=#initdate#
+		 ]]> 
+	</select>
+	
+	
+	
+	
+</sqlMap>

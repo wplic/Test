@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.branch.pojo.YFInvest">
+	<typeAlias alias="YFInvest" type="com.cssweb.branch.pojo.YFInvest"/>
+	<resultMap id="yFInvestMap" class="YFInvest">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="PUBLISH_DATE" property="publishDate" jdbcType="java.util.Date"/>
+		<result column="INSTRUCTION" property="instruction" jdbcType="String"/>
+		<result column="STOCK" property="stock" jdbcType="String"/>
+		<result column="TYPE" property="type" jdbcType="String"/>
+		<result column="PRICE" property="price" jdbcType="String"/>
+		<result column="REASON" property="reason" jdbcType="String"/>
+
+		<result column="CODE" property="code" jdbcType="String"/>
+		<result column="NAME" property="name" jdbcType="String"/>
+		<result column="NUM" property="num" jdbcType="String"/>
+		<result column="INVEST_RATE" property="investRate" jdbcType="String"/>
+		<result column="FUNDS" property="funds" jdbcType="String"/>
+
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+
+	<select id="select" resultMap="yFInvestMap">
+		select
+		*
+		from YF_Invest
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+	</select>
+	
+
+	<select id="getYFInvestById" resultMap="yFInvestMap" parameterClass="java.lang.Long" >
+		select * from YF_Invest where id=#value#
+	</select>
+
+	<select id="getYFInvestsByType" resultMap="yFInvestMap" parameterClass="java.lang.String" >
+		select * from YF_Invest where type=#value# order by publish_Date desc
+	</select>
+	<select id="getYFInvestsByType2" resultMap="yFInvestMap" parameterClass="java.lang.String" >
+		select * from YF_Invest where type=#value#  
+	</select>
+	 <select id="searchYFInvests" parameterClass="map" resultMap="yFInvestMap">
+      SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+
+
+
+	<insert id="insert" parameterClass="YFInvest">
+		insert into YF_Invest(ID,PUBLISH_DATE,INSTRUCTION,STOCK,TYPE,PRICE,REASON,CODE,NAME,NUM,INVEST_RATE,FUNDS,EXT1,EXT2,EXT3,EXT4) 
+					values(#id#,#publishDate#,#instruction#,#stock#,#type#,#price#,#reason#,#code#,#name#,#num#,#investRate#,#funds#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	<update id="update" parameterClass="YFInvest">
+		update YF_Invest set PUBLISH_DATE = #publishDate#,
+							 INSTRUCTION = #instruction#,
+							 STOCK = #stock#,
+							 TYPE = #type#,
+							 PRICE = #price#,
+							 REASON = #reason#,
+							 CODE = #code#,
+							 NAME = #name#,
+							 NUM = #num#,
+							 INVEST_RATE = #investRate#,
+							 FUNDS = #funds#,
+							 EXT1 = #ext1#,
+							 EXT2 = #ext2#,
+							 EXT3 = #ext3#,
+							 EXT4 = #ext4#
+		where ID = #id#
+	</update>
+
+	<select id="count" resultClass="java.lang.Integer"
+		parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+	</select>
+
+
+   <delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from YF_Invest where ID = #value#
+	</delete>
+	
+  
+ 
+</sqlMap>

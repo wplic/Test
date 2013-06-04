@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+
+<sqlMap namespace="com.cssweb.credit.pojo.Credit">
+
+	<typeAlias alias="Credit" type="com.cssweb.credit.pojo.Credit" />
+
+	<!--result map-->
+	<resultMap id="ResultMap" class="Credit">
+		<result column="ID" 			property="id" 			jdbcType="java.lang.Long"/>       
+		<result column="TITLE" 		property="title" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="CONTENT" 		property="content" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="CREATE_DATE" 	property="createDate" 	jdbcType="Date"	nullValue=""/> 
+		<result column="PIC_ID" 	property="picId" 	jdbcType="java.lang.Long"/>  
+		<result column="ORDERNUM" 	property="orderNum" 	jdbcType="java.lang.Long"/>  
+		<result column="TYPE" 		property="type" 	jdbcType="java.lang.String"	nullValue=""/>
+	</resultMap>
+	
+	<update id="updateSortAppend" parameterClass="Long">
+	 update T_INVESTBANK_CREDIT
+		 set 
+		 	ORDERNUM = ORDERNUM+1 
+		where ORDERNUM &gt;=#orderNum#
+	</update>	
+	<update id="updateSortStartEnd" parameterClass="java.util.Map">
+	 update T_INVESTBANK_CREDIT
+		 set 
+		 	ORDERNUM = ORDERNUM+1 
+		where ORDERNUM &gt;= #start# and ORDERNUM &lt;= #end#
+	</update>
+	
+	<update id="updateSortEndStart" parameterClass="java.util.Map">
+	 update T_INVESTBANK_CREDIT
+		 set 
+		 	ORDERNUM = ORDERNUM-1 
+		where ORDERNUM &gt;= #start# and ORDERNUM &lt;= #end#
+	</update>
+	
+	<select id="selectrecord" parameterClass="java.lang.String" resultMap = "ResultMap">   
+      $sql$   
+ 	</select>
+	
+	<select id="selectAll_1" parameterClass="java.util.Map" resultMap = "ResultMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+  
+
+ 
+  <insert id="insert" parameterClass="Credit">    	
+    insert into T_INVESTBANK_CREDIT(ID,TITLE,CONTENT,CREATE_DATE,PIC_ID,ORDERNUM,TYPE)
+    values(#id#,#title#,#content#,sysdate,#picId#,#orderNum#,#type#)
+  </insert>
+ 
+ 
+  <update id="update" parameterClass="Credit">    
+     update T_INVESTBANK_CREDIT
+         set TITLE=#title#,CONTENT=#content#,ORDERNUM=#orderNum#,TYPE=#type#
+         where ID=#id#    
+  </update>
+  
+ 
+  <select id="getCaseById" parameterClass="java.lang.Long" resultMap = "ResultMap">
+    select * from T_INVESTBANK_CREDIT where id = #id#
+  </select>
+    
+    <update id="updatePicIdBySoftId" parameterClass="Credit">
+		  update T_INVESTBANK_CREDIT set PIC_ID=#picId# where ID=#id#
+	</update>
+
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete T_INVESTBANK_CREDIT where id in ($ids$)
+  </delete>
+  
+</sqlMap>

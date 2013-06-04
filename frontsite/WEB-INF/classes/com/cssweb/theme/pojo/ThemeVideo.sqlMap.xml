@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.theme.pojo.ThemeVideo">
+
+	<typeAlias alias="ThemeVideo" type="com.cssweb.theme.pojo.ThemeVideo" />
+
+	<resultMap id="ThemeVideoMap" class="ThemeVideo">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="categoryid" column="CATEGORYID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="docent" column="DOCENT" jdbcType="String"/>
+		<result property="content" column="CONTENT" jdbcType="String"/>
+		<result property="urllink" column="URLLINK" jdbcType="String"/>
+		<result property="downlink" column="DOWNLINK" jdbcType="String"/>
+		<result property="source" column="SOURCE" jdbcType="String"/>
+		<result property="hits" column="HITS" jdbcType="Long"/>
+		<result property="downcount" column="DOWNCOUNT" jdbcType="Long"/>
+		<result property="filesize" column="FILESIZE" jdbcType="String"/>
+		<result property="isdown" column="ISDOWN" jdbcType="String"/>
+		<result property="recommend" column="RECOMMEND" jdbcType="String"/>
+		<result property="filetype" column="FILETYPE" jdbcType="String"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+		<result property="state" column="STATE" jdbcType="String"/>
+		<result property="picid" column="PICID" jdbcType="Long"/>
+	</resultMap>
+
+	<resultMap id="ThemeVideoMap2" class="ThemeVideo">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="category" column="CATEGORY" jdbcType="String"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="docent" column="DOCENT" jdbcType="String"/>
+		<result property="urllink" column="URLLINK" jdbcType="String"/>
+		<result property="source" column="SOURCE" jdbcType="String"/>
+		<result property="filesize" column="FILESIZE" jdbcType="String"/>
+		<result property="filetype" column="FILETYPE" jdbcType="String"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="ThemeVideo">
+		INSERT into T_THEME_VIDEO (ID,
+									CATEGORYID,
+									TITLE,
+									DOCENT,
+									CONTENT,
+									URLLINK,
+									DOWNLINK,
+									SOURCE,
+									HITS,
+									DOWNCOUNT,
+									FILESIZE,
+									ISDOWN,
+									RECOMMEND,
+									FILETYPE,
+									UPDATETIME,
+									STATE,
+									PICID
+								) VALUES (
+									#id#,
+									#categoryid#,
+									#title#,
+									#docent#,
+									#content#,
+									#urllink#,
+									#downlink#,
+									#source#,
+									#hits#,
+									#downcount#,
+									#filesize#,
+									#isdown#,
+									#recommend#,
+									#filetype#,
+									sysdate,
+									#state#,
+									#picid#
+								)
+	</insert>
+	
+	<update id="update" parameterClass="ThemeVideo">
+		update T_THEME_VIDEO set CATEGORYID=#categoryid#,
+								TITLE=#title#,
+								DOCENT=#docent#,
+								CONTENT=#content#,
+								URLLINK=#urllink#,
+								DOWNLINK=#downlink#,
+								SOURCE=#source#,
+								HITS=#hits#,
+								DOWNCOUNT=#downcount#,
+								FILESIZE=#filesize#,
+								ISDOWN=#isdown#,
+								RECOMMEND=#recommend#,
+								FILETYPE=#filetype#,
+								UPDATETIME=sysdate,
+								STATE=#state#,
+								PICID=#picid# 
+		where ID=#id#
+	</update>
+	
+	<update id="updatePic" parameterClass="java.util.Map">
+		update T_THEME_VIDEO set PICID=#picid# where ID=#id#
+	</update>
+
+	<delete id="delete" parameterClass="String">
+		delete from T_THEME_VIDEO where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_THEME_VIDEO where ID = #value#
+	</delete>
+		
+	<select id="getAll" resultMap="ThemeVideoMap">
+		select * from T_THEME_VIDEO ORDER BY ID
+	</select>
+
+	<select id="getCountByCategory" parameterClass="Long" resultClass="java.lang.Integer">
+		select count(*) from T_THEME_VIDEO where CATEGORYID = #categoryid#
+	</select>
+
+	<select id="getCountBySql" parameterClass="String" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="ThemeVideoMap">
+		select * from T_THEME_VIDEO where ID= #id#
+	</select>	
+	
+	  <select id="getFrontByMap" parameterClass="java.util.Map" resultMap = "ThemeVideoMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+	  <select id="getAdminByMap" parameterClass="java.util.Map" resultMap = "ThemeVideoMap2">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+</sqlMap>

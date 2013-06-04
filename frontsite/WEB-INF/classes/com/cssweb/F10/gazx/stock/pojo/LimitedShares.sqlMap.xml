@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.LimitedShares">
+    <typeAlias alias="limitedShares" type="com.cssweb.F10.gazx.stock.pojo.LimitedShares"/>
+    <!--result map-->
+    <resultMap id="limitedSharesMap" class="limitedShares">
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long"/>
+		<result column="SSR" property="listingDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="XSQMXZKSSGF" property="addListingShares" jdbcType="Long"/>
+        <result column="WXSTJGFYE" property="unlimitedShares" jdbcType="Long"/>
+    </resultMap> 
+    
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		select count(*) from YXSTJGFSSSJ
+		where SCBZ = 0 and GKBZ = 1
+		<isNotNull prepend="and" property="companyId">
+			T_GSZB_ID = #companyId#
+		</isNotNull>
+	</select>
+
+	<select id="pageQuery" resultMap="limitedSharesMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select
+					T_GSZB_ID,
+					SSR,
+					XSQMXZKSSGF,
+					WXSTJGFYE
+				from YXSTJGFSSSJ
+				where SCBZ = 0 and GKBZ = 1
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+				order by ssr desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select> 
+	
+</sqlMap>	

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.CustRegister">
+
+	<typeAlias alias="custRegister" type="com.cssweb.rzrq.pojo.CustRegister" />
+	
+	<resultMap id="custRegisterMap" class="custRegister">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="departmentNo" column="departmentNo" jdbcType="String"/>
+		<result property="cardId" column="cardId" jdbcType="String"/>
+		<result property="custNo" column="custNo" jdbcType="String" />
+	    <result property="custName" column="custName" jdbcType="String" />
+	    <result property="petName" column="petName" jdbcType="String"/>
+		<result property="phone" column="phone" jdbcType="String" />
+	    <result property="address" column="address" jdbcType="String" />
+	</resultMap>
+	
+	
+   <insert id="insert" parameterClass="CustRegister">
+		insert into t_rzrq_custRegister
+		(ID,departmentNo,cardId,custNo,custName,petName,phone,address)
+		values(#id#,#departmentNo#,#cardId#,#custNo#,#custName#,#petName#,#phone#,#address#)
+	</insert>
+	
+	<update id="updateUser" parameterClass="String">
+		$sql$
+	</update>
+	
+  <select id="getUserByServiceNameAndNotInId" parameterClass="String" resultMap="custRegisterMap">
+		$sql$
+	</select>
+	<select id="getCnum" parameterClass="String" resultMap="custRegisterMap">
+		$sql$
+	</select>
+</sqlMap>

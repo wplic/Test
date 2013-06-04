@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundDividend">
+
+	<typeAlias alias="fundDividend" type="com.cssweb.F10.gazx.fund.pojo.FundDividend" />
+
+	<!--result map-->
+	<resultMap id="fundDividendMap" class="fundDividend">
+		<result property="dividendYear" column="FPND" jdbcType="java.util.Date" />
+		<result property="id" column="T_JJSYFP_ID" jdbcType="java.lang.Long" />
+		<result property="registeredDate" column="QYDJR" jdbcType="java.util.Date" />
+		<result property="remInterestDate" column="CXR" jdbcType="java.util.Date" />
+		<result property="unitsDistributed" column="MSGJJDWFF_HS" jdbcType="java.lang.Double" />
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>
+	
+	<!-- 根据代码查询基金分红列表 -->	
+	<select id="getFundDividendListByCode" resultMap="fundDividendMap" parameterClass="String">
+    	select jsf.FPND,jsf.T_JJSYFP_ID,jsf.QYDJR,jsf.CXR,jsf.MSGJJDWFF_HS,jsf.FSRQ
+		
+		from JJSYFP  jsf, JJZB  j
+		
+		where jsf.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jsf.SCBZ=0 and jsf.GKBZ=1
+	</select>
+	
+	<!-- 根据代码查询基金分红列表  分页-->
+	<select id="pageQuery" resultMap="fundDividendMap" parameterClass="Map">
+	
+		SELECT * FROM ( 
+						SELECT row_.*, ROWNUM rownum_ FROM 
+							( 
+								select jsf.FPND,jsf.T_JJSYFP_ID,jsf.QYDJR,jsf.CXR,jsf.MSGJJDWFF_HS,jsf.FSRQ from JJSYFP  jsf, JJZB  j
+								where jsf.T_JJZB_ID=j.T_JJZB_ID and jsf.SCBZ=0 and jsf.GKBZ=1 		
+				
+								<dynamic>
+									<isNotNull prepend="and" property="fundCode">
+										j.JJDM= #fundCode#
+									</isNotNull>
+								</dynamic>
+					
+								order by jsf.FSRQ desc
+							) row_ WHERE ROWNUM &lt;= #endNum#
+						) r WHERE rownum_ &gt;#beginNum#			
+	</select>	
+	
+	<!-- 根据代码查询基金分红列表的记录数 -->	
+	<select id="getFundDividendListOfCount" resultClass="Integer" parameterClass="String">
+    	select count(*)
+		
+		from JJSYFP  jsf, JJZB  j
+		
+		where jsf.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #fundCode# and jsf.SCBZ=0 and jsf.GKBZ=1
+	</select>	
+	
+</sqlMap>

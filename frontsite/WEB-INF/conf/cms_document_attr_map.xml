@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config_attr_map>
+	<!--document attr list begin-->
+	<db name="cms"/>
+	<attr name="title" type="string" notNull="true" level="base" desc="标题" idname="doc_id" multi="false" table="cms_doc_single_attr" column="title"/>
+	<attr name="subtitle" type="string" notNull="false" level="base" desc="副标题" idname="doc_id" multi="false" table="cms_doc_single_attr" column="subtitle"/>
+	<attr name="title_color" type="string" notNull="false" level="base" desc="标题颜色" idname="doc_id" multi="false" table="cms_doc_single_attr" column="title_color"/>
+	<attr name="title_striking" type="long" notNull="false" level="base" desc="标题加粗" idname="doc_id" multi="false" table="cms_doc_single_attr" column="title_striking"/>
+	<attr name="upload_date" type="date" notNull="true" level="base" desc="上传时间" idname="doc_id" multi="false" table="cms_doc_single_attr" column="upload_date"/>
+	<attr name="editor" type="string" notNull="true" level="base" desc="录入人" idname="doc_id" multi="false" table="cms_doc_single_attr" column="editor"/>		
+	<attr name="source" type="string" notNull="true" level="base" desc="来源" idname="doc_id" multi="false" table="cms_doc_single_attr" column="source"/>
+	<attr name="state" type="long" notNull="true" level="base" desc="状态" idname="doc_id" multi="false" table="cms_doc_single_attr" column="state"/>
+	<attr name="auditor" type="string" notNull="false" level="base" desc="审核人" idname="doc_id" multi="false" table="cms_doc_single_attr" column="auditor"/>		
+	<attr name="base_brief" type="string" notNull="false" level="base" desc="普通摘要" idname="doc_id" multi="false" table="cms_doc_single_attr" column="base_brief"/>	
+	<attr name="is_delete" type="long" notNull="true" level="base" desc="删除标记" idname="doc_id" multi="false" table="cms_doc_single_attr" column="is_delete"/>
+	<attr name="deletor" type="string" notNull="false" level="base" desc="删除人" idname="doc_id" multi="false" table="cms_doc_single_attr" column="deletor"/>
+	<attr name="modify_date" type="date" notNull="false" desc="最后修改时间" idname="doc_id" multi="false" table="cms_doc_single_attr" column="modify_date"/>
+	<attr name="hit_count" type="long" notNull="false" desc="点击数" idname="doc_id" multi="false" table="cms_doc_single_attr" column="hit_count"/>	
+	<attr name="is_delay" type="long" notNull="true" desc="延时标记" idname="doc_id" multi="false" table="cms_doc_single_attr" column="is_delay"/>	
+	<attr name="has_html" type="long" notNull="true" desc="html标记" idname="doc_id" multi="false" table="cms_doc_single_attr" column="has_html"/>
+	<attr name="has_xml" type="long" notNull="true" desc="xml标记" idname="doc_id" multi="false" table="cms_doc_single_attr" column="has_xml"/>
+	<attr name="has_lucene" type="long" notNull="true" desc="分词标记" idname="doc_id" multi="false" table="cms_doc_single_attr" column="has_lucene"/>
+	<attr name="http_href" type="string" notNull="false" desc="链接" idname="doc_id" multi="false" table="cms_doc_single_attr" column="http_href"/>
+	<attr name="importance" type="long" notNull="false" desc="重要程度" idname="doc_id" multi="false" table="cms_doc_single_attr" column="importance"/>
+	<attr name="source_type" type="string" notNull="false" desc="来源类型" idname="doc_id" multi="false" table="cms_doc_single_attr" column="source_type"/>
+	<attr name="user_type" type="long" notNull="false" desc="用户类型" idname="doc_id" multi="false" table="cms_doc_single_attr" column="user_type"/>
+	<attr name="doc_type" type="long" notNull="false"  desc="资讯类型" idname="doc_id" multi="false" table="cms_doc_single_attr" column="doc_type"/>
+	<attr name="sms_brief" type="string" notNull="false" desc="短信摘要" idname="doc_id" multi="false" table="cms_doc_single_attr" column="sms_brief"/>
+	<attr name="source_date" type="date" notNull="false" desc="来源时间" idname="doc_id" multi="false" table="cms_doc_single_attr" column="source_date"/>		
+	<attr name="cat_id" type="long" notNull="false" desc="栏目" multi="false" idname="doc_id" table="cms_doc_single_attr" column="cat_id"/>
+	<attr name="relation" type="string" notNull="false" desc="相关资讯" idname="doc_id" multi="false" table="cms_doc_single_attr" column="relation"/>
+	<attr name="begin_date" type="date" notNull="false" desc="激活时间" idname="doc_id" multi="false" table="cms_doc_single_attr" column="begin_date"/>
+	<attr name="end_date" type="date" notNull="false" desc="注销时间" idname="doc_id" multi="false" table="cms_doc_single_attr" column="end_date"/>	
+	<attr name="company_grade" type="string" notNull="false" desc="公司投资评级" idname="doc_id" multi="false" table="cms_doc_single_attr" column="company_grade"/>
+	<attr name="trade_grade" type="string" notNull="false" desc="行业投资评级" idname="doc_id" multi="false" table="cms_doc_single_attr" column="trade_grade"/>
+
+	<attr name="author" type="string" notNull="false" desc="作者" idname="doc_id" multi="true" table="cms_doc_multi_attr_author" column="author"/>
+	<attr name="stock_id" type="string" notNull="false" desc="股票代码" idname="doc_id" multi="true" table="cms_doc_multi_attr_stockid" column="stock_id"/>
+	<attr name="keyword" type="string" notNull="false" desc="关键字" idname="doc_id" multi="true" table="cms_doc_multi_attr_keyword" column="key_word"/>
+	<attr name="assetProd" type="long" notNull="false" desc="产品id" idname="doc_id" multi="true" table="cms_multi_attr_assetprod" column="product_id" />
+	
+	<attr name="item" type="long" notNull="false" desc="项目id" idname="doc_id" multi="true" table="cms_multi_attr_ITEM" column="item_id" />
+	<!--document attr list end-->
+</config_attr_map>

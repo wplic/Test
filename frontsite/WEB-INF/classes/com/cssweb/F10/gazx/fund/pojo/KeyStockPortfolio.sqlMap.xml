@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.KeyStockPortfolio">
+
+	<typeAlias alias="keyStockPortfolioment" type="com.cssweb.F10.gazx.fund.pojo.KeyStockPortfolio" />
+
+	<!--result map-->
+	<resultMap id="keyStockPortfoliomentMap" class="keyStockPortfolioment">
+		<result property="ratioInNV" column="ZJJBL" jdbcType="java.lang.Double" />
+		<result property="marketValue" column="CGSZ" jdbcType="java.lang.Double" />
+		<result property="endDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="id" column="T_JJTZZH_CG_ID" jdbcType="java.lang.Long" />
+		<result property="sharesHolding" column="CGSL" jdbcType="java.lang.Long" />
+		<result property="secCode" column="JJDM" jdbcType="java.lang.String" />
+		<result property="secName" column="JJJC" jdbcType="java.lang.String" />
+	</resultMap>
+	
+	<resultMap id="keyStockPortfoliomentByCodeMap" class="keyStockPortfolioment">
+		<result property="endDate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>	
+	
+	<resultMap id="StockListALLMap" class="keyStockPortfolioment">
+		<result property="ratioInNV" column="ZJJBL" jdbcType="java.lang.Double" />
+		<result property="marketValue" column="CGSZ" jdbcType="java.lang.Double" />
+		<result property="endDate" column="FSRQ" jdbcType="java.util.Date" />
+		<result property="sharesHolding" column="CGSL" jdbcType="java.lang.Long" />
+		<result property="secName" column="JJJC" jdbcType="java.lang.String" />
+		<result property="catogory" column="CYLX" jdbcType="java.lang.String" />
+		<result property="secId" column="CONNECT_ID" jdbcType="java.lang.Long" />
+	</resultMap>	
+	
+	<!-- 根据代码查询时间列表 -->
+	<select id="getDateListByCode" resultMap="keyStockPortfoliomentByCodeMap" parameterClass="String">
+    	select distinct jz.FSRQ
+		from JJTZZH_CG  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #secCode# and jz.SCBZ=0 and jz.GKBZ=1
+		order by jz.FSRQ desc
+	</select>	
+	
+	<select id="getLeastDateByCode" resultClass="java.util.Date" parameterClass="String">
+		select max(jz.FSRQ)  as FSRQ
+		from JJTZZH_CG  jz, JJZB  j
+		where jz.T_JJZB_ID=j.T_JJZB_ID and j.JJDM= #secCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>
+	<!-- 根据代码，开始时间，结束时间查询财务指标列表 -->
+	<select id="getStockListByCodeAndDate" resultMap="keyStockPortfoliomentMap" parameterClass="Map">
+    	select jz.ZJJBL,jz.CGSZ,jz.FSRQ,jz.T_JJTZZH_CG_ID,jz.CGSL,j.JJDM,j.JJJC
+		
+		from JJTZZH_CG  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID  and to_char(jz.FSRQ,'yyyy-mm-dd') &lt;= #endDate# 
+    		 and j.JJDM= #secCode# and jz.SCBZ=0 and jz.GKBZ=1
+	</select>
+	
+	<!-- 根据代码、时间查询持仓明细的记录数 -->	
+	<select id="getStockListOfCount" resultClass="Integer" parameterClass="Map">
+    	select count(*)
+		
+		from JJTZZH_CG  jz, JJZB  j
+		
+		where jz.T_JJZB_ID=j.T_JJZB_ID 
+  			and j.JJDM= #fundCode# and jz.SCBZ=0 and jz.GKBZ=1
+  			<dynamic>
+				<isNotNull prepend="and" property="endDate">
+						to_char(jz.FSRQ,'yyyy-mm-dd') = #endDate# 
+				</isNotNull>
+			</dynamic>
+	</select>	
+	
+	<!-- 根据代码、时间查询持仓明细列表  分页 -->
+	<select id="pageQuery" resultMap="StockListALLMap" parameterClass="Map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+		    	select jz.CGSL,jz.CGSZ,jz.FSRQ,jz.ZJJBL,j.JJJC,jz.CYLX,jz.Connect_ID
+				
+				from JJTZZH_CG  jz, JJZB  j
+				
+				where jz.T_JJZB_ID=j.T_JJZB_ID 
+		  			and jz.SCBZ=0 and jz.GKBZ=1
+    		 			<dynamic>
+							<isNotNull prepend="and" property="fundCode">
+								j.JJDM= #fundCode#
+							</isNotNull>
+							<isNotNull prepend="and" property="endDate">
+								to_char(jz.FSRQ,'yyyy-mm-dd') = #endDate# 
+							</isNotNull>
+						</dynamic>
+		    		 order by jz.CGSL desc,jz.CGSZ desc
+			) row_ WHERE ROWNUM &lt;= #endNum#
+		) r WHERE rownum_ &gt;#beginNum#
+	</select>			
+
+</sqlMap>

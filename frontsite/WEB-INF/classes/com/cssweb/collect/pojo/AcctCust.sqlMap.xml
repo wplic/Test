@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.AcctCust">
+
+	<typeAlias alias="acctCust" type="com.cssweb.collect.pojo.AcctCust"/>
+
+	<!--result map-->
+	<resultMap id="acctCustMap" class="acctCust" >
+		<result property="custno" column="custno" jdbcType="java.lang.Long"/>
+		<result property="fdacst" column="FDACST" jdbcType="String"/>
+		<result property="certificatetype" column="CERTIFICATETYPE" jdbcType="String" />
+		<result property="investorname" column="INVESTORNAME" jdbcType="String" />
+		<result property="custtp" column="CUSTTP"  jdbcType="String"  />
+		<result property="instreprname" column="instreprname" jdbcType="String"/>
+		<result property="certificateno" column="CERTIFICATENO" jdbcType="String"/>
+		<result property="postcode" column="POSTCODE" jdbcType="String"/>
+		<result property="address" column="ADDRESS" jdbcType="String"/>
+		<result property="telno" column="TELNO" jdbcType="String"/>
+		<result property="mobiletelno" column="MOBILETELNO" jdbcType="String"/>
+		<result property="hometelno" column="HOMETELNO" jdbcType="String"/>
+		<result property="faxno" column="FAXNO" jdbcType="String"/>
+		<result property="emailaddress" column="EMAILADDRESS" jdbcType="String"/>
+		<result property="taaccountid" column="TAACCOUNTID" jdbcType="String"/>
+		<result property="opendate" column="OPENDATE" jdbcType="String"/>
+		<result property="investhobby" column="INVESTHOBBY" jdbcType="String"/>
+		<result property="acctcardmailflag" column="ACCTCARDMAILFLAG" jdbcType="String"/>
+		<result property="defdividendmethod" column="Defdividendmethod" jdbcType="String"/>
+		<result property="invtp" column="INVTP" jdbcType="String"/>
+		
+	</resultMap>
+ 	
+ 	
+ 	 <select id="getAcctCustByDepositacct" parameterClass="java.lang.String" resultMap = "acctCustMap">
+  	   select tc.custno as custno,
+         tp_s.pmnm fdacst,
+         tp.pmnm certificatetype,
+         tc.investorname,
+         tc.custtp,
+         tc.instreprname,
+         tc.certificateno,
+         tc.postcode,
+         tc.address,
+         tc.telno,
+         tc.mobiletelno,
+         tc.hometelno,
+         tc.faxno,
+         tc.emailaddress,
+         tf.taaccountid,
+         tf.opendate,
+         tc.INVESTHOBBY,
+         tf.acctcardmailflag,
+         tp_t.pmnm as Defdividendmethod,
+         tc.invtp
+    from ta_cust        tc,
+         ta_fundaccount tf,
+         ta_rightsreg tr,
+         ta_FUNDINFO  tf,
+         ta_parameter   tp,
+         ta_parameter   tp_s,
+         ta_parameter   tp_t
+   where tc.custno = tf.custno
+     and tr.fundcode = tf.fundcode
+     and tr.defdividendmethod=tp_t.pmco
+     and tc.certificatetype = tp.pmco
+     and tp.pmky = 'PIDTP'
+     and tf.fdacst = tp_s.pmco
+     and tp_s.pmky = 'STATUS'
+     and tp_t.pmky = 'DEFDIVIDENDMETHOD' and rownum &lt; 2 and tf.taaccountid = #depositacct#
+ 
+  </select>
+ 	
+ 	
+  <update id="updateAcctCust" parameterClass="acctCust">
+		update TA_CUST set TELNO = #telno#,MOBILETELNO = #mobiletelno#,HOMETELNO = #hometelno#,FAXNO = #faxno#,EMAILADDRESS=#emailaddress#,
+		ADDRESS = #address#,POSTCODE=#postcode# where CUSTNO = #custno#
+  </update>  
+  
+  <update id="updateAcctCust_lwp" parameterClass="acctCust">
+		update TA_CUST
+		<dynamic prepend="set">
+            <isNotNull prepend="," property="mobiletelno">
+                MOBILETELNO = #mobiletelno#
+            </isNotNull>
+            <isNotNull prepend="," property="emailaddress">
+                EMAILADDRESS = #emailaddress#
+            </isNotNull>
+            <isNotNull prepend="," property="address">
+                ADDRESS = #address#
+            </isNotNull>
+        </dynamic>
+		where CUSTNO = #custno#
+	</update> 
+     <!-- 
+     		<select id="getAcctCustByDepositacct" parameterClass="java.lang.String" resultMap = "acctCustMap">
+    select a.custno,a.custtp,a.accttp,a.invtp,a.investorname,a.Accountabbr,
+    a.certificatetype,a.certificateno,a.sex,a.postcode,a.address,a.telno,a.hometelno,
+    a.mobiletelno,a.faxno,a.emailaddress ,c.acctcardmailflag,b.depositacct,b.opendate,
+    b.defdividendmethod,c.FDACST
+     from ACCT_CUST a,ACCT_TRANS  b,ACCT_FUND c where b.taaccountid = c.taaccountid and  a.custno= c.custno 
+      and DEPOSITACCT = #depositacct# and  rownum &lt; 2
+</select>
+     
+      -->
+      <!--  
+  <select id="getAcctCustByDepositacct" parameterClass="java.lang.String" resultMap = "acctCustMap">
+  	select a.custno,a.custtp,a.accttp,a.invtp,a.investorname,a.Accountabbr,
+    a.certificatetype,a.certificateno,a.sex,a.postcode,a.address,a.telno,a.hometelno,
+    a.mobiletelno,a.faxno,a.emailaddress ,c.acctcardmailflag,b.depositacct,b.opendate,
+    b.defdividendmethod,c.FDACST
+     from ACCT_CUST a,ACCT_TRANS  b,ACCT_FUND c where b.taaccountid = c.taaccountid and  a.custno= c.custno 
+      and b.taaccountid = #depositacct# and  rownum &lt; 2
+	</select>-->
+	
+
+ <update id="updateAcctFundFlag" parameterClass="java.util.HashMap">
+		update TA_FUNDACCOUNT set ACCTCARDMAILFLAG=#acctcardMailFlag# where CUSTNO = #custno#
+  </update>
+
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+</sqlMap>

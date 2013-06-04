@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.video.pojo.TvideoUserStatTraffic">
+
+	<typeAlias alias="TvideoUserStatTraffic" type="com.cssweb.video.pojo.TvideoUserStatTraffic" />
+
+	<resultMap id="TvideoUserStatTraffic" class="TvideoUserStatTraffic">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="userType" column="USER_TYPE" jdbcType="String"/>
+		<result property="statDate" column="STATDATE" jdbcType="Date"/>
+		<result property="count" column="COUNT" jdbcType="Long"/>
+		<result property="videoType" column="VIDEO_TYPE" jdbcType="String"/>
+	</resultMap>
+
+	<insert id="insertTvideoUserStatTraffic" parameterClass="TvideoUserStatTraffic">
+		INSERT into T_VIDEO_USER_STAT_TRAFFIC ( ID,USER_TYPE,STATDATE,COUNT,VIDEO_TYPE) VALUES (#id#,#userType#,to_date(to_char(sysdate, 'yyyy-MM-dd'), 'yyyy-MM-dd'),#count#,#videoType#)
+	</insert>	
+
+	<select id="getStatTrafficCount" resultClass="java.lang.Integer" parameterClass="java.util.Map">
+	  select decode(SUM(COUNT),null,0,SUM(COUNT)) T from T_VIDEO_USER_STAT_TRAFFIC where 1=1 
+	  <dynamic>
+			  <isNotEmpty property="userType" prepend="and">
+			  	USER_TYPE=#userType#
+			 </isNotEmpty>
+			 <isNotEmpty property="end" prepend="and">
+			  	STATDATE &lt;=to_date(#end# , 'yyyy-MM-dd')
+			 </isNotEmpty>
+			 <isNotEmpty property="begin" prepend="and">
+			  	STATDATE &gt;=to_date(#begin# , 'yyyy-MM-dd')
+			 </isNotEmpty>
+			 <isNotEmpty property="videoType" prepend="and">
+			  	VIDEO_TYPE =#videoType#
+			 </isNotEmpty>
+		</dynamic>
+	  
+	</select>
+	
+	<select id="getStatTrafficByUserType" resultMap="TvideoUserStatTraffic" parameterClass="java.util.Map">
+	  select * from T_VIDEO_USER_STAT_TRAFFIC where 1=1 
+	  <dynamic>
+			  <isNotEmpty property="userType" prepend="and">
+			  	USER_TYPE=#userType#
+			 </isNotEmpty>
+			 <isNotEmpty property="statDate" prepend="and">
+			 STATDATE =to_date(#statDate# , 'yyyy-MM-dd')
+			 </isNotEmpty>
+			 <isNotEmpty property="videoType" prepend="and">
+			  	VIDEO_TYPE =#videoType#
+			 </isNotEmpty>
+		</dynamic>
+	</select>
+	
+	<update id="upTvideoUserStatTraffic" parameterClass="TvideoUserStatTraffic">
+		update T_VIDEO_USER_STAT_TRAFFIC set COUNT = COUNT+1  where USER_TYPE=#userType# AND VIDEO_TYPE =#videoType# AND STATDATE =to_date(to_char(sysdate, 'yyyy-MM-dd'), 'yyyy-MM-dd')
+	</update>
+	
+	
+	<select id="getTvideoUserStatTrafficMap" parameterClass="java.util.Map" resultMap = "TvideoUserStatTraffic">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  	
+  	<select id="gettvideoUserStatTrafficMapCount" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+</sqlMap>

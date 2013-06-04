@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.bond.pojo.BondBackToSaleCase">
+
+	<typeAlias alias="bondBackToSaleCase"
+		type="com.cssweb.F10.gazx.bond.pojo.BondBackToSaleCase" />
+
+	<!--result map-->
+	<resultMap id="bondBackToSaleCaseMap" class="bondBackToSaleCase">
+
+		<!-- 可转债代码 -->
+		<result property="coveriteDebtCode" column="T_ZQZB_ID" jdbcType="java.lang.Long" />
+
+		<!-- 资金到账日 -->
+		<result property="debtBackToSaleArriveDate" column="ZJDZR" jdbcType="java.util.Date" />
+
+		<!-- 回售代码 -->
+		<result property="debtBackToSaleCode" column="HSDM" jdbcType="java.lang.String" />
+
+		<!-- 回售条件 -->
+		<result property="debtBackToSaleCondition" column="HSTJ" jdbcType="java.lang.String" />
+
+		<!-- 备注 -->
+		<result property="debtBackToSaleDesc" column="BZ" jdbcType="java.lang.String" />
+
+		<!-- 回售截止日 -->
+		<result property="debtBackToSaleEndDate" column="HSJZR" jdbcType="java.util.Date" />
+
+		<!-- 债券回售ID -->
+		<result property="debtBackToSaleId" column="T_ZQHSQK_ID" jdbcType="java.lang.Long" />
+
+		<!-- 回售数量 -->
+		<result property="debtBackToSaleNum" column="HSSL" jdbcType="java.lang.Long" />
+
+		<!-- 回售价格 -->
+		<result property="debtBackToSalePrice" column="HSJG" jdbcType="java.lang.Double" />
+
+		<!-- 发生日期 -->
+		<result property="debtBackToSalePublishDate" column="FSRQ" jdbcType="java.util.Date" />
+
+		<!-- 回售简称 -->
+		<result property="debtBackToSaleShortName" column="HSJC" jdbcType="java.lang.String" />
+
+		<!-- 回售起始日 -->
+		<result property="debtBackToSaleStartDate" column="HSQSR" jdbcType="java.util.Date" />
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm" jdbcType="java.lang.String" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqjc" jdbcType="java.lang.String" />
+		
+	</resultMap>
+
+	<!-- 根据债券代码查找搞证券的回售信息 -->
+	<select id="getBondBackToSaleByBondCode"
+		resultMap="bondBackToSaleCaseMap" parameterClass="String">
+		SELECT a.T_ZQHSQK_ID, a.T_ZQZB_ID, a.HSTJ, a.HSDM, a.HSJC,
+		a.HSJG, a.HSQSR, a.HSJZR, a.ZJDZR, a.HSSL, a.BZ, a.FSRQ, b.zqjc,
+		b.zqdm FROM ZQHSQK a,zqzb b where a.T_ZQZB_ID = b.t_Zqzb_Id and
+		b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ = 1 and rownum = 1
+	</select>
+
+	<!-- 查找所有债券回售信息 -->
+	<select id="getBondBackToSaleInfo" resultMap="bondBackToSaleCaseMap">
+		SELECT a.T_ZQHSQK_ID, a.T_ZQZB_ID, a.HSTJ, a.HSDM, a.HSJC,
+		a.HSJG, a.HSQSR, a.HSJZR, a.ZJDZR, a.HSSL, a.BZ, a.FSRQ FROM
+		ZQHSQK a, zqzb b where a.T_ZQZB_ID = b.t_Zqzb_Id order by a.HSDM desc
+	</select>
+
+</sqlMap>

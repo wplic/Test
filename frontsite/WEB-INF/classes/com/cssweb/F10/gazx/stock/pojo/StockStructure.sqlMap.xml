@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.StockStructure">
+    <typeAlias alias="stockStructure" type="com.cssweb.F10.gazx.stock.pojo.StockStructure"/>
+    <!--result map-->
+    <resultMap id="stockStructureMap" class="stockStructure">
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long"/>
+		<result column="JZRQ" property="cutoffDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="WSSLTGFHJ" property="noMarketOfTotalShares" jdbcType="Long"/>
+        <result column="ZGB" property="totalShares" jdbcType="Long"/>
+        <result column="RMBPTG" property="anOfTotalShares" jdbcType="Long"/>
+    </resultMap> 
+    
+    <select id="getStockStructure" resultMap="stockStructureMap" > 
+    	SELECT * FROM (   
+	     SELECT
+				T_GSZB_ID,
+				JZRQ,
+				WSSLTGFHJ,
+				ZGB,
+				RMBPTG
+		FROM GBJG
+			  where SCBZ=0 and GKBZ=1
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+		order by jzrq desc
+		) WHERE ROWNUM = 1
+		
+	</select>
+</sqlMap>	

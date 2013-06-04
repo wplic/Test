@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN"
+        "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+  <tlib-version>1.0</tlib-version>
+  <jsp-version>1.2</jsp-version>
+  <short-name>cssweb-dictionary-tag</short-name>
+  <description>
+     cssweb dictionary Tag lib
+  </description>
+  <tag>
+    <name>dict</name>
+    <tag-class>com.css.dictionary.tag.DictionaryTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+    </description>
+    <attribute>
+       <name>typeCode</name>
+       <required>true</required>
+       <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+       <name>type</name>
+       <required>true</required>
+       <rtexprvalue>false</rtexprvalue>
+    </attribute>
+	<attribute>
+       <name>selectName</name>
+       <required>true</required>
+       <rtexprvalue>false</rtexprvalue>
+    </attribute>
+    <attribute>
+       <name>selectedValue</name>
+       <required>false</required>
+       <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+  <tag>
+    <name>dictvalue</name>
+    <tag-class>com.css.dictionary.tag.DictionaryItemTag</tag-class>
+    <body-content>empty</body-content>
+    <description>
+    </description>
+    <attribute>
+       <name>dictionaryCode</name>
+       <required>true</required>
+       <rtexprvalue>true</rtexprvalue>
+    </attribute>
+  </tag>
+</taglib>

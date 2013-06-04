@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.MajorShareholders">
+   <typeAlias alias="majorShareholders" type="com.cssweb.F10.gazx.stock.pojo.MajorShareholders"/>
+    <!--result map-->
+    <resultMap id="majorShareholdersMap" class="majorShareholders">
+        <result column="GD_ID" property="shareholderId" jdbcType="Long"/>
+        <result column="GDLB" property="shareholderType" jdbcType="String" nullValue=""/>
+        <result column="GFXZ" property="shareholderxz" jdbcType="String" nullValue=""/>
+        <result column="GDMC" property="shareholderName" jdbcType="String" nullValue=""/>
+        <result column="CGS" property="numberOfShares" jdbcType="Long"/>
+        <result column="ZZGBBL" property="proportionOfShareCapital" jdbcType="Number"/>
+        <result column="JZRQ" property="cutoffDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+        <result column="GDBS" property="shareholdersTags" jdbcType="String" nullValue=""/>
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long"/>
+    </resultMap> 
+     <!--/**
+	 * 根据公司ID取截止日期列表。通过循环该列表将各阶段主要股东或流通股东取出。
+	 *
+	 * @param companyId
+	 * @param shareholdersTags
+	 */-->
+	<select id="getCutoffDateList"  resultClass="String" parameterClass="map">
+	select to_char(jzrq, 'yyyy-MM-dd') from (
+	    SELECT
+			 distinct jzrq
+		FROM
+			 zygd
+		WHERE SCBZ = 0 and GKBZ = 1
+		<dynamic>
+		        <isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+		        <isNotNull prepend="and" property="shareholdersTags">
+					GFXZ=#shareholdersTags#
+				</isNotNull>
+				<isNotNull prepend="and" property="lb">
+					GDLB=#lb#
+				</isNotNull>
+		</dynamic>
+		order by jzrq desc)
+	</select>
+     <!--/**
+	 * 根据公司ID和截止日期取主要股东列表，根据shareholdersTags的值区分流通股东和十大股东。
+	 *
+	 * @param companyId
+	 * @param shareholdersTags
+	 */-->
+	<select id="getShareholdersList" resultMap="majorShareholdersMap">
+	    SELECT
+			 GD_ID,GDLB,GDMC,CGS,ZZGBBL,FSRQ,JZRQ,GDBS,T_GSZB_ID,GFXZ
+		FROM
+			 zygd
+		WHERE SCBZ = 0 and GKBZ = 1
+		        <isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+		        <isNotNull prepend="and" property="shareholdersTags">
+					GFXZ=#shareholdersTags#
+				</isNotNull>
+		        <isNotNull prepend="and" property="lb">
+					GDLB=#lb#
+				</isNotNull>
+		       <isNotNull prepend="and" property="cutoffDate">
+				to_char(jzrq,'yyyy-MM-dd')=#cutoffDate#
+			   </isNotNull>
+		    order by jzrq desc,cgs desc
+	</select>
+	<select id="getShareholdersList1" resultMap="majorShareholdersMap">
+	    SELECT
+			 GD_ID,GDLB,GDMC,CGS,ZZGBBL,FSRQ,JZRQ,GDBS,T_GSZB_ID,GFXZ
+		FROM
+			 zygd
+		WHERE rownum &lt;=10 and SCBZ = 0 and GKBZ = 1
+		        <isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+		        <isNotNull prepend="and" property="shareholdersTags">
+					GFXZ=#shareholdersTags#
+				</isNotNull>
+		        <isNotNull prepend="and" property="lb">
+					GDLB=#lb#
+				</isNotNull>
+		    order by jzrq desc,cgs desc
+	</select>
+	<select id="getShareholdersList2" resultMap="majorShareholdersMap">
+	SELECT a.GD_ID,a.GDLB,a.GDMC,a.CGS,a.ZZGBBL,a.FSRQ,a.GDBS,a.T_GSZB_ID,a.GFXZ,a.JZRQ 
+		    FROM       
+			(SELECT t.GD_ID,t.GDLB,t.GDMC,t.CGS,t.ZZGBBL,t.FSRQ,t.GDBS,t.T_GSZB_ID,t.GFXZ,t.JZRQ,rank() over(Partition by t.GD_ID order by t.JZRQ desc) AS rk FROM 
+					(SELECT GD_ID,GDLB,GDMC,CGS,ZZGBBL,FSRQ,JZRQ,GDBS,T_GSZB_ID,GFXZ
+			    FROM zygd WHERE SCBZ = 0 and GKBZ = 1
+					        <isNotNull prepend="and" property="companyId">
+								T_GSZB_ID = #companyId#
+							</isNotNull>
+					        <isNotNull prepend="and" property="lb">
+								GDLB=#lb#
+							</isNotNull>
+					    order by jzrq desc,cgs desc
+			   ) t) a
+			WHERE a.rk=1 and  rownum &lt;=10 order by a.cgs desc,a.jzrq desc 
+	</select>
+</sqlMap>

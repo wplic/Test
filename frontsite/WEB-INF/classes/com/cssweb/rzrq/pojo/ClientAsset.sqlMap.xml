@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.ClientAsset">
+
+	<typeAlias alias="clientAsset" type="com.cssweb.rzrq.pojo.ClientAsset" />
+
+	<resultMap id="clientAsset" class="clientAsset">
+		<result property="zjzh" column="ZJZH" jdbcType="String"/>
+		<result property="khbh" column="KHBH" jdbcType="String"/>
+	    <result property="zzc" column="ZZC" jdbcType="Long"/>
+	</resultMap>
+	 <select id="getUserByServiceNameAndNotInId" parameterClass="String" resultMap="clientAsset">
+		$sql$
+	</select>
+	
+</sqlMap>

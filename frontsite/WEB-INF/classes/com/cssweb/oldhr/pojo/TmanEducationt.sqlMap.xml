@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.oldhr.pojo.TmanEducationt">
+
+	<typeAlias alias="tmanEducationt" type="com.cssweb.oldhr.pojo.TmanEducationt"/>
+	
+	
+	<!--result map-->
+	<resultMap id="tmanEducationtMap" class="tmanEducationt">
+ 		<result property="appId" column="APP_ID" jdbcType="Long"/>
+ 		<result property="dateFrom" column="DATE_FROM" jdbcType="Date"/>
+ 		<result property="dateTo" column="DATE_TO" jdbcType="Date"/>
+ 		<result property="school" column="SCHOOL" jdbcType="String"/>
+ 		<result property="major" column="MAJOR" jdbcType="String"/>
+ 		<result property="eduexp" column="EDU_EXP" jdbcType="String"/>
+ 		<result property="degree" column="DEGREE" jdbcType="String"/>
+ 	</resultMap>
+  	
+	<select id="getTmanEducationtById" parameterClass="Long" resultMap = "tmanEducationtMap">
+	  	select * from T_MAN_EDUCATION_T where APP_ID = #appId#
+ 	 </select>
+	
+	<select id="getTmanEducationtPages" parameterClass="java.util.Map" resultMap = "tmanEducationtMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+ 	 </select>
+  
+  
+</sqlMap>

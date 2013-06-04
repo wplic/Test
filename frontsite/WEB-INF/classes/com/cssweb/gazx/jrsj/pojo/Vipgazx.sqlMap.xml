@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazx.jrsj.pojo.Vipgazx">
+
+	<typeAlias alias="vipgazx" type="com.cssweb.gazx.jrsj.pojo.Vipgazx"/>
+	
+	<resultMap id="jrsjGazxBgjbxxbMap" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result property="bgmc" column="bgmc" jdbcType="String"/>
+ 		<result property="tyjjgmcbId" column="t_yjjgmcb_id" jdbcType="String"/>
+		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+ 		<result property="yjjgmc" column="yjjgmc" jdbcType="String"/>
+ 		<result property="gpjc" column="gpjc" jdbcType="String"/>
+ 		<result property="gpdm" column="gpdm" jdbcType="String"/>
+ 		<result property="wbbgpjmc" column="wbbgpjmc" jdbcType="String"/>
+ 		<result property="yjyxm" column="YJYXM" jdbcType="String"/>
+  	</resultMap>
+  	 <select id="getJrsjGazxListBgjbxxb" parameterClass="java.util.Map" resultMap = "jrsjGazxBgjbxxbMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	    select * from sfbg_ggpj where 1=1
+	    <isNotNull prepend="and" property="bgflbh">
+			bgflbh like '$bgflbh$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="yjyxm">
+			yjyxm like '$yjyxm$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="StartDate">
+			zhxgrq &gt;=#StartDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="EndDate">
+			zhxgrq &lt;=#EndDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="title">
+			bgmc like '%$title$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="yjjgmc">
+			yjjgmc like '%$yjjgmc$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="gpdm">
+			gpdm like '%$gpdm$%'
+		</isNotNull> 
+		order by zhxgrq desc
+	     )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+     </select>
+	  <select id ="getJrsjGazxListBgjbxxbCount" resultClass="Long" parameterClass="java.util.Map">
+	       	select count(1) from sfbg_ggpj where 1=1
+	    <isNotNull prepend="and" property="bgflbh">
+			bgflbh like '$bgflbh$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="yjyxm">
+			yjyxm like '$yjyxm$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="StartDate">
+			zhxgrq &gt;=#StartDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="EndDate">
+			zhxgrq &lt;=#EndDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="title">
+			bgmc like '%$title$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="yjjgmc">
+			yjjgmc like '%$yjjgmc$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="gpdm">
+			gpdm like '%$gpdm$%'
+		</isNotNull> 
+	  </select>
+	  
+	  <resultMap id="jrsjGazxBgjbxxbWzMap" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result property="bgmc" column="bgmc" jdbcType="String"/>
+ 		<result property="tyjjgmcbId" column="t_yjjgmcb_id" jdbcType="String"/>
+		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+ 		<result column="bgzy" property="bgzy" jdbcType="BLOB"/>
+ 		<result column="bgfj" property="bgfj" jdbcType="BLOB"/>
+ 		<result property="yjjgmc" column="yjjgmc" jdbcType="String"/>
+ 		<result property="fjwjmc" column="fjwjmc" jdbcType="String"/>
+  	</resultMap>
+  	
+  	 <select id="getJrsjGazxBgjbxxbObject" parameterClass="java.util.Map" resultMap = "jrsjGazxBgjbxxbWzMap">
+  	 select j.t_bgjbxxb_id as t_bgjbxxb_id ,j.bgmc as bgmc , j.t_yjjgmcb_id as t_yjjgmcb_id, j.zhxgrq as zhxgrq, j.yjjgmc as yjjgmc ,j.bgzy as bgzy,j.BGFJ as bgfj ,j.fjwjmc as fjwjmc
+	   from BGJBXXB j  ,YJJGMCB y  where j.t_bgjbxxb_id= #tbgibxxbId#  and y.t_yjjgmcb_id(+)=j.t_bgjbxxb_id
+	 </select>
+     
+	<resultMap id="jrsjGazxMap" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result property="bgmc" column="bgmc" jdbcType="String"/>
+ 		<result property="tyjjgmcbId" column="t_yjjgmcb_id" jdbcType="String"/>
+		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+ 		<result property="nrflmc" column="nrflmc" jdbcType="String"/>
+ 		<result property="nrflbh" column="nrflbh" jdbcType="String"/>
+  	</resultMap>
+  	 <select id="getJrsjGazxMap" parameterClass="java.util.Map" resultMap = "jrsjGazxMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+ select j.t_bgjbxxb_id as t_bgjbxxb_id ,j.bgmc as bgmc , j.t_yjjgmcb_id as t_yjjgmcb_id, n.zhxgrq as zhxgrq, f.NRFLMC as nrflmc ,n.NRFLBH as nrflbh from BGJBXXB j, BGFLB b ,BGNRB n ,BGNRFLB f 
+			where j.bgflbh=b.bgflbh and b.bgflbh like '$bgflbh$%' and n.t_bgjbxxb_id=j.t_bgjbxxb_id and n.nrflbh=f.nrflbh(+)
+				<isNotNull prepend="and" property="StartDate">
+					n.zhxgrq &gt;=#StartDate#
+				</isNotNull>
+				<isNotNull prepend="and" property="EndDate">
+				   n.zhxgrq &lt;=#EndDate#
+				</isNotNull>
+				<isNotNull prepend="and" property="title">
+					j.bgmc like '%$title$%'
+				</isNotNull>
+				 order by n.zhxgrq desc
+ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+     </select>
+	  <select id ="getJrsjGazxMapCount" resultClass="Long" parameterClass="java.util.Map">
+	       	 select count(1) where j.bgflbh=b.bgflbh and b.bgflbh like '$bgflbh$%' and n.t_bgjbxxb_id=j.t_bgjbxxb_id and n.nrflbh=f.nrflbh(+)
+				<isNotNull prepend="and" property="StartDate">
+					n.zhxgrq &gt;=#StartDate#
+				</isNotNull>
+				<isNotNull prepend="and" property="EndDate">
+				   n.zhxgrq &lt;=#EndDate#
+				</isNotNull>
+				<isNotNull prepend="and" property="title">
+					j.bgmc like '%$title$%'
+				</isNotNull>
+	  </select>
+	  
+	  <resultMap id="jrsjGazxWzMap" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result property="bgmc" column="bgmc" jdbcType="String"/>
+ 		<result property="tyjjgmcbId" column="t_yjjgmcb_id" jdbcType="String"/>
+		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+ 		<result property="nrflmc" column="nrflmc" jdbcType="String"/>
+ 		<result property="nrflbh" column="nrflbh" jdbcType="String"/>
+ 		<result column="NR" property="nr" jdbcType="BLOB"/>
+ 		<result column="bgzy" property="bgzy" jdbcType="BLOB"/>
+ 		<result column="bgfj" property="bgfj" jdbcType="BLOB"/>
+ 		<result property="yjjgmc" column="yjjgmc" jdbcType="String"/>
+ 		<result property="fjwjmc" column="fjwjmc" jdbcType="String"/>
+  	</resultMap>
+  	
+  	 <select id="getJrsjGazxObject" parameterClass="java.util.Map" resultMap = "jrsjGazxWzMap">
+	        select j.t_bgjbxxb_id as t_bgjbxxb_id ,j.bgmc as bgmc , j.t_yjjgmcb_id as t_yjjgmcb_id, n.zhxgrq as zhxgrq, f.NRFLMC as nrflmc ,n.NRFLBH as nrflbh ,
+	  j.yjjgmc as yjjgmc ,j.bgzy as bgzy,j.BGFJ as bgfj ,j.fjwjmc as fjwjmc,n.nr as nr
+	   from BGJBXXB j,BGNRB n ,BGNRFLB f ,YJJGMCB y
+	 				where j.t_bgjbxxb_id= #tbgibxxbId# and n.t_bgjbxxb_id=j.t_bgjbxxb_id and n.nrflbh=f.nrflbh(+) and y.t_yjjgmcb_id(+)=j.t_bgjbxxb_id
+     </select>
+     
+     <resultMap id="yjyxmNameMap" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result property="yjyxm" column="yjyxm" jdbcType="String"/>
+  	</resultMap>
+  	<select id="getYjyxmName" parameterClass="java.util.Map" resultMap = "yjyxmNameMap">
+  	    select t_bgjbxxb_id,yjyxm  from BGYJY t where t_bgjbxxb_id =#tbgibxxbId#
+	</select>
+	<resultMap id="jrsjGazxFileMap" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result column="bgfj" property="bgfj" jdbcType="BLOB"/>
+ 		<result property="fjwjmc" column="fjwjmc" jdbcType="String"/>
+  	</resultMap>
+  	 <select id="getJrsjGazxFile" parameterClass="java.util.Map" resultMap = "jrsjGazxFileMap">
+	        select j.t_bgjbxxb_id as t_bgjbxxb_id,j.BGFJ as bgfj ,j.fjwjmc as fjwjmc from BGJBXXB j where j.t_bgjbxxb_id= #tbgibxxbId# 
+     </select>
+     
+     <resultMap id="jrsjGazxGgpjMap" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result property="bgmc" column="bgmc" jdbcType="String"/>
+ 		<result property="tyjjgmcbId" column="t_yjjgmcb_id" jdbcType="String"/>
+		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+ 		<result property="yjjgmc" column="yjjgmc" jdbcType="String"/>
+ 		<result property="gpjc" column="gpjc" jdbcType="String"/>
+ 		<result property="gpdm" column="gpdm" jdbcType="String"/>
+ 		<result property="wbbgpjmc" column="wbbgpjmc" jdbcType="String"/>
+ 		<result property="bzpjsz" column="bzpjsz" jdbcType="String"/>
+  	</resultMap>
+  	 <select id="getJrsjGazxListGgpj" parameterClass="java.util.Map" resultMap = "jrsjGazxGgpjMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	    select * FROM jr_sfbg_ggpj_all where 1=1
+		<isNotNull prepend="and" property="StartDate">
+			zhxgrq &gt;=#StartDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="EndDate">
+			 zhxgrq &lt;=#EndDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="title">
+			bgmc like '%$title$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="yjjgmc">
+			yjjgmc like '%$yjjgmc$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="gpdm">
+			GPDM like '%$gpdm$%'
+		</isNotNull> 
+		<isNotNull prepend="and" property="bzpjsz">
+			BZPJSZ = #bzpjsz#
+		</isNotNull> 
+		 order by zhxgrq desc
+	     )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+     </select>
+	  <select id ="getJrsjGazxListBgGgpjCount" resultClass="Long" parameterClass="java.util.Map">
+	       	select count(*) from jr_sfbg_ggpj_all where 1=1
+	     <isNotNull prepend="and" property="StartDate">
+			zhxgrq &gt;=#StartDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="EndDate">
+			 zhxgrq &lt;=#EndDate#
+		</isNotNull>
+		<isNotNull prepend="and" property="title">
+			bgmc like '%$title$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="yjjgmc">
+			yjjgmc like '%$yjjgmc$%'
+		</isNotNull>
+		<isNotNull prepend="and" property="gpdm">
+			GPDM like '%$gpdm$%'
+		</isNotNull> 
+		<isNotNull prepend="and" property="bzpjsz">
+			BZPJSZ = #bzpjsz#
+		</isNotNull> 
+	  </select>
+	  <resultMap id="jrsjGazxGgpjMaps" class="vipgazx">
+ 		<result property="tbgibxxbId" column="t_bgjbxxb_id" jdbcType="Integer"/>
+ 		<result property="bgmc" column="bgmc" jdbcType="String"/>
+ 		<result property="tyjjgmcbId" column="t_yjjgmcb_id" jdbcType="String"/>
+		<result property="zhxgrq" column="zhxgrq" jdbcType="Date"/>
+ 		<result property="yjjgmc" column="yjjgmc" jdbcType="String"/>
+ 		<result property="gpjc" column="gpjc" jdbcType="String"/>
+ 		<result property="gpdm" column="gpdm" jdbcType="String"/>
+ 		<result property="wbbgpjmc" column="wbbgpjmc" jdbcType="String"/>
+ 		<result property="bzpjmc" column="bzpjmc" jdbcType="String"/>
+  	</resultMap>
+  	 <select id="getJrsjGazxListGgpjByGpdm" parameterClass="String" resultMap = "jrsjGazxGgpjMaps">
+	    select gp.GPDM as gpdm,gp.gpjc as gpjc,j.YJJGMC as yjjgmc ,j.t_yjjgmcb_id as t_yjjgmcb_id,p.WBBGPJMC as wbbgpjmc,j.bgmc as bgmc ,j.t_bgjbxxb_id as t_bgjbxxb_id,j.zhxgrq as zhxgrq,t.bzpjmc 
+	    from  GPZB gp ,BGPJB p,YJJGMCB y, BGJBXXB j,TZPJFLB t 
+	    where p.t_gpzb_id=gp.t_gpzb_id and j.t_yjjgmcb_id=y.t_yjjgmcb_id(+) and j.t_bgjbxxb_id=p.t_bgjbxxb_id and t.bzpjsz(+)=p.bzpjsz and gp.gpdm=#gpdm#
+     </select>
+</sqlMap>

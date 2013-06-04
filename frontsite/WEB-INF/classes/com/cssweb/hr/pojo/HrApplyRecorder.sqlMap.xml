@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrApplyRecorder">
+				 
+	<typeAlias alias="HrApplyRecorder" type="com.cssweb.hr.pojo.HrApplyRecorder"/>
+								
+	<!--result map-->
+	<resultMap id="resultMap" class="HrApplyRecorder">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="jobId" column="JOB_ID" jdbcType="Long" />
+ 		<result property="applyTime" column="APPLY_TIME" jdbcType="java.util.Date" />
+ 		<result property="wish" column="WISH" jdbcType="int" />
+ 		<result property="interviewStatus" column="INTERVIEW_STATUS" jdbcType="int" />
+ 		<result property="employStatus" column="EMPLOY_STATUS" jdbcType="int" />
+ 		<result property="writeBack" column="WRITE_BACK" jdbcType="String" />
+ 		<result property="backTime" column="BACK_TIME" jdbcType="java.util.Date" />
+ 		<result property="deleteStatus" column="DELETE_STATUS" jdbcType="int" />
+ 		<result property="ifTj" column="IF_TJ" jdbcType="int" />
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="HrApplyRecorder">
+		<![CDATA[
+		 insert into T_HR_APPLY_RECORDER(ID,USER_ID,JOB_ID,APPLY_TIME,WISH,INTERVIEW_STATUS,EMPLOY_STATUS,
+		 		WRITE_BACK,BACK_TIME,DELETE_STATUS,IF_TJ) values(#id#,#userId#,#jobId#,sysdate,#wish#,#interviewStatus#,
+		 		#employStatus#,#writeBack#,#backTime#,#deleteStatus#,#ifTj#)
+		]]>
+	</insert>
+	
+	<update id="update" parameterClass="HrApplyRecorder">
+		update T_HR_APPLY_RECORDER
+		 set 
+		 	JOB_ID=#jobId#,
+		 	APPLY_TIME=sysdate,
+		 	INTERVIEW_STATUS=#interviewStatus#,
+		 	EMPLOY_STATUS=#employStatus#,
+		 	WRITE_BACK=#writeBack#,
+		 	BACK_TIME=#backTime#,
+		 	DELETE_STATUS=#deleteStatus#,
+		 	IF_TJ=#ifTj#
+		where USER_ID = #userId# and WISH=#wish#
+	</update>
+	<update id="update1" parameterClass="HrApplyRecorder">
+		update T_HR_APPLY_RECORDER
+		 set 
+		 	JOB_ID=#jobId#,
+		 	APPLY_TIME=sysdate,
+		 	INTERVIEW_STATUS=#interviewStatus#,
+		 	EMPLOY_STATUS=#employStatus#,
+		 	WRITE_BACK=#writeBack#,
+		 	BACK_TIME=#backTime#,
+		 	DELETE_STATUS=#deleteStatus#,
+		 	IF_TJ=#ifTj#
+		where USER_ID = #userId# and WISH=#wish#
+	</update>
+	<delete id="delete" parameterClass="Long">
+		delete from T_HR_APPLY_RECORDER where id = #id#
+	</delete>
+	
+	<delete id="deleteByJobid" parameterClass="Long">
+		delete from T_HR_APPLY_RECORDER where job_id = #jobid#
+	</delete>
+	
+	<delete id="deleteByUseridAndWish" parameterClass="java.util.Map">
+		delete from T_HR_APPLY_RECORDER where user_id=#userId# and WISH=#wish#
+	</delete>
+	
+	<select id="getRecorderByUser" parameterClass="java.util.Map" resultMap="resultMap">
+   		select 
+   			ID,USER_ID,JOB_ID,APPLY_TIME,WISH,INTERVIEW_STATUS,EMPLOY_STATUS,
+		 		WRITE_BACK,BACK_TIME,DELETE_STATUS,IF_TJ
+		    from T_HR_APPLY_RECORDER 
+		    where 
+		     user_id=#userId# and WISH=#wish#
+   </select>
+   <select id="getApplyRecorderByUserID" parameterClass="java.util.Map" resultMap="resultMap">
+   		select 
+   			ID,USER_ID,JOB_ID,APPLY_TIME,WISH,INTERVIEW_STATUS,EMPLOY_STATUS,
+		 		WRITE_BACK,BACK_TIME,DELETE_STATUS,IF_TJ
+		    from T_HR_APPLY_RECORDER 
+		    where 
+		     user_id=#userId#
+   </select>
+</sqlMap>

@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.sunnyPOF.pojo.SunnyFundinfo">
+	<typeAlias alias="SunnyFundinfo" type="com.fortuneage.sunnyPOF.pojo.SunnyFundinfo"/>
+	<resultMap class="SunnyFundinfo" id="SunnyFundinfoResult">
+		<result property="prodCode" column="PROD_CODE" jdbcType="String"/>
+		<result property="prodName" column="PROD_NAME" jdbcType="String"/>
+		<result property="cplb" column="CPLB" jdbcType="java.lang.Long"/>
+		<result property="fxjg" column="FXJG" jdbcType="java.math.BigDecimal"/>
+		<result property="xszt" column="XSZT" jdbcType="java.lang.Long"/>
+		<result property="fxgm" column="FXGM" jdbcType="String"/>
+		<result property="clrq" column="CLRQ" jdbcType="java.lang.Integer"/>
+		<result property="cpfbq" column="CPFBQ" jdbcType="String"/>
+		<result property="gzr" column="GZR" jdbcType="String"/>
+		<result property="kfr" column="KFR" jdbcType="String"/>
+		<result property="cpqx" column="CPQX" jdbcType="String"/>
+		<result property="str" column="STR" jdbcType="String"/>
+		<result property="bgyh" column="BGYH" jdbcType="String"/>
+		<result property="bgfl" column="BGFL" jdbcType="String"/>
+		<result property="zqjjs" column="ZQJJS" jdbcType="String"/>
+		<result property="zdrgje" column="ZDRGJE" jdbcType="java.lang.Long"/>
+		<result property="zdzjje" column="ZDZJJE" jdbcType="java.lang.Long"/>
+		<result property="rgfl" column="RGFL" jdbcType="String"/>
+		<result property="glfl" column="GLFL" jdbcType="String"/>
+		<result property="shfl" column="SHFL" jdbcType="String"/>
+		<result property="hlzc" column="HLZC" jdbcType="String"/>
+		<result property="yjbc" column="YJBC" jdbcType="String"/>
+		<result property="sxdx" column="SXDX" jdbcType="String"/>
+		<result property="tzfw" column="TZFW" jdbcType="String"/>
+		<result property="cpyqsy" column="CPYQSY" jdbcType="String"/>
+		<result property="rgzhxx" column="RGZHXX" jdbcType="String"/>
+		<result property="ywlxxx" column="YWLXXX" jdbcType="String"/>
+		<result property="simplename" column="SIMPLENAME" jdbcType="String"/>
+	</resultMap>
+	
+	<select id="getSunnyFundinfosBySqltoPage" resultMap="SunnyFundinfoResult" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	
+	<select id="getSunnyFundinfoByCode" resultClass="SunnyFundinfo" parameterClass="String">
+		SELECT 
+			PROD_CODE prodCode,
+			PROD_NAME prodName,
+			CPLB,
+			FXJG,
+			XSZT,
+			FXGM,
+			CLRQ,
+			CPFBQ,
+			GZR,
+			KFR,
+			CPQX,
+			STR,
+			BGYH,
+			BGFL,
+			ZQJJS,
+			ZDRGJE,
+			ZDZJJE,
+			RGFL,
+			GLFL,
+			SHFL,
+			HLZC,
+			YJBC,
+			SXDX,
+			TZFW,
+			CPYQSY,
+			RGZHXX,
+			YWLXXX,
+			SIMPLENAME
+		FROM 
+			SUNNY_FUNDINFO
+		where
+			PROD_CODE=#value#
+	</select>
+</sqlMap>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.video.pojo.TvideoBoard">
+
+	<typeAlias alias="TvideoBoard" type="com.cssweb.video.pojo.TvideoBoard" />
+
+	<resultMap id="TvideoBoard" class="TvideoBoard">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="code" column="CODE" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String" />
+	    <result property="intro" column="INTRO" jdbcType="String" />
+	    <result property="orderNum" column="ORDER_NUM" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+
+	<insert id="insertTvideoBoard" parameterClass="TvideoBoard">
+		INSERT into T_VIDEO_BOARD ( ID, CODE, NAME, INTRO, ORDER_NUM) VALUES (#id#,#code#,#name#, #intro#, #orderNum#)
+	</insert>
+	
+	<update id="upTvideoBoard" parameterClass="TvideoBoard">
+		update T_VIDEO_BOARD set CODE = #code#, NAME = #name#, INTRO = #intro#, ORDER_NUM = #orderNum# where id=#id#
+	</update>
+
+	<delete id="deleteTvideoBoards" parameterClass="String">
+		delete from T_VIDEO_BOARD where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteTvideoBoardById" parameterClass="Long">
+		delete from T_VIDEO_BOARD where id = #value#
+	</delete>
+	
+	<select id="getTvideoBoardAll" resultMap="TvideoBoard">
+		select * from T_VIDEO_BOARD ORDER BY ORDER_NUM
+	</select>
+
+    <select id="getTvideoBoardAllBySp" resultMap="TvideoBoard">
+		select * from T_VIDEO_BOARD WHERE CODE!='sjspgl' and code!='zcgl_spxx' and code!='jgj_hdlc' ORDER BY ORDER_NUM
+	</select>
+	
+	<select id="getTvideoBoardById" parameterClass="Long" resultMap="TvideoBoard">
+		select * from T_VIDEO_BOARD where id= #id#
+	</select>	
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_VIDEO_BOARD 
+	</select>
+	
+	  <select id="getByTvideoBoardMap" parameterClass="java.util.Map" resultMap = "TvideoBoard">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  	
+  	<select id="getByTvideoBoardMapCount" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+	
+	<select id="getTvideoBoardByCode" parameterClass="String" resultMap="TvideoBoard">
+		select * from T_VIDEO_BOARD where CODE= #code#
+	</select>
+</sqlMap>

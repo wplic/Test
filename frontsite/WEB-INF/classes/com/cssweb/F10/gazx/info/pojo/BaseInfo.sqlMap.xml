@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.info.pojo.BaseInfo">
+
+	<typeAlias alias="BaseInfo" type="com.cssweb.F10.gazx.info.pojo.BaseInfo" />
+
+	<!--result map-->
+	<resultMap id="baseInfoListMap" class="BaseInfo">
+		<result property="guid" column="GUID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String" nullValue=""/>
+		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+	</resultMap>		
+	
+	<resultMap id="baseInfoMap" class="BaseInfo">
+		<result property="guid" column="GUID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String" nullValue=""/>
+		<result property="publishDate" column="PUBLISH_DATE" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+		<result property="content" column="CONTENT" jdbcType="BLOB"/>
+	</resultMap>		
+
+	<select id="select" resultMap="baseInfoMap">
+		select
+		GUID,
+		ZT TITLE,
+		FSRQ PUBLISH_DATE,
+		NR CONTENT
+		from $tableName$
+		where SCBZ = 0 and GKBZ = 1
+		and GUID = #guid#
+	</select>
+	
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		select count(*) from $tableName$
+		where SCBZ = 0 and GKBZ = 1
+		and FSRQ is not null
+		<isNotNull prepend="and" property="companyId">
+			T_GSZB_ID = #companyId#
+		</isNotNull> 
+		<isNotNull prepend="and" property="fundId">
+			T_JJZB_ID = #fundId#
+		</isNotNull> 
+		<isNotNull prepend="and" property="bondId">
+			T_ZQZB_ID = #bondId#
+		</isNotNull> 
+
+	</select>
+
+	<select id="pageQuery" resultMap="baseInfoListMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select
+					GUID,
+					ZT TITLE,
+					FSRQ PUBLISH_DATE
+				from $tableName$
+				where SCBZ = 0 and GKBZ = 1
+				and FSRQ is not null
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull> 
+				<isNotNull prepend="and" property="fundId">
+					T_JJZB_ID = #fundId#
+				</isNotNull> 
+				<isNotNull prepend="and" property="bondId">
+					T_ZQZB_ID = #bondId#
+				</isNotNull>
+				order by FSRQ desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select> 
+	
+	<select id="pageQuery2" resultMap="baseInfoListMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select
+					GUID,
+					ZT TITLE,
+					FSRQ PUBLISH_DATE
+				from $tableName$
+				where SCBZ = 0 and GKBZ = 1
+				and FSRQ is not null
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull> 
+				<isNotNull prepend="and" property="fundId">
+					T_JJZB_ID = #fundId#
+				</isNotNull> 
+				<isNotNull prepend="and" property="bondId">
+					T_ZQZB_ID = #bondId#
+				</isNotNull>
+				<isNotNull prepend="and" property="wheresql">
+					$wheresql$
+				</isNotNull>
+				order by FSRQ desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select> 
+</sqlMap>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.common.toDbLob.pojo.FileBlob">
+	<typeAlias alias="FileBlob" type="com.cssweb.common.toDbLob.pojo.FileBlob"/>
+	
+	<resultMap id="fileBlobMap" class="FileBlob">
+		<result column="ID" property="id" jdbcType="Long"/>
+		<result column="FILE_NAME" property="fileName" jdbcType="String"/>
+		<result column="FILE_TYPE" property="fileType" jdbcType="String"/>
+		<result column="FILE_SOURCE" property="source" jdbcType="BLOB"/>
+		<result column="CONTENT_SIZE" property="size" jdbcType="Integer"/>
+		<result column="MODIFY_DATE" property="modifyDate" jdbcType="java.util.Date" />
+		<result column="REMARK" property="remark" jdbcType="String"/>
+		<result column="RELATE_TABLE_NAME" property="relateTableName" jdbcType="String"/>
+		<result column="RELATE_TABLE_ID" property="relateTableId" jdbcType="Long"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	
+	<insert id="insert" parameterClass="FileBlob">
+		insert into COMM_BLOB_FILE(ID,FILE_NAME,FILE_TYPE,FILE_SOURCE,CONTENT_SIZE,MODIFY_DATE,REMARK,
+									RELATE_TABLE_NAME,RELATE_TABLE_ID,EXT1,EXT2,EXT3,EXT4) 
+					values(#id#,#fileName#,#fileType#,#source#,#size#,#modifyDate#,#remark#,
+							#relateTableName#,#relateTableId#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	<update id="update" parameterClass="FileBlob">
+		update COMM_BLOB_FILE 
+				set FILE_NAME=#fileName#,FILE_TYPE=#fileType#,FILE_SOURCE=#source#,CONTENT_SIZE=#size#,
+					MODIFY_DATE=#modifyDate#,REMARK=#remark#,RELATE_TABLE_NAME=#relateTableName#,
+					RELATE_TABLE_ID=#relateTableId#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		where ID = #id#
+	</update>
+   <delete id="deleteById" parameterClass="Long">
+		delete from COMM_BLOB_FILE where ID = #value#
+	</delete>
+	<select id="getById" parameterClass="Long"  resultMap="fileBlobMap">
+		select * from COMM_BLOB_FILE where ID=#value#
+	</select>
+	<select id="getFileNameById" parameterClass="Long"  resultClass="String">
+		select FILE_NAME from COMM_BLOB_FILE where ID=#id#
+	</select>
+	
+</sqlMap>

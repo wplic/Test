@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.collect.pojo.TcsswebRyxx">
+
+	<typeAlias alias="TcsswebRyxx" type="com.cssweb.collect.pojo.TcsswebRyxx"/>
+
+	<!--result map-->
+	<resultMap id="TcsswebRyxx" class="TcsswebRyxx" >
+        <result property="ryxm"  column="RYXM" jdbcType="String"/>
+        <result property="userid" column="USERID"  jdbcType="String" />
+        <result property="sex" column="SEX"  jdbcType="String"  />
+        <result property="deptname" column="DEPTNAME" jdbcType="String"/>
+		<result property="deptid" column="DEPTID" jdbcType="String"/>
+		<result property="zyzg" column="ZYZG" jdbcType="String"/>
+		<result property="zsbh" column="ZSBH" jdbcType="String"/>
+		<result property="jzrq" column="JZRQ" jdbcType="String"/>
+		<result property="yxxx" column="YXXX" jdbcType="BLOB"/>
+     </resultMap>
+  	<select id="getMgrInfoAll" resultClass="TcsswebRyxx" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	  <select id="getTcsswebRyxxBySearch" parameterClass="java.util.Map" resultMap = "TcsswebRyxx">
+	      select RYXM, USERID, SEX, DEPTNAME, DEPTID, ZYZG, ZSBH, JZRQ, YXXX from T_CSSWEB_RYXX a 
+	      where 1=1
+	      <dynamic>
+			 <isNotEmpty property="ryxm" prepend="and">
+			  	RYXM=#ryxm# 
+			 </isNotEmpty>
+			 <isNotEmpty property="userid" prepend="and">
+			  	USERID=#userid#
+			 </isNotEmpty>
+			 <isNotEmpty property="zsbh" prepend="and">
+			  	ZSBH=#zsbh# 
+			 </isNotEmpty>
+		</dynamic>
+	  </select>
+	  <select id="getCountByCustNo" resultClass="java.lang.Integer"  parameterClass="java.util.Map">
+		<![CDATA[
+		$sqlCount$
+		 ]]> 
+	</select>
+	<select id="getCountByCustNo_copy" resultClass="java.lang.Integer"  parameterClass="java.util.Map">
+		<![CDATA[
+		$sqlCount$
+		 ]]> 
+	</select>
+	<select id="getMgrInfoAll_copy" resultClass="TcsswebRyxx" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	<select id="getTcsswebRyxxBySearch_copy" parameterClass="java.util.Map" resultMap = "TcsswebRyxx">
+	      select RYXM, USERID, SEX, DEPTNAME, DEPTID, ZYZG, ZSBH, JZRQ, YXXX from T_CSSWEB_JZRYXX a 
+	      where 1=1
+	      <dynamic>
+			 <isNotEmpty property="ryxm" prepend="and">
+			  	RYXM=#ryxm# 
+			 </isNotEmpty>
+			 <isNotEmpty property="userid" prepend="and">
+			  	USERID=#userid#
+			 </isNotEmpty>
+			 <isNotEmpty property="zsbh" prepend="and">
+			  	ZSBH=#zsbh# 
+			 </isNotEmpty>
+		</dynamic>
+	  </select>
+</sqlMap>

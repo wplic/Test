@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.questionnaire.pojo.QuestionnairePerson">
+
+	<typeAlias alias="QuestionnairePerson" type="com.cssweb.questionnaire.pojo.QuestionnairePerson"/>
+
+	<!--result map-->
+	<resultMap id="personMap" class="QuestionnairePerson">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="questionnaireid" column="QUESTIONNAIRE_ID" jdbcType="Long"/>
+ 		<result property="webuserid" column="WEBUSER_ID" jdbcType="Long"/>
+ 		<result property="realname" column="REAL_NAME" jdbcType="String"/>
+ 		<result property="sex" column="SEX" jdbcType="String"/>
+ 		<result property="age" column="AGE" jdbcType="Long"/>
+ 		<result property="phone" column="PHONE" jdbcType="String" nullValue=""/>
+ 		<result property="email" column="EMAIL" jdbcType="String" nullValue=""/>
+ 		<result property="address" column="ADDRESS" jdbcType="String" nullValue=""/>
+ 		<result property="content" column="CONTENT" jdbcType="String" nullValue=""/>
+ 		<result property="createdate" column="CREATE_TIME" jdbcType="Date"/>
+ 		<result property="point" column="POINT" jdbcType="Double" nullValue="0"/>
+  	</resultMap>	
+  	
+  	<!--result map-->
+	<resultMap id="adviceMap" class="QuestionnairePerson">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="categorystr" column="NAME" jdbcType="String"/>
+ 		<result property="questionnairestr" column="title" jdbcType="Long"/>
+ 		<result property="content" column="CONTENT" jdbcType="String" nullValue=""/>
+ 		<result property="createdate" column="CREATE_TIME" jdbcType="Date"/>
+ 		<result property="point" column="POINT" jdbcType="Double" nullValue="0"/>
+  	</resultMap>	
+  	
+  	<!--result map-->
+	<resultMap id="adviceDetailMap" class="QuestionnairePerson">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="categorystr" column="NAME" jdbcType="String"/>
+ 		<result property="questionnairestr" column="title" jdbcType="Long"/>
+ 		<result property="realname" column="REAL_NAME" jdbcType="String"/>
+ 		<result property="sex" column="SEX" jdbcType="String"/>
+ 		<result property="age" column="AGE" jdbcType="Long"/>
+ 		<result property="phone" column="PHONE" jdbcType="String" nullValue=""/>
+ 		<result property="email" column="EMAIL" jdbcType="String" nullValue=""/>
+ 		<result property="address" column="ADDRESS" jdbcType="String" nullValue=""/>
+ 		<result property="content" column="CONTENT" jdbcType="String" nullValue=""/>
+ 		<result property="createdate" column="CREATE_TIME" jdbcType="Date"/>
+ 		<result property="point" column="POINT" jdbcType="Double" nullValue="0"/>
+  	</resultMap>	
+
+  <insert id="insert" parameterClass="QuestionnairePerson">
+    insert into T_QUESTIONNAIRE_PERSON (ID,QUESTIONNAIRE_ID,WEBUSER_ID,REAL_NAME,SEX,AGE,PHONE,EMAIL,ADDRESS,CONTENT,CREATE_TIME,POINT)
+    	values (#id#,#questionnaireid#,#webuserid#,#realname#,#sex#,#age#,#phone#,#email#,#address#,#content#,sysdate,#point#)
+  </insert>
+ <select id="getPersonByQustIdWebuserId" parameterClass="java.util.Map" resultMap="personMap" >
+    SELECT * FROM T_QUESTIONNAIRE_PERSON where QUESTIONNAIRE_ID=#questionnaireid# AND WEBUSER_ID=#webuserid#
+  </select>
+  <update id="update" parameterClass="QuestionnairePerson">
+    update T_QUESTIONNAIRE_PERSON 
+    	set QUESTIONNAIRE_ID = #questionnaireid#,WEBUSER_ID=#webuserid#,REAL_NAME=#realname#,SEX=#sex#,AGE=#age#,
+    		PHONE=#phone#,EMAIL=#email#,ADDRESS=#address#,CONTENT=#content#,CREATE_TIME=#createdate#,POINT=#point#
+     where ID = #id#
+  </update>
+  
+    <select id="getAllInfoList" parameterClass="java.util.Map" resultMap = "personMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getAllInfoTotal" parameterClass="java.lang.Long" resultClass="java.lang.Long" >
+    SELECT count(*) FROM T_QUESTIONNAIRE_PERSON where QUESTIONNAIRE_ID=#quesid#
+  </select>
+  
+  <select id="getInfoByQuesId" parameterClass="java.lang.Long" resultMap="personMap" >
+    SELECT * FROM T_QUESTIONNAIRE_PERSON where QUESTIONNAIRE_ID=#id#
+  </select>
+  
+  <delete id="deleteBySubtitleId" parameterClass="String">
+    delete T_QUESTIONNAIRE_PERSON where SUBTITLE_ID in ($value$)
+  </delete>
+
+  <select id="getAdviceInfo" parameterClass="java.util.Map" resultMap="adviceMap" >
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getAdviceTotal" resultClass="java.lang.Long" >
+    select count(*) from T_QUESTIONNAIRE_PERSON where CONTENT!=' ' and CONTENT is not null
+  </select>
+    
+  <select id="getAdviceById" parameterClass="java.lang.Long" resultMap="adviceDetailMap" >
+ 	select T_QUESTIONNAIRE_PERSON.ID,NAME,TITLE,REAL_NAME,SEX,AGE,PHONE,EMAIL,CREATE_TIME,ADDRESS,T_QUESTIONNAIRE_PERSON.CONTENT ,POINT
+	from T_QUESTIONNAIRE_CATEGORY ,T_QUESTIONNAIRE_INFO ,T_QUESTIONNAIRE_PERSON 
+	where T_QUESTIONNAIRE_PERSON.ID=#id# and T_QUESTIONNAIRE_PERSON.CONTENT!=' ' and T_QUESTIONNAIRE_PERSON.CONTENT is not null 
+  	and QUESTIONNAIRE_ID=T_QUESTIONNAIRE_INFO.ID and CATEGORY_ID=T_QUESTIONNAIRE_CATEGORY.ID
+  </select>
+    
+  <select id="queryAdviceTotal" parameterClass="String" resultClass="java.lang.Long" >
+    select count(c.ID) from T_QUESTIONNAIRE_CATEGORY a,T_QUESTIONNAIRE_INFO b,T_QUESTIONNAIRE_PERSON c 
+    where c.CONTENT!=' ' and c.CONTENT is not null and $where$
+  </select>
+  
+  <select id="queryAdviceInfo" parameterClass="java.util.Map" resultMap="adviceMap" >
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+    
+  <select id="getPersonById" parameterClass="java.lang.Long" resultMap="personMap" >
+    SELECT * FROM T_QUESTIONNAIRE_PERSON where ID=#id#
+  </select>
+  
+  <delete id="delPersonById" parameterClass="java.lang.Long">
+    delete T_QUESTIONNAIRE_PERSON where ID = #id#
+  </delete>
+</sqlMap>

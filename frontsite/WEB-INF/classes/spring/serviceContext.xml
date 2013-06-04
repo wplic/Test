@@ -1,0 +1,1217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans default-autowire="byName" default-lazy-init="true">
+	<bean id="csswebServiceUtil" class="com.cssweb.common.util.CsswebServiceUtil" />
+	
+	<bean id="sequenceService" class="com.cssweb.common.sequence.service.SequenceService" />
+	
+	<bean id="dictionaryService" class="com.cssweb.common.dictionary.service.DictionaryService" />
+	<bean id="dictionarydao" class="com.cssweb.common.dictionary.dao.DictionaryDao" />
+	
+	<bean id="menuService" class="com.cssweb.common.menu.service.MenuService" />
+	<bean id="menudao" class="com.cssweb.common.menu.dao.MenuDao" />
+	
+	<bean id="userBasicInfoDAO" class="com.cssweb.common.security.user.dao.impl.UserBasicInfoDAOImpl" />
+	<bean id="userExtentInfoDAO" class="com.cssweb.common.security.user.dao.impl.UserExtentInfoDAOImpl" />
+	<bean id="userExtentBlobDAO" class="com.cssweb.common.security.user.dao.impl.UserExtentBlobDAOImpl" />
+	<bean id="userAccountInfoDAO" class="com.cssweb.common.security.user.dao.impl.UserAccountInfoDAOImpl" />
+	<bean id="userService" class="com.cssweb.common.security.user.service.UserService" />
+	
+	<bean id="branchBasicInfoDAO" class="com.cssweb.common.branch.dao.impl.BranchBasicInfoDAOImpl" />
+	<bean id="branchExtendInfoDAO" class="com.cssweb.common.branch.dao.impl.BranchExtendInfoDAOImpl" />
+	<bean id="branchUserMapDAO" class="com.cssweb.common.branch.dao.impl.BranchUserMapDAOImpl" />
+	<bean id="branchService" class="com.cssweb.common.branch.service.BranchService" />
+	
+	<bean id="roleInfoService" class="com.cssweb.common.security.privilege.role.service.RoleInfoService" />
+	<bean id="roleMenuMapService" class="com.cssweb.common.security.privilege.role.service.RoleMenuMapService" />
+	<bean id="roleUserMapService" class="com.cssweb.common.security.privilege.role.service.RoleUserMapService" />
+	<bean id="roleForUserService" class="com.cssweb.common.security.privilege.role.service.RoleForUserService" />
+	
+	<bean id="friendLinkService" class="com.cssweb.friendLink.service.FriendLinkService" />
+	<bean id="friendlinkdao" class="com.cssweb.friendLink.dao.FriendLinkDao" />		
+
+	<bean id="textBlobDAO" class="com.cssweb.common.toDbLob.dao.impl.TextBlobDAOImpl" />	
+	<bean id="fileBlobDAO" class="com.cssweb.common.toDbLob.dao.impl.FileBlobDAOImpl" />	
+	<bean id="lobService" class="com.cssweb.common.toDbLob.service.LobService" />	
+	
+	<bean id="softcategoryservice" class="com.cssweb.soft.service.SoftCategoryService"/>
+	<bean id="softcategorydao" class="com.cssweb.soft.dao.SoftCategoryDao"/>
+    <bean id="softbasicinfoservice" class="com.cssweb.soft.service.SoftBasicInfoService"/>
+    <bean id="softbasicinfodao" class="com.cssweb.soft.dao.SoftBasicInfoDao"/>
+    <bean id="softurlinfoservice"  class="com.cssweb.soft.service.SoftUrlInfoService"/>
+    <bean id="softurlinfodao"  class="com.cssweb.soft.dao.SoftUrlInfoDao"/>
+    
+    <bean id="runsLanternService" class="com.cssweb.runs.service.RunsLanternService" />
+    <bean id="runslanterndao" class="com.cssweb.runs.dao.RunsLanternDao" />
+    
+    <bean id="notifyDao" class="com.cssweb.notify.dao.impl.NotifyDaoImpl"></bean>
+    <bean id="notifyDeptDao" class="com.cssweb.notify.dao.impl.NotifyDeptDaoImpl"></bean>
+    <bean id="notifyService" class="com.cssweb.notify.service.NotifyService"></bean>
+     
+    <bean id="picmangerservice"  class="com.cssweb.picmanger.service.PicMangerService"/>
+    <bean id="picmanagerdao"  class="com.cssweb.picmanger.dao.PicMangerDao"/>
+    
+    <bean id="adMangerService"  class="com.cssweb.admanger.service.AdMangerService"/>
+    <bean id="admanagerdao"  class="com.cssweb.admanger.dao.AdMangerDao"/>
+    
+    <bean id="userMessageInfoDao" class="com.cssweb.message.dao.UserMessageInfoDao"></bean>	
+    <bean id="userMessageInfoService" class="com.cssweb.message.service.UserMessageInfoService"></bean>
+    
+    <bean id="lcRoleService" class="com.cssweb.lcrole.service.LcRoleService"/>
+    <bean id="lcroledao" class="com.cssweb.lcrole.dao.LcRoleDao"/>
+    
+    <bean id="tvideoUserStatTrafficService" class="com.cssweb.video.service.TvideoUserStatTrafficService"/>
+    <bean id="tvideoUserStatTrafficDao" class="com.cssweb.video.dao.TvideoUserStatTrafficDao"/>
+    <bean id="tvideoUserExptimeService" class="com.cssweb.video.service.TvideoUserExptimeService"/>
+    <bean id="tvideoUserExptimeDao" class="com.cssweb.video.dao.TvideoUserExptimeDao"/>
+    <bean id="tvideoBoardService" class="com.cssweb.video.service.TvideoBoardService"/>
+    <bean id="tvideoBoardDao" class="com.cssweb.video.dao.TvideoBoardDao"/>
+    <bean id="tvideoCategoryService" class="com.cssweb.video.service.TvideoCategoryService"/>
+    <bean id="tvideoCategoryDao" class="com.cssweb.video.dao.TvideoCategoryDao"/>
+    <bean id="tvideoProgramService" class="com.cssweb.video.service.TvideoProgramService"/>
+    <bean id="tvideoProgramDao" class="com.cssweb.video.dao.TvideoProgramDao"/>
+    <bean id="tvideoProgramLiveService" class="com.cssweb.video.service.TvideoProgramLiveService"/>
+    <bean id="tvideoProgramLiveDao" class="com.cssweb.video.dao.TvideoProgramLiveDao"/>
+    
+    <bean id="streamDao" class="com.cssweb.video.dao.StreamDao" >
+		    <property name="sqlMapClient" ref="sqlMapClientSqlServer" />
+			<property name="dataSource" ref="dataSourceSqlServer" />	
+	</bean>
+    <bean id="streamService" class="com.cssweb.video.service.StreamService"/>
+
+    <bean id="tfinanceCommendHandsetService" class="com.cssweb.handset.service.TfinanceCommendHandsetService"/>
+    <bean id="tfinanceCommendHandsetDao" class="com.cssweb.handset.dao.TfinanceCommendHandsetDao"/>
+    
+    <bean id="questionnairecategoryservice" class="com.cssweb.questionnaire.service.QuestionnaireCategoryService"/>
+    <bean id="questionnairecategorydao" class="com.cssweb.questionnaire.dao.QuestionnaireCategoryDao"/>
+    <bean id="questionnaireservice" class="com.cssweb.questionnaire.service.QuestionnaireService"/>
+    <bean id="questionnairedao" class="com.cssweb.questionnaire.dao.QuestionnaireDao"/>
+    <bean id="questionnaireAdviceService" class="com.cssweb.questionnaire.service.QuestionnaireAdviceService"/>
+    <bean id="questionnaireAdvicedao" class="com.cssweb.questionnaire.dao.QuestionnaireAdviceDao"/>
+    <!-- 服务对应用户级别服务 -->
+    <bean id="serviceLevelDao" class="com.cssweb.systemset.dao.ServiceLevelDao"/>
+    <bean id="serviceLevelService" class="com.cssweb.systemset.service.ServiceLevelService"/>
+    
+    <!-- 营业部信息管理 -->
+    <bean id="branchManagerDao" class="com.cssweb.systemset.dao.BranchManagerDao"/>
+    <bean id="branchManagerService" class="com.cssweb.systemset.service.BranchManagerService"/>
+    <bean id="tsystemBranchPicDao" class="com.cssweb.systemset.dao.TsystemBranchPicDao"/>
+    <bean id="tsystemBranchPicService" class="com.cssweb.systemset.service.TsystemBranchPicService"/>
+     <!-- 营业部公告管理 -->
+    <bean id="branchNoticeDao" class="com.cssweb.systemset.dao.BranchNoticeDao"/>
+    <bean id="branchNoticeService" class="com.cssweb.systemset.service.BranchNoticeService"/>
+    
+     <!-- 营业部公告审核管理 -->
+    <bean id="branchNoticeMapDao" class="com.cssweb.systemset.dao.BranchNoticeMapDao"/>
+    <bean id="branchNoticeMapService" class="com.cssweb.systemset.service.BranchNoticeMapService"/>
+    
+    <!-- 专家分析师信息维护 -->
+    <bean id="complaintsService" class="com.cssweb.complaints.service.ComplaintsService"/>
+    <bean id="complaintsDao" class="com.cssweb.complaints.dao.ComplaintsDao"/>
+
+    <!-- 客户投诉建议 -->
+    <bean id="financeAdviceService" class="com.cssweb.complaints.service.FinanceAdviceService"/>
+    <bean id="financeAdviceDao" class="com.cssweb.complaints.dao.FinanceAdviceDao"/>    
+    
+    <!-- 所有专家回答维护 -->
+    <bean id="financeQuestionService" class="com.cssweb.complaints.service.FinanceQuestionService"/>
+    <bean id="financeQuestionDao" class="com.cssweb.complaints.dao.FinanceQuestionDao"/>        
+    
+    <!-- 问卷建议信息查询 -->
+    <bean id="questionnairePersonTwoService" class="com.cssweb.complaints.service.QuestionnairePersonTwoService"/>
+    <bean id="questionnairePersonTwoDao" class="com.cssweb.complaints.dao.QuestionnairePersonTwoDao"/>    
+    
+    <!-- 常用快捷提问维护 -->
+    <bean id="financeUsualQuestionService" class="com.cssweb.complaints.service.FinanceUsualQuestionService"/>
+    <bean id="financeUsualQuestionDao" class="com.cssweb.complaints.dao.FinanceUsualQuestionDao"/> 
+    
+    <!-- 分支机构 -->
+    <bean id="branchPortalElementsService" class="com.cssweb.portal.service.BranchPortalElementsService"/>
+    <bean id="branchPortalElementsDao" class="com.cssweb.portal.dao.BranchPortalElementsDao"/>
+    <bean id="branchPortalImagesService" class="com.cssweb.portal.service.BranchPortalImagesService"/>
+    <bean id="branchPortalImagesDao" class="com.cssweb.portal.dao.BranchPortalImagesDao"/> 
+    <bean id="branchPortalItemsService" class="com.cssweb.portal.service.BranchPortalItemsService"/>
+    <bean id="branchPortalItemsDao" class="com.cssweb.portal.dao.BranchPortalItemsDao"/> 
+    <bean id="branchPortalService" class="com.cssweb.portal.service.BranchPortalService"/>
+    <bean id="branchPortalDao" class="com.cssweb.portal.dao.BranchPortalDao"/> 
+    <bean id="branchPortalZdymkService" class="com.cssweb.portal.service.BranchPortalZdymkService"/>
+    <bean id="branchPortalZdymkDao" class="com.cssweb.portal.dao.BranchPortalZdymkDao"/> 
+    <bean id="uploadFileService" class="com.cssweb.workreport.service.UploadFileService"/>
+    <bean id="cmsDocSortService" class="com.cssweb.cmsdocsort.service.CmsDocSortService"/>
+    <bean id="investService" class="com.cssweb.invest.service.InvestService"/>
+
+    <!--  我的自选股-->
+    <bean id="myquoteService" class="com.cssweb.quote.service.MyquoteService"/>
+    <bean id="myquoteDao" class="com.cssweb.quote.dao.MyquoteDao"/>   
+    
+    <!-- 前台登陆登陆模块 -->
+    <bean id="tsystemWebuserService" class="com.cssweb.client.service.TsystemWebuserService"/>
+    <bean id="tsystemWebuserDao" class="com.cssweb.client.dao.TsystemWebuserDao"/>
+    
+    <!-- 基金模块 -->
+    <bean id="fundGsInfoDao" class="com.cssweb.gazxfund.dao.FundGsInfoDao" >
+    		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+			<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+    <bean id="fundGsInfoService" class="com.cssweb.gazxfund.service.FundGsInfoService"></bean>
+    <!-- 我的自选股 根据股票代码取信息模块 -->
+    <bean id="gazxObjectDao" class="com.cssweb.gpdmGazx.dao.GazxObjectDao" >
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />	
+	</bean>
+    <bean id="gazxObjectService" class="com.cssweb.gpdmGazx.service.GazxObjectService"/>
+    
+    <!-- 开放式基金 -->  
+    <bean id="fundValueDao" class="com.cssweb.gazxfund.dao.FundValueDao">
+    		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+    <bean id="fundValueService" class="com.cssweb.gazxfund.service.FundValueService"></bean>
+    
+    <bean id="fundMoneyValueDao" class="com.cssweb.gazxfund.dao.FundMoneyValueDao">
+    		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+    <bean id="fundMoneyValueService" class="com.cssweb.gazxfund.service.FundMoneyValueService"></bean>
+    
+    <bean id="newFundInfoDao" class="com.cssweb.gazxfund.dao.NewFundInfoDao">
+    		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+    <bean id="newFundInfoService" class="com.cssweb.gazxfund.service.NewFundInfoService"></bean>
+    
+    <bean id="fundCutInfoDao" class="com.cssweb.gazxfund.dao.FundCutInfoDao">
+    		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+    <bean id="fundCutInfoService" class="com.cssweb.gazxfund.service.FundCutInfoService"></bean>
+    
+    <bean id="fundSplitInfoDao" class="com.cssweb.gazxfund.dao.FundSplitInfoDao">
+    		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+    <bean id="fundSplitInfoService" class="com.cssweb.gazxfund.service.FundSplitInfoService"></bean>
+    
+    <bean id="fundStopDealDao" class="com.cssweb.gazxfund.dao.FundStopDealDao">
+    		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+     <bean id="fundStopDealService" class="com.cssweb.gazxfund.service.FundStopDealService"></bean>
+     
+      <bean id="fundInfoDao" class="com.cssweb.gazxfund.dao.FundInfoDao">
+    		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+    </bean>
+     <bean id="whFundInfoService" class="com.cssweb.gazxfund.service.FundInfoService"></bean>
+     
+     <bean id="fundAbateFareDao" class="com.cssweb.gazxfund.dao.FundAbateFareDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="fundAbateFareService" class="com.cssweb.gazxfund.service.FundAbateFareService"></bean>
+     
+     <bean id="countService" class="com.css.plugins.count.CountService"></bean>
+     <bean id="marketService" class="com.cssweb.hq.service.MarketService"></bean>
+
+     <bean id="zqsyphDao" class="com.cssweb.hq.dao.ZqsyphDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="zqsyphService" class="com.cssweb.hq.service.ZqsyphService"></bean>
+    <!-- liujk start -->
+		<bean id="adviceService" class="com.cssweb.common.advice.service.AdviceService"/>
+		<bean id="question" class="com.cssweb.question.service.QuestionService"/>
+		<bean id="specialCaseService" class="com.cssweb.specialcase.service.SpecialCaseService"/>
+		<bean id="specialCasedao" class="com.cssweb.specialcase.dao.SpecialCaseDao"/>
+		<bean id="enterpriseSellService" class="com.cssweb.enterprisesell.service.EnterpriseSellService"/>
+		<bean id="creditService" class="com.cssweb.credit.service.CreditService"/>
+		<bean id="roadShowService" class="com.cssweb.roadshow.service.RoadShowService"/>
+		<bean id="contentService" class="com.cssweb.common.content.service.ContentService"/>
+		<bean id="eventImageService" class="com.cssweb.event.service.EventImageService"/>
+		<bean id="eventService" class="com.cssweb.event.service.EventService"/>
+		<bean id="empspeakService" class="com.cssweb.hr.service.EmpspeakService"/>
+		<bean id="hrUserService" class="com.cssweb.hr.service.HrUserService"/>
+		<bean id="hrApplyRecorderDao" class="com.cssweb.hr.dao.HrApplyRecorderDao"/>
+		<bean id="hrApplyRecorderService" class="com.cssweb.hr.service.HrApplyRecorderService"/>
+		<bean id="hrUserBasicInfoService" class="com.cssweb.hr.service.HrUserBasicInfoService"/>
+		<bean id="hrUserEduExperienceService" class="com.cssweb.hr.service.HrUserEduExperienceService"/>
+		<bean id="hrUserWorkExperienceService" class="com.cssweb.hr.service.HrUserWorkExperienceService"/>
+		<bean id="hrUserItemService" class="com.cssweb.hr.service.HrUserItemService"/>
+		<bean id="hrUserBearwardService" class="com.cssweb.hr.service.HrUserBearwardService"/>
+		<bean id="hrUserPubpaperService" class="com.cssweb.hr.service.HrUserPubpaperService"/>
+		<bean id="hrUserFamilyService" class="com.cssweb.hr.service.HrUserFamilyService"/>
+		<bean id="hrUserApplyItemService" class="com.cssweb.hr.service.HrUserApplyItemService"/>
+		<bean id="hrUserSubmitService" class="com.cssweb.hr.service.HrUserSubmitService"/>
+		<bean id="hrUserAuditService" class="com.cssweb.hr.service.HrUserAuditService"/>
+	<!-- end -->
+
+     <bean id="newStockInfoService" class="com.cssweb.gazxNewStock.service.NewStockInfoService"></bean>
+     <bean id="newStockInfoDao" class="com.cssweb.gazxNewStock.dao.NewStockInfoDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="quoteService" class="com.cssweb.hq.service.QuoteService"/>
+     
+     <bean id="qzdqdxService" class="com.cssweb.gazxQz.service.QzdqdxService">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+			<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+    
+    <bean id="ahbjDao" class="com.cssweb.hq.dao.AhbjDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="ahbjService" class="com.cssweb.hq.service.AhbjService"></bean>
+     
+     <bean id="hqgzDao" class="com.cssweb.hq.dao.HqgzDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="hqgzService" class="com.cssweb.hq.service.HqgzService"></bean>
+     
+     <bean id="whpjDao" class="com.cssweb.hq.dao.WhpjDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="whpjService" class="com.cssweb.hq.service.WhpjService"></bean>
+     
+      <bean id="thirdStockHQDao" class="com.cssweb.hq.dao.ThirdStockHQDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="thirdStockHQService" class="com.cssweb.hq.service.ThirdStockHQService"></bean>
+     
+     
+      <bean id="gazxDateService" class="com.cssweb.gazx.data.service.GazxDateService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+   
+	<!--<bean id="ztyjService" class="com.cssweb.gazx.data.service.ZtyjService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<bean id="qhhqService" class="com.cssweb.gazx.data.service.QhhqService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	-->
+	
+	<bean id="fundFilterDao" class="com.cssweb.gazxfund.dao.FundFilterDao">
+     		<property name="sqlMapClient" ref="sqlMapClientGazx"></property>
+    		<property name="dataSource" ref="dataSourceGazx" />	
+     </bean>
+     <bean id="fundFilterService" class="com.cssweb.gazxfund.service.FundFilterService"></bean>
+     
+     	<!-- f10 -->
+	<bean id="futuresInfoService" class="com.cssweb.F10.gazx.futures.service.FuturesInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="futuresQuoteService" class="com.cssweb.F10.gazx.futures.service.FuturesQuoteService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="f10Service"
+		class="com.cssweb.F10.gazx.base.service.F10Service" >
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>	
+	<!-- 注入基金净值fundNetValueService-->
+	<bean id="fundNetValueService" class="com.cssweb.F10.gazx.fund.service.FundNetValueService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<bean id="stockInfoService" class="com.cssweb.F10.gazx.stock.service.StockInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<bean id="majorShareholdersService" class="com.cssweb.F10.gazx.stock.service.MajorShareholdersService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<bean id="personalInfoService" class="com.cssweb.F10.gazx.base.service.PersonalInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<bean id="topExecutivesService" class="com.cssweb.F10.gazx.base.service.TopExecutivesService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="cashFlowService" class="com.cssweb.F10.gazx.stock.service.CashFlowService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="assetIndebteService" class="com.cssweb.F10.gazx.stock.service.AssetIndebteService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="profitAssignService" class="com.cssweb.F10.gazx.stock.service.ProfitAssignService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="companyInfoService" class="com.cssweb.F10.gazx.base.service.CompanyInfoService">
+	<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!--<bean id="fundIntroductionService" class="com.cssweb.F10.gazx.fund.service.FundIntroductionService">
+	<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	-->
+	<bean id="fundProfitDistributionSheetService"
+		class="com.cssweb.F10.gazx.fund.service.FundProfitDistributionSheetService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<bean id="fundBalanceSheetService"
+		class="com.cssweb.F10.gazx.fund.service.FundBalanceSheetService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>	
+	
+	<bean id="assetAllocationService"
+		class="com.cssweb.F10.gazx.fund.service.AssetAllocationService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>		
+	
+	<bean id="financialIndexService"
+		class="com.cssweb.F10.gazx.fund.service.FinancialIndexService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>			
+	
+	<bean id="fundDividendService"
+		class="com.cssweb.F10.gazx.fund.service.FundDividendService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>			
+	
+	<bean id="fundIssuedAndListedService"
+		class="com.cssweb.F10.gazx.fund.service.FundIssuedAndListedService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>				
+	
+	<bean id="fundPurAndRedService"
+		class="com.cssweb.F10.gazx.fund.service.FundPurAndRedService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>	
+	
+	<bean id="rateAdjustmentService"
+		class="com.cssweb.F10.gazx.fund.service.RateAdjustmentService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>						
+	
+	<bean id="netValueChangeService"
+		class="com.cssweb.F10.gazx.fund.service.NetValueChangeService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>		
+	
+	<bean id="positionAdjustmentService"
+		class="com.cssweb.F10.gazx.fund.service.PositionAdjustmentService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>										
+	
+	<bean id="keyStockPortfolioService"
+		class="com.cssweb.F10.gazx.fund.service.KeyStockPortfolioService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>											
+	
+	<bean id="investIndustryService"
+		class="com.cssweb.F10.gazx.fund.service.InvestIndustryService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>			
+	
+	<bean id="fundHolderService"
+		class="com.cssweb.F10.gazx.fund.service.FundHolderService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>				
+	<bean id="fundHoldStockService"
+		class="com.cssweb.F10.gazx.fund.service.FundHoldStockService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>				
+	<!-- lvfeng add end -->
+
+
+	<!-- Creat by Cuizh@FundInfo -->
+	<bean id="fundInfoService" class="com.cssweb.F10.gazx.fund.service.FundInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>	
+	<!-- linli add start -->
+	<bean id="baseInfoService" class="com.cssweb.F10.gazx.info.service.BaseInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="assignStockService" class="com.cssweb.F10.gazx.stock.service.AssignStockService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="importantActivityService" class="com.cssweb.F10.gazx.stock.service.ImportantActivityService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="increaseIssueStockService" class="com.cssweb.F10.gazx.stock.service.IncreaseIssueStockService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="linkRelationService" class="com.cssweb.F10.gazx.stock.service.LinkRelationService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="newStockIssueService" class="com.cssweb.F10.gazx.stock.service.NewStockIssueService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="stockStructureService" class="com.cssweb.F10.gazx.stock.service.StockStructureService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="shareMergerReformService" class="com.cssweb.F10.gazx.stock.service.ShareMergerReformService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="limitedSharesService" class="com.cssweb.F10.gazx.stock.service.LimitedSharesService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<bean id="financialAnalysisService" class="com.cssweb.F10.gazx.stock.service.FinancialAnalysisService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	<!-- linli add end -->
+	
+	<!-- Creat by Cuizh@BondInfo -->
+	<bean id="bondInfoService"
+		class="com.cssweb.F10.gazx.bond.service.BondInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>	
+	
+	<!-- Creat by Cuizh@QzInfo -->
+	<bean id="qzInfoService"
+		class="com.cssweb.F10.gazx.qz.service.QzInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+
+	<!-- Creat by Cuizh@NationalDebtIssue -->
+	<bean id="nationalDebtIssueService"
+		class="com.cssweb.F10.gazx.bond.service.NationalDebtIssueService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+
+	<!-- Creat by Cuizh@NationalDebtIssue -->
+	<bean id="nationalDebtTradeService"
+		class="com.cssweb.F10.gazx.bond.service.NationalDebtTradeService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>	
+
+	<!-- Creat by Cuizh@BondBackToSaleCaseService -->
+	<bean id="bondBackToSaleCaseService"
+		class="com.cssweb.F10.gazx.bond.service.BondBackToSaleCaseService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+
+	<!-- Creat by Cuizh@BondRedemptionCaseService -->
+	<bean id="bondRedemptionCaseService"
+		class="com.cssweb.F10.gazx.bond.service.BondRedemptionCaseService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@ConveriteDebtOwnerInfoService -->
+	<bean id="converiteDebtOwnerInfoService"
+		class="com.cssweb.F10.gazx.bond.service.ConveriteDebtOwnerInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@ConvertibleDebtIssueAndTradeService -->
+	<bean id="convertibleDebtIssueAndTradeService"
+		class="com.cssweb.F10.gazx.bond.service.ConvertibleDebtIssueAndTradeService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@ConvertibleDebtToStockInfoService -->
+	<bean id="convertibleDebtToStockInfoService"
+		class="com.cssweb.F10.gazx.bond.service.ConvertibleDebtToStockInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@ConvertibleDebtToStockPriceChangeService -->
+	<bean id="convertibleDebtToStockPriceChangeService"
+		class="com.cssweb.F10.gazx.bond.service.ConvertibleDebtToStockPriceChangeService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@DebtActualPayRateInfoService -->
+	<bean id="debtActualPayRateInfoService"
+		class="com.cssweb.F10.gazx.bond.service.DebtActualPayRateInfoService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@DebtConversationRatioService -->
+	<bean id="debtConversationRatioService"
+		class="com.cssweb.F10.gazx.bond.service.DebtConversationRatioService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@DebtDueYieldService -->
+	<bean id="debtDueYieldService"
+		class="com.cssweb.F10.gazx.bond.service.DebtDueYieldService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@EnterpriseDebtIssueAndTradeService -->
+	<bean id="enterpriseDebtIssueAndTradeService"
+		class="com.cssweb.F10.gazx.bond.service.EnterpriseDebtIssueAndTradeService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- Creat by Cuizh@FinancialDebtIssueService -->
+	<bean id="financialDebtIssueService"
+		class="com.cssweb.F10.gazx.bond.service.FinancialDebtIssueService">
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />
+	</bean>
+	
+	<!-- 经纪业务荣誉 -->
+	<bean id="systemCreditDao" class="com.cssweb.systemset.dao.SystemCreditDao"></bean>
+	<bean id="systemCreditService" class="com.cssweb.systemset.service.SystemCreditService"></bean>
+	
+	<!-- 融资融券 -->
+	<bean id="assureDao" class="com.cssweb.rzrq.dao.AssureDao"></bean>
+	<bean id="assureService" class="com.cssweb.rzrq.service.AssureService"></bean>
+	<bean id="pledgeAndKeepDao" class="com.cssweb.rzrq.dao.PledgeAndKeepDao"></bean>
+	<bean id="pledgeAndKeepService" class="com.cssweb.rzrq.service.PledgeAndKeepService"></bean>
+	<bean id="rzrqRateDao" class="com.cssweb.rzrq.dao.RzrqRateDao"></bean>
+	<bean id="rzrqRateService" class="com.cssweb.rzrq.service.RzrqRateService"></bean>
+	<!-- 融资融券大赛 -->
+	
+	<bean id="custRegisterDao" class="com.cssweb.rzrq.dao.CustRegisterDao"></bean>
+	<bean id="custRegisterService" class="com.cssweb.rzrq.service.CustRegisterService"></bean>
+	<!--add 2012-6-19 -->
+	<bean id="adviceDao" class="com.cssweb.rzrq.dao.AdviceDao"></bean>
+	<bean id="adviceService1" class="com.cssweb.rzrq.service.AdviceService"></bean>
+	 
+
+	<!-- 资产管理 -->
+	<bean id="productService" class="com.cssweb.business.product.service.ProductService" />
+	<bean id="productNetValueService" class="com.cssweb.business.product.service.ProductNetValueService" />
+	<bean id="assetManagerDao" class="com.cssweb.assetManager.dao.AssetManagerDao"></bean>
+	<bean id="assetManagerService" class="com.cssweb.assetManager.service.AssetManagerService"></bean>
+		
+	<bean id="pledgeQuoteDao" class="com.cssweb.rzrq.dao.PledgeQuoteDao"></bean>
+	<bean id="pledgeQuoteService" class="com.cssweb.rzrq.service.PledgeQuoteService"></bean>
+	<bean id="aimadjustDao" class="com.cssweb.rzrq.dao.AimadjustDao"></bean>
+	<bean id="aimadjustService" class="com.cssweb.rzrq.service.AimadjustService"></bean> 
+	
+	<!-- 基金代销模块 -->
+	<bean id="tsystemFundSaleDao" class="com.cssweb.systemset.dao.TsystemFundSaleDao"></bean> 
+	<bean id="tsystemFundSaleService" class="com.cssweb.systemset.service.TsystemFundSaleService"></bean>
+	
+	<bean id="jjylbDao" class="com.cssweb.systemset.dao.JjylbDao"></bean> 
+	<bean id="jjylbService" class="com.cssweb.systemset.service.JjylbService"></bean>
+	
+	<!-- Hr后台管理 -->
+	<bean id="thrPostInfoDao" class="com.cssweb.hr.dao.ThrPostInfoDao"></bean>
+	
+	<bean id="thrPostInfoService" class="com.cssweb.hr.service.ThrPostInfoService"></bean>
+	
+	<bean id="thrUserJlDao" class="com.cssweb.hr.dao.ThrUserJlDao"></bean>
+	<bean id="thrUserJlService" class="com.cssweb.hr.service.ThrUserJlService"></bean>
+	
+	<!-- 资产管理 -->
+	<bean id="balFundDao" class="com.cssweb.collect.dao.BalFundDao">
+			<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+			<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="balFundService" class="com.cssweb.collect.service.BalFundService"></bean>
+	<bean id="rightsregDao" class="com.cssweb.collect.dao.RightsregDao">
+			<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+			<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="rightsregService" class="com.cssweb.collect.service.RightsregService"></bean>	
+	<bean id="tradeLogDao" class="com.cssweb.collect.dao.TradeLogDao">
+			<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+			<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="tradeLogService" class="com.cssweb.collect.service.TradeLogService"></bean>	
+	
+	<!-- 定向理财 -->
+	<bean id="assetInfoService" class="com.cssweb.clientService.service.AssetInfoService"></bean>
+	<bean id="assetInfoDao" class="com.cssweb.clientService.dao.AssetInfoDao">
+			<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+			<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean id="tradeNoteService" class="com.cssweb.clientService.service.TradeNoteService"></bean>
+	<bean id="tradeNoteDao" class="com.cssweb.clientService.dao.TradeNoteDao">
+			<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+			<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean id="fundHoldService" class="com.cssweb.clientService.service.FundHoldService"></bean>
+	<bean id="fundHoldDao" class="com.cssweb.clientService.dao.FundHoldDao">
+			<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+			<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean id="lcUserInfoService" class="com.cssweb.clientService.service.LcUserInfoService"></bean>
+	<bean id="lcUserInfoDao" class="com.cssweb.clientService.dao.LcUserInfoDao">
+			<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+			<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+
+    <bean id="mgrInfoDao" class="com.cssweb.collect.dao.MgrInfoDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+		<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="mgrInfoService" class="com.cssweb.collect.service.MgrInfoService"></bean>
+	
+	<bean id="tcsswebRyxxDao" class="com.cssweb.collect.dao.TcsswebRyxxDao"></bean>
+	<bean id="tcsswebRyxxService" class="com.cssweb.collect.service.TcsswebRyxxService"></bean>
+	
+	<bean id="acctTransDao" class="com.cssweb.collect.dao.AcctTransDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+		<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="acctTransService" class="com.cssweb.collect.service.AcctTransService"></bean>
+	
+	<bean id="acctCustDao" class="com.cssweb.collect.dao.AcctCustDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+		<property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="acctCustService" class="com.cssweb.collect.service.AcctCustService"></bean>
+	
+
+	<bean id="assetUserDao" class="com.cssweb.assetManager.dao.AssetUserDao">
+	      <property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+		  <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="assetUserService" class="com.cssweb.assetManager.service.AssetUserService"></bean>
+
+    <bean id="stockZcglDao" class="com.cssweb.assetManager.dao.StockZcglDao">
+	      <property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+		  <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="stockZcglService" class="com.cssweb.assetManager.service.StockZcglService"></bean>
+	
+	<bean id="zcglWebuserDao" class="com.cssweb.client.dao.ZcglWebuserDao">
+	      <property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+		  <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="zcglWebuserService" class="com.cssweb.client.service.ZcglWebuserService"></bean>
+
+	<!-- crm -->
+	<bean id="crmWebuserDao" class="com.cssweb.client.dao.CrmWebuserDao">
+	      <property name="sqlMapClient" ref="sqlMapClientCrm"></property>
+		  <property name="dataSource" ref="dataSourceCrm"></property>
+	</bean>
+	<bean id="crmWebuserService" class="com.cssweb.client.service.CrmWebuserService"></bean>
+	
+	<bean id="clientAssetService" class="com.cssweb.rzrq.service.ClientAssetService"></bean>
+	<bean id="clientAssetDao" class="com.cssweb.rzrq.dao.ClientAssetDao">
+	      <property name="sqlMapClient" ref="sqlMapClientCrm"></property>
+		  <property name="dataSource" ref="dataSourceCrm"></property>
+	</bean>
+	
+	<bean id="clientBasicService" class="com.cssweb.rzrq.service.ClientBasicService"></bean>
+	<bean id="clientBasicDao" class="com.cssweb.rzrq.dao.ClientBasicDao">
+		  <property name="sqlMapClient" ref="sqlMapClientCrm"></property>
+		  <property name="dataSource" ref="dataSourceCrm"></property>
+		  </bean>
+	<!-- 2012-6-11 -->
+	<bean id="clientBasicRzrqService" class="com.cssweb.rzrq.service.ClientBasicRzrqService"></bean>
+	<bean id="clientBasicRzrqDao" class="com.cssweb.rzrq.dao.ClientBasicRzrqDao">
+		  <property name="sqlMapClient" ref="sqlMapClientCrm"></property>
+		  <property name="dataSource" ref="dataSourceCrm"></property>
+		  </bean>
+		  
+	<bean id="tgfFundInfoDao" class="com.cssweb.systemset.dao.TgfFundInfoDao">
+		  <property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+		  <!--<property name="dataSource" ref="dataSourceZcgl"></property>
+		  --><property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	<bean id="tgfFundInfoService" class="com.cssweb.systemset.service.TgfFundInfoService"></bean>
+	
+	 <bean id="vipgazxDao" class="com.cssweb.gazx.jrsj.dao.VipgazxDao" >
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />	
+	</bean>
+	<bean id="vipgazxService" class="com.cssweb.gazx.jrsj.service.VipgazxService"/>
+	
+	 <bean id="bgylycbDao" class="com.cssweb.gazx.jrsj.dao.BgylycbDao" >
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />	
+	</bean>
+	<bean id="bgylycbService" class="com.cssweb.gazx.jrsj.service.BgylycbService"/>
+	
+	 <bean id="zxtzpjDao" class="com.cssweb.gazx.jrsj.dao.ZxtzpjDao" >
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />	
+	</bean>
+	<bean id="zxtzpjService" class="com.cssweb.gazx.jrsj.service.ZxtzpjService"/>
+	
+	 <bean id="jggpcDao" class="com.cssweb.gazx.jrsj.dao.JggpcDao" >
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />	
+	</bean>
+	<bean id="jggpcService" class="com.cssweb.gazx.jrsj.service.JggpcService"/>
+	
+	 <bean id="pjtgggDao" class="com.cssweb.gazx.jrsj.dao.PjtgggDao" >
+		<property name="sqlMapClient" ref="sqlMapClientGazx" />
+		<property name="dataSource" ref="dataSourceGazx" />	
+	</bean>
+	<bean id="pjtgggService" class="com.cssweb.gazx.jrsj.service.PjtgggService"/>
+
+    <bean id="hrPurviewDao" class="com.cssweb.hr.dao.HrPurviewDao"></bean>
+    <bean id="hrPurviewService" class="com.cssweb.hr.service.HrPurviewService"></bean>
+    
+    <!-- 研发中心 -->
+    <bean id="tdeveloperGroupDao" class="com.cssweb.developer.dao.TdeveloperGroupDao"></bean>
+    <bean id="tdeveloperGroupService" class="com.cssweb.developer.service.TdeveloperGroupService"></bean>
+    <!-- 专题活动 -->
+    <bean id="themeCategoryDao" class="com.cssweb.theme.dao.ThemeCategoryDao"></bean>
+    <bean id="themeCategoryService" class="com.cssweb.theme.service.ThemeCategoryService"></bean>
+    <bean id="themeIntroDao" class="com.cssweb.theme.dao.ThemeIntroDao"></bean>
+    <bean id="themeIntroService" class="com.cssweb.theme.service.ThemeIntroService"></bean>
+    <bean id="themeNewsDao" class="com.cssweb.theme.dao.ThemeNewsDao"></bean>
+    <bean id="themeNewsService" class="com.cssweb.theme.service.ThemeNewsService"></bean>
+    <bean id="themeVideoDao" class="com.cssweb.theme.dao.ThemeVideoDao"></bean>
+    <bean id="themeVideoService" class="com.cssweb.theme.service.ThemeVideoService"></bean>
+    <bean id="themePicDao" class="com.cssweb.theme.dao.ThemePicDao"></bean>
+    <bean id="themePicService" class="com.cssweb.theme.service.ThemePicService"></bean>
+    <bean id="themeArticleCategoryDao" class="com.cssweb.theme.dao.ThemeArticleCategoryDao"></bean>
+    <bean id="themeArticleCategoryService" class="com.cssweb.theme.service.ThemeArticleCategoryService"></bean>
+    <bean id="themeArticleDao" class="com.cssweb.theme.dao.ThemeArticleDao"></bean>
+    <bean id="themeArticleService" class="com.cssweb.theme.service.ThemeArticleService"></bean>
+    <!-- 个性测评 -->
+    <bean id="questionDao" class="com.cssweb.gxcp.dao.QuestionDao"></bean>
+    <bean id="questionService" class="com.cssweb.gxcp.service.QuestionService"></bean>
+    <bean id="optionDao" class="com.cssweb.gxcp.dao.OptionDao"></bean>
+    <bean id="optionService" class="com.cssweb.gxcp.service.OptionService"></bean>
+    <bean id="userInfoDao" class="com.cssweb.gxcp.dao.UserInfoDao"></bean>
+    <bean id="userInfoService" class="com.cssweb.gxcp.service.UserInfoService"></bean>
+    <bean id="answerDao" class="com.cssweb.gxcp.dao.AnswerDao"></bean>
+    <bean id="answerService" class="com.cssweb.gxcp.service.AnswerService"></bean>
+    
+    <bean id="createExpertHrXLS" class="com.citics.util.CreateExpertHrXLS"></bean>
+    
+    <bean id="mailSendService" class="com.cssweb.business.mail.service.MailSendService"></bean>
+    <!-- Hr老网站历史 -->
+    <bean id="tmanApplicanttDao" class="com.cssweb.oldhr.dao.TmanApplicanttDao"></bean>
+    <bean id="tmanApplicanttService" class="com.cssweb.oldhr.service.TmanApplicanttService"></bean>
+    
+    <bean id="gfVacanciestDao" class="com.cssweb.oldhr.dao.GfVacanciestDao"></bean>
+    <bean id="gfVacanciestService" class="com.cssweb.oldhr.service.GfVacanciestService"></bean>
+    <bean id="tmanCertificateDao" class="com.cssweb.oldhr.dao.TmanCertificateDao"></bean>
+    <bean id="tmanCertificateService" class="com.cssweb.oldhr.service.TmanCertificateService"></bean>
+    <bean id="tmanEducationtDao" class="com.cssweb.oldhr.dao.TmanEducationtDao"></bean>
+    <bean id="tmanEducationtService" class="com.cssweb.oldhr.service.TmanEducationtService"></bean>
+    <bean id="tmanWorkExptDao" class="com.cssweb.oldhr.dao.TmanWorkExptDao"></bean>
+    <bean id="tmanWorkExptService" class="com.cssweb.oldhr.service.TmanWorkExptService"></bean>
+    <bean id="tmanProjectDao" class="com.cssweb.oldhr.dao.TmanProjectDao"></bean>
+    <bean id="tmanProjectService" class="com.cssweb.oldhr.service.TmanProjectService"></bean>
+    <bean id="tmanGiftDao" class="com.cssweb.oldhr.dao.TmanGiftDao"></bean>
+    <bean id="tmanGiftService" class="com.cssweb.oldhr.service.TmanGiftService"></bean>
+    <bean id="tmanArticlesDao" class="com.cssweb.oldhr.dao.TmanArticlesDao"></bean>
+    <bean id="tmanArticlesService" class="com.cssweb.oldhr.service.TmanArticlesService"></bean>
+    <bean id="tmanFamilyDao" class="com.cssweb.oldhr.dao.TmanFamilyDao"></bean>
+    <bean id="tmanFamilyService" class="com.cssweb.oldhr.service.TmanFamilyService"></bean>
+    
+    <bean id="tbranchViewDao" class="com.cssweb.systemset.dao.TbranchViewDao"></bean>
+    <bean id="tbranchViewService" class="com.cssweb.systemset.service.TbranchViewService"></bean>
+    
+    <bean id="aimadjustLogDao" class="com.cssweb.rzrq.dao.AimadjustLogDao" ></bean>
+    <bean id="aimadjustLogService" class="com.cssweb.rzrq.service.AimadjustLogService"></bean>
+    
+    <bean id="pledgeAndKeepLogDao" class="com.cssweb.rzrq.dao.PledgeAndKeepLogDao"></bean>
+    <bean id="pledgeAndKeepLogService" class="com.cssweb.rzrq.service.PledgeAndKeepLogService"></bean>
+    
+    <bean id="pledgeQuoteLogDao" class="com.cssweb.rzrq.dao.PledgeQuoteLogDao"></bean>
+    <bean id="pledgeQuoteLogService" class="com.cssweb.rzrq.service.PledgeQuoteLogService"></bean>
+    
+    <bean id="tclientYdbgDao" class="com.cssweb.client.dao.TclientYdbgDao"></bean>
+    <bean id="tclientYdbgService" class="com.cssweb.client.service.TclientYdbgService"></bean>
+    
+    <bean id="financeMessageDao" class="com.cssweb.complaints.dao.FinanceMessageDao"></bean>
+    <bean id="financeMessageService" class="com.cssweb.complaints.service.FinanceMessageService"></bean>
+    
+    <bean id="phoneBrandInfoDao" class="com.cssweb.phoneSoft.dao.PhoneBrandInfoDao"></bean>
+    <bean id="phoneBrandInfoService" class="com.cssweb.phoneSoft.service.PhoneBrandInfoService"></bean>
+    
+    <bean id="phoneModelInfoDao" class="com.cssweb.phoneSoft.dao.PhoneModelInfoDao"></bean>
+    <bean id="phoneModelInfoService" class="com.cssweb.phoneSoft.service.PhoneModelInfoService"></bean>
+    
+    <bean id="phoneSoftUrlDao" class="com.cssweb.phoneSoft.dao.PhoneSoftUrlDao"></bean>
+    <bean id="phoneSoftUrlService" class="com.cssweb.phoneSoft.service.PhoneSoftUrlService"></bean>
+    <bean id="mbSoftDownCountService" class="com.cssweb.phoneSoft.service.MbSoftDownCountService"></bean>
+    <bean id="tmobileVideoUserStatService" class="com.cssweb.phoneSoft.service.TmobileVideoUserStatService"></bean>
+    
+    <bean id="fundHistoryDao" class="com.cssweb.collect.dao.FundHistoryDao">
+    		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+    		<property name="dataSource" ref="dataSourceZcgl"></property>
+    </bean>
+    <bean id="fundHistoryService" class="com.cssweb.collect.service.FundHistoryService"></bean>
+    
+    <bean id="jgjQuestionDao" class="com.cssweb.question.dao.JgjQuestionDao"></bean>
+    <bean id="jgjQuestionService" class="com.cssweb.question.service.JgjQuestionService"></bean>
+    
+    <bean id="commissionDao" class="com.cssweb.commission.dao.CommissionDao"></bean>
+    <bean id="commissionService" class="com.cssweb.commission.service.CommissionService"></bean>
+    
+	<bean id="tsystmRecordAssetUserDao" class="com.cssweb.collect.dao.TsystmRecordAssetUserDao"></bean>
+	<bean id="tsystmRecordAssetUserService" class="com.cssweb.collect.service.TsystmRecordAssetUserService"></bean>
+	
+	 <bean id="createMbSoftDownCountXLS" class="com.citics.util.CreateMbSoftDownCountXLS"></bean>
+	 <bean id="createTmobuleXLS" class="com.citics.util.CreateTmobuleXLS"></bean>
+	 
+	<bean id="tassetuserUsernameService" class="com.cssweb.client.service.TassetuserUsernameService"/>
+	<bean id="tassetuserUsernameDao" class="com.cssweb.client.dao.TassetuserUsernameDao"/>
+	
+	<bean id="tcsswebFwcpcxService" class="com.cssweb.subscribe.service.TcsswebFwcpcxService"/>
+	<bean id="tcsswebFwcpcxDao" class="com.cssweb.subscribe.dao.TcsswebFwcpcxDao"/>
+	<bean id="tcsswebFwtcdyService" class="com.cssweb.subscribe.service.TcsswebFwtcdyService"/>
+	<bean id="tcsswebFwtcdyDao" class="com.cssweb.subscribe.dao.TcsswebFwtcdyDao"/>
+	<bean id="tcsswebFwcpdyCmsService" class="com.cssweb.subscribe.service.TcsswebFwcpdyCmsService"/>
+	<bean id="tcsswebFwcpdyCmsDao" class="com.cssweb.subscribe.dao.TcsswebFwcpdyCmsDao"/>
+	<bean id="tcsswebFwtcdySfclDao" class="com.cssweb.subscribe.dao.TcsswebFwtcdySfclDao"/>
+	<bean id="tcsswebFwtcdySfclService" class="com.cssweb.subscribe.service.TcsswebFwtcdySfclService"/>
+	<bean id="tcsswebFwcpdyService" class="com.cssweb.subscribe.service.TcsswebFwcpdyService"/>
+	<bean id="tcsswebFwcpdyDao" class="com.cssweb.subscribe.dao.TcsswebFwcpdyDao"/>
+	<bean id="tcsswebProFwcptdService" class="com.cssweb.subscribe.service.TcsswebProFwcptdService"/>
+	<bean id="tcsswebProFwcptdDao" class="com.cssweb.subscribe.dao.TcsswebProFwcptdDao"/>
+	<bean id="tcsswebCppjService" class="com.cssweb.subscribe.service.TcsswebCppjService"/>
+	<bean id="tcsswebCppjDao" class="com.cssweb.subscribe.dao.TcsswebCppjDao"/>
+	<bean id="tcsswebUserCppjService" class="com.cssweb.subscribe.service.TcsswebUserCppjService"/>
+	<bean id="tcsswebUserCppjDao" class="com.cssweb.subscribe.dao.TcsswebUserCppjDao"/>
+	<bean id="tcsswebProductidCatidService" class="com.cssweb.subscribe.service.TcsswebProductidCatidService"/>
+	<bean id="tcsswebProductidCatidDao" class="com.cssweb.subscribe.dao.TcsswebProductidCatidDao"/>
+	<bean id="tcsswebTipsService" class="com.cssweb.subscribe.service.TcsswebTipsService"/>
+	<bean id="tcsswebTipsDao" class="com.cssweb.subscribe.dao.TcsswebTipsDao"/>
+	<bean id="tcsswebFwcpyslService" class="com.cssweb.subscribe.service.TcsswebFwcpyslService"/>
+	<bean id="tcsswebFwcpyslDao" class="com.cssweb.subscribe.dao.TcsswebFwcpyslDao"/>
+	
+	<!-- 公益基金下的项目管理 -->
+	<bean id="itemDao" class="com.cssweb.item.dao.ItemDao"></bean>
+	<bean id="itemService" class="com.cssweb.item.service.ItemService"></bean>
+	<bean id="donateDao" class="com.cssweb.item.dao.DonateDao"></bean>
+	<bean id="donateService" class="com.cssweb.item.service.DonateService"></bean>
+	<bean id="applyDao" class="com.cssweb.item.dao.ApplyDao"></bean>
+	<bean id="applyService" class="com.cssweb.item.service.ApplyService"></bean>
+	
+	
+	
+	<!-- Action -->
+	<bean name="/goldMoney" class="com.fortuneage.goldmoney.action.GoldMoneyAction">
+		<property name="goldMoneyService" ref="goldMoneyService"></property>
+		<property name="goldMoneyHistoryService" ref="goldMoneyHistoryService"></property>
+	</bean>
+	<bean name="/goldMoneyHistory" class="com.fortuneage.goldmoney.action.GoldMoneyHistoryAction">
+		<property name="goldMoneyHistoryService" ref="goldMoneyHistoryService"></property>
+		<property name="goldMoneyService" ref="goldMoneyService"></property>
+	</bean>
+	<!--action  -->
+		<bean name="/institution" class="com.fortuneage.fund.action.InstitutionAction">
+	   <property name="institutionService" ref="institutionService"></property>
+	</bean>
+	
+	<bean name="/itemDocAction" class="com.fortuneage.fund.action.ItemDocAction">
+		<property name="itemDocService" ref="itemDocService"></property>
+	</bean>
+	
+	<!-- 金快线 -->
+	<!-- Dao -->
+	<bean name="goldMoneyDao" class="com.fortuneage.goldmoney.dao.GoldMoneyDao">
+		<!-- 使用默认的sqlMapClient是同时调用默认的dataSource -->
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+		<!-- 使用默认的dataSource本数据源是访问webtest数据库使用的 -->
+    	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	
+	<bean name="goldMoneyHistoryDao" class="com.fortuneage.goldmoney.dao.GoldMoneyHistoryDao">
+		<!-- 使用默认的sqlMapClient是同时调用默认的dataSource -->
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+		<!-- 使用默认的dataSource本数据源是访问webtest数据库使用的 -->
+    	<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- Service -->
+	<bean name="goldMoneyService" class="com.fortuneage.goldmoney.service.GoldMoneyService">
+		<property name="goldMoneyDao" ref="goldMoneyDao"></property>
+	</bean>
+	
+	<bean name="goldMoneyHistoryService" class="com.fortuneage.goldmoney.service.GoldMoneyHistoryService">
+		<property name="goldMoneyHistoryDao" ref="goldMoneyHistoryDao"></property>
+	</bean>
+	
+	
+	
+	
+	
+	
+	
+	<!-- 公益基金-->
+    
+	<!--dao -->
+	<bean name="institutionDao" class="com.fortuneage.fund.dao.InstitutionDao">
+	      <property name="sqlMapClient" ref="sqlMapClient"></property>
+	      <property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<bean name="itemDocDao" class="com.fortuneage.fund.dao.ItemDocDao">
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	     <property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!--service  -->
+	<bean name="institutionService" class="com.fortuneage.fund.service.InstitutionService">
+	    <property name="institutionDao" ref="institutionDao"></property>
+	</bean>
+	
+	<bean name="itemDocService" class="com.fortuneage.fund.service.ItemDocService">
+		<property name="itemDocDao" ref="itemDocDao"></property>
+	</bean>
+	
+	
+	<!-- 阳光私募相关配置 -->
+	<!-- Dao -->
+	<bean name="sunnyCustDao" class="com.fortuneage.sunnyPOF.dao.SunnyCustDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+	      <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean name="sunnyCustshareHistoryDao" class="com.fortuneage.sunnyPOF.dao.SunnyCustshareHistoryDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+	      <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean name="sunnyExchangeDao" class="com.fortuneage.sunnyPOF.dao.SunnyExchangeDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+	      <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean name="sunnyFundPrcDao" class="com.fortuneage.sunnyPOF.dao.SunnyFundPrcDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+	      <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean name="sunnyFundinfoDao" class="com.fortuneage.sunnyPOF.dao.SunnyFundinfoDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+	      <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<bean name="sunnyCpcgwdDao" class="com.fortuneage.sunnyPOF.dao.SunnyCpcgwdDao">
+		<property name="sqlMapClient" ref="sqlMapClientZcgl"></property>
+	      <property name="dataSource" ref="dataSourceZcgl"></property>
+	</bean>
+	
+	<!-- Service -->
+	<bean name="sunnyCustService" class="com.fortuneage.sunnyPOF.service.SunnyCustService">
+		<property name="sunnyCustDao" ref="sunnyCustDao"></property>
+	</bean>
+	
+	<bean name="sunnyCustshareHistoryService" class="com.fortuneage.sunnyPOF.service.SunnyCustshareHistoryService">
+		<property name="sunnyCustshareHistoryDao" ref="sunnyCustshareHistoryDao"></property>
+	</bean>
+	
+	<bean name="sunnyExchangeService" class="com.fortuneage.sunnyPOF.service.SunnyExchangeService">
+		<property name="sunnyExchangeDao" ref="sunnyExchangeDao"></property>
+	</bean>
+	
+	<bean name="sunnyFundinfoService" class="com.fortuneage.sunnyPOF.service.SunnyFundinfoService">
+		<property name="sunnyFundinfoDao" ref="sunnyFundinfoDao"></property>
+	</bean>
+	
+	<bean name="sunnyFundPrcService" class="com.fortuneage.sunnyPOF.service.SunnyFundPrcService">
+		<property name="sunnyFundPrcDao" ref="sunnyFundPrcDao"></property>
+	</bean>
+	
+	<bean name="sunnyCpcgwdService" class="com.fortuneage.sunnyPOF.service.SunnyCpcgwdService">
+		<property name="sunnyCpcgwdDao" ref="sunnyCpcgwdDao"></property>
+	</bean>
+	<!-- Action -->
+	<bean name="/sunnyCustAction" class="com.fortuneage.sunnyPOF.action.SunnyCustAction">
+		<property name="sunnyCustService" ref="sunnyCustService"></property>
+		<property name="sunnyExchangeService" ref="sunnyExchangeService"></property>
+		<property name="sunnyCustshareHistoryService" ref="sunnyCustshareHistoryService"></property>
+		<property name="sunnyFundinfoService" ref="sunnyFundinfoService"></property>
+		<property name="sunnyFundPrcService" ref="sunnyFundPrcService"></property>
+		<property name="sunnyCpcgwdService" ref="sunnyCpcgwdService"></property>
+	</bean>
+	
+	<!-- 短彩信定制 -->
+<bean id="tcsswebDcxdzService" class="com.cssweb.subscribe.service.TcsswebDcxdzService"/>
+<bean id="tcsswebDcxdzDao" class="com.cssweb.subscribe.dao.TcsswebDcxdzDao"/>
+	
+	
+	<!-- RZRQ2012年6月26日 -->
+	<bean id="clientPmDao" class="com.cssweb.rzrq.dao.ClientPmDao">
+	      <property name="sqlMapClient" ref="sqlMapClientCrmpm"></property>
+		  <property name="dataSource" ref="dataSourceCrmpm"></property>
+	</bean>
+	<bean id="clientPmService" class="com.cssweb.rzrq.service.ClientPmService"></bean>
+	
+	<!-- 通用的数据库封装，牛熊宝  没有使用ibatis，减少了xml文件的配置。  by 胡纬 20120604 -->
+	<bean id="zcglDBSessionService" class="com.cssweb.common.util.CsswebDBSessionService" >
+    	<property name="dataSource" ref="dataSourceZcgl" />	
+    	<property name="databaseType" value="oracle" />	
+    </bean>
+	
+	<!-- 通用的数据库封装 ,访问的是wind。  by 胡纬 20120604 -->
+	<bean id="windDBSessionService" class="com.cssweb.common.util.CsswebDBSessionService" >
+    	<property name="dataSource" ref="dataSourceWind" />	
+    	<property name="databaseType" value="oracle" />	
+    </bean>
+    
+    <!-- 通用的数据库封装 ,访问的是广发网的默认数据源。  by 胡纬 20120604 -->
+	<bean id="dBSessionService" class="com.cssweb.common.util.CsswebDBSessionService" >
+    	<property name="dataSource" ref="dataSource" />	
+    	<property name="databaseType" value="oracle" />	
+    </bean>
+     <!-- london2012 2012-7-25 -->
+    <bean id="london2012Service" class="com.cssweb.london2012.service.London2012Service"/>
+	<bean id="london2012Dao" class="com.cssweb.london2012.dao.London2012Dao"/>
+
+	<!-- 估值系统  2012-8-16 -->  
+	<bean id="valueSysDao" class="com.cssweb.valueSys.dao.ValueSysDao" >
+	   <property name="sqlMapClient" ref="sqlMapGzxt"></property>
+		  <property name="dataSource" ref="dataSourceGzxt"></property>
+		  </bean>
+    <bean id="valueSysService" class="com.cssweb.valueSys.service.ValueSysService"/>
+
+	<!--客户短彩信订阅 2012-8-27-->
+<bean id="tcsswebDcxListDao" class="com.cssweb.subscribe.dao.TcsswebDcxListDao">
+  <property name="sqlMapClient" ref="sqlMapClientCrm"></property>
+		  <property name="dataSource" ref="dataSourceCrm"></property> 
+		  </bean>
+<bean id="tcsswebDcxListService" class="com.cssweb.subscribe.service.TcsswebDcxListService"/>
+
+<!--深圳分公司配置Start-->
+     <!-- 深圳分公司-在线预约开户. by shenjian 2012-08-03 -->
+     <!-- dao -->
+	<bean id="accountapplydao" class="com.cssweb.branchcomp.dao.AccountApplyDao">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="departmentdao" class="com.cssweb.branchcomp.dao.DepartmentDao">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="departmentManagerdao" class="com.cssweb.branchcomp.dao.DepartmentManagerDao">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<bean id="cmsDocSingleAttrdao" class="com.cssweb.branchcomp.dao.CmsDocSingleAttrDao">
+		<property name="sqlMapClient" ref="sqlMapClient" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	<!-- service -->
+	<bean id="accountapplyservice" class="com.cssweb.branchcomp.service.AccountApplyService">
+		<property name="accountapplydao" ref="accountapplydao" />
+	</bean>
+	
+	<bean id="departmentservice" class="com.cssweb.branchcomp.service.DepartmentService">
+		<property name="departmentdao" ref="departmentdao" />
+	</bean>
+	
+	<bean id="departmentManagerService" class="com.cssweb.branchcomp.service.DepartmentManagerService">
+		<property name="departmentManagerDao" ref="departmentManagerdao" />
+	</bean>
+	
+	<bean id="infoCenterService" class="com.cssweb.branchcomp.service.InfoCenterService">
+		<property name="cmsDocSingleAttrDao" ref="cmsDocSingleAttrdao"></property>
+	</bean>
+	<!-- action -->
+	<bean name="/sz/accountApplyAction" class="com.cssweb.branchcomp.web.action.AccountApplyAction">
+	<property name="accountapplyservice" ref="accountapplyservice"></property>
+	<property name="departmentservice" ref="departmentservice"></property>
+	</bean>
+	
+	<bean name="/sz/init_sz" class="com.cssweb.branchcomp.web.action.InfoCenterAction">
+		<property name="infocenterService" ref="infoCenterService"></property>
+		<property name="departmentService" ref="departmentservice"></property>
+	</bean>
+	
+	<bean name="/sz/departmentAction" class="com.cssweb.branchcomp.web.action.DepartmentAction">
+	<property name="departmentService" ref="departmentservice"></property>
+	</bean>
+
+
+	<bean name="/sz/departmentManagerAction" class="com.cssweb.branchcomp.web.action.DepartmentManagerAction">
+	<property name="departmentManagerService" ref="departmentManagerService"></property>
+	<property name="departmentservice" ref="departmentservice"></property>
+	</bean>
+		<!-- 深圳分公司配置end-->
+		
+	<!-- 人力资源BBS -->
+	<bean id="hrBbsDao" class="com.cssweb.hr.dao.HrBbsDao">
+		<property name="dataSource" ref="dataSource"></property>
+		<property name="sqlMapClient" ref="sqlMapClient"></property>
+	</bean>
+	<bean id="hrBbsService" class="com.cssweb.hr.service.HrBbsService">
+		<property name="hrBbsDao" ref="hrBbsDao"></property>
+	</bean>
+	<bean name="/hrBbsAction" class="com.cssweb.hr.web.THrBbsAction">
+		<property name="hrBbsService" ref="hrBbsService"></property>
+	</bean>
+	<!-- BBS end -->
+
+	 <!-- 通用的数据库封装，牛熊宝  没有使用ibatis，减少了xml文件的配置。  by 胡纬 20120604 -->
+	<bean id="nxsyDBSessionService" class="com.cssweb.common.util.CsswebDBSessionService" >
+    	<property name="dataSource" ref="dataSourceNxsy" />	
+    	<property name="databaseType" value="oracle" />	
+    </bean>
+   
+   <!-- 2012-10-15 李伟鹏 粤菜1号每日查询 -->
+   <bean id="yyxtDBSessionService" class="com.cssweb.common.util.CsswebDBSessionService" >
+    	<property name="dataSource" ref="dataSourceYyxt" />	
+    	<property name="databaseType" value="oracle" />	
+    </bean>
+
+	<!-- 牛熊双赢常见问题 -->
+	<bean name="nxsyQuestionDao" class="com.cssweb.nxsyAdmin.dao.QuestionDao">
+		<property name="dataSource" ref="dataSourceNxsy"></property>
+		<property name="sqlMapClient" ref="sqlMapClientNxsy"></property>
+	</bean>
+	<bean name="nxsyQuestionService" class="com.cssweb.nxsyAdmin.service.QuestionService">
+		<property name="questionDao" ref="nxsyQuestionDao"></property>
+	</bean>
+	<bean name="/nxsyQuestion" class="com.cssweb.nxsyAdmin.web.QuestionAdminAction">
+		<property name="questionService" ref="nxsyQuestionService"></property>
+	</bean>
+
+
+</beans>

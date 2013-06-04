@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.phoneSoft.pojo.PhoneModelInfo">
+
+	<typeAlias alias="phoneModelInfo" type="com.cssweb.phoneSoft.pojo.PhoneModelInfo"/>
+	
+	<!--result map-->
+	<resultMap id="phoneModelInfoMap" class="phoneModelInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="brandid" column="BRAND_ID" jdbcType="Long"/>
+ 		<result property="model" column="MODEL" jdbcType="String"/>
+ 		<result property="photo" column="PHOTO" jdbcType="Long"/>
+ 		<result property="pubtime" column="PUB_TIME" jdbcType="String"/>
+ 		<result property="status" column="STATUS" jdbcType="Long"/>
+ 		<result property="orderby" column="ORDERBY" jdbcType="Long"/>
+ 		<result property="intro" column="INTRO" jdbcType="String"/>
+ 		<result property="moid" column="M_OID" jdbcType="Long"/>
+  	</resultMap>
+  	
+	<resultMap id="phoneModelInfoMap2" class="phoneModelInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="brandid" column="BRAND_ID" jdbcType="Long"/>
+ 		<result property="brandname" column="BRAND_NAME" jdbcType="Long"/>
+ 		<result property="model" column="MODEL" jdbcType="String"/>
+ 		<result property="photo" column="PHOTO" jdbcType="Long"/>
+ 		<result property="pubtime" column="PUB_TIME" jdbcType="String"/>
+ 		<result property="status" column="STATUS" jdbcType="Long"/>
+ 		<result property="orderby" column="ORDERBY" jdbcType="Long"/>
+ 		<result property="intro" column="INTRO" jdbcType="String"/>
+ 		<result property="moid" column="M_OID" jdbcType="Long"/>
+  	</resultMap>
+  	
+	<insert id="insertPhoneModelInfo" parameterClass="phoneModelInfo" >
+		  insert into T_PHONE_MODEL_INFO (ID,BRAND_ID,MODEL,PHOTO,PUB_TIME,STATUS,ORDERBY,INTRO,M_OID)
+		  				values (#id#,#brandid#,#model#,#photo#,#pubtime#,#status#,#orderby#,#intro#,#moid#)
+	</insert>
+	
+	<update id="updatePhoneModelInfo" parameterClass="phoneModelInfo">
+		  update T_PHONE_MODEL_INFO 
+		  	set BRAND_ID=#brandid#,MODEL=#model#,PUB_TIME=#pubtime#,STATUS=#status#,ORDERBY=#orderby#,INTRO=#intro#,M_OID=#moid#
+		  where ID=#id#
+	</update>
+	
+	<update id="updatePhoto" parameterClass="java.util.Map">
+		  update T_PHONE_MODEL_INFO 
+		  	set PHOTO=#photo#
+		  where ID=#id#
+	</update>
+	
+	<delete id="deleteById" parameterClass="Long">
+	  	delete T_PHONE_MODEL_INFO where ID=#id#
+	</delete>
+	
+	<select id="getById" parameterClass="Long" resultMap = "phoneModelInfoMap">
+	  	select * from T_PHONE_MODEL_INFO where ID = #id#
+	</select>
+  
+	<select id="getPhoneModelInfoPaging" parameterClass="java.util.Map" resultMap = "phoneModelInfoMap2">
+	  	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	  		select * from (
+		  		select a.*,b.brand_name from (
+			  		select * from T_PHONE_MODEL_INFO 
+			  		where 1=1
+					<dynamic>
+						<isNotEmpty property="brandid"	prepend="AND">
+					  		BRAND_ID = #brandid#
+						</isNotEmpty>
+						<isNotEmpty property="model"	prepend="AND">
+					  		MODEL = #model#
+						</isNotEmpty>
+						<isNotEmpty property="status"	prepend="AND">
+					  		STATUS = #status#
+						</isNotEmpty>
+					</dynamic>		  		
+		  		) a left join T_PHONE_BRAND_INFO b on a.brand_id=b.id 
+			)
+			<dynamic prepend="order by">
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+	  	)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+  
+	<select id = "getPhoneModelInfoCount" parameterClass="java.util.Map"  resultClass="Integer">
+	 	select count(*) from T_PHONE_MODEL_INFO 
+	 	where 1=1
+		<dynamic>
+			<isNotEmpty property="brandid"	prepend="AND">
+		  		BRAND_ID = #brandid#
+			</isNotEmpty>
+			<isNotEmpty property="model"	prepend="AND">
+		  		MODEL = #model#
+			</isNotEmpty>
+			<isNotEmpty property="status"	prepend="AND">
+		  		STATUS = #status#
+			</isNotEmpty>
+		</dynamic>
+	</select>
+  
+	<select id ="getPhoneModelInfo" parameterClass="java.util.Map" resultMap="phoneModelInfoMap2">
+		select a.*,b.brand_name from (select * from T_PHONE_MODEL_INFO 
+			where 1=1
+			<dynamic>
+				<isNotEmpty property="brandid"	prepend="AND">
+			  		BRAND_ID = #brandid#
+				</isNotEmpty>
+				<isNotEmpty property="model"	prepend="AND">
+			  		MODEL = #model#
+				</isNotEmpty>
+				<isNotEmpty property="status"	prepend="AND">
+			  		STATUS = #status#
+				</isNotEmpty>
+			</dynamic>
+			) a left join T_PHONE_BRAND_INFO b on a.brand_id=b.id  
+		order by a.model asc
+	</select>
+  
+	<update id="changeOrderNumByIdAndThisOrderNum" parameterClass="java.util.Map">
+	   update T_PHONE_MODEL_INFO set ORDERBY=ORDERBY+1 where ID=#id# and ORDERBY &gt;=#orderby#
+	</update>
+	
+	<update id="changeOrderNumByIdAndOldBiggerNew" parameterClass="java.util.Map">
+	   update T_PHONE_MODEL_INFO set ORDERBY=ORDERBY+1 where ID=#id# and ORDERBY &gt;=#neworderby# and ORDERBY &lt;#oldorderby#
+	</update>
+	<update id="changeOrderNumByIdAndNewBiggerOld" parameterClass="java.util.Map">
+	   update T_PHONE_MODEL_INFO set ORDERBY=ORDERBY-1 where ID=#id# and ORDERBY &gt;#oldorderby# and ORDERBY &lt;=#neworderby#
+	</update>
+  
+</sqlMap>

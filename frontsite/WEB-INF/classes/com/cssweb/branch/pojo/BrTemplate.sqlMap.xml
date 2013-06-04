@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.branch.pojo.BrTemplate">
+
+	<typeAlias alias="BrTemplate"
+		type="com.cssweb.branch.pojo.BrTemplate" />
+
+
+	<cacheModel id="BrTemplateCache" type="OSCACHE">
+		<flushInterval hours="24" />
+		<flushOnExecute
+			statement="com.cssweb.branch.pojo.BrTemplate.insert" />
+		<flushOnExecute
+			statement="com.cssweb.branch.pojo.BrTemplate.update" />
+		<property name="size" value="1000" />
+	</cacheModel>
+	<!--result map-->
+	<resultMap id="BrTemplateMap" class="BrTemplate">
+		<result property="id" column="ID" />
+		<result property="elementId" column="ELEMENT_ID" />
+		<result property="template" column="TEMPLATE" />
+		<result property="url" column="URL" />
+		<result property="uploadId" column="UPLOAD_ID" />
+		<result property="provinceId" column="PROVINCE_ID" />
+		<result property="type" column="TYPE" />
+		<result property="title" column="TITLE" />
+		<result property="content" column="CONTENT" />
+		<result property="ext1" column="EXT1" />
+		<result property="ext2" column="EXT2" />
+		<result property="ext3" column="EXT3" />
+		<result property="ext4" column="EXT4" />
+	</resultMap>
+
+	<insert id="insert" parameterClass="BrTemplate">
+		insert into BR_TEMPLATE
+		(ID,ELEMENT_ID,TEMPLATE,URL,UPLOAD_ID,PROVINCE_ID,TYPE,TITLE,CONTENT,EXT1,EXT2,EXT3,EXT4)
+		values(#id#,#elementId#,#template#,#url#,#uploadId#,
+		#provinceId#,#type#,#title#, #content#, #ext1#, #ext2#, #ext3#,
+		#ext4#)
+	</insert>
+
+	<update id="update" parameterClass="BrTemplate">
+		update BR_TEMPLATE set ELEMENT_ID = #elementId#,
+		TEMPLATE=#template#, URL=#url#, UPLOAD_ID=#uploadId#,
+		PROVINCE_ID=#provinceId#, TYPE=#type#, TITLE=#title#,
+		CONTENT=#content#, EXT1=#ext1#, EXT2=#ext2#, EXT3=#ext3#,
+		EXT4=#ext4# where ID = #id#
+	</update>
+
+	<delete id="delete" parameterClass="BrTemplate">
+		delete BR_TEMPLATE where ID = #id#
+	</delete>
+
+	<delete id="deleteAll">delete BR_TEMPLATE</delete>
+
+	<delete id="deleteById" parameterClass="java.lang.Long">
+		delete BR_TEMPLATE where ID = #value#
+	</delete>
+
+	<select id="getBrTemplateById" parameterClass="Long"
+		resultMap="BrTemplateMap">
+		select * from BR_TEMPLATE where ID =#value#
+	</select>
+
+	<select id="getAllBrTemplates" 
+		resultMap="BrTemplateMap">
+		select * from BR_TEMPLATE order by ID desc
+	</select>
+	
+	<select id="getBrTemplatesByMap" 
+		resultMap="BrTemplateMap" parameterClass="map">
+		select * from BR_TEMPLATE where PROVINCE_ID =#provinceId# order by ID desc
+	</select>
+	
+	<select id="getBrTemplateByProvinceId" 
+		resultMap="BrTemplateMap" parameterClass="String">
+		select * from BR_TEMPLATE where PROVINCE_ID =#value# order by ID desc
+	</select>
+</sqlMap>

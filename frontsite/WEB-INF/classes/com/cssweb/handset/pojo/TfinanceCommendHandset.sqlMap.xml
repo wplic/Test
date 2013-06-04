@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.handset.pojo.TfinanceCommendHandset">
+
+	<typeAlias alias="TfinanceCommendHandset" type="com.cssweb.handset.pojo.TfinanceCommendHandset" />
+
+	<resultMap id="TfinanceCommendHandset" class="TfinanceCommendHandset">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="cardsId" column="CARDS_ID" jdbcType="Long" nullValue="0"/>
+		<result property="model" column="MODEL" jdbcType="String"/>
+		<result property="price" column="PRICE" jdbcType="Long" nullValue="0"/>
+		<result property="briefIntro" column="BRIEF_INTRO" jdbcType="String"/>
+		<result property="functionIntro" column="FUNCTION_INTRO" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="photoId" column="PHOTO_ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="isShow" column="IS_SHOW" jdbcType="String"/>
+		<result property="sjzqtype" column="SJZQ_TYPE" jdbcType="Long" nullValue="0"/>
+		<result property="dxyys" column="DXYYS" jdbcType="Long"/>
+		<result property="newsType" column="NEWSTYPE" jdbcType="String"/>
+		<result property="order_num" column="ORDER_NUM" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+
+	<resultMap id="HandsetMap" class="TfinanceCommendHandset">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="cardsName" column="CARDS_NAME" jdbcType="String" nullValue=""/>
+		<result property="model" column="MODEL" jdbcType="String"/>
+		<result property="price" column="PRICE" jdbcType="Long" nullValue="0"/>
+		<result property="briefIntro" column="BRIEF_INTRO" jdbcType="String"/>
+		<result property="photoId" column="PHOTO_ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="isShow" column="IS_SHOW" jdbcType="String"/>
+		<result property="sjzqtype" column="SJZQ_TYPE" jdbcType="Long" nullValue="0"/>
+		<result property="dxyys" column="DXYYS" jdbcType="Long"/>
+		<result property="newsType" column="NEWSTYPE" jdbcType="String"/>
+		<result property="order_num" column="ORDER_NUM" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+	
+	<insert id="insertTfinanceCommendHandset" parameterClass="TfinanceCommendHandset">
+		INSERT into T_FINANCE_COMMEND_HANDSET ( ID, CARDS_ID, MODEL,PRICE,BRIEF_INTRO, IS_SHOW, SJZQ_TYPE, DXYYS,NEWSTYPE,ORDER_NUM) 
+		VALUES (#id#,#cardsId#, #model#,#price#,#briefIntro#,#isShow#,#sjzqtype#,#dxyys#,#newsType#,#order_num#)
+	</insert>
+	
+	<update id="upTfinanceCommendHandset" parameterClass="TfinanceCommendHandset">
+		update T_FINANCE_COMMEND_HANDSET set CARDS_ID = #cardsId#, MODEL = #model# ,PRICE = #price#, BRIEF_INTRO = #briefIntro#, SJZQ_TYPE = #sjzqtype#, DXYYS = #dxyys#, NEWSTYPE = #newsType#, ORDER_NUM = #order_num# where id=#id#
+	</update>
+     <update id="upHandsetIsShowById" parameterClass="TfinanceCommendHandset">
+		update T_FINANCE_COMMEND_HANDSET set IS_SHOW = #isShow# where id=#id#
+	</update>
+	<delete id="deleteTfinanceCommendHandsets" parameterClass="String">
+		delete from T_FINANCE_COMMEND_HANDSET where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteTfinanceCommendHandsetById" parameterClass="Long">
+		delete from T_FINANCE_COMMEND_HANDSET where id = #value#
+	</delete>
+	
+	<update id="upHandsetFunctionIntroById" parameterClass="TfinanceCommendHandset">
+		update T_FINANCE_COMMEND_HANDSET set FUNCTION_INTRO = #functionIntro#  where id = #id#
+	</update>
+	
+	<update id="upHandsetPhotoIdById" parameterClass="TfinanceCommendHandset">
+		update T_FINANCE_COMMEND_HANDSET set PHOTO_ID = #photoId# where id = #id#
+	</update>
+	
+	<select id="getTfinanceCommendHandsetAll" resultMap="TfinanceCommendHandset">
+		select * from T_FINANCE_COMMEND_HANDSET 
+	</select>
+
+	<select id="getTfinanceCommendHandsetById" parameterClass="Long" resultMap="TfinanceCommendHandset">
+		select * from T_FINANCE_COMMEND_HANDSET where id= #id#
+	</select>	
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_FINANCE_COMMEND_HANDSET 
+	</select>
+	
+	<select id="getByTfinanceCommendHandsetMap" parameterClass="java.util.Map" resultMap = "TfinanceCommendHandset">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$
+	    ) row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getHandsetByYys" parameterClass="java.util.Map" resultMap = "HandsetMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	    	select th.ID, KEY_NAME CARDS_NAME, MODEL,PRICE,PHOTO_ID,BRIEF_INTRO, IS_SHOW, SJZQ_TYPE, DXYYS,NEWSTYPE,ORDER_NUM  from T_FINANCE_COMMEND_HANDSET th,CSSWEB_DICTIONARY cd 
+	    	where th.CARDS_ID = cd.id(+) 
+			<isNotNull prepend="and" property="dxyys">
+				DXYYS = #dxyys#
+			</isNotNull>
+	    	order by CARDS_ID desc,MODEL asc
+	    ) row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getHandsetMapOrderById" parameterClass="java.util.Map" resultMap = "HandsetMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+	    	select th.ID, KEY_NAME CARDS_NAME, MODEL,PRICE,PHOTO_ID,BRIEF_INTRO, IS_SHOW, SJZQ_TYPE, DXYYS,NEWSTYPE,ORDER_NUM  from T_FINANCE_COMMEND_HANDSET th,CSSWEB_DICTIONARY cd 
+	    	where th.CARDS_ID = cd.id(+) and IS_SHOW = '1'
+	    	order by th.ORDER_NUM
+	    ) row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+  	
+  	<select id="getByTfinanceCommendHandsetMapCount" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+</sqlMap>

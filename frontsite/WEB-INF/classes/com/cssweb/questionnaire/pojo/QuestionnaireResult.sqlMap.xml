@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.questionnaire.pojo.QuestionnaireResult">
+
+	<typeAlias alias="QuestionnaireResult" type="com.cssweb.questionnaire.pojo.QuestionnaireResult"/>
+
+	<!--result map-->
+	<resultMap id="resultMap" class="QuestionnaireResult">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="questionnaireid" column="QUESTIONNAIRE_ID" jdbcType="Long"/>
+ 		<result property="subtitleid" column="SUBTITLE_ID" jdbcType="Long"/>
+ 		<result property="optionid" column="OPTION_ID" jdbcType="Long"/>
+ 		<result property="isother" column="IS_OTHER" jdbcType="String" nullValue="0"/>
+ 		<result property="content" column="CONTENT" jdbcType="String" nullValue=""/>
+ 		<result property="webuserid" column="WEBUSER_ID" jdbcType="Long"/>
+  	</resultMap>
+
+  <insert id="insert" parameterClass="QuestionnaireResult">
+    insert into T_QUESTIONNAIRE_RESULT (ID,QUESTIONNAIRE_ID,SUBTITLE_ID,OPTION_ID,IS_OTHER,CONTENT,WEBUSER_ID)
+    	values (#id#,#questionnaireid#,#subtitleid#,#optionid#,#isother#,#content#,#webuserid#)
+  </insert>
+
+	  
+  <select id="getProperty" parameterClass="java.util.Map" resultClass="double" >
+  		select ((select count(*)
+           from t_questionnaire_result
+          where subtitle_id = #quesId#
+            and option_id =#optId#)*100/
+       		(select count(*) from t_questionnaire_result where subtitle_id = #quesId#)) as pro
+  		from dual
+  	
+  </select>  
+  
+  <select id="getResultCount" parameterClass="java.util.Map" resultClass="Integer" >
+  		 select count(*) from t_questionnaire_result  where subtitle_id = #quesId#  and option_id =#optId#
+  </select>
+ 
+   <select id="getProperty1" parameterClass="java.util.Map" resultClass="double" >
+  		select ((select count(*)
+           from t_questionnaire_result
+          where subtitle_id = #quesId#
+            and IS_OTHER='1')*100/
+       		(select count(*) from t_questionnaire_result where subtitle_id = #quesId#)) as pro
+  		from dual
+  	
+  </select>
+  <update id="update" parameterClass="QuestionnaireResult">
+    update T_QUESTIONNAIRE_RESULT 
+    	set QUESTIONNAIRE_ID = #questionnaireid#,SUBTITLE_ID=#subtitleid#,OPTION_ID=#optionid#,IS_OTHER=#isother#,CONTENT=#content#,WEBUSER_ID=#webuserid#
+     where ID = #id#
+  </update>
+  
+  <delete id="deleteBySubtitleId" parameterClass="String">
+    delete T_QUESTIONNAIRE_RESULT where SUBTITLE_ID in ($value$)
+  </delete>
+
+  <select id="getOptionResultById" parameterClass="java.util.Map" resultMap="resultMap" >
+    SELECT * FROM T_QUESTIONNAIRE_RESULT where QUESTIONNAIRE_ID=#quesid# and WEBUSER_ID=#userid#
+  </select>
+  <select id="getOptionResultByQuesid" parameterClass="java.util.Map" resultMap="resultMap" >
+    SELECT * FROM T_QUESTIONNAIRE_RESULT where QUESTIONNAIRE_ID=#quesid# 
+  </select>
+  
+  <delete id="delOptionResultByIdAndQuesid" parameterClass="java.util.Map">
+    delete T_QUESTIONNAIRE_RESULT where QUESTIONNAIRE_ID=#questionnaireid# and WEBUSER_ID=#webuserid#
+  </delete>
+</sqlMap>

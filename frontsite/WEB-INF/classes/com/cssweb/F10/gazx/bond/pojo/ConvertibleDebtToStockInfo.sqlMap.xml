@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap
+	namespace="com.cssweb.F10.gazx.bond.pojo.ConvertibleDebtToStockInfo">
+
+	<typeAlias alias="convertibleDebtToStockInfo"
+		type="com.cssweb.F10.gazx.bond.pojo.ConvertibleDebtToStockInfo" />
+
+	<!--result map-->
+	<resultMap id="convertibleDebtToStockInfoMap"
+		class="convertibleDebtToStockInfo">
+
+		<!-- 债券代码 -->
+		<result property="debtCode" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 可转债（此表中是用ID表示） -->
+		<result property="convertibleDebt" column="T_ZQZB_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 债券简称 -->
+		<result property="debtShortName" column="zqdm"
+			jdbcType="java.lang.String" />
+
+		<!-- 期间转股的债券数额 -->
+		<result property="debtStockNumber" column="zgdzqsl"
+			jdbcType="java.lang.Long" />
+
+		<!-- 转股数占公司股本比率 -->
+		<result property="debtToStockByCompanyRate" column="ZGSZGSGBLL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 截止日 -->
+		<result property="debtToStockEndDate" column="JZR"
+			jdbcType="java.util.Date" />
+
+		<!-- 可转债转换情况ID -->
+		<result property="debtToStockId" column="T_KZZHGQK_ID"
+			jdbcType="java.lang.Long" />
+
+		<!-- 剩余债券数额 -->
+		<result property="debtToStockLeftNumbers" column="syzqsl"
+			jdbcType="java.lang.Long" />
+
+		<!-- 发生日期 -->
+		<result property="debtToStockPublishDate" column="FSRQ"
+			jdbcType="java.util.Date" />
+
+		<!-- 期间转股数 -->
+		<result property="debtToStockSize" column="QJZGS"
+			jdbcType="java.lang.Long" />
+
+		<!-- 累计转股数 -->
+		<result property="debtToStockTotalNumber" column="LJZGS"
+			jdbcType="java.lang.Long" />
+
+		<!-- 转股比例 -->
+		<result property="deteToStockRate" column="CGBL"
+			jdbcType="java.lang.Float" />
+
+		<!-- 最新转股价格 -->
+		<result property="newestDebtToStockPrice" column="Zxzgjg"
+			jdbcType="java.lang.Double" />
+
+	</resultMap>
+
+	<!--  -->
+	<select id="getConvertibleDebtToStockInfoByBondCode"
+		resultMap="convertibleDebtToStockInfoMap" parameterClass="String">
+		SELECT a.T_KZZHGQK_ID, a.T_ZQZB_ID, a.Zxzgjg, a.CGBL, a.zgdzqsl,
+		a.QJZGS, a.LJZGS, a.syzqsl, a.JZR, a.ZGSZGSGBLL, a.FSRQ,b.zqjc,
+		b.zqdm FROM KZZHGQK a,zqzb b where a.T_ZQZB_ID = b.t_Zqzb_Id and
+		b.zqdm = #debtCode# and a.SCBZ = 0 AND a.GKBZ = 1 and rownum = 1
+	</select>
+
+</sqlMap>

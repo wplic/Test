@@ -1,0 +1,33 @@
+.jScrollPaneContainer {
+	Z-INDEX: 1; POSITION: relative; OVERFLOW: hidden
+}
+.jScrollPaneTrack {
+	POSITION: absolute; BACKGROUND: #aaa; HEIGHT: 290px; TOP: 0px; CURSOR: pointer; RIGHT: 0px
+}
+.jScrollPaneDrag {
+	POSITION: absolute; BACKGROUND: #666; OVERFLOW: hidden; CURSOR: pointer
+}
+.jScrollPaneDragTop {
+	POSITION: absolute; OVERFLOW: hidden; TOP: 0px; LEFT: 0px;BACKGROUND: url(../images/windows_arrow_up.gif) no-repeat; height:4px; width:7px;
+}
+.jScrollPaneDragBottom {
+	POSITION: absolute; BOTTOM: 0px; OVERFLOW: hidden; LEFT: 0px;BACKGROUND: url(../images/windows_arrow_down.gif) no-repeat;height:4px; width:7px;
+}
+A.jScrollArrowUp {
+	Z-INDEX: 1; POSITION: absolute; TEXT-INDENT: -2000px; DISPLAY: block; HEIGHT: 9px; OVERFLOW: hidden; TOP: 0px; RIGHT: 0px;
+}
+A.jScrollArrowUp:hover {
+	
+}
+A.jScrollArrowDown {
+	Z-INDEX: 1; POSITION: absolute; TEXT-INDENT: -2000px; BOTTOM: 0px; DISPLAY: block; HEIGHT: 9px; OVERFLOW: hidden; RIGHT: 0px
+}
+A.jScrollArrowDown:hover {
+	
+}
+A.jScrollActiveArrowButton {
+	
+}
+A.jScrollActiveArrowButton:hover {
+	
+}

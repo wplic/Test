@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+	"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundHoldStock">
+
+	<typeAlias alias="fundHoldStock" type="com.cssweb.F10.gazx.fund.pojo.FundHoldStock" />
+
+	<!--result map-->
+	<resultMap id="fundHoldStockMap" class="fundHoldStock">
+		<result property="holdNumber" column="CGSL" jdbcType="java.lang.Long" />
+		<result property="fundId" column="T_JJZB_ID" jdbcType="java.lang.Long" />
+		<result property="holdType" column="CYLX" jdbcType="java.lang.String" />
+		<result property="fundName" column="Jjmc" jdbcType="java.lang.String" />
+		<result property="fundCode" column="Jjdm" jdbcType="java.lang.String" />
+		<result property="holdValue" column="CGSZ" jdbcType="java.lang.Double" />
+		<result property="id" column="Connect_ID" jdbcType="java.lang.Long" />
+		<result property="ratioInNV" column="ZJJBL" jdbcType="java.lang.Float" />
+		<result property="startdate" column="FSRQ" jdbcType="java.util.Date" />
+	</resultMap>
+	<!--/**
+	 * 根据股票ID取基金持股信息列表
+	 */-->
+	<select id="getFundHoldStockByStockCode" parameterClass="map" resultMap="fundHoldStockMap">
+	    select a.FSRQ ,a.CYLX,a.CGSZ ,c.Jjdm, c.Jjmc, a.CGSL,a.Connect_ID, a.ZJJBL,a.T_JJZB_ID from 
+	    JJTZZH_CG  a,jjzb c 
+        where  a.CYLX=#lb# and a.connect_id= #gpid# and a.t_jjzb_id= c.t_jjzb_id order by a.FSRQ desc
+	</select>
+
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		select count(*) from JJTZZH_CG  a,jjzb c
+		where a.CYLX=#lb# and a.connect_id= #gpid# and a.t_jjzb_id= c.t_jjzb_id
+	</select>
+
+	<select id="pageQuery" resultMap="fundHoldStockMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select a.FSRQ ,a.CYLX,a.CGSZ ,c.Jjdm, c.Jjmc, a.CGSL,a.Connect_ID, a.ZJJBL,a.T_JJZB_ID
+				from JJTZZH_CG  a,jjzb c
+				where a.SCBZ = 0 and a.GKBZ = 1 and a.CYLX=#lb# and a.connect_id= #gpid# and a.t_jjzb_id= c.t_jjzb_id
+			<isNotNull prepend="and" property="publishDate">
+				to_char(a.fsrq,'yyyy-MM-dd')=#publishDate#
+			</isNotNull>
+			order by a.CGSL desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select> 
+	
+	<!-- 取日期列表 -->
+	<select id="getDateList" resultClass="String">    
+		select to_char(fsrq, 'yyyy-MM-dd') from 
+		   (select distinct fsrq
+			   from JJTZZH_CG
+			   where SCBZ = 0 and GKBZ = 1 and CYLX=#lb# and connect_id= #gpid#
+			order by fsrq desc)
+	</select>
+	
+
+</sqlMap>

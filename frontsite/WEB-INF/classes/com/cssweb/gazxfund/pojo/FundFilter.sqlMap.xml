@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.gazxfund.pojo.FundFilter">
+	<typeAlias alias="fundFilter" type="com.cssweb.gazxfund.pojo.FundFilter" />
+
+	<resultMap 	id="fundFilterMap" 				class="fundFilter">
+		<result property="fundShortName" 	column="jjjc" 	jdbcType="String"/>
+		<result property="fundCode" 		column="jjdm" 	jdbcType="String"/>
+		<result property="companyName" 		column="gsmc"	jdbcType="String"/>
+		<result property="foundationDate" 	column="clrq"	jdbcType="Date"/>
+		<result property="totalScale" 		column="jjzgm" 	jdbcType="Double" 	nullValue="0.0000" />
+		<result property="fundType" 		column="jjlx"	jdbcType="String"/>
+		<result property="investmentStyle" 	column="tzfg"	jdbcType="String"/>
+		<result property="investee" 		column="tzdx"	jdbcType="String"/>
+		<result property="NAV" 				column="dwjz" 	jdbcType="Double" 	nullValue="0.0000" />
+		<result property="totalNetValue" 	column="ljjz" 	jdbcType="Double" 	nullValue="0.0000" />
+	</resultMap>
+	
+  <select id="getFundFilterPage" parameterClass="java.util.Map" resultMap = "fundFilterMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+	
+  <select id="getAllCountBySql" parameterClass="java.lang.String" resultClass = "Integer">
+    $sql$
+  </select>
+  
+</sqlMap>

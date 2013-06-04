@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<action-mappings>		
+		<action path="/balFundFundAction"  scope="request" parameter="method" validate="false">	
+		</action>
+		<action path="/rightsregAction"  scope="request" parameter="method" validate="false">	
+		</action>
+		<action path="/acctTransAction"  scope="request" parameter="method" validate="false">	
+		</action>
+		<action path="/acctCustAction"  scope="request" parameter="method" validate="false">	
+		</action>
+		<action path="/mgrInfoAction"  scope="request" parameter="method" validate="false">	
+		</action>
+		<action path="/tradelogAction"  scope="request" parameter="method" validate="false">	
+		</action>
+		<action path="/fundHistoryAction" scope="request" parameter="method" validate="false">
+		</action>
+		<action path="/statementAction"  scope="request" parameter="method" validate="false">	
+		</action>
+		<action path="/commissionAction"  scope="request" parameter="method">
+		</action>
+	</action-mappings>
+</struts-config>

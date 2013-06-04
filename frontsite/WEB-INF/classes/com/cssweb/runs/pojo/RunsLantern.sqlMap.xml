@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.runs.pojo.RunsLantern">
+
+	<typeAlias alias="RunsLantern"
+		type="com.cssweb.runs.pojo.RunsLantern" />
+
+	<resultMap id="RunsLanternMap" class="RunsLantern">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="title" column="TITLE" jdbcType="String"/>
+		<result property="sort" column="SORT" jdbcType="Long"/>
+		<result property="content" column="CONTENT" jdbcType="Long"/>
+		<result property="startTime" column="START_TIME" jdbcType="Date"/>
+		<result property="solidTime" column="SOLID_TIME" jdbcType="Date"/>
+	    <result property="ext1" column="EXT1" jdbcType="String" />
+	    <result property="ext2" column="EXT2" jdbcType="String" />
+	    <result property="ext3" column="EXT3" jdbcType="String" />
+	    <result property="ext4" column="EXT4" jdbcType="String"/>
+	</resultMap>
+
+	<insert id="insertRunsLantern" parameterClass="RunsLantern">
+		INSERT into RUNS_LANTERN ( ID, TITLE,SORT, CONTENT, START_TIME, SOLID_TIME,EXT1, EXT2,EXT3, EXT4) VALUES 
+		(#id#,#title#,#sort#, #content#, #startTime#, #solidTime#,#ext1#,#ext2#, #ext3#,#ext4#)
+	</insert>
+	
+	<update id="updateRunsLantern" parameterClass="RunsLantern">
+		update RUNS_LANTERN
+		 set 
+		 	TITLE = #title#, 
+		 	SORT = #sort#, 
+		 	CONTENT =#content#, 
+			START_TIME = #startTime#,
+			SOLID_TIME= #solidTime#, 
+			EXT1 = #ext1#, 
+			EXT2 = #ext2#, 
+			EXT3 = #ext3#, 
+			EXT4= #ext4#
+		where id=#id#
+	</update>
+
+	<delete id="deleteRunsLantern" parameterClass="String">
+		delete from RUNS_LANTERN where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteRunsById" parameterClass="Long">
+		delete from RUNS_LANTERN where id = #value#
+	</delete>
+	
+	<select id="getRunsLantern" resultMap="RunsLanternMap">
+		select * from RUNS_LANTERN 
+	</select>
+
+	<select id="getRunsLanternById" parameterClass="Long" resultMap="RunsLanternMap">
+		select * from RUNS_LANTERN where id= #id#
+	</select>	
+
+	<select id="getCount" resultClass="java.lang.Integer">
+		select count(*) from RUNS_LANTERN 
+	</select>
+	
+	  <select id="getByRunsMap" parameterClass="java.util.Map" resultMap = "RunsLanternMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  
+  <select id="getRunsGgMap"  resultMap="RunsLanternMap">
+  		select * from runs_lantern t where t.start_time &lt;= sysdate and t.solid_time &gt;= sysdate order by sort asc	
+  </select>
+  
+  
+  	<update id="updateSort" parameterClass="Long">
+	 update RUNS_LANTERN
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;#sort#
+	</update>
+  	<update id="updateSortAppend" parameterClass="Long">
+	 update RUNS_LANTERN
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;=#sort#
+	</update>	
+	 <update id="updateSortStartEnd" parameterClass="java.util.Map">
+	 update RUNS_LANTERN
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>
+	 <update id="updateSortEndStart" parameterClass="java.util.Map">
+	 update RUNS_LANTERN
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>		
+</sqlMap>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.Empspeak">
+	<typeAlias alias="Empspeak"	type="com.cssweb.hr.pojo.Empspeak" />
+
+	<resultMap id="resultMap" class="Empspeak">
+		<result property="id" column="ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="type" column="TYPE" jdbcType="String" nullValue=""/>
+		<result property="name" column="NAME" jdbcType="String" nullValue=""/>
+		<result property="intro" column="INTRO" jdbcType="String" nullValue=""/>
+		<result property="speak" column="SPEAK" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="picId" column="PIC_ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="speakDate" column="SPEAK_DATE" jdbcType="java.util.Date"/>
+		<result property="sort" column="SORT" jdbcType="java.util.Date"/>
+  	</resultMap>
+  	<resultMap id="resultMap1" class="Empspeak">
+		<result property="id" column="ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="type" column="TYPE" jdbcType="String" nullValue=""/>
+		<result property="name" column="NAME" jdbcType="String" nullValue=""/>
+		<result property="intro" column="INTRO" jdbcType="String" nullValue=""/>
+		<result property="content" column="TEXT_SOURCE" jdbcType="Blob"/>
+		<result property="picId" column="PIC_ID" jdbcType="java.lang.Long" nullValue="0"/>
+		<result property="speakDate" column="SPEAK_DATE" jdbcType="java.util.Date"/>
+  	</resultMap>
+	<insert id="insert" parameterClass="Empspeak">
+		<![CDATA[
+		 insert into T_HR_EMPSPEAK(id,type,name,intro,speak,pic_Id,speak_Date,SORT) values(#id#,#type#,#name#,#intro#,#speak#,#picId#,#speakDate#,#sort#)
+		]]>
+	</insert>
+	
+	<update id="updateSort" parameterClass="Long">
+	 update T_HR_EMPSPEAK
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;#sort#
+	</update>
+  	<update id="updateSortAppend" parameterClass="Long">
+	 update T_HR_EMPSPEAK
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;=#sort#
+	</update>	
+	 <update id="updateSortStartEnd" parameterClass="java.util.Map">
+	 update T_HR_EMPSPEAK
+		 set 
+		 	SORT = SORT+1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>
+	 <update id="updateSortEndStart" parameterClass="java.util.Map">
+	 update T_HR_EMPSPEAK
+		 set 
+		 	SORT = SORT-1 
+		where SORT &gt;= #start# and SORT &lt;= #end#
+	</update>			  
+
+
+	<update id="update" parameterClass="Empspeak">
+		<![CDATA[
+		update T_HR_EMPSPEAK set type=#type#,name=#name#,intro=#intro#,speak=#speak#,pic_Id=#picId#,speak_Date=#speakDate#,SORT=#sort# where id=#id#
+		]]>
+	</update>
+	
+	<update id="updatePicIdById" parameterClass="Empspeak">
+		<![CDATA[
+		update T_HR_EMPSPEAK set pic_Id=#picId# where id=#id#
+		]]>
+	</update>
+
+	<delete id="delete" parameterClass="java.lang.String">
+		<![CDATA[
+		delete from T_HR_EMPSPEAK where id in ($ids$)
+		]]>
+	</delete>
+	
+	<delete id="deleteById" parameterClass="long">
+		<![CDATA[
+		delete from T_HR_EMPSPEAK where id=#id#
+		]]>
+	</delete>
+
+	<select id="getBeanById" parameterClass="long" resultMap="resultMap">
+		select * from T_HR_EMPSPEAK where id=#id#
+	</select>
+
+	<select id="getListByPaging" parameterClass="java.util.Map"
+		resultMap="resultMap" >
+		<![CDATA[
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM <= #end#) WHERE rownum_>#begin#
+		]]>
+	</select>
+
+	<select id="getAllCount" resultClass="Integer" parameterClass="String">
+		<![CDATA[
+			$sql$ 
+		]]>
+	</select>
+	
+	 <select id="getStaffList" parameterClass="java.util.Map" resultMap = "resultMap1">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+    	select  tk.id,tk.type,tk.name,tk.intro,tk.pic_Id,tk.speak_Date,ct.text_source
+		    from T_HR_EMPSPEAK tk,comm_blob_text ct
+		    where tk.speak=ct.id
+    	<dynamic>
+				<isNotEmpty property="type"	prepend="AND">
+			  		tk.TYPE = #type#
+				</isNotEmpty>
+	    </dynamic>	
+	    order by tk.sort asc
+     )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  	<select id="getStaffListCount" resultClass="Integer" parameterClass="java.util.Map">
+  		select  count(*)
+		    from T_HR_EMPSPEAK tk,comm_blob_text ct
+		    where tk.speak=ct.id
+    	<dynamic>
+				<isNotEmpty property="type"	prepend="AND">
+			  		tk.TYPE = #type#
+				</isNotEmpty>
+	    </dynamic>	
+	</select>
+</sqlMap>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.branch.pojo.BranchExtendInfo">
+
+	<typeAlias alias="BranchExtendInfo" type="com.cssweb.common.branch.pojo.BranchExtendInfo"/>
+	<!--result map-->
+	<resultMap id="branchExtendInfoMap" class="BranchExtendInfo">
+		
+ 		<result property="branchId" column="BRANCH_ID" jdbcType="Long"/>
+ 		<result property="briefName" column="BRIEFNAME" jdbcType="String"/>
+ 		<result property="address" column="ADDRESS" jdbcType="String"/>
+ 		<result property="post" column="POST" jdbcType="String"/>
+ 		<result property="contactor" column="CONTACTOR" jdbcType="String"/>
+ 		<result property="zphone" column="ZPHONE" jdbcType="String"/>
+ 		<result property="wphone" column="WPHONE" jdbcType="String"/>
+ 		<result property="email" column="EMAIL" jdbcType="String"/>
+ 		<result property="url" column="URL" jdbcType="String"/>
+ 		<result property="isOpenAccount" column="IS_OPENACCOUNT" jdbcType="Integer"/>
+ 		<result property="seatNum" column="SEAT_NUM" jdbcType="String"/>
+ 		<result property="branchNum" column="BRANCH_NUM" jdbcType="String"/>
+ 		<result property="introduceId" column="INTRODUCE_ID" jdbcType="Long"/>
+ 		<result property="picId" column="PIC_ID" jdbcType="Long"/>
+ 		<result property="picUrl" column="PIC_URL" jdbcType="String"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+  
+	<insert id="insert" parameterClass="BranchExtendInfo">
+		  insert into BRANCH_EXTEND_INFO (BRANCH_ID,BRIEFNAME,ADDRESS,POST,CONTACTOR,ZPHONE,WPHONE,
+		  									EMAIL,URL,IS_OPENACCOUNT,SEAT_NUM,BRANCH_NUM,INTRODUCE_ID,
+		  										PIC_ID,PIC_URL,EXT1,EXT2,EXT3,EXT4)
+		  values (#branchId#,#briefName#,#address#,#post#,#contactor#,#zphone#,#wphone#,#email#,#url#,
+		  			#isOpenAccount#,#seatNum#,#branchNum#,#introduceId#,#picId#,#picUrl#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	
+	<update id="update" parameterClass="BranchExtendInfo">
+		  update BRANCH_EXTEND_INFO 
+		  	set BRIEFNAME=#briefName#,ADDRESS=#address#,POST=#post#,CONTACTOR=#contactor#,ZPHONE=#zphone#,
+		  		WPHONE=#wphone#,EMAIL=#email#,URL=#url#,IS_OPENACCOUNT=#isOpenAccount#,SEAT_NUM=#seatNum#,
+		  		BRANCH_NUM=#branchNum#,INTRODUCE_ID=#introduceId#,PIC_ID=#picId#,PIC_URL=#picUrl#,EXT1=#ext1#,
+		  		EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where BRANCH_ID=#branchId#
+	</update>
+	
+	<delete id="deleteByBranchId" parameterClass="Long">
+	  	delete BRANCH_EXTEND_INFO where BRANCH_ID=#value#
+	</delete>
+	
+	<select id="getByBranchId" parameterClass="Long" resultMap = "branchExtendInfoMap">
+	  	select * from BRANCH_EXTEND_INFO where BRANCH_ID = #value#
+	</select>
+	
+  <delete id="deleteByIdsAndChilds" parameterClass="String">
+    delete BRANCH_EXTEND_INFO where BRANCH_ID in (select id from BRANCH_BASIC_INFO where ID in ($value$) or PARENT_ID in ($value$))
+  </delete>
+  
+  	<update id="updatePicIdByBranchId" parameterClass="BranchExtendInfo">
+		  update BRANCH_EXTEND_INFO set PIC_ID=#picId# where BRANCH_ID=#branchId#
+	</update>
+	
+	<select id="getIntroduceIdByBranchId" parameterClass="Long" resultClass = "Long">
+	  	select INTRODUCE_ID from BRANCH_EXTEND_INFO where BRANCH_ID = #value#
+	</select>
+	
+	
+	<select id="getBranchDeptInfo" resultMap = "branchExtendInfoMap">
+				select * from BRANCH_EXTEND_INFO where BRANCH_ID  in  (select ID from branch_basic_info t where t.parent_id in (select id from branch_basic_info t where t.parent_id=0 and t.id!=9)) order by BRANCH_ID asc
+				
+	
+	</select>
+	
+	<select id = "getDpetInfo" resultMap = "branchExtendInfoMap">
+		  select * from (select * from BRANCH_EXTEND_INFO where BRANCH_ID  in  (select ID from BRANCH_BASIC_INFO where  PARENT_ID = 9) order by BRANCH_ID asc ) where rownum &lt; 20
+	</select>
+	
+	<select id = "getDeptInfoById" parameterClass="Long" resultMap = "branchExtendInfoMap">
+		  select * from BRANCH_EXTEND_INFO where BRANCH_ID = #branchId# and BRANCH_ID  in  (select ID from branch_basic_info t where t.parent_id in (select id from branch_basic_info t where t.parent_id=0 and t.id!=9)) order by BRANCH_ID asc 
+	</select>
+	
+	
+	
+
+</sqlMap>

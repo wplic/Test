@@ -1,0 +1,208 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.rzrq.pojo.ClientPm">
+
+	<typeAlias alias="clientPm" type="com.cssweb.rzrq.pojo.ClientPm" />
+	<resultMap id="clientPm" class="clientPm">
+	    <result property="pm" column="rownum_" jdbcType="String"/>
+		<result property="csbh" column="csbh" jdbcType="String"/>
+		<result property="rq" column="rq" jdbcType="String" />
+		<result property="yyb" column="yyb" jdbcType="String"/>
+	    <result property="ljsy" column="ljsy" jdbcType="String"/>
+	      <result property="petName" column="petName" jdbcType="String"/>
+	</resultMap>
+
+	
+	  <select id="getAssureByPage" parameterClass="java.util.Map" resultMap = "clientPm">
+       SELECT * FROM ( SELECT ROWNUM as rownum_ ,
+     x.* FROM (select nvl(ab.branch_name, bg.branch_no) as yyb,
+       bg.client_id as csbh,
+       nvl(bm.client_name1, bg.client_id) as petName,
+       nvl(en.init_date, 0) as rq,
+       (case
+         when bg.jzc > 0 then
+          round((en.jzc - bg.jzc) / bg.jzc, 4)
+         else
+          0
+       end)*100 || '%' as ljsy
+  from (select init_date,
+               branch_no,
+               client_id,
+               (close_assure_balance -
+               finance_close_balance - shortsell_close_balance -
+               close_fare_debit - close_other_debit -
+               close_finance_interest - close_shortsell_interest -
+               close_fare_interest - close_other_interest) as jzc
+          from hs_his.hisassetdebit a
+         where init_date = 20120629
+         and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)) bg,
+       (select init_date,
+               branch_no,
+               client_id,
+               (close_assure_balance -
+               finance_close_balance - shortsell_close_balance -
+               close_fare_debit - close_other_debit -
+               close_finance_interest - close_shortsell_interest -
+               close_fare_interest - close_other_interest) as jzc
+          from hs_his.hisassetdebit a
+         where init_date =  #endDate#
+         and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)) en,
+       hs_user.allbranch ab,
+       hs_his.hisfzjsbmb bm
+ where bg.branch_no = en.branch_no(+)
+   and bg.client_id = en.client_id(+)
+   and bg.branch_no = ab.branch_no(+)
+   and bg.client_id = bm.client_id(+)
+ order by (case
+         when bg.jzc > 0 then
+          round((en.jzc - bg.jzc) / bg.jzc, 4)
+         else
+          0
+       end) desc
+ ) x ) WHERE rownum_ &gt;=#begin# and rownum_ &lt;= #end#
+  </select>
+  <resultMap id="clientTmap" class="clientPm">
+	    <result property="pm" column="rownum_" jdbcType="String"/>
+		<result property="csbh" column="csbh" jdbcType="String"/>
+		<result property="rq" column="rq" jdbcType="String" />
+		<result property="yyb" column="yyb" jdbcType="String"/>
+	    <result property="t0zb" column="t0zb" jdbcType="String"/>
+	      <result property="petName" column="petName" jdbcType="String"/>
+	</resultMap>
+
+  <select id="getT0ByPage" parameterClass="java.util.Map" resultMap = "clientTmap">
+    SELECT * FROM ( SELECT ROWNUM as rownum_ ,
+     x.* FROM (select nvl(ab.branch_name, sylpm.branch_no) as yyb,
+       sylpm.client_id as csbh,
+       nvl(bm.client_name1, sylpm.client_id) as petName,
+       sylpm.init_date as rq,
+       (sylpm.spm * 0.7 + nvl(tpm.pm, 1000000) * 0.3) as t0zb
+  from (select branch_no, client_id, init_date, rownum as spm
+          from (select bg.branch_no,
+                       bg.client_id,
+                       nvl(en.init_date, 0) as init_date,
+                       (case
+                         when bg.jzc > 0 then
+                          round((en.jzc - bg.jzc) / bg.jzc, 4)
+                         else
+                          0
+                       end) as ljsyl
+                  from (select init_date,
+                               branch_no,
+                               client_id,
+                               (close_assure_balance -
+                               finance_close_balance -
+                               shortsell_close_balance - close_fare_debit -
+                               close_other_debit - close_finance_interest -
+                               close_shortsell_interest - close_fare_interest -
+                               close_other_interest) as jzc
+                          from hs_his.hisassetdebit a
+                         where init_date = 20120629
+                         and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)) bg,
+                       (select init_date,
+                               branch_no,
+                               client_id,
+                               (close_assure_balance -
+                               finance_close_balance -
+                               shortsell_close_balance - close_fare_debit -
+                               close_other_debit - close_finance_interest -
+                               close_shortsell_interest - close_fare_interest -
+                               close_other_interest) as jzc
+                          from hs_his.hisassetdebit a
+                         where init_date = #endDate#
+                         and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)) en
+                 where bg.branch_no = en.branch_no(+)
+                   and bg.client_id = en.client_id(+)
+                 order by ljsyl desc)) sylpm,
+       (select branch_no, client_id, rownum as pm, jyl
+          from (select branch_no, client_id, sum(business_balance) as jyl
+                  from hs_his.hisdebitjour a
+                 where init_date = clear_date
+                   and debit_type in ('1', '2')
+                   and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)
+                 group by branch_no, client_id
+                 order by jyl desc)) tpm,
+       hs_user.allbranch ab,
+       hs_his.hisfzjsbmb bm
+ where sylpm.branch_no = tpm.branch_no(+)
+   and sylpm.client_id = tpm.client_id(+)
+   and sylpm.branch_no = ab.branch_no(+)
+   and sylpm.client_id = bm.client_id(+)
+ order by t0zb ) x WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;=#begin#
+  </select>
+  <resultMap id="clientEtfMap" class="clientPm">
+	    <result property="pm" column="rownum_" jdbcType="String"/>
+		<result property="csbh" column="csbh" jdbcType="String"/>
+		<result property="rq" column="rq" jdbcType="String" />
+		<result property="yyb" column="yyb" jdbcType="String"/>
+	    <result property="etfzb" column="etfzb" jdbcType="String"/>
+	      <result property="petName" column="petName" jdbcType="String"/>
+	</resultMap>
+  
+  <select id="getETFByPage" parameterClass="java.util.Map" resultMap = "clientEtfMap">
+    SELECT * FROM ( SELECT ROWNUM as rownum_ ,
+     x.* FROM (select nvl(ab.branch_name, sylpm.branch_no) as yyb,
+       sylpm.client_id as csbh,
+       nvl(bm.client_name1, sylpm.client_id) as petName,
+       sylpm.init_date as rq,
+       (sylpm.spm * 0.7 + nvl(tpm.pm, 1000000) * 0.3) as etfzb
+  from (select branch_no, client_id, init_date, rownum as spm
+          from (select bg.branch_no,
+                       bg.client_id,
+                       nvl(en.init_date, 0) as init_date,
+                       (case
+                         when bg.jzc > 0 then
+                          round((en.jzc - bg.jzc) / bg.jzc, 4)
+                         else
+                          0
+                       end) as ljsyl
+                  from (select init_date,
+                               branch_no,
+                               client_id,
+                               (close_assure_balance -
+                               finance_close_balance -
+                               shortsell_close_balance - close_fare_debit -
+                               close_other_debit - close_finance_interest -
+                               close_shortsell_interest - close_fare_interest -
+                               close_other_interest) as jzc
+                          from hs_his.hisassetdebit a
+                         where init_date = 20120629
+                         and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)) bg,
+                       (select init_date,
+                               branch_no,
+                               client_id,
+                               (close_assure_balance -
+                               finance_close_balance -
+                               shortsell_close_balance - close_fare_debit -
+                               close_other_debit - close_finance_interest -
+                               close_shortsell_interest - close_fare_interest -
+                               close_other_interest) as jzc
+                          from hs_his.hisassetdebit a
+                         where init_date = #endDate#
+                         and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)) en
+                 where bg.branch_no = en.branch_no(+)
+                   and bg.client_id = en.client_id(+)
+                 order by ljsyl desc)) sylpm,
+       (select branch_no, client_id, rownum as pm, jyl
+          from (select branch_no, client_id, sum(business_balance) as jyl
+                  from hs_his.hisdebitjour a
+                 where init_date = clear_date
+                   and debit_type in ('1', '2')
+                   and stock_type = 'T'
+                   and exists(select 1 from hs_his.hisfzjsbmb b where a.client_id = b.client_id)
+                 group by branch_no, client_id
+                 order by jyl desc)) tpm,
+       hs_user.allbranch ab,
+       hs_his.hisfzjsbmb bm
+ where sylpm.branch_no = tpm.branch_no(+)
+   and sylpm.client_id = tpm.client_id(+)
+   and sylpm.branch_no = ab.branch_no(+)
+   and sylpm.client_id = bm.client_id(+)
+ order by etfzb )
+		x WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;=#begin#
+  </select>
+ 
+</sqlMap>

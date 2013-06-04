@@ -1,0 +1,104 @@
+#popup_container {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    min-width: 300px; /* Dialog will be no smaller than this */
+    max-width: 600px; /* Dialog will wrap after this width */
+    _width: 500px;    /* IE6 */
+    background: white;
+    border: solid 3px #B5E2F9;
+    color: #000;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+#popup_title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.75em;
+    color: #666;
+    background: #B5E2F9 top repeat-x;
+    border: solid 1px #B5E2F9;
+    border-bottom: solid 1px #B5E2F9;
+    cursor: default;
+    padding: 0em;
+    margin: 0em;
+}
+
+#popup_content {
+    background: 16px 16px no-repeat url(../pic/alert/info.gif);
+    padding: 1em 1.75em;
+    margin: 0em;
+}
+
+#popup_content.alert {
+    background-image: url(../pic/alert/info.gif);
+}
+
+#popup_content.confirm {
+    background-image: url(../pic/alert/important.gif);
+}
+
+#popup_content.prompt {
+    background-image: url(../pic/alert/help.gif);
+}
+
+#popup_message {
+    padding-left: 48px;
+}
+
+#popup_panel {
+    text-align: center;
+    margin: 1em 0em 0em 1em;
+}
+
+#popup_panel input{
+    margin:0px 5px;
+}
+
+#popup_prompt {
+    margin: .5em 0em;
+}
+
+.popup_container {
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    min-width: 300px; /* Dialog will be no smaller than this */
+    max-width: 600px; /* Dialog will wrap after this width */
+    background: white;
+    border: solid 3px #DFE6F5;
+    color: #000;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.popup_title {
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1.75em;
+    color: #666;
+    background: #DFE6F5 top repeat-x;
+    border: solid 1px #DFE6F5;
+    border-bottom: solid 1px #DFE6F5;
+    cursor: default;
+    padding: 0em;
+    margin: 0em;
+}
+
+.popup_content {
+    background: 16px 16px no-repeat url(../pic/alert/info.gif);
+    padding: 1em 1.75em;
+    margin: 0em;
+}
+
+.popup_message {
+    padding-left: 48px;
+}
+
+.popup_panel {
+    text-align: center;
+    margin: 1em 0em 0em 1em;
+}

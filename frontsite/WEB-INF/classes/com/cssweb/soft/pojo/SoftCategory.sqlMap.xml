@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.soft.pojo.SoftCategory">
+
+	<typeAlias alias="SoftCategory" type="com.cssweb.soft.pojo.SoftCategory" />
+
+	<!--result map-->
+	<resultMap id="SoftCategoryMap" class="SoftCategory">
+		<result column="ID" property="id" jdbcType="java.lang.Long"/>       
+		<result column="CATEGORY_CODE" property="category_code" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="CATEGORY_NAME" property="category_name" jdbcType="java.lang.String"  nullValue=""/> 
+		<result column="CATEGORY_DESCRIPTION" property="category_description" jdbcType="java.lang.String" nullValue=""/> 
+		<result column="ORDER_NUM" property="order_num" jdbcType="java.lang.Long" /> 
+		<result column="EXT1" property="ext1" jdbcType="java.lang.String"/> 
+		<result column="EXT2" property="ext2" jdbcType="java.lang.String"/> 
+		<result column="EXT3" property="ext3" jdbcType="java.lang.String"/> 
+		<result column="EXT4" property="ext4" jdbcType="java.lang.String"/> 
+	</resultMap>
+	
+ <select id="selectrecord" parameterClass="java.lang.String" resultMap = "SoftCategoryMap">   
+      $sql$   
+ </select>
+ 
+ <insert id="insert" parameterClass="SoftCategory">    	
+    insert into SOFT_CATEGORY(ID,CATEGORY_CODE,CATEGORY_NAME,CATEGORY_DESCRIPTION,ORDER_NUM,EXT1,EXT2,EXT3,EXT4)
+        values(#id#,#category_code#,#category_name#,#category_description#,#order_num#,#ext1#,#ext2#,#ext3#,#ext4#)
+  </insert>
+ 
+  <update id="update" parameterClass="SoftCategory">    
+     update SOFT_CATEGORY
+         set CATEGORY_CODE=#category_code#,CATEGORY_NAME=#category_name#,CATEGORY_DESCRIPTION=#category_description#,ORDER_NUM=#order_num#,
+         EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#  where ID=#id#    
+  </update>
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete SOFT_CATEGORY where id in ($value$)
+  </delete>
+  
+  <select id="selectAll" resultMap = "SoftCategoryMap">
+    select * from SOFT_CATEGORY
+  </select>
+  
+   <select id="selectAll_1" parameterClass="java.util.Map" resultMap = "SoftCategoryMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getSoftById" parameterClass="java.lang.Long" resultMap = "SoftCategoryMap">
+    select * from SOFT_CATEGORY where id = #value#
+  </select>
+  
+  <select id="getSoftByCode" parameterClass="java.lang.String" resultMap = "SoftCategoryMap">
+    select * from SOFT_CATEGORY where CATEGORY_CODE=#category_code#
+  </select>
+</sqlMap>

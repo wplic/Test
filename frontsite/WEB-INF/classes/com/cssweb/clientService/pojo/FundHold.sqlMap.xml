@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.clientService.pojo.FundHold">
+
+	<typeAlias alias="FundHold" type="com.cssweb.clientService.pojo.FundHold" />
+
+	<resultMap id="FundHoldMap" class="FundHold">
+		<result property="fundCode" column="STOCK_CODE" jdbcType="String"/>
+		<result property="fundName" column="ZQJC" jdbcType="String"/>
+		<result property="currentNumber" column="SUMAMOUT" jdbcType="Long"/>
+		<result property="yesterdayPrice" column="ASSET_PRICE" jdbcType="Double"/>
+		<result property="yesterdayValue" column="YESTERDAY_VALUE" jdbcType="Double"/>
+		<result property="costMoney" column="COSTMONEY" jdbcType="Double"/>
+		<result property="costPrice" column="COSTPRICE" jdbcType="Double"/>
+		<result property="profitAndLoss" column="PROFITANDLOSS" jdbcType="Double"/>
+		<result property="businessDate" column="business_date" jdbcType="Integer" nullValue="0"/>
+	</resultMap>
+	
+	<select id="getInfoByCode" parameterClass="map" resultMap="FundHoldMap">
+		select i.*,j.zqjc from
+		(
+		select a.stock_code,a.begin_amount+a.correct_amount sumamout,c.asset_price,
+		(a.begin_amount+a.correct_amount)*c.asset_price yesterday_value,
+		case when (a.sum_buy_amount-a.sum_sell_amount)=0 then 0 else (round((a.sum_buy_balance - a.sum_sell_balance)/(a.sum_buy_amount - a.sum_sell_amount), 3))*(a.begin_amount+a.correct_amount) end costMoney,
+		case when (a.sum_buy_amount-a.sum_sell_amount)=0 then 0 else round((a.sum_buy_balance - a.sum_sell_balance)/(a.sum_buy_amount - a.sum_sell_amount), 3) end costPrice,
+		round(((a.begin_amount + a.correct_amount) * c.asset_price- (a.sum_buy_balance - a.sum_sell_balance)),2) profitAndLoss
+		,b.business_date
+		from hs_his_stock a,
+		(
+		     select max(f.business_date) business_date from hs_his_stock f where f.client_id='$fundaccount$'
+		) b,
+		hs_his_hisprice c
+		where a.client_id='$fundaccount$' and a.business_date=b.business_date and a.stock_code=c.stock_code and a.business_date=c.init_date
+		) i left join (
+		SELECT * FROM 
+		(select t.zqdm,t.zqjc,rank() over(Partition by t.zqdm order by t.EXCHANGE ) AS rk FROM quote t) a
+		WHERE a.rk=1
+		) j on i.stock_code=j.zqdm
+	</select>
+</sqlMap>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebUserCppj">
+<typeAlias alias="TcsswebUserCppj" type="com.cssweb.subscribe.pojo.TcsswebUserCppj"/>
+	<resultMap id="TcsswebUserCppj" class="TcsswebUserCppj">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="account" column="ACCOUNT" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="certer" column="CERTER" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="productId" column="PRODUCT_ID" jdbcType="java.lang.Long"/>
+	    <result property="cppjId" column="CPPJ_ID" jdbcType="java.lang.Long"/>
+	    <result property="cppjTime" column="CPPJ_TIME" jdbcType="Date"/>
+	</resultMap>
+	<select id="getCountByCppjId" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(1) FROM T_CSSWEB_USER_CPPJ WHERE 1=1
+		<dynamic>
+				 <isNotNull property="cppjId" prepend="and">
+				   CPPJ_ID=#cppjId#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	<select id="getCountByProductId" parameterClass="java.util.Map" resultClass="java.lang.Integer">
+		SELECT count(1) FROM T_CSSWEB_USER_CPPJ WHERE 1=1
+		<dynamic>
+				 <isNotNull property="productId" prepend="and">
+				   PRODUCT_ID=#productId#
+				 </isNotNull>
+				<isNotNull property="cppjId" prepend="and">
+				   CPPJ_ID=#cppjId#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	<select id="getUserCppjByAccountAndTime" parameterClass="java.util.Map" resultMap="TcsswebUserCppj">
+		SELECT * FROM T_CSSWEB_USER_CPPJ WHERE 1=1
+		<dynamic>
+				 <isNotNull property="account" prepend="and">
+				   ACCOUNT=#account#
+				 </isNotNull>
+				 <isNotNull property="productId" prepend="and">
+				   PRODUCT_ID=#productId#
+				 </isNotNull>
+				 <isNotNull property="cppjTime" prepend="and">
+				 to_char(CPPJ_TIME,'yyyyMMdd')=#cppjTime#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	<insert id="insertTcsswebUserCppj" parameterClass="TcsswebUserCppj">
+		INSERT into T_CSSWEB_USER_CPPJ ( ID, ACCOUNT, CERTER, PRODUCT_ID, CPPJ_ID,CPPJ_TIME) VALUES 
+		(#id#,#account#,#certer#, #productId#, #cppjId#,#cppjTime#)
+	</insert>
+</sqlMap>

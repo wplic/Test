@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.theme.pojo.ThemeIntro">
+
+	<typeAlias alias="ThemeIntro" type="com.cssweb.theme.pojo.ThemeIntro" />
+
+	<resultMap id="ThemeIntroMap" class="ThemeIntro">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="categoryid" column="CATEGORYID" jdbcType="Long"/>
+		<result property="intro" column="INTRO" jdbcType="String"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+		<result property="picid" column="PICID" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+
+	<resultMap id="ThemeIntroMap2" class="ThemeIntro">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="category" column="CATEGORY" jdbcType="String"/>
+		<result property="intro" column="INTRO" jdbcType="String"/>
+		<result property="updatetime" column="UPDATETIME" jdbcType="Date"/>
+		<result property="picid" column="PICID" jdbcType="Long" nullValue="0"/>
+	</resultMap>
+
+	<insert id="insert" parameterClass="ThemeIntro">
+		INSERT into T_THEME_INTRO (ID, CATEGORYID,INTRO, UPDATETIME) VALUES (#id#,#categoryid#,#intro#,sysdate)
+	</insert>
+	
+	<update id="update" parameterClass="ThemeIntro">
+		update T_THEME_INTRO set CATEGORYID = #categoryid#,INTRO = #intro#, UPDATETIME = sysdate where ID=#id#
+	</update>
+
+	<update id="updatePicid" parameterClass="java.util.Map">
+		update T_THEME_INTRO set PICID=#picid# where ID=#id#
+	</update>
+	<delete id="delete" parameterClass="String">
+		delete from T_THEME_INTRO where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteById" parameterClass="Long">
+		delete from T_THEME_INTRO where ID = #value#
+	</delete>
+		
+	<select id="getAll" resultMap="ThemeIntroMap">
+		select * from T_THEME_INTRO ORDER BY ID
+	</select>
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_THEME_INTRO 
+	</select>
+
+	<select id="getById" parameterClass="Long" resultMap="ThemeIntroMap">
+		select * from T_THEME_INTRO where ID= #id#
+	</select>	
+
+	<select id="getByCategoryId" parameterClass="Long" resultMap="ThemeIntroMap">
+		select * from T_THEME_INTRO where CATEGORYID= #id#
+	</select>	
+	
+	  <select id="getFrontByMap" parameterClass="java.util.Map" resultMap = "ThemeIntroMap">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+	  <select id="getAdminByMap" parameterClass="java.util.Map" resultMap = "ThemeIntroMap2">
+    	SELECT * FROM ( 
+    		SELECT row_.*, ROWNUM rownum_ FROM (
+    		 	$sql$
+    		 )
+			row_ WHERE ROWNUM &lt;= #end# 
+		) WHERE rownum_ &gt;#begin#
+  	</select>
+	
+</sqlMap>

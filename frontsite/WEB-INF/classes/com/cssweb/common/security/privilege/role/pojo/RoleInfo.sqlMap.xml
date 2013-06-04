@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.common.security.privilege.role.pojo.RoleInfo">
+
+	<typeAlias alias="RoleInfo" type="com.cssweb.common.security.privilege.role.pojo.RoleInfo"/>
+
+	<!--result map-->
+	<resultMap id="roleInfoMap" class="RoleInfo">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="parentId" column="PARENT_ID" jdbcType="Long"/>
+ 		<result property="roleCode" column="ROLE_CODE" jdbcType="String"/>
+ 		<result property="roleName" column="ROLE_NAME" jdbcType="String"/>
+ 		<result property="description" column="DESCRIPTION" jdbcType="String"/>
+ 		<result property="isValid" column="IS_VALID" jdbcType="Integer"/>
+ 		<result property="orderNum" column="ORDER_NUM" jdbcType="Integer"/>
+ 		<result property="ext1" column="EXT1" jdbcType="String"/>
+ 		<result property="ext2" column="EXT2" jdbcType="String"/>
+ 		<result property="ext3" column="EXT3" jdbcType="String"/>
+ 		<result property="ext4" column="EXT4" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="RoleInfo">
+		  insert into ROLE_INFO (ID,PARENT_ID,ROLE_CODE,ROLE_NAME,DESCRIPTION,IS_VALID,ORDER_NUM,EXT1,EXT2,EXT3,EXT4)
+		  		values (#id#,#parentId#,#roleCode#,#roleName#,#description#,#isValid#,#orderNum#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	
+	<update id="update" parameterClass="RoleInfo">
+		  update ROLE_INFO 
+		  	set PARENT_ID=#parentId#,ROLE_CODE=#roleCode#,ROLE_NAME=#roleName#,DESCRIPTION=#description#,
+		  		IS_VALID=#isValid#,ORDER_NUM=#orderNum#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#
+		  where ID = #id#
+	</update>
+	
+	<delete id="deleteById" parameterClass="Long">
+	  	delete ROLE_INFO where ID=#value#
+	</delete>
+	
+	<select id = "getDeptRoleByCode" parameterClass="String" resultMap = "roleInfoMap" >
+		select * from role_info where Role_Code = 'dept'
+	</select>
+	
+	<select id="getById" parameterClass="Long" resultMap = "roleInfoMap">
+	  	select * from ROLE_INFO where ID = #value#
+	</select>
+	
+	<select id="getByParentId" parameterClass="Long" resultMap = "roleInfoMap">
+	    select * from ROLE_INFO where PARENT_ID = #value# order by ORDER_NUM
+	 </select>
+	
+	<select id="getByParentIdAndMap" parameterClass="java.util.Map" resultMap = "roleInfoMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>
+	
+	<select id="getRoleInfoByRoleCode" parameterClass="String" resultMap = "roleInfoMap">
+    select * from ROLE_INFO where ROLE_CODE = #value#
+  </select>
+  
+    <update id="changeOrderNumByParentIdAndThisOrderNum" parameterClass="java.util.Map">
+     update ROLE_INFO set ORDER_NUM=ORDER_NUM+1 where PARENT_ID=#parentId# and ORDER_NUM &gt;=#orderNum#
+  </update>
+    <update id="changeOrderNumByParentIdAndOldBiggerNew" parameterClass="java.util.Map">
+     update ROLE_INFO set ORDER_NUM=ORDER_NUM+1 where PARENT_ID=#parentId# and ORDER_NUM &gt;=#newOrderNum# and ORDER_NUM &lt;#oldOrderNum#
+  </update>
+    <update id="changeOrderNumByParentIdAndNewBiggerOld" parameterClass="java.util.Map">
+     update ROLE_INFO set ORDER_NUM=ORDER_NUM-1 where PARENT_ID=#parentId# and ORDER_NUM &gt;#oldOrderNum# and ORDER_NUM &lt;=#newOrderNum#
+  </update>
+  
+  <delete id="deleteByIdsAndChilds" parameterClass="String">
+    delete ROLE_INFO where ID in ($value$) or PARENT_ID in ($value$)
+  </delete>
+
+  <select id="getAllRoles" resultMap="roleInfoMap">
+	select * from ROLE_INFO
+  </select>
+</sqlMap>

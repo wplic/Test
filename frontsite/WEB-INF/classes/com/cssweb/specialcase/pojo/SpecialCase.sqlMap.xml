@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.specialcase.pojo.SpecialCase">
+
+	<typeAlias alias="SpecialCase" type="com.cssweb.specialcase.pojo.SpecialCase" />
+	<typeAlias alias="dictionary" type="com.cssweb.common.dictionary.pojo.Dictionary"/>
+	<resultMap id="dicMap" class="dictionary">
+		<result property="id" column="ID" jdbcType="long" nullValue="0"/>
+		<result property="keyName" column="KEY_NAME" jdbcType="String" nullValue=""/>
+		<result property="keyCode" column="KEY_CODE" jdbcType="String" nullValue=""/>
+  	</resultMap>
+	<!--result map-->
+	<resultMap id="ResultMap" class="SpecialCase">
+		<result column="ID" 			property="id" 			jdbcType="java.lang.Long"/>       
+		<result column="CASE_NAME" 		property="caseName" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="CASE_CODE" 		property="caseCode" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="CASE_DESC" 		property="caseDesc" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="EXT1" 			property="ext1" 		jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="EXT2" 			property="ext2" 		jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="TYPE" 			property="type" 		jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="INSERT_DATE" 	property="insertDate" 	jdbcType="Date"	nullValue=""/> 
+		<result column="CASE_PIC_ID" 	property="casePicId" 	jdbcType="java.lang.Long"/>  
+	</resultMap>
+	
+ <select id="selectAll_1" parameterClass="java.util.Map" resultMap = "ResultMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>	
+  
+ <select id="selectrecord" parameterClass="java.lang.String" resultMap = "ResultMap">   
+      $sql$   
+ </select>
+ 
+  <insert id="insert" parameterClass="SpecialCase">    	
+    insert into SPECIALCASE(ID,CASE_NAME,CASE_CODE,CASE_DESC,INSERT_DATE,TYPE,EXT1,EXT2,CASE_PIC_ID)
+    values(#id#,#caseName#,#caseCode#,#caseDesc#,sysdate,#type#,#ext1#,#ext2#,#casePicId#)
+  </insert>
+ 
+ <!-- 查看字典信息 -->
+	<select id="findtypebytypecode" resultMap="dicMap"
+		parameterClass="java.util.Map">
+		<![CDATA[
+		select id,key_name,key_code from cssweb_dictionary $sql$
+		]]>
+	</select>
+  <update id="update" parameterClass="SpecialCase">    
+     update SPECIALCASE
+         set CASE_NAME=#caseName#,CASE_CODE=#caseCode#,CASE_DESC=#caseDesc#,INSERT_DATE=sysdate,
+         TYPE=#type#,EXT1=#ext1#,EXT2=#ext2# where ID=#id#    
+  </update>
+  
+  
+    <select id="getCaseById" parameterClass="java.lang.Long" resultMap = "ResultMap">
+    select * from SPECIALCASE where id = #id#
+  </select>
+  
+    <update id="updatePicIdBySoftId" parameterClass="SpecialCase">
+		  update SPECIALCASE set CASE_PIC_ID=#casePicId# where ID=#id#
+	</update>
+  
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete SPECIALCASE where id in ($ids$)
+  </delete>
+  
+	<!-- 
+
+   <select id="getBycateGoryId" parameterClass="java.util.Map" resultMap = "SoftBasicInfoMap">
+    select * from SOFT_BASIC_INFO where IS_VALID=1 and CATEGORY_ID=#cateGoryId# order by ORDER_NUM asc
+  </select>
+ 
+ <select id="selectAll" resultMap = "SoftBasicInfoMap">
+    select * from SOFT_BASIC_INFO
+  </select>
+  
+  
+  
+  
+  
+  
+
+
+<update id="update_count" parameterClass="Long">    
+    update SOFT_BASIC_INFO set COUNT=COUNT+1 where ID=#value#
+  </update> -->
+  	
+	<!--根据类别取软件列表信息
+   <select id="getSoftListByCategoryId" parameterClass="map" resultMap="SoftBasicInfoMap">
+		SELECT * FROM ( 
+			SELECT 	row_.*,
+					rownum rownum_ 
+			FROM ( 
+				SELECT 	ID,
+						SOFT_NAME,
+						SOFT_SIZE,
+						SOFT_DESC,
+						IMAGE_ID,
+						CATEGORY_ID,
+						IS_VALID,
+						ORDER_NUM,
+						COUNT,
+						GXSJ,
+						EXT3,
+						EXT4
+				FROM	SOFT_BASIC_INFO
+				WHERE	IS_VALID=1
+			<dynamic>
+				<isNotEmpty property="category_id"	prepend="AND">
+			  		CATEGORY_ID = #category_id#
+				</isNotEmpty>
+			</dynamic>		 
+			<dynamic prepend="order by">
+				<isNotNull property="sortName">
+					$sortName$
+					<isNotNull property="dir">
+						$dir$
+					</isNotNull>
+				</isNotNull>
+			</dynamic>
+				)row_
+		<dynamic>
+			<isGreaterThan property="end" compareValue="0">
+				WHERE rownum &lt;=#end#
+			</isGreaterThan>
+		</dynamic>
+		)
+		<dynamic>
+			<isGreaterThan property="begin" compareValue="0">
+				WHERE rownum_ &gt;#begin#
+			</isGreaterThan>
+		</dynamic>
+	</select> -->
+	<!--记录的总数
+	<select id="getSoftCountByCategoryId" parameterClass="map" resultClass="Integer">
+			SELECT 	count(*)
+			FROM	SOFT_BASIC_INFO
+			<dynamic>
+				<isNotEmpty property="category_id"	prepend="WHERE">
+			  		CATEGORY_ID = #category_id#
+				</isNotEmpty>
+			</dynamic>		 
+	</select>
+-->
+</sqlMap>

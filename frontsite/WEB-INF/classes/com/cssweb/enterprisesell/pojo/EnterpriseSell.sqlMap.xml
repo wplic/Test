@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.enterprisesell.pojo.EnterpriseSell">
+
+	<typeAlias alias="EnterpriseSell" type="com.cssweb.enterprisesell.pojo.EnterpriseSell" />
+
+	<!--result map-->
+	<resultMap id="ResultMap" class="EnterpriseSell">
+		<result column="ID" 			property="id" 			jdbcType="java.lang.Long"/>       
+		<result column="NAME" 		property="name" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="CODE" 		property="code" 	jdbcType="java.lang.String"	nullValue=""/> 
+		<result column="CREATE_DATE" 	property="createDate" 	jdbcType="Date"	nullValue=""/> 
+		<result column="PIC_ID" 	property="picId" 	jdbcType="java.lang.Long"/>  
+		<result column="ORDERNUM" 	property="orderNum" 	jdbcType="java.lang.Long"/>
+		<result column="TYPE" 		property="type" 	jdbcType="java.lang.String"	nullValue=""/>   
+	</resultMap>
+	
+	<select id="selectrecord" parameterClass="java.lang.String" resultMap = "ResultMap">   
+      $sql$   
+ 	</select>
+	
+	<select id="selectAll_1" parameterClass="java.util.Map" resultMap = "ResultMap">
+	    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+			row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+	</select>	
+  
+
+ 
+  <insert id="insert" parameterClass="EnterpriseSell">    	
+    insert into T_INVESTBANK_ENTERPRISESELL(ID,NAME,CODE,CREATE_DATE,PIC_ID,ORDERNUM,TYPE)
+    values(#id#,#name#,#code#,sysdate,#picId#,#orderNum#,#type#)
+  </insert>
+ 
+ 
+  <update id="update" parameterClass="EnterpriseSell">    
+     update T_INVESTBANK_ENTERPRISESELL
+         set NAME=#name#,CODE=#code#,ORDERNUM=#orderNum#,TYPE=#type#
+         where ID=#id#    
+  </update>
+  
+ 
+  <select id="getCaseById" parameterClass="java.lang.Long" resultMap = "ResultMap">
+    select * from T_INVESTBANK_ENTERPRISESELL where id = #id#
+  </select>
+    
+    <update id="updatePicIdBySoftId" parameterClass="EnterpriseSell">
+		  update T_INVESTBANK_ENTERPRISESELL set PIC_ID=#picId# where ID=#id#
+	</update>
+
+  
+   <delete id="delete" parameterClass="java.lang.String">
+    delete T_INVESTBANK_ENTERPRISESELL where id in ($ids$)
+  </delete>
+  
+</sqlMap>

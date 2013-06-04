@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.pageStatic.pojo.PageStaticList">
+	<typeAlias alias="PageStaticList" type="com.cssweb.pageStatic.pojo.PageStaticList"/>
+	
+	<resultMap id="PageStaticListMap" class="PageStaticList">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="ITEM_ID" property="itemId" jdbcType="long"/>
+		<result column="CREATE_DATE" property="createDate" jdbcType="java.util.Date"/>
+		<result column="UPDATE_DATE" property="updateDate" jdbcType="java.util.Date"/>
+		<result column="PAGESTATIC_RESULT" property="pageStaticResult" jdbcType="String"/>
+		<result column="PAGESTATIC_NUM" property="pageStaticNum" jdbcType="long"/>
+		<result column="PAGESTATIC_MAX_NUM" property="pageStaticMaxNum" jdbcType="long"/>
+		<result column="PAGESTATIC_INFO" property="pageStaticInfo" jdbcType="String"/>		
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+	</resultMap>
+	<select id="select" resultMap="PageStaticListMap">
+		select ID,ITEM_ID,CREATE_DATE,UPDATE_DATE,PAGESTATIC_RESULT,PAGESTATIC_NUM,PAGESTATIC_MAX_NUM,PAGESTATIC_INFO,EXT1,EXT2,EXT3,EXT4
+		from PAGESTATIC_LIST where ID=#value#
+	</select>
+	<insert id="insert" parameterClass="PageStaticList">
+		insert into PAGESTATIC_LIST(ID,ITEM_ID,CREATE_DATE,UPDATE_DATE,PAGESTATIC_RESULT,PAGESTATIC_NUM,PAGESTATIC_MAX_NUM,PAGESTATIC_INFO,EXT1,EXT2,EXT3,EXT4) 
+					values(SEQ_PAGESTATIC_LIST.Nextval,#itemId#,sysdate,#updateDate#,#pageStaticResult#,#pageStaticNum#,#pageStaticMaxNum#,#pageStaticInfo#,#ext1#,#ext2#,#ext3#,#ext4#)
+	</insert>
+	<update id="update" parameterClass="PageStaticList">
+		update PAGESTATIC_LIST set ITEM_ID=#itemId#,CREATE_DATE=#createDate#,
+			UPDATE_DATE=#updateDate#,PAGESTATIC_RESULT=#pageStaticResult#,PAGESTATIC_NUM=#pageStaticNum#,
+			PAGESTATIC_MAX_NUM=#pageStaticMaxNum#,PAGESTATIC_INFO=#pageStaticInfo#,EXT1=#ext1#,EXT2=#ext2#,EXT3=#ext3#,EXT4=#ext4#  where ID = #id#
+	</update>
+	<select id="getPageStaticListByCondition" resultMap="PageStaticListMap" parameterClass="java.util.Map">
+       select * from (
+    		select row_.*,rownum rownum_ from 
+    		(
+		  		$condition$
+    		 )row_ 
+    		<dynamic>
+    			<isGreaterThan property="endNum" compareValue="0">
+		    		where rownum &lt;=#endNum#		
+    			</isGreaterThan>
+    		</dynamic>	
+		    		) 
+		    <dynamic>		
+				<isGreaterThan property="beginNum" compareValue="0">
+		    		where rownum_ &gt;#beginNum# 		
+    			</isGreaterThan>
+    		</dynamic>
+   </select> 	
+    <select id="getPageStaticListCount" resultClass="java.lang.Integer" parameterClass="java.lang.String">
+		select count(*) from ( $sql$ )
+	</select>	
+	<select id="insertPageStaticListByServerId" parameterClass="java.lang.Long" resultMap="PageStaticListMap">
+		insert into pagestatic_list t (t.id,t.item_id,t.create_date,t.pagestatic_result,t.pagestatic_max_num)
+		select SEQ_PAGESTATIC_LIST.Nextval,itemId,sysdate,1,5 from Pagestatic_Item i where i.serverid=#value#
+	</select>
+</sqlMap>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->	
+<sqlMap namespace="com.cssweb.F10.gazx.stock.pojo.FinancialAnalysis">
+    <typeAlias alias="financialAnalysis" type="com.cssweb.F10.gazx.stock.pojo.FinancialAnalysis"/>
+    <!--result map-->
+    <resultMap id="financialAnalysisMap" class="financialAnalysis">
+        <result column="T_GSZB_ID" property="companyId" jdbcType="Long"/>
+        <result column="MGSY" property="earnings" jdbcType="double"/>
+        <result column="MGSYKC" property="earningsAfterAdjusting" jdbcType="double"/>
+        <result column="Mgjzc" property="net" jdbcType="double"/>
+        <result column="Mgxjjll" property="netFlow" jdbcType="double"/>
+        <result column="Mgzbgjj" property="capitalFund" jdbcType="double"/>
+        <result column="MGWFPLR" property="profit" jdbcType="double"/>
+		<result column="JZRQ" property="endDate" jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00"/>
+    </resultMap> 
+    
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		select count(*) from CWFXZB
+		where SCBZ = 0 and GKBZ = 1
+		<isNotNull prepend="and" property="companyId">
+			T_GSZB_ID = #companyId#
+		</isNotNull>
+	</select>
+
+	<select id="pageQuery" resultMap="financialAnalysisMap">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select
+					T_GSZB_ID,
+					MGSY,
+					MGSYKC,
+					Mgjzc,
+					Mgxjjll,
+					Mgzbgjj,
+					MGWFPLR,
+					JZRQ
+				from CWFXZB
+				where SCBZ = 0 and GKBZ = 1
+				<isNotNull prepend="and" property="companyId">
+					T_GSZB_ID = #companyId#
+				</isNotNull>
+				order by JZRQ desc
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+		
+	</select> 
+	
+</sqlMap>	

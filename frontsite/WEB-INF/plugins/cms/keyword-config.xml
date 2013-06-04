@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE struts-config PUBLIC
+          "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN"
+          "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+       
+<struts-config>
+<!-- ============ Data Source =================================== -->
+
+<!--FormBean是struts的一个概念，本质是JavaBean，用来自动存储页面表单中各个域的值，并在适当的时候回填表单域，不需要象传统那样request.getParameter(“fieldName”);，常被action-mappings中的action 使用-->
+
+  <!-- ========== Form Bean Definitions =================================== -->
+<form-beans>
+	<!--关键字表单 -->
+	<form-bean name="DocKeyowordForm" type="com.css.app.document.keyword.view.DocKeyowordForm"/> 
+	<!--页面板块表单 -->
+	<form-bean name="PageBlockForm" type="com.css.app.document.page.view.PageBlockForm"/>
+	<!--页面板块内容表单 -->
+	<form-bean name="PageBlockContentForm" type="com.css.app.document.page.view.PageBlockContentForm"/>
+
+</form-beans>
+
+ <!--这里存放整个系统都可以使用的全局转向中转(Forward)地址，类似于javascript中的window.location(‘index.jsp’);，也类似于电视控制器上的各种按钮，可以转频道、调色等等是基于Struts的Web应用的控制流程流转。一般情况下，一个Action处理完毕后，会转发到一个JSP页面进行显示。这也是JSP中的MVC的实现的要点。-->
+<!-- ========== Global Forward Definitions ============================== -->
+<global-forwards>
+  
+	<forward   name="success"  path="/success.jsp"/>
+	<forward   name="failure"  path="/failure.jsp"/>
+    
+</global-forwards>
+
+<!--还记得web.xml中后缀为do的请求吗？它们是转到这里处理的。
+	这里相当于struts的Model部分，Model部分是struts中比较灵活的地方。-->
+<!-- ========== Action Mapping Definitions ============================== -->
+<action-mappings>
+		
+	<action   path="/admin/info/KeywordCatCreateAction"
+			  parameter="addcat"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success"  path="/admin/info/KeywordCatForm.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/KeywordCreateAction"
+			  parameter="add"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success"  path="/admin/info/KeywordForm.jsp"/>
+	</action>
+		
+	<action   path="/admin/info/KeywordCatUpdateAction"
+			  parameter="editcat"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success" path="/admin/info/KeywordCatForm.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/KeywordUpdateAction"
+			  parameter="edit"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success" path="/admin/info/KeywordForm.jsp"/>
+	</action>		
+		
+	<action   path="/admin/info/KeywordCatSaveAction"
+	          parameter="savecat"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  name="DocKeyowordForm"
+			  scope="request"
+			  input="/admin/info/KeywordCatForm.jsp"
+			  validate="true">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/KeywordSaveAction"
+	          parameter="save"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  name="DocKeyowordForm"
+			  scope="request"
+			  input="/admin/info/KeywordForm.jsp"
+			  validate="true">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/KeywordList.jsp"/>
+	</action>	
+	
+	<action   path="/admin/info/KeywordCatDeleteAction"
+	          parameter="deletecat"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  name="DocKeyowordForm"
+			  scope="request"			
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/KeywordDeleteAction"
+	          parameter="delete"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  name="DocKeyowordForm"
+			  scope="request"			
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/KeywordCat.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/KeywordList.jsp"/>
+	</action>	
+	
+	<action   path="/admin/info/KeywordListAction"
+	          parameter="list"
+			  type="com.css.app.document.keyword.action.DocKeywordAction"
+			  name="DocKeyowordForm"
+			  scope="request"			
+			  validate="false">		
+			<forward name="success" path="/admin/info/KeywordSelector.jsp"/>
+	</action>		
+	
+	<action   path="/admin/info/PageBlockCreateAction"
+			  parameter="add"
+			  type="com.css.app.document.page.action.PageBlockAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+			<forward name="success"  path="/admin/info/PageBlockForm.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockUpdateAction"
+			  parameter="edit"
+			  type="com.css.app.document.page.action.PageBlockAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+			<forward name="success" path="/admin/info/PageBlockForm.jsp"/>
+	</action>	
+	
+	<action   path="/admin/info/PageBlockSaveAction"
+			  parameter="save"
+			  type="com.css.app.document.page.action.PageBlockAction"
+			  scope="request"
+			  name="PageBlockForm"
+			  input="/admin/info/PageBlockForm.jsp"
+			  validate="true">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockDeleteAction"
+			  parameter="delete"
+			  type="com.css.app.document.page.action.PageBlockAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockCheckAction"
+			  parameter="check"
+			  type="com.css.app.document.page.action.PageBlockAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockUnCheckAction"
+			  parameter="uncheck"
+			  type="com.css.app.document.page.action.PageBlockAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockLineListAction"
+			  parameter="listline"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockList.jsp"/>
+			<forward name="success" path="/admin/info/PageBlockLineList.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockLineDeleteAction"
+			  parameter="delline"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockLineCreateAction"
+			  parameter="addline"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockLineOrderAction"
+			  parameter="orderline"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockContentListAction"
+			  parameter="list"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockLineList.jsp"/>
+			<forward name="success" path="/admin/info/PageBlockContentList.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockContentCreateAction"
+			  parameter="add"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockContentListAction.do"/>
+			<forward name="success"  path="/admin/info/PageBlockContentForm.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockContentEditAction"
+			  parameter="edit"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockContentListAction.do"/>
+			<forward name="success"  path="/admin/info/PageBlockContentForm.jsp"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockContentSaveAction"
+			  parameter="save"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  name="PageBlockContentForm"
+			  input="/admin/info/PageBlockContentForm.jsp"
+			  validate="true">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockContentListAction.do"/>
+			<forward name="next" redirect="true" path="/admin/info/PageBlockContentCreateAction.do"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockLineListAction.do"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockContentDeleteAction"
+			  parameter="delete"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockContentListAction.do"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockContentListAction.do"/>
+	</action>
+	
+	<action   path="/admin/info/PageBlockContentOrderAction"
+			  parameter="order"
+			  type="com.css.app.document.page.action.PageBlockContentAction"
+			  scope="request"
+			  validate="false">
+			<forward name="message" redirect="true" path="/admin/share/JumpWithMessage.jsp"/>
+			<forward name="failure" redirect="true" path="/admin/info/PageBlockContentListAction.do"/>
+			<forward name="success" redirect="true" path="/admin/info/PageBlockContentListAction.do"/>
+	</action>
+		
+</action-mappings>
+
+</struts-config>

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.base.pojo.TopExecutives">
+	<typeAlias alias="topExecutives"
+		type="com.cssweb.F10.gazx.base.pojo.TopExecutives" />
+	<!--result map-->
+	<resultMap id="topExecutivesMap" class="topExecutives">
+		<result column="T_GRZB_ID" property="personalInfoId"
+			jdbcType="Long" />
+		<result column="ZW" property="job" jdbcType="String"
+			nullValue="" />
+		<result column="RZQSR" property="serviceStartDate"
+			jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00" />
+		<result column="RZZZR" property="serviceEndDate"
+			jdbcType="java.util.Date" nullValue="1900/01/01 00:00:00" />
+		<result column="GGRQ" property="GGRQ" jdbcType="java.util.Date"
+			nullValue="1900/01/01 00:00:00" />
+
+		<result column="T_GSZB_ID" property="companyId" jdbcType="Long" />
+		<result column="LZSM" property="separationReason"
+			jdbcType="String" nullValue="" />
+		<result column="XPSM" property="rehireReason" jdbcType="String"
+			nullValue="" />
+		<!--<result column="NX" property="annualSalary" jdbcType="double"/>-->
+		<result column="CGS" property="numberOfShares" jdbcType="Long" />
+		<result column="HBLB" property="currencyType" jdbcType="String"
+			nullValue="" />
+		<result column="XM" property="name" jdbcType="String"
+			nullValue="" />
+		<result column="JL" property="curriculumVitae" jdbcType="String"
+			nullValue="" />
+	</resultMap>
+	<!-- 根据公司ID和职位标识取得高管信息集合 -->
+	<select id="getTopExecutivesList" resultMap="topExecutivesMap">
+		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( SELECT
+		A.GGRQ,A.T_GRZB_ID,A.ZW,A.RZQSR,A.RZZZR,A.T_GSZB_ID,A.LZSM,A.XPSM,A.CGS,A.HBLB
+		,B.XM,B.JL FROM RYRZQK A,GRZB B where A.gkbz=#separationTags#
+		and A.T_GSZB_ID=#companyId# AND A.T_GRZB_ID=B.T_GRZB_ID ORDER By
+		A.GGRQ DESC ) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE rownum_
+		&gt;#beginNum#
+
+
+	</select>
+
+	<!-- 分页 -->
+	<select id="pageCount" resultClass="Integer">
+		SELECT count(*) FROM RYRZQK A,GRZB B where
+		A.gkbz=#separationTags# and A.T_GSZB_ID=#companyId# AND
+		A.T_GRZB_ID=B.T_GRZB_ID ORDER By A.GGRQ DESC
+	</select>
+
+</sqlMap>

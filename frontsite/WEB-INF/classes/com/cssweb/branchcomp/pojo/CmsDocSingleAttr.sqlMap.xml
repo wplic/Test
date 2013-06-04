@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.branchcomp.pojo.CmsDocSingleAttr">
+	<typeAlias alias="cmsDocSingleAttr" type="com.cssweb.branchcomp.pojo.CmsDocSingleAttr" />
+	
+	<resultMap id="cmsDocSingleAttrResultMap" class="cmsDocSingleAttr" >
+		<result column="DOC_ID" property="docId" jdbcType="java.lang.Long" />
+		<result column="TITLE"  property="title" jdbcType="java.lang.String" />
+		<result column="UPLOAD_DATE" jdbcType="java.util.Date"
+			property="uploadDate" />
+		<!-- <result column="SUBTITLE"  property="subtitle" jdbcType="java.lang.String"/>
+		 <result column="TITLE_COLOR" jdbcType="java.lang.String"
+			property="titleColor" />
+		<result column="TITLE_STRIKING" jdbcType="java.lang.Long"
+			property="titleStriking" />
+		
+		<result column="EDITOR" jdbcType="java.lang.String" property="editor" />
+		<result column="SOURCE" jdbcType="java.lang.String" property="source" />
+		<result column="STATE" jdbcType="java.lang.Long" property="state" />
+		<result column="AUDITOR" jdbcType="java.lang.String" property="auditor" />
+		<result column="BASE_BRIEF" jdbcType="java.lang.String"
+			property="baseBrief" />
+		<result column="IS_DELETE" jdbcType="java.lang.Long" property="isDelete" />
+		<result column="DELETOR" jdbcType="java.lang.String" property="deletor" />
+		<result column="MODIFY_DATE" jdbcType="java.util.Date"
+			property="modifyDate" />
+		<result column="HIT_COUNT" jdbcType="java.lang.Long" property="hitCount" />
+		<result column="IS_DELAY" jdbcType="java.lang.Long" property="isDelay" />
+		<result column="HAS_HTML" jdbcType="java.lang.Long" property="hasHtml" />
+		<result column="HAS_XML" jdbcType="java.lang.Long" property="hasXml" />
+		<result column="HAS_LUCENE" jdbcType="java.lang.Long" property="hasLucene" />
+		<result column="HTTP_HREF" jdbcType="java.lang.String"
+			property="httpHref" />
+		<result column="IMPORTANCE" jdbcType="java.lang.Long" property="importance" />
+		<result column="SOURCE_TYPE" jdbcType="java.lang.String"
+			property="sourceType" />
+		<result column="USER_TYPE" jdbcType="java.lang.Long" property="userType" />
+		<result column="DOC_TYPE" jdbcType="java.lang.Long" property="docType" />
+		<result column="SMS_BRIEF" jdbcType="java.lang.String"
+			property="smsBrief" />
+		<result column="SOURCE_DATE" jdbcType="java.util.Date"
+			property="sourceDate" />
+		<result column="CAT_ID" jdbcType="java.lang.Long" property="catId" />
+		<result column="BEGIN_DATE" jdbcType="java.util.Date" property="beginDate" />
+		<result column="END_DATE" jdbcType="java.util.Date" property="endDate" />
+		<result column="RELATION" jdbcType="java.lang.String" property="relation" />
+		<result column="COMPANY_GRADE" jdbcType="java.lang.String"
+			property="companyGrade" />
+		<result column="TRADE_GRADE" jdbcType="java.lang.String"
+			property="tradeGrade" /> -->
+	</resultMap>
+	<!-- 分页获取栏目信息 param：栏目id、每页展示条数、页码 -->
+	<select id="getAllInfoBySplit" resultMap="cmsDocSingleAttrResultMap" parameterClass="map">
+		select *
+		   from (select row_.*, rownum rownum_
+		           from (select DOC_ID,TITLE,UPLOAD_DATE 
+		                   from cms_doc_single_attr t
+		                  where state = 1
+		                    and is_delete = 0
+		                    and t.upload_date > sysdate - 5000
+		                    and (doc_id in (select doc_id
+		                                      from cms_doc_category_map
+		                                     where cat_id = (select cat_id from cms_category_basic_info where cat_name=#catname#)))
+		                  order by upload_date desc) row_
+		          where rownum <![CDATA[ <= ]]> #end#)
+		  where rownum_ <![CDATA[ >= ]]> #start# 
+	</select>
+
+	<select id="getInfoCenterCount" parameterClass="map" resultClass="int">
+		select count(1) from cms_doc_single_attr 
+			where state = 1
+				and is_delete = 0
+				and upload_date > sysdate - 5000
+				and (doc_id in (
+                       select doc_id from cms_doc_category_map where cat_id = (select cat_id from cms_category_basic_info where cat_name=#catname#)
+                       )
+                       )
+	</select>
+</sqlMap>

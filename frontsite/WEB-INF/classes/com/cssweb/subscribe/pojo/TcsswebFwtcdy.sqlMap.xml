@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebFwtcdy">
+<typeAlias alias="TcsswebFwtcdy" type="com.cssweb.subscribe.pojo.TcsswebFwtcdy"/>
+	<resultMap id="TcsswebFwtcdy" class="TcsswebFwtcdy">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="departmentCode" column="DEPARTMENT_CODE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="packageName" column="PACKAGE_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="introduce" column="INTRODUCE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="note" column="NOTE" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="packageUserLevel" column="PACKAGE_USER_LEVEL" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="sfclId" column="SFCL_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="sffs" column="SFFS" jdbcType="java.lang.Long" nullValue="0"/>
+	</resultMap>
+	
+	<select id="getTcsswebFwtcdyListFree" parameterClass="java.util.Map" resultMap = "TcsswebFwtcdy">
+		SELECT d.* FROM T_CSSWEB_FWTCDY d 
+		WHERE EXISTS(SELECT 1 from T_CSSWEB_FWTCDY_SFCL l where d.SFCL_ID=l.sfcl_id 
+		  <dynamic>
+				 <isNotNull property="commission" prepend="and">
+				   l.COMMISSION  &lt;= #commission#
+				 </isNotNull>
+			</dynamic>) ORDER BY d.id
+	</select>
+	 <select id="getTcsswebFwtcdyListAll" resultMap ="TcsswebFwtcdy">
+		SELECT d.* FROM T_CSSWEB_FWTCDY d ORDER BY d.id
+	</select>
+	
+	<select id="getTcsswebFwtcdyListAllByabc" parameterClass="java.util.Map" resultMap ="TcsswebFwtcdy">
+		SELECT d.* FROM T_CSSWEB_FWTCDY d 
+		WHERE EXISTS(SELECT 1 from T_CSSWEB_FWTCDY_SFCL l where d.SFCL_ID=l.sfcl_id 
+			  <dynamic>
+				 <isNotNull property="commission" prepend="and">
+				   l.COMMISSION  &gt; #commission#
+				 </isNotNull>
+			</dynamic>) ORDER BY d.id
+	</select>
+	
+	<select id="getTcsswebFwtcdyById" parameterClass="java.util.Map" resultMap = "TcsswebFwtcdy">
+		SELECT d.* FROM T_CSSWEB_FWTCDY d where id=#id#
+	</select>
+</sqlMap>

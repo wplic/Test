@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrUserApplyItem">
+				 
+	<typeAlias alias="HrUserApplyItem" type="com.cssweb.hr.pojo.HrUserApplyItem"/>
+								
+	<!--result map-->
+	<resultMap id="resultMap" class="HrUserApplyItem">
+		<result property="blogId" column="BLOGID" jdbcType="Long"/>
+		<result property="paperId" column="PAPERID" jdbcType="Long" nullValue="0"/>
+ 		<result property="userId" column="USER_ID" jdbcType="Long"/>
+ 		<result property="xscf" column="XSCF" jdbcType="String"/>
+ 		<result property="zqscjr" column="ZQSCJR" jdbcType="String" />
+ 		<result property="zqsckc" column="ZQSCKC" jdbcType="String" />
+ 		<result property="wfgjjhsy" column="WFGJJHSY" jdbcType="String" />
+ 		<result property="cjflg" column="CJFLG" jdbcType="String" />
+ 		<result property="sjsxjjbc" column="SJSXJJBC" jdbcType="String" />
+ 		<result property="czldgx" column="CZLDGX" jdbcType="String" />
+ 		<result property="gptzzh" column="GPTZZH" jdbcType="String" />
+ 		<result property="gdkh" column="GDKH" jdbcType="String" />
+ 		<result property="jdazr" column="JDAZR" jdbcType="String" />
+ 		<result property="reason" column="REASON" jdbcType="String" />
+ 		<result property="avocation" column="AVOCATION" jdbcType="String" />
+ 		<result property="advantage" column="ADVANTAGE" jdbcType="String" />
+ 		<result property="feebleness" column="FEEBLENESS" jdbcType="String" />
+ 		<result property="jyqsgx" column="JYQSGX" jdbcType="String" />
+ 		<result property="aboutqs" column="ABOUTQS" jdbcType="String" />
+ 		<result property="channel" column="CHANNEL" jdbcType="String" />
+ 		<result property="workreason" column="WORKREASON" jdbcType="String" />
+ 		<result property="otherthing" column="OTHERTHING" jdbcType="String" />
+ 		<result property="videoid" column="VIDEOID" jdbcType="Long" nullValue="0"/>
+ 		
+ 	</resultMap>
+ 	
+  	<insert id="insert" parameterClass="HrUserApplyItem">
+		<![CDATA[
+		 insert into T_HR_USER_APPLYITEM(BLOGID,PAPERID,USER_ID,XSCF,ZQSCJR,
+		 		ZQSCKC,WFGJJHSY,CJFLG,SJSXJJBC,CZLDGX,GPTZZH,GDKH,JDAZR,REASON,AVOCATION,
+		 		ADVANTAGE,FEEBLENESS,JYQSGX,ABOUTQS,CHANNEL,WORKREASON,OTHERTHING,VIDEOID)
+		 	 values(#blogId#,#paperId#,#userId#,#xscf#,#zqscjr#,#zqsckc#,#wfgjjhsy#,
+		 		#cjflg#,#sjsxjjbc#,#czldgx#,#gptzzh#,#gdkh#,
+		 		#jdazr#,#reason#,#avocation#,#advantage#,#feebleness#,
+		 		#jyqsgx#,#aboutqs#,#channel#,#workreason#,#otherthing#,#videoid#
+		 		)
+		]]>
+	</insert>
+	
+	<update id="update" parameterClass="HrUserApplyItem">
+		update T_HR_USER_APPLYITEM
+		 set 
+		 	XSCF=#xscf#,ZQSCJR=#zqscjr#,
+		 	ZQSCKC=#zqsckc#,WFGJJHSY=#wfgjjhsy#,CJFLG=#cjflg#,SJSXJJBC=#sjsxjjbc#,
+		 	CZLDGX=#czldgx#,GPTZZH=#gptzzh#,GDKH=#gdkh#,JDAZR=#jdazr#,REASON=#reason#,
+		 	AVOCATION=#avocation#,ADVANTAGE=#advantage#,FEEBLENESS=#feebleness#,
+		 	JYQSGX=#jyqsgx#,ABOUTQS=#aboutqs#,CHANNEL=#channel#,WORKREASON=#workreason#,
+		 	OTHERTHING=#otherthing#,VIDEOID=#videoid#
+		where USER_ID = #userId#
+	</update>
+	
+	<delete id="delete" parameterClass="Long">
+		delete from T_HR_USER_APPLYITEM where USER_ID = #userId#
+	</delete>
+	
+	<select id="getAllWorkList" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_APPLYITEM 
+		    where 
+		     user_id=#userId#
+   </select>
+   
+	<select id="getBeanById" parameterClass="Long" resultMap="resultMap">
+   		select 
+   			*
+		    from T_HR_USER_APPLYITEM 
+		    where 
+		     user_id=#userId#
+   </select>
+   
+    <update id="updatePicIdByUserId" parameterClass="map">
+   	update T_HR_USER_APPLYITEM
+		 set 
+		 	BLOGID=#picId#
+		where USER_ID = #userId#
+   </update>
+   
+    <update id="updatePaperIdByUserId" parameterClass="map">
+   	update T_HR_USER_APPLYITEM
+		 set 
+		 	PAPERID=#paperId#
+		where USER_ID = #userId#
+   </update>
+   
+   <update id="updatevideoIdByUserId" parameterClass="map">
+   	update T_HR_USER_APPLYITEM
+		 set 
+		 	VIDEOID=#videoid#
+		where USER_ID = #userId#
+   </update>
+</sqlMap>

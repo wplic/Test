@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+		
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.questionnaire.pojo.Questionnaire">
+
+	<typeAlias alias="Questionnaire" type="com.cssweb.questionnaire.pojo.Questionnaire"/>
+
+	<!--result map-->
+	<resultMap id="quesMap" class="Questionnaire">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="categoryid" column="CATEGORY_ID" jdbcType="Long"/>
+ 		<result property="title" column="TITLE" jdbcType="String"/>
+ 		<result property="items" column="ITEMS" jdbcType="Long"/>
+ 		<result property="content" column="CONTENT" jdbcType="String"/>
+ 		<result property="picid" column="PIC_ID" jdbcType="Long"/>
+ 		<result property="userlevel" column="USER_LEVEL" jdbcType="Long"/>
+ 		<result property="begindate" column="BEGIN_DATE" jdbcType="Date"/>
+ 		<result property="enddate" column="END_DATE" jdbcType="Date"/>
+ 		<result property="publishdate" column="PUBLISH_DATE" jdbcType="Date"/>
+ 		<result property="publishman" column="PUBLISH_MAN" jdbcType="String"/>
+ 		<result property="isaudit" column="IS_AUDIT" jdbcType="String"/>
+ 		<result property="islc" column="IS_LC" jdbcType="String"/>
+  	</resultMap>
+	<resultMap id="quesMap1" class="Questionnaire">
+ 		<result property="id" column="ID" jdbcType="Long"/>
+ 		<result property="categoryid" column="CATEGORY_ID" jdbcType="Long"/>
+ 		<result property="categorystr" column="NAME" jdbcType="String"/>
+ 		<result property="title" column="TITLE" jdbcType="String"/>
+ 		<result property="items" column="ITEMS" jdbcType="Long"/>
+ 		<result property="content" column="CONTENT" jdbcType="String"/>
+ 		<result property="picid" column="PIC_ID" jdbcType="Long"/>
+ 		<result property="userlevel" column="USER_LEVEL" jdbcType="Long"/>
+ 		<result property="begindate" column="BEGIN_DATE" jdbcType="Date"/>
+ 		<result property="enddate" column="END_DATE" jdbcType="Date"/>
+ 		<result property="publishdate" column="PUBLISH_DATE" jdbcType="Date"/>
+ 		<result property="publishman" column="PUBLISH_MAN" jdbcType="String"/>
+ 		<result property="isaudit" column="IS_AUDIT" jdbcType="String"/>
+ 		<result property="islc" column="IS_LC" jdbcType="String"/>
+ 		<result property="name" column="NAME" jdbcType="String"/>
+  	</resultMap>
+  <insert id="insert" parameterClass="Questionnaire">
+    insert into T_QUESTIONNAIRE_INFO (ID,CATEGORY_ID,TITLE,ITEMS,CONTENT,PIC_ID,USER_LEVEL,BEGIN_DATE,END_DATE,PUBLISH_DATE,PUBLISH_MAN,IS_AUDIT,IS_LC)
+    	values (#id#,#categoryid#,#title#,#items#,#content#,#picid#,#userlevel#,#begindate#,#enddate#,#publishdate#,#publishman#,#isaudit#,#islc#)
+  </insert>
+
+  <update id="update" parameterClass="Questionnaire">
+    update T_QUESTIONNAIRE_INFO 
+    	set CATEGORY_ID=#categoryid#,TITLE=#title#,ITEMS=#items#,CONTENT=#content#,PIC_ID=#picid#,USER_LEVEL=#userlevel#,
+    		BEGIN_DATE=#begindate#,END_DATE=#enddate#,PUBLISH_DATE=#publishdate#,PUBLISH_MAN=#publishman#,IS_AUDIT=#isaudit#,IS_LC=#islc#
+     where ID = #id#
+  </update>
+  
+  <update id="updatePicIdById" parameterClass="java.util.Map">
+    update T_QUESTIONNAIRE_INFO 
+    	set PIC_ID=#picid#
+     where ID = #id#
+  </update>
+  
+  <select id="getBasicInfoList" parameterClass="java.util.Map" resultMap = "quesMap">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getBasicInfoTotal" parameterClass="java.util.Map" resultClass="java.lang.Long" >
+    select count(*) from T_QUESTIONNAIRE_INFO  where category_id in (select ID from T_QUESTIONNAIRE_CATEGORY where  ISACCOUNT=0 )
+  </select>
+  
+  <select id="getBasicInfoTotal2" parameterClass="java.util.Map" resultClass="java.lang.Long" >
+    select count(*) from T_QUESTIONNAIRE_INFO  where category_id in (select ID from T_QUESTIONNAIRE_CATEGORY where  ISACCOUNT=0 and CODE='wjdt_zthd' )
+  </select>
+  
+  <select id="getAccountQuestTotal" parameterClass="java.util.Map" resultClass="java.lang.Long" >
+    select count(*) from T_QUESTIONNAIRE_INFO b  where b.category_id in (select ID from T_QUESTIONNAIRE_CATEGORY where  ISACCOUNT=1)
+  </select>
+  
+  <select id="getInfoById" parameterClass="java.lang.Long" resultMap="quesMap1" >
+    SELECT to1.*,ty.name FROM T_QUESTIONNAIRE_INFO to1,t_questionnaire_category ty where 
+    to1.CATEGORY_ID=ty.ID and
+    to1.ID=#id#
+  </select>  
+  
+  <select id="getShBasicInfoList" parameterClass="java.util.Map" resultMap="quesMap" >
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="getShBasicInfoTotal" parameterClass="java.util.Map" resultClass="java.lang.Long" >
+    SELECT count(*) FROM T_QUESTIONNAIRE_INFO where 0=0 
+  			<dynamic>
+				 <isNotEmpty property="shzt">
+				  and IS_AUDIT=#shzt# 
+				 </isNotEmpty>
+			</dynamic>
+  </select>
+  
+  <select id="getShBasicInfoTotal2" parameterClass="String" resultClass="java.lang.Long" >
+    SELECT count(*) FROM T_QUESTIONNAIRE_INFO where IS_AUDIT=$isaudit$ AND category_id in (select ID from T_QUESTIONNAIRE_CATEGORY where  ISACCOUNT=0 and CODE='wjdt_zthd' )
+  </select>
+  
+  <select id="getShAccountQuestTotal" parameterClass="String" resultClass="java.lang.Long" >
+    SELECT count(*) FROM T_QUESTIONNAIRE_INFO where IS_AUDIT=$isaudit$ AND category_id in (select ID from T_QUESTIONNAIRE_CATEGORY where  ISACCOUNT=1  and CODE='fxdjwj')
+  </select>
+  
+  <delete id="deleteById" parameterClass="String">
+    delete T_QUESTIONNAIRE_INFO where ID in ($value$)
+  </delete>
+  
+  <select id="getQuestionInfoByCateId" parameterClass="java.lang.Long" resultMap="quesMap"  >
+    select * from T_QUESTIONNAIRE_INFO where 
+    		to_char(begin_date,'yyyy-mm-dd') &lt;= to_char(sysdate,'yyyy-mm-dd')
+		   and to_char(sysdate,'yyyy-mm-dd')&lt;= to_char(end_date,'yyyy-mm-dd') 
+		   and category_id=#cateId# and IS_AUDIT='1' and IS_LC='0'
+  </select>
+  
+  <select id="getPreList" parameterClass="java.util.Map" resultMap="quesMap" >
+  	SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+ 		select t.*
+		  from t_questionnaire_info t
+		 where to_char(t.begin_date,'yyyy-mm-dd') &lt;= to_char(sysdate,'yyyy-mm-dd')
+		   and to_char(sysdate,'yyyy-mm-dd')&lt;= to_char(t.end_date,'yyyy-mm-dd') 
+		   and t.IS_AUDIT='1' and IS_LC ='0'
+		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  
+  <select id="searchQuestion" parameterClass="java.util.Map" resultMap="quesMap" >
+  		SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( 
+  		
+  			select * from t_questionnaire_info
+  			where  to_char(begin_date,'yyyy-mm-dd') &lt;= to_char(sysdate,'yyyy-mm-dd')
+				   and to_char(sysdate,'yyyy-mm-dd')&lt;= to_char(end_date,'yyyy-mm-dd') 
+				   and IS_AUDIT='1' and IS_LC='0'
+  			<dynamic>
+				 <isNotEmpty property="cate">
+				  and	CATEGORY_ID=#cate# 
+				 </isNotEmpty>
+				 <isNotEmpty property="name">
+				  and	TITLE like '%$name$%'
+				 </isNotEmpty>	
+				 <isNotEmpty property="endTime">
+				  and	to_char(PUBLISH_DATE,'yyyy-mm-dd') &lt;= #endTime#
+				 </isNotEmpty>
+				 <isNotEmpty property="startTime">
+				  and	to_char(PUBLISH_DATE,'yyyy-mm-dd') >= #startTime#
+				 </isNotEmpty>	
+				  <isNotEmpty property="anthor">
+				  and	PUBLISH_MAN like '%$anthor$%'
+				 </isNotEmpty>	
+			</dynamic>
+			order by PUBLISH_DATE desc
+  		)
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  <select id="searchQuestionCount" parameterClass="map" resultClass="java.lang.Integer" >
+    	select count(*) from t_questionnaire_info
+    	   where   to_char(begin_date,'yyyy-mm-dd') &lt;= to_char(sysdate,'yyyy-mm-dd')
+				   and to_char(sysdate,'yyyy-mm-dd')&lt;= to_char(end_date,'yyyy-mm-dd') 
+				   and IS_AUDIT='1'
+  			<dynamic>
+				  <isNotEmpty property="cate">
+				  and	CATEGORY_ID=#cate# 
+				 </isNotEmpty>
+				 <isNotEmpty property="name">
+				  and	TITLE like '%$name$%'
+				 </isNotEmpty>	
+				 <isNotEmpty property="endTime">
+				  and	to_char(PUBLISH_DATE,'yyyy-mm-dd') &lt;= #endTime#
+				 </isNotEmpty>
+				 <isNotEmpty property="startTime">
+				  and	to_char(PUBLISH_DATE,'yyyy-mm-dd') >= #startTime#
+				 </isNotEmpty>	
+				  <isNotEmpty property="anthor">
+				  and	PUBLISH_MAN like '%$anthor$%'
+				 </isNotEmpty>	
+			</dynamic>
+  </select>
+  <select id="getResultSum" parameterClass="String" resultClass="double" >
+  		select sum(option_value) from t_questionnaire_options where id in ($vaule$)
+  </select>
+  <select id="getLcQuestion" resultMap="quesMap1">
+  		 SELECT to1.*,ty.name FROM T_QUESTIONNAIRE_INFO to1,t_questionnaire_category ty 
+         where to1.CATEGORY_ID=ty.ID and to1.IS_LC ='1' and IS_AUDIT='1'
+         and to_char(begin_date,'yyyy-mm-dd') &lt;= to_char(sysdate,'yyyy-mm-dd')
+		 and to_char(sysdate,'yyyy-mm-dd')&lt;= to_char(end_date,'yyyy-mm-dd') 
+		 order by to1.publish_date desc
+  </select>
+</sqlMap>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<action-mappings>	
+		
+		<action path="/fundGsInfoAction"  scope="request" parameter="method" validate="false">
+				
+		</action>
+		<action path="/fundValueAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundMoneyValueAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/newFundInfoAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundCutInfoAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundSplitInfoAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundStopDealAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundInfoAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundAbateFareAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundFilterAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/fundAIPAction" scope="request" parameter="method" validate="false"></action>
+		<action path="/jsStockAction" scope="request" parameter="method" validate="false"></action>
+	</action-mappings>
+</struts-config>

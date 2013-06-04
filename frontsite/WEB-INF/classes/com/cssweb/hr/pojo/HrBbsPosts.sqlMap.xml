@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.hr.pojo.HrBbsPosts">
+	<typeAlias alias="HrBbsPosts" type="com.cssweb.hr.pojo.HrBbsPosts" />
+
+	<resultMap id="hrBbsPostsresultMap" class="HrBbsPosts">
+		<result property="postId" column="POST_ID" jdbcType="java.lang.Long"/>
+		<result property="postTitle" column="POST_TITLE" jdbcType="String"/>
+		<result property="postSection" column="POST_SECTION" jdbcType="String"/>
+		<result property="postAdminid" column="POST_ADMINID" jdbcType="java.lang.Long"/>
+		<result property="postAdminname" column="POST_ADMINNAME" jdbcType="java.lang.Long"/>
+		<result property="postCreatetime" column="POST_CREATETIME" jdbcType="java.util.Date"/>
+		<result property="postUpdatetime" column="POST_UPDATETIME" jdbcType="java.util.Date"/>
+		<result property="postContent" column="POST_CONTENT" jdbcType="String"/>
+		<result property="postTitlecolor" column="POST_TITLECOLOR" jdbcType="String"/>
+		<result property="postReadcount" column="POST_READCOUNT" jdbcType="java.lang.Integer"/>
+		<result property="postReplycount" column="POST_REPLYCOUNT" jdbcType="java.lang.Integer"/>
+		<result property="postIsread" column="POST_ISREAD" jdbcType="String"/>
+		<result property="postIspay" column="POST_ISPAY" jdbcType="String"/>
+		<result property="postIsexamine" column="POST_ISEXAMINE" jdbcType="String"/>
+		<result property="postExaminetime" column="POST_EXAMINETIME" jdbcType="java.util.Date"/>
+		<result property="postExamineadmin" column="POST_EXAMINEADMIN" jdbcType="java.lang.Long"/>
+		<result property="postIssticky" column="POST_ISSTICKY" jdbcType="String"/>
+		<result property="postStickytime" column="POST_STICKYTIME" jdbcType="java.util.Date"/>
+		<result property="postIslocked" column="POST_ISLOCKED" jdbcType="String"/>
+		<result property="fjId" column="FJ_ID" jdbcType="String"/>
+  	</resultMap>
+  	
+	<insert id="insert" parameterClass="HrBbsPosts">
+		<![CDATA[
+		 insert into T_HR_BBS_POSTS(POST_ID,
+		 							POST_TITLE,
+		 							POST_SECTION,
+		 							POST_ADMINID,
+		 							POST_ADMINNAME,
+		 							POST_CREATETIME,
+		 							POST_UPDATETIME,
+		 							POST_CONTENT,
+		 							POST_TITLECOLOR,
+		 							POST_READCOUNT,
+		 							POST_REPLYCOUNT,
+		 							POST_ISREAD,
+		 							POST_ISPAY,
+		 							POST_ISEXAMINE,
+		 							POST_EXAMINETIME,
+		 							POST_EXAMINEADMIN,
+		 							POST_ISSTICKY,
+		 							POST_STICKYTIME,
+		 							POST_ISLOCKED) 
+		 				values(SEQ_HR_BBS_POSTS.NEXTVAL,
+								#postTitle#,
+								#postSection#,
+								#postAdminid#,
+								#postAdminname#,
+								#postCreatetime#,
+								#postUpdatetime#,
+								#postContent#,
+								#postTitlecolor#,
+								#postReadcount#,
+								#postReplycount#,
+								#postIsread#,
+								#postIspay#,
+								#postIsexamine#,
+								#postExaminetime#,
+								#postExamineadmin#,
+								#postIssticky#,
+								#postStickytime#,
+								#postIslocked#)
+		]]>
+	</insert>
+	
+	<update id="updateByPrimaryKeySelective" parameterClass="HrBbsPosts">
+        update T_HR_BBS_POSTS
+        <dynamic prepend="set">
+            <isNotNull prepend="," property="postTitle">
+                POST_TITLE = #postTitle#
+            </isNotNull>
+            <isNotNull prepend="," property="postSection">
+                POST_SECTION = #postSection#
+            </isNotNull>
+            <isNotNull prepend="," property="postAdminid">
+                POST_ADMINID = #postAdminid#
+            </isNotNull>
+            <isNotNull prepend="," property="postAdminname">
+                POST_ADMINNAME = #postAdminname#
+            </isNotNull>
+            <isNotNull prepend="," property="postCreatetime">
+                POST_CREATETIME = #postCreatetime#
+            </isNotNull>
+            <isNotNull prepend="," property="postUpdatetime">
+                POST_UPDATETIME = #postUpdatetime#
+            </isNotNull>
+            <isNotNull prepend="," property="postContent">
+                POST_CONTENT = #postContent#
+            </isNotNull>
+            <isNotNull prepend="," property="postTitlecolor">
+                POST_TITLECOLOR = #postTitlecolor#
+            </isNotNull>
+            <isNotNull prepend="," property="postReadcount">
+                POST_READCOUNT = #postReadcount#
+            </isNotNull>
+            <isNotNull prepend="," property="postReplycount">
+                POST_REPLYCOUNT = #postReplycount#
+            </isNotNull>
+            <isNotNull prepend="," property="postIsread">
+                POST_ISREAD = #postIsread#
+            </isNotNull>
+            <isNotNull prepend="," property="postIspay">
+                POST_ISPAY = #postIspay#
+            </isNotNull>
+            <isNotNull prepend="," property="postIsexamine">
+                POST_ISEXAMINE = #postIsexamine#
+            </isNotNull>
+            <isNotNull prepend="," property="postExaminetime">
+                POST_EXAMINETIME = #postExaminetime#
+            </isNotNull>
+            <isNotNull prepend="," property="postExamineadmin">
+                POST_EXAMINEADMIN = #postExamineadmin#
+            </isNotNull>
+            <isNotNull prepend="," property="postIssticky">
+                POST_ISSTICKY = #postIssticky#
+            </isNotNull>
+            <isNotNull prepend="," property="postStickytime">
+                POST_STICKYTIME = #postStickytime#
+            </isNotNull>
+            <isNotNull prepend="," property="postIslocked">
+                POST_ISLOCKED = #postIslocked#
+            </isNotNull>
+        </dynamic>
+        where POST_ID = #postId#
+    </update>
+    
+    <update id="updateReadCount" parameterClass="map">
+    	update T_HR_BBS_POSTS set POST_READCOUNT = #readCount# where POST_ID = #postId#
+    </update>
+    
+    <update id="updateReplyCount" parameterClass="map">
+    	update T_HR_BBS_POSTS set POST_REPLYCOUNT = #replyCount# where POST_ID = #postId#
+    </update>
+	
+	<select id="getListBySplit" resultMap="hrBbsPostsresultMap" parameterClass="map">
+		select *
+		   from (select row_.*, rownum rownum_
+		           from (select POST_ID,POST_TITLE,POST_SECTION,POST_ADMINID,
+		           				POST_ADMINNAME,POST_CREATETIME,POST_UPDATETIME,
+		           				POST_CONTENT,POST_TITLECOLOR,POST_READCOUNT,
+		           				POST_REPLYCOUNT,POST_ISREAD,POST_ISPAY,
+		           				POST_ISEXAMINE,POST_EXAMINETIME,POST_EXAMINEADMIN,
+		           				POST_ISSTICKY,POST_STICKYTIME,POST_ISLOCKED,FJ_ID
+		                   from T_HR_BBS_POSTS t
+		                  where POST_ISLOCKED = 1
+		                    and POST_ISEXAMINE = 1
+		                    <dynamic>
+		                    	<isNotNull prepend="and" property="postSection">
+		                    		POST_SECTION = #postSection#
+		                    	</isNotNull>
+		                    </dynamic>
+		                  order by POST_ISSTICKY asc,POST_CREATETIME desc) row_
+		          where rownum <![CDATA[ <= ]]> #end#)
+		  where rownum_ <![CDATA[ > ]]> #start# 
+	</select>
+	
+	<select id="getListBySplitManager" resultMap="hrBbsPostsresultMap" parameterClass="map">
+		select *
+		   from (select row_.*, rownum rownum_
+		           from (select POST_ID,POST_TITLE,POST_SECTION,POST_ADMINID,
+		           				POST_ADMINNAME,POST_CREATETIME,POST_UPDATETIME,
+		           				POST_CONTENT,POST_TITLECOLOR,POST_READCOUNT,
+		           				POST_REPLYCOUNT,POST_ISREAD,POST_ISPAY,
+		           				POST_ISEXAMINE,POST_EXAMINETIME,POST_EXAMINEADMIN,
+		           				POST_ISSTICKY,POST_STICKYTIME,POST_ISLOCKED,FJ_ID
+		                   from T_HR_BBS_POSTS t
+		                  where 1 = 1
+		                    <dynamic>
+		                    	<isNotNull prepend="and" property="postSection">
+		                    		POST_SECTION = #postSection#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIsexamine">
+		                    		POST_ISEXAMINE = #postIsexamine#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIsread">
+		                    		POST_ISREAD = #postIsread#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIslocked">
+		                    		POST_ISLOCKED = #postIslocked#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postTitle">
+		                    		POST_TITLE like '%$postTitle$%'
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postContent">
+		                    		POST_CONTENT like '%$postContent$%'
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIspay">
+		                    		POST_ISPAY = #postIspay#
+		                    	</isNotNull>
+		                    </dynamic>
+		                  order by POST_ISEXAMINE asc,POST_CREATETIME desc) row_
+		          where rownum <![CDATA[ <= ]]> #end#)
+		  where rownum_ <![CDATA[ > ]]> #start# 
+	</select>
+	
+	<select id="getCountManager" resultClass="int" parameterClass="map">
+		select count(1) from T_HR_BBS_POSTS 
+						where 1 = 1
+		                    <dynamic>
+		                    	<isNotNull prepend="and" property="postSection">
+		                    		POST_SECTION = #postSection#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIsexamine">
+		                    		POST_ISEXAMINE = #postIsexamine#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIsread">
+		                    		POST_ISREAD = #postIsread#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIslocked">
+		                    		POST_ISLOCKED = #postIslocked#
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postTitle">
+		                    		POST_TITLE like '%$postTitle$%'
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postContent">
+		                    		POST_CONTENT like '%$postContent$%'
+		                    	</isNotNull>
+		                    	<isNotNull prepend="and" property="postIspay">
+		                    		POST_ISPAY = #postIspay#
+		                    	</isNotNull>
+		                    </dynamic>
+	</select>
+	
+	<select id="getCount" resultClass="int" parameterClass="map">
+		select count(1) from T_HR_BBS_POSTS 
+						where POST_ISLOCKED = 1
+		                    and POST_ISEXAMINE = 1
+		                    <dynamic>
+		                    	<isNotNull prepend="and" property="postSection">
+		                    		POST_SECTION = #postSection#
+		                    	</isNotNull>
+		                    </dynamic>
+	</select>
+	
+	<select id="getCurTodayCount" resultClass="int">
+		select count(1) from t_hr_bbs_posts
+			where post_createtime <![CDATA[ >= ]]> trunc(sysdate) 
+				and post_createtime <![CDATA[ < ]]> trunc(sysdate+1)
+	</select>
+	
+	<select id="getPostId" resultClass="long" parameterClass="map">
+		select post_id from t_hr_bbs_posts
+			where post_createtime = TO_DATE('$postCreatetime$', 'YYYY-MM-DD HH24:MI:SS')
+			  and POST_ADMINID = $userId$
+	</select>
+	
+	<update id="updateFjId" parameterClass="map">
+		update t_hr_bbs_posts set FJ_ID='$fjId$' where POST_ID=$postId$
+	</update>
+	
+	 <select id="getByPrimaryKey" resultMap="hrBbsPostsresultMap" parameterClass="long">
+        select POST_ID,
+		 	POST_TITLE,
+			POST_SECTION,
+			POST_ADMINID,
+			POST_ADMINNAME,
+			POST_CREATETIME,
+			POST_UPDATETIME,
+			POST_CONTENT,
+			POST_TITLECOLOR,
+			POST_READCOUNT,
+			POST_REPLYCOUNT,
+			POST_ISREAD,
+			POST_ISPAY,
+			POST_ISEXAMINE,
+			POST_EXAMINETIME,
+			POST_EXAMINEADMIN,
+			POST_ISSTICKY,
+			POST_STICKYTIME,
+			POST_ISLOCKED,
+			FJ_ID
+        from T_HR_BBS_POSTS
+        where POST_ID = #postId#
+    </select>
+    
+    <delete id="delete" parameterClass="long">
+    	delete from T_HR_BBS_POSTS where POST_ID = #postId#
+    </delete>
+</sqlMap>

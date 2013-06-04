@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="com.cssweb.subscribe.pojo.TcsswebFwtcdySfcl">	
+	<typeAlias alias="TcsswebFwtcdySfcl" type="com.cssweb.subscribe.pojo.TcsswebFwtcdySfcl" />
+	<resultMap id="TcsswebFwtcdySfclMap" class="TcsswebFwtcdySfcl">
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="departmentCode" column="department_code" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="packageLevel" column="package_level" jdbcType="java.lang.Integer"/>
+	    <result property="commission" column="commission" jdbcType="java.lang.Double"/>
+	    <result property="sfclId" column="sfcl_id" jdbcType="java.lang.Integer"/>
+	</resultMap>
+	
+	<select id="getTcsswebFwtcdySfclList" parameterClass="java.util.Map" resultMap = "TcsswebFwtcdySfclMap">
+		select * from t_cssweb_fwtcdy_sfcl t WHERE 1=1
+		  <dynamic>
+				 <isNotNull property="departmentCode" prepend="and">
+				   t.department_code  = #departmentCode#
+				 </isNotNull>
+				 <isNotNull property="packageLevel" prepend="and">
+				   t.package_level  = #packageLevel#
+				 </isNotNull>
+				 <isNotNull property="sfclId" prepend="and">
+				   t.sfcl_id  = #sfclId#
+				 </isNotNull>
+		  </dynamic>
+	</select>
+	
+	<select id="getTcsswebFwtcdySfclById" parameterClass="java.util.Map" resultMap = "TcsswebFwtcdySfclMap">
+		SELECT * FROM t_cssweb_fwtcdy_sfcl t WHERE t.id = #id#
+	</select>
+	
+	<resultMap id="TcsswebFwtcdySfclAndrcMap" class="TcsswebFwtcdySfcl">
+	    <result property="packageId" column="PACKAGE_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="packageName" column="PACKAGE_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="departmentCode" column="department_code" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="packageLevel" column="package_level" jdbcType="java.lang.Integer"/>
+	    <result property="commission" column="commission" jdbcType="java.lang.Double"/>
+	    <result property="sfclId" column="sfcl_id" jdbcType="java.lang.Integer"/>
+	</resultMap>
+	<select id="getFwtcdyAndFwtcdySfcl" resultMap="TcsswebFwtcdySfclAndrcMap">
+		SELECT d.id as PACKAGE_ID, d.PACKAGE_NAME,p.* FROM T_CSSWEB_FWTCDY d ,T_CSSWEB_FWTCDY_SFCL p where d.sfcl_id=p.sfcl_id
+	</select>
+	
+	<select id="getSumSfclByProductIdAndLevel" parameterClass="java.util.Map" resultClass="java.lang.Double">
+		SELECT nvl(sum(COMMISSION),0) FROM T_CSSWEB_FWCPDY_SFCL l 
+			WHERE 
+			EXISTS(SELECT 1 from T_CSSWEB_FWCPDY d where d.SFCL_ID=l.sfcl_id 
+			<dynamic>
+				 <isNotNull property="productIds" prepend="and">
+				   d.ID IN ($productIds$)
+				 </isNotNull>
+		   </dynamic>
+		   )
+		   <dynamic>
+				 <isNotNull property="productLevel" prepend="and">
+				   l.PRODUCT_LEVEL=#productLevel#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	
+	<resultMap id="TcsswebFwcpdySfclByabcSfcl" class="TcsswebFwtcdySfcl">
+	    <result property="packageId" column="PACKAGE_ID" jdbcType="java.lang.Long" nullValue="0"/>
+	    <result property="packageName" column="PACKAGE_NAME" jdbcType="java.lang.String" nullValue=""/>
+	    <result property="id" column="ID" jdbcType="java.lang.Long"/>
+	    <result property="yjlxx" column="YJLXX" jdbcType="java.lang.Double"/>
+	    <result property="yjlsx" column="YJLSX" jdbcType="java.lang.Double"/>
+	</resultMap>
+	
+	<select id="getTcsswebFwcpdySfclByabcSfcl" parameterClass="java.util.Map" resultMap ="TcsswebFwcpdySfclByabcSfcl">
+		 SELECT l.id ,t.id as PACKAGE_ID, t.PACKAGE_NAME,j.YJLXX,j.YJLSX FROM
+		 (SELECT d.id, d.package_name FROM T_CSSWEB_FWTCDY d 
+				WHERE EXISTS(SELECT 1 from T_CSSWEB_FWTCDY_SFCL l where d.SFCL_ID=l.sfcl_id 
+					  and
+						   l.COMMISSION  &gt; 0
+						 ) ORDER BY d.id) t,TFWCP_MFCL l ,TFWCP_YJLQJ j
+		where l.YJL=j.id <dynamic>
+						 <isNotNull property="commission" prepend="and">
+						   l.khjb  = #commission#
+						 </isNotNull>
+					</dynamic>
+		 and t.id= l.fwcp order by t.id,j.yjlxx
+	</select>
+	
+	<select id="getSumSfclByPackageIdAndLevel" parameterClass="java.util.Map" resultClass="java.lang.Double">
+		SELECT nvl(sum(COMMISSION),0) FROM T_CSSWEB_FWTCDY_SFCL l 
+			WHERE 
+			EXISTS(SELECT 1 from T_CSSWEB_FWTCDY d where d.SFCL_ID=l.sfcl_id 
+			<dynamic>
+				 <isNotNull property="packageIds" prepend="and">
+				   d.ID IN ($packageIds$)
+				 </isNotNull>
+		   </dynamic>
+		   )
+		   <dynamic>
+				 <isNotNull property="packageLevel" prepend="and">
+				   l.package_level=#packageLevel#
+				 </isNotNull>
+			</dynamic>
+			<dynamic>
+				 <isNotNull property="departmentCode" prepend="and">
+				   l.department_code  = #departmentCode#
+				 </isNotNull>
+			</dynamic>
+	</select>
+	
+	<select id="getSumKhhByAccount" parameterClass="java.lang.String" resultClass="java.lang.Double">
+	  SELECT b.JHYJL from T_CSSWEB_ZJZH_KHH a,TFX_KHH_QTQK b where a.khh= b.khh And a.zjzh=#value#
+	</select>
+	
+</sqlMap>

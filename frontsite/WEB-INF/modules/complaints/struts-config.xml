@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	
+	<action-mappings>	
+		<!--问题-->
+		<action path="/front/finance"  scope="request" parameter="method" validate="false">
+			<forward name="myAdvisory" path="/bussinesshall/movetradehall/myAdvisory.jsp"></forward>
+			<forward name="myAdvisoryzx" path="/bussinesshall/movetradehall/myAdvisory_zx.jsp"></forward>
+			<forward name="myTzAdvisory" path="/bussinesshall/movetradehall/myTzAdvisory.jsp"></forward>
+			<forward name="myTzAdvisoryzx" path="/bussinesshall/movetradehall/myTzAdvisory_zx.jsp"></forward>
+			<forward name="myJsAdvisory" path="/bussinesshall/movetradehall/myJsAdvisory.jsp"></forward>
+			<forward name="myJsAdvisoryzx" path="/bussinesshall/movetradehall/myJsAdvisory_zx.jsp"></forward>
+			<forward name="myYdAdvisory" path="/bussinesshall/movetradehall/mobileDeal_Advisory.jsp"></forward>
+			<forward name="myYdAdvisoryzx" path="/bussinesshall/movetradehall/mobileDeal_Advisory_zx.jsp"></forward>
+			<forward name="newmyAdvisory" path="/bussinesshall/movetradehall/newmyAdvisory.jsp"></forward>
+			<forward name="newmyAdvisoryzx" path="/bussinesshall/movetradehall/newmyAdvisory_zx.jsp"></forward>
+		</action>
+		<action path="/front/analyst"  scope="request" parameter="method" validate="false">
+			<forward name="frontlist" path="/bussinesshall/iptv/iptvAnalyst.jsp"></forward>															
+		</action>
+		<action path="/financeMsgAction" scope="request" parameter="method" validate="false">
+			<forward name="msgConnectList" path="/mobile/consulting.jsp"></forward>
+			<forward name="saveMsgConnect" path="/financeMsgAction.do?method=getFinanceMessageList" redirect="true"></forward>
+		</action>
+	</action-mappings>
+</struts-config>

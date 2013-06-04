@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts-config PUBLIC
+		"-//Apache Software Foundation//DTD Struts Configuration 1.2//EN"
+		"http://struts.apache.org/dtds/struts-config_1_2.dtd">
+<struts-config>
+	<form-beans>
+		<form-bean name="f10form" type="org.apache.struts.validator.LazyValidatorForm" />
+	</form-beans>
+	<action-mappings>
+		<action path="/baseInfo" scope="request" parameter="method" validate="false">
+			<forward name="stockList" path="/f10/stock/gszx_more.jsp"/>
+			<forward name="bondList" path="/f10/bond/gszx_more.jsp"/>
+			<forward name="detail" path="/f10/stock/f10Content.jsp"/>
+			<forward name="fundList" path="/f10/fund/fundF10Notice.jsp"/>
+ 		</action>
+
+		<!-- add by liujk -->
+		<action path="/f10" scope="request" parameter="method" validate="false" name="f10form">
+			<forward name="resultFund" path="/fund.do?method=getFundInfo"/>
+			<forward name="resultStock" path="/f10/stock/stockF10.jsp"/>
+			<forward name="resultBond" path="/f10/bond/bondF10.jsp"/>
+			<forward name="resultQZ" path="/f10/qz/warrantF10.jsp"/>
+ 		</action>
+ 		<!-- end -->
+	</action-mappings>
+</struts-config>

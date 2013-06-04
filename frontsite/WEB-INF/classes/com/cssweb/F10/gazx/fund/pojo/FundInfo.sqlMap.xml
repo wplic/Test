@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.F10.gazx.fund.pojo.FundInfo">
+
+	<typeAlias alias="f10fundInfo" type="com.cssweb.F10.gazx.fund.pojo.FundInfo" />
+
+	<!--result map-->
+	<resultMap id="fundInfoMap" class="f10fundInfo">
+	
+		<!-- 基金ID -->
+		<result property="fundId" column="T_JJZB_ID" jdbcType="java.lang.Long" />
+		
+		<!-- 基金代码 -->
+		<result property="fundCode" column="JJDM" jdbcType="java.lang.String" />
+
+		<!-- 基金名称 -->
+		<result property="fundName" column="JJMC" jdbcType="java.lang.String" />		
+
+		<!-- 基金简称 -->
+		<result property="fundShortName" column="JJJC" jdbcType="java.lang.String" />	
+
+		<!-- 基金简称拼音 -->
+		<result property="fundShortNamePY" column="GPJCPY" jdbcType="java.lang.String" />		
+		
+		<!-- 成立日期 -->
+		<result property="foundationDate" column="CLRQ" jdbcType="java.util.Date" />		
+
+		<!-- 基金类型	-->
+		<result property="fundType" column="JJLX" jdbcType="java.lang.String" />
+	
+		<!-- 基金总规模 -->
+		<result property="totalScale" column="JJZGM" jdbcType="java.lang.Long" />
+		
+		<!-- 存续期间 -->
+		<result property="duration" column="CXQJ" jdbcType="java.lang.String" />
+
+		<!-- 基金管理人 -->
+		<result property="fundCustodian" column="JJGLR_ID" jdbcType="java.lang.Long" />		
+
+		<!-- 基金托管人 -->
+		<result property="fundManager" column="JJTGR_ID" jdbcType="java.lang.Long" />	
+
+		<!-- 基金网站 -->
+		<result property="website" column="JJWZ" jdbcType="java.lang.String" />		
+		
+		<!-- 基金历史 -->
+		<result property="history" column="JJLS" jdbcType="java.lang.String" />		
+
+		<!-- 投资说明	-->
+		<result property="investDescription" column="TZSM" jdbcType="java.lang.String" />
+		
+		<!-- 是否为伞型 -->
+		<result property="isUmbrellaType" column="SFWSX" jdbcType="java.lang.String" />
+		
+		<!-- 伞系 -->
+		<result property="faction" column="SX" jdbcType="java.lang.String" />
+
+		<!-- 基准指数 -->
+		<result property="benchmarkIndex" column="JZZS" jdbcType="java.lang.Long" />
+
+		<!-- 投资对象 -->
+		<result property="investee" column="TZDX" jdbcType="java.lang.String" />	
+
+		<!-- 投资风格 -->
+		<result property="investmentStyle" column="TZFG" jdbcType="java.lang.String" />		
+		
+		<!-- 到期日期 -->
+		<result property="history" column="DQRQ" jdbcType="java.util.Date" />		
+
+		<!-- 类型转变方式	-->
+		<result property="changeMothod" column="LXZBFS" jdbcType="java.lang.String" />		
+		
+		<!-- 类型转变日期 -->
+		<result property="changeDate" column="LXZBRQ" jdbcType="java.util.Date" />		
+		
+		<!-- 是否QDII -->
+		<result property="isQDII" column="SFQDII" jdbcType="java.lang.String" />
+
+		<!-- 业绩比较基准 -->
+		<result property="benchmarking" column="YJBJJZ" jdbcType="java.lang.String" />		
+
+		<!-- 风险收益特征 -->
+		<result property="incomeFeatures" column="FXSYTZ" jdbcType="java.lang.String" />	
+
+		<!-- 资产配置 -->
+		<result property="assetAllocation" column="ZCPZ" jdbcType="java.lang.String" />		
+		
+		<!-- 投资范围 -->
+		<result property="investmentUniverse" column="TZFW" jdbcType="java.lang.String" />		
+
+		<!-- 投资理念	-->
+		<result property="investmentPhilosophy" column="TZLN" jdbcType="java.lang.String" />				
+		
+		<!-- 投资目标	-->
+		<result property="investmentObjective" column="TZMB" jdbcType="java.lang.String" />				
+		
+	</resultMap>
+	
+	<!-- 返回所有QDII基金信息 -->
+	<select id="getAllQDII" resultMap="fundInfoMap">
+		SELECT T_JJZB_ID, JJDM, JJMC, JJJC, GPJCPY, CLRQ, JJLX, JJZGM, CXQJ, JJGLR_ID, JJTGR_ID, JJWZ, JJLS, TZSM, SFWSX, SX, JZZS, TZDX, TZFG, DQRQ, LXZBFS, LXZBRQ, SFQDII, YJBJJZ, FXSYTZ, ZCPZ, TZFW, TZLN, TZMB FROM JJZB WHERE SCBZ = 0 AND GKBZ = 1 ORDER BY JJDM DESC
+	</select>
+	
+	<!-- 根据基金代码或基金简称或基金简称PY，返回基金基本信息 -->
+	<select id="getFundInfo" resultMap="fundInfoMap" parameterClass="String">
+		SELECT T_JJZB_ID, JJDM, JJMC, JJJC, GPJCPY, CLRQ, JJLX, JJZGM, CXQJ, JJGLR_ID, JJTGR_ID, JJWZ, JJLS, TZSM, SFWSX, SX, JZZS, TZDX, TZFG, DQRQ, LXZBFS, LXZBRQ, SFQDII, YJBJJZ, FXSYTZ, ZCPZ, TZFW, TZLN, TZMB FROM JJZB WHERE SCBZ = 0 AND GKBZ = 1
+		
+		<dynamic prepend="AND">
+		
+			<isParameterPresent prepend="OR">
+				JJDM = #value#
+			</isParameterPresent>
+			
+			<isParameterPresent prepend="OR">
+				JJJC = #value#
+			</isParameterPresent>
+
+			<isParameterPresent prepend="OR">
+				GPJCPY = #value#
+			</isParameterPresent>			
+			
+		</dynamic>
+		
+		AND ROWNUM = 1 
+	</select>
+	
+	<!-- 根据基金代码，返回基金基本信息 -->
+	<select id="getFundInfoByFundCode" resultMap="fundInfoMap" parameterClass="String">
+		SELECT T_JJZB_ID, JJDM, JJMC, JJJC, GPJCPY, CLRQ, JJLX, JJZGM, CXQJ, JJGLR_ID, JJTGR_ID, JJWZ, JJLS, TZSM, SFWSX, SX, JZZS, TZDX, TZFG, DQRQ, LXZBFS, LXZBRQ, SFQDII, YJBJJZ, FXSYTZ, ZCPZ, TZFW, TZLN, TZMB FROM JJZB WHERE JJDM = #fundCode# AND SCBZ = 0 AND GKBZ = 1
+	</select>	
+	
+	<!-- 根据基金简称，返回基金基本信息 -->
+	<select id="getFundInfoByFundShortName" resultMap="fundInfoMap" parameterClass="String">
+		SELECT T_JJZB_ID, JJDM, JJMC, JJJC, GPJCPY, CLRQ, JJLX, JJZGM, CXQJ, JJGLR_ID, JJTGR_ID, JJWZ, JJLS, TZSM, SFWSX, SX, JZZS, TZDX, TZFG, DQRQ, LXZBFS, LXZBRQ, SFQDII, YJBJJZ, FXSYTZ, ZCPZ, TZFW, TZLN, TZMB FROM JJZB WHERE JJJC = #fundShortName# AND SCBZ = 0 AND GKBZ = 1
+	</select>
+	
+	<!-- 根据基金简称拼音，返回基金基本信息 -->
+	<select id="getFundInfoByFundShortNamePY" resultMap="fundInfoMap" parameterClass="String">
+		SELECT T_JJZB_ID, JJDM, JJMC, JJJC, GPJCPY, CLRQ, JJLX, JJZGM, CXQJ, JJGLR_ID, JJTGR_ID, JJWZ, JJLS, TZSM, SFWSX, SX, JZZS, TZDX, TZFG, DQRQ, LXZBFS, LXZBRQ, SFQDII, YJBJJZ, FXSYTZ, ZCPZ, TZFW, TZLN, TZMB FROM JJZB WHERE  GPJCPY = #fundShortNamePY# AND SCBZ = 0 AND GKBZ = 1
+	</select>
+	
+	<!-- 根据基金ID，返回基金基本信息 -->
+	<select id="getFundInfoById" resultMap="fundInfoMap" parameterClass="Long">
+		SELECT T_JJZB_ID, JJDM, JJMC, JJJC, GPJCPY, CLRQ, JJLX, JJZGM, CXQJ, JJGLR_ID, JJTGR_ID, JJWZ, JJLS, TZSM, SFWSX, SX, JZZS, TZDX, TZFG, DQRQ, LXZBFS, LXZBRQ, SFQDII, YJBJJZ, FXSYTZ, ZCPZ, TZFW, TZLN, TZMB FROM JJZB WHERE T_JJZB_ID = #fundId# AND SCBZ = 0 AND GKBZ = 1
+	</select>
+	
+	<select id="pageQuery" resultMap="fundInfoMap" parameterClass="map">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+			select T_JJZB_ID, JJDM, JJMC, JJJC, GPJCPY, CLRQ, JJLX, JJZGM, CXQJ, JJGLR_ID, JJTGR_ID, JJWZ, JJLS, TZSM, SFWSX, SX, JZZS, TZDX, TZFG, DQRQ, LXZBFS, LXZBRQ, SFQDII, YJBJJZ, FXSYTZ, ZCPZ, TZFW, TZLN, TZMB 
+				FROM JJZB WHERE SCBZ = 0 AND GKBZ = 1
+			<dynamic>
+				<isNotNull prepend="and" property="fundCode">
+					JJDM  like '$fundCode$%'
+				</isNotNull>
+				<isNotNull prepend="and" property="fundSpell">
+					GPJCPY like '$fundSpell$%'
+				</isNotNull>
+				<isNotNull prepend="and" property="fundName">
+					Jjjc like '$fundName$%'
+				</isNotNull>
+			</dynamic>
+			order by JJDM
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+</sqlMap>

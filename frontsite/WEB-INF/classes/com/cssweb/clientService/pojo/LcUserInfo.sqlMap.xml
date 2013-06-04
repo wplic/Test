@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.clientService.pojo.LcUserInfo">
+
+	<typeAlias alias="LcUserInfo" type="com.cssweb.clientService.pojo.LcUserInfo" />
+
+	<resultMap id="LcUserInfoMap" class="LcUserInfo">
+		<result property="clientName" column="CLIENT_NAME" jdbcType="String"/>
+		<result property="idcard" column="ID_NO" jdbcType="String"/>
+		<result property="address" column="ADDRESS" jdbcType="String"/>
+		<result property="phone" column="PHONECODE" jdbcType="String"/>
+		<result property="zipcode" column="ZIPCODE" jdbcType="String"/>
+		<result property="fax" column="FAX" jdbcType="String"/>
+		<result property="email" column="E_MAIL" jdbcType="String"/>
+		<result property="openDate" column="OPEN_DATE" jdbcType="Long"/>
+		<result property="cancelDate" column="CANCEL_DATE" jdbcType="Long"/>
+		<result property="clientStatus" column="CLIENT_STATUS" jdbcType="String"/>
+	</resultMap>
+	
+	<resultMap id="passMap" class="LcUserInfo">
+		<result property="fundAccount" column="CLIENT_ID"  jdbcType="String" />
+        <result property="lcpass" column="LCPASS"  jdbcType="String"  />
+	</resultMap>
+	<resultMap id="LcUserInfoMap1" class="LcUserInfo">
+		<result property="fundAccount" column="fundAccount" jdbcType="String"/>
+		<result property="clientName" column="clientName" jdbcType="String"/>
+	</resultMap>
+	<select id="getTxAssetUserAll" parameterClass="java.util.Map" resultMap = "LcUserInfoMap1">
+		select a.client_id as fundAccount, a.CLIENT_NAME as clientName from HS_USER_CLIENT a  order by a.client_id asc
+  	</select>
+  	<select id="getTxAssetUserByFundAccount" parameterClass="String" resultMap = "LcUserInfoMap1">
+		select a.client_id as fundAccount, a.CLIENT_NAME as clientName from HS_USER_CLIENT a  
+		where client_id = #fundAccount#
+  	</select>
+  	
+	<update id="updateClientInfo" parameterClass="LcUserInfo">
+		update HS_USER_CLIENT set ID_NO='$idcard$' where client_id='$fundAccount$'
+	</update>
+	
+	<update id="updateClientOtherInfo" parameterClass="LcUserInfo">
+		update HS_USER_CLIENTINFO set ADDRESS='$address$',PHONECODE='$phone$',ZIPCODE='$zipcode$',FAX='$fax$',E_MAIL='$email$'
+		where client_id='$fundAccount$'
+	</update>
+	
+	<select id="getInfoByPass" parameterClass="java.util.HashMap" resultMap="passMap">
+    	select client_id,lcpass from HS_USER_CLIENT where client_id = #clientId#  and LCPASS=#lcpass# and rownum &lt; 2
+	</select>
+	
+	<select id="getInfoByNotPass" parameterClass="java.util.HashMap" resultMap="passMap">
+    	select client_id,lcpass from HS_USER_CLIENT where client_id = #clientId#  and rownum &lt; 2
+	</select>
+	
+	<update id="updateLcPass" parameterClass="LcUserInfo">
+		update HS_USER_CLIENT set LCPASS=#lcpass# where client_id=#fundAccount#
+	</update>
+	
+	<select id="getListByAccount" parameterClass="String" resultMap="LcUserInfoMap">
+    	select a.CLIENT_NAME,a.ID_NO,b.ADDRESS,b.PHONECODE,b.ZIPCODE,b.FAX,b.E_MAIL,a.OPEN_DATE,a.CANCEL_DATE,a.CLIENT_STATUS
+    	from HS_USER_CLIENT a,HS_USER_CLIENTINFO b 
+    	where a.client_id='$fundaccount$' and a.CLIENT_ID=b.CLIENT_ID
+	</select>
+		
+</sqlMap>

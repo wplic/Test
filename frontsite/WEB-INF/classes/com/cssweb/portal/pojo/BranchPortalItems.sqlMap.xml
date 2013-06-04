@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.cssweb.portal.pojo.BranchPortalItems">
+	<typeAlias alias="BranchPortalItems" type="com.cssweb.portal.pojo.BranchPortalItems"/>
+	<resultMap id="branchPortalItemsMap" class="BranchPortalItems">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="PARENT_ID" property="parentId" jdbcType="long"/>
+		<result column="ELEMENT_NAME" property="elementName" jdbcType="String"/>
+		<result column="TITLE" property="title" jdbcType="String"/>
+		<result column="COMMENTS" property="comments" jdbcType="int"/>
+		<result column="LAST_ITEM" property="lastItem" jdbcType="int"/>
+		<result column="ORDER_NUM" property="orderNum" jdbcType="int"/>
+		<result column="HEIGHT" property="height" jdbcType="int"/>
+		<result column="URL" property="url" jdbcType="String"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+		<result column="EXT5" property="ext5" jdbcType="String"/>
+		<result column="EXT6" property="ext6" jdbcType="String"/>
+		<result column="MAX_COUNT" property="maxCount" jdbcType="int"/>
+		<result column="HAS_SETUP" property="hasSetup" jdbcType="int"/>
+		<result column="SETUP_DIV_WIDTH" property="setupDivWidth" jdbcType="int"/>
+		<result column="SETUP_DIV_HEIGHT" property="setupDivHeight" jdbcType="int"/>
+		<result column="SETUP_DIV_TYPE" property="setupDivType" jdbcType="int"/>
+		<result column="SETUP_ACTION" property="setupAction" jdbcType="String"/>
+		<result column="SETUP_HAS_IMG_DIV" property="setupHasImgDiv" jdbcType="String"/>
+		<result column="DELETED" property="deleted" jdbcType="int"/>		
+	</resultMap>
+
+	<resultMap id="branchPortalItemsMapForHasExist" class="BranchPortalItems">
+		<result column="ID" property="id" jdbcType="long"/>
+		<result column="PARENT_ID" property="parentId" jdbcType="long"/>
+		<result column="ELEMENT_NAME" property="elementName" jdbcType="String"/>
+		<result column="TITLE" property="title" jdbcType="String"/>
+		<result column="COMMENTS" property="comments" jdbcType="int"/>
+		<result column="LAST_ITEM" property="lastItem" jdbcType="int"/>
+		<result column="ORDER_NUM" property="orderNum" jdbcType="int"/>
+		<result column="HEIGHT" property="height" jdbcType="int"/>
+		<result column="URL" property="url" jdbcType="String"/>
+		<result column="EXT1" property="ext1" jdbcType="String"/>
+		<result column="EXT2" property="ext2" jdbcType="String"/>
+		<result column="EXT3" property="ext3" jdbcType="String"/>
+		<result column="EXT4" property="ext4" jdbcType="String"/>
+		<result column="EXT5" property="ext5" jdbcType="String"/>
+		<result column="EXT6" property="ext6" jdbcType="String"/>
+		<result column="MAX_COUNT" property="maxCount" jdbcType="int"/>
+		<result column="HAS_SETUP" property="hasSetup" jdbcType="int"/>
+		<result column="SETUP_DIV_WIDTH" property="setupDivWidth" jdbcType="int"/>
+		<result column="SETUP_DIV_HEIGHT" property="setupDivHeight" jdbcType="int"/>
+		<result column="SETUP_DIV_TYPE" property="setupDivType" jdbcType="int"/>
+		<result column="SETUP_ACTION" property="setupAction" jdbcType="String"/>
+		<result column="SETUP_HAS_IMG_DIV" property="setupHasImgDiv" jdbcType="String"/>
+		<result column="DELETED" property="deleted" jdbcType="int"/>		
+		
+		<result column="HAS_EXIST" property="hasExist" jdbcType="int"/>
+	</resultMap>
+
+	<select id="select" resultMap="branchPortalItemsMap">
+		select
+		*
+		from BRANCH_PORTAL_ITEMS
+		WHERE DELETED = 0
+		<isParameterPresent prepend="and">
+			ID = #value#
+		</isParameterPresent>
+	</select>
+	
+	<insert id="insert" parameterClass="BranchPortalItems">
+		insert into BRANCH_PORTAL_ITEMS(ID,PARENT_ID,TITLE,COMMENTS,LAST_ITEM,ELEMENT_NAME,ORDER_NUM,URL,HEIGHT,EXT1,EXT2,EXT3,EXT4,EXT5,EXT6,MAX_COUNT,HAS_SETUP,SETUP_DIV_WIDTH,SETUP_DIV_HEIGHT,SETUP_DIV_TYPE,SETUP_ACTION,SETUP_HAS_IMG_DIV,DELETED) 
+					values(#id#,#parentId#,#title#,#comments#,#lastItem#,#elementName#,#orderNum#,#url#,#height#,#ext1#,#ext2#,#ext3#,#ext4#,#ext5#,#ext6#,#maxCount#,#hasSetup#,#setupDivWidth#,#setupDivHeight#,#setupDivType#,#setupAction#,#setupHasImgDiv#,#deleted#)
+	</insert>
+	<update id="update" parameterClass="BranchPortalItems">
+		update BRANCH_PORTAL_ITEMS set PARENT_ID = #parentId#,
+									   TITLE = #title#,
+									   COMMENTS = #comments#,
+									   LAST_ITEM = #lastItem#,
+									   ELEMENT_NAME = #elementName#,
+									   ORDER_NUM = #orderNum#,
+									   URL = #url#,
+									   HEIGHT = #height#,
+									   EXT1 = #ext1#,
+									   EXT2 = #ext2#,
+									   EXT3 = #ext3#,
+									   EXT4 = #ext4#,
+									   EXT5 = #ext5#,
+									   EXT6 = #ext6#,
+									   MAX_COUNT = #maxCount#,
+									   HAS_SETUP = #hasSetup#,
+									   SETUP_DIV_WIDTH = #setupDivWidth#,
+									   SETUP_DIV_HEIGHT = #setupDivHeight#,
+									   SETUP_DIV_TYPE = #setupDivType#,
+									   SETUP_ACTION = #setupAction#,
+									   SETUP_HAS_IMG_DIV = #setupHasImgDiv#,
+									   DELETED = #deleted#
+		where ID = #id#
+	</update>
+   <delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from BRANCH_PORTAL_ITEMS where ID = #value#
+	</delete>
+	
+	<select id="pageQuery" resultMap="branchPortalItemsMapForHasExist">
+		SELECT * FROM ( 
+			SELECT row_.*, ROWNUM rownum_ FROM ( 
+				select BRANCH_PORTAL_ITEMS.*,
+				nvl(
+				(select ID from BRANCH_PORTAL_ELEMENTS 
+				 where BRANCH_PORTAL_ELEMENTS.ELEMENT_NAME=BRANCH_PORTAL_ITEMS.ELEMENT_NAME 
+				 and BRANCH_PORTAL_ELEMENTS.PROVINCE_ID=#provinceId# 
+				 and ROWNUM &lt;= 1),0
+				) HAS_EXIST
+				from BRANCH_PORTAL_ITEMS
+				where DELETED = 0
+				<isNotNull property="equalsearch">
+					<isNotNull prepend="and" property="parentId">
+						PARENT_ID = #parentId#
+					</isNotNull>
+					<isNotNull prepend="and" property="orderNum">
+						ORDER_NUM != #orderNum#
+					</isNotNull>
+				</isNotNull>
+				<isNotNull property="notequalsearch">
+					<isNotNull prepend="and" property="parentId">
+						PARENT_ID != #parentId#
+					</isNotNull>
+					<isNotNull prepend="and" property="orderNum">
+						ORDER_NUM != #orderNum#
+					</isNotNull>
+				</isNotNull>
+		) row_ WHERE ROWNUM &lt;= #endNum# ) r WHERE
+		rownum_ &gt;#beginNum#
+	</select>
+	
+	<select id="pageCount" resultClass="int">
+		select count(*) from BRANCH_PORTAL_ITEMS
+		where DELETED = 0
+		<isNotNull property="equalsearch">
+			<isNotNull prepend="and" property="parentId">
+				PARENT_ID = #parentId#
+			</isNotNull>
+			<isNotNull prepend="and" property="orderNum">
+				ORDER_NUM != #orderNum#
+			</isNotNull>
+		</isNotNull>
+		<isNotNull property="notequalsearch">
+			<isNotNull prepend="and" property="parentId">
+				PARENT_ID != #parentId#
+			</isNotNull>
+			<isNotNull prepend="and" property="orderNum">
+				ORDER_NUM != #orderNum#
+			</isNotNull>
+		</isNotNull>
+	</select>
+	
+	<select id="selectByMap" resultMap="branchPortalItemsMapForHasExist">
+		select
+		BRANCH_PORTAL_ITEMS.*,
+		nvl(
+			(select count(*) from BRANCH_PORTAL_ELEMENTS 
+			 where substr(BRANCH_PORTAL_ELEMENTS.ELEMENT_NAME,1,length(BRANCH_PORTAL_ELEMENTS.ELEMENT_NAME)-2)=BRANCH_PORTAL_ITEMS.ELEMENT_NAME 
+			 and BRANCH_PORTAL_ELEMENTS.PROVINCE_ID=#provinceId#
+			 and BRANCH_PORTAL_ELEMENTS.STATE=0),0
+			) HAS_EXIST
+		from BRANCH_PORTAL_ITEMS
+		where DELETED = 0
+		<isNotNull property="findUniqueBy">
+			<isNotNull prepend="and" property="elementName">
+				ELEMENT_NAME = #elementName#
+			</isNotNull>
+		</isNotNull>
+
+		<isNotNull property="findBy">
+			<isNotNull prepend="and" property="parentId">
+				PARENT_ID = #parentId#
+			</isNotNull>
+			<isNotNull prepend="and" property="lastItem">
+				LAST_ITEM = #lastItem#
+			</isNotNull>
+			<isEqual prepend="and" property="template" compareValue="2">
+				ORDER_NUM != 3
+			</isEqual>
+			<isNotEqual prepend="and" property="provinceId" compareValue="1100">
+				ELEMENT_NAME!='xxfb_yybtz_2'
+			</isNotEqual>
+		</isNotNull>
+		order by id
+	</select>
+	
+</sqlMap>

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.video.pojo.TvideoCategory">
+
+	<typeAlias alias="TvideoCategory" type="com.cssweb.video.pojo.TvideoCategory" />
+
+	<resultMap id="TvideoCategory" class="TvideoCategory">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="boardId" column="BOARD_ID" jdbcType="Long" nullValue="0"/>
+		<result property="code" column="CODE" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String" />
+	    <result property="intro" column="INTRO" jdbcType="String" />
+	    <result property="orderNum" column="ORDER_NUM" jdbcType="Long" nullValue="0"/>
+	    <result property="picId" column="PIC_ID" jdbcType="Long" nullValue="0"/>
+	    <result property="isfix" column="ISFIX" jdbcType="String"/>
+	</resultMap>
+	
+    <resultMap id="TvideoCategoryB" class="TvideoCategory">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="boardId" column="BOARD_ID" jdbcType="Long"/>
+		<result property="code" column="CODE" jdbcType="String"/>
+		<result property="name" column="NAME" jdbcType="String" />
+	    <result property="intro" column="INTRO" jdbcType="String" />
+	    <result property="orderNum" column="ORDER_NUM" jdbcType="Long" />
+	    <result property="picId" column="PIC_ID" jdbcType="Long" nullValue="0"/>
+	    <result property="videoBoardName" column="VIDEO_BOARD_NAME" jdbcType="String"/>
+	     <result property="isfix" column="ISFIX" jdbcType="String"/>
+	</resultMap>
+	<insert id="insertTvideoCategory" parameterClass="TvideoCategory">
+		INSERT into T_VIDEO_CATEGORY (ID, BOARD_ID, CODE, NAME, INTRO, ISFIX,ORDER_NUM) VALUES (#id#,#boardId#,#code#,#name#, #intro#,#isfix#, #orderNum#)
+	</insert>
+	
+	<update id="upTvideoCategory" parameterClass="TvideoCategory">
+		update T_VIDEO_CATEGORY set BOARD_ID = #boardId#, CODE = #code#, NAME = #name#, INTRO = #intro#,ISFIX = #isfix#, ORDER_NUM = #orderNum# where id=#id#
+	</update>
+
+	<update id="upCategoryPicIdById" parameterClass="TvideoCategory">
+		update T_VIDEO_CATEGORY set PIC_ID = #picId# where id=#id#
+	</update>
+	<delete id="deleteTvideoCategorys" parameterClass="String">
+		delete from T_VIDEO_CATEGORY where ID in ($value$)
+	</delete>
+	
+	<delete id="deleteTvideoCategoryById" parameterClass="Long">
+		delete from T_VIDEO_CATEGORY where id = #value#
+	</delete>
+	
+	<delete id="deleteTvideoCategoryByBoardId" parameterClass="Long">
+		delete from T_VIDEO_CATEGORY where BOARD_ID = #value#
+	</delete>
+	
+	<select id="getTvideoCategoryAll" resultMap="TvideoCategory">
+		select * from T_VIDEO_CATEGORY ORDER BY ORDER_NUM
+	</select>
+
+	<select id="getTvideoCategoryById" parameterClass="Long" resultMap="TvideoCategory">
+		select * from T_VIDEO_CATEGORY where id= #id#
+	</select>	
+
+	<select id="getAllCount" resultClass="java.lang.Integer">
+		select count(*) from T_VIDEO_CATEGORY 
+	</select>
+	
+	  <select id="getByTvideoCategoryMap" parameterClass="java.util.Map" resultMap = "TvideoCategoryB">
+    SELECT * FROM ( SELECT row_.*, ROWNUM rownum_ FROM ( $sql$ )
+		row_ WHERE ROWNUM &lt;= #end# ) WHERE rownum_ &gt;#begin#
+  </select>
+  	
+  	<select id="getByTvideoCategoryMapCount" resultClass="java.lang.Integer">
+		$sql$
+	</select>
+	
+	<select id="getTvideoCategoryByBoardId" parameterClass="Long" resultMap="TvideoCategory">
+		select * from T_VIDEO_CATEGORY where BOARD_ID= #boardId# ORDER BY ORDER_NUM
+	</select>
+	
+	<select id="getTvideoCategoryByBoardCodes" parameterClass="String" resultMap="TvideoCategory">
+		select t.* from t_video_category t,t_video_board d where d.id=t.board_id and d.code in ($str$)
+	</select>
+	<select id="getTvideoCategoryByCodes" parameterClass="String" resultMap="TvideoCategory">
+		select * from t_video_category t where t.code =#code#
+	</select>
+</sqlMap>

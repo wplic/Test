@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="com.fortuneage.sunnyPOF.pojo.SunnyCpcgwd">
+	<typeAlias alias="SunnyCpcgwd" type="com.fortuneage.sunnyPOF.pojo.SunnyCpcgwd"/>
+
+	
+	<select id="getSunnyCpcgwdBySqltoPage" resultClass="SunnyCpcgwd" parameterClass="java.util.Map">
+		<![CDATA[
+		 	select
+			  *
+			from
+			    (
+			    select 
+			    	temp.*,rownum rn
+			    from
+			        (
+			        	$sql$	
+			        ) temp
+			    where rownum <=#end#
+			    )
+			where rn>=#begin#
+		 ]]> 
+	</select>
+	
+	<select id="getDowns" resultClass="SunnyCpcgwd" parameterClass="java.util.Map">
+		SELECT ID,PROD_CODE,WDLB,TITLE,CONTENT,FJ,FBR,FBRQ FROM SUNNY_CPXGWD WHERE id=#id#
+	</select>
+	<!-- 获取信息披露用户的下载总数 -->
+	
+	<select id="getSunnyCpcgwdCountByCustNo" resultClass="java.lang.Integer" parameterClass="java.lang.Integer">
+		select count(*) from SUNNY_CPXGWD  where prod_code in (SELECT FUNDCODE  FROM sunny_custshare_history  where custno=#custno#)
+	</select>
+
+</sqlMap>

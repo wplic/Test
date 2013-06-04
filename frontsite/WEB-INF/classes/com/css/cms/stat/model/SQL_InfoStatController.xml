@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="GB2312"?>
+<sql>
+<com.css.cms.stat.model.InfoStatController>
+	<statByUser>
+		select userName,sum(editor) as editCount,sum(auditor) as auditCount,sum(deletor) as deleteCount from 
+		(
+			select /*+index( cms_doc_single_attr IDX_EDITOR)*/ editor as userName,count(editor) as editor,0 as auditor,0 as deletor 
+			from cms_doc_single_attr 
+			where editor != 'System' and (upload_date between to_date(<param type="VARCHAR">BEGIN_DATE</param>,'YYYY-MM-DD') and to_date(<param type="VARCHAR">END_DATE</param>,'YYYY-MM-DD')) 
+			group by editor
+		union all
+			select /*+index( cms_doc_single_attr IDX_AUDITOR)*/ auditor as userName,0 editor,count(auditor) as auditor,0 as deletor 
+			from cms_doc_single_attr 
+			where auditor != 'System' and (upload_date between to_date(<param type="VARCHAR">BEGIN_DATE</param>,'YYYY-MM-DD') and to_date(<param type="VARCHAR">END_DATE</param>,'YYYY-MM-DD')) 
+			group by auditor
+		union all
+			select /*+index( cms_doc_single_attr IDX_DELETOR)*/ deletor as userName,0 as editor,0 as auditor,count(deletor) as deletor 
+			from cms_doc_single_attr 
+			where deletor != 'System' and (upload_date between to_date(<param type="VARCHAR">BEGIN_DATE</param>,'YYYY-MM-DD') and to_date(<param type="VARCHAR">END_DATE</param>,'YYYY-MM-DD')) 
+			group by deletor
+		) t 
+		group by userName
+	</statByUser>
+	<statByCat>
+		select 
+			b.cat_id ,
+			count(1) as editCount,
+			sum(decode(a.is_delete,0,decode(a.state,1,1,0),0)) as auditCount,
+			sum(decode(a.is_delete,0,decode(a.state,1,0,1),0)) as unAuditCount,
+			sum(decode(a.is_delete,1,1,0)) as deletecount
+		from  cms_doc_single_attr a,cms_doc_category_map b
+		where  a.doc_id=b.doc_id and (a.upload_date between to_date(<param type="VARCHAR">BEGIN_DATE</param>,'YYYY-MM-DD') and to_date(<param type="VARCHAR">END_DATE</param>,'YYYY-MM-DD')) 
+		group  by b.cat_id
+	</statByCat>
+	
+	<statByUserCat>
+		select cat_id, sum(editor) as editCount,sum(auditor) as auditCount,sum(deletor) as deleteCount from 
+		(
+			select b.cat_id as cat_id ,count(a.editor) as editor,0 as auditor,0 as deletor 
+			from cms_doc_single_attr a,cms_doc_category_map b 
+			where a.doc_id=b.doc_id and a.editor = <param type="VARCHAR">USER_NAME</param> and (a.upload_date between to_date(<param type="VARCHAR">BEGIN_DATE</param>,'YYYY-MM-DD') and to_date(<param type="VARCHAR">END_DATE</param>,'YYYY-MM-DD')) 
+			group by b.cat_id
+		union all
+			select b.cat_id as cat_id ,0 editor,count(a.auditor) as auditor,0 as deletor 
+			from cms_doc_single_attr a,cms_doc_category_map b 
+			where a.doc_id=b.doc_id and a.auditor = <param type="VARCHAR">USER_NAME</param> and (a.upload_date between to_date(<param type="VARCHAR">BEGIN_DATE</param>,'YYYY-MM-DD') and to_date(<param type="VARCHAR">END_DATE</param>,'YYYY-MM-DD')) 
+			group by b.cat_id
+		union all
+			select b.cat_id as cat_id ,0 as editor,0 as auditor,count(a.deletor) as deletor 
+			from cms_doc_single_attr a,cms_doc_category_map b 
+			where a.doc_id=b.doc_id and a.deletor = <param type="VARCHAR">USER_NAME</param> and (a.upload_date between to_date(<param type="VARCHAR">BEGIN_DATE</param>,'YYYY-MM-DD') and to_date(<param type="VARCHAR">END_DATE</param>,'YYYY-MM-DD')) 
+			group by b.cat_id
+		) t 
+		where cat_id != -1
+		group by cat_id
+	</statByUserCat>
+</com.css.cms.stat.model.InfoStatController>
+</sql>

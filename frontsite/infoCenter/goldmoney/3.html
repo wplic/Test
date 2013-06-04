@@ -1,0 +1,408 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>无标题文档</title>
+<link href="css/basic.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="js/topmenu.js"></script>
+</head>
+
+<body>
+
+
+<div class="body_bg">
+<!--页头-->
+<div style="background:center top url(pic/topbg.jpg) no-repeat;width:970px;margin:0 auto;">
+<table width="100%" cellspacing="0" cellpadding="0" border="0">
+<tbody>
+<tr>
+	<td valign="top"><div class="gflogo fl"><a title="广发20周年" href="/default.html"></a></div></td>  
+	<td></td>
+	<td valign="top">
+		<table align="right" class="mt6">
+		<tbody>
+			<tr>
+				<td align="right">
+					<a title="新浪微博" target="_Blank" href="http://weibo.com/gfsecurities/">
+					<img src="http://20.gf.com.cn/gf20/pic/index/weibo.gif"></a>
+					<a title="腾讯微博" target="_Blank" href="http://t.qq.com/gfsecurities">
+					<img src="http://20.gf.com.cn/gf20/pic/index/weibo1.gif"></a>
+				</td>
+				<td align="right" colspan="3">
+					<p class="tr par15">
+						<select onchange="changeLoginLj();" class="font_a8" id="selectLj" name="selectLj">
+						<option value="#">子公司网站</option>
+						<option value="http://www.gfgroup.com.hk/index.shtml">广发控股(香港)</option>
+						<option value="http://www.gfqh.com.cn/">广发期货</option>
+						<option value="http://www.gffunds.com.cn/">广发基金</option>
+						<option value="http://www.gfinvestment.cn">广发信德</option>
+						</select>
+					</p>
+				</td>
+				<td width="50" align="right"><a href="/default.html"><img src="pic/returnlogo.jpg"></a></td>
+				<td width="50">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5">&nbsp;</td>
+			</tr>
+			<tr>
+				<td colspan="5">
+					<table width="467" cellspacing="0" cellpadding="0" border="0" align="center">
+					<tbody>
+						<tr>
+							<td width="50"></td>
+							<td>
+							<p class="tr pa5">
+							<a target="_Blank" class="par20" href="http://thanks.gf.com.cn"><img src="pic/123X31.gif"></a> 
+							<a target="_Blank" class="par20" href="/gyjj/index.jsp"><img src="pic/tlink1.png"></a> 
+							<a target="_Blank" href="http://20.gf.com.cn/gf20/index.xhtml"><img src="pic/tlink2.png"></a></p>
+							</td>
+							<td align="center"></td>
+						</tr>
+					</tbody>
+					</table>
+				</td>
+			</tr>
+		</tbody>
+		</table>
+	</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="clear"></div>
+<table width="921" cellspacing="0" cellpadding="0" border="0" class="topmenu">
+<tbody>
+	<tr>
+		<td align="left"><img src="/pic/menu_bgl.jpg"></td>
+		<td onmouseover="selectMenu(this.id)" id="index" class="font14 white topmenu_a"><a href="/index.html">首  页</a></td>
+		<td width="5"><img src="/pic/menu_line.jpg"></td>
+		<td onmouseover="selectMenu(this.id)" id="wsyyt" class="font14 white topmenu_a"><a onclick="openMain();" href="#">网上营业厅</a></td>
+		<td width="5"><img src="/pic/menu_line.jpg"></td>
+		<td onmouseover="selectMenu(this.id)" id="jgj" class="font14 white topmenu_a"><a href="/golden/index.jsp">金管家服务</a></td>
+		<td width="5"><img src="/pic/menu_line.jpg"></td>
+		<td onmouseover="selectMenu(this.id)" id="zxzx" class="font14 white topmenu_a"><a href="/infoCenter/index.html">资讯中心</a></td>
+		<td width="5"><img src="/pic/menu_line.jpg"></td>
+		<td onmouseover="selectMenu(this.id)" id="tzzyd" class="font14 white topmenu_hover"><a href="/investorEdu/investorSchool.html">投资者园地</a></td>
+		<td width="5"><img src="/pic/menu_line.jpg"></td>
+		<td onmouseover="selectMenu(this.id)" id="grgf" class="font14 white topmenu_a"><a href="/branches/index.html">分支机构</a></td>
+		<td align="right"><img src="/pic/menu_bgr.jpg"></td>
+	</tr>
+</tbody>
+</table>
+
+
+<div align="center" class="topsubmenu">
+       <table cellspacing="0" cellpadding="0" border="0" align="center" style="display: none;" id="index_con">
+          <tbody><tr>
+            <td>&nbsp;</td>
+          </tr>
+        </tbody></table>
+
+	    <table cellspacing="0" cellpadding="0" border="0" align="center" style="display: block;" id="wsyyt_con">
+          <tbody><tr>
+            <td>
+        	<ul>
+                <li class="al"><a onclick="javascript:window.open('https://119.145.72.232/ECMMS/www/comjsp/ecmms/custorder/onlineorder/OnlineCustOrder.do');" href="#" id="yykh">预约开户</a></li>
+                <li class="al"><a href="###" id="jygg">交易公告</a></li>
+				<li class="al"><a onclick="javascript:window.open('http://flash.gf.com.cn/');" href="#" id="ymhq">页面行情</a></li>
+                <li class="al"><a href="###" id="rjxz">软件下载</a></li>
+                <li class="al"><a onclick="javascript:window.open('https://121.14.6.135/');" href="#">页面交易</a></li>
+                <li class="al"><a href="###" id="iptvsp">财富频道</a></li>
+                <li class="al"><a href="###" id="gfydjyt">金管家手机证券</a></li>
+                <li class="al"><a href="###" id="qwwqw">95575</a></li>
+                <li class="al"><a href="###" id="wdlczx">我的理财中心</a></li>       
+            </ul>
+            </td>
+          </tr>
+        </tbody></table>
+        
+        <table cellspacing="0" cellpadding="0" border="0" align="center" style="display: none;" id="jgj_con">
+          <tbody><tr>
+            <td>
+				<ul>
+					<li class="al"><a href="###" id="cjh">金管家资讯套餐介绍</a></li>
+					<li class="al"><a href="###" id="zzfwdypr">自助定阅首页</a>
+					<!-- 
+					</li> 
+					<li class="al"><a id="cjh" href="/golden/goldenCjh.html">财经汇</a></li>
+					<li class="al"><a id="czh" href="/golden/goldenCzh.html">财智汇</a></li>
+					<li class="al"><a id="cfh" href="/golden/goldenCfh.html">财富汇</a></li>  
+					--> 
+					</li>
+				</ul>
+            </td>
+          </tr>
+        </tbody></table>
+        
+        <table cellspacing="0" cellpadding="0" border="0" align="center" style="display: none;" id="zxzx_con">
+        <tbody>
+		<tr>
+            <td>
+        	<ul>
+                <li class="al"><a href="###" id="gfsd">广发视点</a></li>
+                <li class="al"><a href="###" id="xw">新闻</a></li>
+                <li class="al"><a href="###" id="gp">股票</a></li>
+                <li class="al"><a href="###" id="xg">新股</a></li>
+                <li class="al"><a href="###" id="jj">基金</a></li>
+                <li class="al"><a href="###" id="qz">权证</a></li>
+                <li class="al"><a href="###" id="zxb">中小板</a></li>
+                <li class="al"><a href="###" id="sb">三板</a></li>
+                <li class="al"><a href="###" id="zq">债券</a></li>
+                <li class="al"><a href="###" id="bg">B股</a></li>
+                <li class="al"><a href="###" id="gg">港股</a></li>
+                <li class="al"><a href="###" id="qh">期货 </a></li>
+                <li class="al"><a href="###" id="wh">外汇</a></li>
+    		</ul>
+            </td>
+          </tr>
+        </tbody>
+		</table>
+        
+        <table cellspacing="0" cellpadding="0" border="0" align="center" style="display: none;" id="tzzyd_con">
+        <tbody>
+			<tr>
+            <td>
+        	<ul>
+                <li class="al"><a href="###" id="tzzydzxdt">最新公告</a></li>
+                <li class="al"><a href="###" id="tzschool">投资教育学院</a></li>
+                <li class="al"><a href="###" id="zcfg">政策法规</a></li>
+                <li class="al"><a href="###" id="spxx">视频学习</a></li>      
+            </ul>
+            </td>
+           </tr>
+        </tbody>
+		</table>
+        
+		<table cellspacing="0" cellpadding="0" border="0" align="center" style="display: none;" id="grgf_con">
+		<tbody>
+			<tr>
+				<td>
+				<ul>
+					<li class="al"><a href="###" id="jjywjs">经纪业务介绍</a></li>
+					<li class="al"><a href="###" id="jjywcredit">经纪业务荣誉</a></li>
+					<li class="al"><a href="###" id="khfwtx">客户服务体系</a></li>
+					<li class="al"><a href="###" id="cpyfw">产品与服务</a></li>
+					<li class="al"><a href="###" id="yywd">营业网点</a></li>     
+					<li class="al"><a href="###" id="mgrInfo">业务人员执业资格信息查询</a></li>
+				</ul>
+				</td>
+			</tr>
+		</tbody>
+		</table>         
+
+</div>
+<!--页头end-->
+
+<!--主体-->
+	<div class="pbd">
+	<div class="pt-side">
+		<div class="mod mod-jtlxlcc mod01">
+			<div class="mhd"><h2>金天利系列产品</h2></div>
+			<div class="mbd">
+				<ul class="discli01">
+					<li><a href="###">金天利</a></li>
+					<li><a href="###">金天利</a></li>
+					<li><a href="###">金天利</a></li>
+					<li><a href="###">金天利</a></li>
+					<li><a href="###">金天利</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="mod mod01">
+			<div class="mhd"><h2>客户服务</h2></div>
+			<div class="mbd">
+				<ul class="discli01">
+					<li><a href="###">金天利</a></li>
+					<li><a href="###">金天利</a></li>
+					<li><a href="###">金天利</a></li>
+				</ul>
+			</div>
+		</div>
+		<div class="mod mod-fxts mod01">
+			<div class="mhd"><h2>风险提示</h2></div>
+			<div class="mbd">
+				<p>&nbsp;&nbsp;&nbsp;&nbsp;金天利产品作为一种债券质押式报价回购业务，有其自身的特性和风险，本网站上的宣传介绍内容仅供投资者参考，并非我公司金天利产品的法律文件。投资者做出投资决策前，应认真阅读《国信证券股份有限公司金天利债券质押式报价回购业务风险揭示书》和《国信证券股份有限公司金天利债券质押式报价回购业务协议》，并自行承担投资风险。本网站上的宣传介绍文字与前述法律文件不一致的，以前述法律文件为准。
+				</p>
+			</div>
+		</div>
+		<div class="mod  mod01">
+			<div class="mhd"><h2>风险提示</h2></div>
+			<div class="mbd">
+				<ul class="discli01">
+					<li><a href="###">全国统一服务热线：95536</a></li>
+					<li><a href="###">客户投诉受理专线：95536</a></li>
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div class="pt-main">
+		<div class="location">当前位置：<a href="###">首页</a> > <a href="###">金天利</a>    </div>
+		<div class="mod  mod02">
+			<div class="mhd"><h2>产品报价</h2></div>
+			<div class="mbd">
+				<table class="table01" cellpadding="0" cellspacing="0">
+					<thead>
+						<tr>
+							<th class="cpmc">产品名称</th>
+							<th class="rq">日期</th>
+							<th class="kmgm">可买规模</th>
+							<th class="dqn">到期年收益率</th>
+							<th class="tqz">提前终止年收益率</th>
+							<th class="ls">历史收益率</th>
+						</tr>    
+					</thead>
+					<tbody>
+						<tr>
+							<td>金天利28</td>
+							<td>2011-09-07</td>
+							<td>10000万元</td>
+							<td>4.20%</td>
+							<td>0.50%</td>
+							<td><a href="###" class="butt01">查询</a></td>
+						</tr>               
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<div class="mod  mod03">
+			<div class="mhd"><h2>金天利28（交易代码：205010）</h2></div>
+			<div class="mbd">
+				<table cellpadding="0" cellspacing="0" class="table02">
+				  <tr>
+					<th scope="row">名称</th>
+					<td>国信证券“金天利”债券质押式报价回购金天利28</td>
+				  </tr>
+				  <tr>
+					<th scope="row">交易代码</th>
+					<td>205010（上海证券交易所）</td>
+				  </tr>
+				  <tr>
+					<th scope="row">币种</th>
+					<td>人民币</td>
+				  </tr>
+				  <tr>
+					<th scope="row">本金及收益</th>
+					<td>本产品保证本金，到期年收益率下限为银行活期存款利率，上限为一年期贷款利率。</td>
+				  </tr>
+				  <tr>
+					<th scope="row">投资者资产要求</th>
+					<td>在国信证券账户资产高于20万元（含）</td>
+				  </tr>
+				  <tr>
+					<th scope="row">产品限期</th>
+					<td>28天</td>
+				  </tr>
+				  
+				  <tr>
+					<th scope="row">交易起点</th>
+					<td>交易起点金额为5万元，超出交易起点部分应为1千元的整数倍。</td>
+				  </tr>
+				  <tr>
+					<th scope="row">挂牌日</th>
+					<td>2009年5月25日</td>
+				  </tr>
+				  <tr>
+					<th scope="row">计划规模</th>
+					<td>报价回购系列总规模100亿元人民币</td>
+				  </tr>
+				  <tr>
+					<th scope="row">计息基础</th>
+					<td>实际天数/365</td>
+				  </tr>
+				  <tr>
+					<th scope="row">付息日及收益支付</th>
+					<td>该产品利息每日计提，隔日支付（遇节假日顺延），购买当日计息，卖出当日不计息。</td>
+				  </tr>
+				  <tr>
+					<th scope="row">购买方式</th>
+					<td>国信证券各营业部柜台、网上营业厅、通达信网上交易系统。 </td>
+				  </tr>
+				  <tr>
+					<th scope="row">节假日</th>
+					<td>中国法定公众假日</td>
+				  </tr>
+				  <tr>
+					<th scope="row">交易日</th>
+					<td>在产品持续期内，除周六、周日、中国法定公众假日以外的工作日为该产品交易日。<br />
+					国信证券另有特别公告的以特别公告的交易日为准。</td>
+				  </tr>
+				  <tr>
+					<th scope="row">交易时段</th>
+					<td>交易日国信证券业务处理系统记录的北京时间9：30-11：30，12：00-15：00。</td>
+				  </tr>
+				  <tr>
+					<th scope="row">交易场所</th>
+					<td>上海证券交易所</td>
+				  </tr>
+				  <tr>
+					<th scope="row">清算交收机构</th>
+					<td>中国证券登记结算有限公司上海分公司</td>
+				  </tr>
+				  <tr>
+					<th scope="row">质押债券托管机构</th>
+					<td>中国证券登记结算有限公司上海分公司</td>
+				  </tr>
+				</table>
+			</div>
+		</div>
+	</div>
+		
+	</div>
+<!--主体end-->
+
+<!--底部图标-->
+<div class="clear"></div>
+<div class="blank10"></div>
+<table align="center" style="margin:0 auto;">
+	<tbody>
+	<tr>
+		<td><a href="###"><img src="pic/botban1.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban2.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban3.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban4.jpg"></a></td>
+		<td><a href="###"><img src="pic/botban5.jpg"></a></td>
+	</tr>
+	</tbody>
+</table>
+<div class="blank10"></div>
+<!--底部图标end-->
+
+<!--底部-->
+<div style="margin:0 auto;" class="gffoot tc">
+	<p class="lh22">
+		<a href="/about/aboutUs.html">关于广发</a> | 
+		<a target="" href="/branches/yywdServices.html">联系我们</a> | 
+		<a softdownload.html"="" bussinesshall="" onclick="javascript:window.open('https://119.145.72.232/ECMMS/www/comjsp/ecmms/custorder/onlineorder/OnlineCustOrder.do'>预约开户</a> | 
+		<a href="#">软件下载</a> | 
+		<a href="/branches/yywdServices.html">营业网点</a> | 
+		<a href="/investorEdu/investorSchool.html">投资者教育</a> | 
+		<a target="" href="/investmentBank/feedback.html">留言反馈</a> | 
+		<a target="_blank" href="http://www.miibeian.gov.cn/">ICP资格信息</a> | 
+		<a target="" href="/business/businessTsjy.jsp?whichCat=sy_wxts_tsjy">投诉流程</a>
+	</p>
+<table cellspacing="0" cellpadding="0" border="0">
+<tbody>
+	<tr>
+		<td>
+			<a border="0" href="http://www.gzjd.gov.cn/newgzjd/baojing/110.jsp?catid=318"><img src="pic/waicon.gif"></a>
+		</td>
+		<td width="10"></td>
+		<td>[ICP 备案登记证编号：粤ICP备05067872号]&nbsp;&nbsp;&nbsp;&nbsp;广发证券股份有限公司版权所有&nbsp;&nbsp;Copyright &copy; 2000-2011 All Rights Reserved. </td>
+	</tr>
+	<tr>
+		<td align="center" colspan="3">
+		<!--站点卫士图片LOGO安装开始-->
+		<script src="  https://ss.cnnic.cn/seallogo.dll?sn=2010051700100001099"> </script><a style="display:inline-block;" kx_type="固定式" target="_blank" tabindex="-1" href="https://ss.cnnic.cn/verifyseal.dll?sn=2010051700100001099&amp;ct=df&amp;pa=561679"><img alt="可信网站" oncontextmenu="return false;" style="border:none;" src="https://ss.cnnic.cn/seallogo.dll?kind=pic&amp;sn=2010051700100001099&amp;ct=df"></a> 
+		<!--站点卫士图片LOGO安装结束-->
+		</td>
+	</tr>
+</tbody>
+</table>
+<p></p>
+</div>
+<!--底部end-->
+
+</div>
+</body>
+</html>

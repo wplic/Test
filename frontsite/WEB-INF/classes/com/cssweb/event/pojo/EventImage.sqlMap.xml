@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+		"http://www.ibatis.com/dtd/sql-map-2.dtd">
+
+<!-- iBatis SQL Map 文件 -->
+<sqlMap namespace="com.cssweb.event.pojo.EventImage">
+
+	<typeAlias alias="EventImage" type="com.cssweb.event.pojo.EventImage" />
+
+	<!--result map-->
+	<resultMap id="eventImageMap" class="EventImage">
+		<result property="id" column="ID" jdbcType="Long"/>
+		<result property="eventId" column="EVENT_ID" jdbcType="Long"/>
+		<result property="comments" column="COMMENTS" jdbcType="String" nullValue=""/>
+		<result property="type" column="TYPE" jdbcType="String" nullValue=""/>
+		<result property="image" column="IMAGE" jdbcType="BLOB"/>
+		<result property="orderNum" column="ORDER_NUM" jdbcType="Integer" nullValue="0"/>
+	</resultMap>
+	
+	<select id="select" resultMap="eventImageMap">
+		select
+		*
+		from event_image
+		<dynamic prepend="WHERE">
+			<isParameterPresent prepend="and">
+				ID = #value#
+			</isParameterPresent>
+		</dynamic>
+		order by ORDER_NUM
+	</select>
+	
+	<insert id="insert" parameterClass="EventImage">
+		insert into event_image
+		(
+		ID,
+		EVENT_ID,
+		COMMENTS,
+		TYPE,
+		IMAGE,
+		ORDER_NUM
+		)
+		values
+		(
+		#id#,
+		#eventId#,
+		#comments#,
+		#type#,
+		#image#,
+		#orderNum#
+		)
+	</insert>
+
+	<update id="update" parameterClass="EventImage">
+		update
+		event_image
+		set
+		EVENT_ID=#eventId#,
+		COMMENTS=#comments#,
+		TYPE=#type#,
+		IMAGE=#image#,
+		ORDER_NUM=#orderNum#
+		where ID = #id#
+	</update>
+
+	<delete id="deleteByPrimaryKey" parameterClass="Long">
+		delete from event_image
+		where ID=#id#
+	</delete>
+	
+	<select id="selectByMap" resultMap="eventImageMap">
+		select
+		*
+		from event_image
+		<dynamic prepend="where">
+			<isNotNull property="findBy">
+				<isNotNull prepend="and" property="eventId">
+					EVENT_ID = #eventId#
+				</isNotNull>
+			</isNotNull>
+		</dynamic>
+		order by ORDER_NUM
+	</select>
+	
+</sqlMap>

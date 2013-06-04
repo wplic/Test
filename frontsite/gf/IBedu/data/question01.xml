@@ -1,0 +1,892 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--注意事项：1、标题长度不能超过45个中文字符；2、选项长度不能超过15个中文字符；3、选项数量不能超过4个。--> 
+
+<values>
+
+    <question options="3" answers="1">
+        <title>2010 年 6 月 3 日，某投资者持有 IF1006 合约 1 手多单，该合约收盘价为 3660 点，结算价为 3650 点。6 月 4 日（下一交易日）该合约的收盘价为 3600 点，结算价为 3610 点，当日结算后该笔持仓的亏损为(    )。</title>
+        <option>
+           <A>18000 元</A>
+           <B>15000 元</B> 
+           <C>12000 元</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="4" answers="1">
+        <title>某投资者欲在 IF1005 合约建立多头持仓，则应在该合约(    )。</title>
+        <option>
+           <A>买入开仓</A>
+           <B>买入平仓</B>
+           <C>卖出开仓</C>
+		   <D>卖出平仓</D>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="3" answers="1">
+        <title>某交易日沪深 300 股指期货挂牌交易的合约有：IF1005、IF1006、IF1009、IF1012，则该日不可能在(    )。</title>
+        <option>
+           <A>2010 年 4 月</A>
+           <B>2010 年 5 月</B>
+           <C>2010 年 6 月</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+
+
+    <question options="3" answers="1">
+        <title>某投资者买入开仓 IF1007 合约 6 手，再卖出平仓该合约 4 手后，该投资者对 IF1007 合约的持仓为(    )。</title>
+        <option>
+           <A>10 手多单</A>
+           <B>2 手多单</B>
+		   <C>6 手多单、4 手空单</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>沪深 300 股指期货某合约上一交易日结算价为 4000 点，收盘价为 4100 点，当日（非最后交易日）该合约的跌停板价格为(    )。</title>
+        <option>
+           <A>3200 点</A>
+           <B>3600 点</B>
+             <C>3690 点</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>沪深 300 股指期货合约最后交易日的收盘时间为(    )。</title>
+        <option>
+           <A>15：00</A>
+           <B>15：15</B>
+            <C>15：30</C>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>IF1011 合约表示的是(    )到期的沪深 300 股指期货合约。</title>
+        <option>
+           <A>2010 年 10 月 11 日</A>
+           <B>2010 年 11 月</B>
+            <C>2011 月 10 月</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="4" answers="1">
+        <title>投资者持有 1 手某股指期货合约多头持仓，可通过(    )了结该持仓。</title>
+        <option>
+           <A>买入开仓 1 手</A>
+           <B>买入平仓 1 手</B>
+		   <C>卖出开仓 1 手</C>
+		   <D>卖出平仓 1 手</D>
+            
+        </option>
+        <answer>D</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>通过集合竞价买卖沪深 300 股指期货合约，交易指令的申报时间为(    )。</title>
+        <option>
+           <A>9：14—9：15</A>
+           <B>9：10—9：14</B>
+           <C>9：00—9：10</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>某投资者以 3500 点卖出 1 手沪深 300 股指期货某合约开仓，在 3570点买入 1 手该合约平仓，当日该合约收盘价为 3550 点，结算价为3560 点，如果不考虑手续费，该笔交易的亏损为(    )。</title>
+        <option>
+           <A>21000 元</A>
+           <B>18000 元</B>
+           <C>15000 元</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>某投资者以 3500 点卖出 1 手沪深 300 股指期货某合约开仓，当日该合约的收盘价为 3550 点，结算价为 3560 点，如果不考虑手续费，当日结算后该笔持仓的浮动亏损为(    )。</title>
+        <option>
+           <A>20000 元</A>
+           <B>18000 元</B>
+             <C>15000 元</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>沪深 300 股指期货某合约上一交易日结算价为 4000 点，收盘价为 4100 点，当日是该合约的最后交易日，则该合约的当日跌停板价格为(    )。</title>
+        <option>
+           <A>3690 点</A>
+           <B>3600 点</B>
+            <C>3200 点</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>某投资者认为沪深 300 股指期货某合约的价格会上涨，应在该合约上(    )。</title>
+        <option>
+           <A>买入开仓</A>
+           <B>卖出开仓</B>
+            <C>买入平仓</C>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>某投资者以 4000 点买入 1 手 IF1009 合约开仓，该合约的当日结算价为 3950 点，收盘价为 3900 点，如果不考虑手续费，当日结算后该笔持仓的浮动亏损为(    )。</title>
+        <option>
+           <A>30000 元</A>
+           <B>20000 元</B>
+            <C>15000 元</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>某投资者以 4000 点买入 1 手 IF1009 合约开仓，在 3980 点卖出 1手该合约平仓，该合约的当日结算价为 3950 点，收盘价为 3900点，如果不考虑手续费，该笔交易的亏损为(    )。</title>
+        <option>
+           <A>30000 元</A>
+           <B>15000 元</B>
+            <C>6000 元</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>股指期货交易的对象是(    )。</title>
+        <option>
+           <A>标的指数股票组合</A>
+           <B>股指期货合约</B>
+            <C>标的指数 ETF 份额</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>期货结算单中的“客户权益”是持仓占用的保证金与(    )之和。</title>
+        <option>
+           <A>平仓盈亏</A>
+           <B>浮动盈亏</B>
+            <C>可用资金</C>
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+    <question options="3" answers="1">
+        <title>在极端行情下，股指期货投资者面临的亏损(    )。</title>
+        <option>
+           <A>不可能超过投资本金</A>
+           <B>可能会超过投资本金</B>
+            <C>不可能等于投资本金</C>
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>适用于卖出套期保值的情况是(    )。</title>
+        <option>
+           <A>手中持有股票组合，担心股市下跌</A>
+           <B>未来准备买入股票，担心股市上涨</B>
+            <C>手中持有股票组合，并看涨后市</C>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+    <question options="3" answers="1">
+        <title>当沪深300股指期货某合约1手的价值为120万元时，该合约的成交价为(    )点。</title>
+        <option>
+           <A>3000</A>
+           <B>4000</B>
+            <C>5000</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+<question options="3" answers="1">
+        <title>股指期货交易既放大盈利也放大亏损，是因为实行了(    )。</title>
+        <option>
+           <A>逐日盯市</A>
+           <B>保证金制度</B>
+            <C>当日无负债结算制度</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+<question options="3" answers="1">
+        <title>最后交易日，沪深300股指期货合约的涨跌停板幅度为(    )。</title>
+        <option>
+           <A>上一交易日结算价的±20%</A>
+           <B>上一交易日结算价的±10%</B>
+            <C>当日开盘价的±10%</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+	
+	 <question options="3" answers="1">
+        <title>沪深300股指期货合约的最小变动价位为(    )。</title>
+        <option>
+           <A>0.05点</A>
+           <B>0.1点</B>
+            <C>0.2点</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+<question options="3" answers="1">
+        <title>多头持仓是指(    )后持有的未平仓头寸。</title>
+        <option>
+           <A>买入开仓</A>
+           <B>卖出开仓</B>
+            <C>买入平仓</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+<question options="3" answers="1">
+        <title>沪深300股指期货合约最后交易日的交易时间为(    )。</title>
+        <option>
+           <A>9：15-11：30（第一节），13：00-15：00（第二节）</A>
+           <B>9：30-11：30（第一节），13：00-15：00（第二节）</B>
+            <C>9：15-11：30（第一节），13：00-15：15（第二节）</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+	
+	 <question options="4" answers="1">
+        <title>大户报告制度通常与(    )密切相关，可以配合使用。</title>
+        <option>
+           <A>当日无负债结算制度</A>
+           <B>会员资格审批制度</B>
+            <C>持仓限额制度</C>
+			 <D>涨跌停板制度</D> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+<question options="4" answers="1">
+        <title>交易所对股指期货的风险管理制度不包括(    )。</title>
+        <option>
+           <A>强行平仓制度</A>
+           <B>持仓限额制度</B>
+            <C>涨跌停板制度</C>
+            <D>公开竞价制度</D> 
+        </option>
+        <answer>D</answer>
+        <comment></comment>
+    </question>
+
+<question options="4" answers="1">
+        <title>按期货交易的收盘价来确定最后结算价，极易被人为操纵。为避免这种情况发生，股指期货的交割结算价都是依据(    )确定的。</title>
+        <option>
+           <A>现货指数</A>
+           <B>最后交易日当天的最后5分钟期货交易价格的加权平均价</B>
+            <C>从上市至最后交易日的所有期货价格的加权平均价</C>
+            <D>最后交易日当天期货市场开盘价</D> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+	
+	 <question options="3" answers="1">
+        <title>涨跌停板一般是以合约上一交易日的(    )为基准确定的。</title>
+        <option>
+           <A>收盘价</A>
+           <B>开盘价</B>
+            <C>结算价</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+	 <question options="3" answers="1">
+        <title>沪深300股指期货合约到期日为(    )。</title>
+        <option>
+           <A>合约到期月份的第三个周五</A>
+           <B>合约到期月份的第三个周一</B>
+            <C>合约到期月份的月末</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+
+	 <question options="3" answers="1">
+        <title>股指期货投资者交易保证金不足，且未在规定时间内补足的，其部分或全部持仓将被(    )。</title>
+        <option>
+           <A>强制减仓</A>
+           <B>强行平仓</B>
+            <C>协议平仓</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="3" answers="1">
+        <title>若沪深300股指期货某个合约报价为3000点，则1手合约的价值为(    )万元。</title>
+        <option>
+           <A>9</A>
+           <B>90</B>
+            <C>75</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+ 
+	
+	 <question options="3" answers="1">
+        <title>股指期货交易的杠杆性决定了：收益可能成倍放大，损失也可能(    )。</title>
+        <option>
+           <A>不变</A>
+           <B>成倍缩小</B>
+            <C>成倍放大</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+	 <question options="3" answers="1">
+        <title>2010年6月3日（周四），中国金融期货交易所可供交易的沪深300股指期货合约应该有(    )。</title>
+        <option>
+           <A>IF1006  IF1007  IF1008  IF1009</A>
+           <B>IF1006  IF1007  IF1009  IF1012</B>
+            <C>IF1006  IF1009  IF1012  IF1103</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+	 <question options="4" answers="1">
+        <title>强行平仓一般在那个时间段进行?</title>
+        <option>
+           <A>首节交易时间</A>
+           <B>下午交易时间</B>
+           <C>次日</C> 
+           <D>当日任一交易时间</D> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="3" answers="1">
+        <title>股指期货强制减仓制度规定，平仓数量首先分配给单位净持仓盈利大于等于D2交易日结算价的(    )的持仓。</title>
+        <option>
+           <A>6%</A>
+           <B>10%</B>
+            <C>15%</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+ <question options="3" answers="1">
+        <title>股指期货强制减仓制度规定，强制减仓的价格为该合约D2交易日的(    )。</title>
+        <option>
+           <A>结算价</A>
+           <B>平均价</B>
+            <C>涨跌停板价格</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+ <question options="3" answers="1">
+        <title>强行平仓制度规定，因价格涨跌停板限制或者其他市场原因，有关持仓的强行平仓只能延时完成的，因此产生的亏损，由(    )承担。</title>
+        <option>
+           <A>持仓持有者</A>
+           <B>直接责任人</B>
+            <C>会员</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+
+ <question options="3" answers="1">
+        <title>会员或者客户持仓达到交易所规定的报告标准或者交易所要求报告的，应当于(    )向交易所报告。</title>
+        <option>
+           <A>下一交易日开市前</A>
+           <B>下一交易日第一节结束前</B>
+           <C>下一交易日收市前</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+	
+	 <question options="3" answers="1">
+        <title>股指期货某一合约结算后单边总持仓量超过10万手的，结算会员下一交易日该合约单边持仓量不得超过该合约单边总持仓量的(    )。</title>
+        <option>
+           <A>10%</A>
+           <B>15%</B>
+            <C>25%</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+	 <question options="3" answers="1">
+        <title>股指期货季月合约上市首日涨跌停板幅度为挂盘基准价的(    )。</title>
+        <option>
+           <A>±20％</A>
+           <B>±10％</B>
+            <C>±8％</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+	 <question options="3" answers="1">
+        <title>股指期货合约最低交易保证金标准为(    )。</title>
+        <option>
+           <A>10%</A>
+           <B>12%</B>
+            <C>15%</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+	 <question options="3" answers="1">
+        <title>保证金制度中规定的保证金不包括以下哪一项？</title>
+        <option>
+           <A>结算准备金</A>
+           <B>交易保证金</B>
+            <C>结算担保金</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+ 	 <question options="3" answers="1">
+        <title>根据投资者适当性制度要求，自然人申请开户时保证金账户可用资金余额不低于人民币(    )元。</title>
+        <option>
+           <A>10万</A>
+           <B>50万</B>
+            <C>100万</C> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+ 	 <question options="3" answers="1">
+        <title>以下不是沪深300指数采用的编制技术的是(    )。</title>
+        <option>
+           <A>分级靠档</A>
+           <B>缓冲区</B>
+            <C>中位数价格法</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+ 	 <question options="3" answers="1">
+        <title>指数沪深300原则上每(    )定期调整一次，调整方案提前两周公布。</title>
+        <option>
+           <A>半年</A>
+           <B>1年</B>
+            <C>一季度</C> 
+           <C>2年</C> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ 	 <question options="3" answers="1">
+        <title>同时购买多种风险不同的股票，不能有效地规避整个股市下跌所带来的(    )。</title>
+        <option>
+           <A>价格风险</A>
+           <B>结构性风险</B>
+            <C>系统性风险</C> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+ 	 <question options="4" answers="1">
+        <title>股指期货采取的交割方式为(    )。</title>
+        <option>
+           <A>规定投资者必须自己平仓了结</A>
+           <B>交割成分股</B>
+            <C>交割对应ETF基金份额</C> 
+           <D>现金交割</D> 
+        </option>
+        <answer>C</answer>
+        <comment></comment>
+    </question>
+
+	 <question options="2" answers="1">
+        <title>股指期货实行双向交易，既可先买后卖，也可以先卖后买。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B>
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+ 
+   <question options="2" answers="1">
+        <title>投资者可以使用已开立的证券账户进行沪深 300 股指期货交易。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+ 
+   <question options="2" answers="1">
+        <title>中国金融期货交易所上市的沪深 300 股指期货合约的标的是上证综合指数。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>中金所可以根据市场风险状况调整沪深 300 股指期货合约的交易保证金标准。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+
+   <question options="2" answers="1">
+        <title>沪深 300 股指期货合约的当日结算价为该合约当天的收盘价。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+
+   <question options="2" answers="1">
+        <title>客户在股指期货交易中发生保证金不足，而又未能按照期货公司要求及时追加相应保证金或者主动减仓时，期货公司可以强行平掉该客户部分或者全部持仓。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>股指期货合约到期时，交易所将按照交割结算价将投资者持有的未平仓合约进行现金交割，投资者将无法继续持有到期合约。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>IF1011 合约表示的是 2011 年 10 月到期的沪深 300 股指期货合约。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>沪深 300 股指期货合约的最后交易日为合约到期月份 15 日。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>股指期货合约的当日结算价是计算当日盈亏的依据，沪深 300 股指期货合约的当日结算价为该合约当天的收盘价。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>投资者因违反交易规则被强行平仓的，强行平仓产生的亏损由投资者承担。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>沪深 300 股指期货交易实行大户持仓报告制度，客户持仓达到交易所规定的报告标准的，应及时向交易所报告。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+
+   <question options="2" answers="1">
+        <title>沪深 300 指数可综合反映沪深 A 股市场整体表现，其成份股由沪深两市 A 股中规模大、流动性好的 300 只股票组成。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>沪深 300 股指期货有 4 个合约同时挂牌交易，投资者交易时必须同时买卖 4 个合约。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>由于股指期货实行保证金交易制度，投资者在方向判断错误的情况下，亏损将成倍放大，极端行情下亏损可能会超过初始投入的本金。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>沪深 300 股指期货合约的交割日为最后交易日的下一交易日。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>按交易目的区分，股指期货市场上的投资者一般分为三类：套期保值者、套利者和投机者。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+
+   <question options="2" answers="1">
+        <title>期货公司不得向客户做获利保证，不得在经纪业务中与客户约定分享利益或者共担风险。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>股指期货合约与股票一样没有到期日，可以长期持有。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+   <question options="2" answers="1">
+        <title>投资者对期货交易结算报告的内容有异议的，应在期货经纪合同约定的时间内向期货公司提出，否则视为对交易结算结果的确认。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+  <question options="2" answers="1">
+        <title>沪深 300 股指期货集合竞价中的未成交指令自动撤销，不参与连续竞价交易。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+  <question options="2" answers="1">
+        <title>股指期货交易采用保证金交易方式，潜在损失可能成倍放大。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+  <question options="2" answers="1">
+        <title>客户申请沪深 300 股指期货套期保值额度的，应当向其开户的会员申报，会员对申报材料进行审核后向交易所办理申请手续。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>期货公司应当在期货经纪合同中与客户约定风险管理的标准、条件及处置措施。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>股指期货投资者应当随时关注自己的持仓、保证金和权益变化等情况，并妥善处理自己的交易持仓。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>股指期货价格与所对应的标的指数走势无关。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>沪深 300 股指期货合约的交易保证金标准是固定的。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>沪深 300 股指期货交易实行持仓限额制度，进行投机交易的客户号某一合约单边持仓限额为 100 手。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>期货公司可以接受投资者的全权委托进行期货交易。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>沪深300股指期货交易集合竞价期间不接受市价指令申报。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>沪深300股指期货实行T+1交易制度。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>B</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>IF1007合约表示的是2010年7月到期的沪深300股指期货合约。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>股指期货合约最后交易日如遇国家法定假日，则以下一交易日为最后交易日和交割日。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question>
+
+ <question options="2" answers="1">
+        <title>持有股票有可能获得股利，持有股指期货不会获得股利。</title>
+        <option>
+           <A>正确</A>
+           <B>错误</B> 
+        </option>
+        <answer>A</answer>
+        <comment></comment>
+    </question> 
+
+</values>
